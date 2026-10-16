@@ -1,0 +1,123 @@
+{
+  "_about": "Hand-placed landmarks for the Checkpoint 1 wall views, in pixel coordinates of each source image (x right, y down). Left/right are Prince's own left/right. Placed on gridded zooms; expected accuracy about 1-2% of the image size (sheet panels are small).",
+  "_tiers": {"master": 1, "edited": 2, "sheet": 3},
+  "views": {
+    "master_front_standing": {
+      "image": "references/master/master_front_standing.webp", "tier": "master",
+      "init": {"az": 0, "el": 4},
+      "points": {
+        "eye_R": [338, 467], "eye_L": [699, 442],
+        "nose_tip": [548, 748], "mouth_split": [550, 820],
+        "ear_tip_R": [420, 216], "ear_tip_L": [674, 206],
+        "peet_FR": [360, 1232], "peet_FL": [680, 1240]
+      }
+    },
+    "edited_back": {
+      "image": "references/edited/back.webp", "tier": "edited",
+      "init": {"az": 180, "el": 4},
+      "points": {
+        "ear_tip_L": [435, 282], "ear_tip_R": [655, 280],
+        "tail": [525, 1205],
+        "peet_BL": [360, 1235], "peet_BR": [690, 1240]
+      }
+    },
+    "edited_back_3q_left_high": {
+      "image": "references/edited/back_3q_left_high.webp", "tier": "edited",
+      "init": {"az": 140, "el": 22},
+      "points": {
+        "eye_L": [245, 447],
+        "ear_tip_L": [450, 198], "ear_tip_R": [630, 238],
+        "tail": [800, 1090],
+        "peet_FL": [300, 1165], "peet_BL": [590, 1232]
+      }
+    },
+    "sheet_01_front": {
+      "image": "references/sheet/panels/01_front.png", "tier": "sheet",
+      "init": {"az": 0, "el": 12},
+      "points": {
+        "eye_R": [77, 100], "eye_L": [155, 95],
+        "nose_tip": [122, 155], "mouth_split": [122, 173],
+        "ear_tip_R": [98, 48], "ear_tip_L": [152, 47],
+        "peet_FR": [77, 258], "peet_FL": [153, 260]
+      }
+    },
+    "sheet_02_front_3q": {
+      "image": "references/sheet/panels/02_front_3q_right.png", "tier": "sheet",
+      "_note": "Labelled 'Front 1/4 Right' on the sheet but shows his LEFT side (left eye visible, nose toward image left).",
+      "init": {"az": 40, "el": 12},
+      "points": {
+        "eye_L": [130, 97],
+        "nose_tip": [80, 157], "mouth_split": [82, 173],
+        "ear_tip_R": [98, 40], "ear_tip_L": [147, 35],
+        "peet_FR": [62, 245], "peet_FL": [132, 257]
+      }
+    },
+    "sheet_08_front_3q_left": {
+      "image": "references/sheet/panels/08_front_3q_left.png", "tier": "sheet",
+      "init": {"az": 40, "el": 12},
+      "points": {
+        "eye_L": [125, 98],
+        "nose_tip": [78, 155], "mouth_split": [82, 173],
+        "ear_tip_R": [98, 45], "ear_tip_L": [138, 43],
+        "peet_FR": [67, 237], "peet_FL": [137, 253]
+      }
+    },
+    "sheet_03_right_profile": {
+      "image": "references/sheet/panels/03_right_profile.png", "tier": "sheet",
+      "init": {"az": -90, "el": 10},
+      "points": {
+        "eye_R": [175, 107], "nose_tip": [213, 145],
+        "ear_tip_R": [123, 45], "peet_FR": [150, 238]
+      }
+    },
+    "sheet_07_left_profile": {
+      "image": "references/sheet/panels/07_left_profile.png", "tier": "sheet",
+      "init": {"az": 90, "el": 10},
+      "points": {
+        "eye_L": [77, 94], "nose_tip": [40, 132],
+        "ear_tip_L": [135, 55], "peet_FL": [72, 230]
+      }
+    },
+    "sheet_04_back_3q_right": {
+      "image": "references/sheet/panels/04_back_3q_right.png", "tier": "sheet",
+      "init": {"az": -140, "el": 15},
+      "points": {
+        "eye_R": [170, 82], "ear_tip_R": [110, 50]
+      }
+    },
+    "sheet_05_back": {
+      "image": "references/sheet/panels/05_back.png", "tier": "sheet",
+      "init": {"az": 180, "el": 12},
+      "points": {
+        "ear_tip_L": [100, 42], "ear_tip_R": [143, 42]
+      }
+    },
+    "sheet_06_back_3q_left": {
+      "image": "references/sheet/panels/06_back_3q_left.png", "tier": "sheet",
+      "init": {"az": 160, "el": 12},
+      "points": {
+        "ear_tip_L": [85, 53], "ear_tip_R": [117, 50]
+      }
+    },
+    "sheet_09_top_down": {
+      "image": "references/sheet/panels/09_top_down.png", "tier": "sheet",
+      "_note": "Camera above, his head toward the bottom of the image.",
+      "init": {"az": 0, "el": 89, "image_up": "tail"},
+      "points": {
+        "eye_R": [72, 208], "eye_L": [142, 210],
+        "ear_tip_R": [85, 133], "ear_tip_L": [137, 140],
+        "nose_tip": [108, 256]
+      }
+    },
+    "sheet_10_bottom_up": {
+      "image": "references/sheet/panels/10_bottom_up.png", "tier": "sheet",
+      "_note": "Camera below, his head toward the top of the image; seen from below his right side is on image left.",
+      "init": {"az": 0, "el": -89, "image_up": "nose"},
+      "points": {
+        "nose_tip": [118, 62], "mouth_split": [120, 75],
+        "peet_FR": [83, 147], "peet_FL": [155, 150],
+        "peet_BR": [83, 213], "peet_BL": [160, 213]
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+numpy
+scipy
+opencv-python-headless
+pillow
+scikit-image
+matplotlib
+rembg[cpu]
