@@ -22,9 +22,11 @@ CP1 = ROOT / "checkpoints/cp1"
 CP2 = ROOT / "checkpoints/cp2"
 
 
-def on_white(rgba):
+def on_white(rgba, bg=255):
+    """Composite a transparent render on a plain background. Grey clay on
+    pure white loses his top edge in the highlights, so reviews use bg=228."""
     a = rgba[..., 3:4].astype(np.float32) / 255
-    return (rgba[..., :3] * a + 255 * (1 - a)).astype(np.uint8)
+    return (rgba[..., :3] * a + bg * (1 - a)).astype(np.uint8)
 
 
 def ear_zone(view, ear_tips, radius, shape):

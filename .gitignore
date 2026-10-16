@@ -4,3 +4,5 @@ work/
 __pycache__/
 # intermediate carved mesh; regenerate with tools/assemble_walls.py
 checkpoints/cp2/hull.obj
+checkpoints/cp3/body.obj
+checkpoints/cp3/prince_cp3_head_body.obj

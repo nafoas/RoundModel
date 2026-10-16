@@ -93,29 +93,62 @@ def neighbours(F, n):
     return np.array(rows), np.array(cols), deg
 
 
+def cotan_weights(V, F):
+    """Edge weights of the Laplace-Beltrami operator (cotangent weights) on
+    mesh V, F. Unlike counting neighbours equally, this measures smoothness
+    the same everywhere regardless of how evenly the vertices are spaced.
+    (Equal weights on a subdivided icosahedron leave ridges along its
+    original 30 edges, where the spacing changes.)
+    Returns rows, cols, weights, per-vertex weight sums."""
+    n = len(V)
+    rows, cols, ws = [], [], []
+    for k in range(3):
+        i, j, o = F[:, k], F[:, (k + 1) % 3], F[:, (k + 2) % 3]
+        a, b = V[i] - V[o], V[j] - V[o]
+        cot = np.einsum("ij,ij->i", a, b) / np.linalg.norm(np.cross(a, b), axis=1)
+        w = np.maximum(cot, 1e-6) / 2
+        rows += [i, j]
+        cols += [j, i]
+        ws += [w, w]
+    rows, cols, ws = np.concatenate(rows), np.concatenate(cols), np.concatenate(ws)
+    wsum = np.bincount(rows, ws, n)
+    return rows, cols, ws, wsum
+
+
 def mask_path(vn, image):
     stem = Path(image).stem
     return CP1 / "masks" / (f"sheet_{stem}.outline.png" if vn.startswith("sheet_") else f"{stem}.outline.png")
 
 
-def load_views(cams, ear_tips):
+def load_views(cams, ear_tips, extra_zones=(), weights=None, inside_weights=None, smooth=0.0):
+    """ear_tips: 3D points whose surroundings (EAR_RADIUS) don't pull the
+    surface outward. extra_zones: more (point, radius) pairs like that.
+    smooth: blur each outline by this fraction of the image size first. The
+    traced outline follows individual hairs; the body under the fur should
+    follow its smooth envelope (the hair-level edge is the fur's job)."""
+    weights = weights or TIER_W
+    inside_weights = inside_weights or INSIDE_W
+    zones = [(t, EAR_RADIUS) for t in ear_tips] + list(extra_zones)
     views = []
     for vn, v in cams.items():
         m = np.asarray(Image.open(mask_path(vn, v["image"]))) > 0
         h, w = m.shape
+        if smooth:
+            sig = smooth * max(h, w)
+            m = cv2.GaussianBlur(m.astype(np.float32), (0, 0), sig) > 0.5
         norm = max(h, w) / 100.0  # distances in % of image size
         sd = (distance_transform_edt(~m) - distance_transform_edt(m)) / norm
         cs, _ = cv2.findContours(m.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
         c = max(cs, key=len)[:, 0, :].astype(float)
         c = c[np.linspace(0, len(c) - 1, 400).astype(int)]
         Rm = R.from_rotvec(v["rotvec_world_to_cam"]).as_matrix()
-        for tip in ear_tips:
-            Xc = (tip - np.array(v["camera_position_m"])) @ Rm.T
+        for tip, radius in zones:
+            Xc = (np.asarray(tip) - np.array(v["camera_position_m"])) @ Rm.T
             uv = v["focal_px"] * Xc[:2] / Xc[2] + np.array([w, h]) / 2
-            rad = v["focal_px"] * EAR_RADIUS / Xc[2]
+            rad = v["focal_px"] * radius / Xc[2]
             c = c[np.linalg.norm(c - uv, axis=1) > rad]
         views.append({
-            "name": vn, "w": TIER_W[v["tier"]], "w_in": INSIDE_W[v["tier"]], "size": (w, h), "norm": norm,
+            "name": vn, "w": weights[v["tier"]], "w_in": inside_weights[v["tier"]], "size": (w, h), "norm": norm,
             "R": torch.tensor(R.from_rotvec(v["rotvec_world_to_cam"]).as_matrix(), dtype=torch.float32),
             "cam": torch.tensor(v["camera_position_m"], dtype=torch.float32),
             "f": float(v["focal_px"]),

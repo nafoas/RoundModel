@@ -33,16 +33,16 @@ def reset():
     return sc
 
 
-def load_mesh(path):
+def load_mesh(path, colour=(0.72, 0.72, 0.72), roughness=0.65, name="clay"):
     bpy.ops.wm.obj_import(filepath=str(path), forward_axis="Y", up_axis="Z")
     ob = bpy.context.selected_objects[0]
     for p in ob.data.polygons:
         p.use_smooth = True
-    mat = bpy.data.materials.new("clay")
+    mat = bpy.data.materials.new(name)
     mat.use_nodes = True
     bsdf = mat.node_tree.nodes["Principled BSDF"]
-    bsdf.inputs["Base Color"].default_value = (0.72, 0.72, 0.72, 1)
-    bsdf.inputs["Roughness"].default_value = 0.65
+    bsdf.inputs["Base Color"].default_value = (*colour, 1)
+    bsdf.inputs["Roughness"].default_value = roughness
     ob.data.materials.clear()
     ob.data.materials.append(mat)
     return ob
@@ -90,6 +90,7 @@ def main():
     ap.add_argument("--views", default="")
     ap.add_argument("--samples", type=int, default=48)
     ap.add_argument("--scale", type=float, default=1.0)
+    ap.add_argument("--eyes", nargs="*", default=[], help="eyeball meshes, shown dark and glossy")
     a = ap.parse_args()
 
     out = Path(a.outdir)
@@ -98,6 +99,8 @@ def main():
     sc.cycles.samples = a.samples
     sc.cycles.use_denoising = True
     load_mesh(a.mesh)
+    for e in a.eyes:
+        load_mesh(e, colour=(0.015, 0.012, 0.012), roughness=0.08, name="eye")
     lights(sc)
     cd = bpy.data.cameras.new("cam")
     cam = bpy.data.objects.new("cam", cd)

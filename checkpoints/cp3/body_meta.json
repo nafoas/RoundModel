@@ -1,0 +1,45 @@
+{
+  "centre_m": [
+    -0.00404,
+    -0.00098,
+    0.06789
+  ],
+  "subdiv": 6,
+  "iters": 900,
+  "cover_weights": {
+    "master": 200.0,
+    "edited": 6.0,
+    "sheet": 0.5
+  },
+  "inside_weights": {
+    "master": 2000.0,
+    "edited": 6.0,
+    "sheet": 0.5
+  },
+  "round": 12000.0,
+  "mirror": 5.0,
+  "fair": 120000000.0,
+  "pass2": {
+    "iters": 700,
+    "cover_weights": {
+      "master": 200.0,
+      "edited": 1.0,
+      "sheet": 0.1
+    },
+    "inside_weights": {
+      "master": 2000.0,
+      "edited": 3.0,
+      "sheet": 0.25
+    },
+    "fair": 2400000000.0
+  },
+  "outline_smooth": 0.004,
+  "dropped_views": [
+    "sheet_01_front"
+  ],
+  "cover_only_views": [
+    "sheet_02_front_3q",
+    "sheet_08_front_3q_left"
+  ],
+  "ear_radius_m": 0.032
+}
