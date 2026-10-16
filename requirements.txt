@@ -5,3 +5,5 @@ pillow
 scikit-image
 matplotlib
 rembg[cpu]
+bpy==5.2.2
+torch

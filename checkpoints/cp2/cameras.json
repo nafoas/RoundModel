@@ -1,0 +1,466 @@
+{
+  "_convention": "World: metres, +x Prince's right, +y forward, +z up, origin on ground under body centre. Camera: x right, y down, z forward; pixel = f*(x/z, y/z) + image centre. rotvec maps world-frame vectors into camera frame. Scale is assumed, not measured.",
+  "points_3d": {
+    "eye_R": [
+      0.03139,
+      0.04574,
+      0.12668
+    ],
+    "eye_L": [
+      -0.02832,
+      0.04692,
+      0.13366
+    ],
+    "nose_tip": [
+      -0.00483,
+      0.08209,
+      0.08527
+    ],
+    "mouth_split": [
+      -0.00587,
+      0.07403,
+      0.07311
+    ],
+    "ear_tip_R": [
+      0.02186,
+      -0.006,
+      0.17519
+    ],
+    "ear_tip_L": [
+      -0.02533,
+      -2e-05,
+      0.17866
+    ],
+    "peet_FR": [
+      0.02312,
+      0.03546,
+      -0.00694
+    ],
+    "peet_FL": [
+      -0.03441,
+      0.02725,
+      -0.00881
+    ],
+    "peet_BR": [
+      0.03496,
+      -0.03595,
+      0.00486
+    ],
+    "peet_BL": [
+      -0.03011,
+      -0.03977,
+      -0.00014
+    ],
+    "tail": [
+      0.01327,
+      -0.05896,
+      0.01672
+    ]
+  },
+  "views": {
+    "master_front_standing": {
+      "image": "references/master/master_front_standing.webp",
+      "tier": "master",
+      "size": [
+        1098.0,
+        1433.0
+      ],
+      "rotvec_world_to_cam": [
+        -0.027093,
+        2.28406,
+        -2.084851
+      ],
+      "camera_position_m": [
+        0.00329,
+        0.41083,
+        0.11989
+      ],
+      "focal_px": 2180.41,
+      "vertical_fov_deg": 36.38,
+      "azimuth_deg": -0.5,
+      "elevation_deg": 5.5,
+      "distance_m": 0.413,
+      "reprojection_error_pct": {
+        "eye_R": 0.01,
+        "eye_L": 0.02,
+        "nose_tip": 0.02,
+        "mouth_split": 0.01,
+        "ear_tip_R": 0.01,
+        "ear_tip_L": 0.02,
+        "peet_FR": 0.03,
+        "peet_FL": 0.03
+      },
+      "mean_error_pct": 0.02
+    },
+    "edited_back": {
+      "image": "references/edited/back.webp",
+      "tier": "edited",
+      "size": [
+        1098.0,
+        1433.0
+      ],
+      "rotvec_world_to_cam": [
+        1.694801,
+        0.328614,
+        -0.34034
+      ],
+      "camera_position_m": [
+        0.16469,
+        -0.38831,
+        0.14367
+      ],
+      "focal_px": 2185.77,
+      "vertical_fov_deg": 36.3,
+      "azimuth_deg": -157.0,
+      "elevation_deg": 8.6,
+      "distance_m": 0.427,
+      "reprojection_error_pct": {
+        "ear_tip_L": 0.12,
+        "ear_tip_R": 0.15,
+        "tail": 0.01,
+        "peet_BL": 0.07,
+        "peet_BR": 0.09
+      },
+      "mean_error_pct": 0.09
+    },
+    "edited_back_3q_left_high": {
+      "image": "references/edited/back_3q_left_high.webp",
+      "tier": "edited",
+      "size": [
+        1098.0,
+        1433.0
+      ],
+      "rotvec_world_to_cam": [
+        1.699289,
+        -0.841544,
+        0.689963
+      ],
+      "camera_position_m": [
+        -0.24771,
+        -0.17795,
+        0.15916
+      ],
+      "focal_px": 1598.24,
+      "vertical_fov_deg": 48.29,
+      "azimuth_deg": 125.7,
+      "elevation_deg": 14.5,
+      "distance_m": 0.315,
+      "reprojection_error_pct": {
+        "eye_L": 0.01,
+        "ear_tip_L": 0.1,
+        "ear_tip_R": 0.11,
+        "tail": 0.0,
+        "peet_FL": 0.07,
+        "peet_BL": 0.08
+      },
+      "mean_error_pct": 0.06
+    },
+    "sheet_01_front": {
+      "image": "references/sheet/panels/01_front.png",
+      "tier": "sheet",
+      "size": [
+        238.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        -0.045523,
+        2.265495,
+        -2.124433
+      ],
+      "camera_position_m": [
+        -0.00213,
+        0.40098,
+        0.11347
+      ],
+      "focal_px": 441.32,
+      "vertical_fov_deg": 36.61,
+      "azimuth_deg": 0.3,
+      "elevation_deg": 4.8,
+      "distance_m": 0.402,
+      "reprojection_error_pct": {
+        "eye_R": 0.85,
+        "eye_L": 0.37,
+        "nose_tip": 0.65,
+        "mouth_split": 0.28,
+        "ear_tip_R": 0.2,
+        "ear_tip_L": 0.71,
+        "peet_FR": 1.71,
+        "peet_FL": 1.4
+      },
+      "mean_error_pct": 0.77
+    },
+    "sheet_02_front_3q": {
+      "image": "references/sheet/panels/02_front_3q_right.png",
+      "tier": "sheet",
+      "size": [
+        239.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        0.448243,
+        -2.266668,
+        1.869998
+      ],
+      "camera_position_m": [
+        -0.15772,
+        0.44637,
+        0.17566
+      ],
+      "focal_px": 534.55,
+      "vertical_fov_deg": 30.55,
+      "azimuth_deg": 19.5,
+      "elevation_deg": 11.4,
+      "distance_m": 0.483,
+      "reprojection_error_pct": {
+        "eye_L": 0.67,
+        "nose_tip": 0.61,
+        "mouth_split": 0.63,
+        "ear_tip_R": 0.68,
+        "ear_tip_L": 1.19,
+        "peet_FR": 0.78,
+        "peet_FL": 1.3
+      },
+      "mean_error_pct": 0.84
+    },
+    "sheet_08_front_3q_left": {
+      "image": "references/sheet/panels/08_front_3q_left.png",
+      "tier": "sheet",
+      "size": [
+        239.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        0.471003,
+        -2.231982,
+        1.847582
+      ],
+      "camera_position_m": [
+        -0.16657,
+        0.41845,
+        0.16857
+      ],
+      "focal_px": 478.41,
+      "vertical_fov_deg": 33.94,
+      "azimuth_deg": 21.7,
+      "elevation_deg": 11.1,
+      "distance_m": 0.459,
+      "reprojection_error_pct": {
+        "eye_L": 0.46,
+        "nose_tip": 1.06,
+        "mouth_split": 0.75,
+        "ear_tip_R": 0.18,
+        "ear_tip_L": 1.6,
+        "peet_FR": 1.61,
+        "peet_FL": 2.48
+      },
+      "mean_error_pct": 1.16
+    },
+    "sheet_03_right_profile": {
+      "image": "references/sheet/panels/03_right_profile.png",
+      "tier": "sheet",
+      "size": [
+        238.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        1.26799,
+        1.608649,
+        -1.060234
+      ],
+      "camera_position_m": [
+        0.51476,
+        0.08585,
+        0.25228
+      ],
+      "focal_px": 523.51,
+      "vertical_fov_deg": 31.17,
+      "azimuth_deg": -80.5,
+      "elevation_deg": 18.3,
+      "distance_m": 0.55,
+      "reprojection_error_pct": {
+        "eye_R": 0.04,
+        "nose_tip": 0.19,
+        "ear_tip_R": 0.44,
+        "peet_FR": 0.27
+      },
+      "mean_error_pct": 0.23
+    },
+    "sheet_07_left_profile": {
+      "image": "references/sheet/panels/07_left_profile.png",
+      "tier": "sheet",
+      "size": [
+        238.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        1.561546,
+        -1.233712,
+        1.253547
+      ],
+      "camera_position_m": [
+        -0.401,
+        0.01648,
+        0.17312
+      ],
+      "focal_px": 351.93,
+      "vertical_fov_deg": 45.06,
+      "azimuth_deg": 87.6,
+      "elevation_deg": 13.1,
+      "distance_m": 0.412,
+      "reprojection_error_pct": {
+        "eye_L": 0.06,
+        "nose_tip": 0.44,
+        "ear_tip_L": 1.04,
+        "peet_FL": 0.58
+      },
+      "mean_error_pct": 0.53
+    },
+    "sheet_04_back_3q_right": {
+      "image": "references/sheet/panels/04_back_3q_right.png",
+      "tier": "sheet",
+      "size": [
+        238.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        1.86509,
+        0.298815,
+        -0.768891
+      ],
+      "camera_position_m": [
+        0.28113,
+        -0.33418,
+        0.19315
+      ],
+      "focal_px": 458.0,
+      "vertical_fov_deg": 35.36,
+      "azimuth_deg": -139.9,
+      "elevation_deg": 14.5,
+      "distance_m": 0.451,
+      "reprojection_error_pct": {
+        "eye_R": 0.0,
+        "ear_tip_R": 0.0
+      },
+      "mean_error_pct": 0.0
+    },
+    "sheet_05_back": {
+      "image": "references/sheet/panels/05_back.png",
+      "tier": "sheet",
+      "size": [
+        239.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        1.776681,
+        -0.050349,
+        -0.053412
+      ],
+      "camera_position_m": [
+        -0.00057,
+        -0.46836,
+        0.17841
+      ],
+      "focal_px": 465.61,
+      "vertical_fov_deg": 34.82,
+      "azimuth_deg": 179.9,
+      "elevation_deg": 11.9,
+      "distance_m": 0.479,
+      "reprojection_error_pct": {
+        "ear_tip_L": 0.01,
+        "ear_tip_R": 0.01
+      },
+      "mean_error_pct": 0.01
+    },
+    "sheet_06_back_3q_left": {
+      "image": "references/sheet/panels/06_back_3q_left.png",
+      "tier": "sheet",
+      "size": [
+        238.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        1.727187,
+        -0.431309,
+        0.194204
+      ],
+      "camera_position_m": [
+        -0.17977,
+        -0.49735,
+        0.19648
+      ],
+      "focal_px": 502.64,
+      "vertical_fov_deg": 32.39,
+      "azimuth_deg": 160.1,
+      "elevation_deg": 12.4,
+      "distance_m": 0.542,
+      "reprojection_error_pct": {
+        "ear_tip_L": 0.02,
+        "ear_tip_R": 0.02
+      },
+      "mean_error_pct": 0.02
+    },
+    "sheet_09_top_down": {
+      "image": "references/sheet/panels/09_top_down.png",
+      "tier": "sheet",
+      "size": [
+        238.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        -0.011166,
+        3.055911,
+        -0.387752
+      ],
+      "camera_position_m": [
+        0.02003,
+        0.12138,
+        0.51896
+      ],
+      "focal_px": 475.34,
+      "vertical_fov_deg": 34.15,
+      "azimuth_deg": -9.4,
+      "elevation_deg": 74.3,
+      "distance_m": 0.456,
+      "reprojection_error_pct": {
+        "eye_R": 0.24,
+        "eye_L": 0.62,
+        "ear_tip_R": 0.18,
+        "ear_tip_L": 2.07,
+        "nose_tip": 0.46
+      },
+      "mean_error_pct": 0.71
+    },
+    "sheet_10_bottom_up": {
+      "image": "references/sheet/panels/10_bottom_up.png",
+      "tier": "sheet",
+      "size": [
+        238.0,
+        292.0
+      ],
+      "rotvec_world_to_cam": [
+        0.142846,
+        -0.566142,
+        3.020928
+      ],
+      "camera_position_m": [
+        -0.04393,
+        0.15883,
+        -0.31147
+      ],
+      "focal_px": 414.21,
+      "vertical_fov_deg": 38.83,
+      "azimuth_deg": 15.5,
+      "elevation_deg": -67.2,
+      "distance_m": 0.425,
+      "reprojection_error_pct": {
+        "nose_tip": 0.27,
+        "mouth_split": 0.51,
+        "peet_FR": 0.43,
+        "peet_FL": 0.14,
+        "peet_BR": 1.02,
+        "peet_BL": 1.12
+      },
+      "mean_error_pct": 0.58
+    }
+  }
+}

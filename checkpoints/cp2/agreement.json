@@ -1,0 +1,54 @@
+{
+  "master_front_standing": {
+    "outline_agreement": 0.9401,
+    "body_only_agreement": 0.9718
+  },
+  "sheet_01_front": {
+    "outline_agreement": 0.9451,
+    "body_only_agreement": 0.9724
+  },
+  "sheet_02_front_3q": {
+    "outline_agreement": 0.9184,
+    "body_only_agreement": 0.9363
+  },
+  "sheet_08_front_3q_left": {
+    "outline_agreement": 0.904,
+    "body_only_agreement": 0.9289
+  },
+  "sheet_07_left_profile": {
+    "outline_agreement": 0.8967,
+    "body_only_agreement": 0.9169
+  },
+  "sheet_03_right_profile": {
+    "outline_agreement": 0.9103,
+    "body_only_agreement": 0.9308
+  },
+  "edited_back_3q_left_high": {
+    "outline_agreement": 0.8939,
+    "body_only_agreement": 0.9336
+  },
+  "sheet_06_back_3q_left": {
+    "outline_agreement": 0.9289,
+    "body_only_agreement": 0.9652
+  },
+  "sheet_04_back_3q_right": {
+    "outline_agreement": 0.9263,
+    "body_only_agreement": 0.9427
+  },
+  "edited_back": {
+    "outline_agreement": 0.9273,
+    "body_only_agreement": 0.9393
+  },
+  "sheet_05_back": {
+    "outline_agreement": 0.93,
+    "body_only_agreement": 0.9644
+  },
+  "sheet_09_top_down": {
+    "outline_agreement": 0.9114,
+    "body_only_agreement": 0.8877
+  },
+  "sheet_10_bottom_up": {
+    "outline_agreement": 0.9345,
+    "body_only_agreement": 0.925
+  }
+}

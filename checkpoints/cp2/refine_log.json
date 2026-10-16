@@ -1,0 +1,254 @@
+[
+  {
+    "round": 0,
+    "view": "edited_back",
+    "full_refit": false,
+    "iou_before": 0.9119,
+    "iou_after": 0.9366
+  },
+  {
+    "round": 0,
+    "view": "edited_back_3q_left_high",
+    "full_refit": false,
+    "iou_before": 0.8959,
+    "iou_after": 0.9
+  },
+  {
+    "round": 0,
+    "view": "sheet_01_front",
+    "full_refit": false,
+    "iou_before": 0.9587,
+    "iou_after": 0.9624
+  },
+  {
+    "round": 0,
+    "view": "sheet_02_front_3q",
+    "full_refit": false,
+    "iou_before": 0.9311,
+    "iou_after": 0.9436
+  },
+  {
+    "round": 0,
+    "view": "sheet_08_front_3q_left",
+    "full_refit": false,
+    "iou_before": 0.8937,
+    "iou_after": 0.9007
+  },
+  {
+    "round": 0,
+    "view": "sheet_03_right_profile",
+    "full_refit": true,
+    "iou_before": 0.834,
+    "iou_after": 0.8974
+  },
+  {
+    "round": 0,
+    "view": "sheet_07_left_profile",
+    "full_refit": true,
+    "iou_before": 0.8322,
+    "iou_after": 0.8712
+  },
+  {
+    "round": 0,
+    "view": "sheet_04_back_3q_right",
+    "full_refit": true,
+    "iou_before": 0.8194,
+    "iou_after": 0.9321
+  },
+  {
+    "round": 0,
+    "view": "sheet_05_back",
+    "full_refit": true,
+    "iou_before": 0.695,
+    "iou_after": 0.8627
+  },
+  {
+    "round": 0,
+    "view": "sheet_06_back_3q_left",
+    "full_refit": true,
+    "iou_before": 0.4273,
+    "iou_after": 0.7309
+  },
+  {
+    "round": 0,
+    "view": "sheet_09_top_down",
+    "full_refit": true,
+    "iou_before": 0.7072,
+    "iou_after": 0.8369
+  },
+  {
+    "round": 0,
+    "view": "sheet_10_bottom_up",
+    "full_refit": true,
+    "iou_before": 0.7873,
+    "iou_after": 0.8818
+  },
+  {
+    "round": 1,
+    "view": "edited_back",
+    "full_refit": false,
+    "iou_before": 0.9105,
+    "iou_after": 0.9169
+  },
+  {
+    "round": 1,
+    "view": "edited_back_3q_left_high",
+    "full_refit": false,
+    "iou_before": 0.8938,
+    "iou_after": 0.8948
+  },
+  {
+    "round": 1,
+    "view": "sheet_01_front",
+    "full_refit": false,
+    "iou_before": 0.968,
+    "iou_after": 0.9691
+  },
+  {
+    "round": 1,
+    "view": "sheet_02_front_3q",
+    "full_refit": false,
+    "iou_before": 0.9268,
+    "iou_after": 0.9372
+  },
+  {
+    "round": 1,
+    "view": "sheet_08_front_3q_left",
+    "full_refit": false,
+    "iou_before": 0.8659,
+    "iou_after": 0.8705
+  },
+  {
+    "round": 1,
+    "view": "sheet_03_right_profile",
+    "full_refit": false,
+    "iou_before": 0.8926,
+    "iou_after": 0.9119
+  },
+  {
+    "round": 1,
+    "view": "sheet_07_left_profile",
+    "full_refit": false,
+    "iou_before": 0.883,
+    "iou_after": 0.8872
+  },
+  {
+    "round": 1,
+    "view": "sheet_04_back_3q_right",
+    "full_refit": false,
+    "iou_before": 0.9442,
+    "iou_after": 0.945
+  },
+  {
+    "round": 1,
+    "view": "sheet_05_back",
+    "full_refit": false,
+    "iou_before": 0.9001,
+    "iou_after": 0.9005
+  },
+  {
+    "round": 1,
+    "view": "sheet_06_back_3q_left",
+    "full_refit": false,
+    "iou_before": 0.8903,
+    "iou_after": 0.8928
+  },
+  {
+    "round": 1,
+    "view": "sheet_09_top_down",
+    "full_refit": false,
+    "iou_before": 0.8629,
+    "iou_after": 0.8662
+  },
+  {
+    "round": 1,
+    "view": "sheet_10_bottom_up",
+    "full_refit": false,
+    "iou_before": 0.8897,
+    "iou_after": 0.8915
+  },
+  {
+    "round": 2,
+    "view": "edited_back",
+    "full_refit": false,
+    "iou_before": 0.9081,
+    "iou_after": 0.9139
+  },
+  {
+    "round": 2,
+    "view": "edited_back_3q_left_high",
+    "full_refit": false,
+    "iou_before": 0.8965,
+    "iou_after": 0.9006
+  },
+  {
+    "round": 2,
+    "view": "sheet_01_front",
+    "full_refit": false,
+    "iou_before": 0.9651,
+    "iou_after": 0.9669
+  },
+  {
+    "round": 2,
+    "view": "sheet_02_front_3q",
+    "full_refit": false,
+    "iou_before": 0.9241,
+    "iou_after": 0.928
+  },
+  {
+    "round": 2,
+    "view": "sheet_08_front_3q_left",
+    "full_refit": false,
+    "iou_before": 0.8584,
+    "iou_after": 0.8645
+  },
+  {
+    "round": 2,
+    "view": "sheet_03_right_profile",
+    "full_refit": false,
+    "iou_before": 0.8983,
+    "iou_after": 0.9015
+  },
+  {
+    "round": 2,
+    "view": "sheet_07_left_profile",
+    "full_refit": false,
+    "iou_before": 0.8753,
+    "iou_after": 0.8812
+  },
+  {
+    "round": 2,
+    "view": "sheet_04_back_3q_right",
+    "full_refit": false,
+    "iou_before": 0.9341,
+    "iou_after": 0.9436
+  },
+  {
+    "round": 2,
+    "view": "sheet_05_back",
+    "full_refit": false,
+    "iou_before": 0.9054,
+    "iou_after": 0.9089
+  },
+  {
+    "round": 2,
+    "view": "sheet_06_back_3q_left",
+    "full_refit": false,
+    "iou_before": 0.8979,
+    "iou_after": 0.8987
+  },
+  {
+    "round": 2,
+    "view": "sheet_09_top_down",
+    "full_refit": false,
+    "iou_before": 0.8644,
+    "iou_after": 0.8677
+  },
+  {
+    "round": 2,
+    "view": "sheet_10_bottom_up",
+    "full_refit": false,
+    "iou_before": 0.8903,
+    "iou_after": 0.893
+  }
+]

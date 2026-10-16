@@ -1,0 +1,33 @@
+{
+  "centre_m": [
+    -0.00404,
+    -0.00098,
+    0.06789
+  ],
+  "subdiv": 5,
+  "iters": 1500,
+  "weights": {
+    "inside": 1.0,
+    "cover": 1.0,
+    "round": 1500.0,
+    "mirror": 5.0,
+    "camera": 0.05
+  },
+  "tier_weights": {
+    "master": 40.0,
+    "edited": 6.0,
+    "sheet": 1.0
+  },
+  "inside_weights": {
+    "master": 300.0,
+    "edited": 6.0,
+    "sheet": 1.0
+  },
+  "ear_radius_m": 0.032,
+  "extent_cm": [
+    16.309999465942383,
+    20.729999542236328,
+    17.709999084472656
+  ],
+  "volume_ml": 3067.5
+}

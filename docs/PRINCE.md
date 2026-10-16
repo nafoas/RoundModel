@@ -89,10 +89,12 @@ master's exact camera.
 2. **Walls assembled** — intersect the walls into one volume; reproject
    into every view; turntable; disagreements resolved toward the master.
 3. **His face** — refined grey form with features placed, matched to the
-   master.
+   master. Ears are built here as their own geometry (thin flaps shaped
+   from the master); the Checkpoint 2 body volume stops at the head.
 4. **His surface** — fur, whiskers, eyes, lighting; inner body derived
    from the outline minus fur length; blind comparison against the master.
 5. Then, each as its own stage: skeleton, soft body, fur dynamics,
    controllers (head aim, toddle), eye cameras; export to Unreal Engine 5.
 
-Tooling: Blender driven entirely by Python scripts in this repository.
+Tooling: Blender driven entirely by Python scripts in this repository;
+shape fitting in PyTorch (CPU).
