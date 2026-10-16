@@ -198,48 +198,27 @@ def smax(a, b, k):
 # ---------------------------------------------------------------- features
 
 def fit_eyes(body, master):
-    """Both eyeballs share one size (he has two matching eyes; the master
-    shows them a little differently because his head is slightly tilted).
-    How far each sits proud of the fur is fitted per eye."""
-    hits = {}
-    for side in ("R", "L"):
-        S = master.hit(body, EYE_PX[side])
-        hits[side] = (S, body.normal(S[None])[0])
-
-    def box(side, re, proud):
-        S, n = hits[side]
-        c = S - n * (re - proud)
-        pts = ellipsoid_points(c, np.eye(3), np.array([re] * 3), 40)
-        cap = pts[body.sdf(pts) > 0]
-        if len(cap) < 20:
-            return None
-        uv = master.project(cap)
-        return np.array([uv[:, 0].min(), uv[:, 1].min(), uv[:, 0].max(), uv[:, 1].max()])
-
-    def err(p):
-        re, pr_r, pr_l = p
-        e = 0
-        for side, pr in (("R", pr_r), ("L", pr_l)):
-            if not (0.002 < re < 0.012 and 0.0005 < pr < re):
-                return 1e9
-            b = box(side, re, pr)
-            if b is None:
-                return 1e9
-            e += np.sum((b - np.array(EYE_BOX[side])) ** 2)
-        return e
-
-    best = min(((err((re, pr, pr)), re, pr) for re in np.linspace(0.003, 0.011, 17)
-                for pr in np.linspace(0.001, 0.006, 11)), key=lambda t: t[0])
-    r = minimize(err, [best[1], best[2], best[2]], method="Nelder-Mead", options={"xatol": 1e-5, "fatol": 0.1})
-    re = r.x[0]
+    """Eyeballs as anatomy, from the face solve and face pass: each sits in a
+    socket carved into his head, looking out along its solved direction
+    (about 55 deg to the side), cornea standing ~3 mm proud of the lid line.
+    Sizes come from the master (see refine_face.py). Reports how the visible
+    part of each eye compares with the dark of the eye in the master."""
+    shape = json.loads((CP3 / "face_shape.json").read_text())
     eyes = {}
-    for side, pr in (("R", r.x[1]), ("L", r.x[2])):
-        S, n = hits[side]
-        b = box(side, re, pr)
-        be = float(np.sqrt(np.mean((b - np.array(EYE_BOX[side])) ** 2)))
-        eyes[side] = {"surface_point": S.tolist(), "normal": n.tolist(), "radius_m": float(re),
-                      "proud_m": float(pr), "centre": (S - n * (re - pr)).tolist(), "box_error_px": be}
-        print(f"eye {side}: radius {re * 1000:.1f} mm, proud {pr * 1000:.1f} mm, box error {be:.1f} px", flush=True)
+    for side in ("R", "L"):
+        e = shape["eyes"][side]
+        c = np.array(e["eyeball_centre"])
+        re = e["eyeball_radius_m"]
+        pts = ellipsoid_points(c, np.eye(3), np.array([re] * 3), 60)
+        # visible: outside the head, and facing the master camera
+        vis = pts[(body.sdf(pts) > 0) & (np.einsum("ij,ij->i", pts - c, master.pos - pts) > 0)]
+        uv = master.project(vis) if len(vis) else np.zeros((1, 2))
+        bx = np.array([uv[:, 0].min(), uv[:, 1].min(), uv[:, 0].max(), uv[:, 1].max()])
+        err = float(np.sqrt(np.mean((bx - np.array(EYE_BOX[side])) ** 2)))
+        eyes[side] = dict(e, centre=c.tolist(), radius_m=re, box_px=bx.round(1).tolist(), box_error_px=err)
+        print(f"eye {side}: radius {re * 1000:.1f} mm, lid opening {e['rim_radius_m'] * 2000:.1f} mm across, "
+              f"cornea {e['proud_m'] * 1000:.1f} mm proud; visible part vs master: box {bx.round(0).tolist()} "
+              f"vs {list(EYE_BOX[side])} ({err:.1f} px)", flush=True)
     return eyes
 
 
@@ -396,7 +375,7 @@ def nose_and_grooves(body, master):
     # master these lines are gentle shading, not cuts; colour (pink nose,
     # dark lip line) carries most of them and comes with the materials.
     def out(h):
-        return h + body.normal(h[None])[0] * 0.00075
+        return h + body.normal(h[None])[0] * 0.00085
     for poly in GROOVES:
         pts = []
         for a, b in zip(poly[:-1], poly[1:]):
@@ -439,6 +418,18 @@ def assemble(body, ears, peets, pad, lines, eyes, skirt_z):
         for p in peets.values():
             d = smin(d, ellipsoid_sdf(P, np.array(p["centre"]), np.eye(3), np.array(p["radii_m"])), 0.006)
         d = smin(d, ellipsoid_sdf(P, np.array(pad["centre"]), pad_frame, np.array(pad["radii_m"])), 0.003)
+        for e in eyes.values():
+            c, re = np.array(e["centre"]), e["radius_m"]
+            # socket: the eyeball sits in it with 0.3 mm clearance
+            d = smax(d, -(np.linalg.norm(P - c, axis=1) - re - 0.0003), 0.0006)
+            # lid rim: a soft rounded lip around the opening
+            a = np.array(e["axis"])
+            rc = np.array(e["rim_centre"])
+            q = P - rc
+            h = q @ a
+            rad = np.linalg.norm(q - h[:, None] * a, axis=1)
+            torus = np.sqrt((rad - e["rim_radius_m"] - 0.0006) ** 2 + h ** 2) - 0.0009
+            d = smin(d, torus, 0.0008)
         for line in lines:
             L = np.array(line)
             g = np.full(len(P), 1.0)

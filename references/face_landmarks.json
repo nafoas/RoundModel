@@ -1,0 +1,183 @@
+{
+ "_about": "Face landmarks per face view, master pixels of each image. Left/right are Prince's own. Eyes: automatic detection (dark eyeball core centroid). Nose/mouth: hand-placed on gridded zooms. The head is rigid, so these views are several looks at one face; frontal views share the master's camera, turned views get their own head pose.",
+ "views": {
+  "master_front_standing": {
+   "image": "references/master/master_front_standing.webp",
+   "weight": 10,
+   "points": {
+    "eye_R": [
+     338,
+     467
+    ],
+    "eye_L": [
+     699,
+     442
+    ],
+    "nose_tip": [
+     546,
+     745
+    ],
+    "nostril_R": [
+     470,
+     693
+    ],
+    "nostril_L": [
+     605,
+     688
+    ],
+    "mouth_split": [
+     548,
+     818
+    ]
+   },
+   "_note": "Eyes hand-placed (automatic detection leaned toward the dark smudge under his right eye)."
+  },
+  "front_head_lifted": {
+   "image": "references/edited/front_head_lifted.webp",
+   "weight": 0,
+   "points": {
+    "eye_R": [
+     330.2490886998785,
+     485.94046172539487
+    ],
+    "eye_L": [
+     697.8419010669253,
+     442.4015518913676
+    ],
+    "nose_tip": [
+     542,
+     690
+    ],
+    "nostril_R": [
+     500,
+     653
+    ],
+    "nostril_L": [
+     587,
+     643
+    ],
+    "mouth_split": [
+     545,
+     763
+    ]
+   },
+   "_note": "Excluded: its eyes are pixel-identical to the master's while its nose moved, so it is a partial edit, not a rigid head movement."
+  },
+  "front_head_lowered": {
+   "image": "references/edited/front_head_lowered.webp",
+   "weight": 3,
+   "points": {
+    "eye_R": [
+     338.774880255455,
+     529.3001596593933
+    ],
+    "eye_L": [
+     715.3629846855654,
+     500.57771260997066
+    ],
+    "nose_tip": [
+     552,
+     847
+    ],
+    "nostril_R": [
+     480,
+     803
+    ],
+    "nostril_L": [
+     623,
+     800
+    ]
+   }
+  },
+  "head_turn_left_mouth_closed": {
+   "image": "references/edited/head_turn_left_mouth_closed.webp",
+   "weight": 3,
+   "points": {
+    "eye_R": [
+     409,
+     468
+    ],
+    "eye_L": [
+     752,
+     445
+    ],
+    "nose_tip": [
+     655,
+     743
+    ],
+    "nostril_R": [
+     600,
+     697
+    ],
+    "nostril_L": [
+     720,
+     693
+    ],
+    "mouth_split": [
+     652,
+     813
+    ]
+   }
+  },
+  "head_turn_right_mouth_open": {
+   "image": "references/edited/head_turn_right_mouth_open.webp",
+   "weight": 3,
+   "points": {
+    "eye_R": [
+     257,
+     442
+    ],
+    "eye_L": [
+     550,
+     457
+    ],
+    "nose_tip": [
+     278,
+     687
+    ],
+    "nostril_R": [
+     230,
+     632
+    ],
+    "nostril_L": [
+     337,
+     648
+    ],
+    "mouth_split": [
+     287,
+     725
+    ]
+   }
+  },
+  "front_3q_left_toddle": {
+   "image": "references/edited/front_3q_left_toddle.webp",
+   "weight": 3,
+   "points": {
+    "eye_R": [
+     240,
+     434
+    ],
+    "eye_L": [
+     515,
+     450
+    ],
+    "nose_tip": [
+     238,
+     680
+    ],
+    "nostril_R": [
+     200,
+     640
+    ],
+    "nostril_L": [
+     297,
+     642
+    ],
+    "mouth_split": [
+     250,
+     722
+    ]
+   }
+  }
+ }
+}
