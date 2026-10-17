@@ -1,0 +1,775 @@
+{
+ "_about": "Master pixels (x right, y down). Left/right are Prince's own. dashed = soft form change.",
+ "lines": [
+  {
+   "group": "ears",
+   "name": "1 right ear edge",
+   "points": [
+    [
+     365,
+     300
+    ],
+    [
+     372,
+     255
+    ],
+    [
+     392,
+     222
+    ],
+    [
+     420,
+     210
+    ],
+    [
+     447,
+     218
+    ],
+    [
+     468,
+     240
+    ],
+    [
+     478,
+     262
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "ears",
+   "name": "2 right ear base (joins head)",
+   "points": [
+    [
+     378,
+     292
+    ],
+    [
+     425,
+     277
+    ],
+    [
+     478,
+     262
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "ears",
+   "name": "3 left ear edge",
+   "points": [
+    [
+     612,
+     250
+    ],
+    [
+     630,
+     226
+    ],
+    [
+     655,
+     210
+    ],
+    [
+     683,
+     206
+    ],
+    [
+     705,
+     222
+    ],
+    [
+     718,
+     255
+    ],
+    [
+     728,
+     295
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "ears",
+   "name": "4 left ear base (joins head)",
+   "points": [
+    [
+     612,
+     250
+    ],
+    [
+     668,
+     266
+    ],
+    [
+     728,
+     295
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "eyes",
+   "name": "5 right eye (dark of the eye)",
+   "points": [
+    [
+     345,
+     418
+    ],
+    [
+     358,
+     440
+    ],
+    [
+     361,
+     470
+    ],
+    [
+     352,
+     500
+    ],
+    [
+     335,
+     512
+    ],
+    [
+     320,
+     500
+    ],
+    [
+     316,
+     470
+    ],
+    [
+     325,
+     440
+    ]
+   ],
+   "dashed": false,
+   "closed": true
+  },
+  {
+   "group": "eyes",
+   "name": "6 right upper lid / lashes",
+   "points": [
+    [
+     300,
+     410
+    ],
+    [
+     325,
+     400
+    ],
+    [
+     350,
+     405
+    ],
+    [
+     366,
+     420
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "eyes",
+   "name": "7 right brow (socket rim)",
+   "points": [
+    [
+     292,
+     396
+    ],
+    [
+     330,
+     374
+    ],
+    [
+     372,
+     388
+    ],
+    [
+     392,
+     420
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "eyes",
+   "name": "8 right under-eye smudge",
+   "points": [
+    [
+     316,
+     514
+    ],
+    [
+     326,
+     540
+    ],
+    [
+     347,
+     552
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "eyes",
+   "name": "9 left eye (dark of the eye)",
+   "points": [
+    [
+     690,
+     396
+    ],
+    [
+     712,
+     410
+    ],
+    [
+     722,
+     440
+    ],
+    [
+     720,
+     470
+    ],
+    [
+     705,
+     488
+    ],
+    [
+     685,
+     482
+    ],
+    [
+     672,
+     455
+    ],
+    [
+     675,
+     420
+    ]
+   ],
+   "dashed": false,
+   "closed": true
+  },
+  {
+   "group": "eyes",
+   "name": "10 left upper lid / lashes",
+   "points": [
+    [
+     664,
+     390
+    ],
+    [
+     690,
+     378
+    ],
+    [
+     716,
+     385
+    ],
+    [
+     732,
+     401
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "eyes",
+   "name": "11 left brow (socket rim)",
+   "points": [
+    [
+     648,
+     386
+    ],
+    [
+     690,
+     360
+    ],
+    [
+     731,
+     370
+    ],
+    [
+     752,
+     396
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "eyes",
+   "name": "12 left under-eye smudge",
+   "points": [
+    [
+     705,
+     490
+    ],
+    [
+     726,
+     506
+    ],
+    [
+     756,
+     520
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "form",
+   "name": "13 forehead midline (fur parting)",
+   "points": [
+    [
+     545,
+     288
+    ],
+    [
+     544,
+     420
+    ],
+    [
+     543,
+     560
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "nose",
+   "name": "14 right nose-bridge flank",
+   "points": [
+    [
+     455,
+     470
+    ],
+    [
+     480,
+     540
+    ],
+    [
+     505,
+     600
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "nose",
+   "name": "15 left nose-bridge flank",
+   "points": [
+    [
+     630,
+     470
+    ],
+    [
+     602,
+     540
+    ],
+    [
+     577,
+     600
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "nose",
+   "name": "16 top of the nose pad",
+   "points": [
+    [
+     455,
+     690
+    ],
+    [
+     468,
+     632
+    ],
+    [
+     503,
+     600
+    ],
+    [
+     540,
+     594
+    ],
+    [
+     580,
+     600
+    ],
+    [
+     613,
+     632
+    ],
+    [
+     628,
+     690
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "nose",
+   "name": "17 right nostril (arm of the V)",
+   "points": [
+    [
+     455,
+     690
+    ],
+    [
+     490,
+     713
+    ],
+    [
+     520,
+     734
+    ],
+    [
+     545,
+     748
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "nose",
+   "name": "18 left nostril (arm of the V)",
+   "points": [
+    [
+     628,
+     690
+    ],
+    [
+     598,
+     713
+    ],
+    [
+     570,
+     734
+    ],
+    [
+     545,
+     748
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "mouth",
+   "name": "19 philtrum (nose to mouth)",
+   "points": [
+    [
+     545,
+     748
+    ],
+    [
+     546,
+     790
+    ],
+    [
+     548,
+     818
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "mouth",
+   "name": "20 right upper lip",
+   "points": [
+    [
+     548,
+     818
+    ],
+    [
+     525,
+     830
+    ],
+    [
+     500,
+     838
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "mouth",
+   "name": "21 left upper lip",
+   "points": [
+    [
+     548,
+     818
+    ],
+    [
+     572,
+     830
+    ],
+    [
+     597,
+     838
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "mouth",
+   "name": "22 right whisker pad",
+   "points": [
+    [
+     455,
+     690
+    ],
+    [
+     436,
+     740
+    ],
+    [
+     444,
+     800
+    ],
+    [
+     480,
+     836
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "mouth",
+   "name": "23 left whisker pad",
+   "points": [
+    [
+     628,
+     690
+    ],
+    [
+     652,
+     740
+    ],
+    [
+     645,
+     800
+    ],
+    [
+     612,
+     836
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "mouth",
+   "name": "24 under the lips (chin crease)",
+   "points": [
+    [
+     400,
+     835
+    ],
+    [
+     470,
+     851
+    ],
+    [
+     545,
+     857
+    ],
+    [
+     620,
+     851
+    ],
+    [
+     690,
+     834
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "lower",
+   "name": "25 chin meets chest bib",
+   "points": [
+    [
+     360,
+     880
+    ],
+    [
+     450,
+     906
+    ],
+    [
+     545,
+     916
+    ],
+    [
+     640,
+     906
+    ],
+    [
+     730,
+     880
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "lower",
+   "name": "26 bib meets lower skirt",
+   "points": [
+    [
+     280,
+     1000
+    ],
+    [
+     420,
+     1030
+    ],
+    [
+     545,
+     1040
+    ],
+    [
+     670,
+     1030
+    ],
+    [
+     810,
+     1000
+    ]
+   ],
+   "dashed": true,
+   "closed": false
+  },
+  {
+   "group": "lower",
+   "name": "27 right front peet",
+   "points": [
+    [
+     272,
+     1135
+    ],
+    [
+     265,
+     1182
+    ],
+    [
+     288,
+     1214
+    ],
+    [
+     340,
+     1228
+    ],
+    [
+     408,
+     1224
+    ],
+    [
+     442,
+     1205
+    ],
+    [
+     452,
+     1188
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "lower",
+   "name": "28 skirt hem between the peets",
+   "points": [
+    [
+     452,
+     1188
+    ],
+    [
+     520,
+     1194
+    ],
+    [
+     598,
+     1190
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  },
+  {
+   "group": "lower",
+   "name": "29 left front peet",
+   "points": [
+    [
+     598,
+     1190
+    ],
+    [
+     606,
+     1220
+    ],
+    [
+     650,
+     1233
+    ],
+    [
+     720,
+     1235
+    ],
+    [
+     764,
+     1222
+    ],
+    [
+     774,
+     1186
+    ],
+    [
+     772,
+     1150
+    ]
+   ],
+   "dashed": false,
+   "closed": false
+  }
+ ],
+ "peet_specks": [
+  [
+   655,
+   1218
+  ],
+  [
+   676,
+   1223
+  ],
+  [
+   692,
+   1216
+  ]
+ ]
+}
