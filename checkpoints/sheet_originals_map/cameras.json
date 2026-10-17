@@ -1,0 +1,384 @@
+{
+ "01_front": {
+  "azimuth_deg": -0.8,
+  "elevation_deg": 3.0,
+  "distance_m": 0.373,
+  "roll_deg": -3.1,
+  "camera_position_m": [
+   0.0049,
+   0.4223,
+   0.1193
+  ],
+  "landmarks_used": [
+   "eye_R",
+   "eye_L",
+   "nose_tip",
+   "nostril_R",
+   "nostril_L",
+   "mouth_split",
+   "ear_tip_R",
+   "ear_tip_L"
+  ],
+  "rms_px": 7.8,
+  "source": "landmarks (head-relative)"
+ },
+ "02_front_3q": {
+  "azimuth_deg": 12.5,
+  "elevation_deg": 7.1,
+  "distance_m": 0.38,
+  "roll_deg": -5.3,
+  "camera_position_m": [
+   -0.0814,
+   0.4177,
+   0.1466
+  ],
+  "landmarks_used": [
+   "eye_L",
+   "eye_R",
+   "nose_tip",
+   "nostril_R",
+   "nostril_L",
+   "mouth_split",
+   "ear_tip_R",
+   "ear_tip_L"
+  ],
+  "rms_px": 12.7,
+  "source": "landmarks (head-relative)"
+ },
+ "03_right_profile": {
+  "azimuth_deg": -88,
+  "elevation_deg": 12,
+  "distance_m": 0.5,
+  "camera_position_m": [
+   0.4888,
+   0.0671,
+   0.204
+  ],
+  "rms_px": null,
+  "source": "angle read from the photo (landmark solve disagrees; see README)",
+  "landmark_solve": {
+   "azimuth_deg": -51.7,
+   "elevation_deg": 16.4,
+   "distance_m": 0.515,
+   "roll_deg": 1.5,
+   "camera_position_m": [
+    0.3883,
+    0.3562,
+    0.2454
+   ],
+   "landmarks_used": [
+    "eye_R",
+    "nose_tip",
+    "ear_tip_R"
+   ],
+   "rms_px": 6.6,
+   "source": "landmarks (head-relative)"
+  }
+ },
+ "04_back_3q_right": {
+  "azimuth_deg": -139.7,
+  "elevation_deg": 14.0,
+  "distance_m": 0.435,
+  "camera_position_m": [
+   0.27307000756263733,
+   -0.322160005569458,
+   0.18568000197410583
+  ],
+  "source": "Checkpoint 2 silhouette solve of the same photo (sheet panel)",
+  "rms_px": null
+ },
+ "05_back": {
+  "azimuth_deg": 179.9,
+  "elevation_deg": 11.7,
+  "distance_m": 0.463,
+  "camera_position_m": [
+   -0.0009500000160187483,
+   -0.4534899890422821,
+   0.1739400029182434
+  ],
+  "source": "Checkpoint 2 silhouette solve of the same photo (sheet panel)",
+  "rms_px": null
+ },
+ "06_back_3q_left": {
+  "azimuth_deg": 159.9,
+  "elevation_deg": 12.4,
+  "distance_m": 0.523,
+  "camera_position_m": [
+   -0.17573000490665436,
+   -0.47968000173568726,
+   0.19191999733448029
+  ],
+  "source": "Checkpoint 2 silhouette solve of the same photo (sheet panel)",
+  "rms_px": null
+ },
+ "07_left_profile": {
+  "azimuth_deg": 88,
+  "elevation_deg": 12,
+  "distance_m": 0.5,
+  "camera_position_m": [
+   -0.4888,
+   0.0671,
+   0.204
+  ],
+  "rms_px": null,
+  "source": "angle read from the photo (landmark solve disagrees; see README)",
+  "landmark_solve": {
+   "azimuth_deg": 51.0,
+   "elevation_deg": 17.9,
+   "distance_m": 0.577,
+   "roll_deg": -13.7,
+   "camera_position_m": [
+    -0.4266,
+    0.3958,
+    0.2777
+   ],
+   "landmarks_used": [
+    "eye_L",
+    "nose_tip",
+    "ear_tip_L"
+   ],
+   "rms_px": 12.5,
+   "source": "landmarks (head-relative)"
+  }
+ },
+ "08_front_3q_left": {
+  "azimuth_deg": 14.3,
+  "elevation_deg": 7.7,
+  "distance_m": 0.41,
+  "roll_deg": -4.9,
+  "camera_position_m": [
+   -0.1005,
+   0.4441,
+   0.155
+  ],
+  "landmarks_used": [
+   "eye_L",
+   "eye_R",
+   "nose_tip",
+   "nostril_R",
+   "nostril_L",
+   "mouth_split",
+   "ear_tip_R",
+   "ear_tip_L"
+  ],
+  "rms_px": 17.7,
+  "source": "landmarks (head-relative)"
+ },
+ "09_top_down": {
+  "azimuth_deg": 0,
+  "elevation_deg": 86,
+  "distance_m": 0.5,
+  "camera_position_m": [
+   0.0,
+   0.0849,
+   0.5988
+  ],
+  "rms_px": null,
+  "source": "angle read from the photo (landmark solve disagrees; see README)",
+  "landmark_solve": {
+   "azimuth_deg": -3.6,
+   "elevation_deg": 71.8,
+   "distance_m": 0.567,
+   "roll_deg": 174.7,
+   "camera_position_m": [
+    0.0112,
+    0.2266,
+    0.6384
+   ],
+   "landmarks_used": [
+    "eye_R",
+    "eye_L",
+    "nose_tip",
+    "ear_tip_R",
+    "ear_tip_L"
+   ],
+   "rms_px": 49.7,
+   "source": "landmarks (head-relative)"
+  }
+ },
+ "10_bottom_up": {
+  "azimuth_deg": -0.1,
+  "elevation_deg": -69.0,
+  "distance_m": 0.28,
+  "roll_deg": -7.7,
+  "camera_position_m": [
+   0.0002,
+   0.1506,
+   -0.1615
+  ],
+  "landmarks_used": [
+   "nose_tip",
+   "mouth_split"
+  ],
+  "rms_px": 6.1,
+  "source": "landmarks (head-relative)"
+ },
+ "11_looking_up_slight": {
+  "azimuth_deg": 7.8,
+  "elevation_deg": -22.4,
+  "distance_m": 0.425,
+  "roll_deg": -8.9,
+  "camera_position_m": [
+   -0.053,
+   0.4393,
+   -0.0618
+  ],
+  "landmarks_used": [
+   "eye_R",
+   "eye_L",
+   "nose_tip",
+   "nostril_R",
+   "nostril_L",
+   "mouth_split"
+  ],
+  "rms_px": 10.6,
+  "source": "landmarks (head-relative)"
+ },
+ "12_looking_up_more": {
+  "azimuth_deg": 9.0,
+  "elevation_deg": -27.9,
+  "distance_m": 0.39,
+  "roll_deg": -8.0,
+  "camera_position_m": [
+   -0.054,
+   0.3908,
+   -0.0825
+  ],
+  "landmarks_used": [
+   "eye_R",
+   "eye_L",
+   "nose_tip",
+   "nostril_R",
+   "nostril_L",
+   "mouth_split"
+  ],
+  "rms_px": 10.1,
+  "source": "landmarks (head-relative)"
+ },
+ "13_looking_down_slight": {
+  "azimuth_deg": -6.2,
+  "elevation_deg": 28.7,
+  "distance_m": 0.349,
+  "roll_deg": -6.0,
+  "camera_position_m": [
+   0.0332,
+   0.3538,
+   0.2676
+  ],
+  "landmarks_used": [
+   "eye_R",
+   "eye_L",
+   "nose_tip",
+   "nostril_R",
+   "nostril_L",
+   "ear_tip_R",
+   "ear_tip_L"
+  ],
+  "rms_px": 15.0,
+  "source": "landmarks (head-relative)"
+ },
+ "14_looking_down_more": {
+  "azimuth_deg": -6.0,
+  "elevation_deg": 33.0,
+  "distance_m": 0.348,
+  "roll_deg": -2.0,
+  "camera_position_m": [
+   0.0304,
+   0.3404,
+   0.2899
+  ],
+  "landmarks_used": [
+   "eye_R",
+   "eye_L",
+   "nose_tip",
+   "ear_tip_R",
+   "ear_tip_L"
+  ],
+  "rms_px": 11.4,
+  "source": "landmarks (head-relative)"
+ },
+ "15_looking_left": {
+  "azimuth_deg": 23.6,
+  "elevation_deg": 0.5,
+  "distance_m": 0.444,
+  "roll_deg": -23.4,
+  "camera_position_m": [
+   -0.1779,
+   0.4565,
+   0.1036
+  ],
+  "landmarks_used": [
+   "eye_L",
+   "nose_tip",
+   "mouth_split",
+   "ear_tip_L",
+   "ear_tip_R"
+  ],
+  "rms_px": 20.1,
+  "source": "landmarks (head-relative)"
+ },
+ "16_looking_right": {
+  "azimuth_deg": -27.6,
+  "elevation_deg": -4.4,
+  "distance_m": 0.415,
+  "roll_deg": 13.5,
+  "camera_position_m": [
+   0.1915,
+   0.4169,
+   0.068
+  ],
+  "landmarks_used": [
+   "eye_R",
+   "nose_tip",
+   "mouth_split",
+   "ear_tip_R",
+   "ear_tip_L"
+  ],
+  "rms_px": 21.7,
+  "source": "landmarks (head-relative)"
+ },
+ "17_from_below_da_boss": {
+  "azimuth_deg": 11.1,
+  "elevation_deg": -38.8,
+  "distance_m": 0.301,
+  "roll_deg": -7.7,
+  "camera_position_m": [
+   -0.0451,
+   0.2801,
+   -0.0885
+  ],
+  "landmarks_used": [
+   "eye_R",
+   "eye_L",
+   "nose_tip",
+   "nostril_R",
+   "nostril_L",
+   "mouth_split"
+  ],
+  "rms_px": 18.9,
+  "source": "landmarks (head-relative)"
+ },
+ "18_staring_at_boss": {
+  "azimuth_deg": -2.0,
+  "elevation_deg": 2.0,
+  "distance_m": 0.386,
+  "roll_deg": -3.7,
+  "camera_position_m": [
+   0.0132,
+   0.4355,
+   0.1137
+  ],
+  "landmarks_used": [
+   "eye_R",
+   "eye_L",
+   "nose_tip",
+   "nostril_R",
+   "nostril_L",
+   "mouth_split",
+   "ear_tip_R",
+   "ear_tip_L"
+  ],
+  "rms_px": 9.6,
+  "source": "landmarks (head-relative)"
+ }
+}
