@@ -87,6 +87,15 @@ def constraints(face):
 def main():
     torch.manual_seed(0)
     face = json.loads((CP3 / "face_solve.json").read_text())
+    # Eye depth comes from tools/solve_face_depth.py (profiles, top-down and
+    # 45-degree close-ups, with the master's pixels fixed); it supersedes the
+    # head-turn solve, which put the eyes ~23 mm behind the nose instead of ~54.
+    depth = CP3 / "face_depth.json"
+    if depth.exists():
+        dj = json.loads(depth.read_text())
+        face["points_master_pose_m"]["eye_R"] = dj["eye_R_m"]
+        face["points_master_pose_m"]["eye_L"] = dj["eye_L_m"]
+        face["points_master_pose_m"]["nose_tip"] = dj["nose_tip_m"]
     meta = json.loads((CP3 / "body_meta.json").read_text())
     centre = np.array(meta["centre_m"])
     dirs, F = FS.icosphere(meta["subdiv"])

@@ -420,16 +420,10 @@ def assemble(body, ears, peets, pad, lines, eyes, skirt_z):
         d = smin(d, ellipsoid_sdf(P, np.array(pad["centre"]), pad_frame, np.array(pad["radii_m"])), 0.003)
         for e in eyes.values():
             c, re = np.array(e["centre"]), e["radius_m"]
-            # socket: the eyeball sits in it with 0.3 mm clearance
-            d = smax(d, -(np.linalg.norm(P - c, axis=1) - re - 0.0003), 0.0006)
-            # lid rim: a soft rounded lip around the opening
-            a = np.array(e["axis"])
-            rc = np.array(e["rim_centre"])
-            q = P - rc
-            h = q @ a
-            rad = np.linalg.norm(q - h[:, None] * a, axis=1)
-            torus = np.sqrt((rad - e["rim_radius_m"] - 0.0006) ** 2 + h ** 2) - 0.0009
-            d = smin(d, torus, 0.0008)
+            # socket: the fur surface wraps snugly onto the eyeball (no gap,
+            # no raised rim: a ring read as goggles); the lid line is the
+            # soft crease where fur meets eye, which the face pass shapes
+            d = smax(d, -(np.linalg.norm(P - c, axis=1) - re - 0.0001), 0.0004)
         for line in lines:
             L = np.array(line)
             g = np.full(len(P), 1.0)
