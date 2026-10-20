@@ -1,0 +1,46 @@
+{
+ "_about": "Eye depth from profile and top-down ratios; master pixels fixed (points lie on master rays).",
+ "ratios": {
+  "profile_behind_over_above": {
+   "closeup 08 side profile (his right)": 1.6260162601626016,
+   "sheet 03 right profile": 1.3623188405797102,
+   "sheet 07 left profile": 1.626086956521739
+  },
+  "topdown_behind_over_separation": {
+   "sheet 09 top-down": 0.6959876543209876
+  }
+ },
+ "nose_tip_m": [
+  -0.00396,
+  0.10506,
+  0.08807
+ ],
+ "estimates": {
+  "from_profiles": {
+   "eyes_behind_nose_mm": 69.0,
+   "eye_separation_mm": 61.8
+  },
+  "from_top_down": {
+   "eyes_behind_nose_mm": 39.6,
+   "eye_separation_mm": 56.9
+  }
+ },
+ "eye_R_m": [
+  0.03101,
+  0.05053,
+  0.1266
+ ],
+ "eye_L_m": [
+  -0.02793,
+  0.05101,
+  0.13353
+ ],
+ "eyes_behind_nose_mm": 54.3,
+ "eyes_above_nose_mm": 42.0,
+ "eye_separation_mm": 59.3,
+ "previous_face_solve_behind_mm": 22.9,
+ "eye_depth_vs_body_surface_mm": {
+  "eye_R": -6.7,
+  "eye_L": -11.1
+ }
+}
