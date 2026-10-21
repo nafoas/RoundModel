@@ -99,6 +99,73 @@ def midline(V):
     return lambda q: np.interp(q, z[o], y[o])
 
 
+def fit_outline(V, F, rows, cols, deg, master, step):
+    """Make the master-view silhouette match his traced outline.
+
+    Silhouette (rim) points are moved sideways in the master's image plane,
+    never along the master's line of sight, by their distance to the traced
+    outline; the move is spread smoothly into the nearby surface. Parts of
+    the outline that belong to features built separately (ears, peets) are
+    excluded by boxes in master pixels."""
+    import cv2
+    from PIL import Image
+    mask = np.asarray(Image.open(ROOT / "checkpoints/cp1/masks/master_front_standing.outline.png")) > 0
+    # follow the smooth envelope of his fur, not individual tufts (those
+    # come from the fur itself later)
+    sig = step.get("outline_soften_px", 0)
+    if sig:
+        mask = cv2.GaussianBlur(mask.astype(np.float32), (0, 0), sig) > 0.5
+    h, w = mask.shape
+    sd = cv2.distanceTransform((~mask).astype(np.uint8), cv2.DIST_L2, 5) - \
+        cv2.distanceTransform(mask.astype(np.uint8), cv2.DIST_L2, 5)  # + outside, - inside (px)
+    gy, gx = np.gradient(cv2.GaussianBlur(sd, (0, 0), 1.5))
+    excl = np.zeros_like(mask)
+    for x0, y0, x1, y1 in step.get("exclude", []):
+        excl[y0:y1, x0:x1] = True
+    n = len(V)
+    for _ in range(step.get("iters", 6)):
+        fn = np.cross(V[F[:, 1]] - V[F[:, 0]], V[F[:, 2]] - V[F[:, 0]])
+        N = np.zeros_like(V)
+        for k in range(3):
+            np.add.at(N, F[:, k], fn)
+        N /= np.linalg.norm(N, axis=1, keepdims=True)
+        view = V - master.pos
+        dist = np.linalg.norm(view, axis=1)
+        view /= dist[:, None]
+        rim = np.abs(np.einsum("ij,ij->i", N, view)) < 0.12
+        uv = master.project(V)
+        ui = np.clip(np.round(uv[:, 0]).astype(int), 0, w - 1)
+        vi = np.clip(np.round(uv[:, 1]).astype(int), 0, h - 1)
+        rim &= ~excl[vi, ui]
+        # signed distance to his outline (px): move rim points by it, inward
+        # if outside (+), outward if inside (-), along the outline's normal
+        g = np.stack([gx[vi, ui], gy[vi, ui]], 1)
+        g /= np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-6)
+        move_px = -sd[vi, ui][:, None] * g
+        Rm = master.R
+        right, down = Rm[0], Rm[1]
+        move = (move_px[:, :1] * right + move_px[:, 1:] * down) * (dist / master.f)[:, None]
+        D = np.zeros_like(V)
+        D[rim] = move[rim]
+        fixed = rim.copy()
+        # spread the rim moves into the nearby surface (harmonic fill)
+        for _ in range(step.get("spread", 40)):
+            avg = np.zeros_like(D)
+            np.add.at(avg, rows, D[cols])
+            avg /= deg[:, None]
+            D = np.where(fixed[:, None], D, avg * step.get("decay", 0.97))
+        # smooth the correction itself so neighbouring rim points move
+        # together (moving each on its own leaves a ragged edge)
+        for _ in range(step.get("smooth_iters", 25)):
+            avg = np.zeros_like(D)
+            np.add.at(avg, rows, D[cols])
+            D = 0.5 * D + 0.5 * avg / deg[:, None]
+        # keep the move sideways: remove any part along the line of sight
+        D -= np.einsum("ij,ij->i", D, view)[:, None] * view
+        V = V + D * step.get("rate", 0.8)
+    return V
+
+
 def apply(log, V, F, master):
     V0 = V.copy()
     V = V.copy()
@@ -180,6 +247,8 @@ def apply(log, V, F, master):
             w = falloff(np.maximum(radial - step["rim"], 0), step["blend"]) * (h > 0)
             over = np.maximum((V - lid) @ ax_, 0)
             V -= (w * over)[:, None] * ax_[None, :]
+        elif op == "fit_outline":
+            V = fit_outline(V, F, rows, cols, deg, master, step)
         elif op == "smooth":
             w = falloff(np.linalg.norm(V - at, axis=1), step["radius"]) * step.get("strength", 0.5)
             for _ in range(step.get("iters", 3)):

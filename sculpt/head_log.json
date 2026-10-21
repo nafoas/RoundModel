@@ -1,6 +1,41 @@
 {
  "steps": [
   {
+   "note": "silhouette from the master camera matches his traced outline (rim points moved sideways only, never in depth); ears and peets excluded (built separately); fitted to the smooth envelope of the fur (outline softened by 7 px), not single tufts",
+   "op": "fit_outline",
+   "exclude": [
+    [
+     340,
+     180,
+     500,
+     300
+    ],
+    [
+     590,
+     180,
+     760,
+     290
+    ],
+    [
+     230,
+     1150,
+     470,
+     1300
+    ],
+    [
+     580,
+     1160,
+     800,
+     1300
+    ]
+   ],
+   "iters": 12,
+   "spread": 40,
+   "decay": 0.97,
+   "rate": 0.8,
+   "outline_soften_px": 7
+  },
+  {
    "note": "eye level, seen from above: one smooth wedge from the bridge (midline unchanged) back past both eyes, running through each eye's lid line so the eyes bulge out of it; fades out where the head turns to face sideways",
    "op": "section",
    "z": 0.13,
@@ -42,15 +77,15 @@
    ]
   },
   {
-   "note": "right eye: front at its measured point (master pixel fixed, depth from profiles/top-down/45-degree), looking 60 deg out and 8 deg up; looking 55 deg out and 8 deg up; radius 7.5 mm (dark of the eye ~12.6 x 7.5 mm in the master: a 12.6 mm opening seen ~53 deg off-axis)",
+   "note": "right eye: front at its measured depth, placed so the visible dark of the eye lands on the master's eye (front anchored at master px (320, 467)); looking 55 deg out, 8 deg up; radius 8 mm",
    "op": "eye",
    "side": "R",
    "front": [
-    0.03101,
-    0.05053,
-    0.1266
+    0.03393,
+    0.05076,
+    0.12645
    ],
-   "radius": 0.0075,
+   "radius": 0.008,
    "axis": [
     0.8112,
     0.568,
@@ -58,15 +93,15 @@
    ]
   },
   {
-   "note": "left eye: same, at its own measured point; looking 55 deg out and 8 deg up; radius 7.5 mm (dark of the eye ~12.6 x 7.5 mm in the master: a 12.6 mm opening seen ~53 deg off-axis)",
+   "note": "left eye: front at its measured depth, placed so the visible dark of the eye lands on the master's eye (front anchored at master px (718, 439)); looking 55 deg out, 8 deg up; radius 8 mm",
    "op": "eye",
    "side": "L",
    "front": [
-    -0.02793,
-    0.05101,
-    0.13353
+    -0.031,
+    0.05131,
+    0.13415
    ],
-   "radius": 0.0075,
+   "radius": 0.008,
    "axis": [
     -0.8112,
     0.568,
@@ -90,9 +125,53 @@
    "note": "eye socket: opening faces out along the eye's axis; lid opening 12.6 mm across, cornea 3.4 mm proud; soft 8 mm blend into the fur",
    "op": "socket",
    "side": "R",
-   "proud": 0.0034,
-   "rim": 0.0063,
-   "blend": 0.008,
+   "proud": 0.0041,
+   "rim": 0.007,
+   "blend": 0.009,
+   "mirror": true
+  },
+  {
+   "note": "soften the fur around the right eye (no hard creases), then re-open the socket (mirrored)",
+   "op": "smooth",
+   "at": [
+    0.035930000000000004,
+    0.04876,
+    0.12645
+   ],
+   "radius": 0.018,
+   "strength": 0.35,
+   "iters": 8,
+   "mirror": true
+  },
+  {
+   "note": "eye socket: opening faces out along the eye's axis; lid opening 12.6 mm across, cornea 3.4 mm proud; soft 8 mm blend into the fur",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0041,
+   "rim": 0.007,
+   "blend": 0.009,
+   "mirror": true
+  },
+  {
+   "note": "relax the strip between the right eye and the bridge, where the wedge turns most sharply (mirrored); then re-open the socket",
+   "op": "smooth",
+   "at": [
+    0.021,
+    0.068,
+    0.131
+   ],
+   "radius": 0.022,
+   "strength": 0.5,
+   "iters": 90,
+   "mirror": true
+  },
+  {
+   "note": "eye socket: opening faces out along the eye's axis; lid opening 12.6 mm across, cornea 3.4 mm proud; soft 8 mm blend into the fur",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0041,
+   "rim": 0.007,
+   "blend": 0.009,
    "mirror": true
   }
  ]
