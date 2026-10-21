@@ -42,16 +42,44 @@ import fit_surface as FS  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def base_mesh():
+def base_mesh(level=7):
+    """Base body at icosphere level 7 (163,842 vertices, ~0.8 mm apart), its
+    radii interpolated smoothly from the level-6 body fit. Fine enough for
+    the eyelids and the nose."""
     meta = json.loads((ROOT / "checkpoints/cp3/body_meta.json").read_text())
-    d, F = FS.icosphere(meta["subdiv"])
-    r = np.load(ROOT / "checkpoints/cp3/body_radii_preface.npy")
+    d6, _ = FS.icosphere(meta["subdiv"])
+    r6 = np.load(ROOT / "checkpoints/cp3/body_radii_preface.npy")
+    cache = ROOT / f"work/icosphere_{level}.npz"
+    if cache.exists():
+        z = np.load(cache)
+        d, F = z["d"], z["F"]
+    else:
+        d, F = FS.icosphere(level)
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        np.savez(cache, d=d, F=F)
+    from scipy.spatial import cKDTree
+    dist, idx = cKDTree(d6).query(d, k=6)
+    sig = np.median(cKDTree(d6).query(d6, k=2)[0][:, 1]) * 0.7
+    w = np.exp(-(dist / sig) ** 2)
+    r = (r6[idx] * w).sum(1) / w.sum(1)
     return np.array(meta["centre_m"]) + d * r[:, None], F
+
+
+_AVG = {}
 
 
 def neighbours(F, n):
     rows, cols, deg = FS.neighbours(F, n)
     return rows, cols, deg
+
+
+def avg_op(rows, cols, deg):
+    """Sparse operator giving each vertex the mean of its neighbours."""
+    key = (len(deg), len(rows))
+    if key not in _AVG:
+        import scipy.sparse as sp
+        _AVG[key] = sp.csr_matrix((1.0 / deg[rows], (rows, cols)), shape=(len(deg), len(deg)))
+    return _AVG[key]
 
 
 class Master:
@@ -172,16 +200,12 @@ def fit_outline(V, F, rows, cols, deg, master, step):
         fixed = rim.copy()
         # spread the rim moves into the nearby surface (harmonic fill)
         for _ in range(step.get("spread", 40)):
-            avg = np.zeros_like(D)
-            np.add.at(avg, rows, D[cols])
-            avg /= deg[:, None]
+            avg = avg_op(rows, cols, deg) @ D
             D = np.where(fixed[:, None], D, avg * step.get("decay", 0.97))
         # smooth the correction itself so neighbouring rim points move
         # together (moving each on its own leaves a ragged edge)
         for _ in range(step.get("smooth_iters", 25)):
-            avg = np.zeros_like(D)
-            np.add.at(avg, rows, D[cols])
-            D = 0.5 * D + 0.5 * avg / deg[:, None]
+            D = 0.5 * D + 0.5 * (avg_op(rows, cols, deg) @ D)
         # keep the move sideways: remove any part along the line of sight
         D -= np.einsum("ij,ij->i", D, view)[:, None] * view
         V = V + D * step.get("rate", 0.8)
@@ -207,7 +231,32 @@ def apply(log, V, F, master):
             if "side" in m:
                 m["side"] = {"R": "L", "L": "R"}[m["side"]]
             steps.append(m)
-    for step in steps:
+    # Cache: the mesh after each step is stored under a hash of every step up
+    # to it, so changing a late step reuses all the work before it. Eye steps
+    # only add objects, so they are replayed (cheap) rather than cached.
+    import hashlib
+    cache_dir = ROOT / "work/sculpt_cache"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    keys, hsh = [], hashlib.sha1(str(len(V)).encode())
+    for st in steps:
+        hsh.update(json.dumps(st, sort_keys=True).encode())
+        keys.append(hsh.hexdigest()[:16])
+    start = 0
+    for i in range(len(steps) - 1, -1, -1):
+        f = cache_dir / f"{keys[i]}.npy"
+        if f.exists():
+            V = np.load(f)
+            start = i + 1
+            break
+    for st in steps[:start]:
+        if st["op"] == "eye":
+            ax_ = np.asarray(st["axis"], float)
+            ax_ /= np.linalg.norm(ax_)
+            c = np.asarray(st["centre"], float) if "centre" in st else np.asarray(st["front"], float) - ax_ * st["radius"]
+            eyes[st["side"]] = {"centre": c.tolist(), "radius": st["radius"], "axis": ax_.tolist()}
+    for si, step in enumerate(steps):
+        if si < start:
+            continue
         op = step["op"]
         at = step.get("at")
         if isinstance(at, dict) and "master_px" in at:
@@ -268,10 +317,52 @@ def apply(log, V, F, master):
             lid = c + ax_ * (re - step["proud"])  # lid plane: cornea stands `proud` beyond it
             q = V - c
             h = q @ ax_
-            radial = np.linalg.norm(q - h[:, None] * ax_, axis=1)
+            perp = q - h[:, None] * ax_
+            # elliptical opening: "rim_h" along the head (front-back),
+            # "rim_v" up-down; an almond, as in his side-on photos
+            up = np.array([0, 0, 1.0]) - ax_ * ax_[2]
+            up /= np.linalg.norm(up)
+            side = np.cross(ax_, up)
+            rh, rv = step.get("rim_h", step["rim"]), step.get("rim_v", step["rim"])
+            pu, ps = perp @ up, perp @ side
+            ell = np.sqrt((ps / rh) ** 2 + (pu / rv) ** 2)  # 1 at the rim
+            radial = ell * step["rim"]
             w = falloff(np.maximum(radial - step["rim"], 0), step["blend"]) * (h > 0)
             over = np.maximum((V - lid) @ ax_, 0)
             V -= (w * over)[:, None] * ax_[None, :]
+            # outside the opening the fur wraps the eyeball: any surface that
+            # would let the ball show through is pushed out to just cover it
+            q = V - c
+            dist = np.linalg.norm(q, axis=1)
+            h = q @ ax_
+            perp = q - h[:, None] * ax_
+            ell = np.sqrt(((perp @ side) / rh) ** 2 + ((perp @ up) / rv) ** 2)
+            cover = re + step.get("wrap", 0.0008)
+            wrap = (ell > 1.0) & (dist < cover)
+            V[wrap] = c + q[wrap] / dist[wrap, None] * cover
+            # smooth the lid edge (pressed-back inside, wrapped outside meet
+            # here and leave steps at mesh spacing), keeping the ball covered
+            ring = (ell > 0.8) & (ell < step.get("edge_band", 1.35)) & (h > -re * 0.3)
+            A = avg_op(rows, cols, deg)
+            for _ in range(step.get("edge_smooth", 12)):
+                V[ring] += 0.5 * ((A @ V)[ring] - V[ring])
+                q = V - c
+                dist = np.linalg.norm(q, axis=1)
+                h = q @ ax_
+                perp = q - h[:, None] * ax_
+                ell = np.sqrt(((perp @ side) / rh) ** 2 + ((perp @ up) / rv) ** 2)
+                inside = ring & (ell > 1.0) & (dist < cover)
+                V[inside] = c + q[inside] / dist[inside, None] * cover
+            # lid roll: just inside the opening the lid tucks into the eye,
+            # so the visible edge follows the smooth almond, not the mesh
+            if step.get("tuck", 0):
+                q = V - c
+                dist = np.linalg.norm(q, axis=1)
+                h = q @ ax_
+                perp = q - h[:, None] * ax_
+                ell = np.sqrt(((perp @ side) / rh) ** 2 + ((perp @ up) / rv) ** 2)
+                band = (ell > 1.0 - step["tuck"]) & (ell <= 1.0) & (h > 0)
+                V[band] = c + q[band] / dist[band, None] * (re - 0.0004)
         elif op == "bump":
             # soft swelling (height > 0) or hollow (< 0) along the surface normal
             N = normals(V, F)
@@ -292,12 +383,10 @@ def apply(log, V, F, master):
         elif op == "smooth":
             w = falloff(np.linalg.norm(V - at, axis=1), step["radius"]) * step.get("strength", 0.5)
             for _ in range(step.get("iters", 3)):
-                avg = np.zeros_like(V)
-                np.add.at(avg, rows, V[cols])
-                avg /= deg[:, None]
-                V += w[:, None] * (avg - V)
+                V += w[:, None] * (avg_op(rows, cols, deg) @ V - V)
         else:
             raise ValueError(op)
+        np.save(cache_dir / f"{keys[si]}.npy", V)
     return V, eyes
 
 

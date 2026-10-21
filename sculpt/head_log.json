@@ -134,16 +134,16 @@
     0.06306,
     0.12623
    ],
-   "radius": 0.0092,
+   "radius": 0.014,
    "axis": [
-    0.9418,
-    0.306,
+    0.9752,
+    0.172,
     0.1392
    ],
    "centre": [
-    0.02456,
-    0.05844,
-    0.12504
+    0.01943,
+    0.05766,
+    0.12379
    ]
   },
   {
@@ -155,16 +155,16 @@
     0.06306,
     0.13369
    ],
-   "radius": 0.0092,
+   "radius": 0.014,
    "axis": [
-    -0.9418,
-    0.306,
+    -0.9752,
+    0.172,
     0.1392
    ],
    "centre": [
-    -0.02173,
-    0.0594,
-    0.13169
+    -0.01659,
+    0.05945,
+    0.13051
    ]
   },
   {
@@ -181,13 +181,18 @@
    "mirror": true
   },
   {
-   "note": "eye socket: opening faces out along the eye's axis; lid opening 12.6 mm across, cornea 3.4 mm proud; soft 8 mm blend into the fur",
+   "note": "eye opening: almond 14.8 x 11.8 mm (wider than tall, as in close-ups 02 and 08), facing out along the eye; flat cap 2.8 mm proud of the lid; fur meets the lid tightly",
    "op": "socket",
    "side": "R",
-   "proud": 0.0038,
-   "rim": 0.0074,
+   "proud": 0.0048,
+   "rim": 0.0092,
    "blend": 0.0025,
-   "mirror": true
+   "mirror": true,
+   "rim_h": 0.01,
+   "rim_v": 0.0084,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12
   },
   {
    "note": "soften the fur around the right eye (no hard creases), then re-open the socket (mirrored)",
@@ -203,13 +208,18 @@
    "mirror": true
   },
   {
-   "note": "eye socket: opening faces out along the eye's axis; lid opening 12.6 mm across, cornea 3.4 mm proud; soft 8 mm blend into the fur",
+   "note": "eye opening: almond 14.8 x 11.8 mm (wider than tall, as in close-ups 02 and 08), facing out along the eye; flat cap 2.8 mm proud of the lid; fur meets the lid tightly",
    "op": "socket",
    "side": "R",
-   "proud": 0.0038,
-   "rim": 0.0074,
+   "proud": 0.0048,
+   "rim": 0.0092,
    "blend": 0.0025,
-   "mirror": true
+   "mirror": true,
+   "rim_h": 0.01,
+   "rim_v": 0.0084,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12
   },
   {
    "note": "relax the strip between the right eye and the bridge, where the wedge turns most sharply (mirrored); then re-open the socket",
@@ -225,13 +235,80 @@
    "mirror": true
   },
   {
-   "note": "eye socket: opening faces out along the eye's axis; lid opening 12.6 mm across, cornea 3.4 mm proud; soft 8 mm blend into the fur",
+   "note": "eye opening: almond 14.8 x 11.8 mm (wider than tall, as in close-ups 02 and 08), facing out along the eye; flat cap 2.8 mm proud of the lid; fur meets the lid tightly",
    "op": "socket",
    "side": "R",
-   "proud": 0.0038,
-   "rim": 0.0074,
+   "proud": 0.0048,
+   "rim": 0.0092,
    "blend": 0.0025,
-   "mirror": true
+   "mirror": true,
+   "rim_h": 0.01,
+   "rim_v": 0.0084,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12
+  },
+  {
+   "note": "right brow: soft hood of fur over the top of the eye (master: lashes and fur cover the top)",
+   "op": "bump",
+   "at": {
+    "master_px": [
+     345,
+     418
+    ]
+   },
+   "radius": 0.008,
+   "height": 0.003
+  },
+  {
+   "note": "left brow",
+   "op": "bump",
+   "at": {
+    "master_px": [
+     692,
+     392
+    ]
+   },
+   "radius": 0.008,
+   "height": 0.003
+  },
+  {
+   "note": "right cheek fullness under the eye",
+   "op": "bump",
+   "at": {
+    "master_px": [
+     345,
+     520
+    ]
+   },
+   "radius": 0.008,
+   "height": 0.0025
+  },
+  {
+   "note": "left cheek fullness under the eye",
+   "op": "bump",
+   "at": {
+    "master_px": [
+     692,
+     496
+    ]
+   },
+   "radius": 0.008,
+   "height": 0.0025
+  },
+  {
+   "note": "re-open both eyes after the brow and cheek fullness (tight almond lid)",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0048,
+   "rim": 0.0092,
+   "blend": 0.0025,
+   "mirror": true,
+   "rim_h": 0.01,
+   "rim_v": 0.0084,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12
   },
   {
    "note": "muzzle: one broad rounded mound coming forward around the nose and whisker pads (as in the profile and three-quarter photos)",
