@@ -218,7 +218,10 @@ def apply(log, V, F, master):
             # the master ray); the eyeball sits behind it along its axis
             ax_ = np.asarray(step["axis"], float)
             ax_ /= np.linalg.norm(ax_)
-            c = np.asarray(step["front"], float) - ax_ * step["radius"]
+            if "centre" in step:  # eyeball centre given directly (placed by measurement)
+                c = np.asarray(step["centre"], float)
+            else:
+                c = np.asarray(step["front"], float) - ax_ * step["radius"]
             eyes[step["side"]] = {"centre": c.tolist(), "radius": step["radius"], "axis": ax_.tolist()}
         elif op == "grab":
             w = falloff(np.linalg.norm(V - at, axis=1), step["radius"])
