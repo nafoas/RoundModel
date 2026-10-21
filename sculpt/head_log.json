@@ -126,7 +126,7 @@
    "smooth_iters": 200
   },
   {
-   "note": "right eye: front at its measured depth, placed so the visible dark of the eye lands on the master's eye (front anchored at master px (320, 467)); looking 55 deg out, 8 deg up; radius 8 mm",
+   "note": "right eye: eyeball 18 mm across (profile photo: the black of the eye is 90 x 90 px = 18 mm; the brown eye-ring around it ~22 mm); centre placed by eye_fit",
    "op": "eye",
    "side": "R",
    "front": [
@@ -134,20 +134,20 @@
     0.06306,
     0.12623
    ],
-   "radius": 0.014,
+   "radius": 0.009,
    "axis": [
-    0.9752,
-    0.172,
-    0.1392
+    0.9976,
+    0.0698,
+    0.0
    ],
    "centre": [
-    0.01943,
-    0.05766,
-    0.12379
+    0.02537,
+    0.05903,
+    0.12619
    ]
   },
   {
-   "note": "left eye: front at its measured depth, placed so the visible dark of the eye lands on the master's eye (front anchored at master px (718, 439)); looking 55 deg out, 8 deg up; radius 8 mm",
+   "note": "left eye: eyeball 18 mm across (profile photo: the black of the eye is 90 x 90 px = 18 mm; the brown eye-ring around it ~22 mm); centre placed by eye_fit",
    "op": "eye",
    "side": "L",
    "front": [
@@ -155,16 +155,16 @@
     0.06306,
     0.13369
    ],
-   "radius": 0.014,
+   "radius": 0.009,
    "axis": [
-    -0.9752,
-    0.172,
-    0.1392
+    -0.9994,
+    -0.0349,
+    0.0
    ],
    "centre": [
-    -0.01659,
-    0.05945,
-    0.13051
+    -0.02206,
+    0.06007,
+    0.13292
    ]
   },
   {
@@ -181,18 +181,32 @@
    "mirror": true
   },
   {
-   "note": "eye opening: almond 14.8 x 11.8 mm (wider than tall, as in close-ups 02 and 08), facing out along the eye; flat cap 2.8 mm proud of the lid; fur meets the lid tightly",
+   "note": "seat each eye: the fur around it comes down along the eye axis so the eyeball's equator sits at the fur all round, spread over 25 mm so the face beside the eye is gently narrower, not dished (mirrored)",
+   "op": "eye_seat",
+   "side": "R",
+   "rim_h": 0.0015,
+   "reach": 0.025,
+   "mirror": true,
+   "max_drop": 0.006,
+   "max_drop_front": 0.003,
+   "max_drop_up": 0.003,
+   "max_drop_down": 0.003
+  },
+  {
+   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
    "op": "socket",
    "side": "R",
-   "proud": 0.0048,
-   "rim": 0.0092,
-   "blend": 0.0025,
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.01,
-   "rim_v": 0.0084,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
    "edge_band": 1.5,
    "edge_smooth": 30,
-   "tuck": 0.12
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
   },
   {
    "note": "soften the fur around the right eye (no hard creases), then re-open the socket (mirrored)",
@@ -208,18 +222,20 @@
    "mirror": true
   },
   {
-   "note": "eye opening: almond 14.8 x 11.8 mm (wider than tall, as in close-ups 02 and 08), facing out along the eye; flat cap 2.8 mm proud of the lid; fur meets the lid tightly",
+   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
    "op": "socket",
    "side": "R",
-   "proud": 0.0048,
-   "rim": 0.0092,
-   "blend": 0.0025,
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.01,
-   "rim_v": 0.0084,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
    "edge_band": 1.5,
    "edge_smooth": 30,
-   "tuck": 0.12
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
   },
   {
    "note": "relax the strip between the right eye and the bridge, where the wedge turns most sharply (mirrored); then re-open the socket",
@@ -235,80 +251,36 @@
    "mirror": true
   },
   {
-   "note": "eye opening: almond 14.8 x 11.8 mm (wider than tall, as in close-ups 02 and 08), facing out along the eye; flat cap 2.8 mm proud of the lid; fur meets the lid tightly",
+   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
    "op": "socket",
    "side": "R",
-   "proud": 0.0048,
-   "rim": 0.0092,
-   "blend": 0.0025,
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.01,
-   "rim_v": 0.0084,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
    "edge_band": 1.5,
    "edge_smooth": 30,
-   "tuck": 0.12
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
   },
   {
-   "note": "right brow: soft hood of fur over the top of the eye (master: lashes and fur cover the top)",
-   "op": "bump",
-   "at": {
-    "master_px": [
-     345,
-     418
-    ]
-   },
-   "radius": 0.008,
-   "height": 0.003
-  },
-  {
-   "note": "left brow",
-   "op": "bump",
-   "at": {
-    "master_px": [
-     692,
-     392
-    ]
-   },
-   "radius": 0.008,
-   "height": 0.003
-  },
-  {
-   "note": "right cheek fullness under the eye",
-   "op": "bump",
-   "at": {
-    "master_px": [
-     345,
-     520
-    ]
-   },
-   "radius": 0.008,
-   "height": 0.0025
-  },
-  {
-   "note": "left cheek fullness under the eye",
-   "op": "bump",
-   "at": {
-    "master_px": [
-     692,
-     496
-    ]
-   },
-   "radius": 0.008,
-   "height": 0.0025
-  },
-  {
-   "note": "re-open both eyes after the brow and cheek fullness (tight almond lid)",
+   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
    "op": "socket",
    "side": "R",
-   "proud": 0.0048,
-   "rim": 0.0092,
-   "blend": 0.0025,
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.01,
-   "rim_v": 0.0084,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
    "edge_band": 1.5,
    "edge_smooth": 30,
-   "tuck": 0.12
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
   },
   {
    "note": "muzzle: one broad rounded mound coming forward around the nose and whisker pads (as in the profile and three-quarter photos)",

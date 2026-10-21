@@ -7,7 +7,7 @@ matches his outline in the photo. The top of the head (ears) is left out.
 Output: checkpoints/cp3/side_cameras.json, in the same format as
 cameras_fit.json but for the originals' full resolution.
 
-usage: refine_side_cameras.py SCULPT_DIR
+usage: refine_side_cameras.py SCULPT_DIR [VIEW ...]   (default: all; results merge into the file)
 """
 import json
 import sys
@@ -22,7 +22,8 @@ from scipy.spatial.transform import Rotation as R
 ROOT = Path(__file__).resolve().parents[1]
 S, DX = 1 / 0.222, 7 / 0.222
 VIEWS = {"sheet_02_front_3q": "02_front_3q", "sheet_03_right_profile": "03_right_profile",
-         "sheet_07_left_profile": "07_left_profile", "sheet_08_front_3q_left": "08_front_3q_left"}
+         "sheet_07_left_profile": "07_left_profile", "sheet_08_front_3q_left": "08_front_3q_left",
+         "sheet_09_top_down": "09_top_down", "sheet_04_back_3q_right": "04_back_3q_right"}
 
 
 def load_obj(p):
@@ -35,11 +36,14 @@ def load_obj(p):
     return np.array(V), np.array(F)
 
 
-def main(d):
+def main(d, only=()):
     V, F = load_obj(Path(d) / "head.obj")
     cams = json.loads((ROOT / "checkpoints/cp2/cameras_fit.json").read_text())["views"]
-    out = {}
+    outp = ROOT / "checkpoints/cp3/side_cameras.json"
+    out = json.loads(outp.read_text())["views"] if outp.exists() else {}
     for vn, orig in VIEWS.items():
+        if only and vn not in only:
+            continue
         v = cams[vn]
         m = np.asarray(Image.open(ROOT / f"work/orig/{orig}.mask.png")) > 0
         m = cv2.GaussianBlur(m.astype(np.float32), (0, 0), 4) > 0.5  # fur envelope
@@ -86,8 +90,8 @@ def main(d):
                    "rotvec_world_to_cam": R.from_matrix(Rm).as_rotvec().tolist(),
                    "camera_position_m": c.tolist(), "focal_px": float(f),
                    "principal_px": [float(cx0), float(cy0)], "agreement": float(1 - r.fun)}
-    (ROOT / "checkpoints/cp3/side_cameras.json").write_text(json.dumps({"views": out}, indent=1))
+    outp.write_text(json.dumps({"views": out}, indent=1))
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2:])

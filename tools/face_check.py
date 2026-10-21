@@ -58,7 +58,11 @@ def main():
     ap.add_argument("sculpt_dir")
     ap.add_argument("out")
     ap.add_argument("--samples", type=int, default=12)
+    ap.add_argument("--views", nargs="*", default=list(VIEWS),
+                    help="camera names; any sheet_NN_* view uses its full-size original")
+    ap.add_argument("--half", type=float, default=HALF, help="half-size of the crop, metres")
     a = ap.parse_args()
+    originals = {p.stem[:2]: p for p in (ROOT / "references/sheet_originals").glob("*.webp")}
     d = Path(a.sculpt_dir)
     cams = json.loads((ROOT / "checkpoints/cp2/cameras_fit.json").read_text())["views"]
     # side cameras refined against the sculpt at full resolution, if present
@@ -89,7 +93,9 @@ def main():
 
     tiles = []
     font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 22)
-    for vn, spec in VIEWS.items():
+    for vn in a.views:
+        spec = VIEWS.get(vn) or {"photo": str(originals[vn[6:8]].relative_to(ROOT)), "scale": 1 / PANEL_SCALE,
+                                 "dx": PANEL_DX / PANEL_SCALE}
         v = cams[vn]
         cpos = np.array(v["camera_position_m"])
         fill.location = tuple(cpos + np.array([0, 0, 0.12]))
@@ -102,7 +108,7 @@ def main():
         clay = (rgba[..., :3] * al + 228 * (1 - al)).astype(np.uint8)
         photo = np.asarray(Image.open(ROOT / spec["photo"]).convert("RGB"))
         uv, ppm = project(v, spec["scale"], centre)
-        r = HALF * ppm
+        r = a.half * ppm
         x0, y0, x1, y1 = (int(uv[0] - r), int(uv[1] - r), int(uv[0] + r), int(uv[1] + r))
 
         def crop(img, dx=0):

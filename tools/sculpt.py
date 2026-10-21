@@ -230,6 +230,12 @@ def apply(log, V, F, master):
                     m[k] = (np.asarray(m[k]) * flip).tolist()
             if "side" in m:
                 m["side"] = {"R": "L", "L": "R"}[m["side"]]
+            # the master is not perfectly symmetric (his head is slightly
+            # turned): the mirrored copy may take its own values
+            m.update(m.pop("mirror_overrides", {}))
+            step = dict(step)
+            step.pop("mirror_overrides", None)
+            steps[-1] = step
             steps.append(m)
     # Cache: the mesh after each step is stored under a hash of every step up
     # to it, so changing a late step reuses all the work before it. Eye steps
@@ -340,6 +346,19 @@ def apply(log, V, F, master):
             cover = re + step.get("wrap", 0.0008)
             wrap = (ell > 1.0) & (dist < cover)
             V[wrap] = c + q[wrap] / dist[wrap, None] * cover
+            # lids: where the fur lies below the eyeball outside the opening
+            # (after seating the eye), raise it along the axis onto a shell just
+            # over the ball, so the ball shows only through the opening, from
+            # every direction
+            if step.get("lids"):
+                q = V - c
+                h = q @ ax_
+                perp = q - h[:, None] * ax_
+                rho = np.linalg.norm(perp, axis=1)
+                ell = np.sqrt(((perp @ side) / rh) ** 2 + ((perp @ up) / rv) ** 2)
+                shell = np.sqrt(np.maximum(cover ** 2 - rho ** 2, 0))
+                lid = (ell > 1.0) & (rho < cover) & (h > -re) & (h < shell)
+                V[lid] += ((shell - h)[lid])[:, None] * ax_[None, :]
             # smooth the lid edge (pressed-back inside, wrapped outside meet
             # here and leave steps at mesh spacing), keeping the ball covered
             ring = (ell > 0.8) & (ell < step.get("edge_band", 1.35)) & (h > -re * 0.3)
@@ -353,6 +372,44 @@ def apply(log, V, F, master):
                 ell = np.sqrt(((perp @ side) / rh) ** 2 + ((perp @ up) / rv) ** 2)
                 inside = ring & (ell > 1.0) & (dist < cover)
                 V[inside] = c + q[inside] / dist[inside, None] * cover
+            # lid folds (after the edge smoothing, which would erode them):
+            # just outside the opening, in front-above and
+            # front-below, the fur stands out sideways (along the eye axis) to
+            # `fold_up` / `fold_down` from the eye centre, so from the front
+            # they hide the top and bottom of the eyeball while from the side
+            # the whole round eye shows (profile: a fold arcs over the front of
+            # the eye). Strongest in front-above/below, still present straight above/below; fades over
+            # `fold_band` beyond the rim.
+            if step.get("fold_up") or step.get("fold_down"):
+                q = V - c
+                h = q @ ax_
+                perp = q - h[:, None] * ax_
+                rho = np.linalg.norm(perp, axis=1)
+                ell = np.sqrt(((perp @ side) / rh) ** 2 + ((perp @ up) / rv) ** 2)
+                cphi = (perp @ side) * np.sign(side[1]) / np.maximum(rho, 1e-9)  # cos from forward
+                sphi = (perp @ up) / np.maximum(rho, 1e-9)
+                amp = np.where(sphi > 0, step.get("fold_up", 0.0), step.get("fold_down", 0.0))
+                ang = np.abs(sphi) * np.sqrt(np.clip((cphi + 0.4) / 1.4, 0, 1))  # ~0.9 at 55 deg, 0.53 straight up
+                fb = step.get("fold_band", 0.004)
+                rise = step.get("fold_rise", 0.0015)
+                dr = np.maximum(ell - 1.0, 0) * rh  # distance beyond the rim
+                ramp = np.clip(dr / rise, 0, 1)
+                ramp = ramp * ramp * (3 - 2 * ramp)  # rounded lip, not a wall
+                w = ang * ramp * falloff(np.maximum(dr - rise, 0), fb) * (ell > 1.0) * (h > -re)
+                target = amp * w
+                raise_ = np.maximum(target - h, 0) * (w > 0)
+                V += raise_[:, None] * ax_[None, :]
+                # round it off, keeping the eyeball covered outside the opening
+                zone = (w > 0.02) | ((ell > 0.9) & (dr < rise + fb) & (h > -re))
+                for _ in range(step.get("fold_smooth", 12)):
+                    V[zone] += 0.5 * ((A @ V)[zone] - V[zone])
+                    q = V - c
+                    dist = np.linalg.norm(q, axis=1)
+                    h = q @ ax_
+                    perp = q - h[:, None] * ax_
+                    ell = np.sqrt(((perp @ side) / rh) ** 2 + ((perp @ up) / rv) ** 2)
+                    inside = zone & (ell > 1.0) & (dist < cover)
+                    V[inside] = c + q[inside] / dist[inside, None] * cover
             # lid roll: just inside the opening the lid tucks into the eye,
             # so the visible edge follows the smooth almond, not the mesh
             if step.get("tuck", 0):
@@ -363,6 +420,52 @@ def apply(log, V, F, master):
                 ell = np.sqrt(((perp @ side) / rh) ** 2 + ((perp @ up) / rv) ** 2)
                 band = (ell > 1.0 - step["tuck"]) & (ell <= 1.0) & (h > 0)
                 V[band] = c + q[band] / dist[band, None] * (re - 0.0004)
+        elif op == "eye_seat":
+            # Seat the eyeball in the head: around the eye the fur is lowered
+            # along the eye axis until, at the eyeball's rim, it sits `rim_h`
+            # in front of the centre (near the equator: the eye bulges, close-ups
+            # 02, 03, 09). The lowering is measured all round the rim and spread
+            # smoothly over `reach` beyond it, so the face beside the eye is
+            # gently narrower rather than dished.
+            e = eyes[step["side"]]
+            c, ax_, re = np.asarray(e["centre"]), np.asarray(e["axis"]), e["radius"]
+            up = np.array([0, 0, 1.0]) - ax_ * ax_[2]
+            up /= np.linalg.norm(up)
+            side = np.cross(ax_, up)
+            q = V - c
+            h = q @ ax_
+            perp = q - h[:, None] * ax_
+            rho = np.linalg.norm(perp, axis=1)
+            phi = np.arctan2(perp @ up, perp @ side)
+            lateral = h > -0.3 * re
+            ring = lateral & (rho > re) & (rho < re + 0.002)
+            nb = 36
+            bins = ((phi + np.pi) / (2 * np.pi) * nb).astype(int) % nb
+            exc = np.zeros(nb)
+            for b in range(nb):
+                sel = ring & (bins == b)
+                exc[b] = max(np.max(h[sel]) - step["rim_h"], 0) if sel.any() else 0
+            # how far the fur may come down can differ round the eye: less in
+            # front (toward the nose), above and below, where from the front
+            # the fur covers the eyeball (master: a tall almond)
+            bc = (np.arange(nb) + 0.5) / nb * 2 * np.pi - np.pi  # bin centre angle
+            bu, bs = np.sin(bc), np.cos(bc) * np.sign(side[1])  # up, toward the nose
+            md = step.get("max_drop", 1.0)
+            caps = (np.maximum(bu, 0) ** 2 * step.get("max_drop_up", md)
+                    + np.maximum(-bu, 0) ** 2 * step.get("max_drop_down", md)
+                    + np.maximum(bs, 0) ** 2 * step.get("max_drop_front", md)
+                    + np.maximum(-bs, 0) ** 2 * md)
+            exc = np.minimum(exc, caps)
+            # smooth round the rim (circular)
+            for _ in range(3):
+                exc = 0.25 * np.roll(exc, 1) + 0.5 * exc + 0.25 * np.roll(exc, -1)
+            # interpolate per vertex (linear between bin centres)
+            f = (phi + np.pi) / (2 * np.pi) * nb - 0.5
+            i0 = np.floor(f).astype(int) % nb
+            t = f - np.floor(f)
+            ex_v = exc[i0] * (1 - t) + exc[(i0 + 1) % nb] * t
+            w = falloff(np.maximum(rho - re, 0), step["reach"]) * lateral
+            V -= (w * ex_v)[:, None] * ax_[None, :]
         elif op == "bump":
             # soft swelling (height > 0) or hollow (< 0) along the surface normal
             N = normals(V, F)

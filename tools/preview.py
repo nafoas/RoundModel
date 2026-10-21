@@ -38,6 +38,7 @@ def main():
     ap.add_argument("--scale", type=float, default=0.5)
     ap.add_argument("--samples", type=int, default=12)
     ap.add_argument("--keep-raw", action="store_true")
+    ap.add_argument("--matte-eyes", action="store_true", help="flat black eyes, for measuring what is visible")
     a = ap.parse_args()
 
     sc = RC.reset()
@@ -45,7 +46,8 @@ def main():
     sc.cycles.use_denoising = True
     RC.load_mesh(a.mesh)
     for e in a.eyes:
-        RC.load_mesh(e, colour=(0.015, 0.012, 0.012), roughness=0.08, name="eye")
+        RC.load_mesh(e, colour=(0, 0, 0) if a.matte_eyes else (0.015, 0.012, 0.012),
+                     roughness=1.0 if a.matte_eyes else 0.08, name="eye")
     RC.lights(sc)
     sc.view_settings.exposure = -0.8  # keep the top of his head from blowing out
     # soft fill from beside the camera, like the even light in his photos
