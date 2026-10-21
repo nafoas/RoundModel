@@ -212,6 +212,40 @@ def fit_outline(V, F, rows, cols, deg, master, step):
     return V
 
 
+HEAD_C = np.array([0.0, 0.065, 0.115])  # middle of the head, muzzle included
+NECK_PIVOT = np.array([0.0, 0.02, 0.095])  # where the head turns on the neck
+
+
+def head_weight(V):
+    """1 on the head, fading to 0 on the body (the head is posed per photo)."""
+    d = np.linalg.norm(V - HEAD_C, axis=1)
+    x = np.clip((d - 0.058) / 0.03, 0, 1)
+    return 1 - x * x * (3 - 2 * x)
+
+
+def master_outline_points(V, F, master, px=4):
+    """Vertices that are on the sculpt's actual outline from the master camera
+    (edge-on to it and projecting onto the silhouette edge), not every
+    sideways-facing point."""
+    import cv2
+    N = normals(V, F)
+    mview = V - master.pos
+    mview /= np.linalg.norm(mview, axis=1, keepdims=True)
+    rim = np.abs(np.einsum("ij,ij->i", N, mview)) < 0.15
+    uv = master.project(V)
+    w, h = int(master.w), int(master.h)
+    fn = np.cross(V[F[:, 1]] - V[F[:, 0]], V[F[:, 2]] - V[F[:, 0]])
+    front = np.einsum("ij,ij->i", fn, master.pos - V[F[:, 0]]) > 0
+    sil = np.zeros((h, w), np.uint8)
+    cv2.fillPoly(sil, list(np.round(uv[F[front]]).astype(np.int32)), 1)
+    sil = cv2.morphologyEx(sil, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+    edge = cv2.dilate(sil, np.ones((3, 3), np.uint8)) - cv2.erode(sil, np.ones((3, 3), np.uint8))
+    near = cv2.dilate(edge, np.ones((2 * px + 1, 2 * px + 1), np.uint8)) > 0
+    ui = np.clip(np.round(uv[:, 0]).astype(int), 0, w - 1)
+    vi = np.clip(np.round(uv[:, 1]).astype(int), 0, h - 1)
+    return rim & near[vi, ui]
+
+
 def apply(log, V, F, master):
     V0 = V.copy()
     V = V.copy()
@@ -243,7 +277,9 @@ def apply(log, V, F, master):
     import hashlib
     cache_dir = ROOT / "work/sculpt_cache"
     cache_dir.mkdir(parents=True, exist_ok=True)
-    keys, hsh = [], hashlib.sha1(str(len(V)).encode())
+    # the code is part of the key too: changing how an op works must not
+    # reuse meshes made the old way
+    keys, hsh = [], hashlib.sha1(str(len(V)).encode() + Path(__file__).read_bytes())
     for st in steps:
         hsh.update(json.dumps(st, sort_keys=True).encode())
         keys.append(hsh.hexdigest()[:16])
@@ -464,8 +500,40 @@ def apply(log, V, F, master):
             i0 = np.floor(f).astype(int) % nb
             t = f - np.floor(f)
             ex_v = exc[i0] * (1 - t) + exc[(i0 + 1) % nb] * t
+            # fade out just behind the eye's side instead of stopping dead
+            # there (a hard stop leaves a crease across the brow)
+            fb = step.get("back_fade", 0.0)
+            if fb:
+                hb = np.clip((h + 0.3 * re + fb) / fb, 0, 1)
+                lateral = hb * hb * (3 - 2 * hb)
             w = falloff(np.maximum(rho - re, 0), step["reach"]) * lateral
             V -= (w * ex_v)[:, None] * ax_[None, :]
+        elif op == "fair":
+            # Replace a patch with the fairest surface (least bending) that
+            # meets everything held: the patch edge, the lids right round each
+            # eye, and the master outline. Removes ledges and cliffs over and
+            # between the eyes without carving new ones. Solved directly (step-
+            # by-step smoothing on this fine a mesh reaches only ~1 cm).
+            import scipy.sparse as sp
+            from scipy.sparse.linalg import spsolve
+            d0 = np.linalg.norm(V - at, axis=1)
+            region = d0 < step["radius"]
+            hold = d0 > step["radius"] - step.get("edge", 0.004)
+            for e in eyes.values():
+                de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
+                hold |= de < step.get("hold_eyes", 0.003)
+            hold |= master_outline_points(V, F, master)
+            rid = np.nonzero(region)[0]
+            Lf = avg_op(rows, cols, deg) - sp.identity(len(V), format="csr")
+            Lr = Lf[rid][:, rid]
+            # vertices just outside the region enter through the Laplacian
+            Lout = Lf[rid][:, ~region]
+            wdat = np.where(hold[rid], 1.0, step.get("keep", 1e-4))
+            M_ = sp.diags(wdat) + step.get("stiffness", 1.0) * (Lr.T @ Lr)
+            Mc = M_.tocsc()
+            for k in range(3):
+                rhs = wdat * V[rid, k] - step.get("stiffness", 1.0) * (Lr.T @ (Lout @ V[~region, k]))
+                V[rid, k] = spsolve(Mc, rhs)
         elif op == "bump":
             # soft swelling (height > 0) or hollow (< 0) along the surface normal
             N = normals(V, F)

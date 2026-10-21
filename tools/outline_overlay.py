@@ -43,7 +43,7 @@ def main():
     cam = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"][a.view]
     photo = np.asarray(Image.open(ROOT / cam["image"]).convert("RGB")).copy()
     h, w = photo.shape[:2]
-    m = np.asarray(Image.open(ROOT / f"work/orig/{Path(cam['image']).stem}.mask.png")) > 0
+    m = np.asarray(Image.open(ROOT / "checkpoints/cp3/orig_masks" / f"{Path(cam['image']).stem}.mask.png")) > 0
     m = cv2.GaussianBlur(m.astype(np.float32), (0, 0), 4) > 0.5
     V, F = load_obj(Path(a.sculpt_dir) / "head.obj")
     s, P, f, Xc = silhouette(V, F, cam, h, w)

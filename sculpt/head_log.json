@@ -141,9 +141,9 @@
     0.0
    ],
    "centre": [
-    0.02537,
-    0.05903,
-    0.12619
+    0.02532,
+    0.059,
+    0.12624
    ]
   },
   {
@@ -162,9 +162,9 @@
     0.0
    ],
    "centre": [
-    -0.02206,
+    -0.02205,
     0.06007,
-    0.13292
+    0.13291
    ]
   },
   {
@@ -190,7 +190,8 @@
    "max_drop": 0.006,
    "max_drop_front": 0.003,
    "max_drop_up": 0.003,
-   "max_drop_down": 0.003
+   "max_drop_down": 0.003,
+   "back_fade": 0.003
   },
   {
    "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
@@ -268,6 +269,35 @@
   },
   {
    "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
+   "mirror": true,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
+  },
+  {
+   "note": "fair the forehead and the fur round the eyes: the fairest surface (least bending) that meets the lids, the master outline and the patch edge. Removes the ridge running back from each eye (top of the eye-level wedge) and lets the brow slope smoothly down to the eyes (master: broad, gently sloping forehead)",
+   "op": "fair",
+   "at": [
+    0.0,
+    0.045,
+    0.13
+   ],
+   "radius": 0.075,
+   "hold_eyes": 0.003,
+   "stiffness": 1.0,
+   "keep": 1e-08
+  },
+  {
+   "note": "re-open both eyes after fairing",
    "op": "socket",
    "side": "R",
    "proud": 0.0068,

@@ -71,7 +71,8 @@ def main():
         for vn, sv in json.loads(sp.read_text())["views"].items():
             if vn in cams:
                 cams[vn] = dict(cams[vn], rotvec_world_to_cam=sv["rotvec_world_to_cam"],
-                                camera_position_m=sv["camera_position_m"], focal_px=sv["focal_px"] * PANEL_SCALE)
+                                camera_position_m=sv["camera_position_m"], focal_px=sv["focal_px"] * PANEL_SCALE,
+                                focal_px_full=sv["focal_px"], principal_px=sv["principal_px"], image=sv["image"])
     dj = json.loads((ROOT / "checkpoints/cp3/face_depth.json").read_text())
     centre = (np.array(dj["eye_R_m"]) + np.array(dj["eye_L_m"])) / 2 * 0.5 + np.array(dj["nose_tip_m"]) * 0.5
 
@@ -102,12 +103,32 @@ def main():
         fill.rotation_euler = Vector(np.array([0, 0, 0.08]) - cpos - np.array([0, 0, 0.12])).to_track_quat(
             "-Z", "Y").to_euler()
         tmp = Path(a.out).with_name(f"_{vn}.png")
-        render(sc, cam, v, spec["scale"], tmp)
+        if "principal_px" in v:
+            # refined camera of a full-size original: render the whole
+            # original frame with its own image centre, so photo and render
+            # line up pixel for pixel
+            W, H = Image.open(ROOT / v["image"]).size
+            RC.set_camera(sc, cam, (W, H), v["rotvec_world_to_cam"], v["camera_position_m"], v["focal_px_full"])
+            cam.data.shift_x = (v["principal_px"][0] - W / 2) / max(W, H)
+            cam.data.shift_y = (v["principal_px"][1] - H / 2) / max(W, H)
+            sc.render.filepath = str(tmp)
+            bpy.ops.render.render(write_still=True)
+            cam.data.shift_x = cam.data.shift_y = 0
+        else:
+            render(sc, cam, v, spec["scale"], tmp)
         rgba = np.asarray(Image.open(tmp).convert("RGBA")).astype(np.float32)
         al = rgba[..., 3:4] / 255
         clay = (rgba[..., :3] * al + 228 * (1 - al)).astype(np.uint8)
         photo = np.asarray(Image.open(ROOT / spec["photo"]).convert("RGB"))
-        uv, ppm = project(v, spec["scale"], centre)
+        if "principal_px" in v:
+            Rm_ = R.from_rotvec(v["rotvec_world_to_cam"]).as_matrix()
+            Xc_ = (centre - np.asarray(v["camera_position_m"])) @ Rm_.T
+            fF = v["focal_px_full"]
+            uv = np.array([fF * Xc_[0] / Xc_[2] + v["principal_px"][0], fF * Xc_[1] / Xc_[2] + v["principal_px"][1]])
+            ppm = fF / Xc_[2]
+            spec = dict(spec, dx=0)
+        else:
+            uv, ppm = project(v, spec["scale"], centre)
         r = a.half * ppm
         x0, y0, x1, y1 = (int(uv[0] - r), int(uv[1] - r), int(uv[0] + r), int(uv[1] + r))
 

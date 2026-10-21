@@ -44,6 +44,7 @@ def main():
     sc.render.resolution_x = sc.render.resolution_y = a.size
     cd = bpy.data.cameras.new("cam")
     cd.lens = a.lens
+    cd.clip_start = 0.001  # the default 10 cm clips close-ups
     cam = bpy.data.objects.new("cam", cd)
     sc.collection.objects.link(cam)
     sc.camera = cam
