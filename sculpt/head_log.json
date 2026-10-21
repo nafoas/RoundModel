@@ -1,0 +1,99 @@
+{
+ "steps": [
+  {
+   "note": "eye level, seen from above: one smooth wedge from the bridge (midline unchanged) back past both eyes, running through each eye's lid line so the eyes bulge out of it; fades out where the head turns to face sideways",
+   "op": "section",
+   "z": 0.13,
+   "half_height": 0.016,
+   "half_height_below": 0.03,
+   "front": "midline",
+   "min_y": 0.0,
+   "x_cap": 0.043,
+   "x_fade": 0.008,
+   "curve": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     0.01,
+     0.007
+    ],
+    [
+     0.018,
+     0.0175
+    ],
+    [
+     0.025,
+     0.0285
+    ],
+    [
+     0.031,
+     0.038
+    ],
+    [
+     0.038,
+     0.049
+    ],
+    [
+     0.043,
+     0.0605
+    ]
+   ]
+  },
+  {
+   "note": "right eye: front at its measured point (master pixel fixed, depth from profiles/top-down/45-degree), looking 60 deg out and 8 deg up; looking 55 deg out and 8 deg up; radius 7.5 mm (dark of the eye ~12.6 x 7.5 mm in the master: a 12.6 mm opening seen ~53 deg off-axis)",
+   "op": "eye",
+   "side": "R",
+   "front": [
+    0.03101,
+    0.05053,
+    0.1266
+   ],
+   "radius": 0.0075,
+   "axis": [
+    0.8112,
+    0.568,
+    0.1392
+   ]
+  },
+  {
+   "note": "left eye: same, at its own measured point; looking 55 deg out and 8 deg up; radius 7.5 mm (dark of the eye ~12.6 x 7.5 mm in the master: a 12.6 mm opening seen ~53 deg off-axis)",
+   "op": "eye",
+   "side": "L",
+   "front": [
+    -0.02793,
+    0.05101,
+    0.13353
+   ],
+   "radius": 0.0075,
+   "axis": [
+    -0.8112,
+    0.568,
+    0.1392
+   ]
+  },
+  {
+   "note": "relax around and behind the right eye after the big move, irons out bunching (mirrored)",
+   "op": "smooth",
+   "at": [
+    0.03701,
+    0.04253,
+    0.12259999999999999
+   ],
+   "radius": 0.025,
+   "strength": 0.5,
+   "iters": 15,
+   "mirror": true
+  },
+  {
+   "note": "eye socket: opening faces out along the eye's axis; lid opening 12.6 mm across, cornea 3.4 mm proud; soft 8 mm blend into the fur",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0034,
+   "rim": 0.0063,
+   "blend": 0.008,
+   "mirror": true
+  }
+ ]
+}
