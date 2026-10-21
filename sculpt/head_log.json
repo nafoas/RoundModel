@@ -29,18 +29,19 @@
      1300
     ]
    ],
-   "iters": 12,
+   "iters": 10,
    "spread": 40,
    "decay": 0.97,
    "rate": 0.8,
-   "outline_soften_px": 7
+   "outline_soften_px": 7,
+   "smooth_iters": 200
   },
   {
    "note": "eye level, seen from above: one smooth wedge from the bridge (midline unchanged) back past both eyes, running through each eye's lid line so the eyes bulge out of it; fades out where the head turns to face sideways",
    "op": "section",
    "z": 0.13,
    "half_height": 0.016,
-   "half_height_below": 0.03,
+   "half_height_below": 0.016,
    "front": "midline",
    "min_y": 0.0,
    "x_cap": 0.043,
@@ -75,6 +76,54 @@
      0.0605
     ]
    ]
+  },
+  {
+   "note": "relax the whole face front after the wedge, removing steps and flat walls; eyes, nose and mouth are sculpted after this",
+   "op": "smooth",
+   "at": [
+    0.0,
+    0.07,
+    0.115
+   ],
+   "radius": 0.085,
+   "strength": 0.6,
+   "iters": 160
+  },
+  {
+   "note": "re-fit the master outline after relaxing (sideways moves only)",
+   "op": "fit_outline",
+   "exclude": [
+    [
+     340,
+     180,
+     500,
+     300
+    ],
+    [
+     590,
+     180,
+     760,
+     290
+    ],
+    [
+     230,
+     1150,
+     470,
+     1300
+    ],
+    [
+     580,
+     1160,
+     800,
+     1300
+    ]
+   ],
+   "iters": 10,
+   "spread": 40,
+   "decay": 0.97,
+   "rate": 0.8,
+   "outline_soften_px": 7,
+   "smooth_iters": 200
   },
   {
    "note": "right eye: front at its measured depth, placed so the visible dark of the eye lands on the master's eye (front anchored at master px (320, 467)); looking 55 deg out, 8 deg up; radius 8 mm",
@@ -173,6 +222,154 @@
    "rim": 0.007,
    "blend": 0.009,
    "mirror": true
+  },
+  {
+   "note": "nose pad: soft dome above the nostril V (master face lines 16)",
+   "op": "bump",
+   "at": {
+    "master_px": [
+     543,
+     690
+    ]
+   },
+   "radius": 0.011,
+   "height": 0.0018
+  },
+  {
+   "note": "right nostril, the left arm of the V (face line 17)",
+   "op": "crease",
+   "master_px_line": [
+    [
+     455,
+     690
+    ],
+    [
+     490,
+     713
+    ],
+    [
+     520,
+     734
+    ],
+    [
+     545,
+     748
+    ]
+   ],
+   "width": 0.0018,
+   "depth": 0.0011
+  },
+  {
+   "note": "left nostril, the right arm of the V (face line 18)",
+   "op": "crease",
+   "master_px_line": [
+    [
+     628,
+     690
+    ],
+    [
+     598,
+     713
+    ],
+    [
+     570,
+     734
+    ],
+    [
+     545,
+     748
+    ]
+   ],
+   "width": 0.0018,
+   "depth": 0.0011
+  },
+  {
+   "note": "philtrum: groove from the V's point down to the mouth split (face line 19)",
+   "op": "crease",
+   "master_px_line": [
+    [
+     545,
+     748
+    ],
+    [
+     546,
+     790
+    ],
+    [
+     548,
+     818
+    ]
+   ],
+   "width": 0.0016,
+   "depth": 0.0016
+  },
+  {
+   "note": "mouth split, slightly deeper at the bottom",
+   "op": "crease",
+   "master_px_line": [
+    [
+     547,
+     800
+    ],
+    [
+     548,
+     822
+    ]
+   ],
+   "width": 0.0012,
+   "depth": 0.0008
+  },
+  {
+   "note": "right whisker pad: soft swelling beside the philtrum (face line 22)",
+   "op": "bump",
+   "at": {
+    "master_px": [
+     497,
+     775
+    ]
+   },
+   "radius": 0.01,
+   "height": 0.0015
+  },
+  {
+   "note": "left whisker pad (face line 23)",
+   "op": "bump",
+   "at": {
+    "master_px": [
+     597,
+     775
+    ]
+   },
+   "radius": 0.01,
+   "height": 0.0015
+  },
+  {
+   "note": "crease under the lips, chin tucked beneath (face line 24)",
+   "op": "crease",
+   "master_px_line": [
+    [
+     430,
+     840
+    ],
+    [
+     490,
+     852
+    ],
+    [
+     545,
+     857
+    ],
+    [
+     600,
+     852
+    ],
+    [
+     660,
+     840
+    ]
+   ],
+   "width": 0.012,
+   "depth": 0.001
   }
  ]
 }

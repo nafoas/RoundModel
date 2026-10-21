@@ -13,6 +13,10 @@ Operations
   section {"z", "half_height", "front", "k", "power"}: pull the front of the
           head back toward the curve y = front - k |x|^power (seen from above), in a band of
           heights around z
+  bump    {"at", "radius", "height"}: soft swelling (or hollow if negative)
+          along the surface normal
+  crease  {"master_px_line", "width", "depth"}: soft groove along a line
+          drawn on the master photo
   socket  {"side", "proud", "rim", "blend"}: the eye's opening, facing out
           along the eye's axis; cornea stands `proud` beyond the lid
   smooth  {"at", "radius", "strength", "iters"}: relax the surface locally
@@ -85,6 +89,24 @@ class Master:
         if not good.any():
             raise ValueError(f"master ray through {px} misses the mesh")
         return o + d * t[good].min()
+
+
+def normals(V, F):
+    fn = np.cross(V[F[:, 1]] - V[F[:, 0]], V[F[:, 2]] - V[F[:, 0]])
+    N = np.zeros_like(V)
+    for k in range(3):
+        np.add.at(N, F[:, k], fn)
+    return N / np.linalg.norm(N, axis=1, keepdims=True)
+
+
+def densify(line, step_px):
+    out = []
+    for a, b in zip(line[:-1], line[1:]):
+        a, b = np.array(a, float), np.array(b, float)
+        n = max(1, int(np.linalg.norm(b - a) / step_px))
+        out += [a + (b - a) * t for t in np.linspace(0, 1, n, endpoint=False)]
+    out.append(np.array(line[-1], float))
+    return out
 
 
 def falloff(dist, radius):
@@ -247,6 +269,21 @@ def apply(log, V, F, master):
             w = falloff(np.maximum(radial - step["rim"], 0), step["blend"]) * (h > 0)
             over = np.maximum((V - lid) @ ax_, 0)
             V -= (w * over)[:, None] * ax_[None, :]
+        elif op == "bump":
+            # soft swelling (height > 0) or hollow (< 0) along the surface normal
+            N = normals(V, F)
+            w = falloff(np.linalg.norm(V - at, axis=1), step["radius"])
+            V += (w * step["height"])[:, None] * N
+        elif op == "crease":
+            # soft groove along a line of master pixels, projected onto the
+            # surface; depth along the surface normal, profile smooth across
+            N = normals(V, F)
+            pts = [master.hit(V, F, px) for px in densify(step["master_px_line"], 4)]
+            P = np.array(pts)
+            d = np.min(np.linalg.norm(V[:, None, :] - P[None, :, :], axis=2), axis=1)
+            w = falloff(d, step["width"])
+            depth = np.full(len(V), step["depth"])
+            V -= (w * depth)[:, None] * N
         elif op == "fit_outline":
             V = fit_outline(V, F, rows, cols, deg, master, step)
         elif op == "smooth":
