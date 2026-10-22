@@ -226,6 +226,324 @@
    "eye_weight": 1.0
   },
   {
+   "note": "round off the ridges and corners of the upper face (round 1): the wall above each eye, the edge of the forehead block; volume kept, lids and front outline held",
+   "op": "relax",
+   "at": [
+    0.0,
+    0.05,
+    0.135
+   ],
+   "radius": 0.065,
+   "iters": 60,
+   "hold_eyes": 0.002,
+   "fade_eyes": 0.006
+  },
+  {
+   "note": "refit every photo's outline after rounding (round 1)",
+   "op": "fit_multi",
+   "iters": 2,
+   "stiffness": 30000,
+   "views": [
+    {
+     "view": "master_front_standing",
+     "weight": 2.0
+    },
+    {
+     "view": "sheet_03_right_profile",
+     "weight": 1.0,
+     "exclude": [
+      [
+       480,
+       160,
+       700,
+       420
+      ]
+     ]
+    },
+    {
+     "view": "sheet_07_left_profile",
+     "weight": 0.5,
+     "exclude": [
+      [
+       560,
+       210,
+       720,
+       390
+      ],
+      [
+       0,
+       470,
+       1131,
+       1391
+      ]
+     ],
+     "note": "lower face left out: this photo's head pose needs a 25 mm shift, so its camera or his pose is unreliable there; eye and upper head kept, at half weight"
+    },
+    {
+     "view": "sheet_09_top_down",
+     "weight": 1.0,
+     "exclude": [
+      [
+       380,
+       600,
+       700,
+       820
+      ]
+     ]
+    },
+    {
+     "view": "sheet_02_front_3q",
+     "weight": 1.0,
+     "exclude": [
+      [
+       400,
+       150,
+       520,
+       220
+      ],
+      [
+       600,
+       130,
+       740,
+       300
+      ]
+     ]
+    },
+    {
+     "view": "sheet_08_front_3q_left",
+     "weight": 1.0,
+     "exclude": [
+      [
+       400,
+       150,
+       560,
+       240
+      ],
+      [
+       560,
+       150,
+       720,
+       320
+      ]
+     ]
+    }
+   ],
+   "eye_traces": false,
+   "eye_weight": 1.0
+  },
+  {
+   "note": "round off the ridges and corners of the upper face (round 2): the wall above each eye, the edge of the forehead block; volume kept, lids and front outline held",
+   "op": "relax",
+   "at": [
+    0.0,
+    0.05,
+    0.135
+   ],
+   "radius": 0.065,
+   "iters": 60,
+   "hold_eyes": 0.002,
+   "fade_eyes": 0.006
+  },
+  {
+   "note": "refit every photo's outline after rounding (round 2)",
+   "op": "fit_multi",
+   "iters": 2,
+   "stiffness": 30000,
+   "views": [
+    {
+     "view": "master_front_standing",
+     "weight": 2.0
+    },
+    {
+     "view": "sheet_03_right_profile",
+     "weight": 1.0,
+     "exclude": [
+      [
+       480,
+       160,
+       700,
+       420
+      ]
+     ]
+    },
+    {
+     "view": "sheet_07_left_profile",
+     "weight": 0.5,
+     "exclude": [
+      [
+       560,
+       210,
+       720,
+       390
+      ],
+      [
+       0,
+       470,
+       1131,
+       1391
+      ]
+     ],
+     "note": "lower face left out: this photo's head pose needs a 25 mm shift, so its camera or his pose is unreliable there; eye and upper head kept, at half weight"
+    },
+    {
+     "view": "sheet_09_top_down",
+     "weight": 1.0,
+     "exclude": [
+      [
+       380,
+       600,
+       700,
+       820
+      ]
+     ]
+    },
+    {
+     "view": "sheet_02_front_3q",
+     "weight": 1.0,
+     "exclude": [
+      [
+       400,
+       150,
+       520,
+       220
+      ],
+      [
+       600,
+       130,
+       740,
+       300
+      ]
+     ]
+    },
+    {
+     "view": "sheet_08_front_3q_left",
+     "weight": 1.0,
+     "exclude": [
+      [
+       400,
+       150,
+       560,
+       240
+      ],
+      [
+       560,
+       150,
+       720,
+       320
+      ]
+     ]
+    }
+   ],
+   "eye_traces": false,
+   "eye_weight": 1.0
+  },
+  {
+   "note": "round off the ridges and corners of the upper face (round 3): the wall above each eye, the edge of the forehead block; volume kept, lids and front outline held",
+   "op": "relax",
+   "at": [
+    0.0,
+    0.05,
+    0.135
+   ],
+   "radius": 0.065,
+   "iters": 60,
+   "hold_eyes": 0.002,
+   "fade_eyes": 0.006
+  },
+  {
+   "note": "refit every photo's outline after rounding (round 3)",
+   "op": "fit_multi",
+   "iters": 2,
+   "stiffness": 30000,
+   "views": [
+    {
+     "view": "master_front_standing",
+     "weight": 2.0
+    },
+    {
+     "view": "sheet_03_right_profile",
+     "weight": 1.0,
+     "exclude": [
+      [
+       480,
+       160,
+       700,
+       420
+      ]
+     ]
+    },
+    {
+     "view": "sheet_07_left_profile",
+     "weight": 0.5,
+     "exclude": [
+      [
+       560,
+       210,
+       720,
+       390
+      ],
+      [
+       0,
+       470,
+       1131,
+       1391
+      ]
+     ],
+     "note": "lower face left out: this photo's head pose needs a 25 mm shift, so its camera or his pose is unreliable there; eye and upper head kept, at half weight"
+    },
+    {
+     "view": "sheet_09_top_down",
+     "weight": 1.0,
+     "exclude": [
+      [
+       380,
+       600,
+       700,
+       820
+      ]
+     ]
+    },
+    {
+     "view": "sheet_02_front_3q",
+     "weight": 1.0,
+     "exclude": [
+      [
+       400,
+       150,
+       520,
+       220
+      ],
+      [
+       600,
+       130,
+       740,
+       300
+      ]
+     ]
+    },
+    {
+     "view": "sheet_08_front_3q_left",
+     "weight": 1.0,
+     "exclude": [
+      [
+       400,
+       150,
+       560,
+       240
+      ],
+      [
+       560,
+       150,
+       720,
+       320
+      ]
+     ]
+    }
+   ],
+   "eye_traces": false,
+   "eye_weight": 1.0
+  },
+  {
    "note": "right lids from the eye's fitted 3D opening: the eye shows through the opening, the lid edge lies on the ball along it, fur covers the ball elsewhere; one smooth move",
    "op": "lids3d",
    "side": "R",

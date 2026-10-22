@@ -1017,6 +1017,76 @@ def apply(log, V, F, master):
                 lap = A_ @ V - V
                 spk = near & (np.linalg.norm(lap, axis=1) > step.get("limit", 0.0004))
                 V[spk] += 0.6 * lap[spk]
+        elif op == "convexify":
+            # Fur over the forehead and brow makes no hollows. In thin slices
+            # across the head (constant y), each point under the slice's
+            # convex outline moves out to it, in the slice plane; points on
+            # the outline do not move, so the outline from the front and from
+            # above stays exactly as it was. The fur round each eye is left
+            # alone. Moves are then made smooth along the head.
+            from scipy.spatial import ConvexHull
+            y0, y1 = step["y"]
+            zmin = step["z_min"]
+            free = (V[:, 1] > y0) & (V[:, 1] < y1) & (V[:, 2] > zmin)
+            held = np.zeros(len(V), bool)
+            for e in eyes.values():
+                held |= np.linalg.norm(V - np.asarray(e["centre"]), axis=1) < e["radius"] + step.get("hold_eyes", 0.003)
+            D = np.zeros_like(V)
+            w = np.zeros(len(V))
+            dy = step.get("slab", 0.0015)
+            for yc in np.arange(y0, y1, dy):
+                sl = np.nonzero((V[:, 1] >= yc) & (V[:, 1] < yc + dy) & (V[:, 2] > zmin - 0.01))[0]
+                if len(sl) < 10:
+                    continue
+                P2 = V[sl][:, [0, 2]]
+                use = ~held[sl]
+                if use.sum() < 10:
+                    continue
+                hull = ConvexHull(P2[use])
+                eq = hull.equations  # n.x + d <= 0 inside
+                dist = P2 @ eq[:, :2].T + eq[:, 2]  # negative inside
+                k = np.argmax(dist, axis=1)  # nearest face (least negative)
+                gap = -dist[np.arange(len(sl)), k]
+                nrm = eq[k, :2]
+                mv = free[sl] & ~held[sl] & (gap > 0)
+                D[sl[mv], 0] = nrm[mv, 0] * gap[mv]
+                D[sl[mv], 2] = nrm[mv, 1] * gap[mv]
+                w[sl[mv]] = 1.0
+                w[sl[free[sl] & ~mv]] = 1.0  # stays
+            # the fill fades in gradually away from each eye (a hard edge to
+            # the held band leaves a fold)
+            if step.get("fade_eyes"):
+                fade = np.ones(len(V))
+                for e in eyes.values():
+                    de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
+                    x_ = np.clip((de - step.get("hold_eyes", 0.003)) / step["fade_eyes"], 0, 1)
+                    fade = np.minimum(fade, x_ * x_ * (3 - 2 * x_))
+                D *= fade[:, None]
+            # held lids, and his outline from the front, pin the move at zero
+            w[held] = 4.0
+            mo = master_outline_points(V, F, master, px=step.get("outline_px", 2))
+            D[mo] = 0
+            w[mo] = 4.0
+            region = free | held
+            Ds = smooth_disp(D, w, np.ones(len(V), bool), rows, cols, deg, step.get("stiffness", 3.0))
+            V = V + Ds * step.get("rate", 1.0)
+        elif op == "relax":
+            # Round off ridges and corners without shrinking (Taubin: a
+            # smoothing step, then a slightly larger un-shrinking step). Full
+            # strength in the middle of the area, fading to its edge and to
+            # the lids round each eye; his outline from the front held.
+            A_ = avg_op(rows, cols, deg)
+            w = falloff(np.linalg.norm(V - at, axis=1), step["radius"])
+            for e in eyes.values():
+                de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
+                x_ = np.clip((de - step.get("hold_eyes", 0.002)) / step.get("fade_eyes", 0.006), 0, 1)
+                w = w * x_ * x_ * (3 - 2 * x_)
+            if step.get("hold_outline", True):
+                w = w * ~master_outline_points(V, F, master, px=2)
+            lam, mu = step.get("lam", 0.5), step.get("mu", -0.53)
+            for _ in range(step.get("iters", 50)):
+                V += (lam * w)[:, None] * (A_ @ V - V)
+                V += (mu * w)[:, None] * (A_ @ V - V)
         elif op == "bump":
             # soft swelling (height > 0) or hollow (< 0) along the surface normal
             N = normals(V, F)
