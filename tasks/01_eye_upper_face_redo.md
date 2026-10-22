@@ -10,7 +10,7 @@ Yes. Here is exactly what happens next, on the rolled-back kept build (d9f1d7c, 
 - [ ] 1. **Draw the lines on his photos, part by part.**
    - [x] **Eye:** the black of the eye, already traced in ten photos last time; I'll check each trace again and redo any that are off.
    - [x] **Socket:** the edge of the dark eye-ring and lid round each eye.
-   - [ ] **Ridge:** the fold of fur over the eye.
+   - [x] **Ridge:** the fold of fur over the eye.
    - [ ] **Forehead:** the forehead line.
    - [ ] **Muzzle:** the muzzle line.
 

@@ -336,6 +336,36 @@
     792,
     411
    ]
+  ],
+  "ridge_R": [
+   [
+    655,
+    398
+   ],
+   [
+    672,
+    412
+   ],
+   [
+    690,
+    428
+   ],
+   [
+    705,
+    438
+   ],
+   [
+    722,
+    444
+   ],
+   [
+    740,
+    447
+   ],
+   [
+    757,
+    451
+   ]
   ]
  },
  "sheet_02_front_3q": {
@@ -810,6 +840,28 @@
     350,
     367
    ]
+  ],
+  "ridge_L": [
+   [
+    414,
+    404
+   ],
+   [
+    432,
+    406
+   ],
+   [
+    452,
+    409
+   ],
+   [
+    472,
+    412
+   ],
+   [
+    494,
+    415
+   ]
   ]
  },
  "sheet_08_front_3q_left": {
@@ -1094,5 +1146,12 @@
    ]
   ]
  },
- "socket_note": "'socket_X' = outer edge of the dark eye-ring / lid margin round the eye, where white fur starts (lashes left out). In the master and the top-down right eye the ring does not show apart from the eye: the white fur meets the dark lid margin directly, so there the socket edge is the eye trace itself and no separate socket line is drawn."
+ "socket_note": "'socket_X' = outer edge of the dark eye-ring / lid margin round the eye, where white fur starts (lashes left out). In the master and the top-down right eye the ring does not show apart from the eye: the white fur meets the dark lid margin directly, so there the socket edge is the eye trace itself and no separate socket line is drawn.",
+ "ridge_note": "'ridge_X' = the crease where the fold of fur over the eye meets the side of the head, an open line from upper-back down to the eye's back corner. It shows as a line only in the profiles (clear in the right profile, faint in the left). In the master and the three-quarters the fold over the eye shows only as soft shading, not as a line, so no ridge line is drawn there.",
+ "open_lines": [
+  "ridge_R",
+  "ridge_L",
+  "forehead",
+  "muzzle"
+ ]
 }
