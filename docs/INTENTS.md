@@ -45,6 +45,9 @@ the end of each step. Do not paraphrase it into something easier.
   doable, or I want to do it another way: stop and ask.
 - Don't turn a hard instruction into an easier version and report that as
   done.
+- **If I was told to do something a certain way, I will always assume there
+  is a reason for it, and I will not simplify it unless I get explicit
+  permission first.**
 - Don't run for hours on my own decisions. Work in small steps and check in
   at the agreed points. Wasted time is the owner's money and usage.
 - Report exactly what was done, including what was rolled back and why.
