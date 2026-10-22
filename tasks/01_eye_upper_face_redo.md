@@ -8,7 +8,7 @@ of each step.
 Yes. Here is exactly what happens next, on the rolled-back kept build (d9f1d7c, restored in commit 716e530):
 
 - [ ] 1. **Draw the lines on his photos, part by part.**
-   - [ ] **Eye:** the black of the eye, already traced in ten photos last time; I'll check each trace again and redo any that are off.
+   - [x] **Eye:** the black of the eye, already traced in ten photos last time; I'll check each trace again and redo any that are off.
    - [ ] **Socket:** the edge of the dark eye-ring and lid round each eye.
    - [ ] **Ridge:** the fold of fur over the eye.
    - [ ] **Forehead:** the forehead line.
