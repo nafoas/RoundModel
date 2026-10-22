@@ -37,6 +37,47 @@
    "smooth_iters": 200
   },
   {
+   "note": "eye level, seen from above: one smooth wedge from the bridge (midline unchanged) back past both eyes, running through each eye's lid line so the eyes bulge out of it; fades out where the head turns to face sideways",
+   "op": "section",
+   "z": 0.13,
+   "half_height": 0.016,
+   "half_height_below": 0.016,
+   "front": "midline",
+   "min_y": 0.0,
+   "x_cap": 0.043,
+   "x_fade": 0.008,
+   "curve": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     0.01,
+     0.00541
+    ],
+    [
+     0.018,
+     0.01354
+    ],
+    [
+     0.025,
+     0.02204
+    ],
+    [
+     0.031,
+     0.02939
+    ],
+    [
+     0.038,
+     0.0379
+    ],
+    [
+     0.043,
+     0.0468
+    ]
+   ]
+  },
+  {
    "note": "relax the whole face front after the wedge, removing steps and flat walls; eyes, nose and mouth are sculpted after this",
    "op": "smooth",
    "at": [
@@ -85,498 +126,191 @@
    "smooth_iters": 200
   },
   {
-   "note": "right eye from eye3d.py: one eyeball and lid opening fitted to his eye traced in nine views at once (master double)",
+   "note": "right eye: eyeball 18 mm across (profile photo: the black of the eye is 90 x 90 px = 18 mm; the brown eye-ring around it ~22 mm); centre placed by eye_fit",
    "op": "eye",
    "side": "R",
-   "centre": [
-    0.02421,
-    0.06175,
-    0.12551
+   "front": [
+    0.03288,
+    0.06306,
+    0.12623
    ],
-   "radius": 0.00916,
+   "radius": 0.009,
    "axis": [
-    0.97588,
-    0.10533,
-    0.19121
+    0.9976,
+    0.0698,
+    0.0
    ],
-   "roll": 0.15,
-   "opening": [
-    63.33,
-    -0.05,
-    -0.0,
-    -2.93,
-    1.21
+   "centre": [
+    0.02532,
+    0.059,
+    0.12624
    ]
   },
   {
-   "note": "left eye from eye3d.py: one eyeball and lid opening fitted to his eye traced in nine views at once (master double)",
+   "note": "left eye: eyeball 18 mm across (profile photo: the black of the eye is 90 x 90 px = 18 mm; the brown eye-ring around it ~22 mm); centre placed by eye_fit",
    "op": "eye",
    "side": "L",
-   "centre": [
-    -0.02083,
-    0.06002,
-    0.1317
+   "front": [
+    -0.02988,
+    0.06306,
+    0.13369
    ],
-   "radius": 0.00917,
+   "radius": 0.009,
    "axis": [
-    -0.96584,
-    0.15102,
-    0.21059
+    -0.9994,
+    -0.0349,
+    0.0
    ],
-   "roll": 0.01,
-   "opening": [
-    62.45,
-    1.63,
-    1.28,
-    -0.0,
-    -3.43
+   "centre": [
+    -0.02205,
+    0.06007,
+    0.13291
    ]
   },
   {
-   "note": "the head's outline in every photo at once, each with his head posed as there (eye3d.py poses); the master counts double but is not held fixed; one smooth offset of the surface (least bending) answers every photo together",
-   "op": "fit_multi",
+   "note": "relax around and behind the right eye after the big move, irons out bunching (mirrored)",
+   "op": "smooth",
+   "at": [
+    0.03701,
+    0.04253,
+    0.12259999999999999
+   ],
+   "radius": 0.025,
+   "strength": 0.5,
+   "iters": 15,
+   "mirror": true
+  },
+  {
+   "note": "seat each eye: the fur around it comes down along the eye axis so the eyeball's equator sits at the fur all round, spread over 25 mm so the face beside the eye is gently narrower, not dished (mirrored)",
+   "op": "eye_seat",
+   "side": "R",
+   "rim_h": 0.0015,
+   "reach": 0.025,
+   "mirror": true,
+   "max_drop": 0.006,
+   "max_drop_front": 0.003,
+   "max_drop_up": 0.003,
+   "max_drop_down": 0.003,
+   "back_fade": 0.003
+  },
+  {
+   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
+   "mirror": true,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
+  },
+  {
+   "note": "soften the fur around the right eye (no hard creases), then re-open the socket (mirrored)",
+   "op": "smooth",
+   "at": [
+    0.035930000000000004,
+    0.04876,
+    0.12645
+   ],
+   "radius": 0.018,
+   "strength": 0.35,
    "iters": 8,
-   "stiffness": 30000,
-   "views": [
-    {
-     "view": "master_front_standing",
-     "weight": 2.0
-    },
-    {
-     "view": "sheet_03_right_profile",
-     "weight": 1.0,
-     "exclude": [
-      [
-       480,
-       160,
-       700,
-       420
-      ]
-     ]
-    },
-    {
-     "view": "sheet_07_left_profile",
-     "weight": 0.5,
-     "exclude": [
-      [
-       560,
-       210,
-       720,
-       390
-      ],
-      [
-       0,
-       470,
-       1131,
-       1391
-      ]
-     ],
-     "note": "lower face left out: this photo's head pose needs a 25 mm shift, so its camera or his pose is unreliable there; eye and upper head kept, at half weight"
-    },
-    {
-     "view": "sheet_09_top_down",
-     "weight": 1.0,
-     "exclude": [
-      [
-       380,
-       600,
-       700,
-       820
-      ]
-     ]
-    },
-    {
-     "view": "sheet_02_front_3q",
-     "weight": 1.0,
-     "exclude": [
-      [
-       400,
-       150,
-       520,
-       220
-      ],
-      [
-       600,
-       130,
-       740,
-       300
-      ]
-     ]
-    },
-    {
-     "view": "sheet_08_front_3q_left",
-     "weight": 1.0,
-     "exclude": [
-      [
-       400,
-       150,
-       560,
-       240
-      ],
-      [
-       560,
-       150,
-       720,
-       320
-      ]
-     ]
-    }
-   ],
-   "eye_traces": true,
-   "eye_weight": 1.0
+   "mirror": true
   },
   {
-   "note": "round off the ridges and corners of the upper face (round 1): the wall above each eye, the edge of the forehead block; volume kept, lids and front outline held",
-   "op": "relax",
-   "at": [
-    0.0,
-    0.05,
-    0.135
-   ],
-   "radius": 0.065,
-   "iters": 60,
-   "hold_eyes": 0.002,
-   "fade_eyes": 0.006
-  },
-  {
-   "note": "refit every photo's outline after rounding (round 1)",
-   "op": "fit_multi",
-   "iters": 2,
-   "stiffness": 30000,
-   "views": [
-    {
-     "view": "master_front_standing",
-     "weight": 2.0
-    },
-    {
-     "view": "sheet_03_right_profile",
-     "weight": 1.0,
-     "exclude": [
-      [
-       480,
-       160,
-       700,
-       420
-      ]
-     ]
-    },
-    {
-     "view": "sheet_07_left_profile",
-     "weight": 0.5,
-     "exclude": [
-      [
-       560,
-       210,
-       720,
-       390
-      ],
-      [
-       0,
-       470,
-       1131,
-       1391
-      ]
-     ],
-     "note": "lower face left out: this photo's head pose needs a 25 mm shift, so its camera or his pose is unreliable there; eye and upper head kept, at half weight"
-    },
-    {
-     "view": "sheet_09_top_down",
-     "weight": 1.0,
-     "exclude": [
-      [
-       380,
-       600,
-       700,
-       820
-      ]
-     ]
-    },
-    {
-     "view": "sheet_02_front_3q",
-     "weight": 1.0,
-     "exclude": [
-      [
-       400,
-       150,
-       520,
-       220
-      ],
-      [
-       600,
-       130,
-       740,
-       300
-      ]
-     ]
-    },
-    {
-     "view": "sheet_08_front_3q_left",
-     "weight": 1.0,
-     "exclude": [
-      [
-       400,
-       150,
-       560,
-       240
-      ],
-      [
-       560,
-       150,
-       720,
-       320
-      ]
-     ]
-    }
-   ],
-   "eye_traces": false,
-   "eye_weight": 1.0
-  },
-  {
-   "note": "round off the ridges and corners of the upper face (round 2): the wall above each eye, the edge of the forehead block; volume kept, lids and front outline held",
-   "op": "relax",
-   "at": [
-    0.0,
-    0.05,
-    0.135
-   ],
-   "radius": 0.065,
-   "iters": 60,
-   "hold_eyes": 0.002,
-   "fade_eyes": 0.006
-  },
-  {
-   "note": "refit every photo's outline after rounding (round 2)",
-   "op": "fit_multi",
-   "iters": 2,
-   "stiffness": 30000,
-   "views": [
-    {
-     "view": "master_front_standing",
-     "weight": 2.0
-    },
-    {
-     "view": "sheet_03_right_profile",
-     "weight": 1.0,
-     "exclude": [
-      [
-       480,
-       160,
-       700,
-       420
-      ]
-     ]
-    },
-    {
-     "view": "sheet_07_left_profile",
-     "weight": 0.5,
-     "exclude": [
-      [
-       560,
-       210,
-       720,
-       390
-      ],
-      [
-       0,
-       470,
-       1131,
-       1391
-      ]
-     ],
-     "note": "lower face left out: this photo's head pose needs a 25 mm shift, so its camera or his pose is unreliable there; eye and upper head kept, at half weight"
-    },
-    {
-     "view": "sheet_09_top_down",
-     "weight": 1.0,
-     "exclude": [
-      [
-       380,
-       600,
-       700,
-       820
-      ]
-     ]
-    },
-    {
-     "view": "sheet_02_front_3q",
-     "weight": 1.0,
-     "exclude": [
-      [
-       400,
-       150,
-       520,
-       220
-      ],
-      [
-       600,
-       130,
-       740,
-       300
-      ]
-     ]
-    },
-    {
-     "view": "sheet_08_front_3q_left",
-     "weight": 1.0,
-     "exclude": [
-      [
-       400,
-       150,
-       560,
-       240
-      ],
-      [
-       560,
-       150,
-       720,
-       320
-      ]
-     ]
-    }
-   ],
-   "eye_traces": false,
-   "eye_weight": 1.0
-  },
-  {
-   "note": "round off the ridges and corners of the upper face (round 3): the wall above each eye, the edge of the forehead block; volume kept, lids and front outline held",
-   "op": "relax",
-   "at": [
-    0.0,
-    0.05,
-    0.135
-   ],
-   "radius": 0.065,
-   "iters": 60,
-   "hold_eyes": 0.002,
-   "fade_eyes": 0.006
-  },
-  {
-   "note": "refit every photo's outline after rounding (round 3)",
-   "op": "fit_multi",
-   "iters": 2,
-   "stiffness": 30000,
-   "views": [
-    {
-     "view": "master_front_standing",
-     "weight": 2.0
-    },
-    {
-     "view": "sheet_03_right_profile",
-     "weight": 1.0,
-     "exclude": [
-      [
-       480,
-       160,
-       700,
-       420
-      ]
-     ]
-    },
-    {
-     "view": "sheet_07_left_profile",
-     "weight": 0.5,
-     "exclude": [
-      [
-       560,
-       210,
-       720,
-       390
-      ],
-      [
-       0,
-       470,
-       1131,
-       1391
-      ]
-     ],
-     "note": "lower face left out: this photo's head pose needs a 25 mm shift, so its camera or his pose is unreliable there; eye and upper head kept, at half weight"
-    },
-    {
-     "view": "sheet_09_top_down",
-     "weight": 1.0,
-     "exclude": [
-      [
-       380,
-       600,
-       700,
-       820
-      ]
-     ]
-    },
-    {
-     "view": "sheet_02_front_3q",
-     "weight": 1.0,
-     "exclude": [
-      [
-       400,
-       150,
-       520,
-       220
-      ],
-      [
-       600,
-       130,
-       740,
-       300
-      ]
-     ]
-    },
-    {
-     "view": "sheet_08_front_3q_left",
-     "weight": 1.0,
-     "exclude": [
-      [
-       400,
-       150,
-       560,
-       240
-      ],
-      [
-       560,
-       150,
-       720,
-       320
-      ]
-     ]
-    }
-   ],
-   "eye_traces": false,
-   "eye_weight": 1.0
-  },
-  {
-   "note": "right lids from the eye's fitted 3D opening: the eye shows through the opening, the lid edge lies on the ball along it, fur covers the ball elsewhere; one smooth move",
-   "op": "lids3d",
+   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
+   "op": "socket",
    "side": "R",
-   "cover": 0.0006,
-   "tuck": 0.0005,
-   "reach": 0.01,
-   "stiffness": 1.0,
-   "shift_deg": 4,
-   "drape": true,
-   "rounds": 6,
-   "band_deg": 8,
-   "near": 0.005
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
+   "mirror": true,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
   },
   {
-   "note": "left lids from the eye's fitted 3D opening: the eye shows through the opening, the lid edge lies on the ball along it, fur covers the ball elsewhere; one smooth move",
-   "op": "lids3d",
-   "side": "L",
-   "cover": 0.0006,
-   "tuck": 0.0005,
-   "reach": 0.01,
-   "stiffness": 1.0,
-   "shift_deg": 4,
-   "drape": true,
-   "rounds": 6,
-   "band_deg": 8,
-   "near": 0.005
+   "note": "relax the strip between the right eye and the bridge, where the wedge turns most sharply (mirrored); then re-open the socket",
+   "op": "smooth",
+   "at": [
+    0.021,
+    0.068,
+    0.131
+   ],
+   "radius": 0.022,
+   "strength": 0.5,
+   "iters": 90,
+   "mirror": true
   },
   {
-   "note": "pull single spiky points near the eyes back into the surface",
-   "op": "despike",
-   "reach": 0.012,
-   "iters": 10,
-   "limit": 0.0004
+   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
+   "mirror": true,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
+  },
+  {
+   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
+   "mirror": true,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
+  },
+  {
+   "note": "fair the forehead and the fur round the eyes: the fairest surface (least bending) that meets the lids, the master outline and the patch edge. Removes the ridge running back from each eye (top of the eye-level wedge) and lets the brow slope smoothly down to the eyes (master: broad, gently sloping forehead)",
+   "op": "fair",
+   "at": [
+    0.0,
+    0.045,
+    0.13
+   ],
+   "radius": 0.075,
+   "hold_eyes": 0.003,
+   "stiffness": 1.0,
+   "keep": 1e-08
+  },
+  {
+   "note": "re-open both eyes after fairing",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0068,
+   "rim": 0.0084,
+   "blend": 0.0015,
+   "mirror": true,
+   "rim_h": 0.0086,
+   "rim_v": 0.0082,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055
   },
   {
    "note": "muzzle: one broad rounded mound coming forward around the nose and whisker pads (as in the profile and three-quarter photos)",
