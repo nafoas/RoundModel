@@ -1431,7 +1431,7 @@
   ]
  },
  "socket_note": "'socket_X' = outer edge of the dark eye-ring / lid margin round the eye, where white fur starts (lashes left out). In the master and the top-down right eye the ring does not show apart from the eye: the white fur meets the dark lid margin directly, so there the socket edge is the eye trace itself and no separate socket line is drawn.",
- "ridge_note": "'ridge_X' = the crease where the fold of fur over the eye meets the side of the head, an open line from upper-back down to the eye's back corner. It shows as a line only in the profiles (clear in the right profile, faint in the left). In the master and the three-quarters the fold over the eye shows only as soft shading, not as a line, so no ridge line is drawn there.",
+ "ridge_note": "'ridge_X' = the crease where the fold of fur over the eye meets the side of the head, an open line from upper-back down to the eye's back corner. It shows as a line only in the profiles (clear in the right profile, faint in the left). In the master and the three-quarters the fold over the eye shows only as soft shading, not as a line, so no ridge line is drawn there. The crease is fur lying in a fold; how it lies varies with how he sits and moves, so it is a guide, not fixed anatomy.",
  "open_lines": [
   "ridge_R",
   "ridge_L",
@@ -1439,8 +1439,8 @@
   "muzzle"
  ],
  "forehead_note": "'forehead' = his outline along the forehead, an open line: in the profiles from the crown behind the ears' front down to where the nose begins; in the front three-quarters the far-side outline from the crown down to the top of the far eye. In the master the forehead faces the camera and its top is hidden by the ears; from above it faces the camera too: neither shows a forehead line.",
- "muzzle_note": "'muzzle' = his outline along the muzzle, an open line: in the profiles from where the nose begins over the nose tip and mouth down to under the chin; from above the front edge of the snout from one cheek round to the other. In the master and three-quarters the muzzle faces the camera and makes no outline.",
- "points_note": "'points': the same physical point marked in several photos (px). nose_V = where the two nostril arms meet. eye_X_front / eye_X_back = the front (toward the nose) and back ends of the eye opening. brow_fold_X = the upper end of the ridge crease. Eye corners and the brow fold show only side-on, so each is in one profile (plus the back three-quarter for the right eye); they pair across photos only through his left/right mirror symmetry.",
+ "muzzle_note": "'muzzle' = his outline along the muzzle, an open line: in the profiles from where the nose begins over the nose tip and mouth down to under the chin; from above the front edge of the snout from one cheek round to the other. In the master and three-quarters the muzzle faces the camera and makes no outline. From above he is sniffing: his nose is upturned, so the split of his nose shows there; in the other photos the nose points forward. The top-down muzzle line is his sniffing pose, not his resting muzzle shape.",
+ "points_note": "'points': the same physical point marked in several photos (px). nose_V = where the two nostril arms meet. eye_X_front / eye_X_back = the front (toward the nose) and back ends of the eye opening. brow_fold_X = the upper end of the ridge crease. Eye corners and the brow fold show only side-on, so each is in one profile (plus the back three-quarter for the right eye); they pair across photos only through his left/right mirror symmetry. Mismatches between photos may come from him moving (sniffing nose, head turn, fur lying differently), not from his shape.",
  "points": {
   "nose_V": {
    "master_front_standing": [

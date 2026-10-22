@@ -33,6 +33,13 @@ the end of each step. Do not paraphrase it into something easier.
 ## Conflicts between photos
 - If photos disagree, it is probably the angle, the distance, or what he was
   doing in that photo. Work out which, and trust what most views agree on.
+- **He is not a static being, not a stone.** Between photos he sits
+  differently, turns his head, his fur creases and lies differently, and he
+  sniffs. These are not anatomical inconsistencies, and the model must never
+  be deformed to "fix" them. Example: from above you can see the split of his
+  nose because he is sniffing there, nose upturned; in the other photos his
+  nose points forward. Logically work out how the views fit together given
+  what he was doing in each. The owner got what photos he could give.
 - Get the parts agreeing with as many angles as possible first; don't hold
   the front rigid. Then make it look like the master while keeping the
   other views agreeing as much as possible.
