@@ -20,7 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def main(d, view, out):
     d, out = Path(d), Path(out)
     out.mkdir(parents=True, exist_ok=True)
-    p = json.loads((ROOT / "checkpoints/cp3/head_poses.json").read_text())[view]
+    pp = ROOT / "checkpoints/cp3/head_poses_parts" / f"{view}.json"
+    p = json.loads(pp.read_text()) if pp.exists() else json.loads((ROOT / "checkpoints/cp3/head_poses.json").read_text())[view]
     Rm, t = R.from_rotvec(p["rotvec"]).as_matrix(), np.array(p["shift_m"])
     V, F = load_obj(d / "head.obj")
     hw = head_weight(V)

@@ -30,6 +30,9 @@ ROOT = Path(__file__).resolve().parents[1]
 WEIGHT = {"master_front_standing": 2.0}
 PART_W = {("sheet_02_front_3q", "eye_R"): 0.5, ("sheet_08_front_3q_left", "eye_R"): 0.5}
 NF = 2  # Fourier terms of the opening
+# the back three-quarter's head pose is not right yet (its eye falls outside
+# the posed head), so it is left out
+SKIP_VIEWS = {"sheet_04_back_3q_right"}
 
 
 def cameras():
@@ -108,12 +111,13 @@ def visible_mask(x, side, cam, q, shape, box):
 def main(iters=3000, out=None):
     cams = cameras()
     traces = json.loads((ROOT / "checkpoints/cp3/part_traces.json").read_text())
-    poses = json.loads((ROOT / "checkpoints/cp3/head_poses.json").read_text())
+    # head poses from parts that stay put (pose_parts.py)
+    poses = {f.stem: json.loads(f.read_text()) for f in (ROOT / "checkpoints/cp3/head_poses_parts").glob("*.json")}
     log = json.loads((ROOT / "sculpt/head_log.json").read_text())
     jobs = []
     views = []
     for vn, parts in traces.items():
-        if not isinstance(parts, dict):
+        if not isinstance(parts, dict) or vn not in cams or vn in SKIP_VIEWS:
             continue
         cam = cams[vn]
         stem = Path(cam["image"]).stem
