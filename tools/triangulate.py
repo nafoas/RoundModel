@@ -23,7 +23,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main(d):
     T = json.loads((ROOT / "checkpoints/cp3/part_traces.json").read_text())
-    poses = json.loads((ROOT / "checkpoints/cp3/head_poses.json").read_text())
+    # head poses found from parts of his head that stay put (pose_parts.py)
+    poses = {}
+    for f in (ROOT / "checkpoints/cp3/head_poses_parts").glob("sheet_*.json"):
+        if f.stem.count("_") >= 3 and f.stem.split("_")[-1] in ("neck", "atlas"):
+            continue
+        poses[f.stem] = json.loads(f.read_text())
+    pv = {v: np.array(p.get("pivot", NECK_PIVOT)) for v, p in poses.items()}
     cams = cameras()
 
     def proj(view, X):
@@ -42,7 +48,7 @@ def main(d):
     def project(view, X):
         if view in poses:
             p = poses[view]
-            X = (X - NECK_PIVOT) @ Rot.from_rotvec(p["rotvec"]).as_matrix().T + NECK_PIVOT + np.array(p["shift_m"])
+            X = (X - pv[view]) @ Rot.from_rotvec(p["rotvec"]).as_matrix().T + pv[view] + np.array(p["shift_m"])
         c = cams[view]
         Xc = (X - np.asarray(c["pos"])) @ camR[view].T
         return c["f"] * Xc[:2] / Xc[2] + np.asarray(c["c"])
