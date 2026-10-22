@@ -27,7 +27,9 @@ LANDMARK_W = 0.01
 # eyes help fix the pose (a round head turns without changing its outline),
 # weakly, with large turns penalised, so a wrong eye still shows in the scores
 USE_EYES = True
+MULTI_START = "--multi" in sys.argv
 MARKS = {
+    "sheet_04_back_3q_right": {"eyes": {"R": (792, 358)}, "ears": [(440, 190, 640, 330)]},
     "sheet_03_right_profile": {"eyes": {"R": (814, 465)}, "ears": [(480, 160, 700, 420)]},
     "sheet_07_left_profile": {"eyes": {"L": (370, 410)}, "ears": [(560, 210, 720, 390)]},
     "sheet_09_top_down": {"eyes": {"R": (346, 990), "L": (679, 1004)}, "points": {"nose_v": ((500, 1222), (545, 748))}, "ears": [(380, 600, 700, 820)]},
@@ -136,15 +138,29 @@ def main(d, view, out):
         eye_err = np.mean(errs) if errs else 0.0  # mm
         # landmarks (eyes, nose) are the surest thing in a photo: weighted
         # so 1 mm off costs as much as 2% of outline agreement
-        c = (1 - iou) + LANDMARK_W * eye_err + 0.01 * np.sum(q[:3] ** 2) + 0.01 * np.sum(q[3:] ** 2)
+        c = (1 - iou) + LANDMARK_W * eye_err + (0.001 if MULTI_START else 0.01) * np.sum(q[:3] ** 2) + 0.01 * np.sum(q[3:] ** 2)
         return (c, iou, eye_err) if parts else c
 
     q0 = np.zeros(6)
     c0, iou0, e0 = cost(q0, True)
-    r = minimize(cost, q0, method="Powell", options={"maxfev": 1500, "xtol": 1e-3, "ftol": 1e-6})
+    # several starting turns (he may have turned his head a lot), best kept
+    best = None
+    st_ = [a for a in sys.argv if a.startswith("--start=")]
+    yaws, pitches = ((0,), (0,))
+    if st_:
+        y_, p_ = st_[0][8:].split(",")
+        yaws, pitches = (float(y_),), (float(p_),)
+    for yaw in yaws:
+        for pitch in pitches:
+            qs = np.zeros(6)
+            qs[2], qs[0] = yaw, pitch
+            r_ = minimize(cost, qs, method="Powell", options={"maxfev": 1500, "xtol": 1e-3, "ftol": 1e-6})
+            if best is None or r_.fun < best.fun:
+                best = r_
+    r = best
     c1, iou1, e1 = cost(r.x, True)
     rot = R.from_rotvec(r.x[:3] * 0.1)
-    print(f"{view}: head outline {iou0 * 100:.1f}% -> {iou1 * 100:.1f}% | eye off by {e0:.1f} -> {e1:.1f} mm | "
+    print(f"cost {r.fun:.4f} | {view}: head outline {iou0 * 100:.1f}% -> {iou1 * 100:.1f}% | eye off by {e0:.1f} -> {e1:.1f} mm | "
           f"head turn {np.degrees(np.linalg.norm(r.x[:3] * 0.1)):.1f} deg about "
           f"{np.round(r.x[:3] / max(1e-9, np.linalg.norm(r.x[:3])), 2)}, shift {np.round(r.x[3:] * 10, 1)} mm")
     Vp, E = posed(r.x)
@@ -163,6 +179,8 @@ def main(d, view, out):
     crop.save(out)
     res = {"view": view, "rotvec": (r.x[:3] * 0.1).tolist(), "shift_m": (r.x[3:] * 0.01).tolist(),
            "iou_before": iou0, "iou_after": iou1, "eye_mm_before": e0, "eye_mm_after": e1}
+    if "--nosave" in sys.argv:
+        return
     p = ROOT / "checkpoints/cp3/head_poses.json"
     allr = json.loads(p.read_text()) if p.exists() else {}
     allr[view] = res
@@ -170,4 +188,4 @@ def main(d, view, out):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:4])
+    main(*[a for a in sys.argv[1:] if not a.startswith("--")][:3])

@@ -65,7 +65,13 @@ def main(d, outdir=None):
     sc = RC.reset()
     sc.cycles.samples = 2
     sc.cycles.use_denoising = False
-    RC.load_mesh(d / "head.obj", name="head")
+    hob = RC.load_mesh(d / "head.obj", name="head")
+    # fur renders flat white (emission), so only the eyes are ever dark:
+    # shadows in creases must not count as eye
+    mt = hob.data.materials[0].node_tree
+    em = mt.nodes.new("ShaderNodeEmission")
+    em.inputs["Color"].default_value = (1, 1, 1, 1)
+    mt.links.new(em.outputs["Emission"], mt.nodes["Material Output"].inputs["Surface"])
     for e in sorted(d.glob("eye_*.obj")):
         RC.load_mesh(e, colour=(0, 0, 0), roughness=1.0, name=e.stem)
     names = {o.name.split(".")[0]: o.name for o in bpy.data.objects if o.type == "MESH"}

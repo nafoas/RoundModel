@@ -392,6 +392,207 @@ def fit_view(V, F, rows, cols, deg, master, step, eyes=None):
     return V
 
 
+def fit_multi(V, F, rows, cols, deg, master, step, eyes=None):
+    """The head's outline in every listed photo at once (master included),
+    each photo with his head posed as there. Every point on the sculpt's
+    outline in a photo asks to move along its surface normal by whatever
+    brings that outline onto his; one smooth offset field (least bending)
+    answers all of them together, weighted per photo. No photo is held
+    fixed; the master just counts more."""
+    import cv2
+    import scipy.sparse as sp
+    from scipy.sparse.linalg import spsolve
+    from PIL import Image
+    from scipy.spatial.transform import Rotation as Rot
+    side_cams = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"]
+    poses = json.loads((ROOT / step.get("poses_file", "checkpoints/cp3/eyes3d.json")).read_text())["poses"]
+    hw = head_weight(V)
+    region = hw > 0.02
+    if step.get("eyes_only_reach") and eyes:
+        # a local pass round the eyes (lids, brow, the fur between them)
+        region = np.zeros(len(V), bool)
+        for e in eyes.values():
+            region |= np.linalg.norm(V - np.asarray(e["centre"]), axis=1) < e["radius"] + step["eyes_only_reach"]
+    rid = np.nonzero(region)[0]
+    A = avg_op(rows, cols, deg)
+    Lf = (A - sp.identity(len(V), format="csr"))[rid][:, rid]
+    LtL = (Lf.T @ Lf).tocsc()
+    views = []
+    for v in step["views"]:
+        name = v["view"]
+        if name == "master_front_standing":
+            cam = dict(R=master.R, pos=master.pos, f=master.f, c=np.array([master.w / 2, master.h / 2]))
+            mpath = ROOT / step.get("master_mask", "checkpoints/cp3/master_head_outline.png")
+            soft = 7
+        else:
+            c = side_cams[name]
+            cam = dict(R=Rot.from_rotvec(c["rotvec_world_to_cam"]).as_matrix(), pos=np.array(c["camera_position_m"]),
+                       f=c["focal_px"], c=np.array(c["principal_px"]))
+            mpath = ROOT / "checkpoints/cp3/orig_masks" / (Path(c["image"]).stem + ".mask.png")
+            soft = 4
+        mask = np.asarray(Image.open(mpath)) > 0
+        mask = cv2.GaussianBlur(mask.astype(np.float32), (0, 0), soft) > 0.5
+        h, w = mask.shape
+        sd = cv2.distanceTransform((~mask).astype(np.uint8), cv2.DIST_L2, 5) - \
+            cv2.distanceTransform(mask.astype(np.uint8), cv2.DIST_L2, 5)
+        gy, gx = np.gradient(cv2.GaussianBlur(sd, (0, 0), 1.5))
+        excl = np.zeros_like(mask)
+        for x0, y0, x1, y1 in v.get("exclude", []):
+            excl[y0:y1, x0:x1] = True
+        pose = poses.get(name)
+        Rp = np.eye(3) if pose is None else Rot.from_rotvec(pose["rotvec"]).as_matrix()
+        tp = np.zeros(3) if pose is None else np.array(pose["shift_m"])
+        tr = {}
+        if step.get("eye_traces") and eyes:
+            parts = json.loads((ROOT / "checkpoints/cp3/part_traces.json").read_text()).get(name, {})
+            for pn, poly in parts.items():
+                if pn.startswith("eye_") and pn[-1] in eyes:
+                    tm = np.zeros((h, w), np.uint8)
+                    cv2.fillPoly(tm, [np.array(poly, np.int32)], 1)
+                    tr[pn[-1]] = tm > 0
+        views.append(dict(cam=cam, sd=sd, gx=gx, gy=gy, excl=excl, Rp=Rp, tp=tp, w=v.get("weight", 1.0), h=h, wd=w,
+                          traces=tr, name=name))
+    report = []
+    for it in range(step.get("iters", 4)):
+        N = normals(V, F)
+        wsum = np.zeros(len(V))
+        rhs = np.zeros(len(V))
+        report = []
+        for vw in views:
+            cam, Rp, tp = vw["cam"], vw["Rp"], vw["tp"]
+            Vp = V + hw[:, None] * (((V - NECK_PIVOT) @ Rp.T + NECK_PIVOT + tp) - V)
+            Np = N @ Rp.T
+            Xc = (Vp - cam["pos"]) @ cam["R"].T
+            uv = cam["f"] * Xc[:, :2] / Xc[:, 2:3] + cam["c"]
+            h, w = vw["h"], vw["wd"]
+            fnn = np.cross(Vp[F[:, 1]] - Vp[F[:, 0]], Vp[F[:, 2]] - Vp[F[:, 0]])
+            front = np.einsum("ij,ij->i", fnn, cam["pos"] - Vp[F[:, 0]]) > 0
+            sil = np.zeros((h, w), np.uint8)
+            cv2.fillPoly(sil, list(np.round(uv[F[front]]).astype(np.int32)), 1)
+            # the eyes are part of his outline too (from above and in three-
+            # quarter they make the edge themselves)
+            eye_disks = []
+            for e in (eyes or {}).values():
+                cp = (np.asarray(e["centre"]) - NECK_PIVOT) @ Rp.T + NECK_PIVOT + tp
+                Xe = (cp - cam["pos"]) @ cam["R"].T
+                ue = cam["f"] * Xe[:2] / Xe[2] + cam["c"]
+                re_px = cam["f"] * e["radius"] / Xe[2]
+                cv2.circle(sil, (int(round(ue[0])), int(round(ue[1]))), int(round(re_px)), 1, -1)
+                eye_disks.append((cp, e["radius"]))
+            sil = cv2.morphologyEx(sil, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+            ff = sil.copy()
+            cv2.floodFill(ff, np.zeros((h + 2, w + 2), np.uint8), (0, 0), 1)
+            sil = sil | (1 - ff)
+            edge = cv2.dilate(sil, np.ones((3, 3), np.uint8)) - cv2.erode(sil, np.ones((3, 3), np.uint8))
+            near = cv2.dilate(edge, np.ones((7, 7), np.uint8)) > 0
+            vdir = Vp - cam["pos"]
+            vdir /= np.linalg.norm(vdir, axis=1, keepdims=True)
+            ui = np.clip(np.round(uv[:, 0]).astype(int), 0, w - 1)
+            vi = np.clip(np.round(uv[:, 1]).astype(int), 0, h - 1)
+            rim = (np.abs(np.einsum("ij,ij->i", Np, vdir)) < 0.15) & near[vi, ui] & ~vw["excl"][vi, ui] & (hw > 0.3)
+            g = np.stack([vw["gx"][vi, ui], vw["gy"][vi, ui]], 1)
+            g /= np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-6)
+            want = -vw["sd"][vi, ui]  # px, along g
+            eps = 1e-4
+            Xc2 = (Vp + eps * Np - cam["pos"]) @ cam["R"].T
+            uv2 = cam["f"] * Xc2[:, :2] / Xc2[:, 2:3] + cam["c"]
+            lever = np.einsum("ij,ij->i", (uv2 - uv) / eps, g) / 1000  # px per mm
+            ok = rim & (np.abs(lever) > 0.3 * cam["f"] / Xc[:, 2] / 1000)
+            b = np.clip(want / np.where(ok, lever, 1), -step.get("max_mm", 6), step.get("max_mm", 6))
+            wv = vw["w"] * ok
+            wsum += wv
+            rhs += wv * b
+            # where this photo shows his eye, no fur in front of it; where
+            # the eyeball would show but the photo shows fur, fur covers it
+            if vw["traces"]:
+                tv = np.linalg.norm(Vp - cam["pos"], axis=1)
+                facing = np.einsum("ij,ij->i", Np, -vdir) > 0.05
+                cosn = np.maximum(np.einsum("ij,ij->i", Np, -vdir), 0.2)
+                for side, tmask in vw["traces"].items():
+                    e = eyes[side]
+                    cp = (np.asarray(e["centre"]) - NECK_PIVOT) @ Rp.T + NECK_PIVOT + tp
+                    oc = cam["pos"] - cp
+                    bq = np.einsum("ij,j->i", vdir, oc)
+                    disc = bq ** 2 - (oc @ oc - e["radius"] ** 2)
+                    hit = disc > 0
+                    tnear = -bq - np.sqrt(np.maximum(disc, 0))
+                    shown = tmask[vi, ui]
+                    ring = cv2.dilate(tmask.astype(np.uint8), np.ones((25, 25), np.uint8)) > 0
+                    de_ = np.linalg.norm(V - np.asarray(e["centre"]), axis=1)
+                    # fur tucked under the eyeball (inside the opening) is left alone
+                    near_eye = (de_ < e["radius"] + 0.012) & (de_ > e["radius"])
+                    occl = hit & shown & facing & (tv < tnear) & near_eye
+                    cov = hit & ~shown & ring[vi, ui] & (tv > tnear) & near_eye & (hw > 0.3)
+                    we = step.get("eye_weight", 1.0) * vw["w"]
+                    bo = -np.clip((tnear - tv + 0.0004) / cosn * 1000, 0, 4)
+                    bc = np.clip((tv - tnear + 0.0004) / cosn * 1000, 0, 4)
+                    wsum += we * occl + we * cov
+                    rhs += we * occl * bo + we * cov * bc
+            report.append(float(np.mean(np.abs(want[ok]) / (cam["f"] / Xc[ok, 2] / 1000))) if ok.any() else 0.0)
+        # each outline point asks for an offset b (mm) with weight w
+        sel = wsum[rid] > 0
+        bavg = np.where(wsum > 0, rhs / np.maximum(wsum, 1e-9), 0)
+        M = sp.diags(wsum[rid] + 1e-6) + step.get("stiffness", 3e3) * LtL
+        t = np.zeros(len(V))
+        t[rid] = spsolve(M.tocsc(), wsum[rid] * bavg[rid])
+        V = V + (t / 1000 * step.get("rate", 1.0))[:, None] * N
+        print(f"fit_multi iter {it}: mean outline distance per view (mm) " + " ".join(f"{x:.2f}" for x in report),
+              file=sys.stderr)
+    return V
+
+
+def eye_frame(e):
+    """Axis and the two directions round it ('up' turned by the eye's roll),
+    as in eye3d.py."""
+    ax_ = np.asarray(e["axis"], float)
+    ax_ = ax_ / np.linalg.norm(ax_)
+    up = np.array([0, 0, 1.0]) - ax_ * ax_[2]
+    up /= np.linalg.norm(up)
+    sd = np.cross(ax_, up)
+    rl = np.radians(e.get("roll", 0.0) or 0.0)
+    return ax_, np.cos(rl) * up + np.sin(rl) * sd, -np.sin(rl) * up + np.cos(rl) * sd
+
+
+def opening_angle(phi, f):
+    out = np.full_like(phi, np.radians(f[0]))
+    for k in range((len(f) - 1) // 2):
+        out += np.radians(f[1 + 2 * k]) * np.cos((k + 1) * phi) + np.radians(f[2 + 2 * k]) * np.sin((k + 1) * phi)
+    return np.clip(out, np.radians(10), np.radians(120))
+
+
+def smooth_disp(D, w, region, rows, cols, deg, lam):
+    """Smooth displacement field: near D where w > 0, least bending elsewhere,
+    zero outside `region`."""
+    import scipy.sparse as sp
+    from scipy.sparse.linalg import factorized
+    rid = np.nonzero(region)[0]
+    A = avg_op(rows, cols, deg)
+    L = (A - sp.identity(len(w), format="csr"))[rid][:, rid]
+    M = (sp.diags(w[rid] + 1e-7) + lam * (L.T @ L)).tocsc()
+    solve = factorized(M)
+    out = np.zeros_like(D)
+    for k in range(3):
+        out[rid, k] = solve(w[rid] * D[rid, k])
+    return out
+
+
+def fair_shape(V, target, w, region, rows, cols, deg, lam):
+    """Smoothest surface (least bending of the shape) over `region` meeting
+    `target` where w > 0; vertices outside the region stay put."""
+    import scipy.sparse as sp
+    from scipy.sparse.linalg import factorized
+    rid = np.nonzero(region)[0]
+    A = avg_op(rows, cols, deg)
+    Lf = A - sp.identity(len(V), format="csr")
+    Lr, Lo = Lf[rid][:, rid], Lf[rid][:, ~region]
+    M = (sp.diags(w[rid] + 1e-9) + lam * (Lr.T @ Lr)).tocsc()
+    solve = factorized(M)
+    out = V.copy()
+    for k in range(3):
+        out[rid, k] = solve(w[rid] * target[rid, k] - lam * (Lr.T @ (Lo @ V[~region, k])))
+    return out
+
+
 def apply(log, V, F, master):
     V0 = V.copy()
     V = V.copy()
@@ -442,7 +643,8 @@ def apply(log, V, F, master):
             ax_ = np.asarray(st["axis"], float)
             ax_ /= np.linalg.norm(ax_)
             c = np.asarray(st["centre"], float) if "centre" in st else np.asarray(st["front"], float) - ax_ * st["radius"]
-            eyes[st["side"]] = {"centre": c.tolist(), "radius": st["radius"], "axis": ax_.tolist()}
+            eyes[st["side"]] = {"centre": c.tolist(), "radius": st["radius"], "axis": ax_.tolist(),
+                                "opening": st.get("opening"), "roll": st.get("roll", 0.0)}
     for si, step in enumerate(steps):
         if si < start:
             continue
@@ -460,7 +662,8 @@ def apply(log, V, F, master):
                 c = np.asarray(step["centre"], float)
             else:
                 c = np.asarray(step["front"], float) - ax_ * step["radius"]
-            eyes[step["side"]] = {"centre": c.tolist(), "radius": step["radius"], "axis": ax_.tolist()}
+            eyes[step["side"]] = {"centre": c.tolist(), "radius": step["radius"], "axis": ax_.tolist(),
+                                  "opening": step.get("opening"), "roll": step.get("roll", 0.0)}
         elif op == "grab":
             w = falloff(np.linalg.norm(V - at, axis=1), step["radius"])
             V += w[:, None] * np.asarray(step["move"], float)
@@ -669,7 +872,7 @@ def apply(log, V, F, master):
             for e in eyes.values():
                 de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
                 hold |= de < step.get("hold_eyes", 0.003)
-            hold |= master_outline_points(V, F, master)
+            hold |= master_outline_points(V, F, master, px=step.get("outline_px", 4))
             rid = np.nonzero(region)[0]
             Lf = avg_op(rows, cols, deg) - sp.identity(len(V), format="csr")
             Lr = Lf[rid][:, rid]
@@ -719,6 +922,101 @@ def apply(log, V, F, master):
             A_ = avg_op(rows, cols, deg)
             for _ in range(step.get("relax", 6)):
                 V += w[:, None] * (A_ @ V - V)
+        elif op == "lids3d":
+            # Lids from the eye's 3D opening (eye3d.py). On the eyeball,
+            # within the opening, the eye shows: fur there tucks just under
+            # the ball. The lid edge lies on the ball along the opening.
+            # Outside the opening the fur covers the ball (at least `cover`
+            # over it). All met by one smooth displacement (least bending),
+            # fading to nothing `reach` beyond the ball.
+            e = eyes[step["side"]]
+            c, re = np.asarray(e["centre"]), e["radius"]
+            ax_, up, sd = eye_frame(e)
+            cover, tuck = step.get("cover", 0.0006), step.get("tuck", 0.0005)
+            band = np.radians(step.get("band_deg", 4))
+            for _ in range(step.get("rounds", 3)):
+                q = V - c
+                d = np.linalg.norm(q, axis=1)
+                u = q / d[:, None]
+                th = np.arccos(np.clip(u @ ax_, -1, 1))
+                ph = np.arctan2(u @ sd, u @ up)
+                # the lid's edge band sits just outside the fitted opening, so
+                # the eye shows over the whole opening
+                ps = opening_angle(ph, e["opening"]) + np.radians(step.get("shift_deg", 0.0))
+                near = d < re + step.get("near", 0.004)
+                # one smooth rule for the fur's height over the ball, by angle
+                # from the lid edge s = theta - psi: tucked under well inside,
+                # on the ball at the edge, thickening slowly outside; blended
+                # smoothly across +-band (no hard classes, so no stair steps
+                # or pinches at the corners)
+                sang = th - ps
+                x_ = np.clip((sang + band) / (2 * band), 0, 1)
+                sm = x_ * x_ * (3 - 2 * x_)
+                outside_lvl = re + cover + step.get("thick", 0.0) * np.degrees(np.maximum(sang, 0))
+                outside_lvl = np.minimum(outside_lvl, re + step.get("thick_max", 0.004))
+                lvl = (1 - sm) * (re - tuck) + sm * outside_lvl
+                # inside the opening the fur must be at most lvl; outside at least
+                need = np.where(sm < 0.5, d > lvl, d < lvl) & near
+                target = V.copy()
+                target[need] = c + u[need] * lvl[need, None]
+                w = need * (1.0 + 3.0 * (1 - np.abs(2 * sm - 1)))  # firmest at the edge
+                if step.get("drape"):
+                    # the fur round the eye becomes the smoothest surface (least
+                    # bending of the shape itself) that meets the lids, keeps
+                    # off the eyeball and joins the head at `reach`
+                    region = d < re + step["reach"]
+                    w[region & (d > re + step["reach"] - 0.002)] = 10.0
+                    target[w == 10.0] = V[w == 10.0]
+                    Vf = fair_shape(V, target, w, region, rows, cols, deg, step.get("stiffness", 1.0))
+                    # blend into the untouched head gradually toward the edge
+                    # (a hard edge leaves a ring crease)
+                    xb = np.clip((d - re) / step["reach"], 0, 1)
+                    wb = np.clip((1 - xb) / 0.5, 0, 1)
+                    wb = wb * wb * (3 - 2 * wb)
+                    V = V + wb[:, None] * (Vf - V)
+                else:
+                    D = smooth_disp(target - V, w, d < re + step.get("reach", 0.012), rows, cols, deg,
+                                    step.get("stiffness", 30.0))
+                    V = V + D
+        elif op == "fill_dents":
+            # Fur is full and rounded: over the brow and forehead there are no
+            # valleys. The smoothest surface over the area (lids and the
+            # area's edge held) gives, for each point, how far it lies below
+            # that; that depth is itself smoothed (so the fill is one soft
+            # swell, never per-point), kept outward only, and applied along
+            # the surface normal. Repeated a few times.
+            dist0 = np.linalg.norm(V - np.asarray(step["at"]), axis=1)
+            region = dist0 < step["radius"]
+            hold = dist0 > step["radius"] - step.get("edge", 0.004)
+            for e in eyes.values():
+                hold |= np.linalg.norm(V - np.asarray(e["centre"]), axis=1) < e["radius"] + step.get("keep_lid", 0.0015)
+            w = hold.astype(float) * 10.0
+            xb = np.clip(dist0 / step["radius"], 0, 1)
+            wb = np.clip((1 - xb) / 0.5, 0, 1)
+            wb = wb * wb * (3 - 2 * wb)
+            for _ in range(step.get("rounds", 4)):
+                Vf = fair_shape(V, V, w, region, rows, cols, deg, 1.0)
+                N = normals(V, F)
+                depth = np.maximum(np.einsum("ij,ij->i", Vf - V, N), 0) * region * ~hold
+                # one smooth swell
+                Dz = smooth_disp(np.c_[depth, np.zeros((len(V), 2))], (depth > 0).astype(float), region,
+                                 rows, cols, deg, step.get("swell_stiffness", 30.0))[:, 0]
+                Dz = np.maximum(Dz, 0) * wb
+                Ns = smooth_disp(N, np.ones(len(V)), region, rows, cols, deg, 3.0)
+                Ns[~region] = N[~region]
+                Ns /= np.maximum(np.linalg.norm(Ns, axis=1, keepdims=True), 1e-9)
+                V = V + (Dz * step.get("rate", 1.0))[:, None] * Ns
+        elif op == "despike":
+            # single points standing out from their neighbours near the eyes
+            # (mesh-level spikes) are pulled back into the surface
+            A_ = avg_op(rows, cols, deg)
+            near = np.zeros(len(V), bool)
+            for e in eyes.values():
+                near |= np.linalg.norm(V - np.asarray(e["centre"]), axis=1) < e["radius"] + step.get("reach", 0.012)
+            for _ in range(step.get("iters", 10)):
+                lap = A_ @ V - V
+                spk = near & (np.linalg.norm(lap, axis=1) > step.get("limit", 0.0004))
+                V[spk] += 0.6 * lap[spk]
         elif op == "bump":
             # soft swelling (height > 0) or hollow (< 0) along the surface normal
             N = normals(V, F)
@@ -736,6 +1034,8 @@ def apply(log, V, F, master):
             V -= (w * depth)[:, None] * N
         elif op == "fit_outline":
             V = fit_outline(V, F, rows, cols, deg, master, step)
+        elif op == "fit_multi":
+            V = fit_multi(V, F, rows, cols, deg, master, step, eyes)
         elif op == "fit_view":
             V = fit_view(V, F, rows, cols, deg, master, step, eyes)
         elif op == "smooth":
