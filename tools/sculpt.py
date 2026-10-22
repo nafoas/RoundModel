@@ -246,6 +246,152 @@ def master_outline_points(V, F, master, px=4):
     return rim & near[vi, ui]
 
 
+def smooth_field(sel, a, b, region, rows, cols, deg, lam, clip, anchor=None, anchor_w=1.0):
+    """Scalar field t (on `region`, 0 outside) minimising
+    sum_sel (a t - b)^2 + lam |L t|^2, L the mesh Laplacian (neighbour mean
+    minus self); b clipped to +-clip."""
+    import scipy.sparse as sp
+    from scipy.sparse.linalg import spsolve
+    n = len(region)
+    idx = np.full(n, -1)
+    rid = np.nonzero(region)[0]
+    idx[rid] = np.arange(len(rid))
+    A = avg_op(rows, cols, deg)
+    Lfull = A - sp.identity(n, format="csr")
+    L = Lfull[rid][:, rid]  # outside the region t = 0
+    w = np.zeros(len(rid))
+    rhs = np.zeros(len(rid))
+    s_ = sel[rid]
+    aa, bb = a[rid][s_], np.clip(b[rid][s_], -clip, clip)
+    w[s_] = aa * aa
+    rhs[s_] = aa * bb
+    if anchor is not None:
+        w += anchor[rid] * anchor_w
+    M = sp.diags(w + 1e-6) + lam * (L.T @ L)
+    t = np.zeros(n)
+    t[rid] = spsolve(M.tocsc(), rhs)
+    return t
+
+
+def fit_view(V, F, rows, cols, deg, master, step, eyes=None):
+    """Make his outline in another photo match, without touching the master.
+
+    His head is held a little differently in each photo, so the head is first
+    posed as found by head_pose.py (`pose`: rotvec and shift, applied about
+    the neck). Silhouette points in that photo are then moved only along the
+    master camera's line of sight (invisible from the master), by whatever
+    amount shifts them onto his outline there; points where such a move
+    hardly shifts the outline are left alone. Moves are spread smoothly."""
+    import cv2
+    from PIL import Image
+    from scipy.spatial.transform import Rotation as Rot
+    cam = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"][step["view"]]
+    Rc = Rot.from_rotvec(cam["rotvec_world_to_cam"]).as_matrix()
+    cpos, f = np.array(cam["camera_position_m"]), cam["focal_px"]
+    cx, cy = cam["principal_px"]
+    mask = np.asarray(Image.open(ROOT / "checkpoints/cp3/orig_masks" / (Path(cam["image"]).stem + ".mask.png"))) > 0
+    mask = cv2.GaussianBlur(mask.astype(np.float32), (0, 0), step.get("outline_soften_px", 4)) > 0.5
+    h, w = mask.shape
+    sd = cv2.distanceTransform((~mask).astype(np.uint8), cv2.DIST_L2, 5) - \
+        cv2.distanceTransform(mask.astype(np.uint8), cv2.DIST_L2, 5)
+    gy, gx = np.gradient(cv2.GaussianBlur(sd, (0, 0), 1.5))
+    excl = np.zeros_like(mask)
+    for x0, y0, x1, y1 in step.get("exclude", []):
+        excl[y0:y1, x0:x1] = True
+    Rp = Rot.from_rotvec(step["pose"]["rotvec"]).as_matrix()
+    tp = np.array(step["pose"]["shift_m"])
+    hw = head_weight(V)
+    A = avg_op(rows, cols, deg)
+
+    def posed(X):
+        return X + hw[:, None] * (((X - NECK_PIVOT) @ Rp.T + NECK_PIVOT + tp) - X)
+
+    def proj(X):
+        Xc = (X - cpos) @ Rc.T
+        return np.stack([f * Xc[:, 0] / Xc[:, 2] + cx, f * Xc[:, 1] / Xc[:, 2] + cy], 1), Xc[:, 2]
+
+    for _ in range(step.get("iters", 6)):
+        Vp = posed(V)
+        N = normals(Vp, F)
+        view = Vp - cpos
+        view /= np.linalg.norm(view, axis=1, keepdims=True)
+        rim = np.abs(np.einsum("ij,ij->i", N, view)) < 0.12
+        uv, z = proj(Vp)
+        ui = np.clip(np.round(uv[:, 0]).astype(int), 0, w - 1)
+        vi = np.clip(np.round(uv[:, 1]).astype(int), 0, h - 1)
+        rim &= ~excl[vi, ui] & (hw > step.get("min_head", 0.3))
+        if "zones" in step:
+            inz = np.zeros(len(V), bool)
+            for x0, y0, x1, y1 in step["zones"]:
+                inz |= (ui >= x0) & (ui < x1) & (vi >= y0) & (vi < y1)
+            rim &= inz
+        # only rim points on the sculpt's actual outline in this photo (not
+        # rims hidden behind it, e.g. round the eyes)
+        fn = np.cross(Vp[F[:, 1]] - Vp[F[:, 0]], Vp[F[:, 2]] - Vp[F[:, 0]])
+        front = np.einsum("ij,ij->i", fn, cpos - Vp[F[:, 0]]) > 0
+        sil = np.zeros((h, w), np.uint8)
+        cv2.fillPoly(sil, list(np.round(uv[F[front]]).astype(np.int32)), 1)
+        sil = cv2.morphologyEx(sil, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+        # fill enclosed gaps (folded lids leave small holes in the fill that
+        # would otherwise count as outline inside the face)
+        ff = sil.copy()
+        cv2.floodFill(ff, np.zeros((h + 2, w + 2), np.uint8), (0, 0), 1)
+        sil = sil | (1 - ff)
+        edge = cv2.dilate(sil, np.ones((3, 3), np.uint8)) - cv2.erode(sil, np.ones((3, 3), np.uint8))
+        near_edge = cv2.dilate(edge, np.ones((7, 7), np.uint8)) > 0
+        rim &= near_edge[vi, ui]
+        g = np.stack([gx[vi, ui], gy[vi, ui]], 1)
+        g /= np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-6)
+        want = -sd[vi, ui]  # px along g (outward +)
+        # the direction each point may move: along the master's line of
+        # sight (never changes the master view), or, with `free`, for points
+        # well away from the master outline, straight toward/away from this
+        # photo's outline (a point not on the master outline can move
+        # sideways without changing it)
+        mdir = V - master.pos
+        mdir /= np.linalg.norm(mdir, axis=1, keepdims=True)
+        if step.get("free"):
+            Nm = normals(V, F)
+            facing = np.abs(np.einsum("ij,ij->i", Nm, mdir))
+            wf = np.clip((facing - 0.25) / 0.2, 0, 1)
+            # photo in-plane direction g, in the head's own (unposed) frame
+            gw = (g[:, :1] * Rc[0] + g[:, 1:] * Rc[1]) @ Rp
+            gw -= np.einsum("ij,ij->i", gw, view @ Rp)[:, None] * (view @ Rp)
+            gw /= np.maximum(np.linalg.norm(gw, axis=1, keepdims=True), 1e-9)
+            # sign: along mdir as before; for free points pick the photo
+            # direction (move along it changes the outline most)
+            mdir = (1 - wf)[:, None] * mdir * np.sign(np.einsum("ij,ij->i", mdir, gw) + 1e-12)[:, None] + wf[:, None] * gw
+            mdir /= np.maximum(np.linalg.norm(mdir, axis=1, keepdims=True), 1e-9)
+        eps = 1e-4
+        uv2, _ = proj(posed(V + eps * mdir))
+        lever = np.einsum("ij,ij->i", (uv2 - uv) / eps, g)  # px per metre along g
+        full = f / z
+        ok = rim & (np.abs(lever) > step.get("min_lever", 0.35) * full)
+        # one smooth move field over the head (thin plate): as close as it can
+        # get to what the outline points ask for, while bending as little as
+        # possible, so it cannot leave steps or stripes. In mm.
+        # the fur right round each eye (the lids) stays put
+        anchor = None
+        if eyes:
+            anchor = np.zeros(len(V))
+            for e in eyes.values():
+                de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
+                # firm at the lid, fading to free over `hold_eyes` (a hard
+                # edge to the hold leaves a notch where it ends)
+                anchor = np.maximum(anchor, falloff(np.maximum(de, 0), step.get("hold_eyes", 0.012)))
+        t = smooth_field(ok, lever / full, want / (full / 1000), hw > 0.02, rows, cols, deg,
+                         step.get("stiffness", 3e4), step.get("max_want_mm", 8),
+                         anchor=anchor, anchor_w=1.0) / 1000
+        # the move field is smooth; so is the direction field it moves along
+        Ds = (t * step.get("rate", 0.6))[:, None] * mdir
+        if step.get("free"):
+            # directions differ point to point; smooth the moves themselves
+            for _ in range(step.get("move_smooth", 40)):
+                Ds = 0.5 * Ds + 0.5 * (A @ Ds)
+        V = V + Ds
+    return V
+
+
 def apply(log, V, F, master):
     V0 = V.copy()
     V = V.copy()
@@ -288,6 +434,7 @@ def apply(log, V, F, master):
         f = cache_dir / f"{keys[i]}.npy"
         if f.exists():
             V = np.load(f)
+            f.touch()
             start = i + 1
             break
     for st in steps[:start]:
@@ -534,6 +681,44 @@ def apply(log, V, F, master):
             for k in range(3):
                 rhs = wdat * V[rid, k] - step.get("stiffness", 1.0) * (Lr.T @ (Lout @ V[~region, k]))
                 V[rid, k] = spsolve(Mc, rhs)
+        elif op == "lid_fur":
+            # Fur above (hood) and below (cheek) the eye stands out sideways,
+            # along the eye axis: from the front it hides the top and bottom
+            # of the eyeball, from the side the whole round eye still shows
+            # (photos: a tall almond from the front, a full disc side-on).
+            # Thickness `hood` straight above, `cheek` straight below, fading
+            # smoothly toward the front and back corners (|sin|^1.5) and away
+            # from the rim (rises over `rise`, fades over `band`); relaxed after.
+            e = eyes[step["side"]]
+            c, ax_, re = np.asarray(e["centre"]), np.asarray(e["axis"]), e["radius"]
+            up = np.array([0, 0, 1.0]) - ax_ * ax_[2]
+            up /= np.linalg.norm(up)
+            side = np.cross(ax_, up)
+            q = V - c
+            h = q @ ax_
+            perp = q - h[:, None] * ax_
+            rho = np.linalg.norm(perp, axis=1)
+            sphi = (perp @ up) / np.maximum(rho, 1e-9)
+            amp = np.where(sphi > 0, step["hood"], step["cheek"]) * np.abs(sphi) ** 1.5
+            if step.get("brow"):
+                # brow: fur rising toward the nose and up, where the brow
+                # meets the bridge (top-down and master: the eye's front edge
+                # is tucked into fur, not standing proud of a notch)
+                cphi = (perp @ side) * np.sign(side[1]) / np.maximum(rho, 1e-9)  # toward the nose
+                b = np.radians(step.get("brow_deg", 45))
+                cosd = cphi * np.cos(b) + sphi * np.sin(b)
+                amp = amp + step["brow"] * np.maximum(cosd, 0) ** 2
+            rim = step.get("rim", re)
+            dr = rho - rim
+            x = np.clip(dr / step.get("rise", 0.002), 0, 1)
+            radial = x * x * (3 - 2 * x) * falloff(np.maximum(dr - step.get("rise", 0.002), 0), step.get("band", 0.008))
+            radial *= np.clip((h + 0.5 * re) / (0.5 * re), 0, 1)  # only the side of the head the eye is on
+            dh = amp * radial
+            V += dh[:, None] * ax_[None, :]
+            w = 0.5 * (dh > 1e-5)
+            A_ = avg_op(rows, cols, deg)
+            for _ in range(step.get("relax", 6)):
+                V += w[:, None] * (A_ @ V - V)
         elif op == "bump":
             # soft swelling (height > 0) or hollow (< 0) along the surface normal
             N = normals(V, F)
@@ -551,6 +736,8 @@ def apply(log, V, F, master):
             V -= (w * depth)[:, None] * N
         elif op == "fit_outline":
             V = fit_outline(V, F, rows, cols, deg, master, step)
+        elif op == "fit_view":
+            V = fit_view(V, F, rows, cols, deg, master, step, eyes)
         elif op == "smooth":
             w = falloff(np.linalg.norm(V - at, axis=1), step["radius"]) * step.get("strength", 0.5)
             for _ in range(step.get("iters", 3)):
@@ -558,6 +745,10 @@ def apply(log, V, F, master):
         else:
             raise ValueError(op)
         np.save(cache_dir / f"{keys[si]}.npy", V)
+    # keep the cache to the most recently used meshes (each is ~4 MB)
+    files = sorted(cache_dir.glob("*.npy"), key=lambda f: f.stat().st_mtime)
+    for f in files[:-800]:
+        f.unlink(missing_ok=True)
     return V, eyes
 
 

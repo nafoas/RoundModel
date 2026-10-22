@@ -136,14 +136,14 @@
    ],
    "radius": 0.009,
    "axis": [
-    0.9976,
-    0.0698,
-    0.0
+    0.99074,
+    -0.08663,
+    0.10453
    ],
    "centre": [
-    0.02532,
-    0.059,
-    0.12624
+    0.02452,
+    0.06003,
+    0.12544
    ]
   },
   {
@@ -157,14 +157,14 @@
    ],
    "radius": 0.009,
    "axis": [
-    -0.9994,
-    -0.0349,
-    0.0
+    -0.99074,
+    -0.08668,
+    0.10453
    ],
    "centre": [
-    -0.02205,
-    0.06007,
-    0.13291
+    -0.02125,
+    0.05907,
+    0.13211
    ]
   },
   {
@@ -197,17 +197,20 @@
    "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
+   "proud": 0.0074,
    "rim": 0.0084,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
+   "rim_h": 0.0098,
    "rim_v": 0.0082,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim_h": 0.0092
+   }
   },
   {
    "note": "soften the fur around the right eye (no hard creases), then re-open the socket (mirrored)",
@@ -226,17 +229,20 @@
    "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
+   "proud": 0.0074,
    "rim": 0.0084,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
+   "rim_h": 0.0098,
    "rim_v": 0.0082,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim_h": 0.0092
+   }
   },
   {
    "note": "relax the strip between the right eye and the bridge, where the wedge turns most sharply (mirrored); then re-open the socket",
@@ -255,33 +261,39 @@
    "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
+   "proud": 0.0074,
    "rim": 0.0084,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
+   "rim_h": 0.0098,
    "rim_v": 0.0082,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim_h": 0.0092
+   }
   },
   {
    "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
+   "proud": 0.0074,
    "rim": 0.0084,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
+   "rim_h": 0.0098,
    "rim_v": 0.0082,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim_h": 0.0092
+   }
   },
   {
    "note": "fair the forehead and the fur round the eyes: the fairest surface (least bending) that meets the lids, the master outline and the patch edge. Removes the ridge running back from each eye (top of the eye-level wedge) and lets the brow slope smoothly down to the eyes (master: broad, gently sloping forehead)",
@@ -300,17 +312,172 @@
    "note": "re-open both eyes after fairing",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
+   "proud": 0.0074,
    "rim": 0.0084,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
+   "rim_h": 0.0098,
    "rim_v": 0.0082,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim_h": 0.0092
+   }
+  },
+  {
+   "note": "forehead from the right profile: his outline from the crown down to the nose (zone only), head posed as he holds it there; after the eyes are set (the lids held still); the surface moves only along the master camera's line of sight, so the master view is untouched",
+   "op": "fit_view",
+   "view": "sheet_03_right_profile",
+   "pose": {
+    "rotvec": [
+     0.02061,
+     -0.04731,
+     0.05001
+    ],
+    "shift_m": [
+     0.00072,
+     0.0003,
+     -3e-05
+    ]
+   },
+   "zones": [
+    [
+     700,
+     280,
+     1030,
+     600
+    ]
+   ],
+   "exclude": [],
+   "iters": 4,
+   "rate": 1.0,
+   "hold_eyes": 0.012
+  },
+  {
+   "note": "brow above the far eye from the front three-quarter photo (zone only: his outline there bulges past the far eye), head posed as he holds it there; after the eyes are set (the lids held still); the surface moves only along the master camera's line of sight, so the master view is untouched",
+   "op": "fit_view",
+   "view": "sheet_02_front_3q",
+   "pose": {
+    "rotvec": [
+     0.0665,
+     -0.00083,
+     0.07774
+    ],
+    "shift_m": [
+     0.00089,
+     -0.00159,
+     -0.00267
+    ]
+   },
+   "zones": [
+    [
+     150,
+     280,
+     330,
+     520
+    ]
+   ],
+   "exclude": [],
+   "iters": 4,
+   "rate": 1.0,
+   "min_lever": 0.2,
+   "hold_eyes": 0.012
+  },
+  {
+   "note": "sides of the head beside the eyes from the top-down photo (zones only), head posed as he holds it there; after the eyes are set (the lids held still); the surface moves only along the master camera's line of sight, so the master view is untouched",
+   "op": "fit_view",
+   "view": "sheet_09_top_down",
+   "pose": {
+    "rotvec": [
+     -0.09162,
+     0.03946,
+     -0.02844
+    ],
+    "shift_m": [
+     0.00063,
+     0.00149,
+     -0.00312
+    ]
+   },
+   "zones": [
+    [
+     180,
+     850,
+     330,
+     1150
+    ],
+    [
+     690,
+     850,
+     860,
+     1150
+    ]
+   ],
+   "exclude": [],
+   "iters": 4,
+   "rate": 1.0,
+   "min_lever": 0.2,
+   "hold_eyes": 0.012
+  },
+  {
+   "note": "fur above (hood) and below (cheek) each eye stands out sideways: from the front it hides the top and bottom of the eye (master: tall almond), side-on the full round eye shows (profile: 19-20 mm black disc) (mirrored); brow: fur rising front-up of the eye where brow meets bridge",
+   "op": "lid_fur",
+   "side": "R",
+   "hood": 0.0,
+   "cheek": 0.003,
+   "rise": 0.002,
+   "band": 0.008,
+   "mirror": true,
+   "brow": 0.003,
+   "brow_deg": 45
+  },
+  {
+   "note": "smooth the fur at the front corner of the left eye after the zone fits (they sharpen the thin lip there into a flap): the smoothest surface meeting the lid",
+   "op": "fair",
+   "at": [
+    -0.019,
+    0.072,
+    0.13
+   ],
+   "radius": 0.012,
+   "hold_eyes": 0.0015,
+   "stiffness": 1.0,
+   "keep": 1e-08
+  },
+  {
+   "note": "smooth the fur at the front corner of the right eye after the zone fits (they sharpen the thin lip there into a flap): the smoothest surface meeting the lid",
+   "op": "fair",
+   "at": [
+    0.021,
+    0.072,
+    0.13
+   ],
+   "radius": 0.012,
+   "hold_eyes": 0.0015,
+   "stiffness": 1.0,
+   "keep": 1e-08
+  },
+  {
+   "note": "re-open both eyes after the zone fits (re-seats the lids the fits shifted)",
+   "op": "socket",
+   "side": "R",
+   "proud": 0.0074,
+   "rim": 0.0084,
+   "blend": 0.0015,
+   "mirror": true,
+   "rim_h": 0.0098,
+   "rim_v": 0.0082,
+   "edge_band": 1.5,
+   "edge_smooth": 30,
+   "tuck": 0.12,
+   "lids": 1.0,
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim_h": 0.0092
+   }
   },
   {
    "note": "muzzle: one broad rounded mound coming forward around the nose and whisker pads (as in the profile and three-quarter photos)",

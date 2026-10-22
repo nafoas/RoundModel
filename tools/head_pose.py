@@ -23,11 +23,17 @@ from refine_side_cameras import load_obj  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 from sculpt import HEAD_C, NECK_PIVOT as PIVOT, head_weight  # noqa: E402
 # his eye centres (black of the eye) and the ears to leave out, per original
+LANDMARK_W = 0.01
+# eyes help fix the pose (a round head turns without changing its outline),
+# weakly, with large turns penalised, so a wrong eye still shows in the scores
+USE_EYES = True
 MARKS = {
-    "sheet_03_right_profile": {"eyes": {"R": (813, 465)}, "ears": [(480, 160, 700, 420)]},
+    "sheet_03_right_profile": {"eyes": {"R": (814, 465)}, "ears": [(480, 160, 700, 420)]},
     "sheet_07_left_profile": {"eyes": {"L": (370, 410)}, "ears": [(560, 210, 720, 390)]},
-    "sheet_09_top_down": {"eyes": {"R": (350, 990), "L": (672, 1005)}, "ears": [(380, 600, 700, 820)]},
-    "sheet_02_front_3q": {"eyes": {"R": (262, 425), "L": (607, 400)},
+    "sheet_09_top_down": {"eyes": {"R": (346, 990), "L": (679, 1004)}, "points": {"nose_v": ((500, 1222), (545, 748))}, "ears": [(380, 600, 700, 820)]},
+    # the far eye's centre is hidden behind his outline: only the near eye;
+    # "points": photo px -> the same point's master px (on the sculpt)
+    "sheet_02_front_3q": {"eyes": {"L": (610, 405)}, "points": {"nose_v": ((383, 690), (545, 748))},
                           "ears": [(400, 150, 520, 220), (600, 130, 740, 300)]},
 }
 
@@ -42,6 +48,26 @@ def main(d, view, out):
             eyes[st["side"]] = np.array(st["centre"])
     if "L" not in eyes:
         eyes["L"] = eyes["R"] * np.array([-1, 1, 1])
+    # the part of each eyeball that can show: inside the lid opening (the cap
+    # in front of the lid plane). An eye's mark in a photo is the middle of
+    # what shows of it, which for a sideways-facing eye is far from its centre.
+    caps = {}
+    for st in log["steps"]:
+        if st["op"] == "eye":
+            ax = np.asarray(st["axis"], float)
+            ax /= np.linalg.norm(ax)
+            sock = [x for x in log["steps"] if x["op"] == "socket"]
+            proud = sock[-1]["proud"] if sock else 0.003
+            rng = np.random.default_rng(0)
+            P = rng.normal(size=(4000, 3))
+            P /= np.linalg.norm(P, axis=1, keepdims=True)
+            P = P[P @ ax > (st["radius"] - proud) / st["radius"]]
+            caps[st["side"]] = (np.asarray(st["centre"]) + P * st["radius"], P)
+    if MARKS[view].get("points"):
+        from sculpt import Master
+        mst = Master()
+        for k, (_, mpx) in MARKS[view]["points"].items():
+            eyes[k] = mst.hit(V, F, mpx)
     cam = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"][view]
     Rc = R.from_rotvec(cam["rotvec_world_to_cam"]).as_matrix()
     cpos, f = np.array(cam["camera_position_m"]), cam["focal_px"]
@@ -71,6 +97,12 @@ def main(d, view, out):
         t = q[3:] * 0.01
         Vh = (V - PIVOT) @ Rm.T + PIVOT + t
         E = {s: (e - PIVOT) @ Rm.T + PIVOT + t for s, e in eyes.items()}
+        # visible middle of each eye: cap points facing the camera
+        for s_, (P, Nn) in caps.items():
+            Pp = (P - PIVOT) @ Rm.T + PIVOT + t
+            facing = np.einsum("ij,ij->i", Nn @ Rm.T, cpos - Pp) > 0
+            if facing.sum() > 10:
+                E["vis_" + s_] = Pp[facing]
         return V + wt[:, None] * (Vh - V), E
 
     fn0 = None
@@ -92,9 +124,19 @@ def main(d, view, out):
         Vp, E = posed(q)
         s = sil(Vp)
         iou = (s & m & zone).sum() / max(1, ((s | m) & zone).sum())
-        eye_err = np.mean([np.linalg.norm(proj(E[k])[0] - np.array(v)) / px_per_mm
-                           for k, v in marks["eyes"].items()])  # mm
-        c = (1 - iou) + 0.004 * eye_err + 0.001 * np.sum(q ** 2)
+        errs = []
+        for k, v in (marks["eyes"].items() if USE_EYES else []):
+            if "vis_" + k in E:
+                uvv = proj(E["vis_" + k])[0].mean(0)
+            else:
+                uvv = proj(E[k])[0]
+            errs.append(np.linalg.norm(uvv - np.array(v)) / px_per_mm)
+        for k, (px, _) in marks.get("points", {}).items():
+            errs.append(np.linalg.norm(proj(E[k])[0] - np.array(px)) / px_per_mm)
+        eye_err = np.mean(errs) if errs else 0.0  # mm
+        # landmarks (eyes, nose) are the surest thing in a photo: weighted
+        # so 1 mm off costs as much as 2% of outline agreement
+        c = (1 - iou) + LANDMARK_W * eye_err + 0.01 * np.sum(q[:3] ** 2) + 0.01 * np.sum(q[3:] ** 2)
         return (c, iou, eye_err) if parts else c
 
     q0 = np.zeros(6)
