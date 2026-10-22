@@ -1439,5 +1439,66 @@
   "muzzle"
  ],
  "forehead_note": "'forehead' = his outline along the forehead, an open line: in the profiles from the crown behind the ears' front down to where the nose begins; in the front three-quarters the far-side outline from the crown down to the top of the far eye. In the master the forehead faces the camera and its top is hidden by the ears; from above it faces the camera too: neither shows a forehead line.",
- "muzzle_note": "'muzzle' = his outline along the muzzle, an open line: in the profiles from where the nose begins over the nose tip and mouth down to under the chin; from above the front edge of the snout from one cheek round to the other. In the master and three-quarters the muzzle faces the camera and makes no outline."
+ "muzzle_note": "'muzzle' = his outline along the muzzle, an open line: in the profiles from where the nose begins over the nose tip and mouth down to under the chin; from above the front edge of the snout from one cheek round to the other. In the master and three-quarters the muzzle faces the camera and makes no outline.",
+ "points_note": "'points': the same physical point marked in several photos (px). nose_V = where the two nostril arms meet. eye_X_front / eye_X_back = the front (toward the nose) and back ends of the eye opening. brow_fold_X = the upper end of the ridge crease. Eye corners and the brow fold show only side-on, so each is in one profile (plus the back three-quarter for the right eye); they pair across photos only through his left/right mirror symmetry.",
+ "points": {
+  "nose_V": {
+   "master_front_standing": [
+    545,
+    745
+   ],
+   "sheet_02_front_3q": [
+    387,
+    695
+   ],
+   "sheet_08_front_3q_left": [
+    383,
+    685
+   ]
+  },
+  "eye_R_front": {
+   "sheet_03_right_profile": [
+    866,
+    464
+   ],
+   "sheet_04_back_3q_right": [
+    828,
+    366
+   ]
+  },
+  "eye_R_back": {
+   "sheet_03_right_profile": [
+    759,
+    464
+   ],
+   "sheet_04_back_3q_right": [
+    757,
+    372
+   ]
+  },
+  "eye_L_front": {
+   "sheet_07_left_profile": [
+    328,
+    412
+   ]
+  },
+  "eye_L_back": {
+   "sheet_07_left_profile": [
+    400,
+    412
+   ]
+  },
+  "brow_fold_R": {
+   "sheet_03_right_profile": [
+    655,
+    398
+   ]
+  },
+  "brow_fold_L": {
+   "sheet_07_left_profile": [
+    494,
+    415
+   ]
+  }
+ }
 }
