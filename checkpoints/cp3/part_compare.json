@@ -1,0 +1,327 @@
+{
+ "master_front_standing:eye_R": {
+  "size_his_mm": [
+   13.5,
+   7.4
+  ],
+  "size_model_mm": [
+   16.6,
+   7.6
+  ],
+  "tilt_his_deg": 0.6,
+  "tilt_model_deg": 11.8,
+  "centre_offset_mm": [
+   0.2,
+   -1.4
+  ],
+  "shape_overlap": 0.742
+ },
+ "master_front_standing:eye_L": {
+  "size_his_mm": [
+   14.5,
+   6.4
+  ],
+  "size_model_mm": [
+   16.4,
+   7.1
+  ],
+  "tilt_his_deg": -11.7,
+  "tilt_model_deg": -3.4,
+  "centre_offset_mm": [
+   0.2,
+   -1.4
+  ],
+  "shape_overlap": 0.817
+ },
+ "sheet_03_right_profile:eye_R": {
+  "size_his_mm": [
+   22.1,
+   21.2
+  ],
+  "size_model_mm": [
+   18.2,
+   17.6
+  ],
+  "tilt_his_deg": 88.2,
+  "tilt_model_deg": 71.5,
+  "centre_offset_mm": [
+   -2.3,
+   2.0
+  ],
+  "shape_overlap": 0.666
+ },
+ "sheet_03_right_profile:socket_R": {
+  "size_his_mm": [
+   24.7,
+   23.3
+  ],
+  "size_model_mm": [
+   18.2,
+   17.6
+  ],
+  "tilt_his_deg": 77.2,
+  "tilt_model_deg": 71.5,
+  "centre_offset_mm": [
+   -2.3,
+   1.8
+  ],
+  "shape_overlap": 0.549
+ },
+ "sheet_03_right_profile:ridge_R": {
+  "mean_dist_mm": 4.8,
+  "max_dist_mm": 8.5
+ },
+ "sheet_03_right_profile:forehead": {
+  "mean_dist_mm": 5.0,
+  "max_dist_mm": 8.1
+ },
+ "sheet_03_right_profile:muzzle": {
+  "mean_dist_mm": 6.0,
+  "max_dist_mm": 11.5
+ },
+ "sheet_02_front_3q:eye_L": {
+  "size_his_mm": [
+   17.9,
+   11.4
+  ],
+  "size_model_mm": [
+   16.9,
+   9.7
+  ],
+  "tilt_his_deg": -7.0,
+  "tilt_model_deg": -4.2,
+  "centre_offset_mm": [
+   -1.5,
+   -3.0
+  ],
+  "shape_overlap": 0.78
+ },
+ "sheet_02_front_3q:eye_R": {
+  "size_his_mm": [
+   9.1,
+   3.1
+  ],
+  "size_model_mm": [
+   15.3,
+   5.3
+  ],
+  "tilt_his_deg": 10.0,
+  "tilt_model_deg": 11.0,
+  "centre_offset_mm": [
+   -0.4,
+   -0.7
+  ],
+  "shape_overlap": 0.4
+ },
+ "sheet_02_front_3q:socket_L": {
+  "size_his_mm": [
+   19.0,
+   14.0
+  ],
+  "size_model_mm": [
+   16.9,
+   9.7
+  ],
+  "tilt_his_deg": 2.6,
+  "tilt_model_deg": -4.2,
+  "centre_offset_mm": [
+   -1.7,
+   -2.8
+  ],
+  "shape_overlap": 0.586
+ },
+ "sheet_02_front_3q:forehead": {
+  "mean_dist_mm": 0.9,
+  "max_dist_mm": 1.8
+ },
+ "sheet_09_top_down:eye_R": {
+  "size_his_mm": [
+   13.1,
+   4.9
+  ],
+  "size_model_mm": [
+   15.4,
+   5.2
+  ],
+  "tilt_his_deg": -4.1,
+  "tilt_model_deg": -12.1,
+  "centre_offset_mm": [
+   -0.3,
+   2.6
+  ],
+  "shape_overlap": 0.672
+ },
+ "sheet_09_top_down:eye_L": {
+  "size_his_mm": [
+   14.1,
+   6.4
+  ],
+  "size_model_mm": [
+   16.9,
+   7.6
+  ],
+  "tilt_his_deg": -0.2,
+  "tilt_model_deg": 8.0,
+  "centre_offset_mm": [
+   -0.2,
+   0.7
+  ],
+  "shape_overlap": 0.722
+ },
+ "sheet_09_top_down:socket_L": {
+  "size_his_mm": [
+   15.4,
+   7.9
+  ],
+  "size_model_mm": [
+   16.9,
+   7.6
+  ],
+  "tilt_his_deg": -0.9,
+  "tilt_model_deg": 8.0,
+  "centre_offset_mm": [
+   -0.3,
+   0.6
+  ],
+  "shape_overlap": 0.797
+ },
+ "sheet_09_top_down:muzzle": {
+  "mean_dist_mm": 4.5,
+  "max_dist_mm": 6.8
+ },
+ "sheet_07_left_profile:eye_L": {
+  "size_his_mm": [
+   20.5,
+   16.4
+  ],
+  "size_model_mm": [
+   18.3,
+   17.3
+  ],
+  "tilt_his_deg": 2.2,
+  "tilt_model_deg": -24.7,
+  "centre_offset_mm": [
+   -1.1,
+   0.8
+  ],
+  "shape_overlap": 0.882
+ },
+ "sheet_07_left_profile:socket_L": {
+  "size_his_mm": [
+   22.1,
+   19.8
+  ],
+  "size_model_mm": [
+   18.3,
+   17.3
+  ],
+  "tilt_his_deg": -5.6,
+  "tilt_model_deg": -24.7,
+  "centre_offset_mm": [
+   -2.4,
+   0.8
+  ],
+  "shape_overlap": 0.713
+ },
+ "sheet_07_left_profile:ridge_L": {
+  "mean_dist_mm": 4.1,
+  "max_dist_mm": 6.8
+ },
+ "sheet_07_left_profile:forehead": {
+  "mean_dist_mm": 6.8,
+  "max_dist_mm": 13.0
+ },
+ "sheet_07_left_profile:muzzle": {
+  "mean_dist_mm": 5.5,
+  "max_dist_mm": 12.3
+ },
+ "sheet_08_front_3q_left:eye_L": {
+  "size_his_mm": [
+   16.3,
+   11.5
+  ],
+  "size_model_mm": [
+   16.9,
+   9.9
+  ],
+  "tilt_his_deg": -11.5,
+  "tilt_model_deg": -4.7,
+  "centre_offset_mm": [
+   -2.5,
+   -3.8
+  ],
+  "shape_overlap": 0.819
+ },
+ "sheet_08_front_3q_left:eye_R": {
+  "size_his_mm": [
+   7.1,
+   2.9
+  ],
+  "size_model_mm": [
+   15.2,
+   5.1
+  ],
+  "tilt_his_deg": 8.9,
+  "tilt_model_deg": 9.4,
+  "centre_offset_mm": [
+   -0.8,
+   -0.5
+  ],
+  "shape_overlap": 0.294
+ },
+ "sheet_08_front_3q_left:socket_L": {
+  "size_his_mm": [
+   18.4,
+   13.2
+  ],
+  "size_model_mm": [
+   16.9,
+   9.9
+  ],
+  "tilt_his_deg": -2.5,
+  "tilt_model_deg": -4.7,
+  "centre_offset_mm": [
+   -2.6,
+   -3.7
+  ],
+  "shape_overlap": 0.643
+ },
+ "sheet_08_front_3q_left:forehead": {
+  "mean_dist_mm": 1.6,
+  "max_dist_mm": 7.8
+ },
+ "sheet_04_back_3q_right:eye_R": {
+  "size_his_mm": [
+   15.7,
+   14.8
+  ],
+  "size_model_mm": [
+   16.1,
+   8.9
+  ],
+  "tilt_his_deg": 67.4,
+  "tilt_model_deg": -35.7,
+  "centre_offset_mm": [
+   0.6,
+   -0.8
+  ],
+  "shape_overlap": 0.551
+ },
+ "sheet_04_back_3q_right:socket_R": {
+  "size_his_mm": [
+   18.9,
+   16.9
+  ],
+  "size_model_mm": [
+   16.1,
+   8.9
+  ],
+  "tilt_his_deg": 69.4,
+  "tilt_model_deg": -35.7,
+  "centre_offset_mm": [
+   0.7,
+   -1.0
+  ],
+  "shape_overlap": 0.446
+ }
+}
