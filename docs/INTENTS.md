@@ -40,6 +40,11 @@ the end of each step. Do not paraphrase it into something easier.
   nose because he is sniffing there, nose upturned; in the other photos his
   nose points forward. Logically work out how the views fit together given
   what he was doing in each. The owner got what photos he could give.
+- Don't just mechanically observe shapes. For every inconsistency, make a
+  judgement call from what I know about rabbits: is it more likely he shifted
+  his weight, turned, sniffed, his fur folded, or is it an error? The former
+  is much more likely. Look for the reason behind each inconsistency and
+  reason it away with that logic, myself, without being told.
 - Get the parts agreeing with as many angles as possible first; don't hold
   the front rigid. Then make it look like the master while keeping the
   other views agreeing as much as possible.
