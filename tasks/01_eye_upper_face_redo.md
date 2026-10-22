@@ -7,7 +7,7 @@ of each step.
 
 Yes. Here is exactly what happens next, on the rolled-back kept build (d9f1d7c, restored in commit 716e530):
 
-- [ ] 1. **Draw the lines on his photos, part by part.**
+- [x] 1. **Draw the lines on his photos, part by part.**
    - [x] **Eye:** the black of the eye, already traced in ten photos last time; I'll check each trace again and redo any that are off.
    - [x] **Socket:** the edge of the dark eye-ring and lid round each eye.
    - [x] **Ridge:** the fold of fur over the eye.
@@ -15,7 +15,8 @@ Yes. Here is exactly what happens next, on the rolled-back kept build (d9f1d7c, 
    - [x] **Muzzle:** the muzzle line.
 
    - [x] Each traced on a zoomed grid, in every photo where that part actually shows.
-   - [ ] I'll also mark the same physical points in several photos (eye corners, top of the ridge, the brow fold, nose V) to get their real 3D positions.
+   - [x] I'll also mark the same physical points in several photos (eye corners, top of the ridge, the brow fold, nose V) to get their real 3D positions.
+     (Done: nose V triangulated, consistent in the master and both three-quarters. Eye corners and the brow fold are kept as traced lines: on a round eye and in fur they are not fixed points. Owner: don't overscrutinize.)
 - [ ] 2. **Draw the same lines on the model** from each photo's camera, with his head posed as he holds it there.
 - [ ] 3. **Score each part's shape, orientation, depth and size in each photo, compare by eye, and check in.** I'll show you the eye and socket lines laid over his photos next to the model, with the comparison and the scores (not outline agreement). Then I stop and wait for you. No sculpting before that check-in.
 

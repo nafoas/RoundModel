@@ -45,6 +45,9 @@ the end of each step. Do not paraphrase it into something easier.
   his weight, turned, sniffed, his fur folded, or is it an error? The former
   is much more likely. Look for the reason behind each inconsistency and
   reason it away with that logic, myself, without being told.
+- Don't overscrutinize. He is a little round rabbit who looks a bit different
+  from different angles; that is expected and is not something to analyse
+  at length. Spend the effort on making him look like him.
 - Get the parts agreeing with as many angles as possible first; don't hold
   the front rigid. Then make it look like the master while keeping the
   other views agreeing as much as possible.
