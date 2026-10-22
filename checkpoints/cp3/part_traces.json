@@ -378,6 +378,52 @@
     1010,
     590
    ]
+  ],
+  "muzzle": [
+   [
+    997,
+    560
+   ],
+   [
+    1005,
+    580
+   ],
+   [
+    1008,
+    600
+   ],
+   [
+    1000,
+    610
+   ],
+   [
+    998,
+    625
+   ],
+   [
+    998,
+    645
+   ],
+   [
+    995,
+    660
+   ],
+   [
+    985,
+    680
+   ],
+   [
+    972,
+    700
+   ],
+   [
+    950,
+    720
+   ],
+   [
+    927,
+    735
+   ]
   ]
  },
  "sheet_02_front_3q": {
@@ -752,6 +798,60 @@
     666,
     964
    ]
+  ],
+  "muzzle": [
+   [
+    340,
+    1150
+   ],
+   [
+    360,
+    1170
+   ],
+   [
+    390,
+    1200
+   ],
+   [
+    420,
+    1215
+   ],
+   [
+    450,
+    1225
+   ],
+   [
+    480,
+    1232
+   ],
+   [
+    505,
+    1236
+   ],
+   [
+    540,
+    1233
+   ],
+   [
+    570,
+    1228
+   ],
+   [
+    600,
+    1218
+   ],
+   [
+    630,
+    1205
+   ],
+   [
+    660,
+    1190
+   ],
+   [
+    680,
+    1178
+   ]
   ]
  },
  "sheet_07_left_profile": {
@@ -961,6 +1061,48 @@
    [
     185,
     540
+   ]
+  ],
+  "muzzle": [
+   [
+    193,
+    520
+   ],
+   [
+    185,
+    540
+   ],
+   [
+    183,
+    560
+   ],
+   [
+    187,
+    580
+   ],
+   [
+    192,
+    600
+   ],
+   [
+    198,
+    620
+   ],
+   [
+    210,
+    640
+   ],
+   [
+    223,
+    660
+   ],
+   [
+    237,
+    680
+   ],
+   [
+    250,
+    700
    ]
   ]
  },
@@ -1296,5 +1438,6 @@
   "forehead",
   "muzzle"
  ],
- "forehead_note": "'forehead' = his outline along the forehead, an open line: in the profiles from the crown behind the ears' front down to where the nose begins; in the front three-quarters the far-side outline from the crown down to the top of the far eye. In the master the forehead faces the camera and its top is hidden by the ears; from above it faces the camera too: neither shows a forehead line."
+ "forehead_note": "'forehead' = his outline along the forehead, an open line: in the profiles from the crown behind the ears' front down to where the nose begins; in the front three-quarters the far-side outline from the crown down to the top of the far eye. In the master the forehead faces the camera and its top is hidden by the ears; from above it faces the camera too: neither shows a forehead line.",
+ "muzzle_note": "'muzzle' = his outline along the muzzle, an open line: in the profiles from where the nose begins over the nose tip and mouth down to under the chin; from above the front edge of the snout from one cheek round to the other. In the master and three-quarters the muzzle faces the camera and makes no outline."
 }
