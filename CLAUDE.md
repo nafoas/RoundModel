@@ -54,6 +54,24 @@ What to do instead:
   never decide anything and never override what he plainly looks like.
 - This is meant to be a simple modelling task. Don't make it complicated.
 
+## Numbers serve the eye, never the other way round
+
+- A scoring tool is fine only if it measures something real about genuine
+  visual likeness to him, not just patterns and outlines.
+- **"This looks wrong but the number went up" is a betrayal of the task.**
+  If what I see and what a number says disagree, what I see wins. I roll the
+  change back (or keep it) on looks, and say plainly that the number
+  disagreed.
+- Method for every sculpting step:
+  1. Look at his photos (master first) and write two or three plain
+     sentences on what he looks like there and what the model gets wrong.
+  2. Make one change aimed only at that.
+  3. Look at his photo next to the model from the same angle, master first,
+     and write a plain yes or no: does it look more like him? Numbers, if
+     any, come after and only as a minor sanity check.
+  4. Keep it or undo it once. No tinkering loops. One part per turn, then
+     show the owner.
+
 ## Other standing rules (details in docs/INTENTS.md)
 
 - Compare to **him**, his photos, at every step. Not to the previous render,

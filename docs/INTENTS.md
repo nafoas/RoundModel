@@ -15,6 +15,11 @@ together. See CLAUDE.md for the cases I got wrong.
 Written from the owner's own words. Read it before each step, and repeat it at
 the end of each step. Do not paraphrase it into something easier.
 
+**Numbers serve the eye.** Scoring tools are fine only if they measure real
+visual likeness to him, not patterns and outlines. "This looks wrong but the
+number went up" is a major betrayal. Stop, think, listen to the owner and to
+my own judgement: if the look and the number disagree, the look wins.
+
 ## The task (this stage)
 - Start from the kept build (commit d9f1d7c, restored in 716e530).
 - Like the body: draw lines around each part in both his photos and the model,
