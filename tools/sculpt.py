@@ -730,6 +730,104 @@ def apply(log, V, F, master):
                 print(f"brow_contour round {rnd}: {int((wsum > 0).sum())} outline points, "
                       f"mean asked {np.linalg.norm(Dm[wsum > 0], axis=1).mean() * 1000:.2f} mm, "
                       f"max move {np.linalg.norm(Ds, axis=1).max() * 1000:.2f} mm", file=sys.stderr)
+        elif op == "line_contour":
+            # A stretch of his outline in some photos (part_traces lines, e.g.
+            # the forehead): in each photo (head posed as there) the model's
+            # outline points next to his line move sideways in that photo's
+            # picture plane onto his line; all photos combine into one broad
+            # smooth change over `region` (a ball round `at`), the fur round
+            # each eye held.
+            import cv2
+            import scipy.sparse as sp
+            from scipy.sparse.linalg import factorized
+            from scipy.spatial.transform import Rotation as Rot
+            traces = json.loads((ROOT / "checkpoints/cp3/part_traces.json").read_text())
+            sidecams = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"]
+            A_ = avg_op(rows, cols, deg)
+            hw = head_weight(V)
+            d0 = np.linalg.norm(V - np.asarray(step["at"]), axis=1)
+            region = d0 < step["radius"]
+            hold = (d0 > step["radius"] - 0.004).astype(float)
+            for e in eyes.values():
+                hold = np.maximum(hold, (np.linalg.norm(V - np.asarray(e["centre"]), axis=1)
+                                         < e["radius"] + step.get("hold_eyes", 0.003)).astype(float))
+            rid = np.nonzero(region)[0]
+            Lr = (A_ - sp.identity(len(V), format="csr"))[rid][:, rid]
+            for rnd in range(step.get("rounds", 6)):
+                N = normals(V, F)
+                D = np.zeros_like(V)
+                wsum = np.zeros(len(V))
+                for view, vw in step["views"].items():
+                    c_ = sidecams[view]
+                    Rc = Rot.from_rotvec(c_["rotvec_world_to_cam"]).as_matrix()
+                    cpos, f, cc = np.array(c_["camera_position_m"]), c_["focal_px"], np.array(c_["principal_px"])
+                    pp = json.loads((ROOT / f"checkpoints/cp3/head_poses_parts/{view}.json").read_text())
+                    Rp, tp = Rot.from_rotvec(pp["rotvec"]).as_matrix(), np.array(pp["shift_m"])
+                    pv = np.array(pp.get("pivot", NECK_PIVOT))
+                    Vp = V + hw[:, None] * (((V - pv) @ Rp.T + pv + tp) - V)
+                    Np = N @ Rp.T
+                    Xc = (Vp - cpos) @ Rc.T
+                    uv = f * Xc[:, :2] / Xc[:, 2:3] + cc
+                    vdir = Vp - cpos
+                    vdir /= np.linalg.norm(vdir, axis=1, keepdims=True)
+                    rim = np.abs(np.einsum("ij,ij->i", Np, vdir)) < step.get("rim_cos", 0.25)
+                    # only the model's actual outline in this photo
+                    W_, H_ = int(cc[0] * 2) + 400, int(cc[1] * 2) + 400
+                    fn = np.cross(Vp[F[:, 1]] - Vp[F[:, 0]], Vp[F[:, 2]] - Vp[F[:, 0]])
+                    front = np.einsum("ij,ij->i", fn, cpos - Vp[F[:, 0]]) > 0
+                    sil = np.zeros((H_, W_), np.uint8)
+                    cv2.fillPoly(sil, list(np.round(uv[F[front]]).astype(np.int32)), 1)
+                    sil = cv2.morphologyEx(sil, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+                    edge = cv2.dilate(sil, np.ones((3, 3), np.uint8)) - cv2.erode(sil, np.ones((3, 3), np.uint8))
+                    near_edge = cv2.dilate(edge, np.ones((9, 9), np.uint8)) > 0
+                    ui = np.clip(np.round(uv[:, 0]).astype(int), 0, W_ - 1)
+                    vi = np.clip(np.round(uv[:, 1]).astype(int), 0, H_ - 1)
+                    on_outline = rim & near_edge[vi, ui] & region
+                    a_, b_ = vw.get("range", [0, None])
+                    L_ = np.array(traces[view][step["line"]], float)[a_:b_]
+                    # densify his line and find each outline point's nearest
+                    seg = []
+                    for k in range(len(L_) - 1):
+                        n_ = max(2, int(np.linalg.norm(L_[k + 1] - L_[k]) / 2))
+                        seg.append(L_[k] + (L_[k + 1] - L_[k]) * np.linspace(0, 1, n_, endpoint=False)[:, None])
+                    seg.append(L_[-1:])
+                    Ld = np.vstack(seg)
+                    idx = np.nonzero(on_outline)[0]
+                    if len(idx) == 0:
+                        continue
+                    dd = np.linalg.norm(uv[idx, None, :] - Ld[None, :, :], axis=2)
+                    k = np.argmin(dd, axis=1)
+                    dist = dd[np.arange(len(idx)), k]
+                    # not past either end of his line
+                    inner = (k > 0) & (k < len(Ld) - 1) & (dist < vw.get("near_px", 70))
+                    idx, k = idx[inner], k[inner]
+                    move_px = Ld[k] - uv[idx]
+                    mm = Xc[idx, 2] / f
+                    mc = np.c_[move_px * mm[:, None], np.zeros(len(idx))] @ Rc
+                    mw = mc @ Rp
+                    w_ = vw.get("weight", 1.0)
+                    D[idx] += w_ * mw
+                    wsum[idx] += w_
+                if step.get("symmetric"):
+                    # his face is symmetric: each point also takes its mirror
+                    # partner's request (x -> -x)
+                    from scipy.spatial import cKDTree
+                    if rnd == 0 or "mir_idx" not in dir():
+                        mir_idx = cKDTree(V).query(V * np.array([-1, 1, 1]))[1]
+                    Dmir = D[mir_idx] * np.array([-1, 1, 1])
+                    D = D + Dmir
+                    wsum = wsum + wsum[mir_idx]
+                Dm = np.where(wsum[:, None] > 0, D / np.maximum(wsum, 1e-9)[:, None], 0)
+                wt = np.minimum(wsum, 4.0) + 10.0 * hold
+                M_ = (sp.diags(wt[rid] + 1e-7) + step.get("stiffness", 5000.0) * (Lr.T @ Lr)).tocsc()
+                solve = factorized(M_)
+                Ds = np.zeros_like(V)
+                for kk in range(3):
+                    Ds[rid, kk] = solve(wt[rid] * Dm[rid, kk])
+                V = V + Ds * step.get("rate", 0.7)
+                print(f"line_contour {step['line']} round {rnd}: {int((wsum > 0).sum())} outline points, "
+                      f"mean asked {np.linalg.norm(Dm[wsum > 0], axis=1).mean() * 1000:.2f} mm, "
+                      f"max move {np.linalg.norm(Ds, axis=1).max() * 1000:.2f} mm", file=sys.stderr)
         elif op == "eye_ring":
             pass  # recorded here, made in main() from the finished head
         elif op == "bump":
