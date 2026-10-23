@@ -6,6 +6,14 @@ read `docs/INTENTS.md` (the owner's intents, in their words) and the current
 file in `tasks/` (the agreed plan, checked off in order). Re-read both before
 every step and repeat the intents at the end of every step.
 
+**Owner's rule: at the beginning and end of every single command (every tool
+call, not just every task step) I re-read all the method documentation:
+this file, `docs/INTENTS.md` and the `tasks/` files.** A project hook
+(`.claude/hooks/method_reminder.py`, wired in `.claude/settings.json` on
+PreToolUse and PostToolUse for all tools) puts them into my context each
+time. If the hook is not running, I read them myself, every command. It
+costs time; the owner has said that is fine.
+
 ## The lesson I keep failing, and must not fail again
 
 **Prince is a real rabbit, not a statue, and the photos are ordinary photos
