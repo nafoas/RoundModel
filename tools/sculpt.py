@@ -534,6 +534,8 @@ def apply(log, V, F, master):
             for k in range(3):
                 rhs = wdat * V[rid, k] - step.get("stiffness", 1.0) * (Lr.T @ (Lout @ V[~region, k]))
                 V[rid, k] = spsolve(Mc, rhs)
+        elif op == "eye_ring":
+            pass  # recorded here, made in main() from the finished head
         elif op == "bump":
             # soft swelling (height > 0) or hollow (< 0) along the surface normal
             N = normals(V, F)
@@ -592,6 +594,63 @@ def main(log_path, outdir):
         P, Fe = sphere(np.array(e["centre"]), e["radius"])
         write_obj(out / f"eye_{side}.obj", P, Fe)
     np.save(out / "verts.npy", V)
+    # eye-ring: his dark lid margin round each eye (a Dwarf Hotot's ring), the
+    # band of lid just outside the lid opening; written as its own thin mesh so
+    # it renders dark, like his
+    socks = [st for st in log["steps"] if st["op"] == "socket"]
+    for st in log["steps"]:
+        if st["op"] != "eye_ring":
+            continue
+        for side in ("R", "L"):
+            if side not in eyes:
+                continue
+            e = eyes[side]
+            c, re = np.asarray(e["centre"]), e["radius"]
+            ax_ = np.asarray(e["axis"]) / np.linalg.norm(e["axis"])
+            sk = dict(socks[-1])
+            if side == "L":
+                sk.update(sk.get("mirror_overrides", {}))
+            rim = sk["rim"]
+            w = st.get("width_" + side, st["width"])
+            # a smooth band: even angles round the eye, from just inside the
+            # lid edge out to rim + w; each point is placed on the head's
+            # surface by casting from the eye centre outward
+            up = np.array([0, 0, 1.0]) - ax_ * ax_[2]
+            up /= np.linalg.norm(up)
+            sd = np.cross(ax_, up)
+            phis = np.linspace(0, 2 * np.pi, 96, endpoint=False)
+            rhos = np.linspace(rim - st.get("inner", 0.0004), rim + w, 5)
+            near = np.linalg.norm((V[F].mean(1)) - c, axis=1) < re + 0.006
+            A0, B0, C0 = V[F[near, 0]], V[F[near, 1]], V[F[near, 2]]
+            e1, e2 = B0 - A0, C0 - A0
+            P = np.zeros((len(rhos), len(phis), 3))
+            for i, rr in enumerate(rhos):
+                for j, ph in enumerate(phis):
+                    hh = np.sqrt(max(re ** 2 - min(rr, re * 0.999) ** 2, 0))
+                    dvec = ax_ * hh + rr * (np.cos(ph) * up + np.sin(ph) * sd)
+                    dvec /= np.linalg.norm(dvec)
+                    pv = np.cross(dvec, e2)
+                    det = np.einsum("ij,ij->i", e1, pv)
+                    ok = np.abs(det) > 1e-14
+                    inv = np.where(ok, 1 / np.where(ok, det, 1), 0)
+                    s_ = c - A0
+                    u = np.einsum("ij,ij->i", s_, pv) * inv
+                    qq = np.cross(s_, e1)
+                    v_ = (qq @ dvec) * inv
+                    t = np.einsum("ij,ij->i", e2, qq) * inv
+                    hit = ok & (u >= 0) & (v_ >= 0) & (u + v_ <= 1) & (t > re * 0.9)
+                    tt = t[hit].min() if hit.any() else re
+                    # hug the lid: where the fur stands further out than
+                    # `hug`, the ring lies tucked under it, on the eyeball
+                    tt = min(max(tt, re), re + st.get("hug", 0.0015))
+                    P[i, j] = c + dvec * (tt + 0.00012)
+            nr, nphi = P.shape[:2]
+            Fr = []
+            for i in range(nr - 1):
+                for j in range(nphi):
+                    a_, b_ = i * nphi + j, i * nphi + (j + 1) % nphi
+                    Fr += [(a_, b_, a_ + nphi), (b_, b_ + nphi, a_ + nphi)]
+            write_obj(out / f"ring_{side}.obj", P.reshape(-1, 3), np.array(Fr))
 
 
 if __name__ == "__main__":

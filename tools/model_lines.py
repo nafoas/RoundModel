@@ -61,7 +61,16 @@ def main(d, outdir):
     em = mt.nodes.new("ShaderNodeEmission")
     em.inputs["Color"].default_value = (1, 1, 1, 1)
     mt.links.new(em.outputs["Emission"], mt.nodes["Material Output"].inputs["Surface"])
+    ringsV = {p.stem: load_obj(p) for p in sorted(d.glob("ring_*.obj"))}
     eobs = {k: RC.load_mesh(d / f"{k}.obj", colour=(0, 0, 0), roughness=1.0, name=k) for k in eyesV}
+    for k in ringsV:
+        ob = RC.load_mesh(d / f"{k}.obj", name=k)
+        nt = ob.data.materials[0].node_tree
+        em2 = nt.nodes.new("ShaderNodeEmission")
+        em2.inputs["Color"].default_value = (0.25, 0.25, 0.25, 1)  # mid grey: ring
+        nt.links.new(em2.outputs["Emission"], nt.nodes["Material Output"].inputs["Surface"])
+        eobs[k] = ob
+    eyesV.update(ringsV)
     cd = bpy.data.cameras.new("cam")
     cam = bpy.data.objects.new("cam", cd)
     sc.collection.objects.link(cam)
@@ -86,7 +95,10 @@ def main(d, outdir):
         sc.render.filepath = str(tmp)
         bpy.ops.render.render(write_still=True)
         img = np.asarray(Image.open(tmp).convert("RGBA")).astype(np.float32)
-        dark = ((img[..., :3].mean(2) < 80) & (img[..., 3] > 200)).astype(np.uint8)
+        lum_ = img[..., :3].mean(2)
+        black = ((lum_ < 60) & (img[..., 3] > 200)).astype(np.uint8)
+        ringpx = ((lum_ < 200) & (img[..., 3] > 200)).astype(np.uint8)  # eye + ring
+        dark = black
         sil = (img[..., 3] > 127).astype(np.uint8)
         Rc = R.from_rotvec(c["rotvec"]).as_matrix()
         Xc = (Vp - np.asarray(c["pos"])) @ Rc.T
@@ -96,6 +108,7 @@ def main(d, outdir):
             kind = part.split("_")[0]
             P = np.array(poly)
             if kind in ("eye", "socket"):
+                dark = black if kind == "eye" else ringpx
                 # the model's eye region nearest his traced eye
                 x, y, w, h = cv2.boundingRect(P.astype(np.int32))
                 m = max(w, h)

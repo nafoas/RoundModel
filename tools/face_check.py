@@ -82,6 +82,8 @@ def main():
     RC.load_mesh(d / "head.obj")
     for e in sorted(d.glob("eye_*.obj")):
         RC.load_mesh(e, colour=(0.015, 0.012, 0.012), roughness=0.08, name="eye")
+    for e in sorted(d.glob("ring_*.obj")):  # his dark eye-ring (lid margin)
+        RC.load_mesh(e, colour=(0.05, 0.035, 0.03), roughness=0.6, name="ring")
     RC.lights(sc)
     sc.view_settings.exposure = -0.8
     cd = bpy.data.cameras.new("cam")

@@ -26,7 +26,7 @@ def main(d, view, out):
     V, F = load_obj(d / "head.obj")
     hw = head_weight(V)
     write_obj(out / "head.obj", V + hw[:, None] * (((V - NECK_PIVOT) @ Rm.T + NECK_PIVOT + t) - V), F)
-    for e in d.glob("eye_*.obj"):
+    for e in list(d.glob("eye_*.obj")) + list(d.glob("ring_*.obj")):
         Ve, Fe = load_obj(e)
         write_obj(out / e.name, (Ve - NECK_PIVOT) @ Rm.T + NECK_PIVOT + t, Fe)
 
