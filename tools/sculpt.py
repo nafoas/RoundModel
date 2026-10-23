@@ -534,6 +534,96 @@ def apply(log, V, F, master):
             for k in range(3):
                 rhs = wdat * V[rid, k] - step.get("stiffness", 1.0) * (Lr.T @ (Lout @ V[~region, k]))
                 V[rid, k] = spsolve(Mc, rhs)
+        elif op == "brow_cover":
+            # The fold of fur over each eye, from where his photos show eye
+            # and where they don't. In each photo (head posed as there):
+            # fur in front of the eyeball where the photo shows eye moves back
+            # (reveal); fur at the lid behind a part of the eyeball that the
+            # photo does NOT show, but that is next to what it shows, comes
+            # forward over it (cover). One smooth offset along the surface
+            # normal (least bending), only round the eyes, fading to nothing.
+            import cv2
+            import scipy.sparse as sp
+            from scipy.sparse.linalg import factorized
+            from PIL import Image
+            from scipy.spatial.transform import Rotation as Rot
+            traces = json.loads((ROOT / "checkpoints/cp3/part_traces.json").read_text())
+            sidecams = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"]
+            mcam = json.loads((ROOT / "checkpoints/cp2/cameras_fit.json").read_text())["views"]["master_front_standing"]
+            A_ = avg_op(rows, cols, deg)
+            hw = head_weight(V)
+            for _ in range(step.get("rounds", 4)):
+                N = normals(V, F)
+                wsum = np.zeros(len(V))
+                rhs = np.zeros(len(V))
+                region = np.zeros(len(V), bool)
+                for e in eyes.values():
+                    region |= np.linalg.norm(V - np.asarray(e["centre"]), axis=1) < e["radius"] + step.get("reach", 0.014)
+                for view, vw in step["views"].items():
+                    if view == "master_front_standing":
+                        c_ = mcam
+                        Rc = Rot.from_rotvec(c_["rotvec_world_to_cam"]).as_matrix()
+                        cpos, f, cc = np.array(c_["camera_position_m"]), c_["focal_px"], np.array(c_["size"]) / 2
+                        Rp, tp, pv = np.eye(3), np.zeros(3), NECK_PIVOT
+                    else:
+                        c_ = sidecams[view]
+                        Rc = Rot.from_rotvec(c_["rotvec_world_to_cam"]).as_matrix()
+                        cpos, f, cc = np.array(c_["camera_position_m"]), c_["focal_px"], np.array(c_["principal_px"])
+                        pp = json.loads((ROOT / f"checkpoints/cp3/head_poses_parts/{view}.json").read_text())
+                        Rp, tp = Rot.from_rotvec(pp["rotvec"]).as_matrix(), np.array(pp["shift_m"])
+                        pv = np.array(pp.get("pivot", NECK_PIVOT))
+                    Vp = V + hw[:, None] * (((V - pv) @ Rp.T + pv + tp) - V)
+                    Np = N @ Rp.T
+                    Xc = (Vp - cpos) @ Rc.T
+                    uv = f * Xc[:, :2] / Xc[:, 2:3] + cc
+                    vdir = Vp - cpos
+                    tv = np.linalg.norm(vdir, axis=1)
+                    vdir /= tv[:, None]
+                    cosn = np.maximum(np.abs(np.einsum("ij,ij->i", Np, vdir)), 0.25)
+                    for side, e in eyes.items():
+                        poly = traces.get(view, {}).get("eye_" + side)
+                        if poly is None:
+                            continue
+                        P = np.array(poly, np.int32)
+                        x0, y0 = P.min(0) - 60
+                        x1, y1 = P.max(0) + 60
+                        tm = np.zeros((y1 - y0, x1 - x0), np.uint8)
+                        cv2.fillPoly(tm, [P - [x0, y0]], 1)
+                        ring = cv2.dilate(tm, np.ones((2 * vw.get("ring_px", 20) + 1,) * 2, np.uint8))
+                        ui = np.round(uv[:, 0]).astype(int) - x0
+                        vi = np.round(uv[:, 1]).astype(int) - y0
+                        inb = (ui >= 0) & (vi >= 0) & (ui < x1 - x0) & (vi < y1 - y0)
+                        ui, vi = np.clip(ui, 0, x1 - x0 - 1), np.clip(vi, 0, y1 - y0 - 1)
+                        shown = inb & (tm[vi, ui] > 0)
+                        nearring = inb & (ring[vi, ui] > 0)
+                        cp = (np.asarray(e["centre"]) - pv) @ Rp.T + pv + tp
+                        oc = cpos - cp
+                        bq = vdir @ oc
+                        disc = bq ** 2 - (oc @ oc - e["radius"] ** 2)
+                        hit = disc > 0
+                        tnear = -bq - np.sqrt(np.maximum(disc, 0))
+                        de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
+                        local = region & (de > 0.0002) & (de < step.get("reach", 0.014))
+                        m = step.get("margin", 0.0004)
+                        reveal = local & hit & shown & (tv < tnear + m)
+                        cover = local & hit & ~shown & nearring & (tv > tnear - m) & (de < step.get("lid_band", 0.004))
+                        w_ = vw.get("weight", 1.0)
+                        wsum += w_ * reveal + w_ * vw.get("cover_w", 1.0) * cover
+                        rhs += w_ * reveal * (-np.clip((tnear - tv + m) / cosn, 0, 0.006) * 1000)
+                        rhs += w_ * vw.get("cover_w", 1.0) * cover * (np.clip((tv - tnear + m) / cosn, 0, 0.006) * 1000)
+                rid = np.nonzero(region)[0]
+                Lr = (A_ - sp.identity(len(V), format="csr"))[rid][:, rid]
+                edge = np.zeros(len(V))
+                for e in eyes.values():
+                    de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
+                    edge = np.maximum(edge, (de > step.get("reach", 0.014) - 0.002).astype(float))
+                b = np.where(wsum > 0, rhs / np.maximum(wsum, 1e-9), 0)
+                M_ = (sp.diags(wsum[rid] + 10.0 * edge[rid] + 1e-7) + step.get("stiffness", 30.0) * (Lr.T @ Lr)).tocsc()
+                t = np.zeros(len(V))
+                t[rid] = factorized(M_)(wsum[rid] * b[rid])
+                V = V + (t / 1000 * step.get("rate", 1.0))[:, None] * N
+                print(f"brow_cover: reveal/cover points {int((rhs < 0).sum())}/{int((rhs > 0).sum())}, "
+                      f"moves {t.min():.2f}..{t.max():.2f} mm", file=sys.stderr)
         elif op == "eye_ring":
             pass  # recorded here, made in main() from the finished head
         elif op == "bump":
