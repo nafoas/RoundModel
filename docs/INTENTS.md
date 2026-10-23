@@ -1,5 +1,17 @@
 # The owner's intents for this stage (re-read and repeat after every step)
 
+**FIRST, ALWAYS: Prince is a real, living rabbit, not a statue, and his photos
+are ordinary photos, not evidence to audit.** He moves, turns and tilts his
+head, sniffs, loafs, his fur folds; he is not perfectly symmetrical; the
+camera is never in exactly the same place twice (left and right profiles are
+not mirror images; the three-quarter camera is a little lower than the
+master's; from above he is sniffing and looking slightly left). Differences
+between photos are expected: accept the ordinary explanation and move on.
+Never treat them as discrepancies to investigate, never distrust a photo or
+conclude he is deformed, never reconcile per-photo numbers. Look at him,
+judge by eye, make gentle changes toward what the photos plainly show
+together. See CLAUDE.md for the cases I got wrong.
+
 Written from the owner's own words. Read it before each step, and repeat it at
 the end of each step. Do not paraphrase it into something easier.
 
