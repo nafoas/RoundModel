@@ -23,10 +23,12 @@ Yes. Here is exactly what happens next, on the rolled-back kept build (d9f1d7c, 
 **After the check-in, only if you agree:**
 - [x] **The 3D eye:** an eyeball and lid opening fitted to the traces, weighted to the master.
 - [ ] **Then the other parts one at a time:** socket, ridge, forehead, muzzle. Each gets small, local changes. After each one I compare the render to his photo from the same angle and roll it back myself if it isn't closer to him. The other angles get agreeing first without holding the front rigid, then the result is made to look like the master. No deforming the overall head.
-   - [ ] Socket
    - [ ] Ridge
    - [ ] Forehead
+   - [ ] Socket
    - [ ] Muzzle
+
+   (Order changed with the owner's permission: the ridge and forehead come before the socket, because the socket's upper edge is made by the brow. A first socket try, the dark eye-ring, was rolled back.)
 
 All of it follows `docs/INTENTS.md`, which I re-read and repeat at the end of every step. Nothing gets simplified without your explicit permission. If anything is unclear or seems impossible, I stop and ask.
 
