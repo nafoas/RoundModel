@@ -372,6 +372,22 @@
    "height": 0.0025
   },
   {
+   "op": "grab",
+   "note": "upper head: his head stays wide and round above and behind the eyes right up to the ears (master, close-ups 06, 25, 19, 20), so the eyes sit inside the round head instead of on the shoulders of a narrower dome (mirrored)",
+   "at": [
+    0.028,
+    0.04,
+    0.155
+   ],
+   "move": [
+    0.004,
+    0,
+    0
+   ],
+   "radius": 0.024,
+   "mirror": true
+  },
+  {
    "note": "muzzle: one broad rounded mound coming forward around the nose and whisker pads (as in the profile and three-quarter photos); brought in from 5 mm to 3.5 mm so the nose sits on the face arc, not ahead of it",
    "op": "bump",
    "at": {
