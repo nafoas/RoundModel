@@ -890,9 +890,13 @@ def apply(log, V, F, master):
                 fade = np.minimum(fade, x_ * x_ * (3 - 2 * x_))
             radial = np.c_[np.zeros(len(V)), np.cos(th_v), np.sin(th_v)]
             facing = (V[:, 1] > cen[1]) | (V[:, 2] > cen[2])
+            if step.get("along_normal"):
+                # swell outward along the surface (no shearing of sideways-
+                # facing fur, which folds it)
+                radial = normals(V, F)
             V = V + (g_v * lat * fade * facing)[:, None] * radial
             order = np.argsort(S_[:, 0])
-            print("midline_swell gaps (deg, mm): " + " ".join(f"{np.degrees(a):.0f}:{b * 1000:+.1f}" for a, b in S_[order]),
+            print("midline_swell gaps (deg, mm): " + " ".join(f"{np.degrees(a):.0f}:{b * 1000:+.1f}" for a, b, _ in S_[order]),
                   file=sys.stderr)
         elif op == "eye_ring":
             pass  # recorded here, made in main() from the finished head
