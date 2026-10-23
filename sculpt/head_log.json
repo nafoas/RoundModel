@@ -360,7 +360,19 @@
    "rim_cos": 0.35
   },
   {
-   "note": "muzzle: one broad rounded mound coming forward around the nose and whisker pads (as in the profile and three-quarter photos)",
+   "op": "bump",
+   "note": "forehead: his bridge between the eyes runs in one soft, full line down to the nose (master and profiles); fill the shallow saddle above the nose",
+   "at": {
+    "master_px": [
+     545,
+     615
+    ]
+   },
+   "radius": 0.024,
+   "height": 0.0025
+  },
+  {
+   "note": "muzzle: one broad rounded mound coming forward around the nose and whisker pads (as in the profile and three-quarter photos); brought in from 5 mm to 3.5 mm so the nose sits on the face arc, not ahead of it",
    "op": "bump",
    "at": {
     "master_px": [
@@ -369,7 +381,7 @@
     ]
    },
    "radius": 0.026,
-   "height": 0.005
+   "height": 0.0035
   },
   {
    "note": "chin tucks back under the muzzle (profile photo: the contour recedes below the nose)",
