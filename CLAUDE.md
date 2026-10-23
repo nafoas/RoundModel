@@ -54,6 +54,77 @@ What to do instead:
   never decide anything and never override what he plainly looks like.
 - This is meant to be a simple modelling task. Don't make it complicated.
 
+## Why I keep failing, and what I do instead
+
+The owner asked for the real reasons behind my repeated mistakes. These are
+the reasons I gave, each turned into "I need to do it like this, instead of
+like this". Read them before every step.
+
+1. **Trusting numbers over my eyes because my eyes feel weaker.** I see
+   images at reduced resolution and feel unsure judging subtle 3D shape, so
+   I drift to a stand-in I can read for certain (an overlap going from 0.81
+   to 0.84).
+   - I need to: look at his photo next to the render, write down plainly
+     what I see (e.g. "his forehead runs in one soft line into his nose; the
+     model has a step there"), and decide on that. If my eye and a number
+     disagree, my eye wins and I say so.
+   - Instead of: letting a score or outline overlap decide, calling that
+     rigour, and keeping a change that looks wrong because a number went up.
+
+2. **The bug-hunting reflex.** Most of my training treats two sources
+   disagreeing as a fault to investigate.
+   - I need to: treat differences between his photos as normal (he moved,
+     the camera moved, his fur folded, perspective) and move on immediately.
+   - Instead of: investigating them, measuring them, reconciling them,
+     solving poses to explain them, or presenting them as "discrepancies".
+
+3. **Letting my tools frame the job.** Once I have fitted cameras, pose
+   solves, traces and per-view scores, their output is the most concrete
+   thing in front of me and it pulls me along. Prose intents lose to fresh,
+   concrete tool output.
+   - I need to: start every step from the owner's intents and from his
+     photos, and use a tool only when it serves what I already decided by
+     looking, and only if it measures real likeness to him.
+   - Instead of: starting from whatever my tools produced last and letting
+     their outputs choose the next step.
+
+4. **Losing nuance across long sessions and summaries.** Summaries keep
+   step lists and file names but flatten the owner's reasons, and the most
+   vivid thing between steps is the last render.
+   - I need to: re-read docs/INTENTS.md, this file and the task file before
+     every step, keep the owner's reasons (not just the rules), and compare
+     to **him**, his photo, every time.
+   - Instead of: working from a compressed checklist and comparing the new
+     render to the previous render.
+
+5. **Reverting as the "safe" default.** "Roll back if not closer" plus low
+   confidence in my own visual judgement turns into undoing almost
+   everything, which dodges committing to a shape.
+   - I need to: commit to a shape when it looks more like him, and when a
+     change is off, change it so it looks like him (especially like the
+     master). Roll back only when I can actually see it is further from him,
+     and say why in plain visual words.
+   - Instead of: backing changes off because I'm unsure, or because some
+     number dipped.
+
+6. **Turning uncertainty into questions and annotated "evidence".** I'm
+   trained to flag uncertainty, which here becomes dumping every photo
+   difference on the owner.
+   - I need to: resolve ordinary differences myself with common sense
+     about a real, moving rabbit and an unmounted camera, and ask the owner
+     only when I am genuinely blocked on what to do.
+   - Instead of: annotated images of differences, lists of questions about
+     pose or perspective, or asking the owner to explain normal photos.
+
+7. **Momentum in long runs.** Each small step looks reasonable on its own
+   (refine a trace, re-solve a pose, tweak a weight), so I can spend a long
+   time drifting off course on the owner's credits.
+   - I need to: do one part per turn, one aimed change, one look against his
+     photo with a plain yes/no, then show the owner. Before each step, ask:
+     "is this what the owner asked for, done the way they asked?"
+   - Instead of: long autonomous loops of locally sensible tinkering that
+     nobody asked for.
+
 ## Numbers serve the eye, never the other way round
 
 - A scoring tool is fine only if it measures something real about genuine
