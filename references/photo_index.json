@@ -1,0 +1,518 @@
+{
+ "_about": "Every photo of Prince, sorted: what each shows, how he is holding himself, where the camera is, and what it is useful for. Written by eye from contact sheets. Differences between photos are him moving and the camera moving, never discrepancies.",
+ "photos": [
+  {
+   "path": "references/master/master_front_standing.webp",
+   "group": "master",
+   "shows": "whole face, straight on",
+   "his_pose": "standing, looking straight at the camera",
+   "camera": "front, about eye level",
+   "use_for": "everything; the immutable reference",
+   "camera_fitted": true
+  },
+  {
+   "path": "references/sheet_originals/01_front.webp",
+   "group": "sheet",
+   "shows": "whole body from the front",
+   "his_pose": "standing, looking at camera",
+   "camera": "front, a little above eye level",
+   "use_for": "forehead, eyes from front, cheeks, body width",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/02_front_3q.webp",
+   "group": "sheet",
+   "shows": "whole body, three-quarter from his right",
+   "his_pose": "standing, head toward camera",
+   "camera": "front 3/4 right, a little low",
+   "use_for": "forehead, eye, muzzle, cheek (camera fitted)",
+   "camera_fitted": true
+  },
+  {
+   "path": "references/sheet_originals/03_right_profile.webp",
+   "group": "sheet",
+   "shows": "whole body from his right side",
+   "his_pose": "standing, head forward",
+   "camera": "right side, about level",
+   "use_for": "profile line of forehead and nose, eye full circle, ear (camera fitted)",
+   "camera_fitted": true
+  },
+  {
+   "path": "references/sheet_originals/04_back_3q_right.webp",
+   "group": "sheet",
+   "shows": "back three-quarter from his right",
+   "his_pose": "sitting, head forward",
+   "camera": "back 3/4 right",
+   "use_for": "back of head, body (camera fitted)",
+   "camera_fitted": true
+  },
+  {
+   "path": "references/sheet_originals/05_back.webp",
+   "group": "sheet",
+   "shows": "straight from behind",
+   "his_pose": "sitting",
+   "camera": "back",
+   "use_for": "head and body width from behind, ears",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/06_back_3q_left.webp",
+   "group": "sheet",
+   "shows": "back three-quarter from his left",
+   "his_pose": "sitting",
+   "camera": "back 3/4 left",
+   "use_for": "back of head, body",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/07_left_profile.webp",
+   "group": "sheet",
+   "shows": "whole body from his left side",
+   "his_pose": "standing, head held a little higher/back",
+   "camera": "left side, about level",
+   "use_for": "profile line, eye full circle, ear (camera fitted)",
+   "camera_fitted": true
+  },
+  {
+   "path": "references/sheet_originals/08_front_3q_left.webp",
+   "group": "sheet",
+   "shows": "three-quarter from his left",
+   "his_pose": "standing, head toward camera",
+   "camera": "front 3/4 left, a little low",
+   "use_for": "forehead, eye, muzzle (camera fitted)",
+   "camera_fitted": true
+  },
+  {
+   "path": "references/sheet_originals/09_top_down.webp",
+   "group": "sheet",
+   "shows": "from directly above",
+   "his_pose": "lying, sniffing, looking slightly to his left",
+   "camera": "top",
+   "use_for": "forehead width, eye placement from above, muzzle (rotate back to symmetric) (camera fitted)",
+   "camera_fitted": true
+  },
+  {
+   "path": "references/sheet_originals/10_bottom_up.webp",
+   "group": "sheet",
+   "shows": "from underneath (through a clear surface)",
+   "his_pose": "standing",
+   "camera": "below",
+   "use_for": "chin, underside, peets",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/11_looking_up_slight.webp",
+   "group": "sheet",
+   "shows": "front, chin raised a little",
+   "his_pose": "standing, head lifted",
+   "camera": "front, low",
+   "use_for": "chin, underside of muzzle, eye placement with head up",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/12_looking_up_more.webp",
+   "group": "sheet",
+   "shows": "front, chin raised more",
+   "his_pose": "standing, head lifted more",
+   "camera": "front, low",
+   "use_for": "chin, muzzle underside",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/13_looking_down_slight.webp",
+   "group": "sheet",
+   "shows": "front, head lowered",
+   "his_pose": "lying/loafing, head down",
+   "camera": "front, above",
+   "use_for": "forehead and top of head, eye spacing seen from above-front",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/14_looking_down_more.webp",
+   "group": "sheet",
+   "shows": "front, head lowered more",
+   "his_pose": "loafing, head down",
+   "camera": "front, well above",
+   "use_for": "forehead shape from above, eye spacing, ears",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/15_looking_left.webp",
+   "group": "sheet",
+   "shows": "front, head turned to his right (camera-left)",
+   "his_pose": "standing, head turned",
+   "camera": "front",
+   "use_for": "a near-profile of the face from the front camera: forehead/nose line, eye",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/16_looking_right.webp",
+   "group": "sheet",
+   "shows": "front, head turned to his left (camera-right)",
+   "his_pose": "standing, head turned",
+   "camera": "front",
+   "use_for": "near-profile from the other side: forehead/nose line, eye",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/17_from_below_da_boss.webp",
+   "group": "sheet",
+   "shows": "from low in front",
+   "his_pose": "standing, looking up",
+   "camera": "front, very low",
+   "use_for": "chin, muzzle from below, cheeks",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/sheet_originals/18_staring_at_boss.webp",
+   "group": "sheet",
+   "shows": "front",
+   "his_pose": "standing, looking at camera",
+   "camera": "front, a little above",
+   "use_for": "forehead, eyes, face from the front (a second near-master view)",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/01-Eye-Close-Front.png",
+   "group": "closeup",
+   "shows": "his right eye very close, from the front-side",
+   "his_pose": "resting",
+   "camera": "close, front-side",
+   "use_for": "eye shape, lashes, lid edge, the fur above the eye",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/02-Eye-Side-On.png",
+   "group": "closeup",
+   "shows": "head from his left side, close",
+   "his_pose": "resting, head forward",
+   "camera": "left side",
+   "use_for": "eye full circle, forehead and nose line close up",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/03-Eye-From-Rear-Neck.png",
+   "group": "closeup",
+   "shows": "his right eye from behind and above",
+   "his_pose": "resting",
+   "camera": "behind-side, above",
+   "use_for": "how far the eye bulges from the head, back of the brow",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/04-Eye-Looking-Down.png",
+   "group": "closeup",
+   "shows": "his right eye from above",
+   "his_pose": "resting",
+   "camera": "above, close",
+   "use_for": "brow over the eye, how the forehead covers the top of the eye",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/05-Eye-Looking-Up.png",
+   "group": "closeup",
+   "shows": "his right eye from below",
+   "his_pose": "resting",
+   "camera": "below, close",
+   "use_for": "lower lid, cheek under the eye",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/06-Eyes-and-Bridge-Depth.png",
+   "group": "closeup",
+   "shows": "face straight on, close",
+   "his_pose": "looking at camera",
+   "camera": "front, close, about eye level",
+   "use_for": "forehead, bridge between the eyes, how much of the eyes shows from the front",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/07-Head-45-Degrees.png",
+   "group": "closeup",
+   "shows": "whole body, 3/4 from his right",
+   "his_pose": "standing, head turned toward camera",
+   "camera": "front 3/4 right",
+   "use_for": "forehead, eye, cheek, muzzle",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/08-Head-Side-Profile.png",
+   "group": "closeup",
+   "shows": "whole body from his right side",
+   "his_pose": "loafing, head forward",
+   "camera": "right side, about level",
+   "use_for": "profile line of forehead and nose, eye, ear",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/09-Head-120-Degrees.png",
+   "group": "closeup",
+   "shows": "from behind and to one side",
+   "his_pose": "loafing",
+   "camera": "back 3/4",
+   "use_for": "back of the head, ears, eye seen from behind",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/10-Whole-Facial-Contour-Side-Depth.png",
+   "group": "closeup",
+   "shows": "head and body from his right side, closer",
+   "his_pose": "loafing, head forward",
+   "camera": "right side",
+   "use_for": "profile of forehead, bridge and nose; eye; cheek fullness",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/11-Muzzle-From-Above.png",
+   "group": "closeup",
+   "shows": "muzzle and nose from above, close",
+   "his_pose": "resting, nose down",
+   "camera": "above, close",
+   "use_for": "muzzle shape, nose, bridge running into the nose",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/12-Muzzle-From-Below.png",
+   "group": "closeup",
+   "shows": "muzzle and chin from below",
+   "his_pose": "resting",
+   "camera": "below",
+   "use_for": "muzzle underside, mouth, chin",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/13-Tiny-Ears-Side.png",
+   "group": "closeup",
+   "shows": "ears from behind-side",
+   "his_pose": "resting",
+   "camera": "behind, above",
+   "use_for": "ears, top of the head",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/14-Tiny-Ears-Top.png",
+   "group": "closeup",
+   "shows": "top of head and ears from behind, eyes showing",
+   "his_pose": "resting",
+   "camera": "behind, above",
+   "use_for": "top of head, forehead width from behind, ears, eye bulge",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/15-Tiny-Ear-Outward-Fold.png",
+   "group": "closeup",
+   "shows": "one ear close, from behind-side",
+   "his_pose": "resting",
+   "camera": "behind-side",
+   "use_for": "ear fold",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/16-Between-Peets-Up-to-Chin.png",
+   "group": "closeup",
+   "shows": "chin and chest from below-front",
+   "his_pose": "standing",
+   "camera": "front, very low",
+   "use_for": "chin, bib, front peets",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/17-Source-Left-Peet-Rear-Side.png",
+   "group": "closeup",
+   "shows": "his left back foot and haunch",
+   "his_pose": "sitting",
+   "camera": "rear-side, low",
+   "use_for": "peet, haunch",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/18-Source-Right-Peet-Rear-Side.png",
+   "group": "closeup",
+   "shows": "his right back foot and haunch",
+   "his_pose": "sitting",
+   "camera": "rear-side, low",
+   "use_for": "peet, haunch",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/19-D4-Approved-Other-Angle.png",
+   "group": "closeup",
+   "shows": "face 3/4 from his right, close",
+   "his_pose": "looking at camera",
+   "camera": "front 3/4 right, close",
+   "use_for": "forehead, eyes, bridge, brow over the eyes",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/20-Other-Eye-D4-Companion.png",
+   "group": "closeup",
+   "shows": "face 3/4 from his left, close",
+   "his_pose": "looking at camera",
+   "camera": "front 3/4 left, close",
+   "use_for": "forehead, eye, bridge, nose",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/21-Local-Side-Muzzle-Alternate.png",
+   "group": "closeup",
+   "shows": "head from his right side, close",
+   "his_pose": "resting, head forward",
+   "camera": "right side, close",
+   "use_for": "eye full circle, forehead to nose line, cheek, muzzle",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/22-Underbody-Detail-Alternate.png",
+   "group": "closeup",
+   "shows": "underside between the front legs",
+   "his_pose": "standing",
+   "camera": "below-front",
+   "use_for": "chest, underside",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/23-Source-Left-Peet-Contact-Alternate.png",
+   "group": "closeup",
+   "shows": "left back foot on the floor",
+   "his_pose": "sitting",
+   "camera": "rear-side, low",
+   "use_for": "peet contact",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/24-Source-Right-Peet-Contact-Alternate.png",
+   "group": "closeup",
+   "shows": "right back foot on the floor",
+   "his_pose": "sitting",
+   "camera": "rear-side, low",
+   "use_for": "peet contact",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/25-Frontal-Bridge-Alternate.png",
+   "group": "closeup",
+   "shows": "face straight on, close",
+   "his_pose": "looking at camera",
+   "camera": "front, close, about eye level",
+   "use_for": "forehead, bridge, how much eye shows from the front, cheeks",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/26-Wide-Rear-Head-Alternate.png",
+   "group": "closeup",
+   "shows": "back of head from behind and to one side",
+   "his_pose": "loafing",
+   "camera": "back 3/4",
+   "use_for": "back of head, ears, eye from behind",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/closeups/27-Low-Frontal-Muzzle-Alternate.png",
+   "group": "closeup",
+   "shows": "muzzle and nose from the front, low and close",
+   "his_pose": "resting",
+   "camera": "front, low, close",
+   "use_for": "nose, mouth, muzzle width",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/back.webp",
+   "group": "edited",
+   "shows": "straight from behind",
+   "his_pose": "sitting",
+   "camera": "front-ish",
+   "use_for": "body from behind",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/back_3q_left_high.webp",
+   "group": "edited",
+   "shows": "back 3/4 left, high",
+   "his_pose": "sitting",
+   "camera": "front-ish",
+   "use_for": "back of head, body",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/front_3q_left_toddle.webp",
+   "group": "edited",
+   "shows": "front 3/4 left",
+   "his_pose": "mid-toddle, head turned",
+   "camera": "front-ish",
+   "use_for": "face 3/4, eye, muzzle, toddle pose",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/front_blink.webp",
+   "group": "edited",
+   "shows": "front",
+   "his_pose": "standing, blinking",
+   "camera": "front-ish",
+   "use_for": "forehead and brow with eyes closed (lid shape)",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/front_head_lifted.webp",
+   "group": "edited",
+   "shows": "front",
+   "his_pose": "standing, head lifted",
+   "camera": "front-ish",
+   "use_for": "face from the front, head up",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/front_head_lowered.webp",
+   "group": "edited",
+   "shows": "front",
+   "his_pose": "standing, head lowered",
+   "camera": "front-ish",
+   "use_for": "forehead from the front, head down",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/front_loaf.webp",
+   "group": "edited",
+   "shows": "front",
+   "his_pose": "loafing",
+   "camera": "front-ish",
+   "use_for": "face and body from the front in a loaf",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/front_peet_lift_left.webp",
+   "group": "edited",
+   "shows": "front",
+   "his_pose": "standing, left peet lifted",
+   "camera": "front-ish",
+   "use_for": "face from the front, toddle",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/front_peet_lift_right.webp",
+   "group": "edited",
+   "shows": "front",
+   "his_pose": "standing, right peet lifted",
+   "camera": "front-ish",
+   "use_for": "face from the front, toddle",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/head_turn_left_mouth_closed.webp",
+   "group": "edited",
+   "shows": "front",
+   "his_pose": "head turned slightly",
+   "camera": "front-ish",
+   "use_for": "face from the front, turned",
+   "camera_fitted": false
+  },
+  {
+   "path": "references/edited/head_turn_right_mouth_open.webp",
+   "group": "edited",
+   "shows": "front",
+   "his_pose": "head turned to his right, mouth open",
+   "camera": "front-ish",
+   "use_for": "near-profile of face from the front, muzzle",
+   "camera_fitted": false
+  }
+ ]
+}

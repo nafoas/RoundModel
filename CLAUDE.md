@@ -6,13 +6,14 @@ read `docs/INTENTS.md` (the owner's intents, in their words) and the current
 file in `tasks/` (the agreed plan, checked off in order). Re-read both before
 every step and repeat the intents at the end of every step.
 
-**Owner's rule: at the beginning and end of every single command (every tool
-call, not just every task step) I re-read all the method documentation:
-this file, `docs/INTENTS.md` and the `tasks/` files.** A project hook
-(`.claude/hooks/method_reminder.py`, wired in `.claude/settings.json` on
-PreToolUse and PostToolUse for all tools) puts them into my context each
-time. If the hook is not running, I read them myself, every command. It
-costs time; the owner has said that is fine.
+**Re-read the method documentation (this file, `docs/INTENTS.md`, the
+`tasks/` files) at every milestone.** The owner will also say so at the start
+of each message. (A hook that injected them on every command was abandoned:
+it made the website flag commands.)
+
+**Use all of his photos, not just the same five or six.** They are sorted in
+`docs/PHOTOS.md` and `references/photo_index.json` (master, the 18-photo
+sheet, 27 close-ups, 11 edited), listed by which part each shows best.
 
 ## The lesson I keep failing, and must not fail again
 

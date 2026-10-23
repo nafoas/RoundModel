@@ -26,6 +26,7 @@ Yes. Here is exactly what happens next, on the rolled-back kept build (d9f1d7c, 
    - [x] Ridge
      (Brow fur in front of each eye now bounds his visible eye in the master, three-quarters and top-down; the profile still shows the whole eye. His crease behind the eye in the profiles is a fur fold and is not sculpted.)
    - [ ] Forehead
+     (First pass kept: bridge filled, nose brought onto one soft arc. Owner: his eyes look very, very big, far bigger than in the master, because the forehead isn't shaped well yet; genuinely make it look like him. Use the whole photo set (docs/PHOTOS.md), not just the same five or six angles.)
    - [ ] Socket
    - [ ] Muzzle
      (Owner: in the top-down photo he is looking slightly to his left, which is the only reason his muzzle looks lopsided from above. Rotate that photo back into symmetry, then trace his muzzle's exact shape from it; small imperfections are fine, he is a living creature.)
