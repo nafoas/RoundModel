@@ -624,6 +624,112 @@ def apply(log, V, F, master):
                 V = V + (t / 1000 * step.get("rate", 1.0))[:, None] * N
                 print(f"brow_cover: reveal/cover points {int((rhs < 0).sum())}/{int((rhs > 0).sum())}, "
                       f"moves {t.min():.2f}..{t.max():.2f} mm", file=sys.stderr)
+        elif op == "brow_contour":
+            # The brow and forehead fur standing in front of each eye, seen
+            # edge-on from an angle, is what bounds his visible eye in the
+            # master, three-quarters and top-down (the profile shows the whole
+            # eye, so his lid does not cover it). In each such photo (head
+            # posed as there) the model's outline points in front of the
+            # eyeball are moved sideways in that photo's picture plane onto
+            # the edge of his visible eye; all photos' moves combine into one
+            # smooth local change.
+            import cv2
+            import scipy.sparse as sp
+            from scipy.sparse.linalg import factorized
+            from scipy.spatial.transform import Rotation as Rot
+            traces = json.loads((ROOT / "checkpoints/cp3/part_traces.json").read_text())
+            sidecams = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"]
+            mcam = json.loads((ROOT / "checkpoints/cp2/cameras_fit.json").read_text())["views"]["master_front_standing"]
+            A_ = avg_op(rows, cols, deg)
+            hw = head_weight(V)
+            reach = step.get("reach", 0.016)
+            region = np.zeros(len(V), bool)
+            for e in eyes.values():
+                region |= np.linalg.norm(V - np.asarray(e["centre"]), axis=1) < e["radius"] + reach
+            rid = np.nonzero(region)[0]
+            Lr = (A_ - sp.identity(len(V), format="csr"))[rid][:, rid]
+            edge = np.zeros(len(V))
+            for e in eyes.values():
+                de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
+                edge = np.maximum(edge, ((de > reach - 0.003) & (de < reach)).astype(float))
+            for rnd in range(step.get("rounds", 5)):
+                N = normals(V, F)
+                D = np.zeros_like(V)
+                wsum = np.zeros(len(V))
+                for view, vw in step["views"].items():
+                    if view == "master_front_standing":
+                        Rc = Rot.from_rotvec(mcam["rotvec_world_to_cam"]).as_matrix()
+                        cpos, f, cc = np.array(mcam["camera_position_m"]), mcam["focal_px"], np.array(mcam["size"]) / 2
+                        Rp, tp, pv = np.eye(3), np.zeros(3), NECK_PIVOT
+                    else:
+                        c_ = sidecams[view]
+                        Rc = Rot.from_rotvec(c_["rotvec_world_to_cam"]).as_matrix()
+                        cpos, f, cc = np.array(c_["camera_position_m"]), c_["focal_px"], np.array(c_["principal_px"])
+                        pp = json.loads((ROOT / f"checkpoints/cp3/head_poses_parts/{view}.json").read_text())
+                        Rp, tp = Rot.from_rotvec(pp["rotvec"]).as_matrix(), np.array(pp["shift_m"])
+                        pv = np.array(pp.get("pivot", NECK_PIVOT))
+                    Vp = V + hw[:, None] * (((V - pv) @ Rp.T + pv + tp) - V)
+                    Np = N @ Rp.T
+                    Xc = (Vp - cpos) @ Rc.T
+                    uv = f * Xc[:, :2] / Xc[:, 2:3] + cc
+                    vdir = Vp - cpos
+                    tv = np.linalg.norm(vdir, axis=1)
+                    vdir /= tv[:, None]
+                    rim = np.abs(np.einsum("ij,ij->i", Np, vdir)) < step.get("rim_cos", 0.2)
+                    for side, e in eyes.items():
+                        poly = traces.get(view, {}).get("eye_" + side)
+                        if poly is None:
+                            continue
+                        P = np.array(poly, np.int32)
+                        x0, y0 = P.min(0) - 80
+                        x1, y1 = P.max(0) + 80
+                        W_, H_ = x1 - x0, y1 - y0
+                        tm = np.zeros((H_, W_), np.uint8)
+                        cv2.fillPoly(tm, [P - [x0, y0]], 1)
+                        sdist = (cv2.distanceTransform(1 - tm, cv2.DIST_L2, 5)
+                                 - cv2.distanceTransform(tm, cv2.DIST_L2, 5))  # + outside his eye
+                        gy, gx = np.gradient(cv2.GaussianBlur(sdist, (0, 0), 2))
+                        cp = (np.asarray(e["centre"]) - pv) @ Rp.T + pv + tp
+                        oc = cpos - cp
+                        bq = vdir @ oc
+                        disc = bq ** 2 - (oc @ oc - e["radius"] ** 2)
+                        tnear = -bq - np.sqrt(np.maximum(disc, 0))
+                        # the eyeball's disc in this photo (where an outline point
+                        # in front of it bounds what shows of the eye)
+                        Xe = (cp - cpos) @ Rc.T
+                        ue = f * Xe[:2] / Xe[2] + cc
+                        re_px = f * e["radius"] / Xe[2]
+                        ui = np.round(uv[:, 0]).astype(int) - x0
+                        vi = np.round(uv[:, 1]).astype(int) - y0
+                        inb = (ui >= 1) & (vi >= 1) & (ui < W_ - 1) & (vi < H_ - 1)
+                        ui, vi = np.clip(ui, 0, W_ - 1), np.clip(vi, 0, H_ - 1)
+                        in_disc = np.linalg.norm(uv - ue, axis=1) < re_px * 1.05
+                        de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
+                        sel = (region & rim & inb & in_disc & (disc > 0) & (tv < tnear) & (de > 0.0003)
+                               & (de < reach - 0.003))
+                        if not sel.any():
+                            continue
+                        g = np.stack([gx[vi, ui], gy[vi, ui]], 1)
+                        g /= np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-6)
+                        move_px = -sdist[vi, ui][:, None] * g  # onto his eye's edge
+                        move_px = np.clip(move_px, -step.get("max_px", 25), step.get("max_px", 25))
+                        mm = Xc[:, 2] / f  # metres per px at the point
+                        mc = np.c_[move_px * mm[:, None], np.zeros(len(V))] @ Rc  # camera -> world (posed)
+                        mw = mc @ Rp  # posed -> head frame
+                        w_ = vw.get("weight", 1.0)
+                        D[sel] += w_ * mw[sel]
+                        wsum[sel] += w_
+                Dm = np.where(wsum[:, None] > 0, D / np.maximum(wsum, 1e-9)[:, None], 0)
+                wt = np.minimum(wsum, 4.0) + 10.0 * edge
+                M_ = (sp.diags(wt[rid] + 1e-7) + step.get("stiffness", 300.0) * (Lr.T @ Lr)).tocsc()
+                solve = factorized(M_)
+                Ds = np.zeros_like(V)
+                for k in range(3):
+                    Ds[rid, k] = solve(wt[rid] * Dm[rid, k])
+                V = V + Ds * step.get("rate", 0.7)
+                print(f"brow_contour round {rnd}: {int((wsum > 0).sum())} outline points, "
+                      f"mean asked {np.linalg.norm(Dm[wsum > 0], axis=1).mean() * 1000:.2f} mm, "
+                      f"max move {np.linalg.norm(Ds, axis=1).max() * 1000:.2f} mm", file=sys.stderr)
         elif op == "eye_ring":
             pass  # recorded here, made in main() from the finished head
         elif op == "bump":

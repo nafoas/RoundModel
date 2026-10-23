@@ -23,7 +23,8 @@ Yes. Here is exactly what happens next, on the rolled-back kept build (d9f1d7c, 
 **After the check-in, only if you agree:**
 - [x] **The 3D eye:** an eyeball and lid opening fitted to the traces, weighted to the master.
 - [ ] **Then the other parts one at a time:** socket, ridge, forehead, muzzle. Each gets small, local changes. After each one I compare the render to his photo from the same angle and roll it back myself if it isn't closer to him. The other angles get agreeing first without holding the front rigid, then the result is made to look like the master. No deforming the overall head.
-   - [ ] Ridge
+   - [x] Ridge
+     (Brow fur in front of each eye now bounds his visible eye in the master, three-quarters and top-down; the profile still shows the whole eye. His crease behind the eye in the profiles is a fur fold and is not sculpted.)
    - [ ] Forehead
    - [ ] Socket
    - [ ] Muzzle

@@ -343,6 +343,23 @@
    }
   },
   {
+   "note": "ridge: his brow and forehead fur, seen edge-on from an angle, bounds his visible eye in the master, three-quarters and top-down; the model's outline in front of each eyeball is moved onto the edge of his visible eye in each of those photos (master double); one smooth local change",
+   "op": "brow_contour",
+   "rounds": 6,
+   "reach": 0.02,
+   "stiffness": 5000.0,
+   "rate": 0.7,
+   "views": {
+    "master_front_standing": {
+     "weight": 2.0
+    },
+    "sheet_02_front_3q": {},
+    "sheet_08_front_3q_left": {},
+    "sheet_09_top_down": {}
+   },
+   "rim_cos": 0.35
+  },
+  {
    "note": "muzzle: one broad rounded mound coming forward around the nose and whisker pads (as in the profile and three-quarter photos)",
    "op": "bump",
    "at": {
