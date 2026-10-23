@@ -126,7 +126,7 @@
    "smooth_iters": 200
   },
   {
-   "note": "right eye from eye3d.py: true size and shape from the profiles (side-on, full circumference); in angled views what shows of his eye lies inside it (the rest is hidden by brow, forehead and cheek fur); head posed per photo from parts that stay put",
+   "note": "right eye from eye3d.py: true size and shape from the profiles (side-on, full circumference); in angled views what shows of his eye lies inside it (the rest is hidden by brow, forehead and cheek fur); head posed per photo from parts that stay put -- set 1.5 mm deeper along its axis (owner: the eyes look far too big from the front; his sit in the round head, not bulging out of it)",
    "op": "eye",
    "side": "R",
    "front": [
@@ -141,13 +141,13 @@
     0.12371
    ],
    "centre": [
-    0.02491,
-    0.05946,
-    0.12646
+    0.02345,
+    0.05919,
+    0.12627
    ]
   },
   {
-   "note": "left eye from eye3d.py: true size and shape from the profiles (side-on, full circumference); in angled views what shows of his eye lies inside it (the rest is hidden by brow, forehead and cheek fur); head posed per photo from parts that stay put",
+   "note": "left eye from eye3d.py: true size and shape from the profiles (side-on, full circumference); in angled views what shows of his eye lies inside it (the rest is hidden by brow, forehead and cheek fur); head posed per photo from parts that stay put -- set 1.5 mm deeper along its axis (owner: the eyes look far too big from the front; his sit in the round head, not bulging out of it)",
    "op": "eye",
    "side": "L",
    "front": [
@@ -162,9 +162,9 @@
     0.07464
    ],
    "centre": [
-    -0.02167,
-    0.06008,
-    0.13146
+    -0.02023,
+    0.05969,
+    0.13135
    ]
   },
   {
@@ -181,10 +181,10 @@
    "mirror": true
   },
   {
-   "note": "seat each eye: the fur around it comes down along the eye axis so the eyeball's equator sits at the fur all round, spread over 25 mm so the face beside the eye is gently narrower, not dished (mirrored)",
+   "note": "seat each eye: the fur around it comes down along the eye axis so the eyeball's equator sits at the fur all round, spread over 25 mm so the face beside the eye is gently narrower, not dished (mirrored); rim_h 1.5 -> 3 mm with the eyes set 1.5 mm deeper, so the fur stays where it was and less eyeball stands out of it",
    "op": "eye_seat",
    "side": "R",
-   "rim_h": 0.0015,
+   "rim_h": 0.003,
    "reach": 0.025,
    "mirror": true,
    "max_drop": 0.006,
