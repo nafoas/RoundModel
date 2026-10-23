@@ -11,6 +11,10 @@ Never treat them as discrepancies to investigate, never distrust a photo or
 conclude he is deformed, never reconcile per-photo numbers. Look at him,
 judge by eye, make gentle changes toward what the photos plainly show
 together. See CLAUDE.md for the cases I got wrong.
+Lighting also differs between shoots (the second-session close-ups and the
+white-background images look different because he is fluffy and white), and
+some images were minimally post-processed (backgrounds removed for privacy):
+still him, and if one looks off I am most likely reading it wrong.
 
 Written from the owner's own words. Read it before each step, and repeat it at
 the end of each step. Do not paraphrase it into something easier.

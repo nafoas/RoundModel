@@ -13,7 +13,13 @@ it made the website flag commands.)
 
 **Use all of his photos, not just the same five or six.** They are sorted in
 `docs/PHOTOS.md` and `references/photo_index.json` (master, the 18-photo
-sheet, 27 close-ups, 11 edited), listed by which part each shows best.
+sheet, 27 close-ups, 11 edited), listed by which part each shows best. Before using them, read "How to read
+these photos" there: lighting differs between shoots (fluffy white fur looks
+different in different light), every photo has its own pose (e.g. he was
+stretching in *Tiny-Ears-Side*, so his profile looks longer and flatter),
+and some were minimally post-processed (backgrounds removed for privacy).
+They are all him; if one looks off, I am far more likely reading it wrong
+than the owner having exported it wrong.
 
 ## The lesson I keep failing, and must not fail again
 

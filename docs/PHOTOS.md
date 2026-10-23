@@ -9,6 +9,22 @@ turns his head, sniffs, loafs, and the camera is never in the same place
 twice. Use them together and judge by eye; never treat differences between
 them as something to investigate. The master always wins.
 
+## How to read these photos (owner's words, keep in mind before using any)
+
+- **Lighting differs between shoots.** All the close-ups from the second
+  session were taken in slightly different lighting, which he can't always
+  control. He is a fluffy white rabbit whose look depends heavily on outside
+  conditions, so if his fur looks different, that is why. The same goes for
+  the white-background images (not the master).
+- **Every photo has its own pose, angle and posture,** even where the
+  subject is similar. Example: in close-up 13 *Tiny-Ears-Side* his profile
+  looks a bit longer and flatter than in the others only because he was
+  stretching.
+- **Some images were minimally post-processed**, e.g. the background removed
+  because it showed parts of the owner's house. They are all still of the
+  same rabbit. If something in one looks off, it is far more likely that I am
+  reading the image wrong than that the owner made a mistake exporting it.
+
 ## The groups
 
 | Group | Where | How many | What it is |
