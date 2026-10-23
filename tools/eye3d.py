@@ -27,12 +27,13 @@ sys.path.insert(0, str(Path(__file__).parent))
 from sculpt import NECK_PIVOT  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-WEIGHT = {"master_front_standing": 2.0}
+WEIGHT = {"master_front_standing": 2.0, "sheet_03_right_profile": 2.0, "sheet_07_left_profile": 2.0}
 PART_W = {("sheet_02_front_3q", "eye_R"): 0.5, ("sheet_08_front_3q_left", "eye_R"): 0.5}
 NF = 2  # Fourier terms of the opening
 # the back three-quarter's head pose is not right yet (its eye falls outside
 # the posed head), so it is left out
 SKIP_VIEWS = {"sheet_04_back_3q_right"}
+SIDE_ON = {"sheet_03_right_profile", "sheet_07_left_profile"}
 
 
 def cameras():
@@ -135,7 +136,13 @@ def main(iters=3000, out=None):
             tm = np.zeros((box[3] - box[1], box[2] - box[0]), np.uint8)
             cv2.fillPoly(tm, [poly - [box[0], box[1]]], 1)
             om = None if outline is None else outline[box[1]:box[3], box[0]:box[2]].astype(np.uint8)
-            jobs.append(dict(view=vn, side=part[-1], box=box, trace=tm, outline=om,
+            ys_, xs_ = np.nonzero(tm)
+            P_ = np.c_[xs_, ys_].astype(float)
+            c_ = P_.mean(0)
+            w_, v_ = np.linalg.eigh(np.cov((P_ - c_).T))
+            minor = v_[:, 0]
+            wt = float(np.ptp((P_ - c_) @ minor)) + 1
+            jobs.append(dict(view=vn, side=part[-1], box=box, trace=tm, outline=om, c=c_, minor=minor, wt=wt,
                              w=WEIGHT.get(vn, 1.0) * PART_W.get((vn, part), 1.0)))
     # start: current sculpt eyes, opening ~ current socket
     x0 = []
@@ -164,7 +171,22 @@ def main(iters=3000, out=None):
             if j["outline"] is not None:
                 m &= j["outline"]
             iou = (m & j["trace"]).sum() / max(1, (m | j["trace"]).sum())
-            tot += j["w"] * (1 - iou)
+            if j["view"] in SIDE_ON:
+                # side-on: the photo shows the whole opening, true size
+                tot += j["w"] * (1 - iou)
+            else:
+                # at an angle: the opening is foreshortened, and his brow and
+                # forehead hide part of it. What shows must lie inside the
+                # model's opening, and the foreshortened width (across the
+                # trace's short axis, which nothing hides) must match.
+                inside = (m & j["trace"]).sum() / max(1, j["trace"].sum())
+                ys, xs = np.nonzero(m)
+                wm = float(np.ptp((np.c_[xs, ys] - j["c"]) @ j["minor"])) + 1 if len(xs) else 0.0
+                # (a far eye is mostly hidden by his far cheek and brow, so
+                # only "what shows lies inside the opening" counts there)
+                # (his brow and cheek fur hide the sides of the eye too, so the
+                # width seen at an angle is not used: only "inside")
+                tot += j["w"] * (1 - inside)
             W += j["w"]
             det[f"{j['view']}:eye_{j['side']}"] = iou
         c = tot / W

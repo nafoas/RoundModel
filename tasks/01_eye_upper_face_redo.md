@@ -21,7 +21,7 @@ Yes. Here is exactly what happens next, on the rolled-back kept build (d9f1d7c, 
 - [x] 3. **Score each part's shape, orientation, depth and size in each photo, compare by eye, and check in.** I'll show you the eye and socket lines laid over his photos next to the model, with the comparison and the scores (not outline agreement). Then I stop and wait for you. No sculpting before that check-in.
 
 **After the check-in, only if you agree:**
-- [ ] **The 3D eye:** an eyeball and lid opening fitted to the traces, weighted to the master.
+- [x] **The 3D eye:** an eyeball and lid opening fitted to the traces, weighted to the master.
 - [ ] **Then the other parts one at a time:** socket, ridge, forehead, muzzle. Each gets small, local changes. After each one I compare the render to his photo from the same angle and roll it back myself if it isn't closer to him. The other angles get agreeing first without holding the front rigid, then the result is made to look like the master. No deforming the overall head.
    - [ ] Socket
    - [ ] Ridge

@@ -126,7 +126,7 @@
    "smooth_iters": 200
   },
   {
-   "note": "right eye: eyeball 18 mm across (profile photo: the black of the eye is 90 x 90 px = 18 mm; the brown eye-ring around it ~22 mm); centre placed by eye_fit",
+   "note": "right eye from eye3d.py: true size and shape from the profiles (side-on, full circumference); in angled views what shows of his eye lies inside it (the rest is hidden by brow, forehead and cheek fur); head posed per photo from parts that stay put",
    "op": "eye",
    "side": "R",
    "front": [
@@ -134,20 +134,20 @@
     0.06306,
     0.12623
    ],
-   "radius": 0.009,
+   "radius": 0.01028,
    "axis": [
-    0.9976,
-    0.0698,
-    0.0
+    0.97533,
+    0.18284,
+    0.12371
    ],
    "centre": [
-    0.02532,
-    0.059,
-    0.12624
+    0.02491,
+    0.05946,
+    0.12646
    ]
   },
   {
-   "note": "left eye: eyeball 18 mm across (profile photo: the black of the eye is 90 x 90 px = 18 mm; the brown eye-ring around it ~22 mm); centre placed by eye_fit",
+   "note": "left eye from eye3d.py: true size and shape from the profiles (side-on, full circumference); in angled views what shows of his eye lies inside it (the rest is hidden by brow, forehead and cheek fur); head posed per photo from parts that stay put",
    "op": "eye",
    "side": "L",
    "front": [
@@ -155,16 +155,16 @@
     0.06306,
     0.13369
    ],
-   "radius": 0.009,
+   "radius": 0.0099,
    "axis": [
-    -0.9994,
-    -0.0349,
-    0.0
+    -0.96209,
+    0.26232,
+    0.07464
    ],
    "centre": [
-    -0.02205,
-    0.06007,
-    0.13291
+    -0.02167,
+    0.06008,
+    0.13146
    ]
   },
   {
@@ -194,20 +194,26 @@
    "back_fade": 0.003
   },
   {
-   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
+   "note": "lid opening from the fitted 3D eye (eye3d.py)",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
-   "rim": 0.0084,
+   "proud": 0.00802,
+   "rim": 0.01003,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
-   "rim_v": 0.0082,
+   "rim_h": 0.01003,
+   "rim_v": 0.01003,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim": 0.0094,
+    "rim_v": 0.00941,
+    "rim_h": 0.00938,
+    "proud": 0.00679
+   }
   },
   {
    "note": "soften the fur around the right eye (no hard creases), then re-open the socket (mirrored)",
@@ -223,20 +229,26 @@
    "mirror": true
   },
   {
-   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
+   "note": "lid opening from the fitted 3D eye (eye3d.py)",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
-   "rim": 0.0084,
+   "proud": 0.00802,
+   "rim": 0.01003,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
-   "rim_v": 0.0082,
+   "rim_h": 0.01003,
+   "rim_v": 0.01003,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim": 0.0094,
+    "rim_v": 0.00941,
+    "rim_h": 0.00938,
+    "proud": 0.00679
+   }
   },
   {
    "note": "relax the strip between the right eye and the bridge, where the wedge turns most sharply (mirrored); then re-open the socket",
@@ -252,36 +264,48 @@
    "mirror": true
   },
   {
-   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
+   "note": "lid opening from the fitted 3D eye (eye3d.py)",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
-   "rim": 0.0084,
+   "proud": 0.00802,
+   "rim": 0.01003,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
-   "rim_v": 0.0082,
+   "rim_h": 0.01003,
+   "rim_v": 0.01003,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim": 0.0094,
+    "rim_v": 0.00941,
+    "rim_h": 0.00938,
+    "proud": 0.00679
+   }
   },
   {
-   "note": "eye opening, round as seen from the side (profile: 18 mm black disc); outside it the fur wraps the eyeball (lids); a soft lower-lid fold in front-below hides the bottom of the eye from the front (master); the top is hidden by the upper lashes, which come with the fur",
+   "note": "lid opening from the fitted 3D eye (eye3d.py)",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
-   "rim": 0.0084,
+   "proud": 0.00802,
+   "rim": 0.01003,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
-   "rim_v": 0.0082,
+   "rim_h": 0.01003,
+   "rim_v": 0.01003,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim": 0.0094,
+    "rim_v": 0.00941,
+    "rim_h": 0.00938,
+    "proud": 0.00679
+   }
   },
   {
    "note": "fair the forehead and the fur round the eyes: the fairest surface (least bending) that meets the lids, the master outline and the patch edge. Removes the ridge running back from each eye (top of the eye-level wedge) and lets the brow slope smoothly down to the eyes (master: broad, gently sloping forehead)",
@@ -297,20 +321,26 @@
    "keep": 1e-08
   },
   {
-   "note": "re-open both eyes after fairing",
+   "note": "lid opening from the fitted 3D eye (eye3d.py)",
    "op": "socket",
    "side": "R",
-   "proud": 0.0068,
-   "rim": 0.0084,
+   "proud": 0.00802,
+   "rim": 0.01003,
    "blend": 0.0015,
    "mirror": true,
-   "rim_h": 0.0086,
-   "rim_v": 0.0082,
+   "rim_h": 0.01003,
+   "rim_v": 0.01003,
    "edge_band": 1.5,
    "edge_smooth": 30,
    "tuck": 0.12,
    "lids": 1.0,
-   "fold_down": 0.0055
+   "fold_down": 0.0055,
+   "mirror_overrides": {
+    "rim": 0.0094,
+    "rim_v": 0.00941,
+    "rim_h": 0.00938,
+    "proud": 0.00679
+   }
   },
   {
    "note": "muzzle: one broad rounded mound coming forward around the nose and whisker pads (as in the profile and three-quarter photos)",
