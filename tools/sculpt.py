@@ -828,6 +828,72 @@ def apply(log, V, F, master):
                 print(f"line_contour {step['line']} round {rnd}: {int((wsum > 0).sum())} outline points, "
                       f"mean asked {np.linalg.norm(Dm[wsum > 0], axis=1).mean() * 1000:.2f} mm, "
                       f"max move {np.linalg.norm(Ds, axis=1).max() * 1000:.2f} mm", file=sys.stderr)
+        elif op == "midline_swell":
+            # His forehead/bridge line in the profiles is his midline. The gap
+            # between his line and the model's midline is measured along the
+            # midline in each profile (head posed as there), averaged over the
+            # profiles, smoothed along the line, and applied as one broad
+            # swelling centred on the midline that fades evenly to the sides
+            # (and away from the eyes), outward from a centre inside the head.
+            import cv2
+            from scipy.spatial.transform import Rotation as Rot
+            traces = json.loads((ROOT / "checkpoints/cp3/part_traces.json").read_text())
+            sidecams = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"]
+            hw = head_weight(V)
+            cen = np.asarray(step["centre"])
+            th_v = np.arctan2(V[:, 2] - cen[2], V[:, 1] - cen[1])
+            mid = np.abs(V[:, 0]) < 0.002
+            samples = []
+            for view, vw in step["views"].items():
+                c_ = sidecams[view]
+                Rc = Rot.from_rotvec(c_["rotvec_world_to_cam"]).as_matrix()
+                cpos, f, cc = np.array(c_["camera_position_m"]), c_["focal_px"], np.array(c_["principal_px"])
+                pp = json.loads((ROOT / f"checkpoints/cp3/head_poses_parts/{view}.json").read_text())
+                Rp, tp = Rot.from_rotvec(pp["rotvec"]).as_matrix(), np.array(pp["shift_m"])
+                pv = np.array(pp.get("pivot", NECK_PIVOT))
+                Vp = V + hw[:, None] * (((V - pv) @ Rp.T + pv + tp) - V)
+                Xc = (Vp - cpos) @ Rc.T
+                uv = f * Xc[:, :2] / Xc[:, 2:3] + cc
+                W_, H_ = int(cc[0] * 2) + 400, int(cc[1] * 2) + 400
+                fn = np.cross(Vp[F[:, 1]] - Vp[F[:, 0]], Vp[F[:, 2]] - Vp[F[:, 0]])
+                front = np.einsum("ij,ij->i", fn, cpos - Vp[F[:, 0]]) > 0
+                sil = np.zeros((H_, W_), np.uint8)
+                cv2.fillPoly(sil, list(np.round(uv[F[front]]).astype(np.int32)), 1)
+                sil = cv2.morphologyEx(sil, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+                sd = cv2.distanceTransform(1 - sil, cv2.DIST_L2, 5) - cv2.distanceTransform(sil, cv2.DIST_L2, 5)
+                a_, b_ = vw.get("range", [0, None])
+                Lp = np.array(traces[view][step["line"]], float)[a_:b_]
+                midi = np.nonzero(mid)[0]
+                for pnt in Lp:
+                    x_, y_ = int(round(pnt[0])), int(round(pnt[1]))
+                    gap_px = sd[y_, x_]  # + : his line outside the model
+                    k = midi[np.argmin(np.linalg.norm(uv[midi] - pnt, axis=1))]
+                    pmm = f / Xc[k, 2] / 1000
+                    samples.append((th_v[k], gap_px / pmm / 1000, vw.get("weight", 1.0)))
+            S_ = np.array(samples)
+            bw = step.get("bandwidth", 0.12)
+
+            def gap_at(th):
+                wk = np.exp(-0.5 * ((th[:, None] - S_[None, :, 0]) / bw) ** 2) * S_[None, :, 2]
+                g = (wk * S_[None, :, 1]).sum(1) / np.maximum(wk.sum(1), 1e-9)
+                # taper beyond the measured stretch
+                lo, hi = S_[:, 0].min(), S_[:, 0].max()
+                t_ = np.clip(np.minimum(th - lo + bw, hi + bw - th) / bw, 0, 1)
+                return np.clip(g, -step.get("max_in", 0.003), step.get("max_out", 0.01)) * t_ * t_ * (3 - 2 * t_)
+
+            g_v = gap_at(th_v)
+            lat = np.exp(-0.5 * (V[:, 0] / step.get("sigma_x", 0.018)) ** 2)
+            fade = np.ones(len(V))
+            for e in eyes.values():
+                de = np.linalg.norm(V - np.asarray(e["centre"]), axis=1) - e["radius"]
+                x_ = np.clip((de - step.get("hold_eyes", 0.003)) / step.get("eye_fade", 0.006), 0, 1)
+                fade = np.minimum(fade, x_ * x_ * (3 - 2 * x_))
+            radial = np.c_[np.zeros(len(V)), np.cos(th_v), np.sin(th_v)]
+            facing = (V[:, 1] > cen[1]) | (V[:, 2] > cen[2])
+            V = V + (g_v * lat * fade * facing)[:, None] * radial
+            order = np.argsort(S_[:, 0])
+            print("midline_swell gaps (deg, mm): " + " ".join(f"{np.degrees(a):.0f}:{b * 1000:+.1f}" for a, b in S_[order]),
+                  file=sys.stderr)
         elif op == "eye_ring":
             pass  # recorded here, made in main() from the finished head
         elif op == "bump":
