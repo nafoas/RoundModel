@@ -1,5 +1,7 @@
 # Tasks: eye and upper-face stage, clean redo
 
+**Superseded by tasks/02_rebuild_from_parts.md** (the model is being rebuilt from his parts; see that file for why).
+
 Verbatim from the plan agreed with the owner. Checked off one by one, in
 order. No step is simplified or skipped without the owner's explicit
 permission. Re-read docs/INTENTS.md before each step and repeat it at the end

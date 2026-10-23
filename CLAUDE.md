@@ -3,7 +3,8 @@
 This repo builds a 3D model of **Prince**, a real, living, very round white
 Dwarf Hotot rabbit, from photos his owner took of him. Before doing anything,
 read `docs/INTENTS.md` (the owner's intents, in their words) and the current
-file in `tasks/` (the agreed plan, checked off in order). Re-read both before
+file in `tasks/` (the agreed plan, checked off in order; the current one is
+`tasks/02_rebuild_from_parts.md`). Re-read both before
 every step and repeat the intents at the end of every step.
 
 **Re-read the method documentation (this file, `docs/INTENTS.md`, the
