@@ -48,6 +48,12 @@ the end of each step. Do not paraphrase it into something easier.
 - Don't overscrutinize. He is a little round rabbit who looks a bit different
   from different angles; that is expected and is not something to analyse
   at length. Spend the effort on making him look like him.
+- **Think about perspective before calling anything a difference.** A part
+  seen at an angle is foreshortened (looks narrower), and parts in front of it
+  hide some of it (in the master and three-quarters his brow ridge and
+  forehead hide part of the eye), without it being any smaller. The profile
+  shows the eye's true full circumference because it looks at it side-on.
+  Work out what each view can actually show before comparing.
 - Get the parts agreeing with as many angles as possible first; don't hold
   the front rigid. Then make it look like the master while keeping the
   other views agreeing as much as possible.
