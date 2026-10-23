@@ -5,16 +5,16 @@
    7.4
   ],
   "size_model_mm": [
-   16.6,
-   7.6
+   19.8,
+   10.4
   ],
   "tilt_his_deg": 0.6,
-  "tilt_model_deg": 11.8,
+  "tilt_model_deg": 18.3,
   "centre_offset_mm": [
-   0.2,
-   -1.4
+   0.9,
+   -2.1
   ],
-  "shape_overlap": 0.742
+  "shape_overlap": 0.518
  },
  "master_front_standing:eye_L": {
   "size_his_mm": [
@@ -22,16 +22,16 @@
    6.4
   ],
   "size_model_mm": [
-   16.4,
-   7.1
+   18.4,
+   10.3
   ],
   "tilt_his_deg": -11.7,
-  "tilt_model_deg": -3.4,
+  "tilt_model_deg": -11.0,
   "centre_offset_mm": [
-   0.2,
-   -1.4
+   -1.0,
+   -0.5
   ],
-  "shape_overlap": 0.817
+  "shape_overlap": 0.519
  },
  "sheet_03_right_profile:eye_R": {
   "size_his_mm": [
@@ -39,16 +39,16 @@
    21.2
   ],
   "size_model_mm": [
-   18.2,
-   17.6
+   20.9,
+   20.6
   ],
   "tilt_his_deg": 88.2,
-  "tilt_model_deg": 71.5,
+  "tilt_model_deg": 10.8,
   "centre_offset_mm": [
-   -2.3,
-   2.0
+   -1.5,
+   1.3
   ],
-  "shape_overlap": 0.666
+  "shape_overlap": 0.887
  },
  "sheet_03_right_profile:socket_R": {
   "size_his_mm": [
@@ -56,24 +56,24 @@
    23.3
   ],
   "size_model_mm": [
-   18.2,
-   17.6
+   21.1,
+   20.8
   ],
   "tilt_his_deg": 77.2,
-  "tilt_model_deg": 71.5,
+  "tilt_model_deg": 16.2,
   "centre_offset_mm": [
-   -2.3,
-   1.8
+   -1.5,
+   1.1
   ],
-  "shape_overlap": 0.549
+  "shape_overlap": 0.745
  },
  "sheet_03_right_profile:ridge_R": {
-  "mean_dist_mm": 4.8,
-  "max_dist_mm": 8.5
+  "mean_dist_mm": 3.5,
+  "max_dist_mm": 6.3
  },
  "sheet_03_right_profile:forehead": {
   "mean_dist_mm": 5.0,
-  "max_dist_mm": 8.1
+  "max_dist_mm": 8.0
  },
  "sheet_03_right_profile:muzzle": {
   "mean_dist_mm": 6.0,
@@ -85,16 +85,16 @@
    11.4
   ],
   "size_model_mm": [
-   16.9,
-   9.7
+   18.7,
+   13.2
   ],
   "tilt_his_deg": -7.0,
-  "tilt_model_deg": -4.2,
+  "tilt_model_deg": -13.6,
   "centre_offset_mm": [
-   -1.5,
-   -3.0
+   -2.6,
+   -2.0
   ],
-  "shape_overlap": 0.78
+  "shape_overlap": 0.83
  },
  "sheet_02_front_3q:eye_R": {
   "size_his_mm": [
@@ -102,16 +102,16 @@
    3.1
   ],
   "size_model_mm": [
-   15.3,
-   5.3
+   18.9,
+   7.8
   ],
   "tilt_his_deg": 10.0,
-  "tilt_model_deg": 11.0,
+  "tilt_model_deg": 16.6,
   "centre_offset_mm": [
-   -0.4,
-   -0.7
+   0.1,
+   -1.4
   ],
-  "shape_overlap": 0.4
+  "shape_overlap": 0.21
  },
  "sheet_02_front_3q:socket_L": {
   "size_his_mm": [
@@ -119,19 +119,19 @@
    14.0
   ],
   "size_model_mm": [
-   16.9,
-   9.7
+   18.8,
+   13.3
   ],
   "tilt_his_deg": 2.6,
-  "tilt_model_deg": -4.2,
+  "tilt_model_deg": -13.8,
   "centre_offset_mm": [
-   -1.7,
-   -2.8
+   -2.9,
+   -1.8
   ],
-  "shape_overlap": 0.586
+  "shape_overlap": 0.852
  },
  "sheet_02_front_3q:forehead": {
-  "mean_dist_mm": 0.9,
+  "mean_dist_mm": 1.0,
   "max_dist_mm": 1.8
  },
  "sheet_09_top_down:eye_R": {
@@ -140,16 +140,16 @@
    4.9
   ],
   "size_model_mm": [
-   15.4,
-   5.2
+   18.8,
+   7.4
   ],
   "tilt_his_deg": -4.1,
-  "tilt_model_deg": -12.1,
+  "tilt_model_deg": -18.1,
   "centre_offset_mm": [
-   -0.3,
-   2.6
+   0.5,
+   3.6
   ],
-  "shape_overlap": 0.672
+  "shape_overlap": 0.494
  },
  "sheet_09_top_down:eye_L": {
   "size_his_mm": [
@@ -157,16 +157,16 @@
    6.4
   ],
   "size_model_mm": [
-   16.9,
-   7.6
+   18.6,
+   8.9
   ],
   "tilt_his_deg": -0.2,
-  "tilt_model_deg": 8.0,
+  "tilt_model_deg": 23.1,
   "centre_offset_mm": [
-   -0.2,
-   0.7
+   -0.7,
+   1.8
   ],
-  "shape_overlap": 0.722
+  "shape_overlap": 0.535
  },
  "sheet_09_top_down:socket_L": {
   "size_his_mm": [
@@ -174,16 +174,16 @@
    7.9
   ],
   "size_model_mm": [
-   16.9,
-   7.6
+   18.9,
+   9.0
   ],
   "tilt_his_deg": -0.9,
-  "tilt_model_deg": 8.0,
+  "tilt_model_deg": 23.2,
   "centre_offset_mm": [
-   -0.3,
-   0.6
+   -0.7,
+   1.7
   ],
-  "shape_overlap": 0.797
+  "shape_overlap": 0.623
  },
  "sheet_09_top_down:muzzle": {
   "mean_dist_mm": 4.5,
@@ -195,16 +195,16 @@
    16.4
   ],
   "size_model_mm": [
-   18.3,
-   17.3
+   19.6,
+   16.9
   ],
   "tilt_his_deg": 2.2,
-  "tilt_model_deg": -24.7,
+  "tilt_model_deg": -0.9,
   "centre_offset_mm": [
-   -1.1,
-   0.8
+   -2.1,
+   1.8
   ],
-  "shape_overlap": 0.882
+  "shape_overlap": 0.946
  },
  "sheet_07_left_profile:socket_L": {
   "size_his_mm": [
@@ -212,24 +212,24 @@
    19.8
   ],
   "size_model_mm": [
-   18.3,
+   20.1,
    17.3
   ],
   "tilt_his_deg": -5.6,
-  "tilt_model_deg": -24.7,
+  "tilt_model_deg": -0.4,
   "centre_offset_mm": [
-   -2.4,
-   0.8
+   -3.4,
+   1.9
   ],
-  "shape_overlap": 0.713
+  "shape_overlap": 0.767
  },
  "sheet_07_left_profile:ridge_L": {
-  "mean_dist_mm": 4.1,
-  "max_dist_mm": 6.8
+  "mean_dist_mm": 4.0,
+  "max_dist_mm": 6.2
  },
  "sheet_07_left_profile:forehead": {
-  "mean_dist_mm": 6.8,
-  "max_dist_mm": 13.0
+  "mean_dist_mm": 6.9,
+  "max_dist_mm": 12.9
  },
  "sheet_07_left_profile:muzzle": {
   "mean_dist_mm": 5.5,
@@ -241,16 +241,16 @@
    11.5
   ],
   "size_model_mm": [
-   16.9,
-   9.9
+   18.7,
+   13.4
   ],
   "tilt_his_deg": -11.5,
-  "tilt_model_deg": -4.7,
+  "tilt_model_deg": -13.8,
   "centre_offset_mm": [
-   -2.5,
-   -3.8
+   -3.7,
+   -2.8
   ],
-  "shape_overlap": 0.819
+  "shape_overlap": 0.786
  },
  "sheet_08_front_3q_left:eye_R": {
   "size_his_mm": [
@@ -258,16 +258,16 @@
    2.9
   ],
   "size_model_mm": [
-   15.2,
-   5.1
+   19.0,
+   7.7
   ],
   "tilt_his_deg": 8.9,
-  "tilt_model_deg": 9.4,
+  "tilt_model_deg": 15.0,
   "centre_offset_mm": [
-   -0.8,
-   -0.5
+   -0.3,
+   -1.2
   ],
-  "shape_overlap": 0.294
+  "shape_overlap": 0.153
  },
  "sheet_08_front_3q_left:socket_L": {
   "size_his_mm": [
@@ -275,16 +275,16 @@
    13.2
   ],
   "size_model_mm": [
-   16.9,
-   9.9
+   18.8,
+   13.5
   ],
   "tilt_his_deg": -2.5,
-  "tilt_model_deg": -4.7,
+  "tilt_model_deg": -13.9,
   "centre_offset_mm": [
-   -2.6,
-   -3.7
+   -3.7,
+   -2.7
   ],
-  "shape_overlap": 0.643
+  "shape_overlap": 0.911
  },
  "sheet_08_front_3q_left:forehead": {
   "mean_dist_mm": 1.6,
@@ -296,16 +296,16 @@
    14.8
   ],
   "size_model_mm": [
-   16.1,
-   8.9
+   19.4,
+   10.3
   ],
   "tilt_his_deg": 67.4,
-  "tilt_model_deg": -35.7,
+  "tilt_model_deg": -40.0,
   "centre_offset_mm": [
-   0.6,
-   -0.8
+   0.7,
+   -1.7
   ],
-  "shape_overlap": 0.551
+  "shape_overlap": 0.613
  },
  "sheet_04_back_3q_right:socket_R": {
   "size_his_mm": [
@@ -313,15 +313,15 @@
    16.9
   ],
   "size_model_mm": [
-   16.1,
-   8.9
+   19.6,
+   10.3
   ],
   "tilt_his_deg": 69.4,
-  "tilt_model_deg": -35.7,
+  "tilt_model_deg": -39.8,
   "centre_offset_mm": [
    0.7,
-   -1.0
+   -1.9
   ],
-  "shape_overlap": 0.446
+  "shape_overlap": 0.539
  }
 }
