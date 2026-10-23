@@ -28,6 +28,7 @@ Yes. Here is exactly what happens next, on the rolled-back kept build (d9f1d7c, 
    - [ ] Forehead
    - [ ] Socket
    - [ ] Muzzle
+     (Owner: in the top-down photo he is looking slightly to his left, which is the only reason his muzzle looks lopsided from above. Rotate that photo back into symmetry, then trace his muzzle's exact shape from it; small imperfections are fine, he is a living creature.)
 
    (Order changed with the owner's permission: the ridge and forehead come before the socket, because the socket's upper edge is made by the brow. A first socket try, the dark eye-ring, was rolled back.)
 
