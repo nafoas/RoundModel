@@ -1,0 +1,170 @@
+{
+ "_about": "Prince built from his parts (tasks/02). Metres; +x his right, +y forward, +z up. Each part is a soft volume; all are blended into one surface by tools/parts.py.",
+ "parts": [
+  {
+   "name": "body",
+   "note": "the big round body: from the front a wide round mass, widest a little below the middle; from the side an egg longer than tall, highest behind the head, rounding down into the haunches; from behind nearly a circle (master, sheet 01, 03, 05, 07, 09, close-up 08)",
+   "centre": [
+    0.0,
+    -0.012,
+    0.066
+   ],
+   "radii": [
+    0.08,
+    0.09,
+    0.077
+   ],
+   "blend": 0.0
+  },
+  {
+   "name": "head",
+   "note": "the round head on the front of the body, no neck: from the front narrower than the body at eye level and merging into it below; from the side its face comes forward of the chest and its top is about as high as his back (master, close-ups 06, 25, 08, 10; sheet 01, 03, 07, 09). Lower and narrower at eye level than first tried: in the master his head is narrow between the ears and at the eyes (the eyes sit on its sides), and its top is well below where the first try put it; the width below the eyes is his cheeks (step 3). Tipped nose-down ~12 deg: in the profiles (sheet 03, close-ups 08, 10) his face slopes down from the eye to a nose below eye level",
+   "centre": [
+    0.0,
+    0.047,
+    0.112
+   ],
+   "radii": [
+    0.03,
+    0.054,
+    0.042
+   ],
+   "blend": 0.03,
+   "rot": [
+    -12,
+    0,
+    0
+   ]
+  },
+  {
+   "name": "crown",
+   "note": "broad, flattish top of the head: in the master the top of his head between the ears is a wide, nearly flat arc about as wide as the eyes are apart, not a narrow dome (master, close-ups 06, 25, 14). Kept above eye level so it does not bury the eyes",
+   "centre": [
+    0.0,
+    0.028,
+    0.143
+   ],
+   "radii": [
+    0.032,
+    0.04,
+    0.016
+   ],
+   "blend": 0.02
+  },
+  {
+   "name": "temple",
+   "note": "the wide back of the head behind each eye: from the front his head is widest at and just below eye level, with fur beyond the eyes, so the eyes sit inside his outline; from above his head is broad behind the eyes, not a narrow snout (master, close-ups 06, 25, 14; sheet 09) (mirrored)",
+   "centre": [
+    0.03,
+    0.018,
+    0.118
+   ],
+   "radii": [
+    0.03,
+    0.034,
+    0.034
+   ],
+   "blend": 0.022,
+   "mirror": true
+  },
+  {
+   "name": "muzzle",
+   "note": "the broad, blunt lower face: from the front a wide soft muzzle under the nose, no narrow snout ridge (master, close-ups 06, 25, 27); from above the face ends blunt and round (sheet 09, close-up 11); from the side the nose is only a little ahead of the cheek (sheet 03, close-up 21)",
+   "centre": [
+    0.0,
+    0.072,
+    0.095
+   ],
+   "radii": [
+    0.03,
+    0.026,
+    0.026
+   ],
+   "blend": 0.02
+  },
+  {
+   "name": "bib",
+   "note": "the full chest bib under the chin: from the side the front of his body under the face is one full round curve with the face resting on it, no notch under the muzzle (sheet 03, 07, close-ups 08, 10, 16); from the front a broad soft bulge below the mouth (master, sheet 01, 11, 12)",
+   "centre": [
+    0.0,
+    0.055,
+    0.052
+   ],
+   "radii": [
+    0.048,
+    0.036,
+    0.04
+   ],
+   "blend": 0.025
+  },
+  {
+   "name": "skirt",
+   "note": "the lower skirt: from the front his body is a rounded square, sides nearly straight and the base broad and flat on the floor, with the peets just peeking out (master, sheet 01, edited front set); from behind and the side the base is broad too (sheet 03, 05). Higher, rounder and softer than first tried: his base rolls under softly; the first try made a hard ledge",
+   "centre": [
+    0.0,
+    0.0,
+    0.04
+   ],
+   "radii": [
+    0.076,
+    0.084,
+    0.04
+   ],
+   "blend": 0.035
+  },
+  {
+   "name": "cheek",
+   "note": "full round cheeks: from the front his face is broad right under the eyes and flows straight out into the body (master, close-ups 06, 25); from above the head is blunt and nearly as wide as the body at the cheeks (sheet 09); from the side the cheek fills under the eye down to the chest with no undercut (sheet 03, close-ups 08, 10, 21) (mirrored). Set lower (below the eyes, not over them): the first try buried the eyes. Broader and a little higher (but flatter, so it stays under the eyes): from the front his face is nearly as wide as his body from the eyes down, a rounded square, not a pear; blended a little wider so the sides run smoother (too wide buried the eyes), and set a touch lower",
+   "centre": [
+    0.034,
+    0.042,
+    0.08
+   ],
+   "radii": [
+    0.04,
+    0.042,
+    0.03
+   ],
+   "blend": 0.032,
+   "mirror": true
+  },
+  {
+   "name": "floor",
+   "note": "he sits on the floor: a soft flat underside",
+   "subtract": true,
+   "centre": [
+    0.0,
+    0.0,
+    -0.11
+   ],
+   "radii": [
+    0.4,
+    0.4,
+    0.1
+   ],
+   "blend": 0.012
+  }
+ ],
+ "eyes": [
+  {
+   "side": "R",
+   "centre": [
+    0.0249,
+    0.0595,
+    0.1265
+   ],
+   "radius": 0.0103,
+   "note": "provisional, from the eye fit (true size from the profiles); seated properly in step 9"
+  },
+  {
+   "side": "L",
+   "centre": [
+    -0.0217,
+    0.0601,
+    0.1315
+   ],
+   "radius": 0.0099,
+   "note": "provisional"
+  }
+ ]
+}

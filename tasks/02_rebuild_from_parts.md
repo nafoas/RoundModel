@@ -62,18 +62,19 @@ skipped without the owner's explicit permission.
 
 ## The steps
 
-- [ ] 0. **Tool:** a parts file (each part: centre, size, orientation,
+- [x] 0. **Tool:** a parts file (each part: centre, size, orientation,
   softness) built into one smooth mesh, in the same world frame, so it drops
   into the existing renderers. Comparison sheet: master + sheet + close-ups
   beside the model.
-- [ ] 1. **Main body mass:** the big round body, as he stands in the master.
+- [x] 1. **Main body mass:** the big round body, as he stands in the master.
   Photos: master, sheet 01-09, edited front/back, close-ups 07, 08, 09.
-- [ ] 2. **Head mass and how it joins the body** (no visible neck; the head
+- [x] 2. **Head mass and how it joins the body** (no visible neck; the head
   flows straight in). Photos: master, close-ups 06, 25, 07, 08, 10, 14;
   sheet 01, 03, 07, 09, 13-16, 18.
-- [ ] 3. **Cheeks** (full, round). Photos: master, close-ups 06, 25, 10, 21;
+- [x] 3. **Cheeks** (full, round). Photos: master, close-ups 06, 25, 10, 21;
   sheet 01, 18.
-- [ ] 4. **Chest bib and lower skirt** (the layers under the chin). Photos:
+- [x] 4. **Chest bib and lower skirt** (the layers under the chin).
+  (First pass of 1-4 done: tools/parts.py + tools/parts_sheet.py; models/prince_parts.json has body, floor, head (tipped nose-down), crown, temples behind the eyes, broad muzzle, cheeks, bib, skirt. Sheets in checkpoints/cp4/. Rolled back on the way: a tall knob head, cheeks over the eyes, a hard-ledged skirt, cheeks blended so wide they buried the eyes.) Photos:
   master, close-ups 16, 22; sheet 01, 10, 11, 12, 17; edited front set.
 - [ ] 5. **Haunches.** Photos: sheet 03, 04, 05, 06, 07; close-ups 17, 18,
   08, 09; edited back set.
