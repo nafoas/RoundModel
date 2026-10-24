@@ -6,3 +6,5 @@ __pycache__/
 checkpoints/cp2/hull.obj
 checkpoints/cp3/body.obj
 checkpoints/cp3/prince_cp3_head_body.obj
+# regenerate with: python tools/parts.py models/prince_parts.json checkpoints/cp4/model
+checkpoints/cp4/model/
