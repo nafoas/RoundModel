@@ -60,6 +60,21 @@ skipped without the owner's explicit permission.
 5. Photos differ because he moves, the camera moves, the light differs and
    fur is fur. Accept that and move on; never investigate it.
 
+## How sculptors do this (looked up at the owner's request)
+
+- Block out with separate primitives first; the goal is the balance of the
+  overall form. No detail until the blockout already looks like him.
+- Compare against the photos through matched perspective cameras (photos are
+  perspective, not orthographic; lining a model up as if they were ortho
+  skews the proportions). We have fitted cameras for the master and sheet
+  02, 03, 04, 07, 08, 09.
+- Overlay the model on the photo (tools/parts_overlay.py) as a check of
+  proportions by eye, and rotate the blockout to check it from every side.
+- Where front and side disagree (he moves, the camera moves), settle on what
+  most views show and match the likeness at the master and a three-quarter.
+- Sources: 80.lv character production workflow; ZBrushCentral / Polycount /
+  BlenderArtists likeness threads.
+
 ## The steps
 
 - [x] 0. **Tool:** a parts file (each part: centre, size, orientation,
@@ -76,6 +91,11 @@ skipped without the owner's explicit permission.
 - [x] 4. **Chest bib and lower skirt** (the layers under the chin).
   (First pass of 1-4 done: tools/parts.py + tools/parts_sheet.py; models/prince_parts.json has body, floor, head (tipped nose-down), crown, temples behind the eyes, broad muzzle, cheeks, bib, skirt. Sheets in checkpoints/cp4/. Rolled back on the way: a tall knob head, cheeks over the eyes, a hard-ledged skirt, cheeks blended so wide they buried the eyes.) Photos:
   master, close-ups 16, 22; sheet 01, 10, 11, 12, 17; edited front set.
+- [x] 4b. **Proportion pass** (owner: chisel the broad strokes before any detail).
+  Body set back and higher at the rear and a little narrower; cheeks narrower;
+  muzzle smaller and forward-low; chest set back; jowl filling under the nose;
+  ears blocked in (set back, leaning back). Rolled back: setting the head and
+  crown back (it made the eyes bulge out of the face again).
 - [ ] 5. **Haunches.** Photos: sheet 03, 04, 05, 06, 07; close-ups 17, 18,
   08, 09; edited back set.
 - [ ] 6. **Peets** (small, round, fluffy; dark specks on the front ones).

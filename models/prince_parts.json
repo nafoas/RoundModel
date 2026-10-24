@@ -3,16 +3,16 @@
  "parts": [
   {
    "name": "body",
-   "note": "the big round body: from the front a wide round mass, widest a little below the middle; from the side an egg longer than tall, highest behind the head, rounding down into the haunches; from behind nearly a circle (master, sheet 01, 03, 05, 07, 09, close-up 08)",
+   "note": "the big round body: from the front a wide round mass, widest a little below the middle; from the side an egg longer than tall, highest behind the head, rounding down into the haunches; from behind nearly a circle (master, sheet 01, 03, 05, 07, 09, close-up 08). Proportion pass: set further back and higher at the rear (sheet 03: his back is high and round right to the rump; sheet 09: his body runs further back), and a little narrower (master)",
    "centre": [
     0.0,
-    -0.012,
-    0.066
+    -0.022,
+    0.071
    ],
    "radii": [
-    0.08,
-    0.09,
-    0.077
+    0.076,
+    0.094,
+    0.082
    ],
    "blend": 0.0
   },
@@ -26,12 +26,12 @@
    ],
    "radii": [
     0.03,
-    0.054,
+    0.05,
     0.042
    ],
    "blend": 0.03,
    "rot": [
-    -12,
+    -20,
     0,
     0
    ]
@@ -52,6 +52,27 @@
    "blend": 0.02
   },
   {
+   "name": "ear",
+   "note": "short rounded ear, set wide apart on the top-back of the head, tips leaning out and a little back; about 2 cm above the head (master, close-ups 13, 14, 06, 25; sheet 03, 05, 14). Blocked in as a soft flap now; shaped (cupped, thin) in step 8 (mirrored). Set further back, fuller and leaning back more: in the right profile his ear sits well behind the eye and is taller than it looks from the front (it leans back, so the master foreshortens it)",
+   "centre": [
+    0.021,
+    0.004,
+    0.166
+   ],
+   "radii": [
+    0.008,
+    0.012,
+    0.02
+   ],
+   "rot": [
+    30,
+    22,
+    0
+   ],
+   "blend": 0.007,
+   "mirror": true
+  },
+  {
    "name": "temple",
    "note": "the wide back of the head behind each eye: from the front his head is widest at and just below eye level, with fur beyond the eyes, so the eyes sit inside his outline; from above his head is broad behind the eyes, not a narrow snout (master, close-ups 06, 25, 14; sheet 09) (mirrored)",
    "centre": [
@@ -69,25 +90,40 @@
   },
   {
    "name": "muzzle",
-   "note": "the broad, blunt lower face: from the front a wide soft muzzle under the nose, no narrow snout ridge (master, close-ups 06, 25, 27); from above the face ends blunt and round (sheet 09, close-up 11); from the side the nose is only a little ahead of the cheek (sheet 03, close-up 21)",
+   "note": "the broad, blunt lower face: from the front a wide soft muzzle under the nose, no narrow snout ridge (master, close-ups 06, 25, 27); from above the face ends blunt and round (sheet 09, close-up 11); from the side the nose is only a little ahead of the cheek (sheet 03, close-up 21). Proportion pass: smaller and set forward-low, so from the side the face tapers forward and down to a small nose (close-ups 21, 02; sheet 03) instead of ending in a blunt wall; the breadth from the front is the cheeks behind it",
    "centre": [
     0.0,
-    0.072,
-    0.095
+    0.078,
+    0.1
+   ],
+   "radii": [
+    0.022,
+    0.022,
+    0.02
+   ],
+   "blend": 0.02
+  },
+  {
+   "name": "jowl",
+   "note": "whisker pads and chin under the nose, filling between the cheeks: from the front his face below the nose is full and soft with no hollow (master, close-ups 06, 25, 27); from the side the lower face curves back under the nose into the chest (close-ups 21, 02)",
+   "centre": [
+    0.0,
+    0.058,
+    0.082
    ],
    "radii": [
     0.03,
-    0.026,
-    0.026
+    0.022,
+    0.02
    ],
    "blend": 0.02
   },
   {
    "name": "bib",
-   "note": "the full chest bib under the chin: from the side the front of his body under the face is one full round curve with the face resting on it, no notch under the muzzle (sheet 03, 07, close-ups 08, 10, 16); from the front a broad soft bulge below the mouth (master, sheet 01, 11, 12)",
+   "note": "the full chest bib under the chin: from the side the front of his body under the face is one full round curve with the face resting on it, no notch under the muzzle (sheet 03, 07, close-ups 08, 10, 16); from the front a broad soft bulge below the mouth (master, sheet 01, 11, 12). Set back: in the profiles his chest is well behind the nose, the jaw sloping back and down to it",
    "centre": [
     0.0,
-    0.055,
+    0.04,
     0.052
    ],
    "radii": [
@@ -114,10 +150,10 @@
   },
   {
    "name": "cheek",
-   "note": "full round cheeks: from the front his face is broad right under the eyes and flows straight out into the body (master, close-ups 06, 25); from above the head is blunt and nearly as wide as the body at the cheeks (sheet 09); from the side the cheek fills under the eye down to the chest with no undercut (sheet 03, close-ups 08, 10, 21) (mirrored). Set lower (below the eyes, not over them): the first try buried the eyes. Broader and a little higher (but flatter, so it stays under the eyes): from the front his face is nearly as wide as his body from the eyes down, a rounded square, not a pear; blended a little wider so the sides run smoother (too wide buried the eyes), and set a touch lower",
+   "note": "full round cheeks: from the front his face is broad right under the eyes and flows straight out into the body (master, close-ups 06, 25); from above the head is blunt and nearly as wide as the body at the cheeks (sheet 09); from the side the cheek fills under the eye down to the chest with no undercut (sheet 03, close-ups 08, 10, 21) (mirrored). Set lower (below the eyes, not over them): the first try buried the eyes. Broader and a little higher (but flatter, so it stays under the eyes): from the front his face is nearly as wide as his body from the eyes down, a rounded square, not a pear; blended a little wider so the sides run smoother (too wide buried the eyes), and set a touch lower. Set back a little, so the face in profile is a wedge to the nose, not a vertical wall",
    "centre": [
-    0.034,
-    0.042,
+    0.029,
+    0.035,
     0.08
    ],
    "radii": [

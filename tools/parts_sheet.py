@@ -38,6 +38,13 @@ VIEWS = {
     "c08": ("references/closeups/08-Head-Side-Profile.png", None, 90, 6, 0.6),
     "c09": ("references/closeups/09-Head-120-Degrees.png", None, -130, 12, 0.55),
     "c10": ("references/closeups/10-Whole-Facial-Contour-Side-Depth.png", None, 80, 5, 0.45),
+    "c06": ("references/closeups/06-Eyes-and-Bridge-Depth.png", None, 0, 2, 0.22, (0.0, 0.05, 0.11)),
+    "c25": ("references/closeups/25-Frontal-Bridge-Alternate.png", None, 0, 6, 0.22, (0.0, 0.05, 0.11)),
+    "c19": ("references/closeups/19-D4-Approved-Other-Angle.png", None, 28, 4, 0.22, (0.0, 0.05, 0.11)),
+    "c20": ("references/closeups/20-Other-Eye-D4-Companion.png", None, -28, 4, 0.22, (0.0, 0.05, 0.11)),
+    "c21": ("references/closeups/21-Local-Side-Muzzle-Alternate.png", None, 80, 5, 0.22, (0.0, 0.05, 0.11)),
+    "c02": ("references/closeups/02-Eye-Side-On.png", None, -80, 5, 0.22, (0.0, 0.05, 0.11)),
+    "c14": ("references/closeups/14-Tiny-Ears-Top.png", None, 180, 45, 0.35),
     "eback": ("references/edited/back.webp", None, 180, 5, 0.6),
     "eloaf": ("references/edited/front_loaf.webp", None, 0, 5, 0.6),
 }
@@ -76,7 +83,8 @@ def main():
         sc.collection.objects.link(cam)
         sc.camera = cam
         for vn in views:
-            photo, cn, az, el, dist = VIEWS[vn]
+            photo, cn, az, el, dist = VIEWS[vn][:5]
+            target = np.asarray(VIEWS[vn][5]) if len(VIEWS[vn]) > 5 else BODY
             W, H = Image.open(ROOT / photo).size
             out = Path(d) / f"ps_{vn}.png"
             if cn:
@@ -89,7 +97,7 @@ def main():
             else:
                 azr, elr = np.radians(az), np.radians(el)
                 dirv = np.array([np.sin(azr) * np.cos(elr), np.cos(azr) * np.cos(elr), np.sin(elr)])
-                pos = BODY + dist * dirv
+                pos = target + dist * dirv
                 fwd = -dirv
                 right = np.cross(fwd, [0, 0, 1.0])
                 right /= np.linalg.norm(right)
