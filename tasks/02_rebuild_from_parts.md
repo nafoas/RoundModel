@@ -187,3 +187,10 @@ The plan:
 5. [ ] **Show the owner**: top-down first with the measured widths beside it
    (stated as numbers, never "about right"), then the master, then the rest.
    Only after the owner agrees on the base: haunch detail, peets, tail.
+
+   Step 1 notes: first tries traced with colour rules and GrabCut lost his
+   shaded lower fur, took in the lamp-lit wall, and the panel traces scaled
+   up did not line up. Owner: redo the outline before going on. Now traced
+   with BiRefNet (a background-removal segmentation model, run locally via
+   rembg), whisker spikes removed with a 6 px opening. tools/outlines.py,
+   masks in checkpoints/cp4/outlines/, review sheet _review.png.
