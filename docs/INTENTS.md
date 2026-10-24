@@ -24,6 +24,12 @@ visual likeness to him, not patterns and outlines. "This looks wrong but the
 number went up" is a major betrayal. Stop, think, listen to the owner and to
 my own judgement: if the look and the number disagree, the look wins.
 
+**Silhouettes (owner, after the top-down mistake):** the silhouette never
+doesn't matter; it is just not all-important. From above it is literally his
+circumference; the master's matters a lot too. Never say "about right":
+state the measured difference and what I see. Do it meticulously and don't
+blob shapes: follow proper curves and shape.
+
 ## The task (this stage)
 - Start from the kept build (commit d9f1d7c, restored in 716e530).
 - Like the body: draw lines around each part in both his photos and the model,

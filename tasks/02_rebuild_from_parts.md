@@ -114,3 +114,76 @@ skipped without the owner's explicit permission.
 
 After each step: a comparison sheet saved to checkpoints/cp4/, committed and
 pushed, and the intents repeated.
+
+---
+
+## Base shape, done properly (owner approved this plan; written down before starting)
+
+Owner's corrections, in force from here:
+- **Stop saying "about right".** Say what the difference is, measured and
+  seen. The silhouette never doesn't matter; it is just not all-important.
+  From above it is literally his circumference; the master's matters a lot
+  too. Form (the curves and shape inside the outline) matters as well.
+- **Do it meticulously and do not blob shapes.** Take a step back, stop using
+  big blob shapes, and follow proper curves and shape.
+
+What was wrong (measured, top-down camera, row by row along his length):
+- His widest is at the middle (~745 px); the model's widest was toward the
+  head, and the model was ~7 % too wide there.
+- Across his front half (shoulders, cheeks, face) the model was 15-20 % too
+  wide (560-790 px against his 470-670 px). His sides run nearly parallel
+  from the middle forward, then taper evenly into the face; the model stayed
+  wide into the cheeks and turned sharply into the nose: a wide-fronted pear
+  instead of his egg.
+- Why: I judged the top-down view at thumbnail size instead of measuring it;
+  plain ellipsoids cannot make his shape (even, nearly straight sides with
+  rounded ends), so width was added with cheek and temple blobs, which put it
+  in the wrong place; the parts that carry his width (haunches, shoulders)
+  were not modelled.
+
+What the research says (sources in the chat log and below):
+- Dwarf Hotot standard (ARBA judge's article, breed summaries): body "short,
+  compact ... shoulders as broad as its hips", no taper; "good depth at the
+  shoulders" and "a slight rise as we move toward the hips"; hindquarters
+  "full to the table", "well-rounded, smooth, and filled"; head "large,
+  broad ... no visible neck", set lower than a Netherland Dwarf's but not
+  resting on the table; ears short (ideal 2.25 in, ~5.7 cm), well furred,
+  erect, slightly rounded at the tips. Judges look from above as well as the
+  side; a V-shaped narrowing over the hips is a fault.
+- Modellers working from views lock the plan view first: take the top and
+  one other outline, build the shape as cross-sections lofted through
+  guide curves, then check every other view.
+- Shape from silhouettes (calibrated cameras): each photo's outline can size
+  simple shapes directly, provided the cameras agree in space.
+
+The plan:
+1. [ ] **Clean outlines of him** in the key photos: top-down first, then the
+   master, right profile, back, back three-quarter, the two front
+   three-quarters, and the left profile (low weight: his head is held
+   differently there).
+2. [ ] **Rebuild the base from proper curves, not blobs.** His body and head
+   as one lofted surface: cross-sections along his length, each a rounded
+   section (straight-ish sides, round top, flatter base), driven by smooth
+   guide curves: the plan-view outline (half-width along his length), the
+   side profile (top line and underside line), and the height of the widest
+   point and the roundness of each section. This gives the body with even,
+   nearly straight sides and round ends, haunches full to the floor and a
+   slight rise toward them, shoulders as broad as the hips, the head set
+   into the body with no neck, and the underside of the jaw curving back to
+   the chest. Cheeks are part of the sections, not a blob.
+3. [ ] **Let the outlines set the guide curves (not push the surface).**
+   A fitting tool adjusts only the guide curves' control points so the
+   model's outline matches his: top-down weighs most (his circumference),
+   then the master, then the right profile, back and three-quarters. The
+   curves stay smooth (no wiggles), symmetric, with his eye positions fixed
+   and the breed proportions held. For each photo his head is posed as he
+   holds it there (the head poses we already worked out; from above he is
+   sniffing and looking slightly left), so his body is not bent to match
+   his head.
+4. [ ] **Judge the form by eye, master first**, with his close-ups and shaded
+   renders: cheeks, chest, how the head sits on the body; it has to look
+   like him, not just have the right edge. Check the ear length against the
+   profiles and the breed size.
+5. [ ] **Show the owner**: top-down first with the measured widths beside it
+   (stated as numbers, never "about right"), then the master, then the rest.
+   Only after the owner agrees on the base: haunch detail, peets, tail.
