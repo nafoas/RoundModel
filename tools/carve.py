@@ -31,6 +31,7 @@ from skimage import measure
 
 sys.path.insert(0, str(Path(__file__).parent))
 ROOT = Path(__file__).resolve().parents[1]
+USE_POSES = True  # his head as he holds it in each photo (--no_poses to carve without)
 BLOCK = ((-0.12, 0.12), (-0.15, 0.15), (-0.04, 0.21))  # bigger than him on all sides
 
 # view: tolerance in that photo's own pixels (camera / pose certainty)
@@ -63,7 +64,7 @@ def view_data(name):
         cam = dict(rot=c["rotvec_world_to_cam"], pos=c["camera_position_m"], f=c["focal_px"],
                    pp=[mask.shape[1] / 2, mask.shape[0] / 2])
     pose = ROOT / f"checkpoints/cp3/head_poses_parts/{name}.json"
-    cam["pose"] = json.loads(pose.read_text()) if pose.exists() else None
+    cam["pose"] = json.loads(pose.read_text()) if pose.exists() and USE_POSES else None
     return cam, mask
 
 
@@ -127,12 +128,48 @@ def chisel_corners(vol, step, radius=0.008, keep_mm=0.0):
     return vol & (sm < keep_mm / 1000)
 
 
+def carve_votes(step, views=VIEWS, hard=4.0, votes=2):
+    """Gentler carving (owner: the first carving took too much off every side,
+    and squared his nose from above). One photo's small camera or pose error
+    should not be able to cut him alone. A cube is cut only when
+      - one photo puts it outside him by more than `hard` x its tolerance, or
+      - at least `votes` photos put it outside him by more than their
+        tolerance.
+    Distances are measured in each photo's pixels from his outline."""
+    axes = [np.arange(lo, hi + step, step) for lo, hi in BLOCK]
+    shape = tuple(len(a) for a in axes)
+    P = np.stack(np.meshgrid(*axes, indexing="ij"), -1).reshape(-1, 3)
+    n_out = np.zeros(len(P), np.int16)
+    hard_cut = np.zeros(len(P), bool)
+    report = {}
+    for name, tol in views.items():
+        cam, mask = view_data(name)
+        dist = nd.distance_transform_edt(~mask)  # px outside his outline
+        uv = np.round(project(posed(P, cam["pose"]), cam)).astype(int)
+        H, W = mask.shape
+        inside = (uv[:, 0] >= 0) & (uv[:, 0] < W) & (uv[:, 1] >= 0) & (uv[:, 1] < H)
+        d = np.full(len(P), 1e6)
+        d[inside] = dist[uv[inside, 1], uv[inside, 0]]
+        n_out += d > tol
+        hard_cut |= d > hard * tol
+        report[name] = int((d > hard * tol).sum())
+    keep = ~(hard_cut | (n_out >= votes))
+    print("kept", int(keep.sum()), "cubes", flush=True)
+    vol = keep.reshape(shape)
+    lab, n = nd.label(vol)
+    if n > 1:
+        sizes = nd.sum(vol, lab, range(1, n + 1))
+        vol = lab == 1 + int(np.argmax(sizes))
+    return nd.binary_fill_holes(vol), axes, report
+
+
 def mesh(vol, axes, step, smooth_iters=12):
     """Surface of the carved block; voxel steps relaxed (Taubin smoothing,
     which does not shrink him)."""
     f = nd.gaussian_filter(vol.astype(float), 1.0)
     V, F, _, _ = measure.marching_cubes(np.pad(f, 2), 0.5, spacing=(step, step, step))
     V += np.array([a[0] for a in axes]) - 2 * step
+    F = F[:, ::-1]  # outward-facing (marching cubes on an inside-high field faces inward)
     n = len(V)
     E = np.vstack([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]])
     E = np.vstack([E, E[:, ::-1]])
@@ -157,10 +194,18 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("out")
     ap.add_argument("--step", type=float, default=0.0015)
+    ap.add_argument("--votes", type=int, default=0, help="gentle carving: photos that must agree to cut")
+    ap.add_argument("--hard", type=float, default=4.0, help="one photo alone cuts beyond this x its tolerance")
     ap.add_argument("--round", type=float, default=0.0, help="chisel the corners off over this radius (m)")
     ap.add_argument("--keep_mm", type=float, default=0.0)
+    ap.add_argument("--no_poses", action="store_true")
     a = ap.parse_args()
-    vol, axes, report = carve(a.step)
+    global USE_POSES
+    USE_POSES = not a.no_poses
+    if a.votes:
+        vol, axes, report = carve_votes(a.step, hard=a.hard, votes=a.votes)
+    else:
+        vol, axes, report = carve(a.step)
     if a.round:
         before = int(vol.sum())
         vol = chisel_corners(vol, a.step, a.round, a.keep_mm)

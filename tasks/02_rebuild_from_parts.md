@@ -206,6 +206,9 @@ everything about the technique into the docs (docs/CARVING.md).
   photo (tools/carve.py); outline check tool (tools/silhouette_check.py).
 - [x] 3a. Corners chiselled off (6 mm and 10 mm tried; 6 mm kept as the
   working base, it keeps the outlines).
+- [x] 3a'. Owner: carved too much on all sides, nose squared from above.
+  Gentle carving (two photos must agree) + fine rim passes (refine_rim.py);
+  top-down-weighted pass rolled back (lumps, too big elsewhere).
 - [ ] 3b. Chisel by eye: face front, cheeks, chest and chin hollows, top of
   the head; then seat the eyes and shape the ears.
 - [ ] 4. Show the owner.

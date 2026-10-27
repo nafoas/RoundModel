@@ -83,3 +83,36 @@ Read with CLAUDE.md, docs/INTENTS.md, docs/PHOTOS.md and the current task file.
 - The carved form is still blocky: flat planes on the face and top of the
   head, and the face front sits behind the cheeks from the front. That is
   what the chiselling is for.
+
+## 6. Second round (owner: "you carved too much... all sides missing something...
+## his nose is a square from above"; "only add and remove just what is needed")
+
+- **Gentle carving** (`--votes 2 --hard 1.5`): a cube is cut only if at
+  least two photos put it outside him by more than their tolerance, or one
+  photo by more than 1.5x its tolerance. One photo's small camera or pose
+  error can no longer cut him alone. (votes 2 / hard 4 left him 5-11 % too
+  big all round; hard 1.5 is the balance.)
+- Surfaces are now written facing outward (marching cubes on an inside-high
+  field faces inward; this made the first fine pass grow him everywhere).
+- **Fine passes** (tools/refine_rim.py, section 3c): each round, the model's
+  rim from every photo is compared with his outline and moved in or out
+  along the surface normal by the gap (photo pixels converted to mm at that
+  depth), capped at 1 mm per round, weighted (top-down 3, master 2.5,
+  others 0.5-1), spread into a smooth field so it is a gentle reshaping,
+  never a lump. 6 rounds: moves up to 3.8 mm out and 5.2 mm in.
+- Result (work/c/f1, regenerate: carve.py --votes 2 --hard 1.5, then
+  refine_rim.py --rounds 6): model past him / missing of his area:
+  master 1.1 / 1.9 %, right profile 2.5 / 1.9, back 3/4 right 3.0 / 0.5,
+  front 3/4 right 1.9 / 2.2, front 3/4 left 2.9 / 2.7, left profile
+  4.6 / 2.5, back 1.7 / 2.3, back 3/4 left 2.5 / 2.6, top-down 0.4 / 8.4.
+- **Top-down**: the model still stops short at the rump (about 16 mm,
+  a straight edge) and at the nose (a flat front, about 2-3 mm short at
+  the middle). Those edges are where the side and back photos, of him
+  standing, cut; in the top-down photo he is lying low with his nose down.
+  Weighting top-down 10x (rolled back, sheet 06) only brought it to 5.7 %
+  missing, made the model 3-7 % too big in every other photo, and put lumps
+  above the eyes and on the side: not kept.
+- **Form**: the carved form is faceted (flat face front, flat top of the
+  head, a steep cut under the jaw that reads as a dark ledge from the
+  front). Carving without the head poses gives the same, so it is not the
+  poses: outlines cannot shape these areas. They are the by-eye chiselling.
