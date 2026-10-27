@@ -1,0 +1,179 @@
+"""Prince, carved (tasks/02, base shape). Subtractive, like sculpting: start
+from a block bigger than him on every side and chisel it away.
+
+Pass 1, the rough-out: carving from his photos. The block is a grid of small
+cubes (voxels). From each photo's fitted camera, every cube that falls
+outside his outline in that photo is cut away; what is left is the largest
+shape every photo agrees he could be (the "visual hull"). He is not a
+statue: in each photo his head is posed as he holds it there (the head
+poses already worked out), and each photo gets a small tolerance for its
+camera fit, more for photos whose camera or pose is less certain. Top-down
+(his circumference) and the master cut hardest.
+
+What carving cannot do: a photo outline only shows the edge, so hollows
+(the dip between cheek and chest, under the chin) and the corners between
+views are left too full. Those are chiselled next, by eye, against his
+photos (pass 2, tools/chisel.py).
+
+usage: python tools/carve.py OUTDIR [--step 0.0015]
+"""
+import argparse
+import json
+import sys
+from pathlib import Path
+
+import cv2
+import numpy as np
+from PIL import Image
+from scipy import ndimage as nd
+from scipy.spatial.transform import Rotation as R
+from skimage import measure
+
+sys.path.insert(0, str(Path(__file__).parent))
+ROOT = Path(__file__).resolve().parents[1]
+BLOCK = ((-0.12, 0.12), (-0.15, 0.15), (-0.04, 0.21))  # bigger than him on all sides
+
+# view: tolerance in that photo's own pixels (camera / pose certainty)
+VIEWS = {
+    "sheet_09_top_down": 3,
+    "master_front_standing": 3,
+    "sheet_03_right_profile": 6,
+    "sheet_04_back_3q_right": 8,
+    "sheet_02_front_3q": 8,
+    "sheet_08_front_3q_left": 8,
+    "sheet_07_left_profile": 14,
+    "sheet_05_back": 2,          # small sheet panel: tolerance in panel pixels
+    "sheet_06_back_3q_left": 2,
+}
+
+
+def view_data(name):
+    cams = json.loads((ROOT / "checkpoints/cp2/cameras_fit.json").read_text())["views"]
+    side = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"]
+    if name in side:
+        c = side[name]
+        mask = np.asarray(Image.open(ROOT / f"checkpoints/cp4/outlines/{name}.png")) > 127
+        cam = dict(rot=c["rotvec_world_to_cam"], pos=c["camera_position_m"], f=c["focal_px"], pp=c["principal_px"])
+    else:
+        c = cams[name]
+        if name == "master_front_standing":
+            mask = np.asarray(Image.open(ROOT / "checkpoints/cp4/outlines/master_front_standing.png")) > 127
+        else:
+            mask = np.asarray(Image.open(ROOT / f"checkpoints/cp1/masks/{name}.outline.png").convert("L")) > 127
+        cam = dict(rot=c["rotvec_world_to_cam"], pos=c["camera_position_m"], f=c["focal_px"],
+                   pp=[mask.shape[1] / 2, mask.shape[0] / 2])
+    pose = ROOT / f"checkpoints/cp3/head_poses_parts/{name}.json"
+    cam["pose"] = json.loads(pose.read_text()) if pose.exists() else None
+    return cam, mask
+
+
+def posed(P, pose):
+    if pose is None:
+        return P
+    from sculpt import NECK_PIVOT, head_weight
+    hw = head_weight(P)
+    Rm = R.from_rotvec(pose["rotvec"]).as_matrix()
+    Pp = (P - NECK_PIVOT) @ Rm.T + NECK_PIVOT + np.asarray(pose["shift_m"])
+    return P + hw[:, None] * (Pp - P)
+
+
+def project(P, cam):
+    Rc = R.from_rotvec(cam["rot"]).as_matrix()
+    Xc = (P - np.asarray(cam["pos"])) @ Rc.T
+    return cam["f"] * Xc[:, :2] / Xc[:, 2:3] + np.asarray(cam["pp"])
+
+
+def carve(step, views=VIEWS):
+    axes = [np.arange(lo, hi + step, step) for lo, hi in BLOCK]
+    shape = tuple(len(a) for a in axes)
+    P = np.stack(np.meshgrid(*axes, indexing="ij"), -1).reshape(-1, 3)
+    keep = np.ones(len(P), bool)
+    report = {}
+    for name, tol in views.items():
+        cam, mask = view_data(name)
+        m = nd.binary_dilation(mask, iterations=tol) if tol else mask
+        uv = np.round(project(posed(P[keep], cam["pose"]), cam)).astype(int)
+        H, W = m.shape
+        inside = (uv[:, 0] >= 0) & (uv[:, 0] < W) & (uv[:, 1] >= 0) & (uv[:, 1] < H)
+        ok = np.zeros(len(uv), bool)
+        ok[inside] = m[uv[inside, 1], uv[inside, 0]]
+        idx = np.nonzero(keep)[0]
+        cut = idx[~ok]
+        keep[cut] = False
+        report[name] = int(len(cut))
+        print(f"{name:28s} cut {len(cut):9d}  left {int(keep.sum()):9d}", flush=True)
+    vol = keep.reshape(shape)
+    # one solid piece, no holes
+    lab, n = nd.label(vol)
+    if n > 1:
+        sizes = nd.sum(vol, lab, range(1, n + 1))
+        vol = lab == 1 + int(np.argmax(sizes))
+    vol = nd.binary_fill_holes(vol)
+    return vol, axes, report
+
+
+def chisel_corners(vol, step, radius=0.008, keep_mm=0.0):
+    """Pass 2a: take the corners off. Carving from outlines leaves flat planes
+    meeting at hard edges wherever no photo looked squarely (between views).
+    The signed distance to the carved surface is blurred over `radius`; where
+    planes meet at an edge the blurred surface lies inside the old one, so the
+    edge is cut away. Only cuts, never adds (intersected with the carving).
+    keep_mm shifts the result outward a little so smooth stretches, already
+    right, are not shaved."""
+    inside = nd.distance_transform_edt(vol) * step
+    outside = nd.distance_transform_edt(~vol) * step
+    sdf = outside - inside
+    sm = nd.gaussian_filter(sdf, radius / step)
+    return vol & (sm < keep_mm / 1000)
+
+
+def mesh(vol, axes, step, smooth_iters=12):
+    """Surface of the carved block; voxel steps relaxed (Taubin smoothing,
+    which does not shrink him)."""
+    f = nd.gaussian_filter(vol.astype(float), 1.0)
+    V, F, _, _ = measure.marching_cubes(np.pad(f, 2), 0.5, spacing=(step, step, step))
+    V += np.array([a[0] for a in axes]) - 2 * step
+    n = len(V)
+    E = np.vstack([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]])
+    E = np.vstack([E, E[:, ::-1]])
+    import scipy.sparse as sp
+    A = sp.csr_matrix((np.ones(len(E)), (E[:, 0], E[:, 1])), shape=(n, n))
+    A.data[:] = 1
+    deg = np.asarray(A.sum(1)).ravel()
+    L = sp.diags(1 / np.maximum(deg, 1)) @ A
+    for _ in range(smooth_iters):
+        V = V + 0.5 * (L @ V - V)
+        V = V - 0.53 * (L @ V - V)
+    return V, F
+
+
+def write_obj(path, V, F):
+    with open(path, "w") as fh:
+        fh.write("".join(f"v {a:.6f} {b:.6f} {c:.6f}\n" for a, b, c in V))
+        fh.write("".join(f"f {a + 1} {b + 1} {c + 1}\n" for a, b, c in F))
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("out")
+    ap.add_argument("--step", type=float, default=0.0015)
+    ap.add_argument("--round", type=float, default=0.0, help="chisel the corners off over this radius (m)")
+    ap.add_argument("--keep_mm", type=float, default=0.0)
+    a = ap.parse_args()
+    vol, axes, report = carve(a.step)
+    if a.round:
+        before = int(vol.sum())
+        vol = chisel_corners(vol, a.step, a.round, a.keep_mm)
+        print(f"corners chiselled: {before - int(vol.sum())} cubes cut ({(before - vol.sum()) * a.step ** 3 * 1e6:.1f} cm3)")
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    np.save(out / "volume.npy", vol)
+    json.dump({"step": a.step, "origin": [ax[0] for ax in axes], "cut": report},
+              open(out / "carve.json", "w"), indent=1)
+    V, F = mesh(vol, axes, a.step)
+    write_obj(out / "head.obj", V, F)
+    print("mesh", len(V), "vertices; extent", V.min(0).round(3), V.max(0).round(3))
+
+
+if __name__ == "__main__":
+    main()

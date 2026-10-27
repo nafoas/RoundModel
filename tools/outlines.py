@@ -73,6 +73,7 @@ def birefnet_all():
         m = largest(nd.binary_opening(al, structure=disk))
         Image.fromarray((m * 255).astype(np.uint8)).save(OUT / f"{view}.png")
         print(view, int(m.sum()), flush=True)
+        patch(view)
 
 
 def main():
@@ -98,6 +99,34 @@ def main():
         mask = nd.binary_opening(mask, iterations=2)
         Image.fromarray((mask * 255).astype(np.uint8)).save(OUT / f"{view}.png")
         print(view, W, H, int(mask.sum()))
+
+
+
+
+# Manual patches (checked by eye on gridded zooms), applied after tracing:
+#   sheet_02: the dark gap between his front peets, under the hanging fur
+#   sheet_09: a lobe of whiskers caught at his left jaw
+PATCHES = {
+    "sheet_02_front_3q": [("cut_below", [(425, 1132), (450, 1118), (500, 1113), (545, 1116), (568, 1126), (580, 1142), (586, 1160)])],
+    "sheet_09_top_down": [("cut_below", [(688, 1195), (712, 1183), (737, 1170)])],
+}
+
+
+def patch(view):
+    if view not in PATCHES:
+        return
+    p = OUT / f"{view}.png"
+    m = np.asarray(Image.open(p)) > 127
+    H, W = m.shape
+    yy, xx = np.mgrid[0:H, 0:W]
+    for kind, pts in PATCHES[view]:
+        pts = np.array(pts, float)
+        x0, x1 = pts[:, 0].min(), pts[:, 0].max()
+        ycut = np.interp(xx, pts[:, 0], pts[:, 1])
+        m = m & ~((xx >= x0) & (xx <= x1) & (yy > ycut))
+    m = largest(m)
+    Image.fromarray((m * 255).astype(np.uint8)).save(p)
+    print("patched", view)
 
 
 if __name__ == "__main__":

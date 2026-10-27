@@ -194,3 +194,18 @@ The plan:
    with BiRefNet (a background-removal segmentation model, run locally via
    rembg), whisker spikes removed with a 6 px opening. tools/outlines.py,
    masks in checkpoints/cp4/outlines/, review sheet _review.png.
+
+## Owner's change of method: subtractive (carve, then chisel)
+
+"Think of it like you're sculpting him rather than putting blobs together.
+Start with a shape bigger than all sides, and chisel." Also: write
+everything about the technique into the docs (docs/CARVING.md).
+
+- [x] 1. Outlines redone (BiRefNet) and the two owner-spotted spots patched.
+- [x] 2. Rough-out: block carved from nine photos with his head posed per
+  photo (tools/carve.py); outline check tool (tools/silhouette_check.py).
+- [x] 3a. Corners chiselled off (6 mm and 10 mm tried; 6 mm kept as the
+  working base, it keeps the outlines).
+- [ ] 3b. Chisel by eye: face front, cheeks, chest and chin hollows, top of
+  the head; then seat the eyes and shape the ears.
+- [ ] 4. Show the owner.

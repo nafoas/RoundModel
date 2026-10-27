@@ -12,6 +12,9 @@ every step and repeat the intents at the end of every step.
 of each message. (A hook that injected them on every command was abandoned:
 it made the website flag commands.)
 
+**How he is built now: carved, then chiselled** (subtractive; see
+`docs/CARVING.md` for the whole technique).
+
 **Use all of his photos, not just the same five or six.** They are sorted in
 `docs/PHOTOS.md` and `references/photo_index.json` (master, the 18-photo
 sheet, 27 close-ups, 11 edited), listed by which part each shows best. Before using them, read "How to read
