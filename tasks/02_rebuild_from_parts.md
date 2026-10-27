@@ -209,6 +209,11 @@ everything about the technique into the docs (docs/CARVING.md).
 - [x] 3a'. Owner: carved too much on all sides, nose squared from above.
   Gentle carving (two photos must agree) + fine rim passes (refine_rim.py);
   top-down-weighted pass rolled back (lumps, too big elsewhere).
+- [x] 3a''. Owner: scale the photos to each other. Uniform distance scaling
+  tried two ways, rolled back (made it worse; top-down differs in proportion,
+  not size). Owner: from above he only looks longer (a compact loaf, no
+  reference). Top-down read as his shape at the profiles' length: top-down
+  missing 8.4 -> 3.3 %, nose round.
 - [ ] 3b. Chisel by eye: face front, cheeks, chest and chin hollows, top of
   the head; then seat the eyes and shape the ears.
 - [ ] 4. Show the owner.

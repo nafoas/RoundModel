@@ -92,7 +92,9 @@ def project(P, cam):
         c = np.asarray(a["c"])
         th = np.radians(a["roll_deg"])
         Rm = np.array([[np.cos(th), -np.sin(th)], [np.sin(th), np.cos(th)]])
-        uv = (uv - c) @ Rm.T * a["s"] + c + np.asarray(a["t"])
+        uv = (uv - c) @ Rm.T * a["s"]
+        uv[:, 1] *= a.get("sy", 1.0)  # along his length in the top-down photo
+        uv = uv + c + np.asarray(a["t"])
     return uv
 
 

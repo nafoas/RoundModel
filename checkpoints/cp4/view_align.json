@@ -1,0 +1,16 @@
+{
+ "sheet_09_top_down": {
+  "s": 1.0,
+  "sy": 1.0765740289984262,
+  "roll_deg": 0.0,
+  "t": [
+   -10.104101980472034,
+   -11.228818995986881
+  ],
+  "c": [
+   538.765937835291,
+   699.0372686058026
+  ],
+  "note": "owner: from above he is a compact loaf with no reference (legs, ears), so he only looks longer; his length comes from the profiles (213 mm), the top-down outline gives the shape of his circumference. Outline length 225 mm -> model projection stretched 225/213 along his length. Then a shift of the top-down photo along/across his length (-10, -11 px) and its length factor (1.077) solved against the carved shape."
+ }
+}

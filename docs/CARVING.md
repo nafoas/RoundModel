@@ -142,3 +142,29 @@ Read with CLAUDE.md, docs/INTENTS.md, docs/PHOTOS.md and the current task file.
   from them), which shortens his length only (a 20 deg turn shortens it 6 %);
   or his posture (lying low and stretched from above, standing in the
   others). Asked the owner.
+
+## 8. Reading the top-down photo as his shape, not his length (owner)
+
+Owner: "he looks longer in the top down one merely because he is such a
+compact loaf. In the profiles you can really see how short he is, but from
+the top you lose all sense of reference - his legs, ears, anything - so even
+his sides and back kinda get lost within the sheer fluffy loaf form, so he
+looks 'longer' when in reality it is just because there's not a lot of
+perspective." (A new top-down photo is on offer if ever needed.)
+
+- So: **his length comes from the profiles (213 mm); the top-down outline
+  gives the shape of his circumference** (the round of his nose, the curve
+  of his rump, how his sides run). In checkpoints/cp4/view_align.json the
+  top-down photo alone gets a length factor (the model's projection there is
+  stretched along his length, `sy`, 225/213 to start) and a shift; both were
+  then solved against the carved shape (sy 1.077, shift -10, -11 px).
+- Then gentle carving and the fine passes as before. Current base:
+  work/c/tf2 (regenerate: carve.py work/c/t2 --votes 2 --hard 1.5;
+  refine_rim.py work/c/t2 work/c/tf2 --rounds 6).
+- Outlines (model past him / missing): top-down 3.0 / 3.3 % (was 0.4 / 8.4),
+  master 1.2 / 1.9, right profile 2.9 / 1.9, back 3/4 right 3.3 / 0.5, front
+  3/4 right 1.9 / 2.2, front 3/4 left 3.0 / 2.7, left profile 4.8 / 2.4,
+  back 1.7 / 2.4, back 3/4 left 2.8 / 2.6.
+- From above (sheet 10): the nose is round now and his sides follow his
+  outline; the rump end is still a little flat in the middle (~20 px short
+  of his curve) and there is a slight bulge past him at the upper left.
