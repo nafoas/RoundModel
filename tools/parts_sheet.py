@@ -81,6 +81,11 @@ def main():
         sc.view_settings.exposure = -0.8
         cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam"))
         sc.collection.objects.link(cam)
+        # a soft light that follows each camera (above it), so a back or top
+        # view is lit like the photo of it was, not left in shadow
+        fill = bpy.data.objects.new("fill", bpy.data.lights.new("fill", "AREA"))
+        fill.data.energy, fill.data.size = 6.0, 0.8
+        sc.collection.objects.link(fill)
         sc.camera = cam
         for vn in views:
             photo, cn, az, el, dist = VIEWS[vn][:5]
@@ -104,6 +109,9 @@ def main():
                 down = np.cross(fwd, right)
                 f_px = max(W, H) / 2 / np.tan(np.radians(18))
                 RC.set_camera(sc, cam, (W, H), R.from_matrix(np.stack([right, down, fwd])).as_rotvec(), pos, f_px)
+            cpos = np.asarray(cam.matrix_world.translation)
+            fill.location = tuple(cpos + np.array([0, 0, 0.15]))
+            fill.rotation_euler = Vector(BODY - fill.location).to_track_quat("-Z", "Y").to_euler()
             sc.render.filepath = str(out.resolve())
             bpy.ops.render.render(write_still=True)
             cam.data.shift_x = cam.data.shift_y = 0

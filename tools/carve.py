@@ -177,10 +177,10 @@ def carve_votes(step, views=VIEWS, hard=4.0, votes=2):
     return nd.binary_fill_holes(vol), axes, report
 
 
-def mesh(vol, axes, step, smooth_iters=12):
+def mesh(vol, axes, step, smooth_iters=30):
     """Surface of the carved block; voxel steps relaxed (Taubin smoothing,
     which does not shrink him)."""
-    f = nd.gaussian_filter(vol.astype(float), 1.0)
+    f = nd.gaussian_filter(vol.astype(float), 1.6)  # no cube steps (rings) on gentle curves
     V, F, _, _ = measure.marching_cubes(np.pad(f, 2), 0.5, spacing=(step, step, step))
     V += np.array([a[0] for a in axes]) - 2 * step
     F = F[:, ::-1]  # outward-facing (marching cubes on an inside-high field faces inward)

@@ -1,16 +1,16 @@
 {
  "sheet_09_top_down": {
   "s": 1.0,
-  "sy": 1.0765740289984262,
-  "roll_deg": 0.0,
+  "sy": 1.0735457293679507,
+  "roll_deg": 5.365723278187045,
   "t": [
-   -10.104101980472034,
-   -11.228818995986881
+   -10.75714969377042,
+   -8.633781558741427
   ],
   "c": [
    538.765937835291,
    699.0372686058026
   ],
-  "note": "owner: from above he is a compact loaf with no reference (legs, ears), so he only looks longer; his length comes from the profiles (213 mm), the top-down outline gives the shape of his circumference. Outline length 225 mm -> model projection stretched 225/213 along his length. Then a shift of the top-down photo along/across his length (-10, -11 px) and its length factor (1.077) solved against the carved shape."
+  "note": "owner: from above he is a compact loaf with no reference (legs, ears), so he only looks longer; his length comes from the profiles (213 mm), the top-down outline gives the shape of his circumference. Outline length 225 mm -> model projection stretched 225/213 along his length. Then a shift of the top-down photo along/across his length (-10, -11 px) and its length factor (1.077) solved against the carved shape. Owner: he is pointed slightly to his left in the top-down photo; the photo is turned 5.4 deg in its own plane (a turn of him on the spot) with shift and length factor re-solved."
  }
 }

@@ -214,6 +214,9 @@ everything about the technique into the docs (docs/CARVING.md).
   not size). Owner: from above he only looks longer (a compact loaf, no
   reference). Top-down read as his shape at the profiles' length: top-down
   missing 8.4 -> 3.3 %, nose round.
+- [x] 3a'''. Owner: the top-down photo was oriented wrong (he points
+  slightly left): turned 5.4 deg. Then his shape from behind: corners
+  chiselled wider and outlines restored; his back is a smooth ball now.
 - [ ] 3b. Chisel by eye: face front, cheeks, chest and chin hollows, top of
   the head; then seat the eyes and shape the ears.
 - [ ] 4. Show the owner.

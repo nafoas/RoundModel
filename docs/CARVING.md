@@ -168,3 +168,32 @@ perspective." (A new top-down photo is on offer if ever needed.)
 - From above (sheet 10): the nose is round now and his sides follow his
   outline; the rump end is still a little flat in the middle (~20 px short
   of his curve) and there is a slight bulge past him at the upper left.
+
+## 9. The top-down photo turned; his back rounded (owner)
+
+- Owner: "you just oriented the photo wrong ... he is pointed slightly to
+  the left in the photo, but the model doesn't reflect that." The top-down
+  photo is turned in its own plane (same as turning him on the spot), solved
+  with its shift and length factor: 5.4 deg (every starting turn from -6 to
+  +6 deg converged to 5.4-6.4), shift (-10.8, -8.6) px, length factor 1.074.
+  His sides now follow his outline all round from above (sheet 11).
+- The rump end from above stays a little flat in the middle (~25 px, ~4 mm):
+  behind the middle the profiles put his rump end ~4 mm further forward
+  than the top-down photo. Re-solving the length did not change it.
+- **From behind** he is a smooth ball; the carving was faceted there (a flat
+  back wall and hard corners between the views: outlines only show his
+  edge, not how round his back is). Fix: chisel the corners off over a
+  wider radius (`--round 0.014`, 250 cm3 cut), then the fine passes put his
+  outlines back (`refine_rim.py --rounds 10 --cap_mm 1.2`; up to 9.5 mm back
+  out at the rims). His back now rounds over like his (sheet 12).
+- Surface: blur 1.6 cubes before meshing and 30 Taubin rounds, which took
+  out the rings (cube steps) on gentle curves. Renders now have a soft light
+  following each camera, so back and top views are lit as in his photos.
+- Current base: work/c/rrf2 (regenerate: carve.py work/c/rr2 --votes 2
+  --hard 1.5 --round 0.014; refine_rim.py work/c/rr2 work/c/rrf2 --rounds
+  10 --cap_mm 1.2). Outlines (past him / missing): top-down 1.6 / 3.8 %,
+  master 1.3 / 2.5, right profile 2.0 / 2.3, back 3/4 right 2.5 / 0.7, front
+  3/4 right 1.8 / 2.8, front 3/4 left 2.7 / 3.2, left profile 3.2 / 2.8,
+  back 1.3 / 2.9, back 3/4 left 1.4 / 3.1.
+- Still blocky: the face front (lumpy, flat), the top of the head (a flat
+  plate with ridges at its edge from above). Next: the by-eye chiselling.
