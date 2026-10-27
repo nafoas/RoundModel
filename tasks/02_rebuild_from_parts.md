@@ -217,6 +217,8 @@ everything about the technique into the docs (docs/CARVING.md).
 - [x] 3a'''. Owner: the top-down photo was oriented wrong (he points
   slightly left): turned 5.4 deg. Then his shape from behind: corners
   chiselled wider and outlines restored; his back is a smooth ball now.
+- [x] 3a''''. Better from above: ears taken out of the outlines (no plate on
+  the head); symmetric about his own midline (found: -5.4 mm, 2.35 deg).
 - [ ] 3b. Chisel by eye: face front, cheeks, chest and chin hollows, top of
   the head; then seat the eyes and shape the ears.
 - [ ] 4. Show the owner.

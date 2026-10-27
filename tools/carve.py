@@ -33,7 +33,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 ROOT = Path(__file__).resolve().parents[1]
 _ap = ROOT / "checkpoints/cp4/view_align.json"
 ALIGN = json.loads(_ap.read_text()) if _ap.exists() else {}  # tools/align_views.py
-USE_POSES = True  # his head as he holds it in each photo (--no_poses to carve without)
+USE_POSES = True
+NO_EARS = True  # his head as he holds it in each photo (--no_poses to carve without)
 BLOCK = ((-0.12, 0.12), (-0.15, 0.15), (-0.04, 0.21))  # bigger than him on all sides
 
 # view: tolerance in that photo's own pixels (camera / pose certainty)
@@ -67,6 +68,9 @@ def view_data(name):
                    pp=[mask.shape[1] / 2, mask.shape[0] / 2])
     pose = ROOT / f"checkpoints/cp3/head_poses_parts/{name}.json"
     cam["pose"] = json.loads(pose.read_text()) if pose.exists() and USE_POSES else None
+    ne = ROOT / f"checkpoints/cp4/outlines/{name}.noears.png"
+    if NO_EARS and ne.exists():  # ears are built separately (tools/ears_out.py)
+        mask = np.asarray(Image.open(ne)) > 127
     al = ALIGN.get(name)
     if al:
         cam["align"] = al
@@ -177,6 +181,39 @@ def carve_votes(step, views=VIEWS, hard=4.0, votes=2):
     return nd.binary_fill_holes(vol), axes, report
 
 
+def symmetric(vol, axes, step):
+    """Left and right made the same (owner: don't let the top-down photo,
+    where he points a little to his left, make him crooked). His own
+    midline plane is found first (where it is across him and which way it
+    faces, a vertical plane), as the plane his carved shape is most nearly a
+    mirror image across; then the signed distance is averaged with its
+    mirror image across that plane."""
+    from scipy.optimize import minimize
+    sdf = nd.distance_transform_edt(~vol) - nd.distance_transform_edt(vol)
+    o = np.array([ax[0] for ax in axes])
+    near = np.abs(sdf) < 6  # cubes near his surface
+    P = np.stack(np.nonzero(near), -1) * step + o
+    sub = P[:: max(1, len(P) // 40000)]
+
+    def mirror(Q, c, th):
+        n = np.array([np.cos(th), np.sin(th), 0.0])
+        d = (Q - [c, 0, 0]) @ n
+        return Q - 2 * d[:, None] * n
+
+    def sample(Q):
+        return nd.map_coordinates(sdf, ((Q - o) / step).T, order=1, mode="nearest")
+
+    def cost(p):
+        return np.mean((sample(sub) - sample(mirror(sub, p[0], p[1]))) ** 2)
+
+    r = minimize(cost, [0.0, 0.0], method="Powell", options={"xtol": 1e-5})
+    c, th = r.x
+    print(f"his midline: x = {c * 1000:.1f} mm, turned {np.degrees(th):.2f} deg", flush=True)
+    G = np.stack(np.meshgrid(*axes, indexing="ij"), -1).reshape(-1, 3)
+    sym = (sdf.ravel() + sample(mirror(G, c, th))) / 2
+    return (sym < 0).reshape(vol.shape), (float(c), float(th))
+
+
 def mesh(vol, axes, step, smooth_iters=30):
     """Surface of the carved block; voxel steps relaxed (Taubin smoothing,
     which does not shrink him)."""
@@ -213,13 +250,20 @@ def main():
     ap.add_argument("--round", type=float, default=0.0, help="chisel the corners off over this radius (m)")
     ap.add_argument("--keep_mm", type=float, default=0.0)
     ap.add_argument("--no_poses", action="store_true")
+    ap.add_argument("--asym", action="store_true", help="don't make left and right the same")
+    ap.add_argument("--ears", action="store_true", help="carve with the ears left in the outlines")
     a = ap.parse_args()
     global USE_POSES
     USE_POSES = not a.no_poses
+    global NO_EARS
+    NO_EARS = not a.ears
     if a.votes:
         vol, axes, report = carve_votes(a.step, hard=a.hard, votes=a.votes)
     else:
         vol, axes, report = carve(a.step)
+    if not a.asym:
+        vol, plane = symmetric(vol, axes, a.step)
+        json.dump({"x_m": plane[0], "turn_rad": plane[1]}, open(Path(a.out).parent / f"{Path(a.out).name}.midline.json", "w"))
     if a.round:
         before = int(vol.sum())
         vol = chisel_corners(vol, a.step, a.round, a.keep_mm)

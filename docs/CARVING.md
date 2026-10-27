@@ -197,3 +197,36 @@ perspective." (A new top-down photo is on offer if ever needed.)
   back 1.3 / 2.9, back 3/4 left 1.4 / 3.1.
 - Still blocky: the face front (lumpy, flat), the top of the head (a flat
   plate with ridges at its edge from above). Next: the by-eye chiselling.
+
+## 10. Better from above, without making him crooked (owner)
+
+Owner: "trying to make him look better from above, with respect to the other
+angles, could be very productive. Just be wary of making him crooked by
+accidentally using the slightly left tilting image."
+
+- **Ears out of the outlines** (tools/ears_out.py -> <view>.noears.png):
+  left in, the front and side photos carved a slab at ear height between
+  the ears, which from above was a flat plate with ridges at its edge. An
+  ear is what a round opening ~1/9 of his size removes from the top third
+  of his outline; carve.py uses the ear-less outlines (ears get their own
+  step). Review: sheet 14.
+- **Symmetric, about his own midline**: first try mirrored across the
+  world's x = 0 and shifted him sideways (master: model past him on one
+  side, short on the other: 5.7 / 6.9 %). His midline plane is found from
+  the carving itself (the vertical plane his shape is most nearly a mirror
+  image across): x = -5.4 mm, turned 2.35 deg (checkpoints/cp4/midline.json).
+  The carved block's signed distance is averaged with its mirror across that
+  plane, and every fine-pass move is averaged with the move at its mirror
+  point. The top-down photo (him pointing a little left) can no longer bend
+  him.
+- Current base: work/c/ef2 (carve.py work/c/e2 --votes 2 --hard 1.5
+  --round 0.014; refine_rim.py work/c/e2 work/c/ef2 --rounds 10 --cap_mm
+  1.2). Outlines without ears (past him / missing): top-down 2.4 / 3.5 %,
+  master 3.1 / 2.5, right profile 2.5 / 2.1, back 3/4 right 4.0 / 2.1, front
+  3/4 right 2.2 / 2.2, front 3/4 left 3.3 / 2.4, left profile 3.2 / 2.2,
+  back 1.6 / 3.0, back 3/4 left 1.8 / 6.1.
+- From above (sheet 16) he is now a smooth, symmetric egg; the plate is
+  mostly gone, a faint U-shaped rim remains where the head meets the body.
+  From behind and above (close-up 14) smooth. Still to chisel: the face
+  front and the jaw-to-chest ledge from the front; the placeholder eyes are
+  not yet seated in this head.

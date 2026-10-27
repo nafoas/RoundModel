@@ -91,6 +91,7 @@ def main():
     ap.add_argument("--rounds", type=int, default=6)
     ap.add_argument("--cap_mm", type=float, default=1.0)
     ap.add_argument("--smooth", type=float, default=30.0, help="larger = broader, gentler changes")
+    ap.add_argument("--asym", action="store_true")
     ap.add_argument("--top_weight", type=float, default=3.0, help="top-down is his circumference (owner)")
     a = ap.parse_args()
     WEIGHT["sheet_09_top_down"] = a.top_weight
@@ -102,6 +103,15 @@ def main():
     n = len(V)
     L = laplacian(F, n).tocsc()
     total = np.zeros(n)
+    from scipy.spatial import cKDTree
+    import json as _j
+    mp = Path(a.inp).parent / f"{Path(a.inp).name}.midline.json"
+    pl = _j.loads(mp.read_text()) if mp.exists() else {"x_m": 0.0, "turn_rad": 0.0}
+    nrm = np.array([np.cos(pl["turn_rad"]), np.sin(pl["turn_rad"]), 0.0])
+
+    def mirror_of(V):
+        d = (V - [pl["x_m"], 0, 0]) @ nrm
+        return cKDTree(V).query(V - 2 * d[:, None] * nrm)[1]
     for r in range(a.rounds):
         num, den = round_moves(V, F, data, a.cap_mm / 1000)
         t = np.where(den > 0, num / np.maximum(den, 1e-9), 0)
@@ -109,6 +119,8 @@ def main():
         # smooth field d: data where photos see a rim, bending kept low elsewhere
         solve = factorized((Wd + a.smooth * (L @ L)).tocsc())
         d = solve(Wd @ t)
+        if not a.asym:  # the same move on his left and right (no crookedness)
+            d = 0.5 * (d + d[mirror_of(V)])
         V = V + d[:, None] * normals(V, F)
         total += d
         print(f"round {r}: rim points {int((den > 0).sum())}, move mm: mean |d| {np.abs(d).mean()*1000:.2f}, "
