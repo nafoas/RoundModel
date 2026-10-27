@@ -31,6 +31,8 @@ from skimage import measure
 
 sys.path.insert(0, str(Path(__file__).parent))
 ROOT = Path(__file__).resolve().parents[1]
+_ap = ROOT / "checkpoints/cp4/view_align.json"
+ALIGN = json.loads(_ap.read_text()) if _ap.exists() else {}  # tools/align_views.py
 USE_POSES = True  # his head as he holds it in each photo (--no_poses to carve without)
 BLOCK = ((-0.12, 0.12), (-0.15, 0.15), (-0.04, 0.21))  # bigger than him on all sides
 
@@ -65,6 +67,9 @@ def view_data(name):
                    pp=[mask.shape[1] / 2, mask.shape[0] / 2])
     pose = ROOT / f"checkpoints/cp3/head_poses_parts/{name}.json"
     cam["pose"] = json.loads(pose.read_text()) if pose.exists() and USE_POSES else None
+    al = ALIGN.get(name)
+    if al:
+        cam["align"] = al
     return cam, mask
 
 
@@ -81,7 +86,14 @@ def posed(P, pose):
 def project(P, cam):
     Rc = R.from_rotvec(cam["rot"]).as_matrix()
     Xc = (P - np.asarray(cam["pos"])) @ Rc.T
-    return cam["f"] * Xc[:, :2] / Xc[:, 2:3] + np.asarray(cam["pp"])
+    uv = cam["f"] * Xc[:, :2] / Xc[:, 2:3] + np.asarray(cam["pp"])
+    a = cam.get("align")
+    if a:  # scale between photos (each taken from its own distance), shift, roll
+        c = np.asarray(a["c"])
+        th = np.radians(a["roll_deg"])
+        Rm = np.array([[np.cos(th), -np.sin(th)], [np.sin(th), np.cos(th)]])
+        uv = (uv - c) @ Rm.T * a["s"] + c + np.asarray(a["t"])
+    return uv
 
 
 def carve(step, views=VIEWS):

@@ -116,3 +116,29 @@ Read with CLAUDE.md, docs/INTENTS.md, docs/PHOTOS.md and the current task file.
   head, a steep cut under the jaw that reads as a dark ledge from the
   front). Carving without the head poses gives the same, so it is not the
   poses: outlines cannot shape these areas. They are the by-eye chiselling.
+
+## 7. Scaling the photos to each other (owner: "you've not properly scaled the
+## images to each other ... you're just not accounting for distance")
+
+- Hooks added: carve.project() applies a per-photo scale / shift / roll from
+  checkpoints/cp4/view_align.json (scale about where his body centre lands,
+  equivalent to moving that camera nearer or further).
+- Try 1, tools/align_views.py (fit each photo to the carved shape, repeat):
+  ran away (top-down scale fell to 0.78 in 5 rounds; the carved shape is
+  always a little small, so it pulled every photo smaller). Not used.
+- Try 2, tools/scale_views.py (his size measured in mm at each photo's
+  distance, one scale per photo solved by least squares, master fixed):
+  measured width / length / height: master 162 / - / 197 mm, top-down
+  157 / 225 / -, right profile - / 209 / 200, left profile - / 212 / 208,
+  back 174 / - / 208. Solved size 160 x 213 x 200 mm; scales 0.94-1.01.
+  After scaling, top-down still shows him ~7.5 mm longer and ~5.5 mm
+  narrower than the others: a difference in proportion, which no distance
+  (a uniform scale) can produce. With the scales applied, top-down missing
+  rose 8.4 -> 11.5 % and back 2.3 -> 11.0 %: rolled back
+  (view_align.rejected.json, sheet 08).
+- What could make him look longer from above and shorter from the side
+  without a distance error: the profile cameras looking slightly more from
+  the front or back than fitted (or his body turned a little toward or away
+  from them), which shortens his length only (a 20 deg turn shortens it 6 %);
+  or his posture (lying low and stretched from above, standing in the
+  others). Asked the owner.
