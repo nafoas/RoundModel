@@ -223,6 +223,8 @@ everything about the technique into the docs (docs/CARVING.md).
   outline curve; smoothed first and moves spread 50x broader; outlines kept.
 - [x] 3b-2. Fine registration (shift/roll per photo, master head tilt 6.4
   deg); master offset fixed. Open: crease across the back of the head.
+- [x] 3b-3. Step behind the head found (8 mm); ear-base notch closed in the
+  outlines, step 1.2 mm smaller; the rest sits under the ear bases.
 - [ ] 3b. Chisel by eye: face front, cheeks, chest and chin hollows, top of
   the head; then seat the eyes and shape the ears.
 - [ ] 4. Show the owner.

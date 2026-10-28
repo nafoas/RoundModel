@@ -284,3 +284,25 @@ what you did made it worse."
   outlines (no change); skipping fine-pass moves near the removed ears
   (made him 5-8 % too big everywhere). Not solved yet; likely it goes with
   shaping the ears and the head top together.
+
+## 13. The step behind his head
+
+- Found by measuring the top line along his midline (work/c/gf2): it drops
+  8 mm in one step just behind the head (151.7 mm high 10 mm behind the head
+  line, 159.5 mm at it). That step is the "crease" seen from behind/above.
+- tools/fill_hollows.py (fill toward a smoothed copy where the copy is
+  outside him, in a box, symmetric): moved < 1 mm, no visible effect; the
+  step sits on his overall convex dome, so it does not read as a hollow at
+  any smoothing scale. Kept as a tool, not used.
+- Cause found: cutting the ears out of the outlines also cut a notch at each
+  ear base, and the earlier notch fix excluded exactly the ear's area. Now
+  ears_out.py closes the ear-less outline with a round tool (8 % of his
+  size) in the top band including the ear's area (closing cannot regrow the
+  ear). Fills were small: in most photos the step is where his ear bases
+  sit, not an outline notch.
+- Result (work/c/gf6; carve.py work/c/g5 ... as before): the step is
+  1.2 mm smaller (152.9 -> 159.9 mm), softer from behind (sheet 22);
+  outlines the same or slightly better (master 2.5 / 1.2, back 1.0 / 3.1,
+  others within 0.1).
+- The rest of the step sits under his ear bases. Next: build the ears; if a
+  crease still shows at their bases from behind, fill it locally then.

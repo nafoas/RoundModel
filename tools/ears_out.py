@@ -34,6 +34,16 @@ def remove_ears(m, frac=0.11, top=0.33):
         sz = nd.sum(ears, lab, range(1, n + 1))
         ears = np.isin(lab, [i + 1 for i, s in enumerate(sz) if s > 0.003 * m.sum()])
     out = m & ~ears
+    # cutting an ear out leaves a notch where its base met the head (in the
+    # side and back photos, right behind his head); his head runs smoothly
+    # there under the ear. Close it with a large round tool in the top band.
+    # Closing cannot regrow the ear (it only fills hollows of the ear-less
+    # outline), so the ear's own area may be filled too.
+    rc = max(3, int(0.08 * max(h, w)))
+    kc = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * rc + 1, 2 * rc + 1))
+    pc = rc + 5
+    closed = cv2.morphologyEx(np.pad(out.astype(np.uint8), pc), cv2.MORPH_CLOSE, kc)[pc:-pc, pc:-pc].astype(bool)
+    out = out | (closed & band)
     # soften the cut where each ear met the head
     out = cv2.morphologyEx(out.astype(np.uint8), cv2.MORPH_OPEN,
                            cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))).astype(bool)
