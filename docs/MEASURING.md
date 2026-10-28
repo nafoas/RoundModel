@@ -146,3 +146,8 @@ and shown to the owner.
 - Close-up 19: NOT solved (lens 4004, model spills past his outline): one
   landmark and an outline mostly cut by the frame are too little. Needs
   more landmarks (eye corners, visible nose, ear bases) before solving.
+- Close-up 20: NOT solved (eye 2.9 px but outline far off): same as 19.
+- Step A so far: cameras fitted for the master and sheet 02, 03, 04, 07,
+  08, 09 (earlier) and close-ups 06, 25, 21, 02 (new, checked by eye:
+  review/closeups_solved.jpg). Close-ups 19, 20 need more landmarks. Still
+  to do: the other close-ups, sheet 01, 05, 06, 10-18, the edited set.

@@ -241,7 +241,7 @@ Looked at large renders beside master, sheet 02/08/03/07/09, close-ups 06/19/21;
 
 ## Direct measuring (owner's method, docs/MEASURING.md) -- awaiting go
 
-- [ ] A. Solve the camera (and his head pose) for every photo used, close-ups and edited included, from hand-traced landmarks + outline; retire the guessed plain directions. (Owner: close-up 06 render was not the same angle; eye sockets came out wrong because of it.)
+- [ ] A. (in progress: close-ups 06, 25, 21, 02 solved; 19, 20 need more landmarks) Solve the camera (and his head pose) for every photo used, close-ups and edited included, from hand-traced landmarks + outline; retire the guessed plain directions. (Owner: close-up 06 render was not the same angle; eye sockets came out wrong because of it.)
 - [ ] B. His frame from the master (he looks straight forward there): midline plane vertical, facing the master camera, through his face; not the carving's 2.4 deg-turned plane. (Owner: he is angled slightly left.)
 - [ ] Rebuild the carving in his frame; re-seat the eyes.
 - [ ] C. Maps from each photo: normals (DSINE / StableNormal), relative depth (Depth Anything V2), light from the outline + shape from shading (his fur is one colour), landmarks.
