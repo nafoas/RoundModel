@@ -230,3 +230,26 @@ accidentally using the slightly left tilting image."
   From behind and above (close-up 14) smooth. Still to chisel: the face
   front and the jaw-to-chest ledge from the front; the placeholder eyes are
   not yet seated in this head.
+
+## 11. Ripples out (no ridges along the photos' outline curves)
+
+- Seen against the master, close-ups 06, 25, 19, 20, 21, 10 and the edited
+  loaf front: arcs across his face front and a U on top of his head, which
+  he does not have (his face runs softly into a full chest).
+- Tried: filling creases with a 6 mm rounded tool (`carve.py --close`):
+  hardly changed anything. The arcs are not one crease.
+- Cause: the fine passes. Each photo's outline is a curve across his
+  surface, and moving those curves in and out left a ridge along each. Fix
+  (`refine_rim.py --fair 400 --smooth 1500`): Taubin smoothing first (no
+  shrinking), then the fine passes with moves spread 50x more broadly
+  (smoothness 1500 instead of 30). 300 was not enough.
+- Outlines barely changed (each within half a percentage point; past him /
+  missing): top-down 2.2 / 3.7, master 3.4 / 2.4, right profile 2.8 / 2.3,
+  back 3/4 right 4.5 / 2.2, front 3/4 right 2.0 / 2.4, front 3/4 left
+  3.0 / 2.5, left profile 3.4 / 2.2, back 1.5 / 3.2, back 3/4 left 1.8 / 5.9.
+- Current base: work/c/sm1500 (carve.py work/c/e3 --votes 2 --hard 1.5
+  --close 0.006 --round 0.014; refine_rim.py work/c/e3 work/c/sm1500 --fair
+  400 --smooth 1500 --rounds 12 --cap_mm 1.2). Renders: plain-direction fill
+  light lowered to 2.0 (6.0 washed out close framing).
+- Still to do: a soft shading band where his face meets his chest from the
+  front; the face front shape itself; seating the eyes (placeholders); ears.

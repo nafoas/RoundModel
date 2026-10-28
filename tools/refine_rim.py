@@ -92,10 +92,22 @@ def main():
     ap.add_argument("--cap_mm", type=float, default=1.0)
     ap.add_argument("--smooth", type=float, default=30.0, help="larger = broader, gentler changes")
     ap.add_argument("--asym", action="store_true")
+    ap.add_argument("--fair", type=int, default=0, help="Taubin smoothing rounds before the passes")
     ap.add_argument("--top_weight", type=float, default=3.0, help="top-down is his circumference (owner)")
     a = ap.parse_args()
     WEIGHT["sheet_09_top_down"] = a.top_weight
     V, F = load_obj(Path(a.inp) / "head.obj")
+    if a.fair:
+        # take out ripples (stacked shallow cuts between photos) before the
+        # outline passes: Taubin smoothing, which does not shrink him; the
+        # passes below then put his outlines back
+        n0 = len(V)
+        L0 = laplacian(F, n0)
+        deg = np.asarray(L0.diagonal())
+        Wn = sp.diags(1 / np.maximum(deg, 1)) @ (sp.diags(deg) - L0)  # neighbour average
+        for _ in range(a.fair):
+            V = V + 0.5 * (Wn @ V - V)
+            V = V - 0.53 * (Wn @ V - V)
     data = []
     for name in WEIGHT:
         cam, mask = C.view_data(name)

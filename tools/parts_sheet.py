@@ -84,7 +84,7 @@ def main():
         # a soft light that follows each camera (above it), so a back or top
         # view is lit like the photo of it was, not left in shadow
         fill = bpy.data.objects.new("fill", bpy.data.lights.new("fill", "AREA"))
-        fill.data.energy, fill.data.size = 6.0, 0.8
+        fill.data.energy, fill.data.size = 2.0, 0.8
         sc.collection.objects.link(fill)
         sc.camera = cam
         for vn in views:

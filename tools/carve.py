@@ -250,6 +250,7 @@ def main():
     ap.add_argument("--round", type=float, default=0.0, help="chisel the corners off over this radius (m)")
     ap.add_argument("--keep_mm", type=float, default=0.0)
     ap.add_argument("--no_poses", action="store_true")
+    ap.add_argument("--close", type=float, default=0.0, help="fill creases narrower than twice this radius (m)")
     ap.add_argument("--asym", action="store_true", help="don't make left and right the same")
     ap.add_argument("--ears", action="store_true", help="carve with the ears left in the outlines")
     a = ap.parse_args()
@@ -261,6 +262,16 @@ def main():
         vol, axes, report = carve_votes(a.step, hard=a.hard, votes=a.votes)
     else:
         vol, axes, report = carve(a.step)
+    if a.close:
+        # fill narrow creases only (a rounded tool of this radius cannot reach
+        # into them from outside): the carving and the per-photo head turns
+        # leave a crease from cheek to cheek under the muzzle that he does
+        # not have
+        r = int(round(a.close / a.step))
+        g = np.add.outer(np.add.outer(np.arange(-r, r + 1) ** 2, np.arange(-r, r + 1) ** 2), np.arange(-r, r + 1) ** 2) <= r * r
+        before = int(vol.sum())
+        vol = nd.binary_closing(np.pad(vol, r + 1), structure=g)[r + 1:-r - 1, r + 1:-r - 1, r + 1:-r - 1]
+        print(f"creases filled: {int(vol.sum()) - before} cubes ({(vol.sum() - before) * a.step ** 3 * 1e6:.1f} cm3)")
     if not a.asym:
         vol, plane = symmetric(vol, axes, a.step)
         json.dump({"x_m": plane[0], "turn_rad": plane[1]}, open(Path(a.out).parent / f"{Path(a.out).name}.midline.json", "w"))

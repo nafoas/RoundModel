@@ -219,6 +219,8 @@ everything about the technique into the docs (docs/CARVING.md).
   chiselled wider and outlines restored; his back is a smooth ball now.
 - [x] 3a''''. Better from above: ears taken out of the outlines (no plate on
   the head); symmetric about his own midline (found: -5.4 mm, 2.35 deg).
+- [x] 3b-1. Ripples out: the fine passes left ridges along each photo's
+  outline curve; smoothed first and moves spread 50x broader; outlines kept.
 - [ ] 3b. Chisel by eye: face front, cheeks, chest and chin hollows, top of
   the head; then seat the eyes and shape the ears.
 - [ ] 4. Show the owner.
