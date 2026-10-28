@@ -336,3 +336,28 @@ what you did made it worse."
   4.0 / 3.1; back 3/4 right 7.7 / 1.9 and left profile 5.2 / 2.3, where
   he holds his ears differently (more upright, further forward). From
   behind/above his ears look larger and rounder at the base than the model's.
+
+## 15. Fixing pass, F1: his eyes seated
+
+- Before (sheet 26a): one small eye showing from the front, the other
+  buried: the placeholder eyes from the old model, never seated in this head.
+- checkpoints/cp4/eyes.json: the fitted eyes (eyes3d.json: true size from
+  the profiles) un-posed from the master head pose (they were fitted when
+  the master had none), made symmetric about his midline, then pushed 4 mm
+  out along each eye's axis and lowered 1.5 mm. That puts them on his traced
+  eyes in the master (they had been ~13 mm too close together) and the left
+  profile. The three-quarter photos disagree whichever way (his head is
+  turned differently there), so they do not decide this. Radius 10.1 mm.
+- tools/seat_eyes.py: around each eye the head surface is lowered along the
+  eye's axis: inside the lid opening (half-angle 74.5 deg, fitted) to just
+  under the eyeball, the lid rim r cos(psi) in front of the centre, then
+  rising at `slope` back into his face; never moved outward; relaxed a
+  little so there is no hard edge.
+- Slope 0.6 made a wide dish round each eye (rolled back, sheet 26b);
+  2.0 still a dish; 3.5 kept: a tight socket with the fur close round the
+  eye, as in close-ups 21 and 02.
+- Current model: work/c/eyes4e (seat_eyes.py work/c/gf6 work/c/eyes4
+  --slope 3.5; ears_leaf.py work/c/eyes4 work/c/eyes4e --turn 15; eyes from
+  work/c/eyes4).
+- Still: from the front a small notch at the side of the head round each
+  eye where his fur fills in more.
