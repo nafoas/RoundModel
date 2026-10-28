@@ -361,3 +361,20 @@ what you did made it worse."
   work/c/eyes4).
 - Still: from the front a small notch at the side of the head round each
   eye where his fur fills in more.
+
+## 16. Fixing pass, F2 and F3: measured, not shape problems at this scale
+
+- F2, the "flat plateau" on top of his head from above: measured across
+  his head 20 mm forward of the head line, the top falls 0.8 mm at 8 mm
+  out, 2.7 at 16, 4.7 at 24, 10.7 at 32: already a round arc. The bright
+  plateau is the top light on a round head top framed by the darker sides.
+  tools/round_crown.py (ease each cross-slice toward a fitted circular arc)
+  moved < 0.7 mm, no visible change (sheet 27); first version faded out at
+  the shoulders and moved the wrong way (+1.1 mm in the middle). Not used.
+- F3, the dark band under the muzzle from the front: fill_hollows.py in a
+  box round the lower face moved <= 1.1 mm, no visible change (sheet 28).
+  The band is the broad shading round a smooth, featureless muzzle mound,
+  not a crease. What is missing there is fine form (nose, whisker pads,
+  mouth, soft chin), which is the fine-detail step (owner has a method in
+  mind). F4 (face in profile) belongs with it.
+- Current model unchanged from F1: work/c/eyes4e.

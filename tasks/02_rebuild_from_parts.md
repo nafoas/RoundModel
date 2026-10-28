@@ -235,6 +235,6 @@ everything about the technique into the docs (docs/CARVING.md).
 
 Looked at large renders beside master, sheet 02/08/03/07/09, close-ups 06/19/21; what is off, worst first:
 - [x] F1. Eyes (seated; small notch left from the front): in every front photo both big dark eyes show at the sides of his head; the model shows one small eye, the other buried (placeholders, never seated). Use the fitted eyes (checkpoints/cp3/eyes3d.json: true size from the profiles) and seat them so they show as in his photos.
-- [ ] F2. Top of the head from above: a flat bright plateau with the ears on its edges; his head top is round, ears further back.
-- [ ] F3. Face front: a mound with a dark band under it; his face is nose and soft whisker pads into a full chest.
-- [ ] F4. Profile: the face is a pointed wedge; his is rounder, the nose blunt and low at the front.
+- [x] F2 (measured: already a round arc; the plateau is lighting; no change). Top of the head from above: a flat bright plateau with the ears on its edges; his head top is round, ears further back.
+- [x] F3 (not a crease: a featureless muzzle; goes to the fine-detail step). Face front: a mound with a dark band under it; his face is nose and soft whisker pads into a full chest.
+- [ ] F4 (with the fine-detail step). Profile: the face is a pointed wedge; his is rounder, the nose blunt and low at the front.
