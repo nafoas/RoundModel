@@ -238,3 +238,12 @@ Looked at large renders beside master, sheet 02/08/03/07/09, close-ups 06/19/21;
 - [x] F2 (measured: already a round arc; the plateau is lighting; no change). Top of the head from above: a flat bright plateau with the ears on its edges; his head top is round, ears further back.
 - [x] F3 (not a crease: a featureless muzzle; goes to the fine-detail step). Face front: a mound with a dark band under it; his face is nose and soft whisker pads into a full chest.
 - [ ] F4 (with the fine-detail step). Profile: the face is a pointed wedge; his is rounder, the nose blunt and low at the front.
+
+## Direct measuring (owner's method, docs/MEASURING.md) -- awaiting go
+
+- [ ] A. Solve the camera (and his head pose) for every photo used, close-ups and edited included, from hand-traced landmarks + outline; retire the guessed plain directions. (Owner: close-up 06 render was not the same angle; eye sockets came out wrong because of it.)
+- [ ] B. His frame from the master (he looks straight forward there): midline plane vertical, facing the master camera, through his face; not the carving's 2.4 deg-turned plane. (Owner: he is angled slightly left.)
+- [ ] Rebuild the carving in his frame; re-seat the eyes.
+- [ ] C. Maps from each photo: normals (DSINE / StableNormal), relative depth (Depth Anything V2), light from the outline + shape from shading (his fur is one colour), landmarks.
+- [ ] D. Same maps rendered from the model through each photo's camera.
+- [ ] E. Compare part by part (angle error, shading, depth order, landmarks); master and one close-up first, shown to the owner; then all photos.
