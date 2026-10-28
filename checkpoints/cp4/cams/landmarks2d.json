@@ -1,0 +1,9 @@
+{
+ "note": "his landmarks placed by eye on gridded zooms, full-resolution pixels (x right, y down). eye = middle of the dark eye; nose_tip = point of the nose V (in profile: the front-most point of the nose); mouth_split = bottom of the split under the nose.",
+ "c06": {"photo": "references/closeups/06-Eyes-and-Bridge-Depth.png", "eye_R": [275, 520], "eye_L": [862, 515], "nose_tip": [720, 988], "mouth_split": [706, 1092]},
+ "c25": {"photo": "references/closeups/25-Frontal-Bridge-Alternate.png", "eye_R": [270, 490], "eye_L": [852, 482], "nose_tip": [586, 905], "mouth_split": [584, 1020]},
+ "c19": {"photo": "references/closeups/19-D4-Approved-Other-Angle.png", "eye_R": [522, 640]},
+ "c20": {"photo": "references/closeups/20-Other-Eye-D4-Companion.png", "eye_L": [625, 612]},
+ "c21": {"photo": "references/closeups/21-Local-Side-Muzzle-Alternate.png", "eye_R": [482, 290], "nose_tip": [1125, 682]},
+ "c02": {"photo": "references/closeups/02-Eye-Side-On.png", "eye_L": [585, 682], "nose_tip": [18, 1022]}
+}

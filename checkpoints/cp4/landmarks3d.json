@@ -1,0 +1,23 @@
+{
+ "note": "his landmarks at rest (tools/landmarks3d.py): nose tip and mouth split cast from the master onto the model; eyes = visible eye, half a radius in front of the eyeball centre",
+ "nose_tip": [
+  -0.007126647097588495,
+  0.10364043331032119,
+  0.08817136117620589
+ ],
+ "mouth_split": [
+  -0.006818089634656861,
+  0.1001432639622337,
+  0.07738833845410614
+ ],
+ "eye_R": [
+  0.02416046663518313,
+  0.0630871809332752,
+  0.12943205427531745
+ ],
+ "eye_L": [
+  -0.04008081571086304,
+  0.06044844919901533,
+  0.12943205427531745
+ ]
+}

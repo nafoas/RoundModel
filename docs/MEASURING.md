@@ -107,3 +107,25 @@ body carving in his frame -> C/D/E on the master and one close-up first,
 checked by the owner -> then all photos -> F, part by part (eyes and
 sockets first), each fitted to the body against all angles, master first,
 and shown to the owner.
+
+## Step A, progress
+
+- 3D landmarks (tools/landmarks3d.py -> checkpoints/cp4/landmarks3d.json):
+  the master is the authority; his nose tip (point of the nose V) and mouth
+  split are cast from the master camera onto the model, with his head as in
+  the master, then taken back to rest; eyes = the visible eye, half a radius
+  in front of each eyeball centre (checkpoints/cp4/eyes.json). Ears left out
+  (they move between photos). The first checkpoint's 3D landmarks were up to
+  19 mm off this model: not used.
+- 2D landmarks placed by eye on gridded zooms, full-resolution pixels
+  (checkpoints/cp4/cams/landmarks2d.json): close-ups 06, 25 (both eyes,
+  nose, mouth), 19, 20 (one eye), 21, 02 (one eye, nose tip in profile).
+- Outlines of these close-ups traced with BiRefNet (as the others), in
+  checkpoints/cp4/outlines/cNN.png.
+- tools/solve_cams.py: camera position, direction and lens per photo,
+  relative to the model, from landmarks + outline where it is not cut off
+  by the frame (robust: misses such as the ears count less), weak lens prior,
+  two starting directions round the rough one. Solved on a lighter copy of
+  the model (vertices merged on a 2 mm grid: 31k vertices). Output:
+  checkpoints/cp4/cams/<name>.json and <name>_check.jpg (photo with the
+  model's outline in red, his in green, landmarks).
