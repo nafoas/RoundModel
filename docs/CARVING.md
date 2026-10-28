@@ -378,3 +378,41 @@ what you did made it worse."
   mouth, soft chin), which is the fine-detail step (owner has a method in
   mind). F4 (face in profile) belongs with it.
 - Current model unchanged from F1: work/c/eyes4e.
+
+## 17. His frame from the master (step B of docs/MEASURING.md; owner: "he is angled slightly to the left")
+
+- The carving used to find its own mirror plane (x = -5.4 mm, turned
+  2.35 deg), and his head at rest sat about 10 mm to his left of the body's
+  middle; the master head pose then pushed it back to his right (4 mm shift
+  plus a 6.4 deg tilt). Seen without that pose (any render from a plain
+  camera) he was turned and off-centre: the crookedness the owner saw.
+- Now: tools/frame_master.py sets his midline from the master, where he
+  looks straight forward: vertical, the master camera on it, through the
+  column halfway between his eyes (x 518.5 px), which is also halfway
+  between his front peets (520 px). Result: x = 1.7 mm, turned -0.23 deg
+  (checkpoints/cp4/frame.json).
+- tools/frame_poses.py moves his head at rest 9.8 mm to his right, onto
+  that midline, and changes every photo's head pose so his head in that photo
+  stays exactly where it was (shift - R_view @ delta; photos without a pose
+  get shift -delta): checkpoints/cp4/head_poses_frame/ (cp3 kept).
+  tools/carve.py reads its poses from there and mirrors across the frame
+  (--frame checkpoints/cp4/frame.json) instead of finding its own plane.
+- tools/eyes_frame.py moves the eyes with his head and mirrors them across
+  the frame (previous: checkpoints/cp4/eyes.before_frame.json). Ears
+  (tools/ears_leaf.py) mirror across the frame too.
+- Checked by eye, master first (checkpoints/cp4/carve/29_frame_master.jpg; all views: 29_frame_before_after.png, his photo, before, after): before, his
+  muzzle sat toward his left and his eyes were set unevenly; now muzzle,
+  chest and eyes are centred and both sides match, like the master. Kept.
+  Top-down and back also symmetric about his middle. His 3D landmarks are
+  on the midline now (between eyes x 1.9 mm, nose 2.7, mouth split 3.0).
+- Current model: work/b/eyes4e (gitignored). Regenerate:
+  1. python tools/frame_master.py; python tools/frame_poses.py;
+     python tools/eyes_frame.py
+  2. carve.py work/b/g5 --votes 2 --hard 1.5 --close 0.006 --round 0.014
+     --frame checkpoints/cp4/frame.json
+  3. refine_rim.py work/b/g5 work/b/gf6 --fair 400 --smooth 1500 --rounds 12
+     --cap_mm 1.2 (copy g5.midline.json to gf6.midline.json, and to eyes4)
+  4. seat_eyes.py work/b/gf6 work/b/eyes4 --slope 3.5
+  5. ears_leaf.py work/b/eyes4 work/b/eyes4e --turn 15; copy eye_*.obj
+  6. lite copy for camera solving: tools/lite_mesh.py work/b/eyes4e work/b/lite;
+     then tools/landmarks3d.py work/b/eyes4e

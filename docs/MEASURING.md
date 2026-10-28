@@ -143,11 +143,29 @@ and shown to the owner.
   head is higher and fuller above the eye. Agrees with close-up 25 (front):
   the head round and above the eyes is too small, the clearest finding so
   far. His ear here is bigger than the model's.
-- Close-up 19: NOT solved (lens 4004, model spills past his outline): one
-  landmark and an outline mostly cut by the frame are too little. Needs
-  more landmarks (eye corners, visible nose, ear bases) before solving.
-- Close-up 20: NOT solved (eye 2.9 px but outline far off): same as 19.
+- Close-ups 19 and 20, first try: not solved (one landmark each). Looking at
+  them whole: they are not three-quarter views but near-front shots taken
+  very close (about 17 cm, wide lens), one half of his face each (19: his
+  right half, his nose just past the edge; 20: his left half with nose and
+  mouth split). Fixed by (1) the dark eye's extent as four landmarks (left,
+  right, top, bottom; matched to the model eyeball's visible cap inside the
+  lids: eye_X_box in landmarks2d.json), (2) nose tip and mouth split on 20,
+  (3) the right rough starting direction (about 12 deg off the front), and
+  (4) for companion shots, a start from the mirror image of the other one's
+  camera across his frame.
+- Step B done (docs/CARVING.md section 17); all close-up cameras re-solved
+  against the model in his frame (work/b/lite; earlier ones kept in
+  cams/before_frame/). Landmark errors (px, photos about 1100x1430):
+  06: eyes 7, 22, nose 15, mouth 9; 25: eyes 9, 13, nose 5, mouth 11;
+  21: eye 5, nose 7; 02: eye 11, nose 6; 19: eye 5, eye extent 2-18;
+  20: eye 4, eye extent 1-27, nose 29, mouth split 24. Checked by eye
+  (review/closeups_solved.jpg): 19 and 20 mirror each other as they should.
+- Seen in 19 and 20 (for step F): his head is higher and fuller above the
+  eyes than the model (the same as 25 and 02: the clearest finding so far);
+  the model's eye opening is a little taller than his (14-27 px); its nose
+  sits a little high and its mouth split a little low (about 25 px each:
+  the model's nose-to-mouth is longer than his here); his ears are bigger
+  and set wider.
 - Step A so far: cameras fitted for the master and sheet 02, 03, 04, 07,
-  08, 09 (earlier) and close-ups 06, 25, 21, 02 (new, checked by eye:
-  review/closeups_solved.jpg). Close-ups 19, 20 need more landmarks. Still
-  to do: the other close-ups, sheet 01, 05, 06, 10-18, the edited set.
+  08, 09 (earlier) and close-ups 06, 25, 21, 02, 19, 20. Still to do: the
+  other close-ups, sheet 01, 05, 06, 10-18, the edited set.

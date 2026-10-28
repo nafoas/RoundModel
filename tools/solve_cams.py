@@ -30,9 +30,30 @@ from refine_side_cameras import load_obj  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 CAMS = ROOT / "checkpoints/cp4/cams"
 # rough direction to start from: azimuth (deg, toward his right), elevation, distance (m)
-ROUGH = {"c06": (0, 0, 0.30), "c25": (0, 0, 0.30), "c19": (35, 5, 0.25), "c20": (-35, 5, 0.25),
+# (19 and 20 are near-front shots taken very close: one half of his face each)
+ROUGH = {"c06": (0, 0, 0.30), "c25": (0, 0, 0.30), "c19": (12, 5, 0.2), "c20": (-12, 5, 0.2),
          "c21": (88, 5, 0.25), "c02": (-88, 5, 0.25)}
 FACE = np.array([0.0, 0.07, 0.11])
+# companion shots of the other half of his face: also start from the mirror
+# image (across his frame from the master) of the companion's solved camera
+COMPANION = {"c19": "c20", "c20": "c19"}
+
+
+def mirrored_start(other):
+    p = CAMS / f"{other}.json"
+    if not p.exists():
+        return None
+    c = json.loads(p.read_text())
+    fr = json.loads((ROOT / "checkpoints/cp4/frame.json").read_text())
+    n = np.array([np.cos(fr["turn_rad"]), np.sin(fr["turn_rad"]), 0.0])
+    o = np.array([fr["x_m"], 0, 0])
+    M = np.eye(3) - 2 * np.outer(n, n)
+    Rc = R.from_rotvec(c["rotvec_world_to_cam"]).as_matrix()
+    fwd, down = M @ Rc[2], M @ Rc[1]
+    right = np.cross(down, fwd)
+    pos = np.asarray(c["camera_position_m"])
+    pos = pos - 2 * ((pos - o) @ n) * n
+    return np.r_[R.from_matrix(np.stack([right, down, fwd])).as_rotvec(), pos, np.log(c["focal_px"])]
 
 
 def look(az, el, dist, target):
@@ -49,6 +70,26 @@ def look(az, el, dist, target):
 def project(P, rv, pos, f, pp):
     Xc = (P - pos) @ R.from_rotvec(rv).as_matrix().T
     return f * Xc[:, :2] / Xc[:, 2:3] + pp, Xc[:, 2]
+
+
+def eye_cap(side):
+    """Points on the visible part of his eyeball (inside the lid opening)."""
+    E = json.loads((ROOT / "checkpoints/cp4/eyes.json").read_text())[side]
+    c, ax, r = np.asarray(E["centre"]), np.asarray(E["axis"]), E["radius"]
+    ax = ax / np.linalg.norm(ax)
+    psi = np.radians(json.loads((ROOT / "checkpoints/cp4/eyes.json").read_text())["opening_deg"])
+    g = np.random.default_rng(0).normal(size=(4000, 3))
+    g /= np.linalg.norm(g, axis=1, keepdims=True)
+    g = g[g @ ax > np.cos(psi)]
+    return c + r * g, g
+
+
+def eye_box(cap, rv, pos, f, pp):
+    """The dark eye's extent in the photo: left, right, top, bottom (px)."""
+    P, n = cap
+    vis = np.einsum("ij,ij->i", P - pos, n) < 0
+    uv, _ = project(P[vis] if vis.any() else P, rv, pos, f, pp)
+    return np.array([uv[:, 0].min(), uv[:, 0].max(), uv[:, 1].min(), uv[:, 1].max()])
 
 
 def main():
@@ -72,6 +113,8 @@ def main():
         keys = [kk for kk in L2 if kk in L3]
         P3 = np.array([L3[kk] for kk in keys])
         p2 = np.array([L2[kk] for kk in keys], float)
+        # eye extents (left, right, top, bottom of the dark eye), where traced
+        boxes = [(s, eye_cap(s), np.asarray(L2[f"eye_{s}_box"], float)) for s in "RL" if f"eye_{s}_box" in L2]
 
         def cost(x, detail=False):
             rv, pos, f = x[:3], x[3:6], np.exp(x[6])
@@ -92,33 +135,40 @@ def main():
             sil = (hub(d1).mean() + hub(d2).mean()) / 2
             lu, _ = project(P3, rv, pos, f, pp)
             lm = ((lu - p2) ** 2).sum(1).mean() if len(keys) else 0
+            bx = [eye_box(cap, rv, pos, f, pp) - want for _, cap, want in boxes]
+            if bx:
+                lm = lm + 2 * np.mean([(e ** 2).mean() for e in bx])
             fprior = 50 * (x[6] - np.log(2000)) ** 2
             if detail:
-                return sil, np.sqrt(((lu - p2) ** 2).sum(1)), f
+                return sil, np.r_[np.sqrt(((lu - p2) ** 2).sum(1)), np.abs(np.ravel(bx))], f
             return sil + 2.0 * lm + fprior
 
         best = None
         az0, el0, d0 = ROUGH[name]
-        for daz in (-8, 8):
-            for dd in (1.0,):
-                rv, pos = look(az0 + daz, el0, d0 * dd, FACE)
-                x0 = np.r_[rv, pos, np.log(2000)]
+        starts = [np.r_[look(az0 + daz, el0, d0, FACE)[0], look(az0 + daz, el0, d0, FACE)[1], np.log(2000)]
+                  for daz in (-8, 8)]
+        ms = mirrored_start(COMPANION[name]) if name in COMPANION else None
+        if ms is not None:
+            starts.append(ms)
+        for x0 in starts:
+            if True:
                 r = minimize(cost, x0, method="Powell", options={"maxiter": 2500, "xtol": 1e-3, "ftol": 1e-3})
                 if best is None or r.fun < best.fun:
                     best = r
         x = best.x
         sil, lerr, f = cost(x, True)
+        keys_out = keys + [f"eye_{s}_box_{e}" for s, _, _ in boxes for e in ("left", "right", "top", "bottom")]
         rv, pos = x[:3], x[3:6]
         out = {"photo": L2["photo"], "size": [W, H], "rotvec_world_to_cam": rv.tolist(),
                "camera_position_m": pos.tolist(), "focal_px": float(f), "principal_px": pp.tolist(),
-               "landmark_error_px": dict(zip(keys, np.round(lerr, 1).tolist())),
+               "landmark_error_px": dict(zip(keys_out, np.round(lerr, 1).tolist())),
                "outline_cost": float(sil), "relative_to": "the model at rest (head and body together)"}
         (CAMS / f"{name}.json").write_text(json.dumps(out, indent=1))
         # check image
         uv, _ = project(V, rv, pos, f, pp)
         M = np.zeros((H, W), np.uint8)
         cv2.fillPoly(M, list(np.round(uv[F] * 4).astype(np.int32)), 1, shift=2)
-        M = cv2.morphologyEx(M, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8)).astype(bool)
+        M = nd.binary_fill_holes(cv2.morphologyEx(M, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8)))
         img = photo.copy()
         img[M & ~nd.binary_erosion(M, iterations=3)] = (255, 0, 0)
         img[mask & ~nd.binary_erosion(mask, iterations=3)] = (0, 255, 0)
@@ -126,9 +176,13 @@ def main():
         for (u, v), (a, c) in zip(lu, p2):
             cv2.circle(img, (int(u), int(v)), 14, (255, 0, 255), 4)
             cv2.circle(img, (int(a), int(c)), 6, (0, 255, 0), -1)
+        for s_, cap, want in boxes:
+            l, r_, t, b_ = eye_box(cap, rv, pos, f, pp)
+            cv2.rectangle(img, (int(l), int(t)), (int(r_), int(b_)), (255, 0, 255), 3)
+            cv2.rectangle(img, (int(want[0]), int(want[2])), (int(want[1]), int(want[3])), (0, 255, 0), 3)
         Image.fromarray(img).resize((W * 600 // H, 600)).save(CAMS / f"{name}_check.jpg", quality=85)
         print(name, "f", round(f), "dist", round(float(np.linalg.norm(pos - FACE)), 3),
-              "landmark err px", dict(zip(keys, np.round(lerr, 1).tolist())), "outline", round(float(sil), 1), flush=True)
+              "landmark err px", dict(zip(keys_out, np.round(lerr, 1).tolist())), "outline", round(float(sil), 1), flush=True)
 
 
 if __name__ == "__main__":

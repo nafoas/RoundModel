@@ -125,7 +125,7 @@ def main():
     ap.add_argument("--flare_h", type=float, default=0.008, help="height of the base flare (m)")
     a = ap.parse_args()
     C.ALIGN = json.loads((C.ROOT / "checkpoints/cp4/view_align.json").read_text())
-    pl = json.loads((C.ROOT / "checkpoints/cp4/midline.json").read_text())
+    pl = json.loads((C.ROOT / "checkpoints/cp4/frame.json").read_text())  # his frame from the master (step B)
     xe = pl["x_m"] + a.x  # his right ear (+x is his right)
     yz, _ = ear_shape("sheet_03_right_profile", xe)
     # the ear is turned to face forward-outward by `turn` deg; the profile saw

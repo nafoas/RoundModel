@@ -1,0 +1,30 @@
+{
+ "note": "his eyes at rest (fitted eyes3d.json un-posed from the master head pose), made symmetric about his midline (average of the right and the mirrored left); radius is the mean of the two; then each pushed 4 mm out along its axis and lowered 1.5 mm, which puts them on his traced eyes in the master and left profile (they sat ~13 mm too close together there)",
+ "R": {
+  "centre": [
+   0.019322249350608528,
+   0.061750646368300674,
+   0.12892462500711957
+  ],
+  "axis": [
+   0.9590098853904137,
+   0.2649219298321048,
+   0.10058036994115199
+  ],
+  "radius": 0.010090025886656969
+ },
+ "L": {
+  "centre": [
+   -0.035149284584513475,
+   0.05951321025309109,
+   0.12892462500711957
+  ],
+  "axis": [
+   -0.977506139577107,
+   0.18537889920798023,
+   0.10058036994115199
+  ],
+  "radius": 0.010090025886656969
+ },
+ "opening_deg": 74.50281232040274
+}

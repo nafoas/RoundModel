@@ -1,0 +1,14 @@
+{
+ "rotvec": [
+  0.00021784806767008861,
+  0.11167751342182534,
+  0.006468370949818109
+ ],
+ "shift_m": [
+  -0.005682819067771017,
+  -6.355430338628412e-05,
+  -0.0004587319427930979
+ ],
+ "source": "tools register pass: master head pose (owner noticed the master offset; his head is held a little to his right of his body there), solved against the carved shape, head only",
+ "frame": "re-expressed in his frame from the master (tools/frame_poses.py, head at rest moved 9.8 mm)"
+}

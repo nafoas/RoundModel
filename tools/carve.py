@@ -34,6 +34,8 @@ ROOT = Path(__file__).resolve().parents[1]
 _ap = ROOT / "checkpoints/cp4/view_align.json"
 ALIGN = json.loads(_ap.read_text()) if _ap.exists() else {}  # tools/align_views.py
 USE_POSES = True
+# his head poses per photo, in his frame from the master (step B; cp3/head_poses_parts before)
+POSES = ROOT / "checkpoints/cp4/head_poses_frame"
 NO_EARS = True  # his head as he holds it in each photo (--no_poses to carve without)
 BLOCK = ((-0.12, 0.12), (-0.15, 0.15), (-0.04, 0.21))  # bigger than him on all sides
 
@@ -66,7 +68,7 @@ def view_data(name):
             mask = np.asarray(Image.open(ROOT / f"checkpoints/cp1/masks/{name}.outline.png").convert("L")) > 127
         cam = dict(rot=c["rotvec_world_to_cam"], pos=c["camera_position_m"], f=c["focal_px"],
                    pp=[mask.shape[1] / 2, mask.shape[0] / 2])
-    pose = ROOT / f"checkpoints/cp3/head_poses_parts/{name}.json"
+    pose = POSES / f"{name}.json"
     cam["pose"] = json.loads(pose.read_text()) if pose.exists() and USE_POSES else None
     ne = ROOT / f"checkpoints/cp4/outlines/{name}.noears.png"
     if NO_EARS and ne.exists():  # ears are built separately (tools/ears_out.py)
@@ -181,7 +183,7 @@ def carve_votes(step, views=VIEWS, hard=4.0, votes=2):
     return nd.binary_fill_holes(vol), axes, report
 
 
-def symmetric(vol, axes, step):
+def symmetric(vol, axes, step, plane=None):
     """Left and right made the same (owner: don't let the top-down photo,
     where he points a little to his left, make him crooked). His own
     midline plane is found first (where it is across him and which way it
@@ -206,8 +208,13 @@ def symmetric(vol, axes, step):
     def cost(p):
         return np.mean((sample(sub) - sample(mirror(sub, p[0], p[1]))) ** 2)
 
-    r = minimize(cost, [0.0, 0.0], method="Powell", options={"xtol": 1e-5})
-    c, th = r.x
+    if plane is None:
+        r = minimize(cost, [0.0, 0.0], method="Powell", options={"xtol": 1e-5})
+        c, th = r.x
+    else:  # his frame from the master (docs/MEASURING.md step B)
+        c, th = plane
+        f = minimize(cost, [0.0, 0.0], method="Powell", options={"xtol": 1e-5}).x
+        print(f"(the carving alone would mirror across x = {f[0] * 1000:.1f} mm, turned {np.degrees(f[1]):.2f} deg)")
     print(f"his midline: x = {c * 1000:.1f} mm, turned {np.degrees(th):.2f} deg", flush=True)
     G = np.stack(np.meshgrid(*axes, indexing="ij"), -1).reshape(-1, 3)
     sym = (sdf.ravel() + sample(mirror(G, c, th))) / 2
@@ -253,6 +260,8 @@ def main():
     ap.add_argument("--close", type=float, default=0.0, help="fill creases narrower than twice this radius (m)")
     ap.add_argument("--asym", action="store_true", help="don't make left and right the same")
     ap.add_argument("--ears", action="store_true", help="carve with the ears left in the outlines")
+    ap.add_argument("--frame", help="mirror across this plane (checkpoints/cp4/frame.json: his frame from the master) "
+                    "instead of the one the carving finds for itself")
     a = ap.parse_args()
     global USE_POSES
     USE_POSES = not a.no_poses
@@ -273,7 +282,8 @@ def main():
         vol = nd.binary_closing(np.pad(vol, r + 1), structure=g)[r + 1:-r - 1, r + 1:-r - 1, r + 1:-r - 1]
         print(f"creases filled: {int(vol.sum()) - before} cubes ({(vol.sum() - before) * a.step ** 3 * 1e6:.1f} cm3)")
     if not a.asym:
-        vol, plane = symmetric(vol, axes, a.step)
+        fr = json.loads(Path(a.frame).read_text()) if a.frame else None
+        vol, plane = symmetric(vol, axes, a.step, (fr["x_m"], fr["turn_rad"]) if fr else None)
         json.dump({"x_m": plane[0], "turn_rad": plane[1]}, open(Path(a.out).parent / f"{Path(a.out).name}.midline.json", "w"))
     if a.round:
         before = int(vol.sum())

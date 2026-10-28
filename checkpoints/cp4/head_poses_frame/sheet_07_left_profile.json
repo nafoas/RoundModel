@@ -1,0 +1,23 @@
+{
+ "rotvec": [
+  -0.20736271381312282,
+  -0.08923798480993793,
+  -0.05541488882821154
+ ],
+ "shift_m": [
+  -0.012221606363278644,
+  0.005851840091499964,
+  0.0020086677027783793
+ ],
+ "terms": {
+  "eyes": 0.12294776119402984,
+  "lines_mm": 5.723549912284001
+ },
+ "pivot": [
+  0.0,
+  0.02,
+  0.095
+ ],
+ "source": "pose_parts.py (eyes, nose V, forehead/muzzle lines)",
+ "frame": "re-expressed in his frame from the master (tools/frame_poses.py, head at rest moved 9.8 mm)"
+}

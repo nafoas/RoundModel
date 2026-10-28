@@ -241,9 +241,9 @@ Looked at large renders beside master, sheet 02/08/03/07/09, close-ups 06/19/21;
 
 ## Direct measuring (owner's method, docs/MEASURING.md) -- awaiting go
 
-- [ ] A. (in progress: close-ups 06, 25, 21, 02 solved; 19, 20 need more landmarks) Solve the camera (and his head pose) for every photo used, close-ups and edited included, from hand-traced landmarks + outline; retire the guessed plain directions. (Owner: close-up 06 render was not the same angle; eye sockets came out wrong because of it.)
-- [ ] B. His frame from the master (he looks straight forward there): midline plane vertical, facing the master camera, through his face; not the carving's 2.4 deg-turned plane. (Owner: he is angled slightly left.)
-- [ ] Rebuild the carving in his frame; re-seat the eyes.
+- [ ] A. (in progress: close-ups 06, 25, 21, 02, 19, 20 solved, re-solved in his frame; the other photos still to do) Solve the camera (and his head pose) for every photo used, close-ups and edited included, from hand-traced landmarks + outline; retire the guessed plain directions. (Owner: close-up 06 render was not the same angle; eye sockets came out wrong because of it.)
+- [x] B. His frame from the master (he looks straight forward there): midline plane vertical, facing the master camera, through his face; not the carving's 2.4 deg-turned plane. (Owner: he is angled slightly left.) Done: x 1.7 mm, turned -0.23 deg; his head at rest moved 9.8 mm onto it, every photo's pose re-expressed (docs/CARVING.md section 17).
+- [x] Rebuild the carving in his frame; re-seat the eyes. (work/b/eyes4e; checked by eye against the master: centred, both sides matching.)
 - [ ] C. Maps from each photo: normals (DSINE / StableNormal), relative depth (Depth Anything V2), light from the outline + shape from shading (his fur is one colour), landmarks.
 - [ ] D. Same maps rendered from the model through each photo's camera.
 - [ ] E. Compare part by part (angle error, shading, depth order, landmarks); master and one close-up first, shown to the owner; then all photos.
