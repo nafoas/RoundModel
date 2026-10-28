@@ -1,0 +1,30 @@
+{
+ "photo": "references/closeups/25-Frontal-Bridge-Alternate.png",
+ "size": [
+  1155,
+  1362
+ ],
+ "rotvec_world_to_cam": [
+  -0.058843770515748704,
+  -2.2339781720952008,
+  2.1828040138362073
+ ],
+ "camera_position_m": [
+  -0.005017346272517639,
+  0.2953500524943557,
+  0.11288733258141531
+ ],
+ "focal_px": 2163.3783707192756,
+ "principal_px": [
+  577.5,
+  681.0
+ ],
+ "landmark_error_px": {
+  "eye_R": 3.7,
+  "eye_L": 18.7,
+  "nose_tip": 6.5,
+  "mouth_split": 3.6
+ },
+ "outline_cost": 939.0335030885149,
+ "relative_to": "the model at rest (head and body together)"
+}

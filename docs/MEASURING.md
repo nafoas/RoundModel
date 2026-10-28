@@ -129,3 +129,8 @@ and shown to the owner.
   the model (vertices merged on a 2 mm grid: 31k vertices). Output:
   checkpoints/cp4/cams/<name>.json and <name>_check.jpg (photo with the
   model's outline in red, his in green, landmarks).
+- First measured finding (close-up 25, landmarks within 4-7 px, so the
+  camera is pinned): his head is wider than the model's above and beside
+  the eyes up to the ears, and fuller at the cheeks (red model outline well
+  inside his green one there). The same thing the owner saw earlier (eyes
+  looking too big because the head round them is too narrow). For step F.
