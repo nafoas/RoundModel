@@ -107,6 +107,7 @@ def main():
     md = Path(sys.argv[1])
     V, F = load_obj(md / "head.obj")
     hwV = head_weight(V)
+    headF = (hwV[F] > 0.9).all(1)
     L3 = json.loads((ROOT / "checkpoints/cp4/landmarks3d.json").read_text())
     L2all = json.loads((CAMS / "landmarks2d.json").read_text())
     k = 0.25
@@ -129,11 +130,26 @@ def main():
         boxes = [(s, eye_cap(s), np.asarray(L2[f"eye_{s}_box"], float)) for s in "RL" if f"eye_{s}_box" in L2]
         # his head's turn in this photo is solved too where the photo shows his
         # body as well (sheet, edited, wider close-ups): head0_deg given
-        free_head = "head0_deg" in L2
+        # photos where his body is in another posture (standing tall, hunched,
+        # walking off): the camera is placed from his head alone (face points
+        # and the head's own rim against his outline), body left out
+        head_only = L2.get("frame") == "head"
+        free_head = "head0_deg" in L2 and not head_only
+        if head_only:
+            keep = [i for i, kk in enumerate(keys) if not kk.startswith("peet")]
+            keys, P3, p2 = [keys[i] for i in keep], P3[keep], p2[keep]
         hwP = head_weight(P3) if len(keys) else np.zeros(0)
 
         def head_of(x):
             return x[7:10] if free_head else None
+
+        # stage weights: the camera is placed from his body first (outline and
+        # peets, his head held as read from the photo, face points counting
+        # little); then only his head turn is fitted, to the face points
+        face = np.array([0.0 if kk.startswith("peet") else 1.0 for kk in keys])
+        wl = {"face": 1.0}
+        h0 = R.from_euler("zxy", L2["head0_deg"], degrees=True) if free_head else None
+        SIG = np.array([25.0, 20.0, 4.0])  # how far from that reading (deg): turn, nod, tilt
 
         def cost(x, detail=False):
             rv, pos, f = x[:3], x[3:6], np.exp(x[6])
@@ -147,20 +163,26 @@ def main():
             M = cv2.morphologyEx(M, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8)).astype(bool)
             me = M & ~nd.binary_erosion(M)
             me[:b], me[-b:], me[:, :b], me[:, -b:] = False, False, False, False
+            if head_only:  # only the head's rim counts
+                Mh = np.zeros(sm.shape, np.uint8)
+                cv2.fillPoly(Mh, list(tri[headF]), 1, shift=2)
+                me &= cv2.dilate(Mh, np.ones((5, 5), np.uint8)).astype(bool)
             dm = nd.distance_transform_edt(~me)
             d1 = dm[bp[:, 1].astype(int), bp[:, 0].astype(int)] / k
             mp = np.argwhere(me)
             d2 = dist_photo[mp[:, 0], mp[:, 1]] / k if len(mp) else np.array([1e3])
             hub = lambda d, c=25.0: np.where(d < c, 0.5 * d * d, c * (d - 0.5 * c))
-            sil = (hub(d1).mean() + hub(d2).mean()) / 2
+            sil = hub(d2).mean() if head_only else (hub(d1).mean() + hub(d2).mean()) / 2
             lu, _ = project(head_turn(P3, hwP, hr), rv, pos, f, pp)
-            lm = ((lu - p2) ** 2).sum(1).mean() if len(keys) else 0
+            w = np.where(face > 0, wl["face"], 1.0)
+            lm = (w * ((lu - p2) ** 2).sum(1)).sum() / max(w.sum(), 1e-9) if len(keys) else 0
             bx = [eye_box(cap, rv, pos, f, pp) - want for _, cap, want in boxes]
             if bx:
                 lm = lm + 2 * np.mean([(e ** 2).mean() for e in bx])
             fprior = 50 * (x[6] - np.log(2000)) ** 2
-            if free_head:  # a weak pull toward his head held straight
-                fprior = fprior + 20 * float(hr @ hr)
+            if free_head:  # his head stays near the turn read from the photo
+                d = (h0.inv() * R.from_rotvec(hr)).as_euler("zxy", degrees=True)
+                fprior = fprior + 200 * float(((d / SIG) ** 2).sum())
             if detail:
                 return sil, np.r_[np.sqrt(((lu - p2) ** 2).sum(1)), np.abs(np.ravel(bx))], f
             return sil + 2.0 * lm + fprior
@@ -170,17 +192,27 @@ def main():
         starts = [np.r_[look(az0 + daz, el0, d0, FACE)[0], look(az0 + daz, el0, d0, FACE)[1], np.log(2000)]
                   for daz in (-8, 8)]
         if free_head:
-            h0 = R.from_euler("zxy", L2["head0_deg"], degrees=True).as_rotvec()
-            starts = [np.r_[x0, h0] for x0 in starts]
+            starts = [np.r_[x0, h0.as_rotvec()] for x0 in starts]
         ms = mirrored_start(COMPANION[name]) if name in COMPANION else None
         if ms is not None:
             starts.append(ms)
+        opt = {"maxiter": 2500, "xtol": 1e-3, "ftol": 1e-3}
         for x0 in starts:
-            if True:
-                r = minimize(cost, x0, method="Powell", options={"maxiter": 2500, "xtol": 1e-3, "ftol": 1e-3})
-                if best is None or r.fun < best.fun:
-                    best = r
+            if free_head:  # stage 1: the camera, head held at the reading
+                wl["face"] = 0.3
+                hh = x0[7:10]
+                r = minimize(lambda c: cost(np.r_[c, hh]), x0[:7], method="Powell", options=opt)
+                r.x, r.fun = np.r_[r.x, hh], cost(np.r_[r.x, hh])
+            else:
+                r = minimize(cost, x0, method="Powell", options=opt)
+            if best is None or r.fun < best.fun:
+                best = r
         x = best.x
+        if free_head:  # stage 2: his head turn alone, camera kept
+            wl["face"] = 1.0
+            c = x[:7]
+            r = minimize(lambda h: cost(np.r_[c, h]), x[7:10], method="Powell", options=opt)
+            x = np.r_[c, r.x]
         sil, lerr, f = cost(x, True)
         keys_out = keys + [f"eye_{s}_box_{e}" for s, _, _ in boxes for e in ("left", "right", "top", "bottom")]
         rv, pos = x[:3], x[3:6]
@@ -188,7 +220,7 @@ def main():
         out = {"photo": L2["photo"], "size": [W, H], "rotvec_world_to_cam": rv.tolist(),
                "camera_position_m": pos.tolist(), "focal_px": float(f), "principal_px": pp.tolist(),
                "landmark_error_px": dict(zip(keys_out, np.round(lerr, 1).tolist())),
-               "outline_cost": float(sil), "relative_to": "the model at rest (head and body together)"}
+               "outline_cost": float(sil), "relative_to": "his head (body in another posture: left out)" if head_only else "the model at rest (head and body together)"}
         if free_head:
             out["head_pose"] = {"rotvec": hr.tolist(), "shift_m": [0.0, 0.0, 0.0],
                                 "yaw_pitch_roll_deg": np.round(R.from_rotvec(hr).as_euler("zxy", degrees=True), 1).tolist()}

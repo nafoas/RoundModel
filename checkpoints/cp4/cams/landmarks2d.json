@@ -1,5 +1,5 @@
 {
- "note": "his landmarks placed by eye on gridded zooms, full-resolution pixels (x right, y down). eye = middle of the dark eye; nose_tip = point of the nose V (in profile: the front-most point of the nose); mouth_split = bottom of the split under the nose. eye_X_box = the dark eye's extent [left, right, top, bottom] (px), matched to the model eyeball's visible cap inside the lids. rough = [azimuth toward his right, elevation, distance m] to start from; head0_deg = his head's starting turn [yaw toward his left, pitch nose up, roll] in that photo.",
+ "note": "his landmarks placed by eye on gridded zooms, full-resolution pixels (x right, y down). eye = middle of the dark eye; nose_tip = point of the nose V (in profile: the front-most point of the nose); mouth_split = bottom of the split under the nose. eye_X_box = the dark eye's extent [left, right, top, bottom] (px), matched to the model eyeball's visible cap inside the lids. rough = [azimuth toward his right, elevation, distance m] to start from; head0_deg = his head's starting turn [yaw toward his left, pitch nose up, roll] in that photo. frame \"head\": his body is in another posture there, so the camera is placed from his head alone.",
  "c06": {
   "photo": "references/closeups/06-Eyes-and-Bridge-Depth.png",
   "eye_R": [
@@ -203,7 +203,8 @@
    0,
    15,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "s12": {
   "photo": "references/sheet_originals/12_looking_up_more.webp",
@@ -240,7 +241,8 @@
    0,
    25,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "s13": {
   "photo": "references/sheet_originals/13_looking_down_slight.webp",
@@ -265,7 +267,8 @@
    0,
    -15,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "s14": {
   "photo": "references/sheet_originals/14_looking_down_more.webp",
@@ -290,7 +293,8 @@
    0,
    -30,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "s15": {
   "photo": "references/sheet_originals/15_looking_left.webp",
@@ -319,7 +323,8 @@
    -60,
    0,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "s16": {
   "photo": "references/sheet_originals/16_looking_right.webp",
@@ -348,7 +353,8 @@
    60,
    0,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "s17": {
   "photo": "references/sheet_originals/17_from_below_da_boss.webp",
@@ -377,7 +383,8 @@
    0,
    20,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "s10": {
   "photo": "references/sheet_originals/10_bottom_up.webp",
@@ -406,7 +413,8 @@
    0,
    0,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "c03": {
   "photo": "references/closeups/03-Eye-From-Rear-Neck.png",
@@ -926,7 +934,8 @@
    -35,
    0,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "e_front_3q_left_toddle": {
   "photo": "references/edited/front_3q_left_toddle.webp",
@@ -951,7 +960,8 @@
    -25,
    0,
    0
-  ]
+  ],
+  "frame": "head"
  },
  "e_back_3q_left_high": {
   "photo": "references/edited/back_3q_left_high.webp",
