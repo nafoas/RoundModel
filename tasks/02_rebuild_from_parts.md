@@ -221,6 +221,8 @@ everything about the technique into the docs (docs/CARVING.md).
   the head); symmetric about his own midline (found: -5.4 mm, 2.35 deg).
 - [x] 3b-1. Ripples out: the fine passes left ridges along each photo's
   outline curve; smoothed first and moves spread 50x broader; outlines kept.
+- [x] 3b-2. Fine registration (shift/roll per photo, master head tilt 6.4
+  deg); master offset fixed. Open: crease across the back of the head.
 - [ ] 3b. Chisel by eye: face front, cheeks, chest and chin hollows, top of
   the head; then seat the eyes and shape the ears.
 - [ ] 4. Show the owner.

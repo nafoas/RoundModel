@@ -253,3 +253,34 @@ accidentally using the slightly left tilting image."
   light lowered to 2.0 (6.0 washed out close framing).
 - Still to do: a soft shading band where his face meets his chest from the
   front; the face front shape itself; seating the eyes (placeholders); ears.
+
+## 12. Fine registration: offsets, not shapes (owner)
+
+Owner: "the master has some past him on one side, and some missing on the
+other ... you've actually somewhat offset the master relative to his actual
+proportions. Be very refined, deliberate, and gentle ... look and see if
+what you did made it worse."
+
+- tools/register_views.py: every photo (master included) gets a small shift
+  and roll in its own image plane (never a scale), half the found
+  correction per round, 3 rounds, capped (2 % of his size, 3 deg). Shifts
+  found: 1-7 px per round; overlaps rose 0.002-0.03 in every photo.
+  Before: view_align.before_register.json.
+- The master still showed width on one side above and the other below:
+  his head is held tilted in the master, not his body offset. A head pose
+  for the master (head only, as the other photos already had) was solved
+  against the carving: tilted 6.4 deg, shifted 4 mm, no turn or nod
+  (checkpoints/cp3/head_poses_parts/master_front_standing.json).
+- Result (work/c/gf2; past him / missing): master 2.5 / 1.3 (was 3.4 /
+  2.4), top-down 2.2 / 3.5, right profile 3.2 / 2.3, back 3/4 right
+  4.4 / 1.9, front 3/4 right 1.9 / 2.6, front 3/4 left 2.9 / 2.6, left
+  profile 4.3 / 2.3, back 1.2 / 3.1, back 3/4 left 1.5 / 5.2. Form by eye
+  (sheet 20): face and body as before, smooth; from above a touch cleaner.
+- **Made worse, open**: a crease across the back of the head (behind
+  where the ears go), seen from behind and above (close-up 14). By stage
+  (sheet 21): the carving alone has a faint dip; the fine passes deepen it,
+  more so after registration. Tried and rolled back: a 12 mm crease fill
+  (no change); closing the dip between the ear stumps in the ear-less
+  outlines (no change); skipping fine-pass moves near the removed ears
+  (made him 5-8 % too big everywhere). Not solved yet; likely it goes with
+  shaping the ears and the head top together.

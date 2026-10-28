@@ -1,0 +1,13 @@
+{
+ "rotvec": [
+  0.00021784806767008861,
+  0.11167751342182534,
+  0.006468370949818109
+ ],
+ "shift_m": [
+  0.004083173304366335,
+  0,
+  -0.0015539389726834836
+ ],
+ "source": "tools register pass: master head pose (owner noticed the master offset; his head is held a little to his right of his body there), solved against the carved shape, head only"
+}

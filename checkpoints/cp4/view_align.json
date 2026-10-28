@@ -2,15 +2,111 @@
  "sheet_09_top_down": {
   "s": 1.0,
   "sy": 1.0735457293679507,
-  "roll_deg": 5.365723278187045,
+  "roll_deg": 6.728899058340514,
   "t": [
-   -10.75714969377042,
-   -8.633781558741427
+   -11.815355608927861,
+   -17.579790674875394
   ],
   "c": [
    538.765937835291,
    699.0372686058026
   ],
   "note": "owner: from above he is a compact loaf with no reference (legs, ears), so he only looks longer; his length comes from the profiles (213 mm), the top-down outline gives the shape of his circumference. Outline length 225 mm -> model projection stretched 225/213 along his length. Then a shift of the top-down photo along/across his length (-10, -11 px) and its length factor (1.077) solved against the carved shape. Owner: he is pointed slightly to his left in the top-down photo; the photo is turned 5.4 deg in its own plane (a turn of him on the spot) with shift and length factor re-solved."
+ },
+ "master_front_standing": {
+  "s": 1.0,
+  "roll_deg": -1.3403299813725005,
+  "t": [
+   10.365459242512433,
+   -4.412166072360932
+  ],
+  "c": [
+   510.2355020786691,
+   780.8245008029395
+  ]
+ },
+ "sheet_03_right_profile": {
+  "s": 1.0,
+  "roll_deg": -4.5,
+  "t": [
+   4.1026723362511035,
+   8.382681746514931
+  ],
+  "c": [
+   512.2868495118511,
+   659.6505432811281
+  ]
+ },
+ "sheet_04_back_3q_right": {
+  "s": 1.0,
+  "roll_deg": 0.6801601561843474,
+  "t": [
+   12.926029829574407,
+   -5.679605388468321
+  ],
+  "c": [
+   599.0857556121216,
+   677.3111849670905
+  ]
+ },
+ "sheet_02_front_3q": {
+  "s": 1.0,
+  "roll_deg": 0.11052961133034106,
+  "t": [
+   1.561480971963486,
+   -9.313688993372898
+  ],
+  "c": [
+   553.6150177367724,
+   693.3427461218946
+  ]
+ },
+ "sheet_08_front_3q_left": {
+  "s": 1.0,
+  "roll_deg": 0.669028275070661,
+  "t": [
+   -1.9960180996078665,
+   -6.572329536453792
+  ],
+  "c": [
+   546.7004368415116,
+   679.7545833754352
+  ]
+ },
+ "sheet_07_left_profile": {
+  "s": 1.0,
+  "roll_deg": 4.5,
+  "t": [
+   -8.77607290356932,
+   -3.1966914861894065
+  ],
+  "c": [
+   639.8790081464989,
+   701.7718566447611
+  ]
+ },
+ "sheet_05_back": {
+  "s": 1.0,
+  "roll_deg": 1.737698846779371,
+  "t": [
+   0.7271931482770022,
+   -4.348262679677255
+  ],
+  "c": [
+   125.05734350617648,
+   154.02583300688258
+  ]
+ },
+ "sheet_06_back_3q_left": {
+  "s": 1.0,
+  "roll_deg": 4.5,
+  "t": [
+   1.2255290634261116,
+   -3.4136872922275106
+  ],
+  "c": [
+   106.76250778829144,
+   160.26760233769446
+  ]
  }
 }
