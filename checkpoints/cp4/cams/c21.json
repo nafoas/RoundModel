@@ -1,0 +1,28 @@
+{
+ "photo": "references/closeups/21-Local-Side-Muzzle-Alternate.png",
+ "size": [
+  1277,
+  1231
+ ],
+ "rotvec_world_to_cam": [
+  1.3178058056236388,
+  1.4542796756333811,
+  -1.4000674175684982
+ ],
+ "camera_position_m": [
+  0.1788735830933903,
+  0.11069861476839128,
+  0.12911998250294013
+ ],
+ "focal_px": 2192.3127744375847,
+ "principal_px": [
+  638.5,
+  615.5
+ ],
+ "landmark_error_px": {
+  "eye_R": 5.6,
+  "nose_tip": 4.8
+ },
+ "outline_cost": 534.3165323816838,
+ "relative_to": "the model at rest (head and body together)"
+}

@@ -134,3 +134,7 @@ and shown to the owner.
   the eyes up to the ears, and fuller at the cheeks (red model outline well
   inside his green one there). The same thing the owner saw earlier (eyes
   looking too big because the head round them is too narrow). For step F.
+- Close-up 21 (right side, eye 5.6 px, nose 4.8 px): forehead-to-nose line
+  matches; below the nose his chin falls back into his chest while the
+  model's jaw sticks out past his line (up to ~25 px in the photo). For
+  step F (muzzle and chin).
