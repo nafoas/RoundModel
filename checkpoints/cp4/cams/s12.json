@@ -1,0 +1,49 @@
+{
+ "photo": "references/sheet_originals/12_looking_up_more.webp",
+ "size": [
+  1131,
+  1391
+ ],
+ "rotvec_world_to_cam": [
+  0.18046019748637337,
+  -2.233030503337086,
+  2.0592555506277668
+ ],
+ "camera_position_m": [
+  -0.05703324306377362,
+  0.3883715819189931,
+  0.1044408653770283
+ ],
+ "focal_px": 2256.8285557787162,
+ "principal_px": [
+  565.5,
+  695.5
+ ],
+ "landmark_error_px": {
+  "eye_R": 54.8,
+  "eye_L": 55.1,
+  "nose_tip": 1.2,
+  "mouth_split": 14.8,
+  "peet_FR": 28.1,
+  "peet_FL": 30.3
+ },
+ "outline_cost": 514.9162802847038,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   0.45031668170014055,
+   0.06859055754370189,
+   0.13135068483663564
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   9.0,
+   25.4,
+   6.0
+  ]
+ }
+}
