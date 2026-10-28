@@ -225,6 +225,8 @@ everything about the technique into the docs (docs/CARVING.md).
   deg); master offset fixed. Open: crease across the back of the head.
 - [x] 3b-3. Step behind the head found (8 mm); ear-base notch closed in the
   outlines, step 1.2 mm smaller; the rest sits under the ear bases.
+- [x] 3b-4. Ears: built as thick cupped leaves from the right-profile ear
+  outline (carving them failed: ears move between photos).
 - [ ] 3b. Chisel by eye: face front, cheeks, chest and chin hollows, top of
   the head; then seat the eyes and shape the ears.
 - [ ] 4. Show the owner.

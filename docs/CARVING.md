@@ -306,3 +306,33 @@ what you did made it worse."
   others within 0.1).
 - The rest of the step sits under his ear bases. Next: build the ears; if a
   crease still shows at their bases from behind, fill it locally then.
+
+## 14. His ears (built leaves, not carved)
+
+- Carving the ears does not work: his ears move independently and are held
+  differently in every photo, so the photos never agree. Carved with all
+  photos (votes): stubs 8 mm tall. Carved from master + right profile +
+  back only: a lump spanning both ears and the head top; restricted to the
+  master's ear areas: two small flat pills lying on his head
+  (tools/ears_build.py, kept as a tool, not used).
+- tools/ears_leaf.py: each ear a thick, cupped leaf. Flat shape = his ear
+  outline in the right profile (seen nearly flat-on), back-projected onto
+  the vertical plane 21 mm to his right of his midline (head posed as there,
+  then un-posed, per-photo alignment undone), outline smoothed (1.5 mm),
+  base carried 7 mm down into his head. Thickness 7 mm with fur, rounded
+  edges (4 mm), base flared 10 mm over 8 mm height into his head fur
+  (smooth onset). Cupped 3 mm (edges out toward his side). Leaning out
+  12 deg, turned 15 deg to face a little forward. The left ear is the mirror
+  of the right across his midline.
+- Tries: 3 mm thin leaf (blades: rolled back); 7 mm with a raw traced edge
+  (ragged streaks, block-like base: rolled back, sheet 24b); turned 40 deg
+  (from the master's ear width): broad from the front but nearly edge-on
+  from behind, while from behind-right (close-ups 13, 15) his near ear
+  shows its pink inside: rolled back (sheet 24c). 15 deg kept as the middle.
+- Result (work/c/leaf5 = work/c/gf6 + ears): ear 37 mm wide incl. base,
+  28.5 mm tall incl. the buried 7 mm, top 178 mm. Outlines with ears (past
+  him / missing): master 3.2 / 1.5, right profile 4.0 / 2.4, back 2.0 /
+  3.4, back 3/4 left 2.3 / 4.1, front 3/4 right 3.0 / 2.8, front 3/4 left
+  4.0 / 3.1; back 3/4 right 7.7 / 1.9 and left profile 5.2 / 2.3, where
+  he holds his ears differently (more upright, further forward). From
+  behind/above his ears look larger and rounder at the base than the model's.

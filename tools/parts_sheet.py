@@ -44,6 +44,8 @@ VIEWS = {
     "c20": ("references/closeups/20-Other-Eye-D4-Companion.png", None, -28, 4, 0.22, (0.0, 0.05, 0.11)),
     "c21": ("references/closeups/21-Local-Side-Muzzle-Alternate.png", None, 80, 5, 0.22, (0.0, 0.05, 0.11)),
     "c02": ("references/closeups/02-Eye-Side-On.png", None, -80, 5, 0.22, (0.0, 0.05, 0.11)),
+    "c13": ("references/closeups/13-Tiny-Ears-Side.png", None, 150, 25, 0.3, (0.0, 0.02, 0.13)),
+    "c15": ("references/closeups/15-Tiny-Ear-Outward-Fold.png", None, 140, 20, 0.22, (0.02, 0.01, 0.15)),
     "c14": ("references/closeups/14-Tiny-Ears-Top.png", None, 180, 45, 0.35),
     "eback": ("references/edited/back.webp", None, 180, 5, 0.6),
     "eloaf": ("references/edited/front_loaf.webp", None, 0, 5, 0.6),
