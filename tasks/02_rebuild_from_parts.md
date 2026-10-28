@@ -247,3 +247,4 @@ Looked at large renders beside master, sheet 02/08/03/07/09, close-ups 06/19/21;
 - [ ] C. Maps from each photo: normals (DSINE / StableNormal), relative depth (Depth Anything V2), light from the outline + shape from shading (his fur is one colour), landmarks.
 - [ ] D. Same maps rendered from the model through each photo's camera.
 - [ ] E. Compare part by part (angle error, shading, depth order, landmarks); master and one close-up first, shown to the owner; then all photos.
+- [ ] F. Parts made separately in fine detail (owner): each eye with lids and socket, forehead and brow, cheeks, muzzle (nose, nostrils, whisker pads, mouth, chin), ears, chest bib, peets, haunches, tail. Each carved on its own fine grid (0.3-0.5 mm) from the photos that show it best through their solved cameras, chiselled finer using the maps (C), then fitted to the body against every angle, master counting most, blended in without a seam, and shown to the owner beside his photos.

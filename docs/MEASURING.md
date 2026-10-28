@@ -77,8 +77,33 @@ Shown side by side (photo | model | difference map) on one sheet, like the
 outline sheet. Changes are then made where the maps agree he differs, part
 by part, small and checked by eye, master first. Numbers serve the eye.
 
+## Step F: parts made separately, in fine detail, then fitted (owner)
+
+Owner: "assemble constituent parts separately, in much finer detail, using
+more of the chiselling technique, then fit it to the model, with respect to
+all the angles, especially the master."
+
+- Parts: each eye with its lids and socket; the forehead and brow; each
+  cheek; the muzzle (nose, nostrils, whisker pads, mouth split, chin); each
+  ear; the chest bib; each front peet; the back peets and haunches; the tail.
+- Each part is carved on its own fine grid (about 0.3-0.5 mm, against
+  1.5 mm for the whole body), from a block bigger than the part, using the
+  part's own outline in every photo where it shows, cropped close at full
+  resolution: the photos that show that part best (docs/PHOTOS.md "By
+  part"), each through its solved camera (step A).
+- Then chiselled the same way as the body, but finer: hollows and form from
+  the maps (step C: surface direction, shading under his light, depth order),
+  small cuts, checked by eye against his close-ups.
+- Then fitted to the body: placed, turned and sized (within a little) so
+  that, seen through every solved camera, it sits where his does, the master
+  counting most; then blended into the body surface so there is no seam
+  (the body surface under it is replaced, not stacked).
+- Each part shown to the owner beside his photos before it goes on.
+
 ## Order
 
-A (angles) -> B (his frame) -> rebuild the carving in his frame and re-seat
-the eyes -> C/D/E on the master and one close-up first, checked by the owner
--> then all photos.
+A (angles of every photo) -> B (his frame from the master) -> rebuild the
+body carving in his frame -> C/D/E on the master and one close-up first,
+checked by the owner -> then all photos -> F, part by part (eyes and
+sockets first), each fitted to the body against all angles, master first,
+and shown to the owner.

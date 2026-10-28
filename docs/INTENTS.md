@@ -30,6 +30,17 @@ circumference; the master's matters a lot too. Never say "about right":
 state the measured difference and what I see. Do it meticulously and don't
 blob shapes: follow proper curves and shape.
 
+**Measuring and parts (owner, October 2026):** measure more than the
+outline: map his normals, albedo and other properties tied to depth
+(lighting, perspective, orientation) in each photo and compare them with the
+model, so depth can be seen directly instead of guessed. Account for angles:
+every comparison must be from the photo's own angle (the guessed close-up
+angles were wrong and made his eye sockets wrong), and he must not be
+crooked (in the master he looks straight forward; maybe a touch more weight
+on his right peet). Make his parts separately in much finer detail with the
+chiselling technique, then fit them to the model with respect to all the
+angles, especially the master. Plan: docs/MEASURING.md.
+
 ## The task (this stage)
 - Start from the kept build (commit d9f1d7c, restored in 716e530).
 - Like the body: draw lines around each part in both his photos and the model,
