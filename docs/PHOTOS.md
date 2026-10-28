@@ -25,6 +25,14 @@ them as something to investigate. The master always wins.
   same rabbit. If something in one looks off, it is far more likely that I am
   reading the image wrong than that the owner made a mistake exporting it.
 
+- **The white-background (edited) photos were all taken from directly in
+  front, like the master** (owner): the owner stood in front of him just as he
+  was about to move, never herding or corralling him, to show how he looks
+  doing different things from the master's point of view. So in some he is
+  walking off in another direction, his head and body facing different ways.
+  That is him moving, not the camera; solve them as his body (and head)
+  turned in front of a front camera, and don't make anything of it.
+
 ## The groups
 
 | Group | Where | How many | What it is |

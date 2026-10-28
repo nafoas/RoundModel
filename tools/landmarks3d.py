@@ -3,7 +3,8 @@
 The master is the authority: each master landmark (nose tip, mouth split)
 is cast from the master camera onto the model (first surface hit), with his
 head as he holds it in the master, then taken back to his head at rest.
-The eyes come from checkpoints/cp4/eyes.json: the visible eye (what a photo
+The front peets the same way (bottom middle of each front peet; the head
+pose does not reach them). The eyes come from checkpoints/cp4/eyes.json: the visible eye (what a photo
 shows of it) is taken as the point half a radius in front of the eyeball's
 centre along its axis. Ears are left out (they move between photos).
 
@@ -50,13 +51,26 @@ def main():
     o = np.asarray(cam["pos"])
     L2 = json.loads((C.ROOT / "references/landmarks.json").read_text())["views"]["master_front_standing"]["points"]
     out = {}
-    for k in ("nose_tip", "mouth_split"):
+    for k in ("nose_tip", "mouth_split", "peet_FR", "peet_FL"):
         uv = np.asarray(L2[k], float)
         a = cam.get("align")
         d = np.r_[(uv - np.asarray(cam["pp"])) / cam["f"], 1.0] @ Rc
         d /= np.linalg.norm(d)
         P = ray_hit(o, d, Vp, F)
-        out[k] = ((P - NECK_PIVOT - sh) @ Rm + NECK_PIVOT).tolist()  # back to rest
+        if P is None:  # the ray passes just under/beside him (fur): nearest point of him to it
+            q = Vp - o
+            P = Vp[np.argmin(np.linalg.norm(q - np.outer(q @ d, d), axis=1))]
+        if k.startswith("peet"):
+            out[k] = P.tolist()  # the head pose does not reach his peets
+        else:
+            out[k] = ((P - NECK_PIVOT - sh) @ Rm + NECK_PIVOT).tolist()  # back to rest
+    # his peets mirror images across his frame (the model is symmetric there;
+    # a ray grazing the fur under one peet lands a little off)
+    fr = json.loads((C.ROOT / "checkpoints/cp4/frame.json").read_text())
+    n = np.array([np.cos(fr["turn_rad"]), np.sin(fr["turn_rad"]), 0.0])
+    mir = lambda q: q - 2 * ((q - [fr["x_m"], 0, 0]) @ n) * n
+    pr = (np.asarray(out["peet_FR"]) + mir(np.asarray(out["peet_FL"]))) / 2
+    out["peet_FR"], out["peet_FL"] = pr.tolist(), mir(pr).tolist()
     E = json.loads((C.ROOT / "checkpoints/cp4/eyes.json").read_text())
     for s in ("R", "L"):
         c, ax, r = np.asarray(E[s]["centre"]), np.asarray(E[s]["axis"]), E[s]["radius"]

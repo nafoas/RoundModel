@@ -1,5 +1,5 @@
 {
- "note": "his landmarks placed by eye on gridded zooms, full-resolution pixels (x right, y down). eye = middle of the dark eye; nose_tip = point of the nose V (in profile: the front-most point of the nose); mouth_split = bottom of the split under the nose. eye_X_box = the dark eye's extent [left, right, top, bottom] (px), matched to the model eyeball's visible cap inside the lids.",
+ "note": "his landmarks placed by eye on gridded zooms, full-resolution pixels (x right, y down). eye = middle of the dark eye; nose_tip = point of the nose V (in profile: the front-most point of the nose); mouth_split = bottom of the split under the nose. eye_X_box = the dark eye's extent [left, right, top, bottom] (px), matched to the model eyeball's visible cap inside the lids. rough = [azimuth toward his right, elevation, distance m] to start from; head0_deg = his head's starting turn [yaw toward his left, pitch nose up, roll] in that photo.",
  "c06": {
   "photo": "references/closeups/06-Eyes-and-Bridge-Depth.png",
   "eye_R": [
@@ -92,6 +92,882 @@
   "nose_tip": [
    18,
    1022
+  ]
+ },
+ "s01": {
+  "photo": "references/sheet_originals/01_front.webp",
+  "eye_R": [
+   376,
+   412
+  ],
+  "eye_L": [
+   735,
+   400
+  ],
+  "nose_tip": [
+   575,
+   688
+  ],
+  "mouth_split": [
+   579,
+   766
+  ],
+  "peet_FR": [
+   362,
+   1178
+  ],
+  "peet_FL": [
+   710,
+   1181
+  ],
+  "rough": [
+   0,
+   10,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "s18": {
+  "photo": "references/sheet_originals/18_staring_at_boss.webp",
+  "eye_R": [
+   370,
+   412
+  ],
+  "eye_L": [
+   718,
+   405
+  ],
+  "nose_tip": [
+   569,
+   667
+  ],
+  "mouth_split": [
+   573,
+   749
+  ],
+  "peet_FR": [
+   353,
+   1164
+  ],
+  "peet_FL": [
+   715,
+   1171
+  ],
+  "rough": [
+   0,
+   10,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "s11": {
+  "photo": "references/sheet_originals/11_looking_up_slight.webp",
+  "eye_R": [
+   369,
+   255
+  ],
+  "eye_L": [
+   664,
+   252
+  ],
+  "nose_tip": [
+   499,
+   397
+  ],
+  "mouth_split": [
+   504,
+   489
+  ],
+  "peet_FR": [
+   372,
+   1135
+  ],
+  "peet_FL": [
+   695,
+   1156
+  ],
+  "rough": [
+   0,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   15,
+   0
+  ]
+ },
+ "s12": {
+  "photo": "references/sheet_originals/12_looking_up_more.webp",
+  "eye_R": [
+   383,
+   234
+  ],
+  "eye_L": [
+   705,
+   216
+  ],
+  "nose_tip": [
+   531,
+   348
+  ],
+  "mouth_split": [
+   532,
+   451
+  ],
+  "peet_FR": [
+   386,
+   1206
+  ],
+  "peet_FL": [
+   684,
+   1224
+  ],
+  "rough": [
+   0,
+   0,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   25,
+   0
+  ]
+ },
+ "s13": {
+  "photo": "references/sheet_originals/13_looking_down_slight.webp",
+  "eye_R": [
+   355,
+   639
+  ],
+  "eye_L": [
+   741,
+   639
+  ],
+  "nose_tip": [
+   565,
+   979
+  ],
+  "rough": [
+   0,
+   15,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   -15,
+   0
+  ]
+ },
+ "s14": {
+  "photo": "references/sheet_originals/14_looking_down_more.webp",
+  "eye_R": [
+   329,
+   745
+  ],
+  "eye_L": [
+   724,
+   717
+  ],
+  "nose_tip": [
+   578,
+   1062
+  ],
+  "rough": [
+   0,
+   20,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   -30,
+   0
+  ]
+ },
+ "s15": {
+  "photo": "references/sheet_originals/15_looking_left.webp",
+  "eye_L": [
+   571,
+   270
+  ],
+  "nose_tip": [
+   291,
+   412
+  ],
+  "peet_FR": [
+   372,
+   1093
+  ],
+  "peet_FL": [
+   688,
+   1107
+  ],
+  "rough": [
+   0,
+   10,
+   0.4
+  ],
+  "head0_deg": [
+   -60,
+   0,
+   0
+  ]
+ },
+ "s16": {
+  "photo": "references/sheet_originals/16_looking_right.webp",
+  "eye_R": [
+   502,
+   277
+  ],
+  "nose_tip": [
+   805,
+   426
+  ],
+  "peet_FR": [
+   343,
+   1164
+  ],
+  "peet_FL": [
+   649,
+   1167
+  ],
+  "rough": [
+   0,
+   10,
+   0.4
+  ],
+  "head0_deg": [
+   60,
+   0,
+   0
+  ]
+ },
+ "s17": {
+  "photo": "references/sheet_originals/17_from_below_da_boss.webp",
+  "eye_R": [
+   333,
+   262
+  ],
+  "eye_L": [
+   749,
+   227
+  ],
+  "nose_tip": [
+   518,
+   315
+  ],
+  "mouth_split": [
+   525,
+   451
+  ],
+  "rough": [
+   0,
+   -35,
+   0.35
+  ],
+  "head0_deg": [
+   0,
+   20,
+   0
+  ]
+ },
+ "s10": {
+  "photo": "references/sheet_originals/10_bottom_up.webp",
+  "nose_tip": [
+   578,
+   255
+  ],
+  "mouth_split": [
+   581,
+   329
+  ],
+  "peet_FR": [
+   414,
+   667
+  ],
+  "peet_FL": [
+   734,
+   660
+  ],
+  "rough": [
+   0,
+   -80,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c03": {
+  "photo": "references/closeups/03-Eye-From-Rear-Neck.png",
+  "eye_R": [
+   624,
+   526
+  ],
+  "rough": [
+   130,
+   10,
+   0.3
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c07": {
+  "photo": "references/closeups/07-Head-45-Degrees.png",
+  "eye_R": [
+   502,
+   461
+  ],
+  "eye_L": [
+   878,
+   446
+  ],
+  "nose_tip": [
+   827,
+   732
+  ],
+  "mouth_split": [
+   812,
+   831
+  ],
+  "peet_FR": [
+   329,
+   1288
+  ],
+  "peet_FL": [
+   732,
+   1276
+  ],
+  "rough": [
+   40,
+   8,
+   0.3
+  ],
+  "head0_deg": [
+   15,
+   0,
+   0
+  ]
+ },
+ "c08": {
+  "photo": "references/closeups/08-Head-Side-Profile.png",
+  "eye_R": [
+   838,
+   541
+  ],
+  "nose_tip": [
+   1046,
+   666
+  ],
+  "rough": [
+   90,
+   6,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c09": {
+  "photo": "references/closeups/09-Head-120-Degrees.png",
+  "eye_R": [
+   877,
+   504
+  ],
+  "rough": [
+   125,
+   12,
+   0.3
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c10": {
+  "photo": "references/closeups/10-Whole-Facial-Contour-Side-Depth.png",
+  "eye_R": [
+   690,
+   522
+  ],
+  "nose_tip": [
+   1009,
+   731
+  ],
+  "rough": [
+   85,
+   5,
+   0.3
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c11": {
+  "photo": "references/closeups/11-Muzzle-From-Above.png",
+  "nose_tip": [
+   735,
+   805
+  ],
+  "mouth_split": [
+   730,
+   870
+  ],
+  "rough": [
+   0,
+   60,
+   0.2
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c12": {
+  "photo": "references/closeups/12-Muzzle-From-Below.png",
+  "nose_tip": [
+   545,
+   428
+  ],
+  "mouth_split": [
+   545,
+   555
+  ],
+  "rough": [
+   0,
+   -40,
+   0.25
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c13": {
+  "photo": "references/closeups/13-Tiny-Ears-Side.png",
+  "eye_R": [
+   205,
+   1287
+  ],
+  "rough": [
+   30,
+   50,
+   0.25
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c14": {
+  "photo": "references/closeups/14-Tiny-Ears-Top.png",
+  "eye_R": [
+   160,
+   1143
+  ],
+  "eye_L": [
+   1028,
+   1137
+  ],
+  "rough": [
+   0,
+   60,
+   0.25
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c16": {
+  "photo": "references/closeups/16-Between-Peets-Up-to-Chin.png",
+  "nose_tip": [
+   547,
+   95
+  ],
+  "mouth_split": [
+   547,
+   139
+  ],
+  "rough": [
+   0,
+   -30,
+   0.2
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c26": {
+  "photo": "references/closeups/26-Wide-Rear-Head-Alternate.png",
+  "eye_R": [
+   855,
+   600
+  ],
+  "rough": [
+   130,
+   15,
+   0.3
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "c27": {
+  "photo": "references/closeups/27-Low-Frontal-Muzzle-Alternate.png",
+  "nose_tip": [
+   752,
+   110
+  ],
+  "mouth_split": [
+   752,
+   337
+  ],
+  "rough": [
+   0,
+   -20,
+   0.15
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "e_front_blink": {
+  "photo": "references/edited/front_blink.webp",
+  "eye_R": [
+   341,
+   490
+  ],
+  "eye_L": [
+   706,
+   480
+  ],
+  "nose_tip": [
+   545,
+   716
+  ],
+  "mouth_split": [
+   551,
+   797
+  ],
+  "peet_FR": [
+   344,
+   1206
+  ],
+  "peet_FL": [
+   680,
+   1214
+  ],
+  "rough": [
+   0,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "e_front_head_lifted": {
+  "photo": "references/edited/front_head_lifted.webp",
+  "eye_R": [
+   336,
+   453
+  ],
+  "eye_L": [
+   697,
+   439
+  ],
+  "nose_tip": [
+   526,
+   673
+  ],
+  "mouth_split": [
+   534,
+   760
+  ],
+  "peet_FR": [
+   344,
+   1206
+  ],
+  "peet_FL": [
+   673,
+   1214
+  ],
+  "rough": [
+   0,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   8,
+   0
+  ]
+ },
+ "e_front_head_lowered": {
+  "photo": "references/edited/front_head_lowered.webp",
+  "eye_R": [
+   336,
+   519
+  ],
+  "eye_L": [
+   716,
+   504
+  ],
+  "nose_tip": [
+   541,
+   819
+  ],
+  "mouth_split": [
+   548,
+   899
+  ],
+  "peet_FR": [
+   344,
+   1206
+  ],
+  "peet_FL": [
+   680,
+   1214
+  ],
+  "rough": [
+   0,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   -8,
+   0
+  ]
+ },
+ "e_front_loaf": {
+  "photo": "references/edited/front_loaf.webp",
+  "eye_R": [
+   333,
+   519
+  ],
+  "eye_L": [
+   697,
+   497
+  ],
+  "nose_tip": [
+   534,
+   760
+  ],
+  "mouth_split": [
+   541,
+   848
+  ],
+  "rough": [
+   0,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "e_front_peet_lift_left": {
+  "photo": "references/edited/front_peet_lift_left.webp",
+  "eye_R": [
+   333,
+   465
+  ],
+  "eye_L": [
+   697,
+   446
+  ],
+  "nose_tip": [
+   545,
+   716
+  ],
+  "mouth_split": [
+   551,
+   801
+  ],
+  "rough": [
+   0,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "e_front_peet_lift_right": {
+  "photo": "references/edited/front_peet_lift_right.webp",
+  "eye_R": [
+   333,
+   465
+  ],
+  "eye_L": [
+   697,
+   446
+  ],
+  "nose_tip": [
+   545,
+   716
+  ],
+  "mouth_split": [
+   551,
+   801
+  ],
+  "rough": [
+   0,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
+  ]
+ },
+ "e_head_turn_left_mouth_closed": {
+  "photo": "references/edited/head_turn_left_mouth_closed.webp",
+  "eye_R": [
+   407,
+   465
+  ],
+  "eye_L": [
+   753,
+   439
+  ],
+  "nose_tip": [
+   655,
+   716
+  ],
+  "mouth_split": [
+   654,
+   790
+  ],
+  "peet_FR": [
+   344,
+   1206
+  ],
+  "peet_FL": [
+   680,
+   1214
+  ],
+  "rough": [
+   0,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   15,
+   0,
+   0
+  ]
+ },
+ "e_head_turn_right_mouth_open": {
+  "photo": "references/edited/head_turn_right_mouth_open.webp",
+  "eye_L": [
+   545,
+   461
+  ],
+  "eye_R": [
+   263,
+   431
+  ],
+  "nose_tip": [
+   285,
+   665
+  ],
+  "peet_FR": [
+   351,
+   1206
+  ],
+  "peet_FL": [
+   673,
+   1214
+  ],
+  "rough": [
+   0,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   -35,
+   0,
+   0
+  ]
+ },
+ "e_front_3q_left_toddle": {
+  "photo": "references/edited/front_3q_left_toddle.webp",
+  "eye_L": [
+   504,
+   461
+  ],
+  "eye_R": [
+   241,
+   439
+  ],
+  "nose_tip": [
+   256,
+   658
+  ],
+  "rough": [
+   -25,
+   5,
+   0.4
+  ],
+  "head0_deg": [
+   -25,
+   0,
+   0
+  ]
+ },
+ "e_back_3q_left_high": {
+  "photo": "references/edited/back_3q_left_high.webp",
+  "eye_L": [
+   241,
+   439
+  ],
+  "rough": [
+   -140,
+   20,
+   0.45
+  ],
+  "head0_deg": [
+   0,
+   0,
+   0
   ]
  }
 }

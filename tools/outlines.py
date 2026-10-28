@@ -63,6 +63,13 @@ def birefnet_all():
     jobs = {"master_front_standing": ROOT / "references/master/master_front_standing.webp"}
     for view, (orig, _) in SHEETS.items():
         jobs[view] = ROOT / f"references/sheet_originals/{orig}.webp"
+    # every other photo, by short name (step A): sNN sheet, cNN close-up, e_<name> edited
+    for f in sorted((ROOT / "references/sheet_originals").glob("*.webp")):
+        jobs.setdefault("s" + f.stem[:2], f)
+    for f in sorted((ROOT / "references/closeups").glob("*.png")):
+        jobs.setdefault("c" + f.stem[:2], f)
+    for f in sorted((ROOT / "references/edited").glob("*.webp")):
+        jobs.setdefault("e_" + f.stem, f)
     import sys as _s
     only = [a for a in _s.argv[1:] if not a.startswith("--")]
     for view, src in jobs.items():
