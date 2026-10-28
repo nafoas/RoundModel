@@ -143,3 +143,6 @@ and shown to the owner.
   head is higher and fuller above the eye. Agrees with close-up 25 (front):
   the head round and above the eyes is too small, the clearest finding so
   far. His ear here is bigger than the model's.
+- Close-up 19: NOT solved (lens 4004, model spills past his outline): one
+  landmark and an outline mostly cut by the frame are too little. Needs
+  more landmarks (eye corners, visible nose, ear bases) before solving.
