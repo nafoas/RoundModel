@@ -138,3 +138,8 @@ and shown to the owner.
   matches; below the nose his chin falls back into his chest while the
   model's jaw sticks out past his line (up to ~25 px in the photo). For
   step F (muzzle and chin).
+- Close-up 02 (left side, eye 11 px, nose 4 px): from the forehead back
+  over the top of the head, the model's outline runs well inside his: his
+  head is higher and fuller above the eye. Agrees with close-up 25 (front):
+  the head round and above the eyes is too small, the clearest finding so
+  far. His ear here is bigger than the model's.

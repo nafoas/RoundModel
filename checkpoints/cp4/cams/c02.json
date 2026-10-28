@@ -1,0 +1,28 @@
+{
+ "photo": "references/closeups/02-Eye-Side-On.png",
+ "size": [
+  1150,
+  1367
+ ],
+ "rotvec_world_to_cam": [
+  1.1254335070723696,
+  -1.4989626700540548,
+  1.5232573672553922
+ ],
+ "camera_position_m": [
+  -0.18262811015754035,
+  0.11912425425513748,
+  0.13630932926389422
+ ],
+ "focal_px": 1729.869962655241,
+ "principal_px": [
+  575.0,
+  683.5
+ ],
+ "landmark_error_px": {
+  "eye_L": 11.3,
+  "nose_tip": 4.2
+ },
+ "outline_cost": 1574.447525261638,
+ "relative_to": "the model at rest (head and body together)"
+}
