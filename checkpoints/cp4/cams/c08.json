@@ -1,0 +1,45 @@
+{
+ "photo": "references/closeups/08-Head-Side-Profile.png",
+ "size": [
+  1097,
+  1434
+ ],
+ "rotvec_world_to_cam": [
+  1.488703748054177,
+  1.4374957187324586,
+  -1.2320863204450434
+ ],
+ "camera_position_m": [
+  0.3936650424841358,
+  0.04470807969879692,
+  0.20890088409427585
+ ],
+ "focal_px": 1861.733885145471,
+ "principal_px": [
+  548.5,
+  717.0
+ ],
+ "landmark_error_px": {
+  "eye_R": 2.1,
+  "nose_tip": 1.9
+ },
+ "outline_cost": 747.6513781804351,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   0.0029377327987130607,
+   0.010487906475855803,
+   -0.004001385900078461
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   -0.2,
+   0.2,
+   0.6
+  ]
+ }
+}

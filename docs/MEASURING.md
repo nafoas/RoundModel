@@ -166,6 +166,42 @@ and shown to the owner.
   sits a little high and its mouth split a little low (about 25 px each:
   the model's nose-to-mouth is longer than his here); his ears are bigger
   and set wider.
-- Step A so far: cameras fitted for the master and sheet 02, 03, 04, 07,
-  08, 09 (earlier) and close-ups 06, 25, 21, 02, 19, 20. Still to do: the
-  other close-ups, sheet 01, 05, 06, 10-18, the edited set.
+- Step A, all photos (October 2026). Every photo's outline traced
+  (checkpoints/cp4/outlines/: sNN sheet, cNN close-up, e_<name> edited).
+  Landmarks placed by eye on gridded images (eyes, nose tip, mouth split,
+  front peets; checkpoints/cp4/cams/landmarks2d.json, with a rough
+  direction and his head's turn as read from each photo). Front peets added
+  to the 3D landmarks (cast from the master, made mirror images).
+- Solver changes (tools/solve_cams.py), after the first runs went wrong
+  (owner: "some of them keep failing"): letting his head turn freely let
+  the solver tilt his head (26 deg in sheet 14) to hit a few points instead of
+  placing the camera by his body. Now: (1) the camera is placed from his
+  body first (outline, peets; head held as read from the photo), then only
+  his head turn is fitted, kept near that reading (turn 25, nod 20, tilt 4
+  deg); (2) where his body is in another posture (standing tall in 11/12,
+  hunched in 13/14, from below in 10 and 17, head turned in 15/16, walking
+  off in two edited ones: frame "head"), the camera is placed from his head
+  alone (face points and the head's own rim against his outline). The
+  owner's note on the white-background photos: all taken from directly in
+  front, like the master, as he moved off however he liked.
+- Results, judged by eye on each check image (photo, his outline green,
+  model red, landmarks):
+  - Hold (model outline on his, points within ~5-25 px): master; sheet
+    01, 02, 03, 04, 07, 08, 09, 18 (01 and 18 from their first solve, which
+    fit better by eye than the re-solve); sheet 11 and 17 (head-only);
+    close-ups 02, 03, 06, 08, 09, 10, 12, 14, 19, 20, 21, 25, 26; edited
+    front_blink, front_head_lifted, front_head_lowered, front_peet_lift_right,
+    head_turn_left_mouth_closed, back_3q_left_high, front_3q_left_toddle.
+  - Rough (usable loosely): edited front_loaf and front_peet_lift_left
+    (face points land; he is loafed lower and wider than the model);
+    close-up 07 (outline fits, his right eye 50 px off).
+  - Not solved (too little of him, or his posture too far from the model's
+    for the head rim to place it): sheet 10, 13, 14, 15, 16; edited
+    head_turn_right_mouth_open; close-ups 11, 16, 27 (muzzle only: two
+    points in a line), 13 (one eye), and with no landmarks at all 01, 04, 05
+    (one eye), 15 (one ear), 17, 18, 22, 23, 24 (peets, underbody). These
+    are used by eye for their part in step F, not measured.
+  - Sheet 05, 06: cameras from the first checkpoint (panels), unchanged.
+- Seen across the front photos (for step F): his eyes sit closer together
+  than the model's (the model's land 15-50 px wider in every front view);
+  his head is higher and fuller above the eyes (close-ups 02, 19, 20, 25).

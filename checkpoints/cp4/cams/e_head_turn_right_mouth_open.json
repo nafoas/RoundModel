@@ -1,0 +1,29 @@
+{
+ "photo": "references/edited/head_turn_right_mouth_open.webp",
+ "size": [
+  1098,
+  1433
+ ],
+ "rotvec_world_to_cam": [
+  0.23824265735949832,
+  -2.4070475436773506,
+  2.1695743945743753
+ ],
+ "camera_position_m": [
+  -0.050224581945905365,
+  0.5816602374367464,
+  0.13580770367696895
+ ],
+ "focal_px": 2504.2188637376767,
+ "principal_px": [
+  549.0,
+  716.5
+ ],
+ "landmark_error_px": {
+  "eye_L": 17.1,
+  "eye_R": 28.7,
+  "nose_tip": 40.6
+ },
+ "outline_cost": 1395.3054380807098,
+ "relative_to": "his head (body in another posture: left out)"
+}

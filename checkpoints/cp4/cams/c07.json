@@ -1,0 +1,49 @@
+{
+ "photo": "references/closeups/07-Head-45-Degrees.png",
+ "size": [
+  1097,
+  1434
+ ],
+ "rotvec_world_to_cam": [
+  0.2330292761088265,
+  2.2464065576466257,
+  -1.9123555591935715
+ ],
+ "camera_position_m": [
+  0.09078025959430959,
+  0.390050004138607,
+  0.14123632720363527
+ ],
+ "focal_px": 2456.3089061183437,
+ "principal_px": [
+  548.5,
+  717.0
+ ],
+ "landmark_error_px": {
+  "eye_R": 49.8,
+  "eye_L": 22.1,
+  "nose_tip": 33.6,
+  "mouth_split": 11.7,
+  "peet_FR": 26.7,
+  "peet_FL": 25.4
+ },
+ "outline_cost": 265.0362821896648,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   0.005045806343482323,
+   -0.0018770336169726936,
+   0.26717771443916305
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   15.3,
+   0.3,
+   -0.1
+  ]
+ }
+}
