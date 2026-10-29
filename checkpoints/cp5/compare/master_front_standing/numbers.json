@@ -1,0 +1,68 @@
+{
+ "view": "master_front_standing",
+ "angle_deg_median": 19.0,
+ "depth_order_agreement": 0.9,
+ "outline_overlap": 0.879,
+ "parts": {
+  "forehead and brow": {
+   "pixels": 69592,
+   "angle_median_deg": 19.3,
+   "model_minus_his_xyz_deg": [
+    -5.1,
+    7.9,
+    -5.9
+   ],
+   "shading_his_minus_model": 0.005
+  },
+  "eyes and sockets": {
+   "pixels": 12397,
+   "angle_median_deg": 38.4,
+   "model_minus_his_xyz_deg": [
+    -6.4,
+    11.7,
+    -4.9
+   ],
+   "shading_his_minus_model": -0.053
+  },
+  "muzzle": {
+   "pixels": 69347,
+   "angle_median_deg": 20.3,
+   "model_minus_his_xyz_deg": [
+    -8.1,
+    -13.9,
+    1.6
+   ],
+   "shading_his_minus_model": 0.037
+  },
+  "cheeks": {
+   "pixels": 193144,
+   "angle_median_deg": 16.6,
+   "model_minus_his_xyz_deg": [
+    -3.2,
+    -10.5,
+    -0.8
+   ],
+   "shading_his_minus_model": 0.031
+  },
+  "chest": {
+   "pixels": 165787,
+   "angle_median_deg": 20.8,
+   "model_minus_his_xyz_deg": [
+    -1.0,
+    -17.8,
+    -6.3
+   ],
+   "shading_his_minus_model": -0.008
+  },
+  "body": {
+   "pixels": 54827,
+   "angle_median_deg": 32.5,
+   "model_minus_his_xyz_deg": [
+    0.9,
+    -6.9,
+    -12.8
+   ],
+   "shading_his_minus_model": -0.008
+  }
+ }
+}

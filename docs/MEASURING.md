@@ -205,3 +205,40 @@ and shown to the owner.
 - Seen across the front photos (for step F): his eyes sit closer together
   than the model's (the model's land 15-50 px wider in every front view);
   his head is higher and fuller above the eyes (close-ups 02, 19, 20, 25).
+
+## Steps C, D, E: first pass on the master and close-up 25
+
+- C (tools/maps_photo.py -> checkpoints/cp5/maps/<view>/): surface direction
+  from Marigold normals (prs-eth/marigold-normals-v1-1, 4 runs averaged;
+  DSINE needs code fetched from GitHub, which this environment refused),
+  relative depth from Depth Anything V2 Large, his fur mask (bright, nearly
+  colourless; his bib's lavender cast counts as fur), and one light fitted
+  to his fur brightness against those normals (ambient + one direction;
+  from a front view only its right/up parts are pinned). Checked by eye on
+  the photos: nose and its split, whisker pads, eye bulges, brow, cheeks,
+  body curving away, peets all read correctly; depth puts muzzle and chest
+  nearest, ears furthest. Light: from above and a little from his right in
+  both (master explains 63% of his fur brightness, close-up 25 31%: one
+  light is too simple there).
+- D and E (tools/maps_model.py -> checkpoints/cp5/compare/<view>/): the
+  model's surface direction and depth through the photo's own solved camera
+  (his head posed as there), drawn by splatting points (no renderer), then
+  the angle between his surface and the model's, per part, the shading
+  difference under his light, and depth order (numbers.json, compare.jpg).
+- What the two photos agree on (model minus his surface direction, degrees,
+  master / close-up 25; y + means the model faces more upward there):
+  - forehead and brow: model faces up more (+8 / +17): his forehead rises
+    more upright and faces the camera; the model's slopes back like a dome.
+    The same thing as "his head is higher and fuller above the eyes".
+  - muzzle: model faces down more (-14 / -20), and is one soft mound: his
+    has a rounded nose bump, two whisker-pad lobes and a deep split.
+  - cheeks: model faces down more (-10 / -15).
+  - chest: model faces down more (-18 / -27): the model's chest tucks under
+    the chin (a crease shows there); his bib comes forward smoothly.
+  - eyes: his sit in bulges with a crease round them; the model's sit in
+    dished sockets (38 / 42 deg median angle there, the worst part).
+  - depth order agrees well (0.90 / 0.92): the overall depth is right; the
+    differences are in how each part faces.
+- Fur edges show as a red rim in every angle map (fur is see-through at the
+  edge; the estimator does not put the normal fully sideways there): not a
+  shape difference.
