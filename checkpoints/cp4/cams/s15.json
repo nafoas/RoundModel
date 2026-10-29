@@ -1,0 +1,28 @@
+{
+ "photo": "references/sheet_originals/15_looking_left.webp",
+ "size": [
+  1131,
+  1391
+ ],
+ "rotvec_world_to_cam": [
+  0.6485188682960397,
+  -2.6776663511129253,
+  2.0824203469170675
+ ],
+ "camera_position_m": [
+  -0.059815368269446695,
+  0.605701886548763,
+  0.18719283075567136
+ ],
+ "focal_px": 2647.443032779099,
+ "principal_px": [
+  565.5,
+  695.5
+ ],
+ "landmark_error_px": {
+  "eye_L": 9.6,
+  "nose_tip": 12.5
+ },
+ "outline_cost": 1911.5140307199033,
+ "relative_to": "his head (body in another posture: left out)"
+}

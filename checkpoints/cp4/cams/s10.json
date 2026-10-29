@@ -1,0 +1,28 @@
+{
+ "photo": "references/sheet_originals/10_bottom_up.webp",
+ "size": [
+  1131,
+  1391
+ ],
+ "rotvec_world_to_cam": [
+  0.027905344018712468,
+  0.44889158793020434,
+  -3.0970592635434606
+ ],
+ "camera_position_m": [
+  0.0095775510579324,
+  0.13994903209908766,
+  -0.20560535760685267
+ ],
+ "focal_px": 2583.058557676347,
+ "principal_px": [
+  565.5,
+  695.5
+ ],
+ "landmark_error_px": {
+  "nose_tip": 13.0,
+  "mouth_split": 16.5
+ },
+ "outline_cost": 920.1799046120417,
+ "relative_to": "his head (body in another posture: left out)"
+}

@@ -1,0 +1,28 @@
+{
+ "photo": "references/sheet_originals/16_looking_right.webp",
+ "size": [
+  1131,
+  1391
+ ],
+ "rotvec_world_to_cam": [
+  -0.44002948957043936,
+  -2.1484117599417942,
+  1.3570569223507605
+ ],
+ "camera_position_m": [
+  -0.048056120194027635,
+  0.46524758674525785,
+  0.20701217477428777
+ ],
+ "focal_px": 2298.294881109284,
+ "principal_px": [
+  565.5,
+  695.5
+ ],
+ "landmark_error_px": {
+  "eye_R": 6.4,
+  "nose_tip": 3.7
+ },
+ "outline_cost": 1289.207928225789,
+ "relative_to": "his head (body in another posture: left out)"
+}

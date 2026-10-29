@@ -1,0 +1,49 @@
+{
+ "photo": "references/sheet_originals/18_staring_at_boss.webp",
+ "size": [
+  1131,
+  1391
+ ],
+ "rotvec_world_to_cam": [
+  0.0636487464027101,
+  2.2848136706948567,
+  -2.0670931738168465
+ ],
+ "camera_position_m": [
+  0.04623079127531571,
+  0.6974873530648084,
+  0.14423445029978435
+ ],
+ "focal_px": 3805.0049015433437,
+ "principal_px": [
+  565.5,
+  695.5
+ ],
+ "landmark_error_px": {
+  "eye_R": 10.6,
+  "eye_L": 25.8,
+  "nose_tip": 8.7,
+  "mouth_split": 9.9,
+  "peet_FR": 25.4,
+  "peet_FL": 18.8
+ },
+ "outline_cost": 431.2402382469045,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   -0.0009446061838154392,
+   0.03312047665938691,
+   -0.002013819424058092
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   -0.1,
+   -0.1,
+   1.9
+  ]
+ }
+}

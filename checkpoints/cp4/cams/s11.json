@@ -1,0 +1,30 @@
+{
+ "photo": "references/sheet_originals/11_looking_up_slight.webp",
+ "size": [
+  1132,
+  1390
+ ],
+ "rotvec_world_to_cam": [
+  0.10161283104955239,
+  -2.435510646319972,
+  1.8292353983625718
+ ],
+ "camera_position_m": [
+  -0.060977599732062744,
+  0.5153836246244047,
+  0.14508543241560565
+ ],
+ "focal_px": 1800.4022405380306,
+ "principal_px": [
+  566.0,
+  695.0
+ ],
+ "landmark_error_px": {
+  "eye_R": 20.8,
+  "eye_L": 21.4,
+  "nose_tip": 38.5,
+  "mouth_split": 10.9
+ },
+ "outline_cost": 320.6311328950309,
+ "relative_to": "his head (body in another posture: left out)"
+}

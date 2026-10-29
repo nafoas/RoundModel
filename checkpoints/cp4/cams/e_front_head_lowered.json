@@ -1,0 +1,49 @@
+{
+ "photo": "references/edited/front_head_lowered.webp",
+ "size": [
+  1098,
+  1433
+ ],
+ "rotvec_world_to_cam": [
+  -0.02126086425657004,
+  -2.399550943221598,
+  2.1055513027383843
+ ],
+ "camera_position_m": [
+  0.01659448651468068,
+  0.4291854926584481,
+  0.13613278546145133
+ ],
+ "focal_px": 2250.149577296417,
+ "principal_px": [
+  549.0,
+  716.5
+ ],
+ "landmark_error_px": {
+  "eye_R": 11.1,
+  "eye_L": 16.4,
+  "nose_tip": 12.9,
+  "mouth_split": 10.1,
+  "peet_FR": 13.9,
+  "peet_FL": 11.8
+ },
+ "outline_cost": 288.9399911185699,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   -0.14371634213615533,
+   0.04412759941233175,
+   0.00853198160040027
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   0.3,
+   -8.2,
+   2.5
+  ]
+ }
+}
