@@ -4,7 +4,7 @@ This repo builds a 3D model of **Prince**, a real, living, very round white
 Dwarf Hotot rabbit, from photos his owner took of him. Before doing anything,
 read `docs/INTENTS.md` (the owner's intents, in their words) and the current
 file in `tasks/` (the agreed plan, checked off in order; the current one is
-`tasks/02_rebuild_from_parts.md`). Re-read both before
+`tasks/03_from_master_front.md`; the old model is abandoned). Re-read both before
 every step and repeat the intents at the end of every step.
 
 **Re-read the method documentation (this file, `docs/INTENTS.md`, the
@@ -12,8 +12,11 @@ every step and repeat the intents at the end of every step.
 of each message. (A hook that injected them on every command was abandoned:
 it made the website flag commands.)
 
-**How he is built now: carved, then chiselled** (subtractive; see
-`docs/CARVING.md` for the whole technique).
+**How he is built now: from the master's front** (owner, October 2026: the
+master's normal map turned directly into the immutable front-facing model,
+everything else filled in from it and made to conform to it; see
+`tasks/03_from_master_front.md`). The carved model (`docs/CARVING.md`) is
+abandoned; its cameras and outlines are still used.
 
 **Measuring his shape directly:** see `docs/MEASURING.md` (every photo's
 angle solved first; normals, depth, light and shading compared part by part).
@@ -146,6 +149,14 @@ like this". Read them before every step.
      "is this what the owner asked for, done the way they asked?"
    - Instead of: long autonomous loops of locally sensible tinkering that
      nobody asked for.
+
+8. **Pushing through when it isn't going well.** A result that looks wrong
+   or a number far outside what I expected (a "gentle" round moving points
+   37 mm) gets treated as something to fix quickly rather than reported.
+   - I need to: stop and tell the owner plainly, "this isn't going well",
+     with what I saw, before writing any new fix or running anything else.
+   - Instead of: writing another tool straight away, or rendering the
+     result to see how bad it is, after the warning sign was already there.
 
 ## Numbers serve the eye, never the other way round
 

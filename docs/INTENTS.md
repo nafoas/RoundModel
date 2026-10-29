@@ -52,6 +52,13 @@ can see on the photo that the scan misread him. **For his front, the
 master's complete, unaltered normal map is used, the model conforming to it
 and fleshing it out** (owner).
 
+**From the master's front (owner, October 2026):** the old model is
+abandoned (it doesn't look like him). The master's normal map is turned
+directly into a model, the immutable front-facing model; everything else is
+filled in from it, made to conform to the master, never the other way
+round. Plan: tasks/03_from_master_front.md. If it isn't going well, I stop
+and say so.
+
 ## The task (this stage)
 - Start from the kept build (commit d9f1d7c, restored in 716e530).
 - Like the body: draw lines around each part in both his photos and the model,
