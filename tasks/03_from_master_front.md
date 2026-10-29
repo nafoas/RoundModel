@@ -35,6 +35,22 @@ conform to the master, never the other way round.
 - [ ] 3. Checked after each step: master first, then the profiles and the
   top-down; then the close-ups.
 
+## Measured on the new front (tools/front_landmarks.py, checkpoints/cp6/landmarks3d.json)
+
+- From the front (sheet 01, 18, edited fronts) his nose, mouth split and eyes
+  land within about 8-25 px: it lines up.
+- In every side view his eye lands 65-173 px off while his nose is within
+  6-14 px (close-ups 21, 02, 08, 10): the front's eyes sit about 30 mm
+  behind his nose, the profiles say about 42 mm. The front is about 70% as
+  deep as he is (the estimator flattens a little everywhere).
+- His peets on the front sit level with his nose; in the photos they are
+  well back under his chest (35-185 px off): the normal map can't show that
+  step, so the integration smoothed over it.
+- Put to the owner: A) let the profiles set the depth but not the shape
+  (one number deepens the front; the front split at the step under his
+  chest so his peets sit back), or B) keep the front exactly as it is.
+  Recommended A. Waiting for the owner.
+
 ## Known risks (said up front)
 
 - The master can't show depth jumps inside his outline (how far his chin
