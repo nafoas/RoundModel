@@ -1,0 +1,47 @@
+{
+ "photo": "references/edited/front_peet_lift_right.webp",
+ "size": [
+  1098,
+  1433
+ ],
+ "rotvec_world_to_cam": [
+  -0.07365588287501816,
+  -2.2292803710907028,
+  2.09556640590329
+ ],
+ "camera_position_m": [
+  -0.013717356399618748,
+  0.6459928465114666,
+  0.12144719687836769
+ ],
+ "focal_px": 3438.645357783956,
+ "principal_px": [
+  549.0,
+  716.5
+ ],
+ "landmark_error_px": {
+  "eye_R": 17.1,
+  "eye_L": 16.2,
+  "nose_tip": 7.1,
+  "mouth_split": 14.4
+ },
+ "outline_cost": 158.38945675983467,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   -0.0037595279311966536,
+   0.007887948190812472,
+   0.009310280900445929
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   0.5,
+   -0.2,
+   0.5
+  ]
+ }
+}

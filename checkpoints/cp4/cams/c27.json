@@ -1,0 +1,45 @@
+{
+ "photo": "references/closeups/27-Low-Frontal-Muzzle-Alternate.png",
+ "size": [
+  1523,
+  1032
+ ],
+ "rotvec_world_to_cam": [
+  0.20718852369377125,
+  2.083814325288977,
+  -2.2659843846586614
+ ],
+ "camera_position_m": [
+  0.019091480805124232,
+  0.20954145955012835,
+  0.058672965122670374
+ ],
+ "focal_px": 2000.0668965466468,
+ "principal_px": [
+  761.5,
+  516.0
+ ],
+ "landmark_error_px": {
+  "nose_tip": 29.2,
+  "mouth_split": 15.6
+ },
+ "outline_cost": 3595.9339975341695,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   5.1145365416824866e-11,
+   0.0,
+   -2.477062524798892e-07
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   -0.0,
+   0.0,
+   -0.0
+  ]
+ }
+}

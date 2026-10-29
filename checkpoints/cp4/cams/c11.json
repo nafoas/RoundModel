@@ -1,0 +1,45 @@
+{
+ "photo": "references/closeups/11-Muzzle-From-Above.png",
+ "size": [
+  1470,
+  1070
+ ],
+ "rotvec_world_to_cam": [
+  0.7221724103011364,
+  2.9615695739840615,
+  -0.7056140957459556
+ ],
+ "camera_position_m": [
+  0.017711587789605018,
+  0.17387770506412903,
+  0.28211768610397703
+ ],
+ "focal_px": 2904.9562246016894,
+ "principal_px": [
+  735.0,
+  535.0
+ ],
+ "landmark_error_px": {
+  "nose_tip": 17.5,
+  "mouth_split": 30.7
+ },
+ "outline_cost": 6488.836694815751,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   0.03117177348358703,
+   -0.021613239843710066,
+   0.00029942470345359253
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   -0.0,
+   1.8,
+   -1.2
+  ]
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "photo": "references/edited/front_loaf.webp",
+ "size": [
+  1098,
+  1433
+ ],
+ "rotvec_world_to_cam": [
+  0.19193085838419155,
+  2.2850768405294173,
+  -2.01379634258812
+ ],
+ "camera_position_m": [
+  0.0559398606695673,
+  0.45357010818879917,
+  0.142629876457426
+ ],
+ "focal_px": 2228.195795208897,
+ "principal_px": [
+  549.0,
+  716.5
+ ],
+ "landmark_error_px": {
+  "eye_R": 9.6,
+  "eye_L": 10.7,
+  "nose_tip": 15.5,
+  "mouth_split": 12.8
+ },
+ "outline_cost": 874.7604953144078,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   0.0004962792535701917,
+   -3.426381076237774e-05,
+   -0.011236440051210448
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   -0.6,
+   0.0,
+   -0.0
+  ]
+ }
+}

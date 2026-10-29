@@ -1,0 +1,45 @@
+{
+ "photo": "references/closeups/14-Tiny-Ears-Top.png",
+ "size": [
+  1186,
+  1326
+ ],
+ "rotvec_world_to_cam": [
+  -0.017259032460544162,
+  -2.902466179760448,
+  1.139420504159777
+ ],
+ "camera_position_m": [
+  -0.0025054799907370325,
+  0.17939949677481415,
+  0.3099839628750457
+ ],
+ "focal_px": 2787.1576733154084,
+ "principal_px": [
+  593.0,
+  663.0
+ ],
+ "landmark_error_px": {
+  "eye_R": 12.8,
+  "eye_L": 12.3
+ },
+ "outline_cost": 1292.0289021746626,
+ "relative_to": "the model at rest (head and body together)",
+ "head_pose": {
+  "rotvec": [
+   0.005959190735263993,
+   -0.0033789786134894553,
+   -0.004197927405257842
+  ],
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "yaw_pitch_roll_deg": [
+   -0.2,
+   0.3,
+   -0.2
+  ]
+ }
+}
