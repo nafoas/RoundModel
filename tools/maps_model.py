@@ -55,6 +55,7 @@ def camera(view):
         def proj(P):
             X = (P - pos) @ Rc.T
             return f * X[:, :2] / X[:, 2:3] + pp, X[:, 2]
+        proj.pos = pos
         return proj, Rc, pose
     cam, _ = C.view_data(view)
     Rc = R.from_rotvec(cam["rot"]).as_matrix()
@@ -62,6 +63,7 @@ def camera(view):
     def proj(P):
         X = (P - np.asarray(cam["pos"])) @ Rc.T
         return C.project(P, cam), X[:, 2]
+    proj.pos = np.asarray(cam["pos"])
     a = cam.get("align")
     if a:  # the per-photo roll turns the image: turn the normals with it
         th = np.radians(a["roll_deg"])

@@ -43,9 +43,10 @@ def photo_of(view):
     L = json.loads((ROOT / "checkpoints/cp4/cams/landmarks2d.json").read_text())
     if view in L:
         return ROOT / L[view]["photo"]
-    side = json.loads((ROOT / "checkpoints/cp3/side_cameras.json").read_text())["views"]
-    if view in side:
-        return ROOT / side[view]["photo"] if "photo" in side[view] else None
+    if view.startswith("sheet_"):  # sheet_02_front_3q -> references/sheet_originals/02_front_3q.webp
+        p = ROOT / f"references/sheet_originals/{view[6:]}.webp"
+        if p.exists():
+            return p
     raise SystemExit(f"no photo known for {view}")
 
 

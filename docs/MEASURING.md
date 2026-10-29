@@ -242,3 +242,49 @@ and shown to the owner.
 - Fur edges show as a red rim in every angle map (fur is see-through at the
   edge; the estimator does not put the normal fully sideways there): not a
   shape difference.
+
+## Normals from every side onto the model (owner's method, October 2026)
+
+Owner: "take his normals from every side, and fit every side's normals to
+the model and to the other sides, with the master taking preference. We
+already have a very accurate general shape; if we stick the normals from
+every side onto it and chisel away very finely, we get the best of both
+worlds." Agreed. Why it suits him: the model's overall size and depth are
+right (depth order agrees 0.90-0.92 with the photos); what is wrong is how
+each part faces (fine form). A normal map alone can't become him (it only
+sees one side, small slope errors add up into bends, it can't see depth
+jumps such as chin over chest), but laid onto a shape that is already right
+it gives the fine form at photo resolution.
+
+1. Normals from every photo with a reliable camera (docs/MEASURING.md step
+   A "Hold" list): Marigold normals, several runs averaged
+   (tools/maps_photo.py). Photos where his body is in another posture count
+   for his head only.
+2. Onto the model: each model point is seen through each photo's own camera
+   (his head turned as he held it there; hidden points left out), and the
+   photo's surface direction there is taken back to his rest pose. So every
+   point gets one reading per photo that sees it.
+3. One target direction per point, blended from those readings: the master
+   counts most; a photo counts more where it sees the surface face-on and
+   little near its own outline (fur is see-through at the edge); where
+   photos disagree (he moved, his fur lay differently) the master and the
+   majority win and a stray reading is dropped, not averaged in
+   (tools/fuse_normals.py). Shown to the owner before any chiselling.
+4. A finer surface on the head first (0.3-0.5 mm between points, against
+   1.5 mm now), or the nose split and creases can't be held.
+5. Fine chiselling: the surface moved in small, gentle rounds so its
+   directions turn toward the targets (nose bump, split, whisker pads, eye
+   bulges, brow, bib, creases, and the larger shape too where the normals
+   say so). Only a light hold on the current shape, enough that one round
+   can't run away, not enough to stop the normals reshaping him.
+- **The normals almost always win (owner).** If his normals stick out past
+  the model, or the model doesn't come all the way up to them, then either
+  I made the model wrong or that photo's scan went wrong, and so far it has
+  much more often been the model. So: the model moves to the normals. The
+  scan loses only where I can see on the photo itself that it misreads him
+  there (checked by eye on the photo, and when other sides disagree with
+  that one photo); never because the model "already looked fine".
+6. After each round: look at him through the master first, then the
+   profiles and close-ups; keep or change it on looks.
+- In reserve: for what no photo shows well enough, small parts built from a
+  close-up's own normals the same way.

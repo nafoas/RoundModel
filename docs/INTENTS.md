@@ -41,6 +41,15 @@ on his right peet). Make his parts separately in much finer detail with the
 chiselling technique, then fit them to the model with respect to all the
 angles, especially the master. Plan: docs/MEASURING.md.
 
+**Normals from every side (owner, October 2026):** take his normals from
+every side and fit them to the model and to each other, the master taking
+preference; the general shape is already accurate, so stick the normals
+onto it and chisel away very finely: the best of both worlds. Plan:
+docs/MEASURING.md, last section. **The normals almost always win:** where
+they and the model disagree, it is either the model that is wrong (far more
+often so far) or that photo's scan; the model moves to the normals unless I
+can see on the photo that the scan misread him.
+
 ## The task (this stage)
 - Start from the kept build (commit d9f1d7c, restored in 716e530).
 - Like the body: draw lines around each part in both his photos and the model,

@@ -248,3 +248,10 @@ Looked at large renders beside master, sheet 02/08/03/07/09, close-ups 06/19/21;
 - [ ] D. (master and close-up 25 done) Same maps rendered from the model through each photo's camera.
 - [ ] E. (master and close-up 25 done: docs/MEASURING.md) Compare part by part (angle error, shading, depth order, landmarks); master and one close-up first, shown to the owner; then all photos.
 - [ ] F. Parts made separately in fine detail (owner): each eye with lids and socket, forehead and brow, cheeks, muzzle (nose, nostrils, whisker pads, mouth, chin), ears, chest bib, peets, haunches, tail. Each carved on its own fine grid (0.3-0.5 mm) from the photos that show it best through their solved cameras, chiselled finer using the maps (C), then fitted to the body against every angle, master counting most, blended in without a seam, and shown to the owner beside his photos.
+
+## Normals from every side onto the model (owner, October 2026; docs/MEASURING.md)
+
+- [ ] 1. Normals from every photo with a reliable camera (the Hold list).
+- [ ] 2-3. Onto the model and blended into one target direction per point (master first); shown to the owner.
+- [ ] 4. Finer surface on the head (0.3-0.5 mm).
+- [ ] 5. Fine chiselling toward the targets, large shape anchored; checked by eye after each round, master first.
