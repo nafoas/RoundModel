@@ -1,0 +1,13 @@
+{
+ "photo": "references/edited/back_3q_left_high.webp",
+ "frame": "camera: x right, y up, z toward the camera",
+ "light_dir": [
+  -0.606,
+  0.76,
+  -0.237
+ ],
+ "ambient": 0.632,
+ "directional": 0.606,
+ "shading_explained": 0.683,
+ "note": "his fur brightness = ambient + directional * (normal . light_dir), fitted over his fur. From a front view nearly all fur faces the camera, so the light's z (toward the camera) is not pinned: read its x (right) and y (up) only"
+}

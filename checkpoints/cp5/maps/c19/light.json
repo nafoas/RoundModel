@@ -1,0 +1,13 @@
+{
+ "photo": "references/closeups/19-D4-Approved-Other-Angle.png",
+ "frame": "camera: x right, y up, z toward the camera",
+ "light_dir": [
+  -0.506,
+  0.25,
+  0.825
+ ],
+ "ambient": -0.438,
+ "directional": 1.341,
+ "shading_explained": 0.245,
+ "note": "his fur brightness = ambient + directional * (normal . light_dir), fitted over his fur. From a front view nearly all fur faces the camera, so the light's z (toward the camera) is not pinned: read its x (right) and y (up) only"
+}
