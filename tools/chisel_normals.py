@@ -44,8 +44,8 @@ def main():
     ap.add_argument("--fused", default=str(ROOT / "checkpoints/cp5/fused"))
     ap.add_argument("--rounds", type=int, default=3)
     ap.add_argument("--hold", type=float, default=0.05, help="pull back toward the current surface (small: the normals win)")
-    ap.add_argument("--smooth", type=float, default=0.2, help="keeps the slide smooth where no photo gave a target")
-    ap.add_argument("--cap_mm", type=float, default=1.5, help="largest slide per round")
+    ap.add_argument("--smooth", type=float, default=1.0, help="keeps the slide smooth where no photo gave a target")
+    ap.add_argument("--cap_mm", type=float, default=3.0, help="largest slide per round (the round is scaled, not clipped)")
     a = ap.parse_args()
     V, F = load_obj(Path(a.inp) / "head.obj")
     T = np.load(Path(a.fused) / "target.npy")
@@ -72,11 +72,13 @@ def main():
                                                                 np.r_[j[m], i[m]])), shape=(len(m), n))
         b = rhs[m]
         # smooth slide along every edge (stronger where no target), and the hold
-        ws = np.where(has, a.smooth * 0.2, a.smooth)
+        ws = np.where(has, a.smooth * 0.3, a.smooth)
         S = sp.csr_matrix((np.r_[ws, -ws], (np.r_[np.arange(len(E)), np.arange(len(E))], np.r_[j, i])), shape=(len(E), n))
         M = (A.T @ A + S.T @ S + a.hold * sp.eye(n)).tocsr()
         d, info = cg(M, A.T @ b, rtol=1e-6, maxiter=800)
-        d = np.clip(d, -a.cap_mm / 1000, a.cap_mm / 1000)
+        big = np.abs(d).max()
+        if big > a.cap_mm / 1000:  # the whole round scaled down, not single points clipped (clipping tears)
+            d *= a.cap_mm / 1000 / big
         V = V + d[:, None] * N0
         total += d
         print(f"round {r}: edges with a target {len(m)}, slide mm: mean |d| {np.abs(d).mean()*1000:.3f}, "

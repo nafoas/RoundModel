@@ -277,6 +277,13 @@ it gives the fine form at photo resolution.
    bulges, brow, bib, creases, and the larger shape too where the normals
    say so). Only a light hold on the current shape, enough that one round
    can't run away, not enough to stop the normals reshaping him.
+- **The master's normals, complete and unaltered, for his front (owner):**
+  wherever the master sees him, the target is the master's own surface
+  direction, as the estimator gave it: not blended with the other photos,
+  not trimmed back from his outline, not smoothed. The model conforms to it
+  there and fleshes it out; the other photos only fill what the master
+  can't see (sides, back, top, underneath), smoothed across their seams
+  into the master's region, never the other way (tools/master_front.py).
 - **The normals almost always win (owner).** If his normals stick out past
   the model, or the model doesn't come all the way up to them, then either
   I made the model wrong or that photo's scan went wrong, and so far it has
@@ -288,3 +295,37 @@ it gives the fine form at photo resolution.
    profiles and close-ups; keep or change it on looks.
 - In reserve: for what no photo shows well enough, small parts built from a
   close-up's own normals the same way.
+
+### Correction (owner): the model must conform to his normals, not the other way round
+
+The first chisel pass sampled his normal maps only at the model's own
+points, so the model's shape decided where his normals could go: wherever
+he is bigger than the model (his outline past the model's in the master:
+his left side, lower cheeks, peets) his map was never used, and wherever the
+model sticks out past him it got other photos' guesses. And comparing only
+which way the surface faces can't see a surface that faces right but sits
+too far in or out, so it read as "close" when it wasn't. Owner: "You're
+conforming the normals to his existing model, rather than the other way
+around."
+
+Now (tools/master_shell.py):
+1. His front from the master's map itself, over his whole outline: the
+   normals integrated into his front surface (depth along each master
+   pixel's ray; perspective integration: d log z / du = -n_x / (f n.r)),
+   so the map alone fixes the shape; the model sets only one number, his
+   overall scale (distance).
+2. The model takes that shape: everything in front of his surface is cut,
+   everything between it and the model's own back is filled (it grows where
+   he is bigger), everything outside his outline in the master is cut.
+   Behind his front, the model keeps its back, sides and top (fleshing out).
+3. Checked against him through the master first (outline and surface),
+   then the profiles and close-ups.
+
+Result (stopped by the owner): his front from the master's normals alone
+looked like him (outline, depth, face). Putting it onto the model failed
+twice: tools/master_shell.py (extruding along the master's rays) made flat
+walls and a slab cut off his left side; tools/conform_master.py (bending
+the model's surface onto it) moved points up to 37 mm and came out crooked
+and wrong. I should have stopped and said so after the first one. Neither
+result is used; the kept model is still work/b/eyes4e. Waiting for the
+owner on how to go on.

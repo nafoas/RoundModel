@@ -48,7 +48,9 @@ onto it and chisel away very finely: the best of both worlds. Plan:
 docs/MEASURING.md, last section. **The normals almost always win:** where
 they and the model disagree, it is either the model that is wrong (far more
 often so far) or that photo's scan; the model moves to the normals unless I
-can see on the photo that the scan misread him.
+can see on the photo that the scan misread him. **For his front, the
+master's complete, unaltered normal map is used, the model conforming to it
+and fleshing it out** (owner).
 
 ## The task (this stage)
 - Start from the kept build (commit d9f1d7c, restored in 716e530).
