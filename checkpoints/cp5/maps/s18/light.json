@@ -1,0 +1,13 @@
+{
+ "photo": "references/sheet_originals/18_staring_at_boss.webp",
+ "frame": "camera: x right, y up, z toward the camera",
+ "light_dir": [
+  -0.453,
+  0.477,
+  -0.754
+ ],
+ "ambient": 0.906,
+ "directional": 0.481,
+ "shading_explained": 0.512,
+ "note": "his fur brightness = ambient + directional * (normal . light_dir), fitted over his fur. From a front view nearly all fur faces the camera, so the light's z (toward the camera) is not pinned: read its x (right) and y (up) only"
+}

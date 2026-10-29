@@ -1,0 +1,13 @@
+{
+ "photo": "references/closeups/08-Head-Side-Profile.png",
+ "frame": "camera: x right, y up, z toward the camera",
+ "light_dir": [
+  -0.229,
+  0.692,
+  0.685
+ ],
+ "ambient": 0.348,
+ "directional": 0.486,
+ "shading_explained": 0.711,
+ "note": "his fur brightness = ambient + directional * (normal . light_dir), fitted over his fur. From a front view nearly all fur faces the camera, so the light's z (toward the camera) is not pinned: read its x (right) and y (up) only"
+}
