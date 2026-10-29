@@ -28,7 +28,7 @@ conform to the master, never the other way round.
   the master camera: his nose tip at the master camera's depth for it
   (until the owner gives his real width or length). Shown to the owner on
   its own, from the front and from the side.
-- [ ] 2. Fill in the rest from the other solved photos: their outlines
+- [ ] 2. (first try stopped, not used: the other photos cut most of the master's face away (their cameras, solved against the old model, don't line up with the new front; and the front wasn't protected from them), the hidden parts came out faceted, and the block was too short (flat back). Proposed to the owner: re-solve the other cameras against the new front, never cut what the master sees, longer block, shape the hidden parts with normals. Waiting for the owner.) Fill in the rest from the other solved photos: their outlines
   carve what the master can't see (sides, top, back, underneath,
   haunches), their normals shape it; the fill meets the front's edge
   smoothly and never moves the front. Ears from the photos that show them.
