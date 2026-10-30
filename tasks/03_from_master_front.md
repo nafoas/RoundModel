@@ -182,3 +182,18 @@ new normal maps for the master, his front built from each, judged from the
 front AND the side against his photos (broad softly sloping muzzle, eyes on
 the sides of his head, a neck distinct from his head, his expression)
 before anything else is built.
+
+## New fronts (tools/front_candidates.py; checkpoints/cp6/front_candidates.jpg, front_candidates_views.png)
+
+Depth maps of his front from three estimators, put at his distance, edges
+capped (they bled into the background up to 0.5-0.7 m behind his nose),
+judged against docs/FEATURES.md:
+- Depth Pro (Apple, metric): from the front and three-quarters the most
+  rabbit-like: broad soft muzzle, full cheeks, no nose bridge, no carved
+  lip or smile; noisy (fine stripes, fur texture). Eyes ~56 mm behind the nose.
+- Marigold depth: fur-texture noise and a hole at his nose: not usable.
+- Depth Anything V2: clean, eyes on the sides, but the nose fairly defined
+  again; eyes ~73 mm behind the nose.
+- From the side, both usable ones make his muzzle stick out as a point
+  (a cone), not his broad, softly sloping muzzle: no estimator from the
+  master alone gets the side right (the same one-view ambiguity).
