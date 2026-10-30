@@ -49,7 +49,18 @@ conform to the master, never the other way round.
 - Put to the owner: A) let the profiles set the depth but not the shape
   (one number deepens the front; the front split at the step under his
   chest so his peets sit back), or B) keep the front exactly as it is.
-  Recommended A. Waiting for the owner.
+  Recommended A. Owner: the offsets are him moving (head held a little
+  differently, weight shifted), not the front: re-fitting only his head turn
+  in each photo makes eyes and noses land within ~2-20 px
+  (tools/front_head_turns.py -> checkpoints/cp6/head_poses/). So B: the
+  front stays exactly as it is; loafed photos don't cut his chest/peets.
+- Fill, second try (tools/fill_from_photos.py -> work/m/fill2,
+  checkpoints/cp6/fill2_sheet.png): no photo cuts within 4 mm behind his
+  front; loafed photos don't cut below his mouth within 60 mm of the front;
+  block 300 mm long. Result: the front survives whole (master and 3/4s look
+  like him); the filled sides/back/top are faceted (outlines only, no
+  normals yet), and the join between the front and the fill is a ragged
+  ridge, a cliff in the left profile.
 
 ## Known risks (said up front)
 

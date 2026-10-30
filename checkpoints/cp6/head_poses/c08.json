@@ -1,0 +1,23 @@
+{
+ "rotvec": [
+  0.10154148916588936,
+  0.08510211455913129,
+  -0.2398338464612084
+ ],
+ "shift_m": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "yaw_pitch_roll_deg": [
+  -0.2,
+  0.2,
+  0.6
+ ],
+ "extra_turn_nod_tilt_deg": [
+  -13.3,
+  6.2,
+  3.6
+ ],
+ "note": "head pose re-fitted against the new front (tools/front_head_turns.py)"
+}

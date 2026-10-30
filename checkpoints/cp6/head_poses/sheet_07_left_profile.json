@@ -1,0 +1,29 @@
+{
+ "rotvec": [
+  -0.10652922373479998,
+  -0.14612139698160478,
+  0.15890247092867307
+ ],
+ "shift_m": [
+  -0.012221606363278644,
+  0.005851840091499964,
+  0.0020086677027783793
+ ],
+ "terms": {
+  "eyes": 0.12294776119402984,
+  "lines_mm": 5.723549912284001
+ },
+ "pivot": [
+  0.0,
+  0.02,
+  0.095
+ ],
+ "source": "pose_parts.py (eyes, nose V, forehead/muzzle lines)",
+ "frame": "re-expressed in his frame from the master (tools/frame_poses.py, head at rest moved 9.8 mm)",
+ "extra_turn_nod_tilt_deg": [
+  11.4,
+  6.8,
+  -3.7
+ ],
+ "note": "head pose re-fitted against the new front (tools/front_head_turns.py)"
+}

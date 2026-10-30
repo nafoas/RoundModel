@@ -45,7 +45,15 @@ VIEWS = {"sheet_09_top_down": 3, "sheet_03_right_profile": 6, "sheet_07_left_pro
          "sheet_02_front_3q": 8, "sheet_08_front_3q_left": 8, "sheet_04_back_3q_right": 8,
          "sheet_05_back": 2, "sheet_06_back_3q_left": 2, "s01": 6, "s18": 6,
          "e_back_3q_left_high": 8, "c02": 12, "c21": 12, "c08": 10, "c10": 10, "c09": 12,
-         "c26": 12, "c03": 12, "c14": 12, "c12": 12, "s11": 10, "s17": 10}
+         "c26": 12, "c03": 12, "c12": 12}
+# standing as in the master; every other photo shows him loafed (lower, peets
+# tucked under), so it shapes only his back, top and sides: it may not cut
+# his chest and peets (below his mouth in the master, within LOWER_DEPTH of
+# his front)
+STANDING = {"s01", "s18", "sheet_02_front_3q", "sheet_08_front_3q_left", "c12"}
+PROTECT = 0.004  # nothing within this of his front (behind it) is ever cut
+LOWER_DEPTH = 0.06
+POSES = ROOT / "checkpoints/cp6/head_poses"  # his head turn re-fitted against the new front
 
 
 def unpose(P, pose):
@@ -85,7 +93,7 @@ def main():
     noears = np.asarray(Image.open(ROOT / f"checkpoints/cp4/outlines/{MASTER}.noears.png").convert("L")) > 127
     Hm, Wm = noears.shape
     # the block: his front's width and height, and well back of it
-    lo = np.array([Vf[:, 0].min() - 0.015, Vf[:, 1].max() - 0.20, Vf[:, 2].min() - 0.015])
+    lo = np.array([Vf[:, 0].min() - 0.015, Vf[:, 1].max() - 0.30, Vf[:, 2].min() - 0.015])
     hi = np.array([Vf[:, 0].max() + 0.015, Vf[:, 1].max() + 0.005, Vf[:, 2].max() + 0.03])
     axes = [np.arange(lo[i], hi[i], a.step) for i in range(3)]
     G = np.stack(np.meshgrid(*axes, indexing="ij"), -1).reshape(-1, 3)
@@ -96,6 +104,9 @@ def main():
     inside_m = map_coordinates(noears.astype(float), [uv[:, 1], uv[:, 0]], order=1, cval=0) > 0.5
     zf = map_coordinates(np.nan_to_num(zfront, nan=0), [uv[:, 1], uv[:, 0]], order=0, cval=0)
     keep = inside_m & (zf > 0) & (Xc[:, 2] >= zf)
+    protect = keep & (Xc[:, 2] < zf + PROTECT)  # what the master sees: never cut
+    L2m = json.loads((ROOT / "references/landmarks.json").read_text())["views"][MASTER]["points"]
+    lower = keep & (uv[:, 1] > L2m["mouth_split"][1] + 30) & (Xc[:, 2] < zf + LOWER_DEPTH)
     print("master keeps", int(keep.sum()), flush=True)
     votes = np.zeros(len(G), np.int16)
     hard = np.zeros(len(G), bool)
@@ -104,6 +115,8 @@ def main():
     for name, tol in VIEWS.items():
         try:
             proj, _, pose = camera(name)
+            if (POSES / f"{name}.json").exists():
+                pose = json.loads((POSES / f"{name}.json").read_text())
             mask, head_only = view_mask(name)
         except Exception as e:  # noqa: BLE001
             print("skip", name, e)
@@ -117,10 +130,15 @@ def main():
         out_ = inframe & (s > tol)
         if head_only:
             out_ &= hwG[idx] > 0.9
+        if name not in STANDING:
+            out_ &= ~lower[idx]
         votes[idx[out_]] += 1
-        hard[idx[inframe & (s > a.hard * tol) & ((not head_only) | (hwG[idx] > 0.9))]] = True
+        hd = inframe & (s > a.hard * tol) & ((not head_only) | (hwG[idx] > 0.9))
+        if name not in STANDING:
+            hd &= ~lower[idx]
+        hard[idx[hd]] = True
         print(f"{name}: says outside {out_.sum()}", flush=True)
-    cut = (votes >= a.votes) | hard
+    cut = ((votes >= a.votes) | hard) & ~protect
     vol = (keep & ~cut).reshape(tuple(len(x) for x in axes))
     vol = nd.binary_fill_holes(vol)
     lab, n = nd.label(vol)
