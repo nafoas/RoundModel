@@ -70,6 +70,15 @@ conform to the master, never the other way round.
   slide along the master's own lines of sight, which leaves it identical
   in outline from the master, so it can meet the sides. Normal shaping of
   the rest not run yet.
+- Owner: the front's edge is his edge; fill in the side normals and make
+  them conform to his edge. Tried (tools/finish_fill.py --shape, edge
+  direction carried on near the front's edge -> work/m/fin2,
+  checkpoints/cp6/fin2_sheet.png): no better. The flap stays and new
+  crumpled patches appear under his cheeks: the gap behind the front's edge
+  is a missing chunk several mm deep (the fill's carving cut it), which
+  sliding points 2-3 mm along their normals can't cross. Stopped and put to
+  the owner: keep the volume behind his front's edge in the fill itself
+  (so it is never carved open), then round off the join.
 
 ## Known risks (said up front)
 

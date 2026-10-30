@@ -115,6 +115,7 @@ def main():
     ap.add_argument("--w", type=float, default=0.02, help="pull toward the carved surface while smoothing")
     ap.add_argument("--shape", action="store_true")
     ap.add_argument("--rounds", type=int, default=3)
+    ap.add_argument("--edge_mm", type=float, default=6.0, help="how far from his front's edge its direction is carried on")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -162,6 +163,17 @@ def main():
             t = (Ws[..., None] * Ns).sum(0)
             wt = Ws.sum(0)
             t /= np.maximum(np.linalg.norm(t, axis=1, keepdims=True), 1e-9)
+            # his front's edge is his edge: near it, the surface carries on the
+            # way the edge faces (the front's own normal there), strongly at
+            # the edge and fading over EDGE_MM, so the sides come out to meet it
+            Nf = vertex_normals(V, F)
+            from scipy.spatial import cKDTree
+            dist, near = cKDTree(V[fx]).query(V[free])
+            wc = 2.0 * np.exp(-dist / (a.edge_mm / 1000))
+            tc = Nf[fx][near]
+            tf = t[free] * wt[free, None] + tc * wc[:, None]
+            t[free] = tf / np.maximum(np.linalg.norm(tf, axis=1, keepdims=True), 1e-9)
+            wt[free] = wt[free] + wc
             N0 = vertex_normals(V, F)
             te = t[i] + t[j]
             te /= np.maximum(np.linalg.norm(te, axis=1, keepdims=True), 1e-9)
