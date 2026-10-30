@@ -167,3 +167,18 @@ from the front, but a normal map estimated from it is not his shape. The
 front's depth and form must come from all the photos together (the side
 photos decide how the muzzle slopes, where the eyes sit, the neck), with the
 master deciding his outline and his look from the front.
+
+Owner, on the expression: "compare the facial expression on the left [the
+master] to the right [the front from its normal map]. One is a very
+mysterious, neutral, yet curious uniquely rabbit expression. The one on the
+right gives 'victorian death mask' with a completely closed mouth and slight
+peaceful smile. It's uncanny." His: a short soft split under a small nose,
+whisker pads puffed out round it, eyes on the sides. The front's: a defined
+nose bridge, the pads carved into a closed upper lip with a faint smile,
+eyes in frontal sockets.
+
+Next (owner): "for now, we just do the front, to see if it works properly":
+new normal maps for the master, his front built from each, judged from the
+front AND the side against his photos (broad softly sloping muzzle, eyes on
+the sides of his head, a neck distinct from his head, his expression)
+before anything else is built.
