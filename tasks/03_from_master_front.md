@@ -197,3 +197,16 @@ judged against docs/FEATURES.md:
 - From the side, both usable ones make his muzzle stick out as a point
   (a cone), not his broad, softly sloping muzzle: no estimator from the
   master alone gets the side right (the same one-view ambiguity).
+
+## Joint front from several angles (owner's idea; tools/joint_front.py; checkpoints/cp6/joint_sheet.png)
+
+His face solved at once against the master (Depth Pro's surface), both
+three-quarters and both profiles (their normal maps, his head turned as
+re-fitted, profiles counting for his head only), per-pixel depth at 1/4
+resolution, light smoothness. The four side views agreed about three times
+better afterwards. By eye: hints of the right thing (eye bulges move out to
+the sides of his head, rounder whisker pads in the 3/4), but the surface
+tore (flakes, shards, steps, spikes on his forehead and cheeks): each
+pixel moved freely and the views' noise and small misalignments pulled
+neighbours apart. Stopped and put to the owner: solve coarse to fine (broad
+shape first, detail after), as methods like SuperNormal do.
