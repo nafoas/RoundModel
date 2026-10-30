@@ -18,6 +18,8 @@ everything else filled in from it and made to conform to it; see
 `tasks/03_from_master_front.md`). The carved model (`docs/CARVING.md`) is
 abandoned; its cameras and outlines are still used.
 
+**What makes him Prince (features to preserve):** see `docs/FEATURES.md`; check every build against it.
+
 **How others do this (research):** see `docs/RESEARCH.md` (per-view depth+normal maps fused into oriented points, then screened Poisson).
 
 **Measuring his shape directly:** see `docs/MEASURING.md` (every photo's
