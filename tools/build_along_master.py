@@ -48,7 +48,7 @@ def main():
     ap.add_argument("--k", type=int, default=3, help="find the back at every k-th pixel")
     ap.add_argument("--step", type=float, default=0.001)
     ap.add_argument("--depth", type=float, default=0.25, help="how far back to look (m)")
-    ap.add_argument("--run", type=int, default=3, help="outside points in a row that end him")
+    ap.add_argument("--smooth_mm", type=float, default=6.0, help="how smooth his back is")
     a = ap.parse_args()
     fd, out = Path(a.front), Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -97,27 +97,25 @@ def main():
             if head_only:
                 o &= hw > 0.9
                 hd &= hw > 0.9
-            if name not in STANDING:
-                o &= ~lower
-                hd &= ~lower
             votes[:, j0:j0 + len(tt)] += o.reshape(n, -1).astype(np.int8)
             hard[:, j0:j0 + len(tt)] |= hd.reshape(n, -1)
     outside = (votes >= 2) | hard
-    # first run of `run` outside steps
-    run = np.ones_like(outside)
-    for r in range(a.run):
-        run[:, : m - r] &= outside[:, r:]
-        run[:, m - r:] = False
-    first = np.where(run.any(1), run.argmax(1), m - 1)
-    thick = ts[first]
+    # his back along each line: the LAST place the photos agree he is still
+    # there (owner: the master's edge is his edge; small disagreements just
+    # behind his front are the master's business, not theirs)
+    inside = ~outside
+    any_in = inside.any(1)
+    last = m - 1 - np.argmax(inside[:, ::-1], axis=1)
+    thick = np.where(any_in, ts[last], 0.0)
     print(f"his thickness along the master's lines of sight: median {np.median(thick)*1000:.0f} mm, "
-          f"max {thick.max()*1000:.0f} mm; lines that never ended: {(~run.any(1)).sum()}", flush=True)
+          f"max {thick.max()*1000:.0f} mm; lines with nothing behind the front: {(~any_in).sum()}", flush=True)
     # back depth map, smoothed lightly, closed to the front at his outline
     T = np.full(vv.shape, np.nan)
     T[sel] = thick
     Tf = np.nan_to_num(T)
-    wgt = nd.gaussian_filter(np.isfinite(T).astype(float), 1.5)
-    Ts = nd.gaussian_filter(Tf, 1.5) / np.maximum(wgt, 1e-6)
+    sig = a.smooth_mm / 1000 * f / np.median(z0) / k  # his back is one smooth surface
+    wgt = nd.gaussian_filter(np.isfinite(T).astype(float), sig)
+    Ts = nd.gaussian_filter(Tf, sig) / np.maximum(wgt, 1e-6)
     Tfull = np.asarray(Image.fromarray(Ts.astype(np.float32)).resize((W, H), Image.BILINEAR))
     edge = om & ~nd.binary_erosion(om)
     Tfull = np.where(om, np.maximum(Tfull, 0.0), np.nan)

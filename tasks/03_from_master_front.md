@@ -100,6 +100,16 @@ conform to the master, never the other way round.
   to about a millimetre (they come from multi-view stereo or scanners
   there); depths integrated from one photo's normals don't. Stopped and
   told the owner.
+- Back to building along the master's lines of sight, fixed rule: his back
+  is the LAST place the photos agree he's still there (the first-outside
+  rule cut him off right behind the front wherever photos were slightly
+  off), smoothed (tools/build_along_master.py -> work/m/along2,
+  checkpoints/cp6/along2_sheet.png). Master: whole, like him, dark patches
+  gone. Other sides: a long tube to the end of the search (too few photos
+  see behind him to say where he ends) and streaky walls (surface made
+  straight from two depth maps). Put to the owner: let the photos that see
+  behind him (profiles, top-down, back 3/4) decide where he ends, and make
+  the surface from a volume.
 
 ## Known risks (said up front)
 
