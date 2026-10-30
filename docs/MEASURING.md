@@ -329,3 +329,44 @@ the model's surface onto it) moved points up to 37 mm and came out crooked
 and wrong. I should have stopped and said so after the first one. Neither
 result is used; the kept model is still work/b/eyes4e. Waiting for the
 owner on how to go on.
+
+## The master's front reads like a human face mask (owner, seen; October 2026)
+
+Owner: "in the first one [the master] it looks like a rabbit, and then in the
+second one [the front from the master's normal map] it almost looks like a
+human depth mask... it technically got the shape right from the very front,
+but there are multiple ways to get the shape right from the very front, and
+from the sides or back it looks more and more off... the more I look at the
+normals map for his front, the more it looks uncanny." Seen and agreed:
+
+- Nose and muzzle: his is broad and soft, sloping back from a small nose
+  into his cheeks; the front has a narrow, ridged, pointed human nose with a
+  bridge.
+- Whisker pads and mouth: his are two rounded, puffy cushions over a short
+  split; on the front they are sculpted lobes curving down like a human upper
+  lip and smile lines.
+- Eyes: his sit on the sides of his head and bulge outward (seen past the
+  curve of his cheeks from the front); the front puts them in frontal sockets
+  under brow ridges, like a human's.
+- Neck and chin: in his profile there is a chin, a soft dip, then his bib;
+  the front runs straight from mouth to chest like a mask with no neck.
+- Peets: his are fluffy and tucked under him; the front has two small
+  separate lumps stuck on below.
+- From the side the front is an almost upright, flat face plate; his face
+  slopes back from the nose and his head is round behind it.
+
+Why: from one view many 3D shapes give the same picture (the bas-relief
+ambiguity of shape from shading: shallow or deep, broad and sloped or narrow
+and pointed). The normal estimator (Marigold, trained mostly on people and
+indoor scenes) has to pick one, and where his white fur gives it little to
+go on it fills in a human face. It matched the master from the front
+exactly and is wrong in the ways only the other photos show. Treating it as
+immutable then forced every other photo to bend around a face that isn't
+his: the main reason nothing has lined up since (flap, gaps, layers, the
+"too shallow" reading).
+
+Consequence: the master is still the immutable reference for how he looks
+from the front, but a normal map estimated from it is not his shape. The
+front's depth and form must come from all the photos together (the side
+photos decide how the muzzle slopes, where the eyes sit, the neck), with the
+master deciding his outline and his look from the front.

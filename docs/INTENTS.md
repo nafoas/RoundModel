@@ -52,6 +52,13 @@ can see on the photo that the scan misread him. **For his front, the
 master's complete, unaltered normal map is used, the model conforming to it
 and fleshing it out** (owner).
 
+**The master's normal map is not his shape (owner, seen):** the front built
+from it reads like a human face mask (narrow pointed nose, lip-like whisker
+pads, frontal eye sockets, no neck); many shapes match the master from the
+front, and the estimator picked a human one. The master stays the reference
+for how he looks from the front; his form comes from all the photos
+together. Details: tasks/03_from_master_front.md, last section.
+
 **From the master's front (owner, October 2026):** the old model is
 abandoned (it doesn't look like him). The master's normal map is turned
 directly into a model, the immutable front-facing model; everything else is
