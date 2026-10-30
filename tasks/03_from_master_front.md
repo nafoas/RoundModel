@@ -61,6 +61,15 @@ conform to the master, never the other way round.
   like him); the filled sides/back/top are faceted (outlines only, no
   normals yet), and the join between the front and the fill is a ragged
   ridge, a cliff in the left profile.
+- Smoothing the filled-in rest with his front held (tools/finish_fill.py ->
+  work/m/fin1, checkpoints/cp6/fin1_sheet.png): the facets are gone, the
+  sides, back and top are smooth. But the front's rim stays a flap standing
+  off the body (a crease behind it in both profiles, the back 3/4 and from
+  above): with every front point held, nothing can close it. Put to the
+  owner: let only the front's outer band (near his outline in the master)
+  slide along the master's own lines of sight, which leaves it identical
+  in outline from the master, so it can meet the sides. Normal shaping of
+  the rest not run yet.
 
 ## Known risks (said up front)
 
