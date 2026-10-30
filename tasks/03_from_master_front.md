@@ -89,6 +89,17 @@ conform to the master, never the other way round.
   his sides make slivers; dark patches on the front from a joining bug.
   Stopped and put to the owner: find his back as one smooth rounded surface
   fitting what the other photos say overall, and fix the joining bug.
+- Owner: research instead of guessing (docs/RESEARCH.md). Tried the
+  field's recipe (tools/poisson_fuse.py -> work/m/pois1,
+  checkpoints/cp6/pois1_sheet.png): every photo's normal map integrated to
+  depth, placed through its camera, all as oriented points, screened
+  Poisson. Didn't work: each photo's surface sits 2-7 mm (one 11 mm) off
+  the others and bends differently, so the points form several layers and
+  Poisson made overlapping shards; nothing underneath him, so the bottom
+  came out open like a bell. The recipe assumes the per-photo depths agree
+  to about a millimetre (they come from multi-view stereo or scanners
+  there); depths integrated from one photo's normals don't. Stopped and
+  told the owner.
 
 ## Known risks (said up front)
 
