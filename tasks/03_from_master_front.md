@@ -79,6 +79,16 @@ conform to the master, never the other way round.
   sliding points 2-3 mm along their normals can't cross. Stopped and put to
   the owner: keep the volume behind his front's edge in the fill itself
   (so it is never carved open), then round off the join.
+- Owner: the master's edge should BE the model's edge; no second model.
+  Built him along the master's lines of sight instead
+  (tools/build_along_master.py -> work/m/along1,
+  checkpoints/cp6/along1_sheet.png): front from step 1, back where the other
+  photos agree he ends along each line. Didn't work: the back jumps between
+  neighbouring lines (several photos, each lining up a little differently),
+  so from the sides he is long streaks and stretched sheets; lines grazing
+  his sides make slivers; dark patches on the front from a joining bug.
+  Stopped and put to the owner: find his back as one smooth rounded surface
+  fitting what the other photos say overall, and fix the joining bug.
 
 ## Known risks (said up front)
 
