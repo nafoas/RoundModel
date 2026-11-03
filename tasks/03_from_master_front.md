@@ -210,3 +210,12 @@ tore (flakes, shards, steps, spikes on his forehead and cheeks): each
 pixel moved freely and the views' noise and small misalignments pulled
 neighbours apart. Stopped and put to the owner: solve coarse to fine (broad
 shape first, detail after), as methods like SuperNormal do.
+
+- Coarse to fine (owner: go): the depth may only change as a smooth field,
+  cells of 128, then 64, then 32 photo px; fine detail stays Depth Pro's
+  (tools/joint_front.py --stages 32,16,8 -> work/m/joint/j2,
+  checkpoints/cp6/joint2_face.jpg). No tearing; the four other views agree
+  better at every stage. By eye: muzzle broad and soft from the front and
+  three-quarter, sloping a little more gently from the side; still Depth
+  Pro's fine contour ripples (its depth steps) over the face, and judged
+  from a front-only shell the side is hard to read.

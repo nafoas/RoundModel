@@ -52,7 +52,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--iters", type=int, default=400)
     ap.add_argument("--k", type=int, default=4)
-    ap.add_argument("--smooth", type=float, default=0.02)
+    ap.add_argument("--smooth", type=float, default=1.0)
+    ap.add_argument("--stages", default="32,16,8", help="cell sizes, in 1/k pixels, coarse to fine")
+    ap.add_argument("--lr", type=float, default=3e-3)
     ap.add_argument("--out", default="work/m/joint/j1")
     a = ap.parse_args()
     torch.set_num_threads(4)
@@ -70,7 +72,16 @@ def main():
     T = lambda x: torch.tensor(x, dtype=torch.float64)  # noqa: E731
     ray_t, Rc_t, pos_t = T(ray), T(Rc), T(pos)
     lz0 = np.log(np.where(m, zk, np.nanmedian(zk)))
-    lz = torch.nn.Parameter(T(lz0))
+    lz0_t = T(lz0)
+    # coarse to fine: the depth may only change as a smooth field, built from
+    # coarse grids of cells (each stage adds a finer one); no pixel moves alone
+    cs = []
+
+    def field():
+        d = torch.zeros_like(lz0_t)
+        for c in cs:
+            d = d + torch.nn.functional.interpolate(c[None, None], size=lz0_t.shape, mode="bicubic", align_corners=True)[0, 0]
+        return lz0_t + d
     m_t = torch.tensor(m)
 
     def points(lz):
@@ -122,10 +133,9 @@ def main():
         g = torch.stack([uv[..., 0] / (HW[1] - 1) * 2 - 1, uv[..., 1] / (HW[0] - 1) * 2 - 1], -1)[None]
         return torch.nn.functional.grid_sample(img, g, align_corners=True)[0]
 
-    opt = torch.optim.Adam([lz], lr=2e-3)
     mi = m_t[:-1, :-1] & m_t[1:, :-1] & m_t[:-1, 1:]
-    for it in range(a.iters + 1):
-        opt.zero_grad()
+
+    def losses(lz):
         P = points(lz)
         n = normals(P)
         loss_m = ((1 - (n * n_master).sum(-1)) * mi).sum() / mi.sum()
@@ -136,7 +146,6 @@ def main():
             Pv, Rv_ = to_view(Pc, v)
             X = (Pv - v["pos"]) @ v["R"].T
             uv = v["f"] * X[..., :2] / X[..., 2:3] + v["pp"]
-            # his surface direction in that photo, back to him as in the master (head turned back)
             nv = sample(v["N"], uv, v["HW"]).permute(1, 2, 0)
             hwv = (hw[:-1, :-1] > 0.5)[..., None]
             nv = torch.where(hwv, nv @ Rv_ @ Rm_t.T, nv)
@@ -144,7 +153,7 @@ def main():
             inside = sample(v["mask"], uv, v["HW"])[0] > 0.5
             sight = v["pos"] - Pv
             sight = sight / sight.norm(dim=-1, keepdim=True)
-            n_v = torch.where(hwv, n @ Rm_t @ Rv_.T, n)  # surface as in that photo
+            n_v = torch.where(hwv, n @ Rm_t @ Rv_.T, n)
             face = (n_v * sight).sum(-1).detach()
             wgt = (face.clamp(0, 1) ** 2) * inside * mi * (face > 0.3)
             if not v["standing"]:
@@ -152,14 +161,23 @@ def main():
             lv = ((1 - (n * nv).sum(-1)) * wgt).sum() / wgt.sum().clamp_min(1)
             loss = loss + lv
             report[v["name"]] = float(lv)
-        lap = (lz[1:-1, 1:-1] * 4 - lz[:-2, 1:-1] - lz[2:, 1:-1] - lz[1:-1, :-2] - lz[1:-1, 2:])
-        loss = loss + a.smooth * 1e4 * (lap[m_t[1:-1, 1:-1]] ** 2).mean()
-        loss.backward()
-        with torch.no_grad():
-            lz.grad[~m_t] = 0
-        opt.step()
-        if it % 50 == 0:
-            print(it, {k_: round(v_, 4) for k_, v_ in report.items()}, flush=True)
+        return loss, report
+
+    for st in [int(x) for x in a.stages.split(",")]:
+        c = torch.nn.Parameter(torch.zeros(int(np.ceil(h / st)) + 1, int(np.ceil(w / st)) + 1, dtype=torch.float64))
+        cs.append(c)
+        opt = torch.optim.Adam(cs, lr=a.lr)
+        for it in range(a.iters + 1):
+            opt.zero_grad()
+            loss, report = losses(field())
+            for cc in cs:  # each field gently smooth
+                lap = cc[1:-1, 1:-1] * 4 - cc[:-2, 1:-1] - cc[2:, 1:-1] - cc[1:-1, :-2] - cc[1:-1, 2:]
+                loss = loss + a.smooth * (lap ** 2).sum()
+            loss.backward()
+            opt.step()
+            if it % 100 == 0:
+                print(f"cells {st * k * 1} px:", it, {k_: round(v_, 4) for k_, v_ in report.items()}, flush=True)
+    lz = field()
     # the change, spread to Depth Pro's full-resolution front
     dl = (lz.detach().numpy() - lz0) * m
     dl_full = np.asarray(Image.fromarray(dl.astype(np.float32)).resize((W, H), Image.BILINEAR))
