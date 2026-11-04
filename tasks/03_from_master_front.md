@@ -219,3 +219,35 @@ shape first, detail after), as methods like SuperNormal do.
   three-quarter, sloping a little more gently from the side; still Depth
   Pro's fine contour ripples (its depth steps) over the face, and judged
   from a front-only shell the side is hard to read.
+
+## The other angles decide his shape; the master only regulates (owner, November 2026)
+
+Owner: "the same silhouette from the front can produce multiple shapes as it
+goes further back... use the other angles as a means to *achieving* the
+front, not making the front straight up overwrite them... He has a gently
+sloping, broad forehead, with a tiny bit of depth, but that same thing can
+be emulated with that weird nose thing on the model previously that looked
+like a death mask... The front can still look like the front even if you
+defer to the other angles, the front just serves as a means of regulating,
+like 'okay so we didn't go too far from this angle, the front is still the
+front'." And: "the problem with the current method is we essentially stick
+with one possible way that it could have the same shape from directly
+ahead, even if it's wrong."
+
+So:
+- Every method so far picked ONE shape matching the master from the front
+  (Marigold's guess, then Depth Pro's) and made it fixed or the start that
+  everything else bent around; if it was the wrong one of the many, nothing
+  could undo it.
+- From now on no front guess is committed to. The other angles (profiles,
+  three-quarters, top, back, close-ups) decide his shape; the master only
+  rules out shapes that don't look like him from the front: his outline in
+  the master stays his outline, and from the front his surface still reads
+  like the master, as a gentle check, never the main pull.
+- His head is one closed surface (not a front shell along the master's lines
+  of sight, which the side photos can't shape: from the side it is only a
+  grazing edge), starting as a smooth rounded head from the photos'
+  outlines, shaped coarse to fine through every photo's camera (his head
+  turned as re-fitted) by their normal maps and outlines.
+- Judged by eye against docs/FEATURES.md, the side and three-quarters as
+  much as the front.

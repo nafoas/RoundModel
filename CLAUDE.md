@@ -12,10 +12,11 @@ every step and repeat the intents at the end of every step.
 of each message. (A hook that injected them on every command was abandoned:
 it made the website flag commands.)
 
-**How he is built now: from the master's front** (owner, October 2026: the
-master's normal map turned directly into the immutable front-facing model,
-everything else filled in from it and made to conform to it; see
-`tasks/03_from_master_front.md`). The carved model (`docs/CARVING.md`) is
+**How he is built now:** the other photos decide his shape, the master only
+regulates it (owner, November 2026: from directly ahead many shapes look the
+same, so never stick with one front guess; the master photo stays the
+immutable reference for how he looks from the front). See the last section
+of `tasks/03_from_master_front.md`. The carved model (`docs/CARVING.md`) is
 abandoned; its cameras and outlines are still used.
 
 **What makes him Prince (features to preserve):** see `docs/FEATURES.md`; check every build against it.

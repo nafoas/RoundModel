@@ -52,6 +52,12 @@ can see on the photo that the scan misread him. **For his front, the
 master's complete, unaltered normal map is used, the model conforming to it
 and fleshing it out** (owner).
 
+**The other angles decide his shape; the master only regulates (owner):**
+from directly ahead many shapes give the same picture, so never stick with
+one front guess. The other photos decide his shape; the master only checks
+"we didn't go too far, the front is still the front" (his outline there,
+and a gentle check that he still reads like the master from the front).
+
 **The master's normal map is not his shape (owner, seen):** the front built
 from it reads like a human face mask (narrow pointed nose, lip-like whisker
 pads, frontal eye sockets, no neck); many shapes match the master from the
