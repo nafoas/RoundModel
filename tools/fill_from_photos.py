@@ -83,6 +83,8 @@ def main():
     ap.add_argument("--step", type=float, default=0.001)
     ap.add_argument("--votes", type=int, default=2)
     ap.add_argument("--hard", type=float, default=1.5)
+    ap.add_argument("--no_front", action="store_true",
+                    help="no front guess at all: the master gives only its outline (owner, November 2026)")
     a = ap.parse_args()
     fd, out = Path(a.front), Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -105,8 +107,16 @@ def main():
     zf = map_coordinates(np.nan_to_num(zfront, nan=0), [uv[:, 1], uv[:, 0]], order=0, cval=0)
     keep = inside_m & (zf > 0) & (Xc[:, 2] >= zf)
     protect = keep & (Xc[:, 2] < zf + PROTECT)  # what the master sees: never cut
+    if a.no_front:
+        keep = inside_m & (Xc[:, 2] > 0.2)
+        protect = np.zeros_like(keep)
     L2m = json.loads((ROOT / "references/landmarks.json").read_text())["views"][MASTER]["points"]
-    lower = keep & (uv[:, 1] > L2m["mouth_split"][1] + 30) & (Xc[:, 2] < zf + LOWER_DEPTH)
+    if a.no_front:  # no front guess: measured from his nose tip's depth instead
+        L3 = json.loads((ROOT / "checkpoints/cp6/landmarks3d.json").read_text())
+        z_nose = float(((np.asarray(L3["nose_tip"]) - pos) @ Rc.T)[2])
+        lower = keep & (uv[:, 1] > L2m["mouth_split"][1] + 30) & (Xc[:, 2] < z_nose + LOWER_DEPTH)
+    else:
+        lower = keep & (uv[:, 1] > L2m["mouth_split"][1] + 30) & (Xc[:, 2] < zf + LOWER_DEPTH)
     print("master keeps", int(keep.sum()), flush=True)
     votes = np.zeros(len(G), np.int16)
     hard = np.zeros(len(G), bool)
@@ -162,7 +172,7 @@ def main():
     px = np.clip(np.round(uvq).astype(int), 0, [Wm - 1, Hm - 1])
     seen = np.abs(zq - zb[px[:, 1], px[:, 0]]) < 2 * a.step
     zt = map_coordinates(np.nan_to_num(zfront, nan=0), [uvq[:, 1], uvq[:, 0]], order=1, cval=0)
-    snap = seen & (zt > 0) & (np.abs(zt - zq) < 4 * a.step)
+    snap = seen & (zt > 0) & (np.abs(zt - zq) < 4 * a.step) & (not a.no_front)
     V[snap] = pos + (V[snap] - pos) * (zt[snap] / zq[snap])[:, None]
     C.write_obj(out / "head.obj", V, F)
     print(f"surface {len(V)} points; {snap.sum()} placed exactly on his front", flush=True)
