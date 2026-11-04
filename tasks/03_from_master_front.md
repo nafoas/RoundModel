@@ -251,3 +251,10 @@ So:
   turned as re-fitted) by their normal maps and outlines.
 - Judged by eye against docs/FEATURES.md, the side and three-quarters as
   much as the front.
+
+- First whole-head solve (tools/whole_head.py -> work/m/wh1,
+  checkpoints/cp6/wh1_sheet.png): failed. The neutral hull still has the flat
+  shelf across his chest (my fix to the loafed-photo rule didn't remove it),
+  and the solve covered him in spikes: single points slid up to 54 mm (the
+  smoothness term was far too weak for a 2 mm mesh, and points near the rim
+  were pulled by misaligned outlines). Stopped and told the owner.
