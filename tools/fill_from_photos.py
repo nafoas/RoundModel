@@ -142,11 +142,11 @@ def main():
         out_ = inframe & (s > tol)
         if head_only:
             out_ &= hwG[idx] > 0.9
-        if name not in STANDING:
+        if name not in STANDING and not a.no_front:
             out_ &= ~lower[idx]
         votes[idx[out_]] += 1
         hd = inframe & (s > a.hard * tol) & ((not head_only) | (hwG[idx] > 0.9))
-        if name not in STANDING:
+        if name not in STANDING and not a.no_front:
             hd &= ~lower[idx]
         hard[idx[hd]] = True
         print(f"{name}: says outside {out_.sum()}", flush=True)
