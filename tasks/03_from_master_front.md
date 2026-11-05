@@ -270,3 +270,9 @@ So:
   standing photos, then shapes it).
 - The solve now changes his shape only through broad smooth bumps (60 of
   30 mm, then 300 of 13 mm), so no single point can spike.
+
+- Shaping step with smooth bumps (tools/whole_head.py -> work/m/wh3,
+  checkpoints/cp6/wh3_sheet.png): no spikes, no tearing, but it does not
+  look more like him: the same lumpy egg, a little lumpier; no face, eyes,
+  muzzle or neck emerge from any side. The photos' normals barely moved it
+  (agreement 0.119 -> 0.121, no better). Stopped and told the owner.
