@@ -52,6 +52,10 @@ can see on the photo that the scan misread him. **For his front, the
 master's complete, unaltered normal map is used, the model conforming to it
 and fleshing it out** (owner).
 
+**Simply make him (owner):** he is a very round, white, fluffy little animal;
+his shape is simple, subtle but simple. No big guns, no rituals: make him
+directly, look at him next to his photos, gentle changes, show the owner.
+
 **Never let angles overlap (owner):** every patch of his surface is owned
 by exactly one photo (the one that sees it most face-on) and shaped from it
 alone; neighbours meet only in a narrow, smooth border. Overlap is what made

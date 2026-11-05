@@ -12,7 +12,9 @@ every step and repeat the intents at the end of every step.
 of each message. (A hook that injected them on every command was abandoned:
 it made the website flag commands.)
 
-**How he is built now:** the other photos decide his shape, the master only
+**How he is built now: simply** (owner, November 2026: "a small round fluffy
+animal"; no pipelines; tools/prince_simple.py, last section of the task file).
+Earlier: the other photos decide his shape, the master only
 regulates it (owner, November 2026: from directly ahead many shapes look the
 same, so never stick with one front guess; the master photo stays the
 immutable reference for how he looks from the front). See the last section

@@ -313,3 +313,19 @@ shape.)
   rear (not his chest and peets); and give each part of him to as few
   photos as possible (whole-body sheet photos own the body and the broad
   head, close-ups only small regions where they clearly see best).
+
+## Simply make him (owner, November 2026)
+
+Owner: "This is a simple task, 'create a model based on an image'. And you
+keep either simplifying it into a bunch of round blobs, or complicating it
+into a 30 step ritual process... you're overstating how hard he is to make.
+He is a very very round, white, fluffy little animal. His shape is simple.
+Subtle, yes, but simple... You're acting like you need to bring in the big
+guns when this is a small round fluffy animal."
+
+So: no estimators, solvers or pipelines. Make him directly: a soft round
+body, a round head flowing into it, his little face (soft broad sloping
+muzzle, small nose and short split, puffy whisker pads, eyes on the sides),
+small rounded ears set wide, peets tucked under, a tail. Sizes from his
+outlines. Look at him next to his photos (master first, then a side view),
+make gentle changes, show the owner. (tools/prince_simple.py)
