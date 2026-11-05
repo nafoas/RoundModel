@@ -302,3 +302,14 @@ Method:
    neighbouring patches meet badly offset somewhere, stop and show the owner.
 (As in photogrammetry texturing: one photo per patch, smooth seams; here for
 shape.)
+
+- Ownership map, first try (tools/ownership.py on the smoothed neutral
+  hull; checkpoints/cp6/ownership.jpg): two problems. (1) 64% of him has no
+  owner: his sides, back and rear, because every photo that sees them shows
+  him loafed and loafed photos were limited to his head. (2) The head and
+  face are split into many small patches among 22 photos (close-ups own
+  pieces of cheek, the top-down owns his forehead, etc.), so there would be
+  many borders. Put to the owner: let loafed photos own his sides, back and
+  rear (not his chest and peets); and give each part of him to as few
+  photos as possible (whole-body sheet photos own the body and the broad
+  head, close-ups only small regions where they clearly see best).
