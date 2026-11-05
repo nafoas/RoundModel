@@ -107,8 +107,10 @@ def main():
     zf = map_coordinates(np.nan_to_num(zfront, nan=0), [uv[:, 1], uv[:, 0]], order=0, cval=0)
     keep = inside_m & (zf > 0) & (Xc[:, 2] >= zf)
     protect = keep & (Xc[:, 2] < zf + PROTECT)  # what the master sees: never cut
-    if a.no_front:
-        keep = inside_m & (Xc[:, 2] > 0.2)
+    if a.no_front:  # nothing of him is nearer the master camera than his nose tip
+        L3n = json.loads((ROOT / "checkpoints/cp6/landmarks3d.json").read_text())
+        z_tip = float(((np.asarray(L3n["nose_tip"]) - pos) @ Rc.T)[2])
+        keep = inside_m & (Xc[:, 2] > z_tip - 0.003)
         protect = np.zeros_like(keep)
     L2m = json.loads((ROOT / "references/landmarks.json").read_text())["views"][MASTER]["points"]
     if a.no_front:  # no front guess: measured from his nose tip's depth instead

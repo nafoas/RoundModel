@@ -258,3 +258,15 @@ So:
   and the solve covered him in spikes: single points slid up to 54 mm (the
   smoothness term was far too weak for a 2 mm mesh, and points near the rim
   were pulled by misaligned outlines). Stopped and told the owner.
+
+- Chest shelf, cause found: below his mouth the loafed photos are not
+  allowed to cut (their chest posture differs), and the only photos left
+  there are front-facing ones, which can't carve depth; so that band stays
+  as far forward as the block reaches. Starting the block at his nose tip's
+  depth made the slab smaller but a ridge remains at mouth level
+  (checkpoints/cp6/hull2_sheet.png): the band rule itself makes the step.
+  Stopped (bump solve not run) and put to the owner: drop that rule for the
+  starting head (let all photos carve his chest; the solve, with the
+  standing photos, then shapes it).
+- The solve now changes his shape only through broad smooth bumps (60 of
+  30 mm, then 300 of 13 mm), so no single point can spike.

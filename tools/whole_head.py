@@ -145,10 +145,38 @@ def main():
         px = np.clip(np.round(uv).astype(int), 0, [v["HW"][1] - 1, v["HW"][0] - 1])
         return torch.as_tensor(np.abs(z - zb[px[:, 1], px[:, 0]]) < 0.002)
 
-    d = torch.zeros(len(V0), dtype=torch.float64, requires_grad=True)
-    for stage, lam in enumerate(float(x) for x in a.stages.split(",")):
-        opt = torch.optim.Adam([d], lr=4e-4)
+    # his shape changes only through broad smooth bulges and dents (owner: no
+    # spikes): each stage adds K bumps of radius r, centres spread over him
+    from scipy.spatial import cKDTree
+    tree = cKDTree(V0)
+    bases, coefs = [], []
+
+    def centres(K):
+        idx = [0]
+        dmin = np.linalg.norm(V0 - V0[0], axis=1)
+        for _ in range(K - 1):
+            i = int(np.argmax(dmin))
+            idx.append(i)
+            dmin = np.minimum(dmin, np.linalg.norm(V0 - V0[i], axis=1))
+        return V0[idx]
+
+    def disp():
+        out = torch.zeros(len(V0), dtype=torch.float64)
+        for B, c in zip(bases, coefs):
+            out = out + B @ c
+        return out
+    for stage, (K, r) in enumerate([(60, 0.030), (300, 0.013)]):
+        Cn = centres(K)
+        dist = np.linalg.norm(V0[:, None, :] - Cn[None], axis=2)
+        Bm = np.exp(-(dist / r) ** 2)
+        Bm /= np.maximum(Bm.sum(1, keepdims=True), 1e-6)
+        bases.append(T(Bm))
+        c = torch.zeros(K, dtype=torch.float64, requires_grad=True)
+        coefs.append(c)
+        opt = torch.optim.Adam(coefs, lr=3e-4)
+        lam = 0.0
         for it in range(a.iters + 1):
+            d = disp()
             V = Vt + d[:, None] * N0
             if it % 25 == 0:
                 vis_cache = {v["name"]: visible(in_view(V, v), v, F0) for v in views}
@@ -167,7 +195,7 @@ def main():
                 vis = vis_cache[v["name"]] & use
                 l_out = (torch.relu(s)[use] ** 2).mean() * 1e-2
                 rim = vis & (face.abs() < 0.2) & (s.abs().detach() < 25)
-                l_rim = (s[rim] ** 2).mean() * 1e-2 if rim.any() else 0.0
+                l_rim = torch.nn.functional.huber_loss(s[rim], torch.zeros_like(s[rim]), delta=8.0) * 1e-2 if rim.any() else 0.0
                 lv = l_out + l_rim
                 fw = vis & (face.detach() > 0.35)
                 if v["name"] == MASTER:
@@ -185,17 +213,16 @@ def main():
                     lv = lv + l_n
                     rep[v["name"]] = round(float(l_n), 4)
                 loss = loss + lv
-            Ld = torch.sparse.mm(Lt, d[:, None])[:, 0]
-            loss = loss + lam * 1e3 * (Ld ** 2).mean()
+            loss = loss + 5.0 * sum((cc ** 2).mean() for cc in coefs) * 1e3  # stay near the outline hull unless the photos say
             opt.zero_grad()
             loss.backward()
             opt.step()
             if it % 50 == 0:
-                print(f"stage {stage} (smooth {lam:g}) it {it}: slide mm mean {d.abs().mean().item()*1000:.2f} "
+                print(f"stage {stage} ({K} bumps, {r*1000:.0f} mm) it {it}: slide mm mean {d.abs().mean().item()*1000:.2f} "
                       f"max {d.abs().max().item()*1000:.2f}; normals off {np.mean(list(rep.values())):.4f}", flush=True)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
-    C.write_obj(out / "head.obj", (Vt + d[:, None] * N0).detach().numpy(), F0)
+    C.write_obj(out / "head.obj", (Vt + disp()[:, None] * N0).detach().numpy(), F0)
     C.write_obj(out / "start.obj", V0, F0)
 
 
