@@ -276,3 +276,29 @@ So:
   look more like him: the same lumpy egg, a little lumpier; no face, eyes,
   muzzle or neck emerge from any side. The photos' normals barely moved it
   (agreement 0.119 -> 0.121, no better). Stopped and told the owner.
+
+## Never let angles overlap (owner, November 2026)
+
+Owner: "I believe the automatic routes can work, if we are simply
+systematic. If we never let angles overlap, this wouldn't be a problem."
+Looking back, every automatic attempt let photos overlap (fused normals
+averaged every photo that saw a spot; Poisson stacked every photo's surface;
+the joint solves let every photo pull on every point), so where two photos
+disagreed (he moved, cameras don't line up exactly) they fought (spikes,
+layers) or cancelled (lumps). The parts model was rebuilt by mistake and
+shown as if new (it is tasks/02's, unchanged): not that again.
+
+Method:
+1. Ownership map: his surface divided into patches, each owned by exactly
+   ONE photo, the one that sees it most face-on (loafed photos own his head
+   only; the master's estimated normals are still not his shape, but the
+   master stays the reference for how he looks from the front). Shown to
+   the owner before anything is shaped.
+2. Each patch takes its shape from its owner's normal map alone, never
+   blended with another photo.
+3. Only at borders do neighbours meet, in a narrow band where the two
+   surfaces are joined smoothly (no step).
+4. Checked by eye after the map, then after each patch is shaped. If
+   neighbouring patches meet badly offset somewhere, stop and show the owner.
+(As in photogrammetry texturing: one photo per patch, smooth seams; here for
+shape.)

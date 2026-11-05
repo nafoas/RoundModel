@@ -52,6 +52,11 @@ can see on the photo that the scan misread him. **For his front, the
 master's complete, unaltered normal map is used, the model conforming to it
 and fleshing it out** (owner).
 
+**Never let angles overlap (owner):** every patch of his surface is owned
+by exactly one photo (the one that sees it most face-on) and shaped from it
+alone; neighbours meet only in a narrow, smooth border. Overlap is what made
+photos fight or cancel. Details: tasks/03_from_master_front.md, last section.
+
 **The other angles decide his shape; the master only regulates (owner):**
 from directly ahead many shapes give the same picture, so never stick with
 one front guess. The other photos decide his shape; the master only checks
