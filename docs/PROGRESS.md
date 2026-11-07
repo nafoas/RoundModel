@@ -159,3 +159,11 @@ check.py output (if applicable), and the next step.
   it made the line hook into his right eye's area, so it was undone (r=4 kept).
   Remaining: a small bump above his right eye's lashes; asked the owner.
 - Batch 1 sheets regenerated with the tightened outline.
+- **Owner flagged:** a tiny bit of the black eye mark was cut off; be sub-pixel
+  precise, pixel by pixel; the hotot eye marks make him, him. **Measured:** 12
+  pixels (lum 98-114) of the tip of his right eye's mark (x 316-318, y 421-424)
+  were outside. **Cause:** the strand filter treated the 4-px-tall mark tip as a
+  strand. **Fix:** eye marks are protected and merged into the outline at 1/8-px
+  precision with a 0.5 px margin. **Re-checked:** both eyes: 0 mark pixels
+  outside (3,024 and 4,175 checked); pixel-grid views of both corners; lashes
+  still outside. Test added (it caught corner-shaving, fixed). 6 tests pass.

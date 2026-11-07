@@ -108,6 +108,10 @@ excuse and was withdrawn.)
   The outline is fitted as tightly as possible across the top of his head
   (both ears, both eye corners), following his head under the lashes, never
   the lashes themselves. The bend at each eye corner is tight.
+- **His black eye marks are sacred** (2026-11-07): he has little hotot
+  "eyeliner" marks; "this is really what makes him, him." Not one pixel of them
+  may be cut off. They're protected in the outline at sub-pixel precision and
+  checked pixel by pixel on every run.
 
 ## Whiskers
 
@@ -171,6 +175,12 @@ excuse and was withdrawn.)
    a wider strand filter made the line hook under his right eye's lashes into
    the eye area. → Undone; when a fix makes a sensitive area worse, stop and
    say so instead of tinkering further.
-8. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
+8. **A filter that shaved his eye mark.** The strand filter (meant to keep lashes
+   out) treated the 4-px-tall tip of his right eye's black mark as a strand and
+   cut 12 pixels of it off. → The marks are now explicitly protected and
+   checked pixel by pixel; a test makes sure a mark poking past the outline
+   ends up fully inside, including its corners (which the test caught being
+   shaved by smoothing; fixed with a 0.5 px margin).
+9. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
    written by an earlier session without being logged. → Log everything in
    `docs/PROGRESS.md`; unlogged work is untrusted until reviewed.

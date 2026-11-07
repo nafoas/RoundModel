@@ -39,6 +39,12 @@ HANDOFF = 40            # px: smooth hand-off between zones
 SENSITIVE_FIT = (2.5, 0.8)
 PEET_FIT = (4.0, 1.0)
 STRAND_R = 4            # px: strands thinner than ~2*STRAND_R+1 are removed before the sensitive fit
+# His black eye marks (hotot "eyeliner") are protected: the outline must contain
+# every pixel of them, to sub-pixel precision. Owner: they make him, him.
+EYE_BOXES = {"right_eye_image_left": (270, 340, 380, 500), "left_eye_image_right": (670, 330, 790, 490)}
+MARK_LUM = 130          # darker than this and connected to the eye's dark core = eye mark
+CORE_LUM = 70
+UNION_SS = 8            # sub-samples per pixel when merging the marks into the outline
 
 
 def coverage(rgb: np.ndarray) -> np.ndarray:
@@ -131,6 +137,78 @@ def fit_outline(a: np.ndarray):
     return tck, mid_gentle
 
 
+def eye_mark_fields(rgb: np.ndarray, a: np.ndarray) -> dict:
+    """For each eye box: a 0..1 field of the black eye mark (its soft edge kept)."""
+    lum = rgb.mean(axis=2).astype(float)
+    out = {}
+    for name, (x0, y0, x1, y1) in EYE_BOXES.items():
+        L = lum[y0:y1, x0:x1]
+        dark = L < MARK_LUM
+        lab, n = ndi.label(dark, structure=np.ones((3, 3), int))
+        core_ids = set(np.unique(lab[(L < CORE_LUM) & dark])) - {0}
+        mark = np.isin(lab, list(core_ids))
+        near = ndi.binary_dilation(mark, iterations=2)          # include the mark's anti-aliased edge
+        out[name] = ((x0, y0, x1, y1), a[y0:y1, x0:x1] * near, mark)
+    return out
+
+
+def merge_marks(curve: np.ndarray, fields: dict) -> np.ndarray:
+    """Union the outline with each eye mark on an UNION_SS-times finer grid and
+    splice the union's boundary back into the outline inside that eye box."""
+    from matplotlib.path import Path as MPath
+    from scipy.spatial import cKDTree
+    for (x0, y0, x1, y1), field, _ in fields.values():
+        ss = UNION_SS
+        xs = x0 + (np.arange((x1 - x0) * ss) + 0.5) / ss
+        ys = y0 + (np.arange((y1 - y0) * ss) + 0.5) / ss
+        X, Y = np.meshgrid(xs, ys)
+        inside = MPath(curve).contains_points(np.c_[X.ravel(), Y.ravel()]).reshape(X.shape)
+        # mark field sampled on the fine grid (bilinear), its 50% level is the mark's edge
+        fine = ndi.map_coordinates(field, [(Y - y0 - 0.5).ravel(), (X - x0 - 0.5).ravel()],
+                                   order=1, mode="nearest").reshape(X.shape)
+        mk = ndi.binary_dilation(fine >= LEVEL, structure=et.disk(ss // 2))   # +0.5 px safety margin
+        union = np.maximum(inside.astype(float), mk.astype(float))
+        union = ndi.gaussian_filter(union, ss * 0.35)           # remove 1/8-px stair steps only
+        union[[0, -1], :] = inside[[0, -1], :]                  # box border: keep the outline as it was
+        union[:, [0, -1]] = inside[:, [0, -1]]
+        cs = find_contours(union, 0.5)
+        if not cs:
+            continue
+        c = max(cs, key=len)
+        seg = np.stack([x0 + (c[:, 1] + 0.5) / ss, y0 + (c[:, 0] + 0.5) / ss], axis=1)
+        tree = cKDTree(curve)
+        i0, i1 = tree.query(seg[0])[1], tree.query(seg[-1])[1]
+        n = len(curve)
+        fwd = (i1 - i0) % n
+        mid_f = curve[(i0 + fwd // 2) % n]
+        in_box = (x0 <= mid_f[0] < x1) and (y0 <= mid_f[1] < y1)
+        if in_box:      # replace i0 -> i1 going forward
+            keep = curve[[(i1 + k) % n for k in range(n - fwd)]]
+            curve = np.vstack([seg, keep[1:]]) if np.allclose(seg[-1], keep[0], atol=2) else np.vstack([seg, keep])
+        else:           # replace i1 -> i0 going forward; reverse seg to keep orientation
+            back = (i0 - i1) % n
+            keep = curve[[(i0 + k) % n for k in range(n - back)]]
+            curve = np.vstack([seg[::-1], keep])
+    return resample(curve, 0.5)
+
+
+def mark_check(curve: np.ndarray, fields: dict) -> dict:
+    """Sub-pixel check: how much of each eye-mark pixel lies outside the outline."""
+    from matplotlib.path import Path as MPath
+    path = MPath(curve)
+    res = {}
+    for name, ((x0, y0, x1, y1), field, mark) in fields.items():
+        ss = 8
+        xs = x0 + (np.arange((x1 - x0) * ss) + 0.5) / ss
+        ys = y0 + (np.arange((y1 - y0) * ss) + 0.5) / ss
+        X, Y = np.meshgrid(xs, ys)
+        f = path.contains_points(np.c_[X.ravel(), Y.ravel()]).reshape(y1 - y0, ss, x1 - x0, ss).mean(axis=(1, 3))
+        res[name] = {"mark_pixels": int(mark.sum()),
+                     "mark_pixels_not_fully_inside": int((mark & (f < 1)).sum()),
+                     "mark_area_outside_px": round(float(((1 - f) * mark).sum()), 3)}
+    return res
+
+
 def sample(tck, n: int) -> np.ndarray:
     x, y = splev(np.linspace(0, 1, n, endpoint=False), tck)
     return np.stack([x, y], axis=1)
@@ -158,6 +236,9 @@ def main() -> int:
     raw = resample(level_contour(a, 0.0), 1.0)          # unblurred 50% edge: "the raw edge"
     tck, mid = fit_outline(a)
     curve = resample(sample(tck, 6000), 1.0)
+    fields = eye_mark_fields(rgb, a)
+    curve = merge_marks(curve, fields)
+    marks = mark_check(curve, fields)
     # distance from the smooth curve to the 50% level it was fitted to
     from scipy.spatial import cKDTree
     dist = cKDTree(curve).query(resample(mid, 1.0))[0]
@@ -183,12 +264,14 @@ def main() -> int:
         "spline": {"t": tck[0].tolist(), "cx": tck[1][0].tolist(), "cy": tck[1][1].tolist(), "k": tck[2]},
         "fit_to_50pct_level_px": {"mean": round(float(dist.mean()), 2), "max": round(float(dist.max()), 2)},
         "tiles_where_not_smoother_than_raw": worse,
-        "sampled_curve": [[round(float(x), 2), round(float(y), 2)] for x, y in curve[::4]],
+        "eye_marks_check": marks,
+        "sampled_curve": [[round(float(x), 3), round(float(y), 3)] for x, y in curve],
     }
     Path("data/strands/body_outline.json").write_text(json.dumps(out, indent=1))
-    print(f"curve length {len(curve)} px; fit to 50% level: mean {dist.mean():.2f}, max {dist.max():.2f} px")
+    print(f"curve points {len(curve)}; fit to 50% level: mean {dist.mean():.2f}, max {dist.max():.2f} px")
     print(f"total turning: raw edge {turning(raw).sum():.0f} rad, smooth outline {turning(curve).sum():.0f} rad")
     print(f"tiles where the outline is NOT smoother than the raw edge: {worse or 'none'}")
+    print(f"eye marks check: {marks}")
     return 0 if not worse else 1
 
 

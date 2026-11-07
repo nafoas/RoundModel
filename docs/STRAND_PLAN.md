@@ -184,6 +184,13 @@ Original description:
     (lashes, eyebrow whiskers; grey opening r=4) so the line follows his head
     under them. Owner: if his eye area is shaped slightly wrong he loses his
     identity.
+  - **His black eye marks (hotot "eyeliner") are protected:** around each eye,
+    every pixel darker than 130 connected to the eye's dark core is the mark.
+    The mark (with its soft edge, +0.5 px safety margin) is merged into the
+    outline on a grid 8x finer than the photo, so the line follows the mark's
+    own edge. Checked every run: 0 of 3,024 (his right eye) and 0 of 4,175 (his
+    left eye) mark pixels outside, 0.000 px of mark area outside. Test:
+    `tests/test_body_outline.py`. Pixel view: `docs/images/eye_corners_pixels.png`.
   - Peets/tuft, y > 1100: faithful (4 px blur, 1 px RMS).
   - His furry sides: gentle (8 px blur, 4 px RMS).
   (A single smoothing level was tried first: either wiggly on the sides or it
