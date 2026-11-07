@@ -1,5 +1,5 @@
 {
- "about": "Step 1 of docs/STRAND_PLAN.md. Every tile of Prince's edge band, in order around him (T = along the outline, starting at the top of his head toward image-right = his left; E = extensions for the outer fringe and whiskers, with the nearest outline tile). Status flow: todo -> annotated -> self-checked -> owner-approved.",
+ "about": "Step 1 of docs/STRAND_PLAN.md. Every tile of Prince's edge band, in order around him (T = along the outline, starting at the top of his head toward image-right = his left; E = extensions for the outer fringe and whiskers, with the nearest outline tile). Status flow: todo -> annotated -> self-checked -> owner-approved. Per-part status fields (e.g. 'outline') track each step separately.",
  "photo": "data/photos/anchor_front.webp",
  "params": {
   "tile": 64,
@@ -23,7 +23,9 @@
    "y0": 166,
    "x1": 712,
    "y1": 230,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "ear tip/outer edge through soft halo; eyebrow whiskers outside"
   },
   {
    "id": "T002",
@@ -32,7 +34,9 @@
    "y0": 190,
    "x1": 738,
    "y1": 254,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "ear tip/outer edge through soft halo; eyebrow whiskers outside"
   },
   {
    "id": "T003",
@@ -41,7 +45,9 @@
    "y0": 224,
    "x1": 744,
    "y1": 288,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "ear tip/outer edge through soft halo; eyebrow whiskers outside"
   },
   {
    "id": "T004",
@@ -50,7 +56,9 @@
    "y0": 258,
    "x1": 754,
    "y1": 322,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "ear tip/outer edge through soft halo; eyebrow whiskers outside"
   },
   {
    "id": "T005",
@@ -59,7 +67,9 @@
    "y0": 288,
    "x1": 763,
    "y1": 352,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "ear tip/outer edge through soft halo; eyebrow whiskers outside"
   },
   {
    "id": "T006",
@@ -68,7 +78,9 @@
    "y0": 320,
    "x1": 766,
    "y1": 384,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "past the eye; lashes and crossing hairs outside; slight bend where lashes meet head (eye-corner question)"
   },
   {
    "id": "T007",
@@ -77,7 +89,9 @@
    "y0": 348,
    "x1": 777,
    "y1": 412,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "past the eye; lashes and crossing hairs outside; slight bend where lashes meet head (eye-corner question)"
   },
   {
    "id": "T008",
@@ -86,7 +100,9 @@
    "y0": 376,
    "x1": 793,
    "y1": 440,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "past the eye; lashes and crossing hairs outside; slight bend where lashes meet head (eye-corner question)"
   },
   {
    "id": "T009",
@@ -95,7 +111,9 @@
    "y0": 396,
    "x1": 821,
    "y1": 460,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "side of head; smooth through soft gradient"
   },
   {
    "id": "T010",
@@ -104,7 +122,9 @@
    "y0": 415,
    "x1": 848,
    "y1": 479,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "side of head; smooth through soft gradient"
   },
   {
    "id": "T011",
@@ -113,7 +133,9 @@
    "y0": 441,
    "x1": 868,
    "y1": 505,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "side of head; smooth through soft gradient"
   },
   {
    "id": "T012",
@@ -122,7 +144,9 @@
    "y0": 467,
    "x1": 888,
    "y1": 531,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "side of head; smooth through soft gradient"
   },
   {
    "id": "T013",
@@ -131,7 +155,9 @@
    "y0": 496,
    "x1": 906,
    "y1": 560,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "side of head; smooth through soft gradient"
   },
   {
    "id": "T014",
@@ -140,7 +166,9 @@
    "y0": 528,
    "x1": 924,
    "y1": 592,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "side of head; smooth through soft gradient"
   },
   {
    "id": "T015",
@@ -149,7 +177,9 @@
    "y0": 560,
    "x1": 943,
    "y1": 624,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "side of head; smooth through soft gradient"
   },
   {
    "id": "T016",
@@ -158,7 +188,9 @@
    "y0": 592,
    "x1": 961,
    "y1": 656,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "side of head; smooth through soft gradient"
   },
   {
    "id": "T017",
@@ -167,7 +199,9 @@
    "y0": 622,
    "x1": 983,
    "y1": 686,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "dense dark fringe; line through middle; cheek whiskers outside"
   },
   {
    "id": "T018",
@@ -176,7 +210,9 @@
    "y0": 651,
    "x1": 994,
    "y1": 715,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "dense dark fringe; line through middle; cheek whiskers outside"
   },
   {
    "id": "T019",
@@ -185,7 +221,9 @@
    "y0": 672,
    "x1": 1008,
    "y1": 736,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "dense dark fringe; line through middle; cheek whiskers outside"
   },
   {
    "id": "T020",
@@ -194,7 +232,9 @@
    "y0": 694,
    "x1": 1016,
    "y1": 758,
-   "status": "todo"
+   "status": "todo",
+   "outline": "self-checked",
+   "outline_note": "dense dark fringe; line through middle; cheek whiskers outside"
   },
   {
    "id": "T021",
@@ -203,7 +243,8 @@
    "y0": 717,
    "x1": 1020,
    "y1": 781,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T022",
@@ -212,7 +253,8 @@
    "y0": 746,
    "x1": 1018,
    "y1": 810,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T023",
@@ -221,7 +263,8 @@
    "y0": 768,
    "x1": 1028,
    "y1": 832,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T024",
@@ -230,7 +273,8 @@
    "y0": 797,
    "x1": 1028,
    "y1": 861,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T025",
@@ -239,7 +283,8 @@
    "y0": 828,
    "x1": 1024,
    "y1": 892,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T026",
@@ -248,7 +293,8 @@
    "y0": 853,
    "x1": 1022,
    "y1": 917,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T027",
@@ -257,7 +303,8 @@
    "y0": 866,
    "x1": 999,
    "y1": 930,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T028",
@@ -266,7 +313,8 @@
    "y0": 896,
    "x1": 992,
    "y1": 960,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T029",
@@ -275,7 +323,8 @@
    "y0": 922,
    "x1": 985,
    "y1": 986,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T030",
@@ -284,7 +333,8 @@
    "y0": 952,
    "x1": 980,
    "y1": 1016,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T031",
@@ -293,7 +343,8 @@
    "y0": 978,
    "x1": 974,
    "y1": 1042,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T032",
@@ -302,7 +353,8 @@
    "y0": 1004,
    "x1": 967,
    "y1": 1068,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T033",
@@ -311,7 +363,8 @@
    "y0": 1031,
    "x1": 952,
    "y1": 1095,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T034",
@@ -320,7 +373,8 @@
    "y0": 1058,
    "x1": 942,
    "y1": 1122,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T035",
@@ -329,7 +383,8 @@
    "y0": 1082,
    "x1": 935,
    "y1": 1146,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T036",
@@ -338,7 +393,8 @@
    "y0": 1100,
    "x1": 920,
    "y1": 1164,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T037",
@@ -347,7 +403,8 @@
    "y0": 1108,
    "x1": 896,
    "y1": 1172,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T038",
@@ -356,7 +413,8 @@
    "y0": 1122,
    "x1": 876,
    "y1": 1186,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T039",
@@ -365,7 +423,8 @@
    "y0": 1140,
    "x1": 858,
    "y1": 1204,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T040",
@@ -374,7 +433,8 @@
    "y0": 1144,
    "x1": 838,
    "y1": 1208,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T041",
@@ -383,7 +443,8 @@
    "y0": 1168,
    "x1": 824,
    "y1": 1232,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T042",
@@ -392,7 +453,8 @@
    "y0": 1198,
    "x1": 819,
    "y1": 1262,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T043",
@@ -401,7 +463,8 @@
    "y0": 1216,
    "x1": 789,
    "y1": 1280,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T044",
@@ -410,7 +473,8 @@
    "y0": 1220,
    "x1": 750,
    "y1": 1284,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T045",
@@ -419,7 +483,8 @@
    "y0": 1222,
    "x1": 719,
    "y1": 1286,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T046",
@@ -428,7 +493,8 @@
    "y0": 1222,
    "x1": 680,
    "y1": 1286,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T047",
@@ -437,7 +503,8 @@
    "y0": 1214,
    "x1": 643,
    "y1": 1278,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T048",
@@ -446,7 +513,8 @@
    "y0": 1207,
    "x1": 608,
    "y1": 1271,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T049",
@@ -455,7 +523,8 @@
    "y0": 1198,
    "x1": 584,
    "y1": 1262,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T050",
@@ -464,7 +533,8 @@
    "y0": 1192,
    "x1": 555,
    "y1": 1256,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T051",
@@ -473,7 +543,8 @@
    "y0": 1184,
    "x1": 525,
    "y1": 1248,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T052",
@@ -482,7 +553,8 @@
    "y0": 1179,
    "x1": 498,
    "y1": 1243,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T053",
@@ -491,7 +563,8 @@
    "y0": 1204,
    "x1": 475,
    "y1": 1268,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T054",
@@ -500,7 +573,8 @@
    "y0": 1204,
    "x1": 438,
    "y1": 1268,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T055",
@@ -509,7 +583,8 @@
    "y0": 1205,
    "x1": 404,
    "y1": 1269,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T056",
@@ -518,7 +593,8 @@
    "y0": 1208,
    "x1": 370,
    "y1": 1272,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T057",
@@ -527,7 +603,8 @@
    "y0": 1200,
    "x1": 338,
    "y1": 1264,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T058",
@@ -536,7 +613,8 @@
    "y0": 1184,
    "x1": 307,
    "y1": 1248,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T059",
@@ -545,7 +623,8 @@
    "y0": 1158,
    "x1": 284,
    "y1": 1222,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T060",
@@ -554,7 +633,8 @@
    "y0": 1126,
    "x1": 283,
    "y1": 1190,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T061",
@@ -563,7 +643,8 @@
    "y0": 1102,
    "x1": 278,
    "y1": 1166,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T062",
@@ -572,7 +653,8 @@
    "y0": 1082,
    "x1": 262,
    "y1": 1146,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T063",
@@ -581,7 +663,8 @@
    "y0": 1065,
    "x1": 248,
    "y1": 1129,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T064",
@@ -590,7 +673,8 @@
    "y0": 1045,
    "x1": 222,
    "y1": 1109,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T065",
@@ -599,7 +683,8 @@
    "y0": 1018,
    "x1": 207,
    "y1": 1082,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T066",
@@ -608,7 +693,8 @@
    "y0": 984,
    "x1": 198,
    "y1": 1048,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T067",
@@ -617,7 +703,8 @@
    "y0": 958,
    "x1": 192,
    "y1": 1022,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T068",
@@ -626,7 +713,8 @@
    "y0": 929,
    "x1": 188,
    "y1": 993,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T069",
@@ -635,7 +723,8 @@
    "y0": 904,
    "x1": 184,
    "y1": 968,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T070",
@@ -644,7 +733,8 @@
    "y0": 880,
    "x1": 172,
    "y1": 944,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T071",
@@ -653,7 +743,8 @@
    "y0": 859,
    "x1": 164,
    "y1": 923,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T072",
@@ -662,7 +753,8 @@
    "y0": 830,
    "x1": 164,
    "y1": 894,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T073",
@@ -671,7 +763,8 @@
    "y0": 820,
    "x1": 166,
    "y1": 884,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T074",
@@ -680,7 +773,8 @@
    "y0": 805,
    "x1": 152,
    "y1": 869,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T075",
@@ -689,7 +783,8 @@
    "y0": 794,
    "x1": 140,
    "y1": 858,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T076",
@@ -698,7 +793,8 @@
    "y0": 764,
    "x1": 158,
    "y1": 828,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T077",
@@ -707,7 +803,8 @@
    "y0": 737,
    "x1": 170,
    "y1": 801,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T078",
@@ -716,7 +813,8 @@
    "y0": 704,
    "x1": 176,
    "y1": 768,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T079",
@@ -725,7 +823,8 @@
    "y0": 681,
    "x1": 164,
    "y1": 745,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T080",
@@ -734,7 +833,8 @@
    "y0": 658,
    "x1": 169,
    "y1": 722,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T081",
@@ -743,7 +843,8 @@
    "y0": 628,
    "x1": 180,
    "y1": 692,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T082",
@@ -752,7 +853,8 @@
    "y0": 600,
    "x1": 197,
    "y1": 664,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T083",
@@ -761,7 +863,8 @@
    "y0": 575,
    "x1": 192,
    "y1": 639,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T084",
@@ -770,7 +873,8 @@
    "y0": 554,
    "x1": 212,
    "y1": 618,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T085",
@@ -779,7 +883,8 @@
    "y0": 526,
    "x1": 231,
    "y1": 590,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T086",
@@ -788,7 +893,8 @@
    "y0": 500,
    "x1": 242,
    "y1": 564,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T087",
@@ -797,7 +903,8 @@
    "y0": 477,
    "x1": 256,
    "y1": 541,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T088",
@@ -806,7 +913,8 @@
    "y0": 450,
    "x1": 268,
    "y1": 514,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T089",
@@ -815,7 +923,8 @@
    "y0": 434,
    "x1": 290,
    "y1": 498,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T090",
@@ -824,7 +933,8 @@
    "y0": 420,
    "x1": 314,
    "y1": 484,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T091",
@@ -833,7 +943,8 @@
    "y0": 398,
    "x1": 337,
    "y1": 462,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T092",
@@ -842,7 +953,8 @@
    "y0": 373,
    "x1": 332,
    "y1": 437,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T093",
@@ -851,7 +963,8 @@
    "y0": 344,
    "x1": 344,
    "y1": 408,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T094",
@@ -860,7 +973,8 @@
    "y0": 314,
    "x1": 348,
    "y1": 378,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T095",
@@ -869,7 +983,8 @@
    "y0": 288,
    "x1": 366,
    "y1": 352,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T096",
@@ -878,7 +993,8 @@
    "y0": 264,
    "x1": 377,
    "y1": 328,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T097",
@@ -887,7 +1003,8 @@
    "y0": 243,
    "x1": 400,
    "y1": 307,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T098",
@@ -896,7 +1013,8 @@
    "y0": 209,
    "x1": 410,
    "y1": 273,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T099",
@@ -905,7 +1023,8 @@
    "y0": 184,
    "x1": 433,
    "y1": 248,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T100",
@@ -914,7 +1033,8 @@
    "y0": 184,
    "x1": 469,
    "y1": 248,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T101",
@@ -923,7 +1043,8 @@
    "y0": 199,
    "x1": 500,
    "y1": 263,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T102",
@@ -932,7 +1053,8 @@
    "y0": 220,
    "x1": 524,
    "y1": 284,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T103",
@@ -941,7 +1063,8 @@
    "y0": 242,
    "x1": 546,
    "y1": 306,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T104",
@@ -950,7 +1073,8 @@
    "y0": 237,
    "x1": 580,
    "y1": 301,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T105",
@@ -959,7 +1083,8 @@
    "y0": 230,
    "x1": 613,
    "y1": 294,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T106",
@@ -968,7 +1093,8 @@
    "y0": 212,
    "x1": 643,
    "y1": 276,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T107",
@@ -977,7 +1103,8 @@
    "y0": 187,
    "x1": 664,
    "y1": 251,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "T108",
@@ -986,7 +1113,8 @@
    "y0": 168,
    "x1": 696,
    "y1": 232,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E001",
@@ -996,7 +1124,8 @@
    "y0": 133,
    "x1": 718,
    "y1": 197,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E002",
@@ -1006,7 +1135,8 @@
    "y0": 100,
    "x1": 726,
    "y1": 164,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E003",
@@ -1016,7 +1146,8 @@
    "y0": 195,
    "x1": 776,
    "y1": 259,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E004",
@@ -1026,7 +1157,8 @@
    "y0": 166,
    "x1": 808,
    "y1": 230,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E005",
@@ -1036,7 +1168,8 @@
    "y0": 229,
    "x1": 367,
    "y1": 293,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E006",
@@ -1046,7 +1179,8 @@
    "y0": 272,
    "x1": 795,
    "y1": 336,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E007",
@@ -1056,7 +1190,8 @@
    "y0": 261,
    "x1": 827,
    "y1": 325,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E008",
@@ -1066,7 +1201,8 @@
    "y0": 281,
    "x1": 316,
    "y1": 345,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E009",
@@ -1076,7 +1212,8 @@
    "y0": 340,
    "x1": 300,
    "y1": 404,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E010",
@@ -1086,7 +1223,8 @@
    "y0": 332,
    "x1": 267,
    "y1": 396,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E011",
@@ -1096,7 +1234,8 @@
    "y0": 363,
    "x1": 234,
    "y1": 427,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E012",
@@ -1106,7 +1245,8 @@
    "y0": 364,
    "x1": 266,
    "y1": 428,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E013",
@@ -1116,7 +1256,8 @@
    "y0": 372,
    "x1": 298,
    "y1": 436,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E014",
@@ -1126,7 +1267,8 @@
    "y0": 382,
    "x1": 871,
    "y1": 446,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E015",
@@ -1136,7 +1278,8 @@
    "y0": 390,
    "x1": 903,
    "y1": 454,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E016",
@@ -1146,7 +1289,8 @@
    "y0": 581,
    "x1": 159,
    "y1": 645,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E017",
@@ -1156,7 +1300,8 @@
    "y0": 587,
    "x1": 126,
    "y1": 651,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E018",
@@ -1166,7 +1311,8 @@
    "y0": 595,
    "x1": 93,
    "y1": 659,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E019",
@@ -1176,7 +1322,8 @@
    "y0": 606,
    "x1": 64,
    "y1": 670,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E020",
@@ -1186,7 +1333,8 @@
    "y0": 653,
    "x1": 1040,
    "y1": 717,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E021",
@@ -1196,7 +1344,8 @@
    "y0": 664,
    "x1": 1072,
    "y1": 728,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E022",
@@ -1206,7 +1355,8 @@
    "y0": 677,
    "x1": 131,
    "y1": 741,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E023",
@@ -1216,7 +1366,8 @@
    "y0": 677,
    "x1": 1098,
    "y1": 741,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E024",
@@ -1226,7 +1377,8 @@
    "y0": 688,
    "x1": 98,
    "y1": 752,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E025",
@@ -1236,7 +1388,8 @@
    "y0": 698,
    "x1": 65,
    "y1": 762,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E026",
@@ -1246,7 +1399,8 @@
    "y0": 723,
    "x1": 1052,
    "y1": 787,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E027",
@@ -1256,7 +1410,8 @@
    "y0": 784,
    "x1": 1060,
    "y1": 848,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E028",
@@ -1266,7 +1421,8 @@
    "y0": 804,
    "x1": 1092,
    "y1": 868,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E029",
@@ -1276,7 +1432,8 @@
    "y0": 821,
    "x1": 1098,
    "y1": 885,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E030",
@@ -1286,7 +1443,8 @@
    "y0": 836,
    "x1": 119,
    "y1": 900,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E031",
@@ -1296,7 +1454,8 @@
    "y0": 849,
    "x1": 1056,
    "y1": 913,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E032",
@@ -1306,7 +1465,8 @@
    "y0": 868,
    "x1": 90,
    "y1": 932,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E033",
@@ -1316,7 +1476,8 @@
    "y0": 868,
    "x1": 122,
    "y1": 932,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E034",
@@ -1326,7 +1487,8 @@
    "y0": 881,
    "x1": 1054,
    "y1": 945,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E035",
@@ -1336,7 +1498,8 @@
    "y0": 900,
    "x1": 68,
    "y1": 964,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E036",
@@ -1346,7 +1509,8 @@
    "y0": 900,
    "x1": 101,
    "y1": 964,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E037",
@@ -1356,7 +1520,8 @@
    "y0": 904,
    "x1": 1086,
    "y1": 968,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E038",
@@ -1366,7 +1531,8 @@
    "y0": 920,
    "x1": 1024,
    "y1": 984,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E039",
@@ -1376,7 +1542,8 @@
    "y0": 932,
    "x1": 64,
    "y1": 996,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E040",
@@ -1386,7 +1553,8 @@
    "y0": 936,
    "x1": 1088,
    "y1": 1000,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E041",
@@ -1396,7 +1564,8 @@
    "y0": 949,
    "x1": 1098,
    "y1": 1013,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E042",
@@ -1406,7 +1575,8 @@
    "y0": 977,
    "x1": 1065,
    "y1": 1041,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E043",
@@ -1416,7 +1586,8 @@
    "y0": 1009,
    "x1": 1066,
    "y1": 1073,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   },
   {
    "id": "E044",
@@ -1426,7 +1597,8 @@
    "y0": 1021,
    "x1": 1098,
    "y1": 1085,
-   "status": "todo"
+   "status": "todo",
+   "outline": "todo"
   }
  ]
 }

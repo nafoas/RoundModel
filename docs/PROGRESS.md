@@ -139,3 +139,14 @@ check.py output (if applicable), and the next step.
   in STRAND_PLAN step 2; summary in DECISIONS.
 - **Next step:** step 3, annotate tiles strand by strand against the guide,
   in batches of ~20, owner reviews every tile.
+
+## 2026-11-07 — Session 4: STRAND_PLAN step 3, part 1 (body outline)
+- Reference used: anchor photo only.
+- Wrote `tools/body_outline.py` + `tests/test_body_outline.py` (5 tests pass).
+  One smooth closed outline through his soft edge; gentle on his sides,
+  faithful at the ears and peets (three versions tried; details in STRAND_PLAN).
+- Batch 1 (T001-T020) self-checked at 4x with context; sheets in
+  `docs/images/batch1_outline_1.png` and `_2.png`. Ledger `outline` field =
+  self-checked for those tiles.
+- Review moved to chat (no local web page).
+- **Next:** owner reviews batch 1; open question about the corner at each eye.

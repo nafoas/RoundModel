@@ -171,7 +171,26 @@ Original description:
 - The owner's decisions on these become the written definitions above, with
   crops saved as reference. Every later tile is judged against them.
 
-### 3. Annotate each tile strand by strand
+### 3. Annotate each tile strand by strand — IN PROGRESS
+**Part 1, body outline** (`python tools/body_outline.py` →
+`data/strands/body_outline.json`; reference: anchor photo only):
+- One closed smooth curve around his whole silhouette (ears, peets, tuft
+  included; split off in their own steps). Not drawn per tile, which would
+  leave seams; fitted once and reviewed tile by tile.
+- Runs through his soft edge (50% coverage). Two curves joined: a gentle one on
+  his furry sides (8 px blur, 4 px RMS) and a faithful one at the ears (y < 330)
+  and peets/tuft (y > 1100) (4 px blur, 1 px RMS), with a 40 px hand-off.
+  (A single smoothing level was tried first: either wiggly on the sides or it
+  cut corners off the ears and peets.)
+- Check: smoother than the raw edge in all 152 tiles (total turning 33 vs 1872
+  rad). Test: `tests/test_body_outline.py`.
+- **Review happens in chat** with review sheets (4x with context), not a local
+  web page; the ledger's per-tile `outline` field records status.
+- Batch 1 (T001-T020): self-checked, sheets `docs/images/batch1_outline_*.png`,
+  awaiting owner review. Open: the small corner at each eye where the lashes
+  meet his head.
+
+Original description:
 - A ridge (line) detector *proposes* candidate strands. A proposal is only a
   suggestion: each one is individually accepted, edited, or rejected. Proposals
   are never bulk-accepted, and missed strands are added by hand.
