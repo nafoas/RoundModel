@@ -167,3 +167,9 @@ check.py output (if applicable), and the next step.
   precision with a 0.5 px margin. **Re-checked:** both eyes: 0 mark pixels
   outside (3,024 and 4,175 checked); pixel-grid views of both corners; lashes
   still outside. Test added (it caught corner-shaving, fixed). 6 tests pass.
+- Owner: the bump above his right eye is a rogue wisp. Outline bridged past it
+  (rows 368-401, owner-guided). First bridge had an 11 deg/2 px angle at its
+  lower joint (directions were taken partly from the bumped stretch); fixed by
+  measuring directions only outside the stretch (now max 6.8). Also made the
+  closed outline evenly spaced all the way round. Eye marks still 0 px outside.
+  The wisp is noted for the wisp step. Review images regenerated.

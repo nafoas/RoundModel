@@ -200,8 +200,16 @@ Original description:
 - **Review happens in chat** with review sheets (4x with context), not a local
   web page; the ledger's per-tile `outline` field records status.
 - Batch 1 (T001-T020): self-checked, sheets `docs/images/batch1_outline_*.png`,
-  awaiting owner review. Open: a small bump just above the lashes of his right
-  eye (image left): brow fur or his head? See `docs/images/sensitive_eyes_ears.png`.
+  awaiting owner review.
+- **Owner-guided bridge:** above his right eye (image left), rows 368-401, the
+  outline had bent out to include the base of a wisp. Owner: "a little rogue
+  piece of wispy fur, not an eyebrow." The outline is bridged smoothly past it
+  (cubic Hermite, directions matched from outside the stretch; max turn 6.8
+  deg/2 px, gentler than the natural curve below). Recorded in
+  `data/strands/body_outline.json` under `owner_guided`. Pixel view:
+  `docs/images/right_eye_bridge_pixels.png`.
+- **For the wisp step:** the rogue wisp above his right eye (rows ~380-386,
+  running left from x ~318 to ~297) must be traced exactly as a WISP.
 
 Original description:
 - A ridge (line) detector *proposes* candidate strands. A proposal is only a

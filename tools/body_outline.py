@@ -45,6 +45,14 @@ EYE_BOXES = {"right_eye_image_left": (270, 340, 380, 500), "left_eye_image_right
 MARK_LUM = 130          # darker than this and connected to the eye's dark core = eye mark
 CORE_LUM = 70
 UNION_SS = 8            # sub-samples per pixel when merging the marks into the outline
+# Owner-guided stretches: the outline is bridged smoothly past things the owner
+# has said are not his body. Each bridge joins the outline at both ends with
+# matching direction (cubic Hermite), so there is no kink.
+OWNER_GUIDED = [
+    {"name": "rogue wisp above his right eye (image left)", "x_max": 345, "rows": (368, 401),
+     "why": "owner, 2026-11-07: the small bump above his right eye's lashes is a little "
+            "rogue piece of wispy fur, not an eyebrow. The wisp goes to the wisp layer."},
+]
 
 
 def coverage(rgb: np.ndarray) -> np.ndarray:
@@ -192,6 +200,32 @@ def merge_marks(curve: np.ndarray, fields: dict) -> np.ndarray:
     return resample(curve, 0.5)
 
 
+def bridge(curve: np.ndarray, x_max: float, rows: tuple[int, int]) -> np.ndarray:
+    """Replace the stretch of outline with x < x_max between the two rows by a
+    cubic Hermite curve that matches position and direction at both ends."""
+    y0, y1 = rows
+    n = len(curve)
+    side = curve[:, 0] < x_max
+    i0 = int(np.argmin(np.where(side, np.abs(curve[:, 1] - y0), np.inf)))
+    i1 = int(np.argmin(np.where(side, np.abs(curve[:, 1] - y1), np.inf)))
+    fwd = (i1 - i0) % n
+    if fwd > n // 2:                     # make i0 -> i1 the short way round
+        i0, i1 = i1, i0
+        fwd = (i1 - i0) % n
+    p0, p1 = curve[i0], curve[i1]
+    k = 8   # directions measured only from the outline OUTSIDE the bridged stretch
+    t0 = curve[i0] - curve[(i0 - k) % n]
+    t1 = curve[(i1 + k) % n] - curve[i1]
+    chord = np.hypot(*(p1 - p0))
+    t0 = t0 / np.hypot(*t0) * chord
+    t1 = t1 / np.hypot(*t1) * chord
+    t = np.linspace(0, 1, max(fwd, 8))[:, None]
+    h00, h10, h01, h11 = 2*t**3 - 3*t**2 + 1, t**3 - 2*t**2 + t, -2*t**3 + 3*t**2, t**3 - t**2
+    seg = h00 * p0 + h10 * t0 + h01 * p1 + h11 * t1
+    rest = curve[[(i1 + j) % n for j in range(1, n - fwd)]]
+    return np.vstack([seg, rest])
+
+
 def mark_check(curve: np.ndarray, fields: dict) -> dict:
     """Sub-pixel check: how much of each eye-mark pixel lies outside the outline."""
     from matplotlib.path import Path as MPath
@@ -238,6 +272,9 @@ def main() -> int:
     curve = resample(sample(tck, 6000), 1.0)
     fields = eye_mark_fields(rgb, a)
     curve = merge_marks(curve, fields)
+    for g in OWNER_GUIDED:
+        curve = resample(bridge(curve, g["x_max"], g["rows"]), 0.5)
+    curve = resample(np.vstack([curve, curve[:1]]), 0.5)[:-1]   # even spacing all the way round the loop
     marks = mark_check(curve, fields)
     # distance from the smooth curve to the 50% level it was fitted to
     from scipy.spatial import cKDTree
@@ -265,6 +302,7 @@ def main() -> int:
         "fit_to_50pct_level_px": {"mean": round(float(dist.mean()), 2), "max": round(float(dist.max()), 2)},
         "tiles_where_not_smoother_than_raw": worse,
         "eye_marks_check": marks,
+        "owner_guided": OWNER_GUIDED,
         "sampled_curve": [[round(float(x), 3), round(float(y), 3)] for x, y in curve],
     }
     Path("data/strands/body_outline.json").write_text(json.dumps(out, indent=1))

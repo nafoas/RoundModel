@@ -108,6 +108,9 @@ excuse and was withdrawn.)
   The outline is fitted as tightly as possible across the top of his head
   (both ears, both eye corners), following his head under the lashes, never
   the lashes themselves. The bend at each eye corner is tight.
+- **The bump above his right eye is a rogue wisp** (2026-11-07), not his head
+  or an eyebrow: the outline is bridged past it (owner-guided) and the wisp
+  goes to the wisp layer.
 - **His black eye marks are sacred** (2026-11-07): he has little hotot
   "eyeliner" marks; "this is really what makes him, him." Not one pixel of them
   may be cut off. They're protected in the outline at sub-pixel precision and
