@@ -133,3 +133,9 @@ check.py output (if applicable), and the next step.
   (`docs/images/golden_tiles.png`) with proposed classifications and three
   questions. Tiles are now viewed at 4x with context (8x was too blurry).
   Waiting on the owner's answers before writing definitions.
+- **Step 2 DONE.** Owner approved all six proposals, confirmed the long dark
+  hairs at cheek/mouth height are whiskers and the thin hairs at the ears are
+  eyebrow whiskers, and trusted the spike-vs-wisp rule. Written as "THE GUIDE"
+  in STRAND_PLAN step 2; summary in DECISIONS.
+- **Next step:** step 3, annotate tiles strand by strand against the guide,
+  in batches of ~20, owner reviews every tile.

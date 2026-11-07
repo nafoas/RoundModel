@@ -95,6 +95,14 @@ excuse and was withdrawn.)
 
 - **The owner reviews every tile** of the strand-by-strand work, not a sample.
 
+- **The guide (golden tiles, approved 2026-11-07):** tufts hanging off him are
+  fluff, tips included; peet undersides belong to the peet, faint hairs below
+  are wisps; feathery fringe is soft edge; a hair is a wisp only if it reaches
+  clearly past the fringe or stands alone with background on both sides for
+  most of its length; long dark straight hairs at cheek/mouth height are
+  whiskers; thin dark hairs at the ears are eyebrow whiskers. Full list in
+  STRAND_PLAN step 2.
+
 ## Whiskers
 
 - Reproduced **exactly as they are**, as frozen traced data, added last: the one

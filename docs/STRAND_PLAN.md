@@ -141,14 +141,28 @@ Original description:
 - A coverage script proves that every edge pixel falls in at least one tile.
   No tile can be skipped silently.
 
-### 2. Calibrate on golden tiles first — IN PROGRESS (awaiting owner's answers)
-Golden tiles: T050 (tuft between the peets), T056 (left peet underside), T073
-(left side fringe), T082 (left cheek, whisker leaving), T027 (right side long
-hairs), T002 (his left ear edge). Sheet: `docs/images/golden_tiles.png`.
-**Viewing change:** at 8x a 64 px tile is too blurry to judge and has no
-context, so tiles are reviewed at **4x with their surroundings**, the tile
-outlined. Open: whiskers vs wisps for the long dark hairs at cheek/mouth height;
-the rule for when a spike becomes a wisp; the two thin hairs at the ear.
+### 2. Calibrate on golden tiles first — DONE 2026-11-07
+Golden tiles: T050, T056, T073, T082, T027, T002. Reference sheet:
+`docs/images/golden_tiles.png`. **Viewing:** tiles are reviewed at **4x with
+their surroundings**, the tile outlined (8x was too blurry, with no context).
+
+**THE GUIDE: owner-approved definitions. Judge every tile against these.**
+1. **Tufts hanging off the body** (e.g. T050, between the peets): the whole
+   tuft, spike tips included, is FLUFF (underfluff). Not split into strands
+   unless a hair clearly stands apart from the tuft.
+2. **Peet undersides** (e.g. T056): the soft blurry edge belongs to that PEET.
+   Faint thin hairs lying below it are WISPS (fluff under the peets).
+3. **Feathery/spiky fringe along his edge** (e.g. T073, T082, T027): part of the
+   body's (or ear's) soft edge. Not split off.
+4. **Spike vs wisp rule:** a hair is a WISP only if it reaches clearly past the
+   general fringe line, or stands on its own with background on both sides for
+   most of its length. Otherwise it's soft edge. Wisps are taken full length,
+   base included.
+5. **Long, dark, straight hairs at cheek and mouth height on both sides** (e.g.
+   T073, T082, T027) are WHISKERS, traced full length, including where the root
+   runs back into the fur.
+6. **Thin dark hairs at the ears** (e.g. T002) are **eyebrow whiskers**: WHISKERS.
+7. **Ear halo** (e.g. T002): the ear's soft edge, part of that EAR.
 
 Original description:
 - Before any bulk work, the owner and Claude go through about 6 tiles together:
