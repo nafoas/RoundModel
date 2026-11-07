@@ -212,3 +212,9 @@ check.py output (if applicable), and the next step.
   cause could apply) will be checked in batch 3/4. Fidelity: 0 cuts; small
   fringe-gap bulges only (T021-23, T028-29, max 5.3 px); eye marks 0 px out;
   peet line inside.
+- **Batch 3 (T041-T060): self-checked.** Both peets and the tuft (sensitive).
+  Fidelity: 0 cuts, 0 bulges, smoother everywhere; eye marks 0 px out; peet
+  line inside. Peets' sides/bottoms followed; wisps below them outside. Checked
+  the left-side notch (T059-T060) up close with the gentle/faithful curves and
+  the peet line: the hook is the real notch where the peet line starts, outside
+  his fur; kept (Q2). Tuft spike tips noted for the fluff step (Q3).

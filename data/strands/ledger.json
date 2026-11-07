@@ -604,7 +604,15 @@
    "x1": 824,
    "y1": 1232,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T042",
@@ -614,7 +622,15 @@
    "x1": 819,
    "y1": 1262,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T043",
@@ -624,7 +640,15 @@
    "x1": 789,
    "y1": 1280,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T044",
@@ -634,7 +658,15 @@
    "x1": 750,
    "y1": 1284,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T045",
@@ -644,7 +676,15 @@
    "x1": 719,
    "y1": 1286,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T046",
@@ -654,7 +694,15 @@
    "x1": 680,
    "y1": 1286,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T047",
@@ -664,7 +712,15 @@
    "x1": 643,
    "y1": 1278,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T048",
@@ -674,7 +730,15 @@
    "x1": 608,
    "y1": 1271,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T049",
@@ -684,7 +748,15 @@
    "x1": 584,
    "y1": 1262,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T050",
@@ -694,7 +766,15 @@
    "x1": 555,
    "y1": 1256,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T051",
@@ -704,7 +784,15 @@
    "x1": 525,
    "y1": 1248,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T052",
@@ -714,7 +802,15 @@
    "x1": 498,
    "y1": 1243,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T053",
@@ -724,7 +820,15 @@
    "x1": 475,
    "y1": 1268,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "rises into the real white gap between the tuft and his right peet",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T054",
@@ -734,7 +838,15 @@
    "x1": 438,
    "y1": 1268,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T055",
@@ -744,7 +856,15 @@
    "x1": 404,
    "y1": 1269,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T056",
@@ -754,7 +874,15 @@
    "x1": 370,
    "y1": 1272,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T057",
@@ -764,7 +892,15 @@
    "x1": 338,
    "y1": 1264,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T058",
@@ -774,7 +910,15 @@
    "x1": 307,
    "y1": 1248,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T059",
@@ -784,7 +928,15 @@
    "x1": 284,
    "y1": 1222,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "hand-off from his right peet into his right side; small S at the notch",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T060",
@@ -794,7 +946,15 @@
    "x1": 283,
    "y1": 1190,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "notch where his right peet meets his body side (start of the approved peet line): small real inward hook kept; peet's own step later",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T061",

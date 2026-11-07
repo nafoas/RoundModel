@@ -215,6 +215,8 @@ Original description:
 - **For later:** the ears, peets, underfluff, and later the mouth, nose and
   whisker pads each get special care as units of their own, separately (see
   METHOD §2).
+- **For the fluff step:** the underfluff tuft's boundary must include its thin
+  hanging spike tips (guide #1); the body outline currently passes just above them.
 - **For the wisp step:** the rogue wisp above his right eye (rows ~380-386,
   running left from x ~318 to ~297) must be traced exactly as a WISP.
 
