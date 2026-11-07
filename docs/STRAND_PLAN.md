@@ -141,7 +141,16 @@ Original description:
 - A coverage script proves that every edge pixel falls in at least one tile.
   No tile can be skipped silently.
 
-### 2. Calibrate on golden tiles first
+### 2. Calibrate on golden tiles first — IN PROGRESS (awaiting owner's answers)
+Golden tiles: T050 (tuft between the peets), T056 (left peet underside), T073
+(left side fringe), T082 (left cheek, whisker leaving), T027 (right side long
+hairs), T002 (his left ear edge). Sheet: `docs/images/golden_tiles.png`.
+**Viewing change:** at 8x a 64 px tile is too blurry to judge and has no
+context, so tiles are reviewed at **4x with their surroundings**, the tile
+outlined. Open: whiskers vs wisps for the long dark hairs at cheek/mouth height;
+the rule for when a spike becomes a wisp; the two thin hairs at the ear.
+
+Original description:
 - Before any bulk work, the owner and Claude go through about 6 tiles together:
   the hanging tufts under the undercarriage, the paw undersides, a dense side
   fringe, the long wisps on the right, an ear edge, and cheek whiskers.

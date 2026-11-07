@@ -129,3 +129,7 @@ check.py output (if applicable), and the next step.
 - Owner decision: **each peet is its own part, like each ear** (left peet, right
   peet, and the underfluff tuft between them are separate). Recorded in
   STRAND_PLAN, DECISIONS, CLAUDE.md. Resolves the peet-underside question.
+- Step 2 started: six golden tiles picked and shown to the owner
+  (`docs/images/golden_tiles.png`) with proposed classifications and three
+  questions. Tiles are now viewed at 4x with context (8x was too blurry).
+  Waiting on the owner's answers before writing definitions.
