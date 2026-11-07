@@ -65,8 +65,9 @@ anything, and re-read it (plus the current plan file) at every milestone.
 ## How he's being built (details in docs)
 
 - **Parts, each with its own colour and its own step:** head, undercarriage,
-  ears, peets, fluff tufts, wisps, whiskers. Order: body outline → ears → peets →
-  fluff → wisps → whiskers (last). Owner reviews each step. See `docs/STRAND_PLAN.md`.
+  each ear, each peet (left and right peets are separate parts, like the ears),
+  fluff tufts, wisps, whiskers. Order: body outline → ears → peets → fluff →
+  wisps → whiskers (last). Owner reviews each step. See `docs/STRAND_PLAN.md`.
 - **Gentle edges.** His edge is naturally furry. The body boundary is a smooth,
   gentle curve that must come out *less* jagged than the raw photo, never more.
   Only distinct tufts and strands are split off.

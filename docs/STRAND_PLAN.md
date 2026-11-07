@@ -43,19 +43,23 @@ one simple shape at a time is easier and safer than shaping everything at once.
 | BODY: head | smoother, sloping; ends at the chin fold |
 | BODY: undercarriage | fluffier mass under the chin, down to the peets |
 | EARS (left, right) | short, wide, rounded |
-| PEETS (left, right) | his tiny front feet ("peets") |
+| LEFT PEET | its own part, like each ear: own colour, own shaping step |
+| RIGHT PEET | its own part, like each ear: own colour, own shaping step |
 | FLUFF | distinct tufts, e.g. the tuft hanging between the peets |
 | WISPS | distinct long wispy hairs, fluff under the peets |
 | WHISKERS | all whiskers, including those lying over his face |
 
-Order: body outline → ears → peets → fluff → wisps → whiskers (last).
+Order: body outline → ears (each) → peets (each) → fluff → wisps → whiskers (last).
 Each step gets its own review before the next starts.
 
 ### Peets / underfluff / body boundary: APPROVED
 `data/lines/peet_line.json` (picture: `docs/images/peet_line_approved.png`).
 Notch on his left side → along the faint gray crease on top of the left peet →
 across, with a gentle dip between the peets → a hump over the right peet → the
-notch on his right side. Body above; peets and underfluff below. Owner-guided,
+notch on his right side. Body above; below it are three separate things: the
+**left peet**, the **right peet** (each its own part, like the ears, decided
+2026-11-07), and the **underfluff** tuft between them. Each peet's soft
+underside belongs to that peet. Owner-guided,
 approved after 5 rounds (see DECISIONS.md). Use it as given; don't refit it.
 
 ### Whiskers: colour them, otherwise they don't exist
@@ -191,5 +195,3 @@ on remembering the conversation.
   (body fit uses CORE + FLUFF per owner's decision; WISPS are the frozen layer).
 
 ## Open questions for the owner
-- Soft, blurry underside of the peets: assumed to be the peets' own soft edge
-  (gentle-edge rule) unless the owner says otherwise.

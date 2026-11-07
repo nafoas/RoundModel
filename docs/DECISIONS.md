@@ -69,6 +69,9 @@ excuse and was withdrawn.)
   fold), **undercarriage** (instead of a neck, a fluffier mass under the chin,
   down to the peets), **ears**, **peets** (his tiny front feet: they go
   *peetpeetpeet*), **fluff tufts**, **wisps**, **whiskers**.
+- **Each peet is its own part, like each ear** (2026-11-07): left peet and right
+  peet each get their own colour and shaping step, separate from each other and
+  from the underfluff tuft between them. Each peet's soft underside belongs to it.
 - Measured: the head-to-undercarriage join has no notch in the outline; it
   shows only as the chin fold and a change in fur texture (undercarriage fur is
   about twice as rough). He's widest at mouth/chin level.

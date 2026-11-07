@@ -126,3 +126,6 @@ check.py output (if applicable), and the next step.
   cheek whiskers). Open question: review depth after the first batch.
 - Owner decision: they review **every** tile (not a sample). Recorded in
   STRAND_PLAN step 5 and DECISIONS.
+- Owner decision: **each peet is its own part, like each ear** (left peet, right
+  peet, and the underfluff tuft between them are separate). Recorded in
+  STRAND_PLAN, DECISIONS, CLAUDE.md. Resolves the peet-underside question.
