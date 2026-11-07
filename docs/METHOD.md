@@ -141,6 +141,10 @@ until last, never removed or painted over.
 
 ## 6. Representation
 
+- **Pixel convention (project-wide):** pixel (col, row) covers [col, col+1) x
+  [row, row+1); its centre is at (col+0.5, row+0.5). Stored curves, drawings,
+  checks and tiles all use it (a half-pixel mismatch was found and fixed; a test
+  guards it).
 - **No pixelly edges.** Boundaries and strands are sub-pixel smooth curves
   (splines), never pixel masks. Pixels appear only when rendering, anti-aliased.
 - Edge pixels have soft, fractional ownership.
@@ -188,16 +192,28 @@ until last, never removed or painted over.
 
 ---
 
+### Measured fidelity check (`tools/review_batch.py`)
+Per tile: **cut** = solid body pixels outside the line by > 1 px; **bulge** =
+pure-background pixels inside the line by > 3 px; **smooth** = smoother than the
+raw edge. Plus: every eye-mark pixel inside; the approved peet line inside the
+silhouette. Its sensitivity was tested: shrinking the outline 3 px or growing
+it 4 px is detected. **Limit:** sharpest on crisp edges (ears, eyes); in fuzzy
+fringe a few-px drift may not register, so the visual check of every tile is
+still required.
+
 ## 9. Per-batch routine (step 3 onward)
 
 1. Re-read `CLAUDE.md`, this file, the current plan, the latest PROGRESS entry.
 2. For the batch's tiles, decide: gentle or sensitive (§2). Sensitive → §3.
-3. Do the work; run `python -m pytest -q` and the tool's built-in checks.
+3. Do the work; run `python -m pytest -q`, the tool's built-in checks, and
+   `python tools/review_batch.py <batch> <first> <last>` (fidelity + sheets).
 4. Self-check: 4× context for every tile; pixel grids for every sensitive spot;
    measure joints and protected features.
 5. Update the ledger (`self-checked` + a one-line note per tile).
 6. Regenerate review sheets; commit and push.
-7. Send the sheets; list what was checked, what's uncertain, and the questions.
+7. Send the sheets (or, when working on my own, keep going); list what was
+   checked and what's uncertain. Questions go in `docs/OWNER_QUESTIONS.md` with
+   what I did in the meantime (intuition + earlier guidance).
 8. Apply the owner's verdicts; mark approved tiles `owner-approved`.
 
 ---

@@ -53,3 +53,13 @@ def test_eye_mark_straddling_the_outline_ends_up_fully_inside():
     assert check["mark_area_outside_px"] == 0
     # and it didn't swallow the background far from the mark
     assert not MPath(merged).contains_point((10, 30))
+
+
+def test_pixel_convention_edges_land_on_pixel_boundaries():
+    """Project convention: pixel (c, r) covers [c, c+1) x [r, r+1). A crisp square
+    filling pixels 20..99 must have its 50% edge exactly at x = 20 and x = 100."""
+    a = np.zeros((120, 120))
+    a[20:100, 20:100] = 1.0
+    c = bo.level_contour(a, 0)
+    assert abs(c[:, 0].min() - 20.0) < 0.05 and abs(c[:, 0].max() - 100.0) < 0.05
+    assert abs(c[:, 1].min() - 20.0) < 0.05 and abs(c[:, 1].max() - 100.0) < 0.05

@@ -75,11 +75,15 @@ def coverage(rgb: np.ndarray) -> np.ndarray:
 
 
 def level_contour(a: np.ndarray, blur: float) -> np.ndarray:
-    """Longest closed contour at LEVEL of the blurred coverage, as (x, y)."""
+    """Longest closed contour at LEVEL of the blurred coverage, as (x, y).
+
+    PIXEL CONVENTION (project-wide): pixel (col, row) covers [col, col+1) x
+    [row, row+1); its centre is at (col+0.5, row+0.5). find_contours puts pixel
+    centres at whole numbers, so +0.5 converts to the project convention."""
     src = ndi.gaussian_filter(a, blur) if blur > 0 else a
     cs = find_contours(src, LEVEL)
     c = max(cs, key=len)
-    return np.stack([c[:, 1], c[:, 0]], axis=1)
+    return np.stack([c[:, 1] + 0.5, c[:, 0] + 0.5], axis=1)
 
 
 def resample(xy: np.ndarray, step: float = 1.0) -> np.ndarray:

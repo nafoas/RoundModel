@@ -191,3 +191,16 @@ check.py output (if applicable), and the next step.
   ears, peets, underfluff etc. get special care as separate units later (noted in
   METHOD §2 and STRAND_PLAN).
 - **Next:** batch 2 (T021-T040), down his left side to his left peet (image right).
+
+## 2026-11-07 — Session 5: working through the outline batches on my own
+- Owner: keep going batch by batch, double-check and fidelity-check each, note
+  questions for a bulk review, stop only if something is physically wrong.
+  Agents per batch were considered and not used for the outline step (one
+  shared curve; batches are review units); suggested for strand tracing later.
+- **Found and fixed a half-pixel convention bug** (outline stored with pixel
+  centres at whole numbers; everything else uses [col, col+1)). Test added.
+  Eye marks still 0 px outside. Batch 1 sheets regenerated; noted as Q1 in
+  `docs/OWNER_QUESTIONS.md`.
+- Added `tools/review_batch.py` (sheets + measured fidelity: cut / bulge /
+  smoothness / eye marks / peet line) with tests that it detects a shrunken or
+  swollen outline. Batch 1: all clean.
