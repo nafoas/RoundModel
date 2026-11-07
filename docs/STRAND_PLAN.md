@@ -208,6 +208,11 @@ Original description:
   deg/2 px, gentler than the natural curve below). Recorded in
   `data/strands/body_outline.json` under `owner_guided`. Pixel view:
   `docs/images/right_eye_bridge_pixels.png`.
+- **Batch 1 (T001-T020): owner-approved 2026-11-07.** Owner: the ears could use
+  pixel-perfect tweaks, saved for when each ear is worked on individually.
+- **For later:** the ears, peets, underfluff, and later the mouth, nose and
+  whisker pads each get special care as units of their own, separately (see
+  METHOD §2).
 - **For the wisp step:** the rogue wisp above his right eye (rows ~380-386,
   running left from x ~318 to ~297) must be traced exactly as a WISP.
 

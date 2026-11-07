@@ -52,6 +52,13 @@ precise when it gets to his little sensitive, detailed areas." List so far:
 
 When working in a sensitive area, **use the precision protocol (§3)**, always.
 
+**For later: each of these gets special care as a unit of its own** (owner,
+2026-11-07). The body outline only places them roughly within his silhouette.
+Each ear, each peet, the underfluff, and later the mouth, nose and whisker pads
+will be worked on **individually and separately**, each in its own step with
+the precision protocol and the owner's review. Known to-do: **the ears need
+pixel-perfect tweaks**, saved for when they're worked on individually.
+
 ---
 
 ## 3. The precision protocol (sensitive areas)

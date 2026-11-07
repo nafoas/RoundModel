@@ -186,3 +186,8 @@ check.py output (if applicable), and the next step.
   approved by the owner.**
 - **Next:** owner approves/corrects batch 1, then batch 2 (T021-T040: his left
   side down to his left peet, so the peet's sensitive edge is in it).
+- **Batch 1 (T001-T020) outline: owner-approved.** Ledger updated. Owner: ears
+  need pixel-perfect tweaks later, when each ear is worked on individually; the
+  ears, peets, underfluff etc. get special care as separate units later (noted in
+  METHOD §2 and STRAND_PLAN).
+- **Next:** batch 2 (T021-T040), down his left side to his left peet (image right).
