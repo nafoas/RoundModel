@@ -191,7 +191,9 @@ Original description:
     own edge. Checked every run: 0 of 3,024 (his right eye) and 0 of 4,175 (his
     left eye) mark pixels outside, 0.000 px of mark area outside. Test:
     `tests/test_body_outline.py`. Pixel view: `docs/images/eye_corners_pixels.png`.
-  - Peets/tuft, y > 1100: faithful (4 px blur, 1 px RMS).
+  - Peets/tuft: faithful (4 px blur, 1 px RMS) **below the approved peet line**
+    (+-10 px hand-off). It used to be "below row 1100", which wrongly made the
+    lower furry sides wiggly (found in batch 2, T033-T038).
   - His furry sides: gentle (8 px blur, 4 px RMS).
   (A single smoothing level was tried first: either wiggly on the sides or it
   cut corners off the ears and peets.)

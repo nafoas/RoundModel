@@ -46,7 +46,7 @@ precise when it gets to his little sensitive, detailed areas." List so far:
 |---|---|---|
 | **Eyes and his black hotot eye marks ("eyeliner")** | "Eyes are the window into the soul"; the marks are "really what makes him, him"; "if his eye area is shaped slightly wrong he loses his identity" | Protected in the outline (§3) |
 | **Ears** (each one) | Tiny, detailed, identity | Tight fit in the outline |
-| **Peets** (each one) | His little front feet | Faithful fit; own step later |
+| **Peets** (each one) | His little front feet | Faithful fit **below the approved peet line** (the line defines the zone, not a row); own step later |
 | **Underfluff / pelvis** | "His pelvis needs to look right and he needs to have the right stance" | Peet line approved; own step later |
 | **Mouth, nose, whisker pads** | Detailed, identity | Later steps |
 

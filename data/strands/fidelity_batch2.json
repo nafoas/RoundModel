@@ -1,0 +1,142 @@
+{
+ "T021": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 1,
+  "bulge_max_px": 4.39,
+  "smoother_than_raw": true
+ },
+ "T022": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 2,
+  "bulge_max_px": 4.39,
+  "smoother_than_raw": true
+ },
+ "T023": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 2,
+  "bulge_max_px": 4.39,
+  "smoother_than_raw": true
+ },
+ "T024": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T025": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T026": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T027": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T028": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 1,
+  "bulge_max_px": 5.26,
+  "smoother_than_raw": true
+ },
+ "T029": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 1,
+  "bulge_max_px": 5.26,
+  "smoother_than_raw": true
+ },
+ "T030": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T031": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T032": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T033": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T034": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T035": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T036": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T037": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T038": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T039": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ },
+ "T040": {
+  "cut_px": 0,
+  "cut_max_px": 0.0,
+  "bulge_px": 0,
+  "bulge_max_px": 0.0,
+  "smoother_than_raw": true
+ }
+}

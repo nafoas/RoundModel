@@ -204,3 +204,11 @@ check.py output (if applicable), and the next step.
 - Added `tools/review_batch.py` (sheets + measured fidelity: cut / bulge /
   smoothness / eye marks / peet line) with tests that it detects a shrunken or
   swollen outline. Batch 1: all clean.
+- **Batch 2 (T021-T040): self-checked.** Found the line wiggling around fur
+  tufts at T033-T038. **Cause:** the peet zone was "everything below row 1100",
+  which includes the lower furry sides. **Fix:** the peet zone is now everything
+  below the approved peet line. **Re-checked:** T031-T040 smooth; peet corner
+  hand-off smooth; batch 1 unaffected (far above the line); the left side (same
+  cause could apply) will be checked in batch 3/4. Fidelity: 0 cuts; small
+  fringe-gap bulges only (T021-23, T028-29, max 5.3 px); eye marks 0 px out;
+  peet line inside.

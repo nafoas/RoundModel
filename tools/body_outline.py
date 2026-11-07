@@ -34,7 +34,9 @@ SMOOTH_RMS = 4.0  # px: allowed RMS distance to the 50% level, on his furry side
 #  - PEETS: peets and the tuft between them: faithful.
 #  - everything else (his furry sides): gentle.
 SENSITIVE_MAX_Y = 520   # above this row: ears + eyes
-PEET_MIN_Y = 1100       # below this row: peets + tuft
+PEET_MIN_Y = 1100       # (legacy, unused) the peet zone is now defined by the approved peet line
+PEET_LINE = "data/lines/peet_line.json"
+PEET_RAMP = 10          # px: hand-off half-width across the peet line (gentle above, faithful below)
 HANDOFF = 40            # px: smooth hand-off between zones
 SENSITIVE_FIT = (2.5, 0.8)
 PEET_FIT = (4.0, 1.0)
@@ -124,6 +126,16 @@ def _curve(src: np.ndarray, blur: float, rms: float) -> np.ndarray:
     return resample(sample(tck, 8000), 1.0)
 
 
+def peet_weight(xy: np.ndarray) -> np.ndarray:
+    """0..1: how much a point belongs to the peets/underfluff zone, i.e. lies
+    below the owner-approved peet line (notch to notch; beyond the notches the
+    line is extended flat at the notch height). Smooth over +-PEET_RAMP px."""
+    line = np.array(json.loads(Path(PEET_LINE).read_text())["sampled_curve"])
+    line = line[np.argsort(line[:, 0])]
+    ly = np.interp(xy[:, 0], line[:, 0], line[:, 1])   # np.interp clamps beyond the ends
+    return np.clip((xy[:, 1] - ly + PEET_RAMP) / (2 * PEET_RAMP), 0, 1)
+
+
 def fit_outline(a: np.ndarray):
     """Three closed curves joined by image row: SENSITIVE (top of head: ears and
     eyes, strands removed, tightest fit), PEET (faithful), and GENTLE (his furry
@@ -138,7 +150,7 @@ def fit_outline(a: np.ndarray):
     near_p = peet[cKDTree(peet).query(gentle)[1]]
     y = gentle[:, 1]
     ts = np.clip((SENSITIVE_MAX_Y + HANDOFF - y) / HANDOFF, 0, 1)[:, None]
-    tp = np.clip((y - (PEET_MIN_Y - HANDOFF)) / HANDOFF, 0, 1)[:, None]
+    tp = peet_weight(gentle)[:, None]
     joined = ts * near_s + tp * near_p + (1 - ts - tp) * gentle
     keep = SMOOTH_RMS
     SMOOTH_RMS = 0.2
@@ -300,7 +312,8 @@ def main() -> int:
         "params": {"gentle_fit_blur_rms_px": [BLUR, SMOOTH_RMS], "level": LEVEL,
                    "sensitive_zone": f"y < {SENSITIVE_MAX_Y} (ears, eyes), strands removed (r={STRAND_R})",
                    "sensitive_fit_blur_rms_px": list(SENSITIVE_FIT),
-                   "peet_zone": f"y > {PEET_MIN_Y}", "peet_fit_blur_rms_px": list(PEET_FIT),
+                   "peet_zone": f"below the approved peet line ({PEET_LINE}), ramp +-{PEET_RAMP} px",
+                   "peet_fit_blur_rms_px": list(PEET_FIT),
                    "handoff_px": HANDOFF},
         "spline": {"t": tck[0].tolist(), "cx": tck[1][0].tolist(), "cy": tck[1][1].tolist(), "k": tck[2]},
         "fit_to_50pct_level_px": {"mean": round(float(dist.mean()), 2), "max": round(float(dist.max()), 2)},
