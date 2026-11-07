@@ -150,7 +150,6 @@ Prince is built in separate layers so no layer can distort another:
 - Whether to keep, review, or restart the unlogged draft code in `prince/`.
   Note: the draft models Prince as body + separate head + ears + feet + tail;
   it must be reworked to the owner's head/undercarriage decomposition.
-- Review depth for strand-plan batches (see STRAND_PLAN).
 
 ## Known risks
 - **Pose mismatch:** photos of a loafing vs. sitting Prince are different shapes.

@@ -90,6 +90,8 @@ excuse and was withdrawn.)
 - Fluff under the peets and the **full** length of wispy hairs, bases included,
   are wisps, not body.
 
+- **The owner reviews every tile** of the strand-by-strand work, not a sample.
+
 ## Whiskers
 
 - Reproduced **exactly as they are**, as frozen traced data, added last: the one

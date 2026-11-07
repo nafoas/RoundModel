@@ -167,8 +167,8 @@ tile. Anything uncertain is marked **uncertain**, not guessed.
 ### 5. Owner review in batches
 - A local review page (HTML) shows each tile: photo, overlay, strand list, and
   approve / flag buttons with a comment box. Flags save to `data/strands/`.
-- Batches of about 20 tiles. The first batch after calibration is reviewed in
-  full; later batches at least in part, plus every tile marked uncertain.
+- Batches of about 20 tiles. **The owner reviews every tile** (decided
+  2026-11-07), not a sample.
 - Nothing counts as done until every tile is owner-approved.
 
 ### 6. When the owner flags a mistake (anti-acquiescence rule)
@@ -191,6 +191,5 @@ on remembering the conversation.
   (body fit uses CORE + FLUFF per owner's decision; WISPS are the frozen layer).
 
 ## Open questions for the owner
-- Review depth after the first batch: every tile, or a sample plus all uncertain?
 - Soft, blurry underside of the peets: assumed to be the peets' own soft edge
   (gentle-edge rule) unless the owner says otherwise.

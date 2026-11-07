@@ -124,3 +124,5 @@ check.py output (if applicable), and the next step.
 - **Next step:** step 2, golden tiles with the owner (tuft between the peets,
   peet undersides, a dense side fringe, the long wisps on the right, an ear edge,
   cheek whiskers). Open question: review depth after the first batch.
+- Owner decision: they review **every** tile (not a sample). Recorded in
+  STRAND_PLAN step 5 and DECISIONS.
