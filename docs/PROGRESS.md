@@ -150,3 +150,12 @@ check.py output (if applicable), and the next step.
   self-checked for those tiles.
 - Review moved to chat (no local web page).
 - **Next:** owner reviews batch 1; open question about the corner at each eye.
+- **Owner flagged:** the bend at the eye needs to be tighter; eyes and ears are
+  sensitive. **Cause:** the eye corners were in the gentle-smoothing zone (only
+  the ears and peets were faithful). **Fix:** a sensitive zone over the whole top
+  of his head (both ears, both eyes), fitted as tightly as possible after removing
+  thin strands. **Re-checked:** both eyes and both ears at 5-6x
+  (`docs/images/sensitive_eyes_ears.png`). Tried a wider strand filter (r=6):
+  it made the line hook into his right eye's area, so it was undone (r=4 kept).
+  Remaining: a small bump above his right eye's lashes; asked the owner.
+- Batch 1 sheets regenerated with the tightened outline.

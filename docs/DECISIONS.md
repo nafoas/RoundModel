@@ -103,6 +103,12 @@ excuse and was withdrawn.)
   whiskers; thin dark hairs at the ears are eyebrow whiskers. Full list in
   STRAND_PLAN step 2.
 
+- **Eyes and ears are sensitive** (2026-11-07): "if his eye area is shaped
+  slightly wrong he loses his identity; eyes are the window into the soul."
+  The outline is fitted as tightly as possible across the top of his head
+  (both ears, both eye corners), following his head under the lashes, never
+  the lashes themselves. The bend at each eye corner is tight.
+
 ## Whiskers
 
 - Reproduced **exactly as they are**, as frozen traced data, added last: the one
@@ -159,6 +165,12 @@ excuse and was withdrawn.)
 6. **Reinterpreting the owner's words.** "Semicircular… across" was read as a dome
    over one peet. → When unsure what the owner means, ask, or draw a guess and
    show it, before building on it.
-7. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
+7. **Treating the eyes like the furry sides.** The eye corners were fitted with
+   the gentle smoothing meant for his sides, which rounded off the bend there.
+   → Sensitive areas (eyes, ears) get the tightest fit. Then, over-correcting:
+   a wider strand filter made the line hook under his right eye's lashes into
+   the eye area. → Undone; when a fix makes a sensitive area worse, stop and
+   say so instead of tinkering further.
+8. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
    written by an earlier session without being logged. → Log everything in
    `docs/PROGRESS.md`; unlogged work is untrusted until reviewed.

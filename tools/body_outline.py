@@ -23,15 +23,22 @@ from skimage.measure import find_contours
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import edge_tiles as et  # noqa: E402
 
-BLUR = 8.0        # px: how much the coverage map is blurred before taking the 50% level
+BLUR = 8.0        # px: blur before taking the 50% level, on his furry sides
 LEVEL = 0.5       # coverage level the outline runs along
-SMOOTH_RMS = 4.0  # px: allowed RMS distance between the smooth curve and the 50% level
-# Gentle along his furry sides, faithful where his real shape has corners
-# (ears, peets, tuft). Those regions get a tighter fit (weight) and less blur.
-EAR_MAX_Y = 330        # above this row: ears and the dip between them
-PEET_MIN_Y = 1100      # below this row: peets and the tuft between them
-FAITHFUL_WEIGHT = 3.0  # how much tighter the fit is in those regions
-FAITHFUL_BLUR = 4.0
+SMOOTH_RMS = 4.0  # px: allowed RMS distance to the 50% level, on his furry sides
+# Zones by image row, each with its own fit (blur px, RMS px):
+#  - SENSITIVE: the top of his head (both ears, the dip between them, and both
+#    eye corners). His identity lives here: fitted as tightly as possible, after
+#    removing thin strands (lashes, eyebrow whiskers) so the line follows his
+#    head underneath them, not the strands.
+#  - PEETS: peets and the tuft between them: faithful.
+#  - everything else (his furry sides): gentle.
+SENSITIVE_MAX_Y = 520   # above this row: ears + eyes
+PEET_MIN_Y = 1100       # below this row: peets + tuft
+HANDOFF = 40            # px: smooth hand-off between zones
+SENSITIVE_FIT = (2.5, 0.8)
+PEET_FIT = (4.0, 1.0)
+STRAND_R = 4            # px: strands thinner than ~2*STRAND_R+1 are removed before the sensitive fit
 
 
 def coverage(rgb: np.ndarray) -> np.ndarray:
@@ -70,10 +77,6 @@ def resample(xy: np.ndarray, step: float = 1.0) -> np.ndarray:
     return np.stack([np.interp(t, arc, xy[:, 0]), np.interp(t, arc, xy[:, 1])], axis=1)
 
 
-def faithful(xy: np.ndarray) -> np.ndarray:
-    return (xy[:, 1] < EAR_MAX_Y) | (xy[:, 1] > PEET_MIN_Y)
-
-
 def fit_smooth(xy: np.ndarray, w: np.ndarray | None = None):
     pts = resample(xy, 2.0)
     if np.hypot(*(pts[0] - pts[-1])) < 1e-6:
@@ -86,46 +89,46 @@ def fit_smooth(xy: np.ndarray, w: np.ndarray | None = None):
     return tck, pts
 
 
-def blended_contour(a: np.ndarray) -> np.ndarray:
-    """50% level of the coverage, blurred BLUR on his sides and FAITHFUL_BLUR at
-    the ears/peets (the two blurs are blended smoothly by row)."""
-    gentle = ndi.gaussian_filter(a, BLUR)
-    sharp = ndi.gaussian_filter(a, FAITHFUL_BLUR)
-    rows = np.arange(a.shape[0])[:, None].astype(float)
-    t = np.clip(np.maximum((EAR_MAX_Y + 40 - rows) / 40, (rows - (PEET_MIN_Y - 40)) / 40), 0, 1)
-    mix = sharp * t + gentle * (1 - t)
-    cs = find_contours(mix, LEVEL)
-    c = max(cs, key=len)
-    return np.stack([c[:, 1], c[:, 0]], axis=1)
+def without_strands(a: np.ndarray) -> np.ndarray:
+    """Coverage with thin strands (lashes, whiskers, single hairs) removed. A grey
+    opening keeps smooth edges where they are and only drops narrow peaks."""
+    return ndi.grey_opening(a, footprint=et.disk(STRAND_R))
+
+
+def _curve(src: np.ndarray, blur: float, rms: float) -> np.ndarray:
+    global SMOOTH_RMS
+    keep = SMOOTH_RMS
+    SMOOTH_RMS = rms
+    try:
+        tck, _ = fit_smooth(level_contour(src, blur))
+    finally:
+        SMOOTH_RMS = keep
+    return resample(sample(tck, 8000), 1.0)
 
 
 def fit_outline(a: np.ndarray):
-    """Two closed curves joined: a GENTLE one (blur BLUR, RMS SMOOTH_RMS) used on
-    his furry sides, and a FAITHFUL one (blur FAITHFUL_BLUR, RMS 1 px) used at the
-    ears, peets and tuft, with a smooth 40 px hand-off between them."""
+    """Three closed curves joined by image row: SENSITIVE (top of head: ears and
+    eyes, strands removed, tightest fit), PEET (faithful), and GENTLE (his furry
+    sides), with smooth HANDOFF-px transitions."""
     global SMOOTH_RMS
-    mid_gentle = level_contour(a, BLUR)
-    tck_g, _ = fit_smooth(mid_gentle)
-    gentle = resample(sample(tck_g, 6000), 1.0)
-    rms = SMOOTH_RMS
-    SMOOTH_RMS = 1.0
-    try:
-        tck_f, _ = fit_smooth(level_contour(a, FAITHFUL_BLUR))
-    finally:
-        SMOOTH_RMS = rms
-    tight = resample(sample(tck_f, 6000), 1.0)
     from scipy.spatial import cKDTree
-    near = tight[cKDTree(tight).query(gentle)[1]]
+    mid_gentle = level_contour(a, BLUR)
+    gentle = _curve(a, BLUR, SMOOTH_RMS)
+    sens = _curve(without_strands(a), *SENSITIVE_FIT)
+    peet = _curve(a, *PEET_FIT)
+    near_s = sens[cKDTree(sens).query(gentle)[1]]
+    near_p = peet[cKDTree(peet).query(gentle)[1]]
     y = gentle[:, 1]
-    t = np.clip(np.maximum((EAR_MAX_Y + 40 - y) / 40, (y - (PEET_MIN_Y - 40)) / 40), 0, 1)[:, None]
-    joined = t * near + (1 - t) * gentle
-    SMOOTH_RMS = 0.5
+    ts = np.clip((SENSITIVE_MAX_Y + HANDOFF - y) / HANDOFF, 0, 1)[:, None]
+    tp = np.clip((y - (PEET_MIN_Y - HANDOFF)) / HANDOFF, 0, 1)[:, None]
+    joined = ts * near_s + tp * near_p + (1 - ts - tp) * gentle
+    keep = SMOOTH_RMS
+    SMOOTH_RMS = 0.2
     try:
         tck, _ = fit_smooth(joined)
     finally:
-        SMOOTH_RMS = rms
-    mid = np.vstack([mid_gentle])
-    return tck, mid
+        SMOOTH_RMS = keep
+    return tck, mid_gentle
 
 
 def sample(tck, n: int) -> np.ndarray:
@@ -172,9 +175,11 @@ def main() -> int:
                  "tuft are still included and get split off in later steps.",
         "photo": "data/photos/anchor_front.webp",
         "status": "first pass, not yet verified",
-        "params": {"blur_px": BLUR, "level": LEVEL, "smooth_rms_px": SMOOTH_RMS,
-                   "faithful_regions": f"y < {EAR_MAX_Y} (ears) and y > {PEET_MIN_Y} (peets, tuft)",
-                   "faithful_weight": FAITHFUL_WEIGHT, "faithful_blur_px": FAITHFUL_BLUR},
+        "params": {"gentle_fit_blur_rms_px": [BLUR, SMOOTH_RMS], "level": LEVEL,
+                   "sensitive_zone": f"y < {SENSITIVE_MAX_Y} (ears, eyes), strands removed (r={STRAND_R})",
+                   "sensitive_fit_blur_rms_px": list(SENSITIVE_FIT),
+                   "peet_zone": f"y > {PEET_MIN_Y}", "peet_fit_blur_rms_px": list(PEET_FIT),
+                   "handoff_px": HANDOFF},
         "spline": {"t": tck[0].tolist(), "cx": tck[1][0].tolist(), "cy": tck[1][1].tolist(), "k": tck[2]},
         "fit_to_50pct_level_px": {"mean": round(float(dist.mean()), 2), "max": round(float(dist.max()), 2)},
         "tiles_where_not_smoother_than_raw": worse,

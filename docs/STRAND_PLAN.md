@@ -177,9 +177,15 @@ Original description:
 - One closed smooth curve around his whole silhouette (ears, peets, tuft
   included; split off in their own steps). Not drawn per tile, which would
   leave seams; fitted once and reviewed tile by tile.
-- Runs through his soft edge (50% coverage). Two curves joined: a gentle one on
-  his furry sides (8 px blur, 4 px RMS) and a faithful one at the ears (y < 330)
-  and peets/tuft (y > 1100) (4 px blur, 1 px RMS), with a 40 px hand-off.
+- Runs through his soft edge (50% coverage). Three curves joined by row with
+  40 px hand-offs:
+  - **Sensitive zone, y < 520 (both ears and both eye corners): fitted as
+    tightly as possible** (2.5 px blur, 0.8 px RMS), after removing thin strands
+    (lashes, eyebrow whiskers; grey opening r=4) so the line follows his head
+    under them. Owner: if his eye area is shaped slightly wrong he loses his
+    identity.
+  - Peets/tuft, y > 1100: faithful (4 px blur, 1 px RMS).
+  - His furry sides: gentle (8 px blur, 4 px RMS).
   (A single smoothing level was tried first: either wiggly on the sides or it
   cut corners off the ears and peets.)
 - Check: smoother than the raw edge in all 152 tiles (total turning 33 vs 1872
@@ -187,8 +193,8 @@ Original description:
 - **Review happens in chat** with review sheets (4x with context), not a local
   web page; the ledger's per-tile `outline` field records status.
 - Batch 1 (T001-T020): self-checked, sheets `docs/images/batch1_outline_*.png`,
-  awaiting owner review. Open: the small corner at each eye where the lashes
-  meet his head.
+  awaiting owner review. Open: a small bump just above the lashes of his right
+  eye (image left): brow fur or his head? See `docs/images/sensitive_eyes_ears.png`.
 
 Original description:
 - A ridge (line) detector *proposes* candidate strands. A proposal is only a

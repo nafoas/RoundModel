@@ -24,7 +24,7 @@ def furry_disk():
 
 
 def test_outline_is_smooth_circle_ignoring_whisker():
-    bo.EAR_MAX_Y, bo.PEET_MIN_Y = -1000, 10000      # no faithful regions in this test
+    bo.SENSITIVE_MAX_Y, bo.PEET_MIN_Y = -1000, 10000      # no faithful regions in this test
     a = bo.coverage(furry_disk())
     tck, _ = bo.fit_outline(a)
     c = bo.resample(bo.sample(tck, 4000), 1.0)
