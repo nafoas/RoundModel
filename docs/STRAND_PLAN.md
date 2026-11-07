@@ -112,7 +112,24 @@ look pixelly. A real edge doesn't line up with the pixel grid. So:
 
 ## Process
 
-### 1. Tile the edge, keep a ledger
+### 1. Tile the edge, keep a ledger — DONE 2026-11-07
+Result (`python tools/edge_tiles.py`; reference: anchor photo only):
+- 152 tiles of 64×64 px: 108 along the outline (T001-T108, starting at the top
+  of his left ear and going round toward image-right) + 44 extensions (E001-E044)
+  following the outer fringe and whiskers to their tips. Ledger:
+  `data/strands/ledger.json`; picture: `docs/images/edge_tiles_overview.png`.
+- Coverage proof: all 107,874 edge-band pixels are inside a tile (0 uncovered).
+  Tests: `tests/test_edge_tiles.py`.
+- Checked at zoom on all sides (peets, both sides, ears, whisker tips).
+- Job size, honestly: an automatic count found 95 strand pieces ≥ 8 px outside
+  the body (18 ≥ 20 px, 5 ≥ 40 px), but crossing hairs split and overlapping
+  ones merge. Visual estimate: **about 40-100 distinct wisps and whiskers.**
+  The fine fuzz along his edge stays part of him (gentle-edge rule) and isn't
+  counted.
+- **Not yet tiled:** whiskers lying over his face *inside* the outline. They
+  need their own small set of tiles before the whisker step.
+
+Original description:
 - Walk the full outline and cut the edge band into small overlapping tiles
   (about 64×64 px, viewed at 8× zoom), numbered in order around him.
 - `data/strands/ledger.json` lists every tile with a status:

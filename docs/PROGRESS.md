@@ -111,3 +111,16 @@ check.py output (if applicable), and the next step.
 - Still unreviewed: draft code in `prince/` and `out/look_default.png`.
 - **Next step:** STRAND_PLAN step 1 (tile the edge, ledger, count strands), then
   step 2, golden tiles with the owner. Open question: review depth per batch.
+
+## 2026-11-07 — Session 3: STRAND_PLAN step 1 (tile the edge)
+- Reference used: anchor photo only.
+- Wrote `tools/edge_tiles.py` + `tests/test_edge_tiles.py` (4 tests pass).
+- Result: 152 tiles (108 outline + 44 extension), ledger at
+  `data/strands/ledger.json` (all `todo`), overview at
+  `docs/images/edge_tiles_overview.png`. Coverage: 0 of 107,874 band pixels
+  uncovered. Checked at zoom on every side.
+- Job size: ~40-100 distinct wisps/whiskers (automatic count is rough: 95
+  pieces ≥ 8 px). Face whiskers inside the outline still need their own tiles.
+- **Next step:** step 2, golden tiles with the owner (tuft between the peets,
+  peet undersides, a dense side fringe, the long wisps on the right, an ear edge,
+  cheek whiskers). Open question: review depth after the first batch.
