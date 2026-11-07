@@ -173,3 +173,16 @@ check.py output (if applicable), and the next step.
   measuring directions only outside the stretch (now max 6.8). Also made the
   closed outline evenly spaced all the way round. Eye marks still 0 px outside.
   The wisp is noted for the wisp step. Review images regenerated.
+
+## 2026-11-07 — Session 4 (cont.): method documented
+- Owner: sensitive areas (peets, underfluff/pelvis and stance, ears, later
+  mouth, nose, whisker pads, plus the eyes) always get extreme precision and
+  owner-guided handling where needed.
+- Wrote `docs/METHOD.md`: the full working method and when to do what (gentle vs
+  sensitive areas, the precision protocol, judgment lines, the guide,
+  representation, viewing/checking, working with the owner, per-batch routine).
+  CLAUDE.md and DECISIONS point to it.
+- Batch 1 (T001-T020) outline: self-checked, sheets regenerated; **not yet
+  approved by the owner.**
+- **Next:** owner approves/corrects batch 1, then batch 2 (T021-T040: his left
+  side down to his left peet, so the peet's sensitive edge is in it).

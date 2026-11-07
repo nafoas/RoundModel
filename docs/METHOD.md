@@ -1,0 +1,206 @@
+# The method: how Prince is being built, and what to do when
+
+This is the working method, built up with the owner over many rounds. It says
+what to do in each situation and why. When in doubt, follow this file;
+`docs/DECISIONS.md` has the history behind each rule.
+
+---
+
+## 1. First principles (always)
+
+- **He has to look like he is.** Prince is a real, small, very round, white,
+  fluffy rabbit with little hotot eye marks. Every step is judged by whether it
+  keeps him *him*, against the anchor photo (`data/photos/anchor_front.webp`).
+- **The anchor photo is the ground truth**, never something to trace (except
+  whiskers and wisps, see §6). Say which photos you're using as references.
+- **Not a hard shape, but subtle.** Never excuse a shortcut by calling it hard.
+  The difficulty is precision, and precision is the job.
+- **Rules live in files.** Re-read `CLAUDE.md`, this file and the current plan
+  at every milestone. Log every step in `docs/PROGRESS.md`.
+
+---
+
+## 2. Two kinds of area, two ways of working
+
+Every part of his edge is either a **gentle area** or a **sensitive area**.
+Decide which before touching it.
+
+### Gentle areas: his furry sides
+Where: the long sweep of his sides (cheeks down along the undercarriage), and
+anywhere his edge is just fur.
+- The boundary is **one gentle, smooth curve through the middle of his soft
+  fuzzy edge** (the 50% coverage level of a blurred coverage map), not along
+  the fuzz tips and not hugging individual hairs.
+- It must come out **less jagged than the raw photo edge, never more** (checked
+  per tile).
+- **Don't flag the natural fuzz.** It stays part of him as a soft-edge quality,
+  recreated later by the fur. Only distinct tufts and strands are split off
+  (§5).
+- Current settings: 8 px blur, 4 px RMS spline smoothing.
+
+### Sensitive areas: where his identity lives
+Owner: "I need him to look like he is, and that involves you being incredibly
+precise when it gets to his little sensitive, detailed areas." List so far:
+
+| Area | Why it matters (owner) | Status |
+|---|---|---|
+| **Eyes and his black hotot eye marks ("eyeliner")** | "Eyes are the window into the soul"; the marks are "really what makes him, him"; "if his eye area is shaped slightly wrong he loses his identity" | Protected in the outline (§3) |
+| **Ears** (each one) | Tiny, detailed, identity | Tight fit in the outline |
+| **Peets** (each one) | His little front feet | Faithful fit; own step later |
+| **Underfluff / pelvis** | "His pelvis needs to look right and he needs to have the right stance" | Peet line approved; own step later |
+| **Mouth, nose, whisker pads** | Detailed, identity | Later steps |
+
+When working in a sensitive area, **use the precision protocol (§3)**, always.
+
+---
+
+## 3. The precision protocol (sensitive areas)
+
+Use this for eyes, eye marks, ears, peets, underfluff/pelvis, mouth, nose,
+whisker pads, and anything the owner calls sensitive.
+
+1. **Fit as tightly as possible.** Low blur, tight spline (currently 2.5 px blur,
+   0.8 px RMS across the top of his head). Never the gentle-area settings.
+2. **Keep strands from pulling the line**, but never let a strand filter touch a
+   protected feature. Thin strands (lashes, eyebrow whiskers, single hairs) are
+   removed before fitting (grey opening, r = 4) so the line follows *him* under
+   them. Then protected features are merged back in exactly (step 3).
+3. **Protect identity features explicitly.** For the eye marks: every pixel
+   darker than 130 connected to the eye's dark core is the mark. It is merged
+   into the outline on a grid 8× finer than the photo, with a 0.5 px safety
+   margin, so the line follows the mark's own edge. **Not one pixel of a mark
+   may be outside.** Do the same for any new identity feature the owner names.
+4. **Measure, don't eyeball.** Check every protected pixel's inside fraction at
+   1/8-px precision on every run (`eye_marks_check` in `body_outline.json`).
+   Expected result: 0 pixels not fully inside, 0.000 px area outside.
+5. **Look pixel by pixel.** Render the area at 10-16× with a grid, one square per
+   photo pixel, the line drawn on the photo, and row/column numbers. Read the
+   rows where the line meets the feature. Show these grids to the owner.
+6. **Measure smoothness at joints.** Where curves join or a bridge meets the
+   outline, measure direction change per 2 px and compare with the natural curve
+   next to it. A joint sharper than its neighbours is a kink: find why and fix it.
+7. **Owner-guided bridges** for things the owner says are not his body (e.g. the
+   rogue wisp above his right eye): replace only that stretch with a cubic
+   Hermite curve, joining directions measured **only from outside the stretch**.
+   Record name, rows and the owner's words under `owner_guided`. Send the thing
+   bridged past (a wisp, a whisker) to its own layer so it isn't lost.
+8. **If a fix makes a sensitive area worse, undo it and stop.** Say so plainly,
+   show what happened, and ask. (A wider strand filter once hooked the line into
+   his eye area: undone, not tinkered with.)
+9. **When you can't tell whether something is him** (a bump: his head or fur?),
+   don't guess: show the pixel view and ask the owner. Their answer becomes an
+   owner-guided decision.
+10. **Every protection gets a test** (`tests/`), including edge cases. Tests
+    have already caught a real flaw (smoothing shaving a mark's corners).
+
+---
+
+## 4. Judgment lines (hidden or ambiguous boundaries)
+
+Where a boundary isn't visible (e.g. his pelvis hidden under the underfluff):
+- Look for the faint real cue first (the owner spotted a faint gray crease on
+  top of the left peet). Measure where it's clear, judge where it's faint, and
+  say which is which.
+- **Show a drawn guess before building on it.** Don't reinterpret the owner's
+  words ("semicircular… across" was once misread as a dome over one peet).
+- Iterate with the owner until approved; store the control points, smoothing
+  and how it was reached (`data/lines/peet_line.json`). Approved lines are used
+  as given, never refit.
+
+---
+
+## 5. What is what: the guide (owner-approved definitions)
+
+From the golden tiles (`docs/images/golden_tiles.png`):
+1. **Tufts hanging off him** (e.g. between the peets): FLUFF, tips included.
+2. **Peet undersides:** belong to that PEET. Faint hairs lying below: WISPS.
+3. **Feathery/spiky fringe along his edge:** soft edge of the body or ear.
+4. **A hair is a WISP** only if it reaches clearly past the general fringe
+   line, or stands on its own with background on both sides for most of its
+   length. Wisps are taken full length, bases included.
+5. **Long, dark, straight hairs at cheek and mouth height:** WHISKERS, full
+   length, including the root running into the fur.
+6. **Thin dark hairs at the ears:** eyebrow WHISKERS.
+7. **Ear halo:** the ear's soft edge.
+8. **Lashes:** outside the body line; the black eye *mark* is inside (§3).
+9. **Rogue wisp above his right eye:** WISP (owner-guided bridge in the outline).
+
+Parts, each with its own colour and step: head, undercarriage, each ear, each
+peet, fluff tufts, wisps, whiskers. Order: body outline → ears → peets → fluff →
+wisps → whiskers. Whiskers are coloured precisely, then ignored (weight 0)
+until last, never removed or painted over.
+
+---
+
+## 6. Representation
+
+- **No pixelly edges.** Boundaries and strands are sub-pixel smooth curves
+  (splines), never pixel masks. Pixels appear only when rendering, anti-aliased.
+- Edge pixels have soft, fractional ownership.
+- **Tracing is allowed only for whiskers and wisps** (frozen data, reproduced
+  exactly, added last). Never for the body, ears, peets, tufts or coat.
+
+---
+
+## 7. Viewing and checking (all areas)
+
+- **Overlay on the photo, never side-by-side panels.** Comparing two panels by
+  eye once made correct background look like missing fur.
+- **Review tiles at 4× with their surroundings**, the tile outlined (8× of a
+  64 px tile was too blurry and had no context).
+- **Sensitive areas: 10-16× pixel grids** (§3.5).
+- **Never claim from a downscaled overview.** Say "first pass, not yet verified"
+  until zoomed checks are done and shown.
+- **Don't game your own scoring.** When a fit rewards something ("darkest path",
+  "darkest point per ray"), check what it latched onto (it once chased dark
+  undercarriage fur instead of a faint crease). Score what the feature really is
+  (e.g. a crease darker than *both* sides).
+- **Check the check.** A per-tile "smoother than raw" test passed even when the
+  line was wiggly, because the raw edge is so jagged. A passing number is not
+  approval; the eye and the owner decide.
+- Rendering artefacts aren't defects: a gap in a drawing may just be an unclosed
+  polyline. Measure before "fixing".
+
+---
+
+## 8. Working with the owner
+
+- **The owner reviews every tile**, in batches of about 20, in chat with review
+  sheets (no local web page). Nothing is done until they approve it. The ledger
+  (`data/strands/ledger.json`) records per-part status per tile: `todo →
+  self-checked → owner-approved`. Only the owner's words make a tile approved.
+- **When the owner flags a mistake:** fix it, name the cause, re-check every
+  place the same cause could apply (e.g. *both* eyes, *both* ears), log it in
+  PROGRESS and the Lessons in DECISIONS, and show the fix with zoomed proof.
+- **Ask only what only the owner can answer** (is this bump his head or fur?
+  whisker or wisp?), with a picture. Resolve everything else yourself.
+- **One bounded task per session**; don't run long loops on your own decisions.
+  If a step isn't going well, stop and say so before writing another fix.
+- **Report honestly**: what was done, what failed, what was undone, numbers with
+  what they do and don't prove.
+
+---
+
+## 9. Per-batch routine (step 3 onward)
+
+1. Re-read `CLAUDE.md`, this file, the current plan, the latest PROGRESS entry.
+2. For the batch's tiles, decide: gentle or sensitive (§2). Sensitive → §3.
+3. Do the work; run `python -m pytest -q` and the tool's built-in checks.
+4. Self-check: 4× context for every tile; pixel grids for every sensitive spot;
+   measure joints and protected features.
+5. Update the ledger (`self-checked` + a one-line note per tile).
+6. Regenerate review sheets; commit and push.
+7. Send the sheets; list what was checked, what's uncertain, and the questions.
+8. Apply the owner's verdicts; mark approved tiles `owner-approved`.
+
+---
+
+## 10. Tools and files
+
+| What | Where |
+|---|---|
+| Edge tiles + ledger | `tools/edge_tiles.py` → `data/strands/ledger.json` |
+| Body outline (gentle + sensitive + eye-mark protection + owner-guided bridges) | `tools/body_outline.py` → `data/strands/body_outline.json` |
+| Approved peet line | `data/lines/peet_line.json` |
+| Review images | `docs/images/` (batch sheets, golden tiles, eye-corner pixel grids) |
+| Tests | `tests/` (`python -m pytest -q`) |

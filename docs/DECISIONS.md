@@ -108,6 +108,12 @@ excuse and was withdrawn.)
   The outline is fitted as tightly as possible across the top of his head
   (both ears, both eye corners), following his head under the lashes, never
   the lashes themselves. The bend at each eye corner is tight.
+- **Sensitive areas get extreme precision** (2026-11-07): "I need him to look
+  like he is, and that involves you being incredibly precise when it gets to his
+  little sensitive, detailed areas": his peets, his underfluff ("his pelvis needs
+  to look right and he needs to have the right stance"), his ears, and later his
+  mouth, nose and whisker pads, as well as his eyes. Owner-guided handling is
+  welcome in those areas. Method: `docs/METHOD.md` §3.
 - **The bump above his right eye is a rogue wisp** (2026-11-07), not his head
   or an eyebrow: the outline is bridged past it (owner-guided) and the wisp
   goes to the wisp layer.

@@ -5,9 +5,15 @@ fluffy rabbit, to be the body of the owner's "Little Self" project. He means a
 great deal to the owner. Get him right. Read this whole file before doing
 anything, and re-read it (plus the current plan file) at every milestone.
 
-**Start here:** the latest entry in `docs/PROGRESS.md`, then `docs/DECISIONS.md`
+**Start here:** the latest entry in `docs/PROGRESS.md`, then **`docs/METHOD.md`
+(the working method: what to do in which situation)**, then `docs/DECISIONS.md`
 (everything the owner has decided, and why), then the current plan:
 `docs/STRAND_PLAN.md`.
+
+**Sensitive areas get the precision protocol (METHOD §3), always:** his eyes and
+black hotot eye marks, ears, peets, underfluff/pelvis (his stance), and later
+his mouth, nose and whisker pads. Tightest fit, identity features protected and
+checked pixel by pixel, owner-guided bridges, and stop if a fix makes it worse.
 
 ## Non-negotiable rules
 
@@ -83,6 +89,7 @@ anything, and re-read it (plus the current plan file) at every milestone.
 
 ## Where things are
 
+- `docs/METHOD.md`: the working method and when to do what.
 - `docs/DECISIONS.md`: every owner decision, with reasons and lessons learned.
 - `docs/STRAND_PLAN.md`: current plan: classifying the anchor photo part by part.
 - `docs/PLAN.md`: the overall pipeline (numeric fitting, unattended runs).
