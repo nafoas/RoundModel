@@ -26,13 +26,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.1,
-    "width_median": 2.6,
-    "width_max": 4.2,
-    "captured": 0.42,
+    "reserved_ears_eyes": true,
+    "width_min": 1.8,
+    "width_median": 2.5,
+    "width_max": 3.7,
+    "captured": 0.39,
     "smoother_than_raw": true
    }
   },
@@ -46,13 +47,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
+    "reserved_ears_eyes": true,
     "width_min": 2.5,
-    "width_median": 3.9,
-    "width_max": 4.5,
-    "captured": 0.5,
+    "width_median": 3.3,
+    "width_max": 4.0,
+    "captured": 0.47,
     "smoother_than_raw": true
    }
   },
@@ -66,13 +68,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 3.0,
-    "width_median": 4.1,
-    "width_max": 4.5,
-    "captured": 0.46,
+    "reserved_ears_eyes": true,
+    "width_min": 2.5,
+    "width_median": 3.5,
+    "width_max": 4.0,
+    "captured": 0.42,
     "smoother_than_raw": true
    }
   },
@@ -86,13 +89,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 3.0,
-    "width_median": 3.0,
-    "width_max": 4.2,
-    "captured": 0.4,
+    "reserved_ears_eyes": true,
+    "width_min": 2.4,
+    "width_median": 2.5,
+    "width_max": 3.6,
+    "captured": 0.34,
     "smoother_than_raw": true
    }
   },
@@ -106,13 +110,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 3.0,
-    "width_median": 3.0,
-    "width_max": 5.0,
-    "captured": 0.42,
+    "reserved_ears_eyes": true,
+    "width_min": 2.3,
+    "width_median": 2.5,
+    "width_max": 4.0,
+    "captured": 0.36,
     "smoother_than_raw": true
    }
   },
@@ -126,13 +131,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "past his left eye; tightened at the eye corner (sensitive zone); lashes and crossing hairs outside",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 3.0,
-    "width_median": 5.0,
-    "width_max": 17.3,
-    "captured": 0.56,
+    "reserved_ears_eyes": true,
+    "width_min": 2.3,
+    "width_median": 4.0,
+    "width_max": 10.8,
+    "captured": 0.46,
     "smoother_than_raw": true
    }
   },
@@ -146,13 +152,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "past his left eye; tightened at the eye corner (sensitive zone); lashes and crossing hairs outside",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.4,
-    "width_median": 8.7,
-    "width_max": 17.6,
-    "captured": 0.78,
+    "reserved_ears_eyes": true,
+    "width_min": 3.5,
+    "width_median": 6.9,
+    "width_max": 10.9,
+    "captured": 0.67,
     "smoother_than_raw": true
    }
   },
@@ -166,13 +173,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "past his left eye; tightened at the eye corner (sensitive zone); lashes and crossing hairs outside",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.1,
-    "width_median": 5.0,
-    "width_max": 16.9,
-    "captured": 0.79,
+    "reserved_ears_eyes": true,
+    "width_min": 3.6,
+    "width_median": 4.4,
+    "width_max": 10.7,
+    "captured": 0.67,
     "smoother_than_raw": true
    }
   },
@@ -186,13 +194,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "side of head; smooth through soft gradient",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.1,
-    "width_median": 5.0,
-    "width_max": 6.2,
-    "captured": 0.76,
+    "reserved_ears_eyes": true,
+    "width_min": 3.6,
+    "width_median": 4.4,
+    "width_max": 5.4,
+    "captured": 0.7,
     "smoother_than_raw": true
    }
   },
@@ -206,13 +215,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "side of head; smooth through soft gradient",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.8,
-    "width_median": 5.8,
-    "width_max": 6.2,
-    "captured": 0.73,
+    "reserved_ears_eyes": true,
+    "width_min": 4.3,
+    "width_median": 5.2,
+    "width_max": 5.4,
+    "captured": 0.69,
     "smoother_than_raw": true
    }
   },
@@ -226,13 +236,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "side of head; smooth through soft gradient",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 5.2,
-    "width_median": 5.8,
-    "width_max": 6.2,
-    "captured": 0.7,
+    "reserved_ears_eyes": true,
+    "width_min": 4.6,
+    "width_median": 5.2,
+    "width_max": 5.4,
+    "captured": 0.65,
     "smoother_than_raw": true
    }
   },
@@ -246,13 +257,14 @@
    "status": "todo",
    "outline": "owner-approved",
    "outline_note": "side of head; smooth through soft gradient",
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 5.0,
-    "width_median": 5.5,
-    "width_max": 6.0,
-    "captured": 0.72,
+    "reserved_ears_eyes": true,
+    "width_min": 4.2,
+    "width_median": 4.8,
+    "width_max": 5.4,
+    "captured": 0.67,
     "smoother_than_raw": true
    }
   },
@@ -278,10 +290,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.9,
-    "width_median": 5.0,
-    "width_max": 5.8,
-    "captured": 0.75,
+    "reserved_ears_eyes": false,
+    "width_min": 4.1,
+    "width_median": 4.5,
+    "width_max": 5.1,
+    "captured": 0.69,
     "smoother_than_raw": true
    }
   },
@@ -307,10 +320,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.9,
-    "width_median": 5.8,
-    "width_max": 8.9,
-    "captured": 0.8,
+    "reserved_ears_eyes": false,
+    "width_min": 4.1,
+    "width_median": 5.1,
+    "width_max": 7.9,
+    "captured": 0.74,
     "smoother_than_raw": true
    }
   },
@@ -336,10 +350,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 6.2,
-    "width_median": 8.6,
-    "width_max": 9.6,
-    "captured": 0.83,
+    "reserved_ears_eyes": false,
+    "width_min": 5.5,
+    "width_median": 7.6,
+    "width_max": 8.6,
+    "captured": 0.78,
     "smoother_than_raw": true
    }
   },
@@ -365,10 +380,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 5.6,
-    "width_median": 7.1,
-    "width_max": 9.6,
-    "captured": 0.83,
+    "reserved_ears_eyes": false,
+    "width_min": 4.6,
+    "width_median": 6.2,
+    "width_max": 8.6,
+    "captured": 0.77,
     "smoother_than_raw": true
    }
   },
@@ -394,10 +410,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 5.6,
-    "width_median": 7.3,
-    "width_max": 10.5,
-    "captured": 0.69,
+    "reserved_ears_eyes": false,
+    "width_min": 4.6,
+    "width_median": 6.6,
+    "width_max": 9.2,
+    "captured": 0.63,
     "smoother_than_raw": true
    }
   },
@@ -423,10 +440,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 6.7,
-    "width_median": 9.4,
-    "width_max": 11.8,
-    "captured": 0.73,
+    "reserved_ears_eyes": false,
+    "width_min": 5.9,
+    "width_median": 8.2,
+    "width_max": 10.4,
+    "captured": 0.68,
     "smoother_than_raw": true
    }
   },
@@ -452,10 +470,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 7.8,
-    "width_median": 9.8,
-    "width_max": 11.8,
-    "captured": 0.76,
+    "reserved_ears_eyes": false,
+    "width_min": 6.7,
+    "width_median": 8.5,
+    "width_max": 10.4,
+    "captured": 0.71,
     "smoother_than_raw": true
    }
   },
@@ -481,10 +500,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 7.8,
-    "width_median": 11.1,
-    "width_max": 19.1,
-    "captured": 0.77,
+    "reserved_ears_eyes": false,
+    "width_min": 6.7,
+    "width_median": 9.5,
+    "width_max": 16.1,
+    "captured": 0.7,
     "smoother_than_raw": true
    }
   },
@@ -510,10 +530,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 7.8,
-    "width_median": 14.9,
-    "width_max": 19.2,
-    "captured": 0.78,
+    "reserved_ears_eyes": false,
+    "width_min": 6.7,
+    "width_median": 13.2,
+    "width_max": 16.2,
+    "captured": 0.71,
     "smoother_than_raw": true
    }
   },
@@ -539,10 +560,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 11.8,
-    "width_median": 15.0,
-    "width_max": 19.2,
-    "captured": 0.71,
+    "reserved_ears_eyes": false,
+    "width_min": 9.1,
+    "width_median": 13.4,
+    "width_max": 16.2,
+    "captured": 0.63,
     "smoother_than_raw": true
    }
   },
@@ -568,10 +590,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 10.9,
-    "width_median": 12.5,
-    "width_max": 17.7,
-    "captured": 0.73,
+    "reserved_ears_eyes": false,
+    "width_min": 9.1,
+    "width_median": 10.2,
+    "width_max": 15.3,
+    "captured": 0.65,
     "smoother_than_raw": true
    }
   },
@@ -597,10 +620,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 9.8,
-    "width_median": 11.3,
-    "width_max": 12.7,
-    "captured": 0.6,
+    "reserved_ears_eyes": false,
+    "width_min": 8.8,
+    "width_median": 9.2,
+    "width_max": 10.4,
+    "captured": 0.51,
     "smoother_than_raw": true
    }
   },
@@ -626,10 +650,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 9.8,
-    "width_median": 10.7,
-    "width_max": 19.9,
-    "captured": 0.57,
+    "reserved_ears_eyes": false,
+    "width_min": 8.8,
+    "width_median": 9.2,
+    "width_max": 16.5,
+    "captured": 0.51,
     "smoother_than_raw": true
    }
   },
@@ -655,10 +680,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 10.0,
-    "width_median": 12.5,
-    "width_max": 20.4,
-    "captured": 0.59,
+    "reserved_ears_eyes": false,
+    "width_min": 8.9,
+    "width_median": 10.3,
+    "width_max": 17.1,
+    "captured": 0.51,
     "smoother_than_raw": true
    }
   },
@@ -684,10 +710,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 10.7,
-    "width_median": 16.2,
-    "width_max": 20.4,
-    "captured": 0.71,
+    "reserved_ears_eyes": false,
+    "width_min": 9.1,
+    "width_median": 14.9,
+    "width_max": 17.1,
+    "captured": 0.65,
     "smoother_than_raw": true
    }
   },
@@ -713,10 +740,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 15.8,
-    "width_median": 17.6,
-    "width_max": 20.3,
-    "captured": 0.77,
+    "reserved_ears_eyes": false,
+    "width_min": 14.8,
+    "width_median": 15.9,
+    "width_max": 18.4,
+    "captured": 0.72,
     "smoother_than_raw": true
    }
   },
@@ -742,10 +770,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 15.8,
-    "width_median": 18.7,
-    "width_max": 19.8,
-    "captured": 0.81,
+    "reserved_ears_eyes": false,
+    "width_min": 14.8,
+    "width_median": 17.2,
+    "width_max": 18.6,
+    "captured": 0.79,
     "smoother_than_raw": true
    }
   },
@@ -771,10 +800,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 17.3,
-    "width_median": 18.7,
-    "width_max": 19.8,
-    "captured": 0.92,
+    "reserved_ears_eyes": false,
+    "width_min": 16.0,
+    "width_median": 17.6,
+    "width_max": 18.6,
+    "captured": 0.89,
     "smoother_than_raw": true
    }
   },
@@ -800,10 +830,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 17.3,
-    "width_median": 18.7,
-    "width_max": 19.9,
-    "captured": 0.9,
+    "reserved_ears_eyes": false,
+    "width_min": 16.0,
+    "width_median": 17.6,
+    "width_max": 19.7,
+    "captured": 0.88,
     "smoother_than_raw": true
    }
   },
@@ -829,9 +860,10 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 17.7,
-    "width_median": 19.1,
-    "width_max": 19.9,
+    "reserved_ears_eyes": false,
+    "width_min": 16.6,
+    "width_median": 18.3,
+    "width_max": 19.7,
     "captured": 0.84,
     "smoother_than_raw": true
    }
@@ -858,10 +890,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 17.1,
-    "width_median": 18.8,
-    "width_max": 19.9,
-    "captured": 0.81,
+    "reserved_ears_eyes": false,
+    "width_min": 15.8,
+    "width_median": 18.0,
+    "width_max": 19.6,
+    "captured": 0.79,
     "smoother_than_raw": true
    }
   },
@@ -887,10 +920,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 16.2,
-    "width_median": 17.4,
-    "width_max": 18.9,
-    "captured": 0.86,
+    "reserved_ears_eyes": false,
+    "width_min": 14.8,
+    "width_median": 16.3,
+    "width_max": 18.1,
+    "captured": 0.84,
     "smoother_than_raw": true
    }
   },
@@ -916,10 +950,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 15.8,
-    "width_median": 16.7,
-    "width_max": 18.1,
-    "captured": 0.83,
+    "reserved_ears_eyes": false,
+    "width_min": 14.5,
+    "width_median": 15.2,
+    "width_max": 17.1,
+    "captured": 0.8,
     "smoother_than_raw": true
    }
   },
@@ -945,10 +980,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 15.2,
-    "width_median": 16.2,
-    "width_max": 16.9,
-    "captured": 0.83,
+    "reserved_ears_eyes": false,
+    "width_min": 14.2,
+    "width_median": 14.8,
+    "width_max": 15.5,
+    "captured": 0.79,
     "smoother_than_raw": true
    }
   },
@@ -974,10 +1010,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 14.6,
-    "width_median": 15.3,
-    "width_max": 16.6,
-    "captured": 0.89,
+    "reserved_ears_eyes": false,
+    "width_min": 12.5,
+    "width_median": 14.2,
+    "width_max": 15.1,
+    "captured": 0.86,
     "smoother_than_raw": true
    }
   },
@@ -1003,10 +1040,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 14.6,
-    "width_median": 15.2,
-    "width_max": 16.6,
-    "captured": 0.94,
+    "reserved_ears_eyes": false,
+    "width_min": 12.5,
+    "width_median": 13.8,
+    "width_max": 14.7,
+    "captured": 0.93,
     "smoother_than_raw": true
    }
   },
@@ -1032,10 +1070,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 14.8,
-    "width_median": 15.6,
-    "width_max": 16.6,
-    "captured": 0.92,
+    "reserved_ears_eyes": false,
+    "width_min": 12.6,
+    "width_median": 13.0,
+    "width_max": 13.8,
+    "captured": 0.89,
     "smoother_than_raw": true
    }
   },
@@ -1061,9 +1100,10 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 15.3,
-    "width_median": 15.9,
-    "width_max": 16.6,
+    "reserved_ears_eyes": false,
+    "width_min": 12.8,
+    "width_median": 13.3,
+    "width_max": 13.8,
     "captured": 1.0,
     "smoother_than_raw": true
    }
@@ -1090,6 +1130,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1116,6 +1157,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1142,6 +1184,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1168,6 +1211,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1194,6 +1238,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1220,6 +1265,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1246,6 +1292,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1272,6 +1319,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1298,6 +1346,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1324,6 +1373,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1350,6 +1400,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1376,6 +1427,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1402,6 +1454,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1428,6 +1481,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1454,6 +1508,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1480,6 +1535,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1506,6 +1562,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1532,6 +1589,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1558,6 +1616,7 @@
    "intermediate_fur": "n/a (peet zone: peets/underfluff)",
    "intermediate_fur_check": {
     "peet_zone": true,
+    "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
    }
@@ -1584,10 +1643,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 13.0,
-    "width_median": 13.2,
-    "width_max": 13.4,
-    "captured": 0.87,
+    "reserved_ears_eyes": false,
+    "width_min": 12.3,
+    "width_median": 12.5,
+    "width_max": 12.5,
+    "captured": 0.86,
     "smoother_than_raw": true
    }
   },
@@ -1613,10 +1673,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 10.1,
-    "width_median": 11.8,
-    "width_max": 13.4,
-    "captured": 0.84,
+    "reserved_ears_eyes": false,
+    "width_min": 8.9,
+    "width_median": 10.8,
+    "width_max": 12.5,
+    "captured": 0.8,
     "smoother_than_raw": true
    }
   },
@@ -1642,10 +1703,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 9.1,
-    "width_median": 10.5,
-    "width_max": 13.4,
-    "captured": 0.83,
+    "reserved_ears_eyes": false,
+    "width_min": 8.0,
+    "width_median": 9.3,
+    "width_max": 12.5,
+    "captured": 0.79,
     "smoother_than_raw": true
    }
   },
@@ -1671,10 +1733,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 7.5,
-    "width_median": 9.5,
-    "width_max": 11.6,
-    "captured": 0.78,
+    "reserved_ears_eyes": false,
+    "width_min": 6.5,
+    "width_median": 8.3,
+    "width_max": 10.5,
+    "captured": 0.73,
     "smoother_than_raw": true
    }
   },
@@ -1700,10 +1763,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 7.3,
-    "width_median": 8.2,
-    "width_max": 9.6,
-    "captured": 0.77,
+    "reserved_ears_eyes": false,
+    "width_min": 6.3,
+    "width_median": 7.2,
+    "width_max": 8.4,
+    "captured": 0.71,
     "smoother_than_raw": true
    }
   },
@@ -1729,10 +1793,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 7.3,
-    "width_median": 8.4,
-    "width_max": 12.8,
-    "captured": 0.85,
+    "reserved_ears_eyes": false,
+    "width_min": 6.3,
+    "width_median": 7.4,
+    "width_max": 12.2,
+    "captured": 0.82,
     "smoother_than_raw": true
    }
   },
@@ -1758,10 +1823,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 8.0,
-    "width_median": 12.6,
-    "width_max": 14.9,
-    "captured": 0.87,
+    "reserved_ears_eyes": false,
+    "width_min": 7.0,
+    "width_median": 11.6,
+    "width_max": 12.3,
+    "captured": 0.84,
     "smoother_than_raw": true
    }
   },
@@ -1787,10 +1853,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 12.6,
-    "width_median": 13.8,
-    "width_max": 16.2,
-    "captured": 0.88,
+    "reserved_ears_eyes": false,
+    "width_min": 11.4,
+    "width_median": 12.2,
+    "width_max": 15.2,
+    "captured": 0.85,
     "smoother_than_raw": true
    }
   },
@@ -1816,10 +1883,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 13.3,
-    "width_median": 16.1,
-    "width_max": 16.7,
-    "captured": 0.89,
+    "reserved_ears_eyes": false,
+    "width_min": 11.5,
+    "width_median": 15.0,
+    "width_max": 15.8,
+    "captured": 0.85,
     "smoother_than_raw": true
    }
   },
@@ -1845,10 +1913,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 16.0,
-    "width_median": 16.5,
-    "width_max": 19.4,
-    "captured": 0.89,
+    "reserved_ears_eyes": false,
+    "width_min": 14.6,
+    "width_median": 15.6,
+    "width_max": 18.2,
+    "captured": 0.86,
     "smoother_than_raw": true
    }
   },
@@ -1874,10 +1943,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 16.3,
-    "width_median": 17.8,
-    "width_max": 22.9,
-    "captured": 0.91,
+    "reserved_ears_eyes": false,
+    "width_min": 15.4,
+    "width_median": 16.6,
+    "width_max": 21.3,
+    "captured": 0.89,
     "smoother_than_raw": true
    }
   },
@@ -1903,10 +1973,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 16.4,
-    "width_median": 21.4,
-    "width_max": 25.3,
-    "captured": 0.91,
+    "reserved_ears_eyes": false,
+    "width_min": 15.4,
+    "width_median": 20.0,
+    "width_max": 23.9,
+    "captured": 0.89,
     "smoother_than_raw": true
    }
   },
@@ -1932,10 +2003,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 20.2,
-    "width_median": 23.4,
-    "width_max": 25.3,
-    "captured": 0.89,
+    "reserved_ears_eyes": false,
+    "width_min": 18.8,
+    "width_median": 22.1,
+    "width_max": 23.9,
+    "captured": 0.87,
     "smoother_than_raw": true
    }
   },
@@ -1961,10 +2033,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 17.4,
-    "width_median": 23.4,
-    "width_max": 25.3,
-    "captured": 0.83,
+    "reserved_ears_eyes": false,
+    "width_min": 15.9,
+    "width_median": 22.1,
+    "width_max": 23.9,
+    "captured": 0.8,
     "smoother_than_raw": true
    }
   },
@@ -1990,10 +2063,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 14.4,
-    "width_median": 21.8,
-    "width_max": 25.3,
-    "captured": 0.78,
+    "reserved_ears_eyes": false,
+    "width_min": 13.5,
+    "width_median": 20.7,
+    "width_max": 23.9,
+    "captured": 0.75,
     "smoother_than_raw": true
    }
   },
@@ -2019,7 +2093,8 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "captured": 0.7,
+    "reserved_ears_eyes": false,
+    "captured": 0.66,
     "smoother_than_raw": true
    }
   },
@@ -2045,10 +2120,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 12.4,
-    "width_median": 13.7,
-    "width_max": 19.6,
-    "captured": 0.77,
+    "reserved_ears_eyes": false,
+    "width_min": 11.6,
+    "width_median": 12.9,
+    "width_max": 18.0,
+    "captured": 0.74,
     "smoother_than_raw": true
    }
   },
@@ -2074,10 +2150,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 12.2,
-    "width_median": 12.8,
-    "width_max": 14.0,
-    "captured": 0.9,
+    "reserved_ears_eyes": false,
+    "width_min": 11.2,
+    "width_median": 11.8,
+    "width_max": 13.2,
+    "captured": 0.88,
     "smoother_than_raw": true
    }
   },
@@ -2103,10 +2180,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 12.2,
-    "width_median": 13.1,
-    "width_max": 14.5,
-    "captured": 0.77,
+    "reserved_ears_eyes": false,
+    "width_min": 11.2,
+    "width_median": 11.8,
+    "width_max": 13.4,
+    "captured": 0.74,
     "smoother_than_raw": true
    }
   },
@@ -2132,10 +2210,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 12.5,
-    "width_median": 14.4,
-    "width_max": 14.9,
-    "captured": 0.78,
+    "reserved_ears_eyes": false,
+    "width_min": 11.3,
+    "width_median": 13.2,
+    "width_max": 13.9,
+    "captured": 0.75,
     "smoother_than_raw": true
    }
   },
@@ -2161,10 +2240,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 13.8,
-    "width_median": 14.5,
-    "width_max": 14.9,
-    "captured": 0.8,
+    "reserved_ears_eyes": false,
+    "width_min": 12.7,
+    "width_median": 13.6,
+    "width_max": 13.9,
+    "captured": 0.77,
     "smoother_than_raw": true
    }
   },
@@ -2190,10 +2270,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 10.8,
-    "width_median": 13.9,
-    "width_max": 14.9,
-    "captured": 0.92,
+    "reserved_ears_eyes": false,
+    "width_min": 9.8,
+    "width_median": 13.1,
+    "width_max": 13.9,
+    "captured": 0.9,
     "smoother_than_raw": true
    }
   },
@@ -2219,10 +2300,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 9.4,
-    "width_median": 11.0,
-    "width_max": 14.3,
-    "captured": 0.73,
+    "reserved_ears_eyes": false,
+    "width_min": 8.5,
+    "width_median": 9.9,
+    "width_max": 13.6,
+    "captured": 0.7,
     "smoother_than_raw": true
    }
   },
@@ -2248,10 +2330,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 9.4,
-    "width_median": 10.0,
-    "width_max": 11.4,
-    "captured": 0.66,
+    "reserved_ears_eyes": false,
+    "width_min": 8.5,
+    "width_median": 9.0,
+    "width_max": 10.4,
+    "captured": 0.62,
     "smoother_than_raw": true
    }
   },
@@ -2277,10 +2360,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 9.4,
-    "width_median": 10.3,
-    "width_max": 10.5,
-    "captured": 0.69,
+    "reserved_ears_eyes": false,
+    "width_min": 8.5,
+    "width_median": 9.4,
+    "width_max": 9.8,
+    "captured": 0.65,
     "smoother_than_raw": true
    }
   },
@@ -2306,10 +2390,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 8.6,
-    "width_median": 10.3,
-    "width_max": 10.5,
-    "captured": 0.82,
+    "reserved_ears_eyes": false,
+    "width_min": 7.4,
+    "width_median": 9.4,
+    "width_max": 9.8,
+    "captured": 0.77,
     "smoother_than_raw": true
    }
   },
@@ -2335,10 +2420,11 @@
    "intermediate_fur": "self-checked",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 8.6,
-    "width_median": 10.2,
-    "width_max": 11.4,
-    "captured": 0.8,
+    "reserved_ears_eyes": false,
+    "width_min": 7.4,
+    "width_median": 9.1,
+    "width_max": 10.3,
+    "captured": 0.75,
     "smoother_than_raw": true
    }
   },
@@ -2361,13 +2447,14 @@
     "fringe_in_max_px": 4.85,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 6.2,
-    "width_median": 9.3,
-    "width_max": 11.4,
-    "captured": 0.77,
+    "reserved_ears_eyes": true,
+    "width_min": 5.4,
+    "width_median": 8.0,
+    "width_max": 10.3,
+    "captured": 0.71,
     "smoother_than_raw": true
    }
   },
@@ -2390,13 +2477,14 @@
     "fringe_in_max_px": 4.85,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.9,
-    "width_median": 7.6,
-    "width_max": 11.4,
-    "captured": 0.71,
+    "reserved_ears_eyes": true,
+    "width_min": 4.3,
+    "width_median": 6.6,
+    "width_max": 10.3,
+    "captured": 0.63,
     "smoother_than_raw": true
    }
   },
@@ -2419,13 +2507,14 @@
     "fringe_in_max_px": 3.18,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.8,
-    "width_median": 5.4,
-    "width_max": 9.3,
-    "captured": 0.73,
+    "reserved_ears_eyes": true,
+    "width_min": 4.2,
+    "width_median": 4.7,
+    "width_max": 8.2,
+    "captured": 0.67,
     "smoother_than_raw": true
    }
   },
@@ -2448,13 +2537,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.8,
-    "width_median": 5.6,
-    "width_max": 7.6,
-    "captured": 0.81,
+    "reserved_ears_eyes": true,
+    "width_min": 4.2,
+    "width_median": 4.8,
+    "width_max": 6.7,
+    "captured": 0.72,
     "smoother_than_raw": true
    }
   },
@@ -2477,13 +2567,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 5.1,
-    "width_median": 7.9,
-    "width_max": 14.3,
-    "captured": 0.8,
+    "reserved_ears_eyes": true,
+    "width_min": 4.4,
+    "width_median": 6.3,
+    "width_max": 12.3,
+    "captured": 0.7,
     "smoother_than_raw": true
    }
   },
@@ -2506,13 +2597,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 7.8,
-    "width_median": 13.9,
-    "width_max": 14.4,
-    "captured": 0.76,
+    "reserved_ears_eyes": true,
+    "width_min": 5.2,
+    "width_median": 11.6,
+    "width_max": 12.7,
+    "captured": 0.68,
     "smoother_than_raw": true
    }
   },
@@ -2535,13 +2627,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 7.2,
-    "width_median": 13.9,
-    "width_max": 14.4,
-    "captured": 0.75,
+    "reserved_ears_eyes": true,
+    "width_min": 6.1,
+    "width_median": 12.0,
+    "width_max": 12.7,
+    "captured": 0.7,
     "smoother_than_raw": true
    }
   },
@@ -2564,13 +2657,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 4.0,
-    "width_median": 7.0,
-    "width_max": 14.0,
-    "captured": 0.68,
+    "reserved_ears_eyes": true,
+    "width_min": 3.3,
+    "width_median": 6.0,
+    "width_max": 12.6,
+    "captured": 0.62,
     "smoother_than_raw": true
    }
   },
@@ -2593,13 +2687,14 @@
     "fringe_in_max_px": 2.05,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 3.7,
-    "width_median": 5.1,
-    "width_max": 9.0,
-    "captured": 0.46,
+    "reserved_ears_eyes": true,
+    "width_min": 3.0,
+    "width_median": 4.4,
+    "width_max": 7.5,
+    "captured": 0.41,
     "smoother_than_raw": true
    }
   },
@@ -2622,13 +2717,14 @@
     "fringe_in_max_px": 2.05,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 3.7,
-    "width_median": 4.6,
-    "width_max": 5.5,
-    "captured": 0.5,
+    "reserved_ears_eyes": true,
+    "width_min": 3.0,
+    "width_median": 3.9,
+    "width_max": 4.8,
+    "captured": 0.44,
     "smoother_than_raw": true
    }
   },
@@ -2651,13 +2747,14 @@
     "fringe_in_max_px": 2.49,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 3.5,
-    "width_median": 4.3,
-    "width_max": 5.2,
-    "captured": 0.52,
+    "reserved_ears_eyes": true,
+    "width_min": 3.1,
+    "width_median": 3.6,
+    "width_max": 4.5,
+    "captured": 0.47,
     "smoother_than_raw": true
    }
   },
@@ -2680,13 +2777,14 @@
     "fringe_in_max_px": 2.49,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.4,
-    "width_median": 3.4,
-    "width_max": 4.3,
-    "captured": 0.76,
+    "reserved_ears_eyes": true,
+    "width_min": 2.1,
+    "width_median": 3.0,
+    "width_max": 3.7,
+    "captured": 0.7,
     "smoother_than_raw": true
    }
   },
@@ -2709,13 +2807,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.3,
-    "width_median": 2.5,
-    "width_max": 3.8,
-    "captured": 0.81,
+    "reserved_ears_eyes": true,
+    "width_min": 2.1,
+    "width_median": 2.3,
+    "width_max": 3.3,
+    "captured": 0.76,
     "smoother_than_raw": true
    }
   },
@@ -2738,13 +2837,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.1,
-    "width_median": 2.4,
-    "width_max": 2.7,
-    "captured": 0.81,
+    "reserved_ears_eyes": true,
+    "width_min": 1.7,
+    "width_median": 2.1,
+    "width_max": 2.4,
+    "captured": 0.76,
     "smoother_than_raw": true
    }
   },
@@ -2767,13 +2867,14 @@
     "fringe_in_max_px": 2.46,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.1,
-    "width_median": 2.6,
-    "width_max": 3.0,
-    "captured": 0.73,
+    "reserved_ears_eyes": true,
+    "width_min": 1.7,
+    "width_median": 2.3,
+    "width_max": 2.5,
+    "captured": 0.66,
     "smoother_than_raw": true
    }
   },
@@ -2796,13 +2897,14 @@
     "fringe_in_max_px": 3.76,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.0,
-    "width_median": 2.6,
-    "width_max": 3.0,
-    "captured": 0.72,
+    "reserved_ears_eyes": true,
+    "width_min": 1.8,
+    "width_median": 2.3,
+    "width_max": 2.5,
+    "captured": 0.65,
     "smoother_than_raw": true
    }
   },
@@ -2825,13 +2927,14 @@
     "fringe_in_max_px": 3.76,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.0,
-    "width_median": 2.3,
-    "width_max": 2.9,
-    "captured": 0.75,
+    "reserved_ears_eyes": true,
+    "width_min": 1.8,
+    "width_median": 2.0,
+    "width_max": 2.5,
+    "captured": 0.69,
     "smoother_than_raw": true
    }
   },
@@ -2854,13 +2957,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.0,
-    "width_median": 2.3,
-    "width_max": 2.5,
-    "captured": 0.72,
+    "reserved_ears_eyes": true,
+    "width_min": 1.8,
+    "width_median": 2.0,
+    "width_max": 2.0,
+    "captured": 0.67,
     "smoother_than_raw": true
    }
   },
@@ -2883,13 +2987,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.1,
-    "width_median": 2.4,
-    "width_max": 2.5,
-    "captured": 0.74,
+    "reserved_ears_eyes": true,
+    "width_min": 2.0,
+    "width_median": 2.0,
+    "width_max": 2.2,
+    "captured": 0.69,
     "smoother_than_raw": true
    }
   },
@@ -2912,13 +3017,14 @@
     "fringe_in_max_px": 2.71,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.0,
-    "width_median": 2.3,
-    "width_max": 2.5,
-    "captured": 0.79,
+    "reserved_ears_eyes": true,
+    "width_min": 1.8,
+    "width_median": 2.0,
+    "width_max": 2.2,
+    "captured": 0.74,
     "smoother_than_raw": true
    }
   },
@@ -2941,13 +3047,14 @@
     "fringe_in_max_px": 2.71,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.0,
-    "width_median": 2.3,
-    "width_max": 2.5,
-    "captured": 0.81,
+    "reserved_ears_eyes": true,
+    "width_min": 1.8,
+    "width_median": 2.0,
+    "width_max": 2.3,
+    "captured": 0.77,
     "smoother_than_raw": true
    }
   },
@@ -2970,13 +3077,14 @@
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
    },
-   "intermediate_fur": "self-checked",
+   "intermediate_fur": "reserved: ears/eyes/lashes, separate precise step",
    "intermediate_fur_check": {
     "peet_zone": false,
-    "width_min": 2.0,
-    "width_median": 2.4,
-    "width_max": 3.6,
-    "captured": 0.45,
+    "reserved_ears_eyes": true,
+    "width_min": 1.8,
+    "width_median": 2.2,
+    "width_max": 3.0,
+    "captured": 0.42,
     "smoother_than_raw": true
    }
   },

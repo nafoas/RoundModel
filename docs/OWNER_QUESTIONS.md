@@ -36,16 +36,16 @@ the owner's official opinion later. Each says what I did in the meantime.
    image right): the body line swings out around it, treating it as body because
    it's as dense as body fur. *Meantime:* kept as body; if it's intermediate fur,
    the line should pass behind it.
-8. **Where the outer edge of the intermediate fur sits.** I tried three settings
+8. **[ANSWERED 2026-11-08: "could maybe go in just a tiny bit" → density 0.18 → 0.21, about 1 px in on average.]** **Where the outer edge of the intermediate fur sits.** I tried three settings
    (tight / middle / loose) and chose the middle one: most short fringe spikes
    end right around it; long single hairs carry on past it (they're wisps or
    whiskers). Long straight strands (whiskers, long wisps) are removed before
    measuring, so where they fan out together they don't drag the edge out.
    *Meantime:* middle setting. Sheets: `docs/images/batch*_fur_*.png`.
-9. **Ear halo.** Guide #7 said the ear's halo is the ear's soft edge; with the
+9. **[ANSWERED 2026-11-08: ears and eye lashes need to be incredibly precise; done separately, eventually.]** **Ear halo.** Guide #7 said the ear's halo is the ear's soft edge; with the
    newer rule (fringe outside the body line = intermediate fur), the thin halo
    (2-3 px) is now in the intermediate fur band. *Meantime:* intermediate fur;
    when the ears get their own step, the halo can be reassigned to them.
-10. **Lash bases.** At both eyes the band takes in the bases of the lashes; the
+10. **[ANSWERED 2026-11-08: same; lashes get their own separate precise step.]** **Lash bases.** At both eyes the band takes in the bases of the lashes; the
    lashes continue past it. *Meantime:* bases in the band, lashes beyond it
    handled as strands (wisp rule) later. Should lashes be their own class?

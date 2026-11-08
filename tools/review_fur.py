@@ -30,6 +30,11 @@ import body_outline as bo  # noqa: E402
 CONTEXT, ZOOM, PER_SHEET = 110, 4, 10
 
 
+def itf_reserved_row():
+    import intermediate_fur as itf
+    return itf.RESERVED_ROW
+
+
 def checks(tiles, body, outer, reach, a):
     pb, po = MPath(body), MPath(outer)
     tree_b = cKDTree(body)
@@ -48,7 +53,8 @@ def checks(tiles, body, outer, reach, a):
         ring = ~in_b & (d <= 30) & above
         fur = a[y0:y1, x0:x1].ravel()
         tot = fur[ring].sum()
-        r = {"peet_zone": bool(on.any() and not sel.any())}
+        r = {"peet_zone": bool(on.any() and not sel.any()),
+             "reserved_ears_eyes": bool(on.any() and np.mean(body[on, 1] < itf_reserved_row()) > 0.5)}
         if sel.any():
             w = reach[sel]
             r.update({"width_min": round(float(w.min()), 1), "width_median": round(float(np.median(w)), 1),

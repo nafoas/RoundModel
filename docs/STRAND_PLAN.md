@@ -180,7 +180,9 @@ general edge of the dense fringe (`tools/intermediate_fur.py` →
 measured outward from the body line and averaged along the edge (12 px), with
 long straight strands (whiskers, long wisps; >= 35 px, reaching >= 20 px out)
 removed first; reach smoothed along the edge (8 px). Density threshold 0.18
-(middle of three tried). Band width above the peet line: 2-25 px, median ~9.5.
+(middle of three tried), then 0.21 after the owner's "in just a tiny bit"
+(band width above the peet line 2-24 px, median ~8). **Reserved:** rows < 520
+(ears, eyes, lashes): provisional, done in their own separate precise step.
 Below the approved peet line the band belongs to the peets / underfluff.
 Next: owner review; then split off the peets and ears along the drawn lines.
 

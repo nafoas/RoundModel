@@ -127,6 +127,12 @@ excuse and was withdrawn.)
 - **T019-T020 bulge** (his left cheek): part of his brow ridge, i.e. him; the
   body line stays around it.
 
+- **Intermediate fur outer edge** (2026-11-08): "could maybe go in just a tiny
+  bit" (density 0.21).
+- **Ears and eye lashes: their own separate, incredibly precise step,
+  eventually** (2026-11-08): "his little eyes mean a lot." The intermediate fur
+  at the ears and eyes (rows < 520) is provisional until then.
+
 ## Whiskers
 
 - Reproduced **exactly as they are**, as frozen traced data, added last: the one

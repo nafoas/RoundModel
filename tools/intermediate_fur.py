@@ -32,11 +32,15 @@ from skimage.measure import find_contours
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import body_outline as bo  # noqa: E402
 
-DENSITY = 0.18        # fringe continues while the along-edge averaged coverage is at least this
+DENSITY = 0.21        # fringe continues while the along-edge averaged coverage is at least this
 ALONG_SIGMA = 12.0    # px: averaging along the edge (one hair ~ 2 px wide counts for little)
 REACH_SIGMA = 8.0     # px: smoothing of the reach along the edge
 MAX_REACH = 45.0      # px
 STEP = 0.5            # px
+# Ears, eyes and lashes (the locked top of head, rows < RESERVED_ROW) are
+# RESERVED for their own separate, very precise step (owner, 2026-11-08). The
+# band there is provisional and not reviewed as intermediate fur.
+RESERVED_ROW = 520
 # Long straight strands (whiskers, long wisps) are removed before measuring the
 # fringe: where many fan out together they would otherwise look like fringe.
 STRAND_RIDGE = 0.05   # ridge-filter threshold
@@ -134,6 +138,8 @@ def main() -> int:
                  "peet line. Below the peet line the band belongs to the peets / underfluff.",
         "photo": "data/photos/anchor_front.webp",
         "status": "first pass, self-checked per batch; awaiting owner review",
+        "reserved": f"rows < {RESERVED_ROW}: ears, eyes and lashes; provisional here, done in their "
+                    "own separate precise step (owner 2026-11-08)",
         "params": {"density": DENSITY, "along_sigma_px": ALONG_SIGMA, "reach_sigma_px": REACH_SIGMA,
                    "max_reach_px": MAX_REACH, "long_strands_removed": {"min_len_px": STRAND_MIN_LEN,
                    "min_reach_px": STRAND_MIN_REACH, "masked_px": int(strands.sum())}},

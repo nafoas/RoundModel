@@ -267,3 +267,8 @@ check.py output (if applicable), and the next step.
 - **batch4 (T061-T080) intermediate fur: self-checked**, all tiles viewed. 0 tiles in the peet zone (not this class). Wide band (>22 px, checked by eye: long feathery fringe): T070, T071, T072, T073, T074. Outer line smoother than the raw edge everywhere.
 - **batch5 (T081-T100) intermediate fur: self-checked**, all tiles viewed. 0 tiles in the peet zone (not this class). Outer line smoother than the raw edge everywhere.
 - **batch6 (T101-T108) intermediate fur: self-checked**, all tiles viewed. 0 tiles in the peet zone (not this class). Outer line smoother than the raw edge everywhere.
+- Owner: outer edge "in just a tiny bit" → density 0.21 (median ~1 px in; the
+  biggest moves, up to 6.6 px, were at the lashes, which are reserved). Ears and
+  lashes get their own separate precise step later: 34 tiles at the ears/eyes
+  marked reserved in the ledger; 55 self-checked; 19 in the peet zone. Sheets
+  regenerated.

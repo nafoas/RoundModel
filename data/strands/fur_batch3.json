@@ -1,105 +1,125 @@
 {
  "T041": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T042": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T043": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T044": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T045": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T046": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T047": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T048": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T049": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T050": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T051": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T052": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T053": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T054": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T055": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T056": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T057": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T058": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T059": {
   "peet_zone": true,
+  "reserved_ears_eyes": false,
   "captured": null,
   "smoother_than_raw": true
  },
  "T060": {
   "peet_zone": false,
-  "width_min": 13.0,
-  "width_median": 13.2,
-  "width_max": 13.4,
-  "captured": 0.87,
+  "reserved_ears_eyes": false,
+  "width_min": 12.3,
+  "width_median": 12.5,
+  "width_max": 12.5,
+  "captured": 0.86,
   "smoother_than_raw": true
  }
 }

@@ -56,6 +56,7 @@ precise when it gets to his little sensitive, detailed areas." List so far:
 | **Ears** (each one) | Tiny, detailed, identity | Tight fit in the outline |
 | **Peets** (each one) | His little front feet | Faithful fit **below the approved peet line** (the line defines the zone, not a row); own step later |
 | **Underfluff / pelvis** | "His pelvis needs to look right and he needs to have the right stance" | Peet line approved; own step later |
+| **Eye lashes** | "The ear and eye lashes need to be incredibly precise"; "his little eyes mean a lot" | Own separate step later; band at ears/eyes provisional |
 | **Mouth, nose, whisker pads** | Detailed, identity | Later steps |
 
 When working in a sensitive area, **use the precision protocol (§3)**, always.
