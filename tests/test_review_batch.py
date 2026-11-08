@@ -37,3 +37,15 @@ def test_swollen_outline_reports_bulge():
     rgb, a, t = setup()
     f = rb.fidelity([t], square(46, 154), rgb, a)["X"]
     assert f["bulge_px"] > 0 and f["cut_px"] == 0
+
+
+def test_line_out_in_the_fringe_is_flagged():
+    """Body 50..149 with a 12 px fringe of thin spikes; a line drawn through the
+    middle of the fringe must be flagged, a line on the body edge must not."""
+    rgb, a, t = setup()
+    for x in range(52, 148, 4):                    # spikes along the top edge, rows 38..49
+        rgb[38:50, x] = 120
+    f_on = rb.fidelity([t], square(50, 150), rgb, a)["X"]
+    f_mid = rb.fidelity([t], square(44, 156), rgb, a)["X"]
+    assert f_on["fringe_in_px"] == 0
+    assert f_mid["fringe_in_px"] > 0 and f_mid["fringe_in_max_px"] > 2

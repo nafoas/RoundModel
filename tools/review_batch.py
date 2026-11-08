@@ -6,10 +6,14 @@ Usage: python tools/review_batch.py <batch_name> <first_tile> <last_tile>
 Writes docs/images/<batch_name>_outline_<n>.png (tiles at 4x with their
 surroundings, outline in blue, tile in orange) and prints per-tile fidelity:
 
-  cut    = solid body pixels (strand-free coverage >= 0.9) whose centres are
-           OUTSIDE the outline by more than CUT_TOL px  -> the line cuts into him
+  cut    = solid body pixels (strand-free coverage >= 0.9, connected to his main
+           body) whose centres are OUTSIDE the outline by more than CUT_TOL px
+           -> the line cuts into him
   bulge  = pure-background pixels whose centres are INSIDE the outline by more
            than BULGE_TOL px                           -> the line swells into air
+  into-fringe = gaps of the intermediate fur (strand-free coverage < 0.5) or
+           background INSIDE the outline by more than FRINGE_TOL px
+           -> the line is out in the intermediate fur instead of on his body
   smooth = the outline is smoother than the raw edge in this tile
 
 Pixel convention: pixel (col, row) covers [col, col+1) x [row, row+1).
@@ -29,6 +33,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import body_outline as bo  # noqa: E402
 
 CUT_TOL = 1.0     # px
+FRINGE_TOL = 2.0  # px
+FRINGE_COV = 0.5  # strand-free coverage below this = gaps of the intermediate fur, not his body
 BULGE_TOL = 3.0   # px
 SOLID = 0.9
 CONTEXT, ZOOM, PER_SHEET = 110, 4, 10
@@ -37,6 +43,9 @@ CONTEXT, ZOOM, PER_SHEET = 110, 4, 10
 def fidelity(tiles, curve, rgb, a_free):
     path, tree = MPath(curve), cKDTree(curve)
     mn = rgb.min(axis=2)
+    # "solid body" = the dense mass CONNECTED to him; isolated dense clumps of
+    # fringe hair out in the intermediate fur are not his body.
+    body = bo.et.largest(a_free >= SOLID)
     out = {}
     for t in tiles:
         x0, y0, x1, y1 = t["x0"], t["y0"], t["x1"], t["y1"]
@@ -44,12 +53,17 @@ def fidelity(tiles, curve, rgb, a_free):
         pts = np.c_[X.ravel(), Y.ravel()]
         inside = path.contains_points(pts).reshape(X.shape)
         dist = tree.query(pts)[0].reshape(X.shape)
-        solid = a_free[y0:y1, x0:x1] >= SOLID
+        solid = body[y0:y1, x0:x1]
         bg = mn[y0:y1, x0:x1] >= bo.et.WHITE
         cut = solid & ~inside & (dist > CUT_TOL)
+        # line pushed out into the intermediate fur: fringe gaps INSIDE the line
+        fringe_in = (a_free[y0:y1, x0:x1] < FRINGE_COV) & ~bg & inside & (dist > FRINGE_TOL)
+        fringe_in |= bg & inside & (dist > FRINGE_TOL)
         bulge = bg & inside & (dist > BULGE_TOL)
         out[t["id"]] = {"cut_px": int(cut.sum()), "cut_max_px": round(float(dist[cut].max()), 2) if cut.any() else 0.0,
-                        "bulge_px": int(bulge.sum()), "bulge_max_px": round(float(dist[bulge].max()), 2) if bulge.any() else 0.0}
+                        "bulge_px": int(bulge.sum()), "bulge_max_px": round(float(dist[bulge].max()), 2) if bulge.any() else 0.0,
+                        "fringe_in_px": int(fringe_in.sum()),
+                        "fringe_in_max_px": round(float(dist[fringe_in].max()), 2) if fringe_in.any() else 0.0}
     return out
 
 
@@ -102,8 +116,9 @@ def main(argv):
     for t in tiles:
         f = fid[t["id"]]
         f["smoother_than_raw"] = t["id"] not in rough
-        print(f'{t["id"]}: cut {f["cut_px"]} (max {f["cut_max_px"]} px)  bulge {f["bulge_px"]} '
-              f'(max {f["bulge_max_px"]} px)  smoother {f["smoother_than_raw"]}')
+        print(f'{t["id"]}: cut {f["cut_px"]} (max {f["cut_max_px"]})  bulge {f["bulge_px"]} '
+              f'(max {f["bulge_max_px"]})  into-fringe {f["fringe_in_px"]} (max {f["fringe_in_max_px"]})  '
+              f'smoother {f["smoother_than_raw"]}')
     print("eye marks:", outline["eye_marks_check"])
     print("peet line:", peet_line_check(curve))
     print("sheets:", sheets(name, tiles, curve, im))

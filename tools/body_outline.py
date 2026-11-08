@@ -39,6 +39,14 @@ PEET_LINE = "data/lines/peet_line.json"
 PEET_RAMP = 10          # px: hand-off half-width across the peet line (gentle above, faithful below)
 HANDOFF = 40            # px: smooth hand-off between zones
 SENSITIVE_FIT = (2.5, 0.8)
+# The body line follows the EDGE OF HIS SOLID BODY, where the intermediate fur
+# (fringe) begins: owner, 2026-11-07, "the little intermediate fur gets its own
+# colour". Solid body = coverage >= 0.5 with anything narrower than a disk of
+# radius SOLID_R removed (fringe spikes and the gaps between them), holes filled.
+SOLID_R_SIDES = 9       # px, his furry sides
+SOLID_R_PEETS = 5       # px, below the peet line (keeps the peets' corners)
+SIDE_RMS = 2.0          # px, spline smoothing on his sides
+PEET_RMS = 1.0
 PEET_FIT = (4.0, 1.0)
 STRAND_R = 4            # px: strands thinner than ~2*STRAND_R+1 are removed before the sensitive fit
 # His black eye marks (hotot "eyeliner") are protected: the outline must contain
@@ -115,6 +123,14 @@ def without_strands(a: np.ndarray) -> np.ndarray:
     return ndi.grey_opening(a, footprint=et.disk(STRAND_R))
 
 
+def solid_body(a: np.ndarray, r: int) -> np.ndarray:
+    """Soft (0..1) field of his solid body: the 50% coverage region with anything
+    narrower than a disk of radius r removed. Its 0.5 level is the body's edge."""
+    m = ndi.binary_opening(a >= LEVEL, structure=et.disk(r))
+    m = ndi.binary_fill_holes(et.largest(m))
+    return ndi.gaussian_filter(m.astype(float), 1.0)
+
+
 def _curve(src: np.ndarray, blur: float, rms: float) -> np.ndarray:
     global SMOOTH_RMS
     keep = SMOOTH_RMS
@@ -143,9 +159,9 @@ def fit_outline(a: np.ndarray):
     global SMOOTH_RMS
     from scipy.spatial import cKDTree
     mid_gentle = level_contour(a, BLUR)
-    gentle = _curve(a, BLUR, SMOOTH_RMS)
+    gentle = _curve(solid_body(a, SOLID_R_SIDES), 0, SIDE_RMS)
     sens = _curve(without_strands(a), *SENSITIVE_FIT)
-    peet = _curve(a, *PEET_FIT)
+    peet = _curve(solid_body(a, SOLID_R_PEETS), 0, PEET_RMS)
     near_s = sens[cKDTree(sens).query(gentle)[1]]
     near_p = peet[cKDTree(peet).query(gentle)[1]]
     y = gentle[:, 1]
@@ -309,7 +325,8 @@ def main() -> int:
                  "tuft are still included and get split off in later steps.",
         "photo": "data/photos/anchor_front.webp",
         "status": "first pass, not yet verified",
-        "params": {"gentle_fit_blur_rms_px": [BLUR, SMOOTH_RMS], "level": LEVEL,
+        "params": {"sides": f"edge of solid body (opening r={SOLID_R_SIDES}), RMS {SIDE_RMS} px",
+                   "peets": f"edge of solid body (opening r={SOLID_R_PEETS}), RMS {PEET_RMS} px", "level": LEVEL,
                    "sensitive_zone": f"y < {SENSITIVE_MAX_Y} (ears, eyes), strands removed (r={STRAND_R})",
                    "sensitive_fit_blur_rms_px": list(SENSITIVE_FIT),
                    "peet_zone": f"below the approved peet line ({PEET_LINE}), ramp +-{PEET_RAMP} px",

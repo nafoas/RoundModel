@@ -218,3 +218,17 @@ check.py output (if applicable), and the next step.
   the left-side notch (T059-T060) up close with the gentle/faithful curves and
   the peet line: the hook is the real notch where the peet line starts, outside
   his fur; kept (Q2). Tuft spike tips noted for the fluff step (Q3).
+
+## 2026-11-08 — Session 5 (cont.): body line recalibration, paused for the owner
+- **Owner flagged:** the line is consistently too far out; it should follow the
+  edge of his body, and the intermediate fur between body and wisps gets its own
+  colour. **Cause:** the side line was the 50% level of a blurred coverage map,
+  which lands mid-fringe.
+- Tried: edge of "solid body" (opening r=9). Measured with a new into-fringe check
+  (`tools/review_batch.py`, tested): old line 9,159 px in the fringe over 61/80
+  tiles; new 526 px. But it **cut in too far** (e.g. his right side T076-T080 and
+  under his right eye, where it hooked inward). **Owner stopped it.**
+- Committed: the into-fringe check + test, and the cut check counting only solid
+  fur connected to him. NOT committed: the over-tight outline/sheets. Ledger
+  T013-T060 reset to todo.
+- **Next:** calibration sheet with candidate lines on ~4 spots; owner picks.

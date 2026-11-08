@@ -172,6 +172,17 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**PAUSED: body line recalibration (2026-11-08).** Owner: the line was
+consistently too far out, sitting in the intermediate fur ("the little
+intermediate fur gets its own colour"). First correction (edge of "solid body" =
+coverage region opened with a 9 px disk) cut in too far; owner stopped it.
+`tools/body_outline.py` currently holds that rejected experiment;
+`data/strands/body_outline.json` and the sheets are still the previous (also
+rejected, mid-fringe) line. **Next:** calibrate with the owner on ~4 spots
+(candidate lines between the two, owner picks), apply that rule, verify with the
+into-fringe check, re-review. T013-T060 reset to `todo`; T001-T012 (eyes/ears,
+moved < 0.6 px) stay approved.
+
 **Part 1, body outline** (`python tools/body_outline.py` →
 `data/strands/body_outline.json`; reference: anchor photo only):
 - One closed smooth curve around his whole silhouette (ears, peets, tuft

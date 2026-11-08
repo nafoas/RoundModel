@@ -156,8 +156,8 @@
    "x1": 906,
    "y1": 560,
    "status": "todo",
-   "outline": "owner-approved",
-   "outline_note": "side of head; smooth through soft gradient"
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T014",
@@ -167,8 +167,8 @@
    "x1": 924,
    "y1": 592,
    "status": "todo",
-   "outline": "owner-approved",
-   "outline_note": "side of head; smooth through soft gradient"
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T015",
@@ -178,8 +178,8 @@
    "x1": 943,
    "y1": 624,
    "status": "todo",
-   "outline": "owner-approved",
-   "outline_note": "side of head; smooth through soft gradient"
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T016",
@@ -189,8 +189,8 @@
    "x1": 961,
    "y1": 656,
    "status": "todo",
-   "outline": "owner-approved",
-   "outline_note": "side of head; smooth through soft gradient"
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T017",
@@ -200,8 +200,8 @@
    "x1": 983,
    "y1": 686,
    "status": "todo",
-   "outline": "owner-approved",
-   "outline_note": "dense dark fringe; line through middle; cheek whiskers outside"
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T018",
@@ -211,8 +211,8 @@
    "x1": 994,
    "y1": 715,
    "status": "todo",
-   "outline": "owner-approved",
-   "outline_note": "dense dark fringe; line through middle; cheek whiskers outside"
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T019",
@@ -222,8 +222,8 @@
    "x1": 1008,
    "y1": 736,
    "status": "todo",
-   "outline": "owner-approved",
-   "outline_note": "dense dark fringe; line through middle; cheek whiskers outside"
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T020",
@@ -233,8 +233,8 @@
    "x1": 1016,
    "y1": 758,
    "status": "todo",
-   "outline": "owner-approved",
-   "outline_note": "dense dark fringe; line through middle; cheek whiskers outside"
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T021",
@@ -244,15 +244,8 @@
    "x1": 1020,
    "y1": 781,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 1,
-    "bulge_max_px": 4.39,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T022",
@@ -262,15 +255,8 @@
    "x1": 1018,
    "y1": 810,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 2,
-    "bulge_max_px": 4.39,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T023",
@@ -280,15 +266,8 @@
    "x1": 1028,
    "y1": 832,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 2,
-    "bulge_max_px": 4.39,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T024",
@@ -298,15 +277,8 @@
    "x1": 1028,
    "y1": 861,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T025",
@@ -316,15 +288,8 @@
    "x1": 1024,
    "y1": 892,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T026",
@@ -334,15 +299,8 @@
    "x1": 1022,
    "y1": 917,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T027",
@@ -352,15 +310,8 @@
    "x1": 999,
    "y1": 930,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T028",
@@ -370,15 +321,8 @@
    "x1": 992,
    "y1": 960,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 1,
-    "bulge_max_px": 5.26,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T029",
@@ -388,15 +332,8 @@
    "x1": 985,
    "y1": 986,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 1,
-    "bulge_max_px": 5.26,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T030",
@@ -406,15 +343,8 @@
    "x1": 980,
    "y1": 1016,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T031",
@@ -424,15 +354,8 @@
    "x1": 974,
    "y1": 1042,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T032",
@@ -442,15 +365,8 @@
    "x1": 967,
    "y1": 1068,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left side (gentle): one smooth curve through the middle of the fringe; long whiskers/wisps outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T033",
@@ -460,15 +376,8 @@
    "x1": 952,
    "y1": 1095,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "lower left side (gentle, after the peet-zone fix): smooth through the hanging fringe",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T034",
@@ -478,15 +387,8 @@
    "x1": 942,
    "y1": 1122,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "lower left side (gentle, after the peet-zone fix): smooth through the hanging fringe",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T035",
@@ -496,15 +398,8 @@
    "x1": 935,
    "y1": 1146,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "lower left side (gentle, after the peet-zone fix): smooth through the hanging fringe",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T036",
@@ -514,15 +409,8 @@
    "x1": 920,
    "y1": 1164,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "lower left side (gentle, after the peet-zone fix): smooth through the hanging fringe",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T037",
@@ -532,15 +420,8 @@
    "x1": 896,
    "y1": 1172,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "lower left side (gentle, after the peet-zone fix): smooth through the hanging fringe",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T038",
@@ -550,15 +431,8 @@
    "x1": 876,
    "y1": 1186,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "lower left side (gentle, after the peet-zone fix): smooth through the hanging fringe",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T039",
@@ -568,15 +442,8 @@
    "x1": 858,
    "y1": 1204,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "hand-off from gentle side into his left peet's outer corner (faithful); peet gets its own step later",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T040",
@@ -586,15 +453,8 @@
    "x1": 838,
    "y1": 1208,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left peet's outer edge (faithful, sensitive): follows the dark peet side down; own step later",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T041",
@@ -604,15 +464,8 @@
    "x1": 824,
    "y1": 1232,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T042",
@@ -622,15 +475,8 @@
    "x1": 819,
    "y1": 1262,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T043",
@@ -640,15 +486,8 @@
    "x1": 789,
    "y1": 1280,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T044",
@@ -658,15 +497,8 @@
    "x1": 750,
    "y1": 1284,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T045",
@@ -676,15 +508,8 @@
    "x1": 719,
    "y1": 1286,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T046",
@@ -694,15 +519,8 @@
    "x1": 680,
    "y1": 1286,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his left peet (image right), outer side/corner/bottom (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T047",
@@ -712,15 +530,8 @@
    "x1": 643,
    "y1": 1278,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T048",
@@ -730,15 +541,8 @@
    "x1": 608,
    "y1": 1271,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T049",
@@ -748,15 +552,8 @@
    "x1": 584,
    "y1": 1262,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T050",
@@ -766,15 +563,8 @@
    "x1": 555,
    "y1": 1256,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T051",
@@ -784,15 +574,8 @@
    "x1": 525,
    "y1": 1248,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T052",
@@ -802,15 +585,8 @@
    "x1": 498,
    "y1": 1243,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "underfluff tuft between the peets (faithful, sensitive): follows its big scallops; thin spike tips hang below (FLUFF step will include them)",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T053",
@@ -820,15 +596,8 @@
    "x1": 475,
    "y1": 1268,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "rises into the real white gap between the tuft and his right peet",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T054",
@@ -838,15 +607,8 @@
    "x1": 438,
    "y1": 1268,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T055",
@@ -856,15 +618,8 @@
    "x1": 404,
    "y1": 1269,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T056",
@@ -874,15 +629,8 @@
    "x1": 370,
    "y1": 1272,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T057",
@@ -892,15 +640,8 @@
    "x1": 338,
    "y1": 1264,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T058",
@@ -910,15 +651,8 @@
    "x1": 307,
    "y1": 1248,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "his right peet (image left), bottom and rounded side (faithful, sensitive); faint hairs below = wisps, outside",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T059",
@@ -928,15 +662,8 @@
    "x1": 284,
    "y1": 1222,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "hand-off from his right peet into his right side; small S at the notch",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T060",
@@ -946,15 +673,8 @@
    "x1": 283,
    "y1": 1190,
    "status": "todo",
-   "outline": "self-checked",
-   "outline_note": "notch where his right peet meets his body side (start of the approved peet line): small real inward hook kept; peet's own step later",
-   "outline_fidelity": {
-    "cut_px": 0,
-    "cut_max_px": 0.0,
-    "bulge_px": 0,
-    "bulge_max_px": 0.0,
-    "smoother_than_raw": true
-   }
+   "outline": "todo",
+   "outline_note": "RECALIBRATING: owner said the line was too far out (mid-fringe); the first correction cut in too far. Needs owner calibration, then re-check."
   },
   {
    "id": "T061",
