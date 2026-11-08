@@ -277,3 +277,13 @@ check.py output (if applicable), and the next step.
   the tuft's on the cream peet, the gray peet's own corner); placed by shape,
   checked at 4x. Saved as PROPOSED; stopped for the owner (Q11) since peets are
   sensitive and these lines decide his stance.
+- **Owner flagged:** peet dividers went straight down, cutting the round peets
+  off (top connections fine). **Cause:** dividers drawn as near-straight
+  splines through 3 points, ignoring the peets' shape. **Fix (v2):** each peet's
+  known outline fitted with a rounded-box shape (median error ~1-2 px); the
+  divider follows its tuft-side curvature between the kept endpoints. Tried and
+  rejected on the way: free fit (curled back and cut the cream peet's bottom
+  corner; gray barely bowed and cut its shadowed corner); fit anchored at both
+  ends (cream bulged outside the body). **Checked:** both inside the body, smooth,
+  never cut in more than v1 (cream +17 px, gray +8 px). Zoom:
+  `docs/images/peet_dividers_zoom.png` (red = v1). Awaiting owner (Q12).

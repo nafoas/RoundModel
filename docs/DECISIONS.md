@@ -122,6 +122,8 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **Peet dividers follow the curvature of his small peets** (2026-11-08), not
+  straight lines; the top connections to the peet line were fine.
 - **Order after the body outline** (2026-11-08): the intermediate fur first;
   then the peets and ears are split off along the lines drawn earlier.
 - **T019-T020 bulge** (his left cheek): part of his brow ridge, i.e. him; the
@@ -208,6 +210,11 @@ excuse and was withdrawn.)
    part of the line where the two diverge (14 px). → Approved sensitive
    stretches are locked as data; hand-offs only where lines are within a few px
    (checked, the tool refuses otherwise).
-10. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
+10. **Straight dividers across round peets.** The peet/tuft dividers were drawn
+   as near-straight lines between two points, slicing off each peet's rounded
+   inner side (owner caught it). → Dividers between parts follow the part's own
+   shape: fit its known outline and continue that curvature; keep approved
+   endpoints; check it never cuts in more than before and stays inside the body.
+11. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
    written by an earlier session without being logged. → Log everything in
    `docs/PROGRESS.md`; unlogged work is untrusted until reviewed.

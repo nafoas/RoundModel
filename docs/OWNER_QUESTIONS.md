@@ -49,7 +49,7 @@ the owner's official opinion later. Each says what I did in the meantime.
 10. **[ANSWERED 2026-11-08: same; lashes get their own separate precise step.]** **Lash bases.** At both eyes the band takes in the bases of the lashes; the
    lashes continue past it. *Meantime:* bases in the band, lashes beyond it
    handled as strands (wisp rule) later. Should lashes be their own class?
-11. **Dividing the peets from the tuft** (needed before the peets can be split
+11. **[v1 ANSWERED 2026-11-08: top connections fine; lines must follow the peets' curvature. v2 proposed, see below.]** **Dividing the peets from the tuft** (needed before the peets can be split
    off). Below the approved peet line there are three parts: the cream peet
    (image left), the tuft and the gray peet (image right). I drew two proposed
    dividing lines (`docs/images/peet_dividers_proposed.png`, zoom
@@ -59,3 +59,7 @@ the owner's official opinion later. Each says what I did in the meantime.
    where each peet's rounded mass ends and the tuft's vertical hair begins,
    ending at the corner where the outline turns up into the tuft. *Meantime:*
    stopped here for your check, since the peets are sensitive (stance).
+12. **How far the peets bulge toward the tuft (v2).** That edge is in shadow and
+   not directly visible, so v2 follows each peet's fitted roundness: the cream
+   peet bulges up to 17 px past v1, the gray peet up to 8 px. Bottom corners kept
+   from v1. *Meantime:* proposed; tell me if either bulges too much or too little.
