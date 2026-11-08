@@ -1086,6 +1086,12 @@
     "fringe_in_px": 7,
     "fringe_in_max_px": 3.18,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1105,6 +1111,12 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 5,
     "fringe_in_max_px": 3.18,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
     "smoother_than_raw": true
    }
   },
@@ -1126,6 +1138,12 @@
     "fringe_in_px": 5,
     "fringe_in_max_px": 3.18,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1145,6 +1163,12 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
     "smoother_than_raw": true
    }
   },
@@ -1166,6 +1190,12 @@
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1185,6 +1215,12 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
     "smoother_than_raw": true
    }
   },
@@ -1206,6 +1242,12 @@
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1225,6 +1267,12 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
     "smoother_than_raw": true
    }
   },
@@ -1246,6 +1294,12 @@
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1265,6 +1319,12 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
     "smoother_than_raw": true
    }
   },
@@ -1286,6 +1346,12 @@
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1305,6 +1371,12 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
     "smoother_than_raw": true
    }
   },
@@ -1326,6 +1398,12 @@
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1345,6 +1423,12 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
     "smoother_than_raw": true
    }
   },
@@ -1366,6 +1450,12 @@
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1385,6 +1475,12 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
     "smoother_than_raw": true
    }
   },
@@ -1406,6 +1502,12 @@
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1425,6 +1527,12 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
     "smoother_than_raw": true
    }
   },
@@ -1446,6 +1554,12 @@
     "fringe_in_px": 1,
     "fringe_in_max_px": 2.19,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "n/a (peet zone: peets/underfluff)",
+   "intermediate_fur_check": {
+    "peet_zone": true,
+    "captured": null,
+    "smoother_than_raw": true
    }
   },
   {
@@ -1465,6 +1579,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 5,
     "fringe_in_max_px": 3.33,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 13.0,
+    "width_median": 13.2,
+    "width_max": 13.4,
+    "captured": 0.87,
     "smoother_than_raw": true
    }
   },
