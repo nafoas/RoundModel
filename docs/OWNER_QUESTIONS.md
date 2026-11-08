@@ -32,3 +32,7 @@ the owner's official opinion later. Each says what I did in the meantime.
 6. **Small notches between fur clumps** at the base of the fringe (3-5 px deep,
    e.g. T019-T031, T066-T081): the smooth body line bridges them rather than
    dipping into each one. *Meantime:* bridged, for a gentle edge.
+7. **Dense dark clump at the base of his fringe** (T019-T020, his left cheek,
+   image right): the body line swings out around it, treating it as body because
+   it's as dense as body fur. *Meantime:* kept as body; if it's intermediate fur,
+   the line should pass behind it.

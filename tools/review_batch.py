@@ -14,6 +14,7 @@ surroundings, outline in blue, tile in orange) and prints per-tile fidelity:
   into-fringe = gaps of the intermediate fur (strand-free coverage < 0.5) or
            background INSIDE the outline by more than FRINGE_TOL px
            -> the line is out in the intermediate fur instead of on his body
+           (skipped in the eye boxes: the black eye skews the coverage there)
   smooth = the outline is smoother than the raw edge in this tile
 
 Pixel convention: pixel (col, row) covers [col, col+1) x [row, row+1).
@@ -46,6 +47,9 @@ def fidelity(tiles, curve, rgb, a_free):
     # "solid body" = the dense mass CONNECTED to him; isolated dense clumps of
     # fringe hair out in the intermediate fur are not his body.
     body = bo.et.largest(a_free >= SOLID)
+    eye_zone = np.zeros(a_free.shape, bool)
+    for ex0, ey0, ex1, ey1 in bo.EYE_BOXES.values():
+        eye_zone[max(0, ey0 - 10):ey1 + 10, max(0, ex0 - 10):ex1 + 10] = True
     out = {}
     for t in tiles:
         x0, y0, x1, y1 = t["x0"], t["y0"], t["x1"], t["y1"]
@@ -59,6 +63,10 @@ def fidelity(tiles, curve, rgb, a_free):
         # line pushed out into the intermediate fur: fringe gaps INSIDE the line
         fringe_in = (a_free[y0:y1, x0:x1] < FRINGE_COV) & ~bg & inside & (dist > FRINGE_TOL)
         fringe_in |= bg & inside & (dist > FRINGE_TOL)
+        # The black eyes darken the local fur estimate, so light fur right next
+        # to them reads as half-transparent. Eye areas are covered by the
+        # eye-mark check and the locked approved top of head instead.
+        fringe_in &= ~eye_zone[y0:y1, x0:x1]
         bulge = bg & inside & (dist > BULGE_TOL)
         out[t["id"]] = {"cut_px": int(cut.sum()), "cut_max_px": round(float(dist[cut].max()), 2) if cut.any() else 0.0,
                         "bulge_px": int(bulge.sum()), "bulge_max_px": round(float(dist[bulge].max()), 2) if bulge.any() else 0.0,
