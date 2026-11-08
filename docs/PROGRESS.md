@@ -247,3 +247,9 @@ check.py output (if applicable), and the next step.
 - **batch4 (T061-T080) outline: self-checked** on the recalibrated line. Fidelity: no cuts, no bulges, no into-fringe > 6 px, smoother everywhere; eye marks 0 px out; peet line inside.
 - **batch5 (T081-T100) outline: self-checked** on the recalibrated line. Fidelity: no cuts, no bulges, no into-fringe > 6 px, smoother everywhere; eye marks 0 px out; peet line inside.
 - **batch6 (T101-T108) outline: self-checked** on the recalibrated line. Fidelity: no cuts, no bulges, no into-fringe > 6 px, smoother everywhere; eye marks 0 px out; peet line inside.
+- Into-fringe check now skips the eye boxes (the black eye skews coverage, so
+  light cheek fur beside it read as fringe; verified by looking: photo values
+  180-251, real fur). Line unchanged.
+- **Body outline complete for review: T001-T012 approved, T013-T108
+  self-checked.** 12 tests pass. **Next:** owner bulk review + questions
+  (`docs/OWNER_QUESTIONS.md`, Q1-Q7); then the next part step (Q4).

@@ -172,6 +172,10 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**Body outline: all 108 tiles done, awaiting owner bulk review (2026-11-08).**
+T001-T012 owner-approved; T013-T108 self-checked, sheets
+`docs/images/batch1..6_outline_*.png`, questions in `docs/OWNER_QUESTIONS.md`.
+Next part step pending the owner's answer to Q4 (intermediate fur first?).
 **Recalibrated (2026-11-08), resumed.** The owner looked again: the solid-body
 line is right on his sides; only the eye areas cut in (the zone joining jumped
 to the wrong part of the line under his right eye). Fix: the approved top of his
