@@ -264,3 +264,4 @@ check.py output (if applicable), and the next step.
 - **batch1 (T001-T020) intermediate fur: self-checked**, all tiles viewed. 0 tiles in the peet zone (not this class). Outer line smoother than the raw edge everywhere.
 - **batch2 (T021-T040) intermediate fur: self-checked**, all tiles viewed. 0 tiles in the peet zone (not this class). Outer line smoother than the raw edge everywhere.
 - **batch3 (T041-T060) intermediate fur: self-checked**, all tiles viewed. 19 tiles in the peet zone (not this class). Outer line smoother than the raw edge everywhere.
+- **batch4 (T061-T080) intermediate fur: self-checked**, all tiles viewed. 0 tiles in the peet zone (not this class). Wide band (>22 px, checked by eye: long feathery fringe): T070, T071, T072, T073, T074. Outer line smoother than the raw edge everywhere.
