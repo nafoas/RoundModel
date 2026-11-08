@@ -172,7 +172,7 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**Peets (2026-11-08): dividing lines PROPOSED v2** (v1 rejected: straight lines cut the round peets off; v2 follows each peet's fitted roundness) (`data/strands/peet_dividers.json`,
+**Peets (2026-11-08): dividers: gray (tuft | gray peet) owner-approved; cream (cream peet | tuft) v3 proposed** (v1: straight, cut the peets off; v2: follows the peets' roundness, but the cream line's junction still cut off the shoulder; v3 moves that junction to x 450) (`data/strands/peet_dividers.json`,
 `docs/images/peet_dividers_*.png`), awaiting owner review before the peets are
 split off (Q11). Ears: no dividing line yet; to be proposed next.
 

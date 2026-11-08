@@ -287,3 +287,10 @@ check.py output (if applicable), and the next step.
   ends (cream bulged outside the body). **Checked:** both inside the body, smooth,
   never cut in more than v1 (cream +17 px, gray +8 px). Zoom:
   `docs/images/peet_dividers_zoom.png` (red = v1). Awaiting owner (Q12).
+- Owner: gray divider fine; cream divider's connection to the purple line still
+  cut off part of the peet. **Cause:** the junction (x 433) sat left of the
+  peet's widest point (x 453), so the side leaned in toward the top and left a
+  wedge of shoulder on the tuft side. **Fix (v3, cream only):** junction moved
+  to x 450 on the peet line, shoulder rounded in, lower part unchanged; adds up
+  to 10.5 px, cuts none, inside the body, smooth. The 6x zoom showed no sharp
+  edge there (cream fades into blue), so it's a judgment line. Awaiting owner.

@@ -59,7 +59,12 @@ the owner's official opinion later. Each says what I did in the meantime.
    where each peet's rounded mass ends and the tuft's vertical hair begins,
    ending at the corner where the outline turns up into the tuft. *Meantime:*
    stopped here for your check, since the peets are sensitive (stance).
-12. **How far the peets bulge toward the tuft (v2).** That edge is in shadow and
+12. **[v2 ANSWERED 2026-11-08: gray fine; cream's connection to the purple line still cut off part of the peet → v3.]** **How far the peets bulge toward the tuft (v2).** That edge is in shadow and
    not directly visible, so v2 follows each peet's fitted roundness: the cream
    peet bulges up to 17 px past v1, the gray peet up to 8 px. Bottom corners kept
    from v1. *Meantime:* proposed; tell me if either bulges too much or too little.
+13. **Cream peet divider v3.** Junction with the purple line moved from x 433 to
+   x 450 (above the widest point of the peet's side), shoulder rounded into the
+   purple line, lower part unchanged. The photo shows no sharp edge there (the
+   cream fades into the tuft's blue), so the exact spot is judgment. *Meantime:*
+   proposed; zoom `docs/images/peet_dividers_zoom.png` (thin red = v2).
