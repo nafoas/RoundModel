@@ -63,3 +63,20 @@ def test_pixel_convention_edges_land_on_pixel_boundaries():
     c = bo.level_contour(a, 0)
     assert abs(c[:, 0].min() - 20.0) < 0.05 and abs(c[:, 0].max() - 100.0) < 0.05
     assert abs(c[:, 1].min() - 20.0) < 0.05 and abs(c[:, 1].max() - 100.0) < 0.05
+
+
+def test_lock_top_keeps_the_approved_top_exactly(tmp_path):
+    """Approved = circle. New = same circle but dented inward near the top (like
+    the eye hook). After locking rows < 200, the top must equal the approved."""
+    import json
+    t = np.linspace(0, 2 * np.pi, 2000, endpoint=False)
+    app = np.c_[300 + 150 * np.cos(t), 300 + 150 * np.sin(t)]
+    new = app.copy()
+    dent = (new[:, 1] < 190) & (np.abs(new[:, 0] - 250) < 30)
+    new[dent, 1] += 14
+    f = tmp_path / "top.json"
+    f.write_text(json.dumps({"lock_row": 200, "hand_off_px": 40, "closed_curve": app.tolist()}))
+    out = bo.lock_top(new, str(f))
+    from scipy.spatial import cKDTree
+    top = app[app[:, 1] < 200]
+    assert cKDTree(out).query(top)[0].max() < 0.3

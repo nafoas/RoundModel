@@ -190,6 +190,13 @@ excuse and was withdrawn.)
    checked pixel by pixel; a test makes sure a mark poking past the outline
    ends up fully inside, including its corners (which the test caught being
    shaved by smoothing; fixed with a 0.5 px margin).
-9. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
+9. **Line too far out, then too far in.** The side line ran mid-fringe (owner:
+   the intermediate fur gets its own colour). The first correction was right
+   on the sides but cut in around his right eye: zones were joined by mapping
+   each side-line point to the nearest eye-zone point, which jumps to the wrong
+   part of the line where the two diverge (14 px). → Approved sensitive
+   stretches are locked as data; hand-offs only where lines are within a few px
+   (checked, the tool refuses otherwise).
+10. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
    written by an earlier session without being logged. → Log everything in
    `docs/PROGRESS.md`; unlogged work is untrusted until reviewed.

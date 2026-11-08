@@ -232,3 +232,12 @@ check.py output (if applicable), and the next step.
   fur connected to him. NOT committed: the over-tight outline/sheets. Ledger
   T013-T060 reset to todo.
 - **Next:** calibration sheet with candidate lines on ~4 spots; owner picks.
+- **Owner, looking again:** the recalibrated line is right on his sides; only the
+  eye areas cut in ("cutting around the outline of his eye, not his shape";
+  "his eyes should already be done"). **Cause:** zone joining by nearest point
+  jumped to the wrong part of the line under his right eye (rows 420-460, 14 px).
+  **Fix:** approved top of head locked as `data/lines/approved_top_of_head.json`
+  (rows < 520, 40 px hand-off; tool refuses a hand-off > 8 px). **Re-checked:**
+  top of head within 0.25 px of approved everywhere; both eyes viewed
+  (`docs/images/eyes_after_lock.png`); eye marks 0 px out; hand-off 6.2 deg/2 px
+  (same as his sides). Test added (12 pass).

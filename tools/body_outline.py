@@ -46,6 +46,9 @@ SENSITIVE_FIT = (2.5, 0.8)
 SOLID_R_SIDES = 9       # px, his furry sides
 SOLID_R_PEETS = 5       # px, below the peet line (keeps the peets' corners)
 SIDE_RMS = 2.0          # px, spline smoothing on his sides
+# Owner-approved top of head (ears, eyes, eye marks, wisp bridge) is LOCKED:
+# taken exactly from this file above its lock_row, never recomputed.
+APPROVED_TOP = "data/lines/approved_top_of_head.json"
 PEET_RMS = 1.0
 PEET_FIT = (4.0, 1.0)
 STRAND_R = 4            # px: strands thinner than ~2*STRAND_R+1 are removed before the sensitive fit
@@ -258,6 +261,39 @@ def bridge(curve: np.ndarray, x_max: float, rows: tuple[int, int]) -> np.ndarray
     return np.vstack([seg, rest])
 
 
+def _canon(c: np.ndarray) -> np.ndarray:
+    """Same orientation for every closed curve (positive signed area in image
+    coordinates), rolled to start at its lowest point (max y)."""
+    x, y = c[:, 0], c[:, 1]
+    if 0.5 * np.sum(x * np.roll(y, -1) - np.roll(x, -1) * y) < 0:
+        c = c[::-1]
+    return np.roll(c, -int(np.argmax(c[:, 1])), axis=0)
+
+
+def lock_top(curve: np.ndarray, path: str = APPROVED_TOP) -> np.ndarray:
+    """Replace everything above lock_row with the approved curve, and hand off
+    smoothly over hand_off_px below it (the two curves must already be close
+    there; the hand-off moves each new point toward the nearest approved point)."""
+    from scipy.spatial import cKDTree
+    d = json.loads(Path(path).read_text())
+    lock, hand = d["lock_row"], d["hand_off_px"]
+    app = _canon(np.array(d["closed_curve"], float))
+    new = _canon(curve)
+    a_top = np.where(app[:, 1] < lock)[0]
+    n_top = np.where(new[:, 1] < lock)[0]
+    if not (np.all(np.diff(a_top) == 1) and np.all(np.diff(n_top) == 1)):
+        raise RuntimeError("top-of-head region is not one contiguous stretch")
+    joined = np.vstack([new[:n_top[0]], app[a_top], new[n_top[-1] + 1:]])
+    band = (joined[:, 1] >= lock) & (joined[:, 1] < lock + hand)
+    near = app[cKDTree(app).query(joined[band])[1]]
+    w = ((lock + hand - joined[band, 1]) / hand)[:, None]
+    gap = np.hypot(*(near - joined[band]).T).max() if band.any() else 0.0
+    if gap > 8.0:   # a few px eased over the hand-off is gentle; the eye bug was 14 px
+        raise RuntimeError(f"hand-off curves are {gap:.1f} px apart; too far to blend safely")
+    joined[band] = w * near + (1 - w) * joined[band]
+    return resample(np.vstack([joined, joined[:1]]), 0.5)[:-1]
+
+
 def mark_check(curve: np.ndarray, fields: dict) -> dict:
     """Sub-pixel check: how much of each eye-mark pixel lies outside the outline."""
     from matplotlib.path import Path as MPath
@@ -307,6 +343,8 @@ def main() -> int:
     for g in OWNER_GUIDED:
         curve = resample(bridge(curve, g["x_max"], g["rows"]), 0.5)
     curve = resample(np.vstack([curve, curve[:1]]), 0.5)[:-1]   # even spacing all the way round the loop
+    if Path(APPROVED_TOP).exists():
+        curve = lock_top(curve)
     marks = mark_check(curve, fields)
     # distance from the smooth curve to the 50% level it was fitted to
     from scipy.spatial import cKDTree
@@ -337,6 +375,7 @@ def main() -> int:
         "tiles_where_not_smoother_than_raw": worse,
         "eye_marks_check": marks,
         "owner_guided": OWNER_GUIDED,
+        "locked": f"rows above the approved top of head ({APPROVED_TOP})",
         "sampled_curve": [[round(float(x), 3), round(float(y), 3)] for x, y in curve],
     }
     Path("data/strands/body_outline.json").write_text(json.dumps(out, indent=1))

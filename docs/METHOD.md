@@ -28,15 +28,23 @@ Decide which before touching it.
 ### Gentle areas: his furry sides
 Where: the long sweep of his sides (cheeks down along the undercarriage), and
 anywhere his edge is just fur.
-- The boundary is **one gentle, smooth curve through the middle of his soft
-  fuzzy edge** (the 50% coverage level of a blurred coverage map), not along
-  the fuzz tips and not hugging individual hairs.
+- The boundary follows **the edge of his body: where his solid body ends and the
+  intermediate fur begins** (owner, 2026-11-08). The intermediate fur between
+  his body and the wisps is its own class with its own colour; the body line must
+  not run through it. (The first version ran through the middle of the fuzzy
+  edge and sat out in the intermediate fur; a too-strong correction then cut
+  into him near the eyes.) Current: edge of the 50% coverage region with
+  anything narrower than a 9 px-radius disk removed, 2 px RMS spline; peets use
+  r = 5, 1 px RMS. Checked with the into-fringe measure (§7).
 - It must come out **less jagged than the raw photo edge, never more** (checked
   per tile).
 - **Don't flag the natural fuzz.** It stays part of him as a soft-edge quality,
   recreated later by the fur. Only distinct tufts and strands are split off
   (§5).
-- Current settings: 8 px blur, 4 px RMS spline smoothing.
+- **Approved stretches are locked as data.** Once the owner approves a sensitive
+  stretch (the top of his head: ears, eyes, eye marks, wisp bridge), it is
+  saved under `data/lines/` and used exactly; later changes elsewhere can't move
+  it. Hand-offs into it are short and checked for kinks.
 
 ### Sensitive areas: where his identity lives
 Owner: "I need him to look like he is, and that involves you being incredibly
@@ -122,6 +130,9 @@ From the golden tiles (`docs/images/golden_tiles.png`):
 1. **Tufts hanging off him** (e.g. between the peets): FLUFF, tips included.
 2. **Peet undersides:** belong to that PEET. Faint hairs lying below: WISPS.
 3. **Feathery/spiky fringe along his edge:** soft edge of the body or ear.
+3b. **Intermediate fur** (owner, 2026-11-08): the band of fringe between the
+   edge of his body and the wisps is its own class (own colour), not body.
+   This supersedes the earlier "fringe = soft edge of the body".
 4. **A hair is a WISP** only if it reaches clearly past the general fringe
    line, or stands on its own with background on both sides for most of its
    length. Wisps are taken full length, bases included.

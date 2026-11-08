@@ -172,7 +172,12 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**PAUSED: body line recalibration (2026-11-08).** Owner: the line was
+**Recalibrated (2026-11-08), resumed.** The owner looked again: the solid-body
+line is right on his sides; only the eye areas cut in (the zone joining jumped
+to the wrong part of the line under his right eye). Fix: the approved top of his
+head (ears, eyes, eye marks, wisp bridge) is **locked** as approved data
+(`data/lines/approved_top_of_head.json`, rows < 520, 40 px hand-off). History:
+**Was paused (2026-11-08).** Owner: the line was
 consistently too far out, sitting in the intermediate fur ("the little
 intermediate fur gets its own colour"). First correction (edge of "solid body" =
 coverage region opened with a 9 px disk) cut in too far; owner stopped it.

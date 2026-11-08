@@ -20,3 +20,15 @@ the owner's official opinion later. Each says what I did in the meantime.
    its thin hanging spike tips fall just outside, like fringe elsewhere. *Meantime:*
    per the guide ("tufts: FLUFF, tips included"), the tips will be included when
    the tuft gets its own FLUFF step.
+
+4. **Intermediate fur: its own step, and when?** You said the intermediate fur
+   between his body and the wisps gets its own colour. *Meantime:* I've made it
+   its own class and would give it its own step right after the body outline
+   (before the ears), since it borders every part. Its outer edge is where the
+   wisps begin. Please confirm the order.
+5. **The fringe guide changed.** Golden-tile guide #3 said feathery fringe is
+   the body's soft edge; your newer word (intermediate fur is its own colour)
+   supersedes it. Recorded as guide #3b in METHOD.md.
+6. **Small notches between fur clumps** at the base of the fringe (3-5 px deep,
+   e.g. T019-T031, T066-T081): the smooth body line bridges them rather than
+   dipping into each one. *Meantime:* bridged, for a gentle edge.
