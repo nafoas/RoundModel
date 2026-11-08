@@ -246,3 +246,4 @@ check.py output (if applicable), and the next step.
 - **batch3 (T041-T060) outline: self-checked** on the recalibrated line. Fidelity: no cuts, no bulges, no into-fringe > 6 px, smoother everywhere; eye marks 0 px out; peet line inside.
 - **batch4 (T061-T080) outline: self-checked** on the recalibrated line. Fidelity: no cuts, no bulges, no into-fringe > 6 px, smoother everywhere; eye marks 0 px out; peet line inside.
 - **batch5 (T081-T100) outline: self-checked** on the recalibrated line. Fidelity: no cuts, no bulges, no into-fringe > 6 px, smoother everywhere; eye marks 0 px out; peet line inside.
+- **batch6 (T101-T108) outline: self-checked** on the recalibrated line. Fidelity: no cuts, no bulges, no into-fringe > 6 px, smoother everywhere; eye marks 0 px out; peet line inside.

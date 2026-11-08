@@ -1916,7 +1916,17 @@
    "x1": 500,
    "y1": 263,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "dip between the ears and the small step at his right ear's base (locked, approved)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "fringe_in_px": 2,
+    "fringe_in_max_px": 2.46,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T102",
@@ -1926,7 +1936,17 @@
    "x1": 524,
    "y1": 284,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "dip between the ears and the small step at his right ear's base (locked, approved)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "fringe_in_px": 11,
+    "fringe_in_max_px": 3.76,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T103",
@@ -1936,7 +1956,17 @@
    "x1": 546,
    "y1": 306,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "dip between the ears and the small step at his right ear's base (locked, approved)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "fringe_in_px": 9,
+    "fringe_in_max_px": 3.76,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T104",
@@ -1946,7 +1976,17 @@
    "x1": 580,
    "y1": 301,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "dip between the ears and the small step at his right ear's base (locked, approved)",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "fringe_in_px": 0,
+    "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T105",
@@ -1956,7 +1996,17 @@
    "x1": 613,
    "y1": 294,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left ear's inner side and tip (locked, approved); eyebrow whisker outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "fringe_in_px": 0,
+    "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T106",
@@ -1966,7 +2016,17 @@
    "x1": 643,
    "y1": 276,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left ear's inner side and tip (locked, approved); eyebrow whisker outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "fringe_in_px": 2,
+    "fringe_in_max_px": 2.71,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T107",
@@ -1976,7 +2036,17 @@
    "x1": 664,
    "y1": 251,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left ear's inner side and tip (locked, approved); eyebrow whisker outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "fringe_in_px": 2,
+    "fringe_in_max_px": 2.71,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T108",
@@ -1986,7 +2056,17 @@
    "x1": 696,
    "y1": 232,
    "status": "todo",
-   "outline": "todo"
+   "outline": "self-checked",
+   "outline_note": "his left ear's inner side and tip (locked, approved); eyebrow whisker outside",
+   "outline_fidelity": {
+    "cut_px": 0,
+    "cut_max_px": 0.0,
+    "bulge_px": 0,
+    "bulge_max_px": 0.0,
+    "fringe_in_px": 0,
+    "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "E001",
