@@ -272,3 +272,8 @@ check.py output (if applicable), and the next step.
   lashes get their own separate precise step later: 34 tiles at the ears/eyes
   marked reserved in the ledger; 55 self-checked; 19 in the peet zone. Sheets
   regenerated.
+- **Peets: dividing lines proposed** (cream peet | tuft | gray peet), from the
+  approved peet line down to the body outline. Colour tracing failed (shadows:
+  the tuft's on the cream peet, the gray peet's own corner); placed by shape,
+  checked at 4x. Saved as PROPOSED; stopped for the owner (Q11) since peets are
+  sensitive and these lines decide his stance.

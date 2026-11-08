@@ -172,6 +172,10 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**Peets (2026-11-08): dividing lines PROPOSED** (`data/strands/peet_dividers.json`,
+`docs/images/peet_dividers_*.png`), awaiting owner review before the peets are
+split off (Q11). Ears: no dividing line yet; to be proposed next.
+
 **Intermediate fur (2026-11-08): first pass done for all 108 tiles, awaiting
 owner bulk review.** Band between the body line and an outer line along the
 general edge of the dense fringe (`tools/intermediate_fur.py` →
