@@ -506,6 +506,15 @@
     "fringe_in_px": 25,
     "fringe_in_max_px": 4.14,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 7.8,
+    "width_median": 14.9,
+    "width_max": 19.2,
+    "captured": 0.78,
+    "smoother_than_raw": true
    }
   },
   {
@@ -525,6 +534,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 16,
     "fringe_in_max_px": 4.2,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 11.8,
+    "width_median": 15.0,
+    "width_max": 19.2,
+    "captured": 0.71,
     "smoother_than_raw": true
    }
   },
@@ -546,6 +564,15 @@
     "fringe_in_px": 24,
     "fringe_in_max_px": 4.42,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 10.9,
+    "width_median": 12.5,
+    "width_max": 17.7,
+    "captured": 0.73,
+    "smoother_than_raw": true
    }
   },
   {
@@ -565,6 +592,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 15,
     "fringe_in_max_px": 4.42,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 9.8,
+    "width_median": 11.3,
+    "width_max": 12.7,
+    "captured": 0.6,
     "smoother_than_raw": true
    }
   },
@@ -586,6 +622,15 @@
     "fringe_in_px": 12,
     "fringe_in_max_px": 4.42,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 9.8,
+    "width_median": 10.7,
+    "width_max": 19.9,
+    "captured": 0.57,
+    "smoother_than_raw": true
    }
   },
   {
@@ -605,6 +650,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 1,
     "fringe_in_max_px": 2.63,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 10.0,
+    "width_median": 12.5,
+    "width_max": 20.4,
+    "captured": 0.59,
     "smoother_than_raw": true
    }
   },
@@ -626,6 +680,15 @@
     "fringe_in_px": 6,
     "fringe_in_max_px": 3.22,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 10.7,
+    "width_median": 16.2,
+    "width_max": 20.4,
+    "captured": 0.71,
+    "smoother_than_raw": true
    }
   },
   {
@@ -645,6 +708,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 11,
     "fringe_in_max_px": 4.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 15.8,
+    "width_median": 17.6,
+    "width_max": 20.3,
+    "captured": 0.77,
     "smoother_than_raw": true
    }
   },
@@ -666,6 +738,15 @@
     "fringe_in_px": 13,
     "fringe_in_max_px": 4.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 15.8,
+    "width_median": 18.7,
+    "width_max": 19.8,
+    "captured": 0.81,
+    "smoother_than_raw": true
    }
   },
   {
@@ -685,6 +766,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 18,
     "fringe_in_max_px": 7.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 17.3,
+    "width_median": 18.7,
+    "width_max": 19.8,
+    "captured": 0.92,
     "smoother_than_raw": true
    }
   },
@@ -706,6 +796,15 @@
     "fringe_in_px": 18,
     "fringe_in_max_px": 7.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 17.3,
+    "width_median": 18.7,
+    "width_max": 19.9,
+    "captured": 0.9,
+    "smoother_than_raw": true
    }
   },
   {
@@ -725,6 +824,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 4,
     "fringe_in_max_px": 3.8,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 17.7,
+    "width_median": 19.1,
+    "width_max": 19.9,
+    "captured": 0.84,
     "smoother_than_raw": true
    }
   },
@@ -746,6 +854,15 @@
     "fringe_in_px": 6,
     "fringe_in_max_px": 3.8,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 17.1,
+    "width_median": 18.8,
+    "width_max": 19.9,
+    "captured": 0.81,
+    "smoother_than_raw": true
    }
   },
   {
@@ -765,6 +882,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 8,
     "fringe_in_max_px": 3.8,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 16.2,
+    "width_median": 17.4,
+    "width_max": 18.9,
+    "captured": 0.86,
     "smoother_than_raw": true
    }
   },
@@ -786,6 +912,15 @@
     "fringe_in_px": 5,
     "fringe_in_max_px": 3.21,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 15.8,
+    "width_median": 16.7,
+    "width_max": 18.1,
+    "captured": 0.83,
+    "smoother_than_raw": true
    }
   },
   {
@@ -805,6 +940,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 3,
     "fringe_in_max_px": 3.17,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 15.2,
+    "width_median": 16.2,
+    "width_max": 16.9,
+    "captured": 0.83,
     "smoother_than_raw": true
    }
   },
@@ -826,6 +970,15 @@
     "fringe_in_px": 13,
     "fringe_in_max_px": 5.1,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 14.6,
+    "width_median": 15.3,
+    "width_max": 16.6,
+    "captured": 0.89,
+    "smoother_than_raw": true
    }
   },
   {
@@ -845,6 +998,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 13,
     "fringe_in_max_px": 5.1,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 14.6,
+    "width_median": 15.2,
+    "width_max": 16.6,
+    "captured": 0.94,
     "smoother_than_raw": true
    }
   },
@@ -866,6 +1028,15 @@
     "fringe_in_px": 1,
     "fringe_in_max_px": 2.33,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 14.8,
+    "width_median": 15.6,
+    "width_max": 16.6,
+    "captured": 0.92,
+    "smoother_than_raw": true
    }
   },
   {
@@ -885,6 +1056,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 3,
     "fringe_in_max_px": 2.33,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 15.3,
+    "width_median": 15.9,
+    "width_max": 16.6,
+    "captured": 1.0,
     "smoother_than_raw": true
    }
   },

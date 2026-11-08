@@ -262,3 +262,4 @@ check.py output (if applicable), and the next step.
   Then long straight strands were dragging it out where whiskers fan out
   (T024-T030, T071-T076); fixed by removing them before measuring. Tests: 14 pass.
 - **batch1 (T001-T020) intermediate fur: self-checked**, all tiles viewed. 0 tiles in the peet zone (not this class). Outer line smoother than the raw edge everywhere.
+- **batch2 (T021-T040) intermediate fur: self-checked**, all tiles viewed. 0 tiles in the peet zone (not this class). Outer line smoother than the raw edge everywhere.
