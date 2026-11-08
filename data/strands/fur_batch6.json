@@ -1,0 +1,66 @@
+{
+ "T101": {
+  "peet_zone": false,
+  "width_min": 2.1,
+  "width_median": 2.6,
+  "width_max": 3.0,
+  "captured": 0.73,
+  "smoother_than_raw": true
+ },
+ "T102": {
+  "peet_zone": false,
+  "width_min": 2.0,
+  "width_median": 2.6,
+  "width_max": 3.0,
+  "captured": 0.72,
+  "smoother_than_raw": true
+ },
+ "T103": {
+  "peet_zone": false,
+  "width_min": 2.0,
+  "width_median": 2.3,
+  "width_max": 2.9,
+  "captured": 0.75,
+  "smoother_than_raw": true
+ },
+ "T104": {
+  "peet_zone": false,
+  "width_min": 2.0,
+  "width_median": 2.3,
+  "width_max": 2.5,
+  "captured": 0.72,
+  "smoother_than_raw": true
+ },
+ "T105": {
+  "peet_zone": false,
+  "width_min": 2.1,
+  "width_median": 2.4,
+  "width_max": 2.5,
+  "captured": 0.74,
+  "smoother_than_raw": true
+ },
+ "T106": {
+  "peet_zone": false,
+  "width_min": 2.0,
+  "width_median": 2.3,
+  "width_max": 2.5,
+  "captured": 0.79,
+  "smoother_than_raw": true
+ },
+ "T107": {
+  "peet_zone": false,
+  "width_min": 2.0,
+  "width_median": 2.3,
+  "width_max": 2.5,
+  "captured": 0.81,
+  "smoother_than_raw": true
+ },
+ "T108": {
+  "peet_zone": false,
+  "width_min": 2.0,
+  "width_median": 2.4,
+  "width_max": 3.6,
+  "captured": 0.45,
+  "smoother_than_raw": true
+ }
+}
