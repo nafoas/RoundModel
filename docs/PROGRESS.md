@@ -242,3 +242,4 @@ check.py output (if applicable), and the next step.
   (`docs/images/eyes_after_lock.png`); eye marks 0 px out; hand-off 6.2 deg/2 px
   (same as his sides). Test added (12 pass).
 - **batch1 (T013-T020) outline: self-checked** on the recalibrated line. Fidelity: no cuts, no bulges, no into-fringe > 6 px, smoother everywhere; eye marks 0 px out; peet line inside.
+- **batch2 (T021-T040) outline: self-checked** on the recalibrated line. Fidelity: flags: T030 into-fringe 7.0 px, T031 into-fringe 7.0 px; eye marks 0 px out; peet line inside.
