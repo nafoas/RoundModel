@@ -122,6 +122,11 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **Order after the body outline** (2026-11-08): the intermediate fur first;
+  then the peets and ears are split off along the lines drawn earlier.
+- **T019-T020 bulge** (his left cheek): part of his brow ridge, i.e. him; the
+  body line stays around it.
+
 ## Whiskers
 
 - Reproduced **exactly as they are**, as frozen traced data, added last: the one

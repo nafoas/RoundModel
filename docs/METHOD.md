@@ -132,7 +132,10 @@ From the golden tiles (`docs/images/golden_tiles.png`):
 3. **Feathery/spiky fringe along his edge:** soft edge of the body or ear.
 3b. **Intermediate fur** (owner, 2026-11-08): the band of fringe between the
    edge of his body and the wisps is its own class (own colour), not body.
-   This supersedes the earlier "fringe = soft edge of the body".
+   This supersedes the earlier "fringe = soft edge of the body". Its outer edge
+   is the general edge of the dense fringe: smooth, tied to the body line,
+   never pulled out by long single hairs (they're removed before measuring).
+   Below the approved peet line, the band belongs to the peets / underfluff.
 4. **A hair is a WISP** only if it reaches clearly past the general fringe
    line, or stands on its own with background on both sides for most of its
    length. Wisps are taken full length, bases included.

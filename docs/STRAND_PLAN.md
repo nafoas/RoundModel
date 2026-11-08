@@ -172,6 +172,18 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**Intermediate fur (2026-11-08): first pass done for all 108 tiles, awaiting
+owner bulk review.** Band between the body line and an outer line along the
+general edge of the dense fringe (`tools/intermediate_fur.py` →
+`data/strands/intermediate_fur.json`; reviews `tools/review_fur.py`, sheets
+`docs/images/batch*_fur_*.png`). Outer edge = how far the dense fringe reaches,
+measured outward from the body line and averaged along the edge (12 px), with
+long straight strands (whiskers, long wisps; >= 35 px, reaching >= 20 px out)
+removed first; reach smoothed along the edge (8 px). Density threshold 0.18
+(middle of three tried). Band width above the peet line: 2-25 px, median ~9.5.
+Below the approved peet line the band belongs to the peets / underfluff.
+Next: owner review; then split off the peets and ears along the drawn lines.
+
 **Body outline: all 108 tiles done, awaiting owner bulk review (2026-11-08).**
 T001-T012 owner-approved; T013-T108 self-checked, sheets
 `docs/images/batch1..6_outline_*.png`, questions in `docs/OWNER_QUESTIONS.md`.

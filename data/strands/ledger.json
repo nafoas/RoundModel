@@ -25,7 +25,16 @@
    "y1": 230,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside"
+   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 2.1,
+    "width_median": 2.6,
+    "width_max": 4.2,
+    "captured": 0.42,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T002",
@@ -36,7 +45,16 @@
    "y1": 254,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside"
+   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 2.5,
+    "width_median": 3.9,
+    "width_max": 4.5,
+    "captured": 0.5,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T003",
@@ -47,7 +65,16 @@
    "y1": 288,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside"
+   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 3.0,
+    "width_median": 4.1,
+    "width_max": 4.5,
+    "captured": 0.46,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T004",
@@ -58,7 +85,16 @@
    "y1": 322,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside"
+   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 3.0,
+    "width_median": 3.0,
+    "width_max": 4.2,
+    "captured": 0.4,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T005",
@@ -69,7 +105,16 @@
    "y1": 352,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside"
+   "outline_note": "ear tip/outer edge, tightened (sensitive zone); eyebrow whiskers outside",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 3.0,
+    "width_median": 3.0,
+    "width_max": 5.0,
+    "captured": 0.42,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T006",
@@ -80,7 +125,16 @@
    "y1": 384,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "past his left eye; tightened at the eye corner (sensitive zone); lashes and crossing hairs outside"
+   "outline_note": "past his left eye; tightened at the eye corner (sensitive zone); lashes and crossing hairs outside",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 3.0,
+    "width_median": 5.0,
+    "width_max": 17.3,
+    "captured": 0.56,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T007",
@@ -91,7 +145,16 @@
    "y1": 412,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "past his left eye; tightened at the eye corner (sensitive zone); lashes and crossing hairs outside"
+   "outline_note": "past his left eye; tightened at the eye corner (sensitive zone); lashes and crossing hairs outside",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 4.4,
+    "width_median": 8.7,
+    "width_max": 17.6,
+    "captured": 0.78,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T008",
@@ -102,7 +165,16 @@
    "y1": 440,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "past his left eye; tightened at the eye corner (sensitive zone); lashes and crossing hairs outside"
+   "outline_note": "past his left eye; tightened at the eye corner (sensitive zone); lashes and crossing hairs outside",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 4.1,
+    "width_median": 5.0,
+    "width_max": 16.9,
+    "captured": 0.79,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T009",
@@ -113,7 +185,16 @@
    "y1": 460,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "side of head; smooth through soft gradient"
+   "outline_note": "side of head; smooth through soft gradient",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 4.1,
+    "width_median": 5.0,
+    "width_max": 6.2,
+    "captured": 0.76,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T010",
@@ -124,7 +205,16 @@
    "y1": 479,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "side of head; smooth through soft gradient"
+   "outline_note": "side of head; smooth through soft gradient",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 4.8,
+    "width_median": 5.8,
+    "width_max": 6.2,
+    "captured": 0.73,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T011",
@@ -135,7 +225,16 @@
    "y1": 505,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "side of head; smooth through soft gradient"
+   "outline_note": "side of head; smooth through soft gradient",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 5.2,
+    "width_median": 5.8,
+    "width_max": 6.2,
+    "captured": 0.7,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T012",
@@ -146,7 +245,16 @@
    "y1": 531,
    "status": "todo",
    "outline": "owner-approved",
-   "outline_note": "side of head; smooth through soft gradient"
+   "outline_note": "side of head; smooth through soft gradient",
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 5.0,
+    "width_median": 5.5,
+    "width_max": 6.0,
+    "captured": 0.72,
+    "smoother_than_raw": true
+   }
   },
   {
    "id": "T013",
@@ -165,6 +273,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 4.9,
+    "width_median": 5.0,
+    "width_max": 5.8,
+    "captured": 0.75,
     "smoother_than_raw": true
    }
   },
@@ -186,6 +303,15 @@
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 4.9,
+    "width_median": 5.8,
+    "width_max": 8.9,
+    "captured": 0.8,
+    "smoother_than_raw": true
    }
   },
   {
@@ -205,6 +331,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 0,
     "fringe_in_max_px": 0.0,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 6.2,
+    "width_median": 8.6,
+    "width_max": 9.6,
+    "captured": 0.83,
     "smoother_than_raw": true
    }
   },
@@ -226,6 +361,15 @@
     "fringe_in_px": 17,
     "fringe_in_max_px": 3.67,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 5.6,
+    "width_median": 7.1,
+    "width_max": 9.6,
+    "captured": 0.83,
+    "smoother_than_raw": true
    }
   },
   {
@@ -245,6 +389,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 18,
     "fringe_in_max_px": 3.67,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 5.6,
+    "width_median": 7.3,
+    "width_max": 10.5,
+    "captured": 0.69,
     "smoother_than_raw": true
    }
   },
@@ -266,6 +419,15 @@
     "fringe_in_px": 12,
     "fringe_in_max_px": 3.31,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 6.7,
+    "width_median": 9.4,
+    "width_max": 11.8,
+    "captured": 0.73,
+    "smoother_than_raw": true
    }
   },
   {
@@ -286,6 +448,15 @@
     "fringe_in_px": 25,
     "fringe_in_max_px": 4.14,
     "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 7.8,
+    "width_median": 9.8,
+    "width_max": 11.8,
+    "captured": 0.76,
+    "smoother_than_raw": true
    }
   },
   {
@@ -305,6 +476,15 @@
     "bulge_max_px": 0.0,
     "fringe_in_px": 20,
     "fringe_in_max_px": 4.14,
+    "smoother_than_raw": true
+   },
+   "intermediate_fur": "self-checked",
+   "intermediate_fur_check": {
+    "peet_zone": false,
+    "width_min": 7.8,
+    "width_median": 11.1,
+    "width_max": 19.1,
+    "captured": 0.77,
     "smoother_than_raw": true
    }
   },

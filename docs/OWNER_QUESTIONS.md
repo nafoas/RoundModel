@@ -21,7 +21,7 @@ the owner's official opinion later. Each says what I did in the meantime.
    per the guide ("tufts: FLUFF, tips included"), the tips will be included when
    the tuft gets its own FLUFF step.
 
-4. **Intermediate fur: its own step, and when?** You said the intermediate fur
+4. **[ANSWERED 2026-11-08: intermediate fur goes first; the peets and ears are split off later along the lines drawn earlier.]** **Intermediate fur: its own step, and when?** You said the intermediate fur
    between his body and the wisps gets its own colour. *Meantime:* I've made it
    its own class and would give it its own step right after the body outline
    (before the ears), since it borders every part. Its outer edge is where the
@@ -32,7 +32,20 @@ the owner's official opinion later. Each says what I did in the meantime.
 6. **Small notches between fur clumps** at the base of the fringe (3-5 px deep,
    e.g. T019-T031, T066-T081): the smooth body line bridges them rather than
    dipping into each one. *Meantime:* bridged, for a gentle edge.
-7. **Dense dark clump at the base of his fringe** (T019-T020, his left cheek,
+7. **[ANSWERED 2026-11-08: "the bulge is also part of his brow ridge" → read as: it's him, keep it as body. Correct me if I misread.]** **Dense dark clump at the base of his fringe** (T019-T020, his left cheek,
    image right): the body line swings out around it, treating it as body because
    it's as dense as body fur. *Meantime:* kept as body; if it's intermediate fur,
    the line should pass behind it.
+8. **Where the outer edge of the intermediate fur sits.** I tried three settings
+   (tight / middle / loose) and chose the middle one: most short fringe spikes
+   end right around it; long single hairs carry on past it (they're wisps or
+   whiskers). Long straight strands (whiskers, long wisps) are removed before
+   measuring, so where they fan out together they don't drag the edge out.
+   *Meantime:* middle setting. Sheets: `docs/images/batch*_fur_*.png`.
+9. **Ear halo.** Guide #7 said the ear's halo is the ear's soft edge; with the
+   newer rule (fringe outside the body line = intermediate fur), the thin halo
+   (2-3 px) is now in the intermediate fur band. *Meantime:* intermediate fur;
+   when the ears get their own step, the halo can be reassigned to them.
+10. **Lash bases.** At both eyes the band takes in the bases of the lashes; the
+   lashes continue past it. *Meantime:* bases in the band, lashes beyond it
+   handled as strands (wisp rule) later. Should lashes be their own class?

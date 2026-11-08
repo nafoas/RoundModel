@@ -253,3 +253,12 @@ check.py output (if applicable), and the next step.
 - **Body outline complete for review: T001-T012 approved, T013-T108
   self-checked.** 12 tests pass. **Next:** owner bulk review + questions
   (`docs/OWNER_QUESTIONS.md`, Q1-Q7); then the next part step (Q4).
+
+## 2026-11-08 — Session 5 (cont.): intermediate fur, first pass
+- Owner: proceed; intermediate fur first, then split peets and ears along
+  the drawn lines; the T019-T020 bulge is his brow ridge (body).
+- First outer-edge try (closing/opening envelope) was jagged and followed
+  hair clusters; replaced by reach-from-body-line with along-edge averaging.
+  Then long straight strands were dragging it out where whiskers fan out
+  (T024-T030, T071-T076); fixed by removing them before measuring. Tests: 14 pass.
+- **batch1 (T001-T020) intermediate fur: self-checked**, all tiles viewed. 0 tiles in the peet zone (not this class). Outer line smoother than the raw edge everywhere.
