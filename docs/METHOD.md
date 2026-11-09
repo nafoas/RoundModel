@@ -111,6 +111,23 @@ whisker pads, and anything the owner calls sensitive.
 
 ---
 
+## 3b. Parts are whole, even where something covers them
+
+Owner, 2026-11-09: "some of the little bluish fur tufts cover some of the edge
+of the cream peets, but the peets still extend that far ... we can make the peet
+then extend the fur over it when we make it, but we need to not cut off part of
+his peets for the fur."
+- A part's boundary marks where **the part itself** ends, not where it stops
+  being visible. Where fur, a tuft, lashes or whiskers overlap a part, the part
+  continues underneath, completed from its own visible shape (fit its whole
+  visible edge and continue the curvature under the overlap).
+- The overlapping thing is its own layer and is laid back over the part when
+  he's built. Never cut a part short to make room for what covers it.
+- Applies everywhere: peets under the tuft, ears and eyes under lashes and
+  brow fur, the mouth and nose under whiskers, etc.
+- When unsure how far a hidden part reaches, err on the side of more part, and
+  show the owner.
+
 ## 4. Judgment lines (hidden or ambiguous boundaries)
 
 Where a boundary isn't visible (e.g. his pelvis hidden under the underfluff):

@@ -294,3 +294,14 @@ check.py output (if applicable), and the next step.
   to x 450 on the peet line, shoulder rounded in, lower part unchanged; adds up
   to 10.5 px, cuts none, inside the body, smooth. The 6x zoom showed no sharp
   edge there (cream fades into blue), so it's a judgment line. Awaiting owner.
+
+## 2026-11-09 — Session 5 (cont.): cream peet completed under the tuft fur
+- Owner: bluish tuft fur covers part of the cream peet's edge, but the peet
+  extends under it; make the whole peet and lay the fur over it later.
+  **Cause of the repeated cut-off:** the divider tracked where the peet stops
+  being visible. **Fix (v4):** fit the peet's whole visible edge (outer side,
+  bottom, rising side up to x 465, peet line on top; median error 1.5 px) and
+  complete it under the fur: widest x 464.5 (v3: 453). Starts at v3's junction,
+  ends on the outline at the peet's visible side. Two kinks found and removed
+  (forced jump at the top, snapped end); final max turn 2.9 deg/px, inside the
+  body, never inside v3. New general rule in METHOD §3b; lesson 11 in DECISIONS.

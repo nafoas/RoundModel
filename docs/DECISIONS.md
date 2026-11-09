@@ -122,6 +122,9 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **Parts are whole under whatever covers them** (2026-11-09): tuft fur covers
+  part of the cream peet's edge, but the peet extends under it; make the whole
+  peet and lay the fur over it later. Never cut a part off for the fur. (METHOD §3b)
 - **Peet dividers follow the curvature of his small peets** (2026-11-08), not
   straight lines; the top connections to the peet line were fine.
 - **Order after the body outline** (2026-11-08): the intermediate fur first;
@@ -215,6 +218,10 @@ excuse and was withdrawn.)
    inner side (owner caught it). → Dividers between parts follow the part's own
    shape: fit its known outline and continue that curvature; keep approved
    endpoints; check it never cuts in more than before and stays inside the body.
-11. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
+11. **Treating "visible edge" as "where the part ends".** The cream peet divider
+   followed where the peet stopped being visible, so the peet was cut short
+   under the tuft's overhanging fur, twice. → Parts are completed under whatever
+   covers them (METHOD §3b).
+12. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
    written by an earlier session without being logged. → Log everything in
    `docs/PROGRESS.md`; unlogged work is untrusted until reviewed.

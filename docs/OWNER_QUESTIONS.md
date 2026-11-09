@@ -63,8 +63,14 @@ the owner's official opinion later. Each says what I did in the meantime.
    not directly visible, so v2 follows each peet's fitted roundness: the cream
    peet bulges up to 17 px past v1, the gray peet up to 8 px. Bottom corners kept
    from v1. *Meantime:* proposed; tell me if either bulges too much or too little.
-13. **Cream peet divider v3.** Junction with the purple line moved from x 433 to
+13. **[v3 ANSWERED 2026-11-09: tuft fur covers part of the peet's edge but the peet extends under it; don't cut the peet off for the fur → v4.]** **Cream peet divider v3.** Junction with the purple line moved from x 433 to
    x 450 (above the widest point of the peet's side), shoulder rounded into the
    purple line, lower part unchanged. The photo shows no sharp edge there (the
    cream fades into the tuft's blue), so the exact spot is judgment. *Meantime:*
    proposed; zoom `docs/images/peet_dividers_zoom.png` (thin red = v2).
+14. **Cream peet divider v4** (whole peet under the tuft fur): widest at x 464.5,
+   ends on the peet's visible rising side. *Meantime:* proposed.
+15. **Gray peet and the same rule.** You approved the gray line as is. By the
+   same rule (parts continue under covering fur), the gray peet's left edge might
+   also reach a little under the tuft. *Meantime:* left unchanged since you
+   approved it; say if it should get the same treatment.
