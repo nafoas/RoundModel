@@ -111,6 +111,8 @@ whisker pads, and anything the owner calls sensitive.
 8. **If a fix makes a sensitive area worse, undo it and stop.** Say so plainly,
    show what happened, and ask. (A wider strand filter once hooked the line into
    his eye area: undone, not tinkered with.)
+8b. **The owner's sizes win.** "A tiny bit" means a few px. Do what was said;
+   if a measurement suggests more, mention it, don't apply it.
 9. **When you can't tell whether something is him** (a bump: his head or fur?),
    don't guess: show the pixel view and ask the owner. Their answer becomes an
    owner-guided decision.

@@ -172,7 +172,7 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**Ears (2026-11-09): pixel-precise, PROPOSED v3 (bases lowered to where each ear meets the flat part of his head), awaiting owner review (Q19).**
+**Ears (2026-11-09): pixel-precise, PROPOSED v4 (bases 3 px lower than v2; the ear on image left's base covers its shaded flare below the hook), awaiting owner review (Q20).**
 Outline over the top of the head is pixel-precise (`tools/ear_edges.py` →
 `data/lines/top_of_head_precise.json`, spliced in by `tools/body_outline.py`),
 whisker roots bridged. Ear bases end on real notches (`data/strands/ear_bases.json`,

@@ -124,8 +124,10 @@ excuse and was withdrawn.)
 
 - **Ears go down to their base** (2026-11-09): "the ears go down to the base,
   that's what we include. So cut it off right as you get to the flat part."
-  The base line sits where the ear's curved surface meets the flat head, not
-  in the crease's groove (measured: ~12 px lower).
+  Owner's size: about 3 px below the crease line ("a tiny bit" = ~3 px; 12 px,
+  from a brightness measurement, was too far). The ear on image left's base
+  includes the shaded flare below its hook, down to where the outline turns
+  into the head's side (351.5, 311.8).
 - **Ears: pixel by pixel** (2026-11-09): every notch and kink, and the base on
   the left; asymmetry is fine. The whole top of the head (both ears, the dip,
   past each ear's base) now follows the photo's exact edge
@@ -237,6 +239,10 @@ excuse and was withdrawn.)
    own dark rim; and the smooth ear outline rounded off real notches (the
    ledge notch, the step corner, the hook at the base). → For identity areas,
    check every claimed feature pixel by pixel and use the precise edge.
-13. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
+13. **Letting a measurement override the owner's words.** Asked for "a tiny
+   bit" lower, I measured where the surface goes flat and moved 12 px; the owner
+   meant ~3 px. → When the owner gives a size ("a tiny bit", "just a little"),
+   do that size (a few px) and offer the measurement as a note, not the change.
+14. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
    written by an earlier session without being logged. → Log everything in
    `docs/PROGRESS.md`; unlogged work is untrusted until reviewed.

@@ -97,8 +97,13 @@ the owner's official opinion later. Each says what I did in the meantime.
    mirrored. (c) The ear on image right's base now ends on a real notch at
    (715.8, 300.2), 7.7 px higher than v1. *Meantime:* proposed; pixel views
    `docs/images/ear_left_pixels.png`, `ear_right_pixels.png`.
-19. **Ears v3: how far down.** You said "a tiny bit"; measured, the flat part
+19. **[ANSWERED 2026-11-09: too far; ~3 px. Also the base on the left side of the orange ear wasn't covered → v4.]** **Ears v3: how far down.** You said "a tiny bit"; measured, the flat part
    starts ~12 px below the v2 lines (12-16 px on the ear on image right, ~14
    on the other), so both are 12 px lower in the middle, easing to no change at
    the inner corners. *Meantime:* proposed; if 12 px is more than you meant, I
    can go halfway. Thin red = v2 in `docs/images/ear_*_pixels.png`.
+20. **Ears v4.** Both bases 3 px below v2 (easing to 0 at the inner corners).
+   The orange ear's base flares outward below its hook (the outline runs
+   straight from the hook to (351.5, 311.8), then curves as his head's side);
+   the line now sweeps down that flare and ends where it becomes his head.
+   *Meantime:* proposed. Thin red = v2 in `docs/images/ear_*_pixels.png`.

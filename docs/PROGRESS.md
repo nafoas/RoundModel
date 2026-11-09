@@ -344,3 +344,12 @@ check.py output (if applicable), and the next step.
   12 px down the outline. Tried and dropped: nearest-point outer end (left line
   cupped), extending along the line (overshot 26 px onto the head's side).
   Ear areas recomputed. Awaiting owner (Q19).
+- Owner: v3's 12 px was too far ("more like 3px"); and the base on the left side
+  of the orange ear (image left) wasn't covered. **Cause of the 12 px:** I let a
+  brightness measurement override "a tiny bit" (lesson 13, METHOD 8b). **Found the
+  uncovered base:** below the hook the outline runs straight at a steady -29 deg
+  to (351.5, 311.8), then curves as the head's side; that shaded flare is the
+  ear's base, cut off by v2 and v3. **v4:** both bases v2 + 3 px (eased to 0 at
+  the inner corners), right ear's outer end 3 px down the outline; orange ear's
+  outer part sweeps down the flare to (351.5, 311.8) (first try had a knee and a
+  dip from a forced depth; redone as one gentle curve, max 0.9 deg/2 px).
