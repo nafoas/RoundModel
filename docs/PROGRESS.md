@@ -336,3 +336,11 @@ check.py output (if applicable), and the next step.
   real notches; the left base's v1 "crease" was the ledge's rim, so it now
   mirrors the right ear's measured crease (inferred). Nothing else moved: peet
   parts within 0.1 px², eye marks 0 px out, top batches clean. Tests: 16 pass.
+- Owner: both ear bases a tiny bit lower; ears include everything down to the
+  flat part. **Measured** the flat part (brightness profile averaged along each
+  base; slope map): v2 sat in the groove of the crease; flat begins ~12-16 px
+  lower (right ear) and ~14 px lower (left). **v3:** lowered 12 px in the middle,
+  cosine ease to 0 at the inner corners (already at the flat dip), outer ends slid
+  12 px down the outline. Tried and dropped: nearest-point outer end (left line
+  cupped), extending along the line (overshot 26 px onto the head's side).
+  Ear areas recomputed. Awaiting owner (Q19).

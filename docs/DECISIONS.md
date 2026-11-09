@@ -122,6 +122,10 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **Ears go down to their base** (2026-11-09): "the ears go down to the base,
+  that's what we include. So cut it off right as you get to the flat part."
+  The base line sits where the ear's curved surface meets the flat head, not
+  in the crease's groove (measured: ~12 px lower).
 - **Ears: pixel by pixel** (2026-11-09): every notch and kink, and the base on
   the left; asymmetry is fine. The whole top of the head (both ears, the dip,
   past each ear's base) now follows the photo's exact edge

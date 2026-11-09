@@ -90,10 +90,15 @@ the owner's official opinion later. Each says what I did in the meantime.
    of its step into the dip, so the small ledge belongs to the ear. The flat dip
    between them is the top of his head. *Meantime:* proposed; the two bases
    aren't symmetric (right one ~20 px lower outside), left as the photo shows.
-18. **Ears v2 (pixel-precise).** (a) The little outward hook at the outer base of
+18. **[ANSWERED 2026-11-09: both bases a bit lower, down to where the ear meets the flat part → v3; hook and mirrored base not objected to.]** **Ears v2 (pixel-precise).** (a) The little outward hook at the outer base of
    the ear on image left: I counted it as part of the ear (ears flare where
    they attach), so the base ends just below it. (b) That ear's base shows no
    crease in the photo, so it uses the other ear's measured crease shape,
    mirrored. (c) The ear on image right's base now ends on a real notch at
    (715.8, 300.2), 7.7 px higher than v1. *Meantime:* proposed; pixel views
    `docs/images/ear_left_pixels.png`, `ear_right_pixels.png`.
+19. **Ears v3: how far down.** You said "a tiny bit"; measured, the flat part
+   starts ~12 px below the v2 lines (12-16 px on the ear on image right, ~14
+   on the other), so both are 12 px lower in the middle, easing to no change at
+   the inner corners. *Meantime:* proposed; if 12 px is more than you meant, I
+   can go halfway. Thin red = v2 in `docs/images/ear_*_pixels.png`.
