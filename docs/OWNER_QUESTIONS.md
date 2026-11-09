@@ -68,9 +68,16 @@ the owner's official opinion later. Each says what I did in the meantime.
    purple line, lower part unchanged. The photo shows no sharp edge there (the
    cream fades into the tuft's blue), so the exact spot is judgment. *Meantime:*
    proposed; zoom `docs/images/peet_dividers_zoom.png` (thin red = v2).
-14. **Cream peet divider v4** (whole peet under the tuft fur): widest at x 464.5,
+14. **[ANSWERED 2026-11-09: approved; owner moved on.]** **Cream peet divider v4** (whole peet under the tuft fur): widest at x 464.5,
    ends on the peet's visible rising side. *Meantime:* proposed.
-15. **Gray peet and the same rule.** You approved the gray line as is. By the
+15. **[ANSWERED 2026-11-09: 'the gray peet seems fine'.]** **Gray peet and the same rule.** You approved the gray line as is. By the
    same rule (parts continue under covering fur), the gray peet's left edge might
    also reach a little under the tuft. *Meantime:* left unchanged since you
    approved it; say if it should get the same treatment.
+16. **Where the peet line meets the outline.** The approved peet line stopped
+   short of the (later refined) body outline at both notches. Cream side: its own
+   direction continued 9.8 px lands in the notch. Gray side: continuing straight
+   would overshoot onto his body side, so it now turns down the gray peet's
+   shadowed right side to the notch (a rounded top-right corner; inferred).
+   *Meantime:* used for the split; picture `docs/images/parts_peets_zoom.png`
+   (right panel).

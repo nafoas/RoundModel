@@ -172,7 +172,15 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**Peets (2026-11-08): dividers: gray (tuft | gray peet) owner-approved; cream (cream peet | tuft) v4 proposed** (v1: straight, cut the peets off; v2: follows the peets' roundness, but the junction cut off the shoulder; v3: junction moved to x 450; v4: the peet is completed under the tuft fur that covers its edge, widest x 464.5) (`data/strands/peet_dividers.json`,
+**Peets split off (2026-11-09): self-checked, awaiting owner review.**
+`python tools/split_peets.py` → `data/strands/parts_peets.json`: cream peet
+(image left), underfluff tuft, gray peet (image right) as closed sub-pixel
+polygons; they fill the region below the peet line exactly (0 px gap, 0 px
+overlap; test `tests/test_split_peets.py`). Overlays: `docs/images/parts_peets*.png`.
+The peet line had to be joined to the outline at both notches
+(`data/lines/peet_line_joins.json`): cream side a straight 9.8 px continuation,
+gray side an INFERRED curve down the peet's shadowed side to the notch (Q16).
+**Peet dividers: owner-approved 2026-11-09** (gray v2, cream v4) (v1: straight, cut the peets off; v2: follows the peets' roundness, but the junction cut off the shoulder; v3: junction moved to x 450; v4: the peet is completed under the tuft fur that covers its edge, widest x 464.5) (`data/strands/peet_dividers.json`,
 `docs/images/peet_dividers_*.png`), awaiting owner review before the peets are
 split off (Q11). Ears: no dividing line yet; to be proposed next.
 

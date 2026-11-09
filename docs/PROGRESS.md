@@ -305,3 +305,14 @@ check.py output (if applicable), and the next step.
   ends on the outline at the peet's visible side. Two kinks found and removed
   (forced jump at the top, snapped end); final max turn 2.9 deg/px, inside the
   body, never inside v3. New general rule in METHOD §3b; lesson 11 in DECISIONS.
+- Owner: gray peet fine; move on. Peet dividers marked approved (gray v2,
+  cream v4).
+- **Peets split off** (`tools/split_peets.py`, test added, 15 tests pass):
+  cream peet 18,826 px², tuft 5,097 px², gray peet 16,918 px²; exact tiling
+  (0 gap, 0 overlap). The peet line didn't reach the refined outline at either
+  notch; joined (cream: straight 9.8 px into the notch; gray: inferred curve down
+  the peet's shadowed side, after a darkest-point trace followed single hairs and
+  was discarded). Checked on tinted overlays at 2x and 4x. Added requirements.txt
+  (shapely is new).
+- **Next:** owner review of the split (Q16); then the ears: propose where each
+  ear meets his head, as their own precise step.
