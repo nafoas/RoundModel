@@ -1,7 +1,7 @@
 {
  "about": "Prince's parts below the approved peet line (step 3, peets). Closed polygons in photo pixels. Each part is whole (METHOD 3b): the cream peet continues under the tuft fur that covers its edge.",
  "photo": "data/photos/anchor_front.webp",
- "status": "self-checked; awaiting owner review (gray-side join is inferred)",
+ "status": "OWNER-APPROVED 2026-11-09 ('this looks great, it all seems good'), including the inferred gray-side join",
  "checks": {
   "zone_area_px": 40841.58,
   "sum_of_parts_px": 40841.58,

@@ -74,10 +74,19 @@ the owner's official opinion later. Each says what I did in the meantime.
    same rule (parts continue under covering fur), the gray peet's left edge might
    also reach a little under the tuft. *Meantime:* left unchanged since you
    approved it; say if it should get the same treatment.
-16. **Where the peet line meets the outline.** The approved peet line stopped
+16. **[ANSWERED 2026-11-09: approved, 'it all seems good'.]** **Where the peet line meets the outline.** The approved peet line stopped
    short of the (later refined) body outline at both notches. Cream side: its own
    direction continued 9.8 px lands in the notch. Gray side: continuing straight
    would overshoot onto his body side, so it now turns down the gray peet's
    shadowed right side to the notch (a rounded top-right corner; inferred).
    *Meantime:* used for the split; picture `docs/images/parts_peets_zoom.png`
    (right panel).
+17. **Where each ear meets his head** (`docs/images/ear_bases_proposed.png`,
+   zoom `ear_bases_zoom.png`). Ear on image right: a clear crease, followed;
+   its inner end is where the dip between the ears starts rising, its outer end
+   where the crease meets the ear's shaded outer side (y 308; the outline has a
+   very slight kink higher up at y 254 that I did NOT use). Ear on image left:
+   the crease is faint; the line runs from the ear's outer corner to the bottom
+   of its step into the dip, so the small ledge belongs to the ear. The flat dip
+   between them is the top of his head. *Meantime:* proposed; the two bases
+   aren't symmetric (right one ~20 px lower outside), left as the photo shows.

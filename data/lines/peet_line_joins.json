@@ -1,5 +1,5 @@
 {
- "status": "cream join: straight continuation of the approved peet line (9.8 px) into the notch, verified at 7x; gray join: INFERRED judgment curve (2026-11-09), awaiting owner review",
+ "status": "OWNER-APPROVED 2026-11-09 (both joins)",
  "why": "The approved peet line stopped short of the body outline (the outline moved to the solid-body edge after the peet line was approved): 9.8 px on the cream side, 20-32 px on the gray side. To close off the peets, each end must meet the outline at its notch.",
  "cream_side": {
   "how": "the peet line's own end direction continued straight on until it meets the body outline; lands in the notch where the cream peet meets his side",

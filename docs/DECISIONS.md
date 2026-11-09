@@ -122,6 +122,8 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **Peet split approved** (2026-11-09: "this looks great, it all seems good"),
+  including the inferred gray-side join to the notch.
 - **Parts are whole under whatever covers them** (2026-11-09): tuft fur covers
   part of the cream peet's edge, but the peet extends under it; make the whole
   peet and lay the fur over it later. Never cut a part off for the fur. (METHOD §3b)

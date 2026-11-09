@@ -172,7 +172,12 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**Peets split off (2026-11-09): self-checked, awaiting owner review.**
+**Ears (2026-11-09): base lines PROPOSED** (`data/strands/ear_bases.json`,
+`docs/images/ear_bases_*.png`), awaiting owner review (Q17). Each line follows a
+measured crease where the ear meets his head; ears get their own precise step
+(pixel-perfect edges, lashes) afterwards.
+
+**Peets split off (2026-11-09): OWNER-APPROVED.**
 `python tools/split_peets.py` → `data/strands/parts_peets.json`: cream peet
 (image left), underfluff tuft, gray peet (image right) as closed sub-pixel
 polygons; they fill the region below the peet line exactly (0 px gap, 0 px

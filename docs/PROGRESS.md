@@ -316,3 +316,12 @@ check.py output (if applicable), and the next step.
   (shapely is new).
 - **Next:** owner review of the split (Q16); then the ears: propose where each
   ear meets his head, as their own precise step.
+- Owner approved the peet split. **Ears: base lines proposed.** Groove filter
+  (sigma 4-7) read column by column >10 px inside the outline. Discarded on the
+  way: cheapest-path search (followed the dark rim around the ears, lesson 5);
+  spline extrapolation past the measured crease (plunged down the head's side);
+  straight inner extension (ran along the whole dip). Final: right ear follows
+  its crease (median 1.1 px off it) from the dip's rising corner (572.6, 272.3)
+  to the outer side (717.6, 307.9); left ear from its outer corner (376.5, 287.1)
+  through its faint crease to its step bottom (512.9, 275.8). Ear areas 5,262
+  and 7,171 px². Awaiting owner (Q17).
