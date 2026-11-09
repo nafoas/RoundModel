@@ -49,6 +49,10 @@ SIDE_RMS = 2.0          # px, spline smoothing on his sides
 # Owner-approved top of head (ears, eyes, eye marks, wisp bridge) is LOCKED:
 # taken exactly from this file above its lock_row, never recomputed.
 APPROVED_TOP = "data/lines/approved_top_of_head.json"
+# Pixel-precise top of head (ears, dip, ear bases), owner 2026-11-09; made by
+# tools/ear_edges.py. Spliced in after the lock, so it overrides the ear stretch.
+PRECISE_TOP = "data/lines/top_of_head_precise.json"
+PRECISE_BLEND = 8.0     # px of arc length at each end over which it blends into the outline
 PEET_RMS = 1.0
 PEET_FIT = (4.0, 1.0)
 STRAND_R = 4            # px: strands thinner than ~2*STRAND_R+1 are removed before the sensitive fit
@@ -294,6 +298,35 @@ def lock_top(curve: np.ndarray, path: str = APPROVED_TOP) -> np.ndarray:
     return resample(np.vstack([joined, joined[:1]]), 0.5)[:-1]
 
 
+def splice_precise(curve: np.ndarray, path: str = PRECISE_TOP) -> np.ndarray:
+    """Replace the outline over the top of his head with the precise stretch,
+    blending the first/last PRECISE_BLEND px into the outline."""
+    from scipy.spatial import cKDTree
+    st = np.array(json.loads(Path(path).read_text())["curve"], float)
+    c = _canon(curve)
+    t = cKDTree(c)
+    i, j = t.query(st[0])[1], t.query(st[-1])[1]
+    n = len(c)
+    fwd = [(i + k) % n for k in range((j - i) % n + 1)]
+    bwd = [(i - k) % n for k in range((i - j) % n + 1)]
+    over = fwd if c[fwd, 1].mean() < c[bwd, 1].mean() else bwd
+    if over is bwd:
+        st = st[::-1]; i, j = j, i
+        over = [(i + k) % n for k in range((j - i) % n + 1)]
+    st = st.copy()
+    arc = np.r_[0, np.cumsum(np.hypot(*np.diff(st, axis=0).T))]
+    for end_idx, dist in ((i, arc), (j, arc[-1] - arc)):
+        w = np.clip(dist / PRECISE_BLEND, 0, 1)[:, None]
+        anchor = c[end_idx]
+        near = w < 1
+        st[near[:, 0]] = (w * st + (1 - w) * anchor)[near[:, 0]]
+    keep = [k for k in range(n) if k not in set(over)]
+    start = (j + 1) % n
+    rest = c[[(start + k) % n for k in range(len(keep))]]
+    joined = np.vstack([st, rest])
+    return resample(np.vstack([joined, joined[:1]]), 0.5)[:-1]
+
+
 def mark_check(curve: np.ndarray, fields: dict) -> dict:
     """Sub-pixel check: how much of each eye-mark pixel lies outside the outline."""
     from matplotlib.path import Path as MPath
@@ -345,6 +378,8 @@ def main() -> int:
     curve = resample(np.vstack([curve, curve[:1]]), 0.5)[:-1]   # even spacing all the way round the loop
     if Path(APPROVED_TOP).exists():
         curve = lock_top(curve)
+    if Path(PRECISE_TOP).exists():
+        curve = splice_precise(curve)
     marks = mark_check(curve, fields)
     # distance from the smooth curve to the 50% level it was fitted to
     from scipy.spatial import cKDTree
@@ -375,7 +410,7 @@ def main() -> int:
         "tiles_where_not_smoother_than_raw": worse,
         "eye_marks_check": marks,
         "owner_guided": OWNER_GUIDED,
-        "locked": f"rows above the approved top of head ({APPROVED_TOP})",
+        "locked": f"rows above the approved top of head ({APPROVED_TOP}); ears/dip/ear bases from {PRECISE_TOP}",
         "sampled_curve": [[round(float(x), 3), round(float(y), 3)] for x, y in curve],
     }
     Path("data/strands/body_outline.json").write_text(json.dumps(out, indent=1))

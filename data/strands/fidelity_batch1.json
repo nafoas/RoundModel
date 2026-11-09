@@ -58,8 +58,8 @@
   "cut_max_px": 0.0,
   "bulge_px": 0,
   "bulge_max_px": 0.0,
-  "fringe_in_px": 5,
-  "fringe_in_max_px": 3.07,
+  "fringe_in_px": 0,
+  "fringe_in_max_px": 0.0,
   "smoother_than_raw": true
  },
  "T008": {
@@ -67,8 +67,8 @@
   "cut_max_px": 0.0,
   "bulge_px": 0,
   "bulge_max_px": 0.0,
-  "fringe_in_px": 1,
-  "fringe_in_max_px": 2.21,
+  "fringe_in_px": 0,
+  "fringe_in_max_px": 0.0,
   "smoother_than_raw": true
  },
  "T009": {

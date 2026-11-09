@@ -325,3 +325,14 @@ check.py output (if applicable), and the next step.
   to the outer side (717.6, 307.9); left ear from its outer corner (376.5, 287.1)
   through its faint crease to its step bottom (512.9, 275.8). Ear areas 5,262
   and 7,171 px². Awaiting owner (Q17).
+- Owner: ears pixel by pixel like the eyes (notches, kinks, the base on the
+  left; asymmetry fine). Measured: the smooth ear line was 0.8 px (median),
+  up to 2.7 px off the photo's exact edge and rounded off real notches. **Fix:**
+  `tools/ear_edges.py`: exact 50% edge (no blur), whiskers removed, 2 whisker
+  roots bridged, smoothing <= 0.25 px RMS (0.19 px median / 0.88 px max from the
+  raw edge); spliced over the top of the head with 8 px blends (joints < 8.5 deg
+  over 2 px). First splice end sat just under the ear-base hook and kinked; moved
+  to where the exact edge meets the old line (0.2 px). Ear bases re-anchored on
+  real notches; the left base's v1 "crease" was the ledge's rim, so it now
+  mirrors the right ear's measured crease (inferred). Nothing else moved: peet
+  parts within 0.1 px², eye marks 0 px out, top batches clean. Tests: 16 pass.

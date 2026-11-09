@@ -172,10 +172,12 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**Ears (2026-11-09): base lines PROPOSED** (`data/strands/ear_bases.json`,
-`docs/images/ear_bases_*.png`), awaiting owner review (Q17). Each line follows a
-measured crease where the ear meets his head; ears get their own precise step
-(pixel-perfect edges, lashes) afterwards.
+**Ears (2026-11-09): pixel-precise, PROPOSED v2, awaiting owner review (Q18).**
+Outline over the top of the head is pixel-precise (`tools/ear_edges.py` →
+`data/lines/top_of_head_precise.json`, spliced in by `tools/body_outline.py`),
+whisker roots bridged. Ear bases end on real notches (`data/strands/ear_bases.json`,
+which also holds the ear parts). Pixel views: `docs/images/ear_left_pixels.png`,
+`ear_right_pixels.png`. Lashes still reserved for their own step.
 
 **Peets split off (2026-11-09): OWNER-APPROVED.**
 `python tools/split_peets.py` → `data/strands/parts_peets.json`: cream peet

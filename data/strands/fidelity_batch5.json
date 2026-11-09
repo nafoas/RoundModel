@@ -32,7 +32,7 @@
   "bulge_px": 0,
   "bulge_max_px": 0.0,
   "fringe_in_px": 9,
-  "fringe_in_max_px": 3.41,
+  "fringe_in_max_px": 3.4,
   "smoother_than_raw": true
  },
  "T085": {
@@ -41,7 +41,7 @@
   "bulge_px": 0,
   "bulge_max_px": 0.0,
   "fringe_in_px": 6,
-  "fringe_in_max_px": 3.41,
+  "fringe_in_max_px": 3.4,
   "smoother_than_raw": true
  },
  "T086": {
@@ -50,7 +50,7 @@
   "bulge_px": 0,
   "bulge_max_px": 0.0,
   "fringe_in_px": 3,
-  "fringe_in_max_px": 2.95,
+  "fringe_in_max_px": 2.96,
   "smoother_than_raw": true
  },
  "T087": {
@@ -131,7 +131,7 @@
   "bulge_px": 0,
   "bulge_max_px": 0.0,
   "fringe_in_px": 1,
-  "fringe_in_max_px": 2.05,
+  "fringe_in_max_px": 2.06,
   "smoother_than_raw": true
  },
  "T096": {
@@ -140,7 +140,7 @@
   "bulge_px": 0,
   "bulge_max_px": 0.0,
   "fringe_in_px": 1,
-  "fringe_in_max_px": 2.05,
+  "fringe_in_max_px": 2.06,
   "smoother_than_raw": true
  },
  "T097": {
@@ -148,8 +148,8 @@
   "cut_max_px": 0.0,
   "bulge_px": 0,
   "bulge_max_px": 0.0,
-  "fringe_in_px": 1,
-  "fringe_in_max_px": 2.49,
+  "fringe_in_px": 0,
+  "fringe_in_max_px": 0.0,
   "smoother_than_raw": true
  },
  "T098": {
@@ -157,8 +157,8 @@
   "cut_max_px": 0.0,
   "bulge_px": 0,
   "bulge_max_px": 0.0,
-  "fringe_in_px": 1,
-  "fringe_in_max_px": 2.49,
+  "fringe_in_px": 0,
+  "fringe_in_max_px": 0.0,
   "smoother_than_raw": true
  },
  "T099": {

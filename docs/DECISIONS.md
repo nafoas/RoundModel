@@ -122,6 +122,10 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **Ears: pixel by pixel** (2026-11-09): every notch and kink, and the base on
+  the left; asymmetry is fine. The whole top of the head (both ears, the dip,
+  past each ear's base) now follows the photo's exact edge
+  (`tools/ear_edges.py`, `data/lines/top_of_head_precise.json`).
 - **Peet split approved** (2026-11-09: "this looks great, it all seems good"),
   including the inferred gray-side join to the notch.
 - **Parts are whole under whatever covers them** (2026-11-09): tuft fur covers
@@ -224,6 +228,11 @@ excuse and was withdrawn.)
    followed where the peet stopped being visible, so the peet was cut short
    under the tuft's overhanging fur, twice. → Parts are completed under whatever
    covers them (METHOD §3b).
-12. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
+12. **A rim mistaken for a crease, and smoothing that hid notches.** The ear base
+   (image left) was built on "faint crease" points that were really the ledge's
+   own dark rim; and the smooth ear outline rounded off real notches (the
+   ledge notch, the step corner, the hook at the base). → For identity areas,
+   check every claimed feature pixel by pixel and use the precise edge.
+13. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
    written by an earlier session without being logged. → Log everything in
    `docs/PROGRESS.md`; unlogged work is untrusted until reviewed.

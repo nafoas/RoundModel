@@ -86,6 +86,14 @@ whisker pads, and anything the owner calls sensitive.
    into the outline on a grid 8× finer than the photo, with a 0.5 px safety
    margin, so the line follows the mark's own edge. **Not one pixel of a mark
    may be outside.** Do the same for any new identity feature the owner names.
+3b. **Pixel-precise edges for identity areas** (owner, 2026-11-09, the ears:
+   "go pixel by pixel, including all the little notches, kinks ... they're his
+   little ears. They are detailed, and very intricate"). The edge is the 50%
+   fur-coverage level at the photo's own resolution (no blur), long strands
+   removed first, smoothed only enough to remove pixel stair-steps (≤ 0.25 px
+   RMS; result within 0.2 px median / 0.9 px max of the raw edge). Whisker roots
+   are bridged (the part continues under them). Spliced in with short blends
+   that are checked for kinks. Real animals are asymmetric: keep it.
 4. **Measure, don't eyeball.** Check every protected pixel's inside fraction at
    1/8-px precision on every run (`eye_marks_check` in `body_outline.json`).
    Expected result: 0 pixels not fully inside, 0.000 px area outside.

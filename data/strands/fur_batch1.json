@@ -2,64 +2,64 @@
  "T001": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 1.8,
-  "width_median": 2.5,
-  "width_max": 3.7,
-  "captured": 0.39,
+  "width_min": 1.5,
+  "width_median": 1.7,
+  "width_max": 3.5,
+  "captured": 0.33,
   "smoother_than_raw": true
  },
  "T002": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 2.5,
-  "width_median": 3.3,
-  "width_max": 4.0,
-  "captured": 0.47,
+  "width_min": 1.5,
+  "width_median": 3.1,
+  "width_max": 4.4,
+  "captured": 0.45,
   "smoother_than_raw": true
  },
  "T003": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 2.5,
-  "width_median": 3.5,
-  "width_max": 4.0,
-  "captured": 0.42,
+  "width_min": 3.2,
+  "width_median": 4.2,
+  "width_max": 4.5,
+  "captured": 0.5,
   "smoother_than_raw": true
  },
  "T004": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 2.4,
-  "width_median": 2.5,
-  "width_max": 3.6,
-  "captured": 0.34,
+  "width_min": 2.5,
+  "width_median": 3.5,
+  "width_max": 4.5,
+  "captured": 0.44,
   "smoother_than_raw": true
  },
  "T005": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 2.3,
-  "width_median": 2.5,
+  "width_min": 2.4,
+  "width_median": 2.8,
   "width_max": 4.0,
-  "captured": 0.36,
+  "captured": 0.38,
   "smoother_than_raw": true
  },
  "T006": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 2.3,
+  "width_min": 2.4,
   "width_median": 4.0,
-  "width_max": 10.8,
-  "captured": 0.46,
+  "width_max": 10.7,
+  "captured": 0.47,
   "smoother_than_raw": true
  },
  "T007": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 3.5,
+  "width_min": 3.4,
   "width_median": 6.9,
   "width_max": 10.9,
-  "captured": 0.67,
+  "captured": 0.66,
   "smoother_than_raw": true
  },
  "T008": {
@@ -67,8 +67,8 @@
   "reserved_ears_eyes": true,
   "width_min": 3.6,
   "width_median": 4.4,
-  "width_max": 10.7,
-  "captured": 0.67,
+  "width_max": 10.6,
+  "captured": 0.68,
   "smoother_than_raw": true
  },
  "T009": {
@@ -86,7 +86,7 @@
   "width_min": 4.3,
   "width_median": 5.2,
   "width_max": 5.4,
-  "captured": 0.69,
+  "captured": 0.68,
   "smoother_than_raw": true
  },
  "T011": {
@@ -131,7 +131,7 @@
   "width_min": 5.5,
   "width_median": 7.6,
   "width_max": 8.6,
-  "captured": 0.78,
+  "captured": 0.77,
   "smoother_than_raw": true
  },
  "T016": {
@@ -140,43 +140,43 @@
   "width_min": 4.6,
   "width_median": 6.2,
   "width_max": 8.6,
-  "captured": 0.77,
+  "captured": 0.76,
   "smoother_than_raw": true
  },
  "T017": {
   "peet_zone": false,
   "reserved_ears_eyes": false,
   "width_min": 4.6,
-  "width_median": 6.6,
-  "width_max": 9.2,
-  "captured": 0.63,
+  "width_median": 6.4,
+  "width_max": 9.0,
+  "captured": 0.62,
   "smoother_than_raw": true
  },
  "T018": {
   "peet_zone": false,
   "reserved_ears_eyes": false,
-  "width_min": 5.9,
-  "width_median": 8.2,
-  "width_max": 10.4,
-  "captured": 0.68,
+  "width_min": 5.8,
+  "width_median": 8.1,
+  "width_max": 10.3,
+  "captured": 0.67,
   "smoother_than_raw": true
  },
  "T019": {
   "peet_zone": false,
   "reserved_ears_eyes": false,
-  "width_min": 6.7,
-  "width_median": 8.5,
-  "width_max": 10.4,
-  "captured": 0.71,
+  "width_min": 7.4,
+  "width_median": 8.9,
+  "width_max": 12.2,
+  "captured": 0.72,
   "smoother_than_raw": true
  },
  "T020": {
   "peet_zone": false,
   "reserved_ears_eyes": false,
-  "width_min": 6.7,
-  "width_median": 9.5,
-  "width_max": 16.1,
-  "captured": 0.7,
+  "width_min": 7.6,
+  "width_median": 10.2,
+  "width_max": 17.3,
+  "captured": 0.76,
   "smoother_than_raw": true
  }
 }

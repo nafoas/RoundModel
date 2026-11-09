@@ -80,3 +80,22 @@ def test_lock_top_keeps_the_approved_top_exactly(tmp_path):
     from scipy.spatial import cKDTree
     top = app[app[:, 1] < 200]
     assert cKDTree(out).query(top)[0].max() < 0.3
+
+
+def test_splice_precise_replaces_only_the_top(tmp_path):
+    """Circle outline; a precise stretch over the top with a notch in it. After
+    splicing: the notch is there, the bottom half is unchanged."""
+    import json
+    from scipy.spatial import cKDTree
+    t = np.linspace(0, 2 * np.pi, 4000, endpoint=False)
+    circ = np.c_[300 + 100 * np.cos(t), 300 + 100 * np.sin(t)]
+    ang = np.linspace(np.radians(200), np.radians(340), 1500)
+    r = 100 - 6 * np.exp(-((ang - np.radians(270)) / 0.05) ** 2)          # 6 px notch at the top
+    st = np.c_[300 + r * np.cos(ang), 300 + r * np.sin(ang)]
+    f = tmp_path / "p.json"
+    f.write_text(json.dumps({"curve": st.tolist()}))
+    out = bo.splice_precise(circ, str(f))
+    top = np.array([300.0, 206.0])
+    assert cKDTree(out).query(top)[0] < 0.6                                # notch kept
+    bottom = circ[circ[:, 1] > 330]
+    assert cKDTree(out).query(bottom)[0].max() < 0.3                       # rest unchanged

@@ -81,7 +81,7 @@ the owner's official opinion later. Each says what I did in the meantime.
    shadowed right side to the notch (a rounded top-right corner; inferred).
    *Meantime:* used for the split; picture `docs/images/parts_peets_zoom.png`
    (right panel).
-17. **Where each ear meets his head** (`docs/images/ear_bases_proposed.png`,
+17. **[ANSWERED 2026-11-09: go pixel by pixel like the eyes, every notch and kink and the base on the left; asymmetry is fine → v2.]** **Where each ear meets his head** (`docs/images/ear_bases_proposed.png`,
    zoom `ear_bases_zoom.png`). Ear on image right: a clear crease, followed;
    its inner end is where the dip between the ears starts rising, its outer end
    where the crease meets the ear's shaded outer side (y 308; the outline has a
@@ -90,3 +90,10 @@ the owner's official opinion later. Each says what I did in the meantime.
    of its step into the dip, so the small ledge belongs to the ear. The flat dip
    between them is the top of his head. *Meantime:* proposed; the two bases
    aren't symmetric (right one ~20 px lower outside), left as the photo shows.
+18. **Ears v2 (pixel-precise).** (a) The little outward hook at the outer base of
+   the ear on image left: I counted it as part of the ear (ears flare where
+   they attach), so the base ends just below it. (b) That ear's base shows no
+   crease in the photo, so it uses the other ear's measured crease shape,
+   mirrored. (c) The ear on image right's base now ends on a real notch at
+   (715.8, 300.2), 7.7 px higher than v1. *Meantime:* proposed; pixel views
+   `docs/images/ear_left_pixels.png`, `ear_right_pixels.png`.

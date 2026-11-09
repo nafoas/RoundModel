@@ -13,8 +13,8 @@
   "reserved_ears_eyes": false,
   "width_min": 8.5,
   "width_median": 9.9,
-  "width_max": 13.6,
-  "captured": 0.7,
+  "width_max": 13.5,
+  "captured": 0.69,
   "smoother_than_raw": true
  },
  "T083": {
@@ -23,7 +23,7 @@
   "width_min": 8.5,
   "width_median": 9.0,
   "width_max": 10.4,
-  "captured": 0.62,
+  "captured": 0.61,
   "smoother_than_raw": true
  },
  "T084": {
@@ -32,7 +32,7 @@
   "width_min": 8.5,
   "width_median": 9.4,
   "width_max": 9.8,
-  "captured": 0.65,
+  "captured": 0.66,
   "smoother_than_raw": true
  },
  "T085": {
@@ -41,7 +41,7 @@
   "width_min": 7.4,
   "width_median": 9.4,
   "width_max": 9.8,
-  "captured": 0.77,
+  "captured": 0.78,
   "smoother_than_raw": true
  },
  "T086": {
@@ -56,19 +56,19 @@
  "T087": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 5.4,
+  "width_min": 5.3,
   "width_median": 8.0,
   "width_max": 10.3,
-  "captured": 0.71,
+  "captured": 0.72,
   "smoother_than_raw": true
  },
  "T088": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 4.3,
-  "width_median": 6.6,
+  "width_min": 4.2,
+  "width_median": 6.5,
   "width_max": 10.3,
-  "captured": 0.63,
+  "captured": 0.66,
   "smoother_than_raw": true
  },
  "T089": {
@@ -77,7 +77,7 @@
   "width_min": 4.2,
   "width_median": 4.7,
   "width_max": 8.2,
-  "captured": 0.67,
+  "captured": 0.68,
   "smoother_than_raw": true
  },
  "T090": {
@@ -86,97 +86,97 @@
   "width_min": 4.2,
   "width_median": 4.8,
   "width_max": 6.7,
-  "captured": 0.72,
+  "captured": 0.73,
   "smoother_than_raw": true
  },
  "T091": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
   "width_min": 4.4,
-  "width_median": 6.3,
-  "width_max": 12.3,
-  "captured": 0.7,
+  "width_median": 6.1,
+  "width_max": 7.9,
+  "captured": 0.64,
   "smoother_than_raw": true
  },
  "T092": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 5.2,
-  "width_median": 11.6,
-  "width_max": 12.7,
-  "captured": 0.68,
+  "width_min": 4.6,
+  "width_median": 7.6,
+  "width_max": 11.2,
+  "captured": 0.56,
   "smoother_than_raw": true
  },
  "T093": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 6.1,
-  "width_median": 12.0,
-  "width_max": 12.7,
-  "captured": 0.7,
+  "width_min": 5.7,
+  "width_median": 8.8,
+  "width_max": 11.2,
+  "captured": 0.62,
   "smoother_than_raw": true
  },
  "T094": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 3.3,
-  "width_median": 6.0,
-  "width_max": 12.6,
-  "captured": 0.62,
+  "width_min": 3.6,
+  "width_median": 5.5,
+  "width_max": 11.2,
+  "captured": 0.6,
   "smoother_than_raw": true
  },
  "T095": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 3.0,
-  "width_median": 4.4,
-  "width_max": 7.5,
+  "width_min": 3.1,
+  "width_median": 4.5,
+  "width_max": 6.9,
   "captured": 0.41,
   "smoother_than_raw": true
  },
  "T096": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 3.0,
-  "width_median": 3.9,
-  "width_max": 4.8,
+  "width_min": 3.1,
+  "width_median": 3.7,
+  "width_max": 4.7,
   "captured": 0.44,
   "smoother_than_raw": true
  },
  "T097": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 3.1,
-  "width_median": 3.6,
-  "width_max": 4.5,
+  "width_min": 2.7,
+  "width_median": 3.4,
+  "width_max": 3.9,
   "captured": 0.47,
   "smoother_than_raw": true
  },
  "T098": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 2.1,
-  "width_median": 3.0,
-  "width_max": 3.7,
-  "captured": 0.7,
+  "width_min": 1.6,
+  "width_median": 2.6,
+  "width_max": 3.4,
+  "captured": 0.68,
   "smoother_than_raw": true
  },
  "T099": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 2.1,
-  "width_median": 2.3,
-  "width_max": 3.3,
-  "captured": 0.76,
+  "width_min": 1.5,
+  "width_median": 1.8,
+  "width_max": 2.9,
+  "captured": 0.62,
   "smoother_than_raw": true
  },
  "T100": {
   "peet_zone": false,
   "reserved_ears_eyes": true,
-  "width_min": 1.7,
-  "width_median": 2.1,
-  "width_max": 2.4,
-  "captured": 0.76,
+  "width_min": 1.5,
+  "width_median": 1.7,
+  "width_max": 2.2,
+  "captured": 0.64,
   "smoother_than_raw": true
  }
 }
