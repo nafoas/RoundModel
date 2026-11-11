@@ -139,3 +139,13 @@ the owner's official opinion later. Each says what I did in the meantime.
 28. **The rogue wisp** above his right eye: confirmed against the outline from
    before the bridge (the bump was exactly this hair's base); traced as one hair
    across a whisker crossing (B5-S07). Picture `docs/images/rogue_wisp_pixels.png`.
+29. **Shared whisker roots** (his right-side fan, image left): measured darkness
+   says three whiskers (B4-S12, B4-S17, B4-S15) lie on one line near the root;
+   each now has its own line through the shared stretch. *Meantime:* as traced;
+   picture `docs/images/whiskers_3.png`.
+30. **Loose whisker sections** B1-S07 (beside his left eye) and B2-S29 (left side,
+   low): their link back to his head is too faint to see. *Meantime:* traced as
+   what's visible, classified whisker.
+31. **B5-S06** (long eyebrow whisker above his right eye) stops ~10 px short of his
+   fur where it crosses the rogue wisp. *Meantime:* left for the lash/eye step,
+   which works in that area anyway.

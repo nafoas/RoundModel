@@ -172,6 +172,24 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**Whiskers, part 1 (2026-11-11): the whiskers out past his fur, self-checked.**
+`python tools/trace_whiskers.py` (after trace_wisps): 21 whiskers re-traced with a
+whisker tracer that separates up to 3 hairs lying side by side and coasts straight
+through crossings (<= 8 px; 46 px coasted in total); tested on synthetic
+whiskers. **Shared roots:** in his right-side fan (image left) the darkness along
+one line doubles where B4-S12's tip lies on B4-S17 and rises again where B4-S15
+joins: three whiskers share one root line. Root ends that run into another
+whisker's line (<= 7 px, <= 30 deg, dark across) continue along it; along the
+shared stretch the photo's profile is fitted as exactly that many whiskers (own
+widths/opacities fixed, positions free, fixed order so they never cross).
+Fine light hairs beside whiskers traced as wisps (W-F01, W-F02). Fidelity:
+rendered vs photo coverage, mean 0.02-0.06 for single whiskers, 0.07-0.09 for the
+shared fan; centres ~0.1 px from the photo's ridge. Remaining differences are
+roots disappearing into dark fringe clumps (classified with the whisker).
+Accounting: 0 unclassified. Sheets `docs/images/whiskers_1..4.png`, overview
+`whiskers_overview.png`. **Part 2 next:** whiskers lying over his face inside the
+outline (need a different contrast measure: white fur, not white background).
+
 **Wisps (2026-11-11): all traced and self-checked; every pixel accounted for.**
 `python tools/trace_wisps.py` runs the whole step (inventory, batches B1-B6 by
 outline tile, tracing, de-duplication, classification, owner-guided strands,

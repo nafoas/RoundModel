@@ -417,3 +417,17 @@ check.py output (if applicable), and the next step.
   mostly shadow (his left side) vs light (right side). My earlier "dark" meant
   opacity; corrected. The six stay wisps (no change). Colour cue + shadow caveat
   recorded for the whisker step (METHOD guide #13, lesson 13b).
+
+## 2026-11-11 — Session 6 (cont.): whiskers, part 1 (outside the outline)
+- `wisps.fit_multi/extend_whisker/retrace_whisker` (up to 3 side-by-side ridges,
+  coasting through crossings), synthetic test (stays on its whisker 3 px from a
+  neighbour, through a crossing); `tools/trace_whiskers.py`.
+- Found the fan's thick line is 2-3 whiskers sharing a root (darkness doubles at
+  B4-S12's tip, rises again at B4-S15's join). Fixes on the way: a join rule first
+  joined a whisker's TIP (wrong) → root ends only; first shared fit put all three
+  on one line (red halo, too wide) → fit exactly N whiskers with fixed widths;
+  then lines swapped/crossed → fixed no-crossing order. Result: fan residual
+  0.110 → 0.066 (S12), centres separated, no crossings, bends <= 7 deg.
+- 2 fine hairs beside whiskers traced (wisps). Accounting: 0 unclassified.
+- All 21 whiskers viewed (full length + root pixel zoom). Questions Q29-Q31.
+- **Next:** whiskers part 2: the whiskers lying over his face inside the outline.

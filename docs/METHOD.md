@@ -180,6 +180,12 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     dropped.
 12. **Very long straight hairs (>= 60 px) are whiskers at any opacity**; eyebrow
     whiskers can be faint.
+14. **Whiskers can share a root line.** Several whiskers grow from one spot and lie
+    on top of each other near the root; the line then carries 2-3 whiskers' worth
+    of darkness. Only a whisker's ROOT end (nearer his body) may continue along
+    another's line; along the shared stretch each keeps its own width/opacity and
+    they keep a fixed order (no crossings). A whisker's tip lying on another's
+    line just means it ends there.
 13. **His whiskers are light in colour** (owner, 2026-11-11: "Little bnuy whiskers
     are light in color"). Dark hair is not a whisker; dark hair near his eyes is
     eye fur (lashes, his hotot marks). Judge colour against the fur next to the
