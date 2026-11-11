@@ -107,8 +107,14 @@ the owner's official opinion later. Each says what I did in the meantime.
    straight from the hook to (351.5, 311.8), then curves as his head's side);
    the line now sweeps down that flare and ends where it becomes his head.
    *Meantime:* proposed. Thin red = v2 in `docs/images/ear_*_pixels.png`.
-21. **Orange ear base v5.** 3 px below v4 along its whole length; at the inner
+21. **[ANSWERED 2026-11-11: approved.]** **Orange ear base v5.** 3 px below v4 along its whole length; at the inner
    notch the drop eases in over 14 px (a 6 px ease kinked), so the right side is
    1.7 px lower at x 505 and 3 px lower from x 500 on; outer end 3 px further
    down the outline. *Meantime:* proposed. Thin red = v4 in
    `docs/images/ear_left_pixels.png`.
+22. **The tuft's spike tips.** The tuft's lower edge now follows each of its
+   hanging spikes at the photo's exact edge (half-opaque level), so the tips
+   are in. Below them, mostly under the right half (x 535-575, y 1220-1232),
+   there's a faint gray haze of hair tips, only partly opaque. *Meantime:* left
+   out of the tuft; by the guide they'd be wisps (thin hairs below), traced in
+   the wisp step. Should they be part of the tuft instead?

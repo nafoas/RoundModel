@@ -362,3 +362,14 @@ check.py output (if applicable), and the next step.
   (6 px gave a 27 deg kink, 10 px 14 deg; 14 px 7.9 deg, like the other joins),
   outer end slid 3 px further down the outline to (348.6, 313.8). Inside the body.
   Awaiting owner (Q21).
+- Owner approved the ear bases. Added `tools/split_ears.py` (reproduces the
+  approved ear parts to within 0.05 px²) → `data/strands/parts_ears.json`.
+- **Fluff step: the underfluff tuft.** The smoothed outline cut across the
+  tuft's hanging spikes (5-6 spikes, 5-10 px). `tools/tuft_edge.py` traces the
+  exact edge between the peet dividers' bottom ends (0.16 px median from the raw
+  edge); spliced into the outline. `splice_precise` now takes the short way
+  between the ends (was "the higher way", only right for the top of the head).
+  Checked: nothing else moved (<= 0.25 px), peet and ear parts unchanged
+  (<= 0.06 px²), dividers still end on the outline (0.14 / 0.46 px), tuft +92 px²;
+  the two joins (~20 deg vs 5 before) checked at 16x: real corners, not kinks.
+  Faint haze below the spike tips left for the owner (Q22). 16 tests pass.

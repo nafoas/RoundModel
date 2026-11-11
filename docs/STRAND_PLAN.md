@@ -172,7 +172,13 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**Ears: pixel-precise. Ear on image right (green): base OWNER-APPROVED (v4, 2026-11-11). Ear on image left (orange): base v5 proposed (3 px lower than v4, right side included), awaiting owner review (Q21).**
+**Fluff (2026-11-11): the underfluff tuft's lower edge is pixel-precise, spike
+tips included** (`tools/tuft_edge.py` → `data/lines/tuft_edge_precise.json`,
+spliced into the outline; tuft part in `data/strands/parts_peets.json`, +92 px²).
+Self-checked, awaiting owner review (Q22). Picture: `docs/images/tuft_fluff_pixels.png`.
+
+**Ears: OWNER-APPROVED 2026-11-11** (green v4, orange v5). Split off reproducibly:
+`python tools/split_ears.py` → `data/strands/parts_ears.json`.
 Outline over the top of the head is pixel-precise (`tools/ear_edges.py` →
 `data/lines/top_of_head_precise.json`, spliced in by `tools/body_outline.py`),
 whisker roots bridged. Ear bases end on real notches (`data/strands/ear_bases.json`,

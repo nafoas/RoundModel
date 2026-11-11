@@ -1,5 +1,5 @@
 {
- "status": "ear on image right (green): OWNER-APPROVED v4 (2026-11-11). Ear on image left (orange): v5 proposed, awaiting owner review.",
+ "status": "OWNER-APPROVED 2026-11-11: ear on image right (green) v4, ear on image left (orange) v5",
  "photo": "data/photos/anchor_front.webp",
  "coords": "photo pixels; pixel (col,row) covers [col,col+1)x[row,row+1)",
  "meaning": "Where each ear meets his head: the ear is above the line, the head below.",

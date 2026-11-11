@@ -122,6 +122,8 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **Ear bases approved** (2026-11-11): green (image right) v4, orange (image
+  left) v5.
 - **Ears go down to their base** (2026-11-09): "the ears go down to the base,
   that's what we include. So cut it off right as you get to the flat part."
   Owner's size: about 3 px below the crease line ("a tiny bit" = ~3 px; 12 px,

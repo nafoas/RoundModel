@@ -53,6 +53,9 @@ APPROVED_TOP = "data/lines/approved_top_of_head.json"
 # tools/ear_edges.py. Spliced in after the lock, so it overrides the ear stretch.
 PRECISE_TOP = "data/lines/top_of_head_precise.json"
 PRECISE_BLEND = 8.0     # px of arc length at each end over which it blends into the outline
+# Pixel-precise lower edge of the underfluff tuft, spike tips included (made by
+# tools/tuft_edge.py), between the bottom ends of the approved peet dividers.
+PRECISE_TUFT = "data/lines/tuft_edge_precise.json"
 PEET_RMS = 1.0
 PEET_FIT = (4.0, 1.0)
 STRAND_R = 4            # px: strands thinner than ~2*STRAND_R+1 are removed before the sensitive fit
@@ -309,7 +312,7 @@ def splice_precise(curve: np.ndarray, path: str = PRECISE_TOP) -> np.ndarray:
     n = len(c)
     fwd = [(i + k) % n for k in range((j - i) % n + 1)]
     bwd = [(i - k) % n for k in range((i - j) % n + 1)]
-    over = fwd if c[fwd, 1].mean() < c[bwd, 1].mean() else bwd
+    over = fwd if len(fwd) <= len(bwd) else bwd      # the short way between the two ends
     if over is bwd:
         st = st[::-1]; i, j = j, i
         over = [(i + k) % n for k in range((j - i) % n + 1)]
@@ -380,6 +383,8 @@ def main() -> int:
         curve = lock_top(curve)
     if Path(PRECISE_TOP).exists():
         curve = splice_precise(curve)
+    if Path(PRECISE_TUFT).exists():
+        curve = splice_precise(curve, PRECISE_TUFT)
     marks = mark_check(curve, fields)
     # distance from the smooth curve to the 50% level it was fitted to
     from scipy.spatial import cKDTree
@@ -410,7 +415,7 @@ def main() -> int:
         "tiles_where_not_smoother_than_raw": worse,
         "eye_marks_check": marks,
         "owner_guided": OWNER_GUIDED,
-        "locked": f"rows above the approved top of head ({APPROVED_TOP}); ears/dip/ear bases from {PRECISE_TOP}",
+        "locked": f"rows above the approved top of head ({APPROVED_TOP}); ears/dip/ear bases from {PRECISE_TOP}; tuft lower edge from {PRECISE_TUFT}",
         "sampled_curve": [[round(float(x), 3), round(float(y), 3)] for x, y in curve],
     }
     Path("data/strands/body_outline.json").write_text(json.dumps(out, indent=1))
