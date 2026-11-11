@@ -172,6 +172,18 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**Wisps (2026-11-11): IN PROGRESS, region 1 traced, awaiting owner calibration
+(Q24-Q26).** Owner: "since these little wisps are so small, you must go pixel by
+pixel, and be as precise as possible." `tools/wisps.py`: each strand traced to
+sub-pixel precision by fitting its cross-profile (centre, width, opacity) every
+1 px, extended to the tip and into the fringe to the base while it's still a
+ridge; tested on a known synthetic hair (centre within 0.17 px; width and opacity
+recovered after removing the known pixel/sampling blur). Checks: ridge (lighter
+on both sides, so fringe edges aren't mistaken for hairs), no sharp turns (no
+jumping between hairs), duplicates removed, blobs rejected. Classes: wisp /
+whisker (last step) / lash (reserved) / fringe tip. Data `data/strands/wisps.json`;
+review `docs/images/wisps_R1_overview.png`, `wisps_R1_pixels.png`.
+
 **Fluff (2026-11-11): the underfluff tuft's lower edge is pixel-precise, spike
 tips included** (`tools/tuft_edge.py` → `data/lines/tuft_edge_precise.json`,
 spliced into the outline; tuft part in `data/strands/parts_peets.json`, +92 px²).

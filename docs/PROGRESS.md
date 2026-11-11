@@ -380,3 +380,18 @@ check.py output (if applicable), and the next step.
   divider end (first try had a vertical wall at the right end and a jag under the
   hook spike). ~620 px², median 3.9 px deep. Not added to the tuft's solid shape.
   Added a "Build checklist" to PLAN.md and guide #10 to METHOD.
+
+## 2026-11-11 — Session 6 (cont.): wisps, region 1
+- Owner approved the tuft fuzz; stressed pixel-by-pixel precision for the wisps.
+- Inventory: 129 hair-like pieces outside the body, fur band and tuft fuzz.
+- `tools/wisps.py` + `tests/test_wisps.py`: sub-pixel strand tracer (profile fits
+  every 1 px; centre within 0.17 px on a known synthetic hair after removing the
+  known pixel + sampling blur from width/opacity), crossing-aware seeds from the
+  skeleton, duplicate removal, classification. 18 tests pass.
+- Region 1 (his left side, ear to cheek): first pass had two real problems found
+  by looking at contrast-stretched pixel views: a trace ran along a fringe EDGE
+  and jumped to a neighbouring hair (false S-bend), because a step looked like a
+  ridge. Fixed with a ridge check (lighter on both sides) and a sharp-turn split.
+  Halo along the fur edge (pieces 2, 63) is refused by the tracer (not hair-shaped).
+  Result: 5 wisps, 6 whiskers (provisional), 2 lash bits (reserved), 1 fringe tip.
+  Saved to `data/strands/wisps.json`; stopped for owner calibration (Q24-Q26).

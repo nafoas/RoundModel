@@ -118,6 +118,16 @@ the owner's official opinion later. Each says what I did in the meantime.
    there's a faint gray haze of hair tips, only partly opaque. *Meantime:* left
    out of the tuft; by the guide they'd be wisps (thin hairs below), traced in
    the wisp step. Should they be part of the tuft instead?
-23. **Tuft fuzz band.** Recorded below the spike tips down to where the haze
+23. **[ANSWERED 2026-11-11: looks good.]** **Tuft fuzz band.** Recorded below the spike tips down to where the haze
    fades (coverage 0.10, the middle of three levels tried), tapering to nothing
    at each peet. *Meantime:* proposed; picture `docs/images/tuft_fuzz.png`.
+24. **What counts as a wisp vs a fringe tip.** Your guide: a wisp reaches
+   *clearly* past the fringe. I use 6 px past the intermediate fur's outer edge;
+   hairs poking out less than that stay with the fringe as its tips (like the
+   tuft's fuzz stays with the tuft). Many tiny pieces fall below it.
+25. **Wisps vs whiskers.** Long (>= 40 px), straight (>= 95%) and fairly dark
+   (>= 40% opacity) = whisker, done in the last step; everything else past the
+   fringe = wisp. In region 1 that makes 6 whiskers (incl. the eyebrow whiskers
+   from his left ear and a loose whisker section) and 5 wisps. Right split?
+26. **Very faint wisp S07** (17% opacity, ~10 px, at x 847, y 481): keep it as a
+   wisp, or treat it as fringe fuzz?
