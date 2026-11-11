@@ -149,3 +149,27 @@ the owner's official opinion later. Each says what I did in the meantime.
 31. **B5-S06** (long eyebrow whisker above his right eye) stops ~10 px short of his
    fur where it crosses the rogue wisp. *Meantime:* left for the lash/eye step,
    which works in that area anyway.
+32. **Face whiskers (whiskers lying over his cheeks)**: 7 traced (pictures
+   `docs/images/face_whiskers_image_left.png` and `..._image_right.png`, one zoom
+   per whisker `face_whisker_<id>.png`; magenta guides 3 px either side of each
+   line, dashed yellow = inferred). Five continue whiskers from outside his fur,
+   one more is linked (Q33), one (FW-01, his right cheek) has no visible outside
+   part. Between where each whisker enters his fur and where its line shows on
+   the cheek (7-64 px) the path is inferred. *Meantime:* as traced, weight 0.
+33. **B2-S02's face line is linked by position**: its own search went off its
+   line; a search started on his outline 12 px from its root end found a face
+   line heading the same way (1 deg apart). *Meantime:* linked as its
+   continuation.
+34. **Seven whiskers show no face part**: B2-S12, B2-S15, B2-S20 (his left side,
+   image right, low) and the shared-root fan B4-S12/S15/S17 (his right side,
+   image left, low cheek, where the fur is busy). Weaker lines that may be the
+   fan's face parts are among the faint candidates (Q35, near x 150-240,
+   y 760-810). *Meantime:* outside parts only; their roots will be inferred with
+   the whisker pads later.
+35. **Eight fainter lines** on his cheeks are listed but NOT classified as
+   whiskers (dotted blue on the sheets; `faint_candidates_not_classified` in
+   `data/strands/face_whiskers.json`): the clearest is below B2-S16 (x 817-921,
+   y 811-885, 128 px). Also, B5-S17's face line may continue past where it is
+   traced (it seems to bend down toward his cheek). *Meantime:* body fur (not
+   whiskers). Are any of them whiskers?
+

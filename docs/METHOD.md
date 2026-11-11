@@ -193,6 +193,14 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     every hair there reads ~30-50 levels darker than on his lit right side.
     Note: "opacity" in the traces is how strongly a hair shows against the white
     background, NOT its colour; don't call a hair "dark" from opacity.
+15. **Whiskers lying over his face** are found as whole paths, not step by step
+    (`tools/face_whiskers.py`). Being light, on his white fur they show only as
+    faint lines a few grey levels darker than the fur beside them (5-12 of 255),
+    about the size of the photo's compression blocks. A whisker's face part counts
+    only where its line stands out from plain fur for >= 40 px; between his
+    outline and that point (the busy fur band) the link is *inferred* and drawn
+    dashed for the owner. Fainter lines are listed as candidates and stay body
+    fur until the owner says otherwise.
 10. **Faint see-through haze below a tuft's spike tips:** that tuft's FUZZ (owner,
     2026-11-11: "simply his little fuzz, part of the tuft"). Stored as the tuft's
     fuzz band, not added to its solid shape, and never dropped: it must be
@@ -292,4 +300,6 @@ still required.
 | Body outline (gentle + sensitive + eye-mark protection + owner-guided bridges) | `tools/body_outline.py` → `data/strands/body_outline.json` |
 | Approved peet line | `data/lines/peet_line.json` |
 | Review images | `docs/images/` (batch sheets, golden tiles, eye-corner pixel grids) |
+| Whiskers outside the outline | `tools/trace_whiskers.py` (after `tools/trace_wisps.py`) → `data/strands/wisps.json` |
+| Whiskers over his face | `tools/face_whiskers.py` → `data/strands/face_whiskers.json`, sheets `docs/images/face_whisker*.png` |
 | Tests | `tests/` (`python -m pytest -q`) |

@@ -431,3 +431,31 @@ check.py output (if applicable), and the next step.
 - 2 fine hairs beside whiskers traced (wisps). Accounting: 0 unclassified.
 - All 21 whiskers viewed (full length + root pixel zoom). Questions Q29-Q31.
 - **Next:** whiskers part 2: the whiskers lying over his face inside the outline.
+
+## 2026-11-11 — Session 6 (cont.): whiskers, part 2 (over his face)
+- Photos used as references of him: `data/photos/anchor_front.webp` (the only one).
+- Tried first: a step-by-step tracer from each whisker's root. It returned 0 points
+  for every whisker; the cause was its "left the body" stop rule firing at the
+  first step (root ends lie just outside the outline). Fixed, it then ran off each
+  line where the whisker bends onto his cheek (lesson 15). Dropped it.
+- Built `tools/face_whiskers.py`: whole-path search (dynamic programming over
+  smooth arcs) on a local-contrast map; acceptance by running contrast with
+  hysteresis (3.5 to accept, 2.5 to follow); change-point ends; per-px Gaussian
+  fits on the photo + least-squares spline. Fixes on the way: one dark blob (his
+  eye mark) pulled a path → per-point contrast capped, eye margin 50 px; paths
+  ran along his outline's dark edge → the outline band (12 px) is off limits once
+  past the entry; two whiskers ran onto one face line → the stronger keeps it.
+  Synthetic tests (`tests/test_face_whiskers.py`): faint curved line on fur-like
+  speckle, 0.15-0.25 px along the line, ends within ~2 px; plain fur gives nothing.
+- Result: 7 face whiskers (5 continuations, B2-S02 linked by position, FW-01 face
+  only), 5997 px marked WHISKER (weight 0) over the body; 7 whiskers with no
+  visible face part; 8 fainter lines listed, not classified. Every line viewed at
+  full resolution on the contrast-stretched photo with guides either side: each
+  sits on its line. The lines are only 5-12 grey levels deep, about the size of
+  the photo's compression blocks, so ends and the fainter lines are judgment.
+- Tests: 24 passed. `check.py` does not exist yet (PLAN.md: not built), so no
+  match is claimed.
+- **Next:** owner review of face whiskers (Q32-Q35) and the earlier sheets; then
+  the separate precise steps the owner listed (ears' pixel tweaks, lashes/eyes,
+  whisker pads, mouth and nose), then the head/undercarriage split.
+

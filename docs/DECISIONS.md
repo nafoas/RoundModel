@@ -175,6 +175,13 @@ excuse and was withdrawn.)
   (weight 0) by every other step: they count as neither body nor gap nor
   background. Their overlap would otherwise corrupt what's beneath them.
 
+- **Face whiskers** (2026-11-11, first pass, owner review pending): a whisker's
+  face part counts only where its line stands out from plain fur; between his
+  outline and that point the link is *inferred* (the fur band there is too busy
+  to see it) and is marked so. Fainter lines are listed, not classified as
+  whiskers, until the owner says. Reason: colouring fur as whisker would remove
+  it from every other step (weight 0); a missed whisker can still be added.
+
 ## The peets / underfluff / body line (approved 2026-11-07)
 
 - Under his body, his pelvis isn't visible: a fur tuft hangs between the peets.
@@ -265,3 +272,10 @@ excuse and was withdrawn.)
 14. **Silent work.** Draft code (`prince/model.py`, `camera.py`, `render.py`) was
    written by an earlier session without being logged. → Log everything in
    `docs/PROGRESS.md`; unlogged work is untrusted until reviewed.
+15. **Believing a tool that found nothing.** The first face-whisker tracer
+   returned 0 points for every whisker. The cause was not "no whiskers there":
+   its stop rule ("left the body") fired on the very first step, because
+   whisker root ends lie just outside the outline. Fixed, it then ran off each
+   line where the whisker bends onto his cheek. → When a tool returns nothing
+   or stops early, find out why before changing approach (look at what it did,
+   step by step); for faint curving lines, search for the whole path at once.

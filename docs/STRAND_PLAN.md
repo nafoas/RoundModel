@@ -172,6 +172,28 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**Whiskers, part 2 (2026-11-11): the whiskers lying over his face, first pass,
+self-checked at full resolution; owner review pending.**
+`python tools/face_whiskers.py [--sweep-cache PATH]` (~25 min with 4 cores; with
+the cache ~3 min). On his white fur his light whiskers show only as faint lines
+5-12 grey levels darker than the fur beside them, so each face line is found as a
+whole path (dynamic programming over smooth arcs, <= 0.22 deg/px bend; eyes,
+nose/mouth and the outline band off limits), accepted where its running contrast
+is clearly above plain fur (>= 3.5 for >= 40 px), followed into its faint parts
+(>= 2.5), ended at the contrast change point, and fitted to the photo at every
+1 px (sub-pixel centre, width, depth; smooth spline). Starts: the root end of
+every whisker at his cheeks, plus a sweep every 3 px along both cheek outlines.
+Tested on synthetic faint curved lines (0.15-0.25 px along the line; ends within
+~2 px, as the line fades). **Result: 7 face whiskers**: continuations of B1-S11,
+B2-S08, B2-S16, B4-S02, B5-S17, B2-S02 (linked: found from a sweep start 12 px
+from its root), and FW-01 (face only, his right cheek, image left). Between his
+outline and where each line can be seen the link is *inferred* (7-64 px, dashed).
+Seven whiskers show no face part (B2-S12, B2-S15, B2-S20, the fan B4-S12/S15/S17).
+8 fainter lines listed, not classified (stay body fur). 5997 px marked WHISKER
+(weight 0) on top of the body. `data/strands/face_whiskers.json`; sheets
+`docs/images/face_whiskers_image_{left,right}.png`, `face_whisker_<id>.png`.
+Questions Q32-Q35.
+
 **Whiskers, part 1 (2026-11-11): the whiskers out past his fur, self-checked.**
 `python tools/trace_whiskers.py` (after trace_wisps): 21 whiskers re-traced with a
 whisker tracer that separates up to 3 hairs lying side by side and coasts straight
@@ -187,8 +209,7 @@ rendered vs photo coverage, mean 0.02-0.06 for single whiskers, 0.07-0.09 for th
 shared fan; centres ~0.1 px from the photo's ridge. Remaining differences are
 roots disappearing into dark fringe clumps (classified with the whisker).
 Accounting: 0 unclassified. Sheets `docs/images/whiskers_1..4.png`, overview
-`whiskers_overview.png`. **Part 2 next:** whiskers lying over his face inside the
-outline (need a different contrast measure: white fur, not white background).
+`whiskers_overview.png`. Part 2 (face whiskers) above.
 
 **Wisps (2026-11-11): all traced and self-checked; every pixel accounted for.**
 `python tools/trace_wisps.py` runs the whole step (inventory, batches B1-B6 by
