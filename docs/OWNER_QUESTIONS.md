@@ -131,7 +131,7 @@ the owner's official opinion later. Each says what I did in the meantime.
    from his left ear and a loose whisker section) and 5 wisps. Right split?
 26. **[ANSWERED 2026-11-11: judgment calls make sense; classify everything.]** **Very faint wisp S07** (17% opacity, ~10 px, at x 847, y 481): keep it as a
    wisp, or treat it as fringe fuzz?
-27. **Six borderline wisps:** dark, very straight, 30-37 px (just under the 40 px
+27. **[ANSWERED 2026-11-11: whiskers are light; dark ones aren't whiskers → stay wisps. Measured: none is actually dark; my "dark" meant opacity.]** **Six borderline wisps:** dark, very straight, 30-37 px (just under the 40 px
    whisker length): B2-S09, B2-S14, B2-S17, B4-S01 at cheek/mouth height (your
    guide puts whiskers there), B2-S32, B2-S34 lower on his side. *Meantime:*
    wisps; I'll re-check the four at cheek/mouth height when I do the whiskers,

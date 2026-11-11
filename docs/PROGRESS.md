@@ -411,3 +411,9 @@ check.py output (if applicable), and the next step.
   its halo; near a hair (<= 20 px) → nearest. **Now 0 unclassified.**
 - **Next:** owner bulk review of wisp sheets; then whiskers (incl. side-by-side
   whiskers in the left fan, crossings, and the 4 borderline wisps, Q27).
+- Owner: whiskers are light; dark hairs are probably dark eye fur, not whiskers.
+  Measured each traced hair's colour (unmixed from the white background): all
+  ~140-210 of 255 (whiskers 142-206, the six borderline 141-196); the spread is
+  mostly shadow (his left side) vs light (right side). My earlier "dark" meant
+  opacity; corrected. The six stay wisps (no change). Colour cue + shadow caveat
+  recorded for the whisker step (METHOD guide #13, lesson 13b).

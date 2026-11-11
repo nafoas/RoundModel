@@ -180,6 +180,13 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     dropped.
 12. **Very long straight hairs (>= 60 px) are whiskers at any opacity**; eyebrow
     whiskers can be faint.
+13. **His whiskers are light in colour** (owner, 2026-11-11: "Little bnuy whiskers
+    are light in color"). Dark hair is not a whisker; dark hair near his eyes is
+    eye fur (lashes, his hotot marks). Judge colour against the fur next to the
+    hair, not as an absolute value: his left side (image right) is in shadow, so
+    every hair there reads ~30-50 levels darker than on his lit right side.
+    Note: "opacity" in the traces is how strongly a hair shows against the white
+    background, NOT its colour; don't call a hair "dark" from opacity.
 10. **Faint see-through haze below a tuft's spike tips:** that tuft's FUZZ (owner,
     2026-11-11: "simply his little fuzz, part of the tuft"). Stored as the tuft's
     fuzz band, not added to its solid shape, and never dropped: it must be

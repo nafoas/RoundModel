@@ -122,6 +122,11 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **Whiskers are light; dark hairs aren't whiskers** (2026-11-11). The six
+  borderline hairs (Q27) stay wisps. Measured, none of the traced hairs is
+  actually dark (all ~140-210 of 255 once unmixed from the white background);
+  the brightness difference is mostly his shadowed left side vs his lit right
+  side. Colour cue recorded for the whisker step (METHOD guide #13).
 - **Wisp judgment calls approved** (2026-11-11): 6 px past the fur edge to count
   as a wisp; long/straight/dark = whisker; the faint wisp kept. "Just make sure
   everything gets a classification in the end, and it isn't left out." → pixel
@@ -250,6 +255,9 @@ excuse and was withdrawn.)
    own dark rim; and the smooth ear outline rounded off real notches (the
    ledge notch, the step corner, the hook at the base). → For identity areas,
    check every claimed feature pixel by pixel and use the precise edge.
+13b. **Calling hairs "dark" from an opacity number.** The owner reasonably read it
+   as colour. → Say "shows strongly / faintly" for opacity; give colour only when
+   measured from the photo.
 13. **Letting a measurement override the owner's words.** Asked for "a tiny
    bit" lower, I measured where the surface goes flat and moved 12 px; the owner
    meant ~3 px. → When the owner gives a size ("a tiny bit", "just a little"),
