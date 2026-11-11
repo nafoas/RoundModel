@@ -351,6 +351,7 @@ def straightness(cl: np.ndarray) -> float:
 
 # ------------------------------------------------------- classification ----
 WHISKER_LEN, WHISKER_STRAIGHT, WHISKER_OPAC = 40.0, 0.95, 0.40
+WHISKER_LONG = 60.0    # px: long and straight enough to be a whisker at any opacity
 WISP_REACH = 6.0       # px past the fur band's outer edge ("clearly past the fringe")
 BLOB_SIGMA, MIN_LEN = 2.0, 6.0
 EYE_PAD = 25           # px around each eye box: lashes, reserved for their own step
@@ -364,6 +365,8 @@ def classify(t: dict, eye_boxes: dict) -> str:
         return "not a hair (blob)"
     if t["length"] >= WHISKER_LEN and t["straight"] >= WHISKER_STRAIGHT and med_op >= WHISKER_OPAC:
         return "whisker (last step)"
+    if t["length"] >= WHISKER_LONG and t["straight"] >= WHISKER_STRAIGHT:
+        return "whisker (last step)"           # very long and straight: a whisker even if faint
     for (x0, y0, x1, y1) in eye_boxes.values():
         inside = ((cl[:, 0] > x0 - EYE_PAD) & (cl[:, 0] < x1 + EYE_PAD) &
                   (cl[:, 1] > y0 - EYE_PAD) & (cl[:, 1] < y1 + EYE_PAD))
@@ -389,3 +392,32 @@ def dedupe(strands: list[dict], tol: float = 1.5, frac: float = 0.7) -> list[dic
         if not dup:
             kept.append(i)
     return [strands[i] for i in sorted(kept)]
+
+
+def join(t1: dict, t2: dict) -> dict:
+    """Join two traces of one hair split by a crossing: t1's far end to t2's
+    near end, ordered so the gap is the shortest; centre, width and opacity
+    carried across the gap linearly."""
+    best = None
+    for a_rev in (False, True):
+        for b_rev in (False, True):
+            A = t1["centreline"][::-1] if a_rev else t1["centreline"]
+            B = t2["centreline"][::-1] if b_rev else t2["centreline"]
+            g = float(np.hypot(*(A[-1] - B[0])))
+            if best is None or g < best[0]:
+                best = (g, a_rev, b_rev)
+    g, a_rev, b_rev = best
+    def o(t, rev):
+        f = (lambda v: v[::-1]) if rev else (lambda v: v)
+        return f(t["centreline"]), f(t["sigma"]), f(t["opacity"])
+    A, sa, oa = o(t1, a_rev); B, sb, ob = o(t2, b_rev)
+    n = max(int(g / 0.25), 2)
+    gap = np.linspace(A[-1], B[0], n + 2)[1:-1]
+    cl = np.vstack([A, gap, B])
+    sg = np.r_[sa, np.linspace(sa[-1], sb[0], n + 2)[1:-1], sb]
+    op = np.r_[oa, np.linspace(oa[-1], ob[0], n + 2)[1:-1], ob]
+    out = dict(t1)
+    out.update(centreline=cl, sigma=sg, opacity=op,
+               length=float(np.hypot(*np.diff(cl, axis=0).T).sum()), straight=straightness(cl),
+               reach=max(t1["reach"], t2["reach"]), joined_gap_px=round(g, 2))
+    return out

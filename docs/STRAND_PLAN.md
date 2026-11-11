@@ -172,8 +172,18 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**Wisps (2026-11-11): IN PROGRESS, region 1 traced, awaiting owner calibration
-(Q24-Q26).** Owner: "since these little wisps are so small, you must go pixel by
+**Wisps (2026-11-11): all traced and self-checked; every pixel accounted for.**
+`python tools/trace_wisps.py` runs the whole step (inventory, batches B1-B6 by
+outline tile, tracing, de-duplication, classification, owner-guided strands,
+accounting). 63 wisps, 21 whiskers (traced provisionally for the last step),
+6 lash bits (reserved), 6 fringe tips, 15 blobs; 81 paths refused as not
+hair-shaped (halo along the fur edge). **Accounting** (`data/strands/accounting.json`,
+`docs/images/accounting.png`): every non-background pixel outside the body has
+exactly one class; **0 unclassified**. Leftovers touching a traced hair belong to
+it (recorded per hair as extra pixels beyond the trace), leftovers touching the
+fringe are its halo. The rogue wisp above his right eye is owner-guided (joined
+across a whisker crossing). Review sheets `docs/images/wisps_B*_*.png`; the owner
+reviews them in bulk. Earlier region-1 calibration (Q24-Q26) approved. Owner: "since these little wisps are so small, you must go pixel by
 pixel, and be as precise as possible." `tools/wisps.py`: each strand traced to
 sub-pixel precision by fitting its cross-profile (centre, width, opacity) every
 1 px, extended to the tip and into the fringe to the base while it's still a

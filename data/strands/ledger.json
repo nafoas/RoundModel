@@ -35,7 +35,14 @@
     "width_max": 3.7,
     "captured": 0.39,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S01",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T002",
@@ -56,7 +63,14 @@
     "width_max": 4.0,
     "captured": 0.47,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S02",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T003",
@@ -77,7 +91,8 @@
     "width_max": 4.0,
     "captured": 0.42,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T004",
@@ -98,7 +113,8 @@
     "width_max": 3.6,
     "captured": 0.34,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T005",
@@ -119,7 +135,18 @@
     "width_max": 4.0,
     "captured": 0.36,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S03",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B1-S04",
+     "class": "lash (reserved)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T006",
@@ -140,7 +167,14 @@
     "width_max": 10.8,
     "captured": 0.46,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S05",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T007",
@@ -161,7 +195,14 @@
     "width_max": 10.9,
     "captured": 0.67,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S06",
+     "class": "lash (reserved)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T008",
@@ -182,7 +223,8 @@
     "width_max": 10.7,
     "captured": 0.67,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T009",
@@ -203,7 +245,8 @@
     "width_max": 5.4,
     "captured": 0.7,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T010",
@@ -224,7 +267,14 @@
     "width_max": 5.4,
     "captured": 0.69,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S07",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T011",
@@ -245,7 +295,14 @@
     "width_max": 5.4,
     "captured": 0.65,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S08",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T012",
@@ -266,7 +323,8 @@
     "width_max": 5.4,
     "captured": 0.67,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T013",
@@ -296,7 +354,8 @@
     "width_max": 5.1,
     "captured": 0.69,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T014",
@@ -326,7 +385,8 @@
     "width_max": 7.9,
     "captured": 0.74,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T015",
@@ -356,7 +416,8 @@
     "width_max": 8.6,
     "captured": 0.78,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T016",
@@ -386,7 +447,8 @@
     "width_max": 8.6,
     "captured": 0.77,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T017",
@@ -416,7 +478,14 @@
     "width_max": 9.2,
     "captured": 0.63,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S09",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T018",
@@ -446,7 +515,8 @@
     "width_max": 10.4,
     "captured": 0.68,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T019",
@@ -476,7 +546,14 @@
     "width_max": 10.4,
     "captured": 0.71,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S10",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T020",
@@ -506,7 +583,22 @@
     "width_max": 16.1,
     "captured": 0.7,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B1-S11",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B1-S12",
+     "class": "fringe tip"
+    },
+    {
+     "id": "B2-S01",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T021",
@@ -536,7 +628,14 @@
     "width_max": 16.2,
     "captured": 0.71,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S02",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T022",
@@ -566,7 +665,18 @@
     "width_max": 16.2,
     "captured": 0.63,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S03",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S04",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T023",
@@ -596,7 +706,18 @@
     "width_max": 15.3,
     "captured": 0.65,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S05",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S06",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T024",
@@ -626,7 +747,18 @@
     "width_max": 10.4,
     "captured": 0.51,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S07",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S08",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T025",
@@ -656,7 +788,18 @@
     "width_max": 16.5,
     "captured": 0.51,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S09",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S10",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T026",
@@ -686,7 +829,30 @@
     "width_max": 17.1,
     "captured": 0.51,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S11",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S12",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B2-S15",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B2-S16",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B2-S18",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T027",
@@ -716,7 +882,18 @@
     "width_max": 17.1,
     "captured": 0.65,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S13",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S14",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T028",
@@ -746,7 +923,18 @@
     "width_max": 18.4,
     "captured": 0.72,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S17",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S20",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T029",
@@ -776,7 +964,18 @@
     "width_max": 18.6,
     "captured": 0.79,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S19",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S21",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T030",
@@ -806,7 +1005,22 @@
     "width_max": 18.6,
     "captured": 0.89,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S22",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S23",
+     "class": "not a hair (blob)"
+    },
+    {
+     "id": "B2-S24",
+     "class": "fringe tip"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T031",
@@ -836,7 +1050,26 @@
     "width_max": 19.7,
     "captured": 0.88,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S25",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S26",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S27",
+     "class": "not a hair (blob)"
+    },
+    {
+     "id": "B2-S29",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T032",
@@ -866,7 +1099,22 @@
     "width_max": 19.7,
     "captured": 0.84,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S28",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S30",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S31",
+     "class": "fringe tip"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T033",
@@ -896,7 +1144,22 @@
     "width_max": 19.6,
     "captured": 0.79,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S32",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S33",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S34",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T034",
@@ -926,7 +1189,14 @@
     "width_max": 18.1,
     "captured": 0.84,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S35",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T035",
@@ -956,7 +1226,14 @@
     "width_max": 17.1,
     "captured": 0.8,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S36",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T036",
@@ -986,7 +1263,18 @@
     "width_max": 15.5,
     "captured": 0.79,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S37",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S38",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T037",
@@ -1016,7 +1304,14 @@
     "width_max": 15.1,
     "captured": 0.86,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S39",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T038",
@@ -1046,7 +1341,26 @@
     "width_max": 14.7,
     "captured": 0.93,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S40",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S41",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S42",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S43",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T039",
@@ -1076,7 +1390,22 @@
     "width_max": 13.8,
     "captured": 0.89,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S44",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S45",
+     "class": "wisp"
+    },
+    {
+     "id": "B2-S46",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T040",
@@ -1106,7 +1435,14 @@
     "width_max": 13.8,
     "captured": 1.0,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B2-S47",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T041",
@@ -1133,7 +1469,14 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B3-S03",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T042",
@@ -1160,7 +1503,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T043",
@@ -1187,7 +1531,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T044",
@@ -1214,7 +1559,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T045",
@@ -1241,7 +1587,14 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B3-S06",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T046",
@@ -1268,7 +1621,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T047",
@@ -1295,7 +1649,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T048",
@@ -1322,7 +1677,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T049",
@@ -1349,7 +1705,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T050",
@@ -1376,7 +1733,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T051",
@@ -1403,7 +1761,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T052",
@@ -1430,7 +1789,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T053",
@@ -1457,7 +1817,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T054",
@@ -1484,7 +1845,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T055",
@@ -1511,7 +1873,14 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B3-S05",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T056",
@@ -1538,7 +1907,14 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B3-S04",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T057",
@@ -1565,7 +1941,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T058",
@@ -1592,7 +1969,8 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T059",
@@ -1619,7 +1997,14 @@
     "reserved_ears_eyes": false,
     "captured": null,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B3-S02",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T060",
@@ -1649,7 +2034,18 @@
     "width_max": 12.5,
     "captured": 0.86,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B3-S01",
+     "class": "wisp"
+    },
+    {
+     "id": "B4-S28",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T061",
@@ -1679,7 +2075,14 @@
     "width_max": 12.5,
     "captured": 0.8,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S27",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T062",
@@ -1709,7 +2112,18 @@
     "width_max": 12.5,
     "captured": 0.79,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S25",
+     "class": "wisp"
+    },
+    {
+     "id": "B4-S26",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T063",
@@ -1739,7 +2153,14 @@
     "width_max": 10.5,
     "captured": 0.73,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S24",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T064",
@@ -1769,7 +2190,18 @@
     "width_max": 8.4,
     "captured": 0.71,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S22",
+     "class": "not a hair (blob)"
+    },
+    {
+     "id": "B4-S23",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T065",
@@ -1799,7 +2231,8 @@
     "width_max": 12.2,
     "captured": 0.82,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T066",
@@ -1829,7 +2262,8 @@
     "width_max": 12.3,
     "captured": 0.84,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T067",
@@ -1859,7 +2293,14 @@
     "width_max": 15.2,
     "captured": 0.85,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S21",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T068",
@@ -1889,7 +2330,18 @@
     "width_max": 15.8,
     "captured": 0.85,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S19",
+     "class": "fringe tip"
+    },
+    {
+     "id": "B4-S20",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T069",
@@ -1919,7 +2371,14 @@
     "width_max": 18.2,
     "captured": 0.86,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S18",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T070",
@@ -1949,7 +2408,18 @@
     "width_max": 21.3,
     "captured": 0.89,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S14",
+     "class": "wisp"
+    },
+    {
+     "id": "B4-S16",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T071",
@@ -1979,7 +2449,26 @@
     "width_max": 23.9,
     "captured": 0.89,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S12",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B4-S13",
+     "class": "wisp"
+    },
+    {
+     "id": "B4-S15",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B4-S17",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T072",
@@ -2009,7 +2498,18 @@
     "width_max": 23.9,
     "captured": 0.87,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S10",
+     "class": "wisp"
+    },
+    {
+     "id": "B4-S11",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T073",
@@ -2039,7 +2539,8 @@
     "width_max": 23.9,
     "captured": 0.8,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T074",
@@ -2069,7 +2570,8 @@
     "width_max": 23.9,
     "captured": 0.75,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T075",
@@ -2096,7 +2598,14 @@
     "reserved_ears_eyes": false,
     "captured": 0.66,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S09",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T076",
@@ -2126,7 +2635,14 @@
     "width_max": 18.0,
     "captured": 0.74,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S08",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T077",
@@ -2156,7 +2672,22 @@
     "width_max": 13.2,
     "captured": 0.88,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S05",
+     "class": "fringe tip"
+    },
+    {
+     "id": "B4-S06",
+     "class": "fringe tip"
+    },
+    {
+     "id": "B4-S07",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T078",
@@ -2186,7 +2717,18 @@
     "width_max": 13.4,
     "captured": 0.74,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S03",
+     "class": "wisp"
+    },
+    {
+     "id": "B4-S04",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T079",
@@ -2216,7 +2758,18 @@
     "width_max": 13.9,
     "captured": 0.75,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B4-S01",
+     "class": "wisp"
+    },
+    {
+     "id": "B4-S02",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T080",
@@ -2246,7 +2799,8 @@
     "width_max": 13.9,
     "captured": 0.77,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T081",
@@ -2276,7 +2830,18 @@
     "width_max": 13.9,
     "captured": 0.9,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S17",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B5-S18",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T082",
@@ -2306,7 +2871,8 @@
     "width_max": 13.6,
     "captured": 0.7,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T083",
@@ -2336,7 +2902,14 @@
     "width_max": 10.4,
     "captured": 0.62,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S16",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T084",
@@ -2366,7 +2939,14 @@
     "width_max": 9.8,
     "captured": 0.65,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S15",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T085",
@@ -2396,7 +2976,8 @@
     "width_max": 9.8,
     "captured": 0.77,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T086",
@@ -2426,7 +3007,18 @@
     "width_max": 10.3,
     "captured": 0.75,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S13",
+     "class": "wisp"
+    },
+    {
+     "id": "B5-S14",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T087",
@@ -2456,7 +3048,18 @@
     "width_max": 10.3,
     "captured": 0.71,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S11",
+     "class": "wisp"
+    },
+    {
+     "id": "B5-S12",
+     "class": "wisp"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T088",
@@ -2486,7 +3089,14 @@
     "width_max": 10.3,
     "captured": 0.63,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S10",
+     "class": "not a hair (blob)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T089",
@@ -2516,7 +3126,8 @@
     "width_max": 8.2,
     "captured": 0.67,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T090",
@@ -2546,7 +3157,8 @@
     "width_max": 6.7,
     "captured": 0.72,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T091",
@@ -2576,7 +3188,8 @@
     "width_max": 12.3,
     "captured": 0.7,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T092",
@@ -2606,7 +3219,26 @@
     "width_max": 12.7,
     "captured": 0.68,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S06",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B5-S07",
+     "class": "wisp"
+    },
+    {
+     "id": "B5-S08",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B5-S09",
+     "class": "lash (reserved)"
+    }
+   ],
+   "wisps": "self-checked"
   },
   {
    "id": "T093",
@@ -2636,7 +3268,14 @@
     "width_max": 12.7,
     "captured": 0.7,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S05",
+     "class": "lash (reserved)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T094",
@@ -2666,7 +3305,18 @@
     "width_max": 12.6,
     "captured": 0.62,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S02",
+     "class": "whisker (last step)"
+    },
+    {
+     "id": "B5-S04",
+     "class": "lash (reserved)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T095",
@@ -2696,7 +3346,14 @@
     "width_max": 7.5,
     "captured": 0.41,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S03",
+     "class": "lash (reserved)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T096",
@@ -2726,7 +3383,14 @@
     "width_max": 4.8,
     "captured": 0.44,
     "smoother_than_raw": true
-   }
+   },
+   "strands": [
+    {
+     "id": "B5-S01",
+     "class": "whisker (last step)"
+    }
+   ],
+   "wisps": "none (other classes only)"
   },
   {
    "id": "T097",
@@ -2756,7 +3420,8 @@
     "width_max": 4.5,
     "captured": 0.47,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T098",
@@ -2786,7 +3451,8 @@
     "width_max": 3.7,
     "captured": 0.7,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T099",
@@ -2816,7 +3482,8 @@
     "width_max": 3.3,
     "captured": 0.76,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T100",
@@ -2846,7 +3513,8 @@
     "width_max": 2.4,
     "captured": 0.76,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T101",
@@ -2876,7 +3544,8 @@
     "width_max": 2.5,
     "captured": 0.66,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T102",
@@ -2906,7 +3575,8 @@
     "width_max": 2.5,
     "captured": 0.65,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T103",
@@ -2936,7 +3606,8 @@
     "width_max": 2.5,
     "captured": 0.69,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T104",
@@ -2966,7 +3637,8 @@
     "width_max": 2.0,
     "captured": 0.67,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T105",
@@ -2996,7 +3668,8 @@
     "width_max": 2.2,
     "captured": 0.69,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T106",
@@ -3026,7 +3699,8 @@
     "width_max": 2.2,
     "captured": 0.74,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T107",
@@ -3056,7 +3730,8 @@
     "width_max": 2.3,
     "captured": 0.77,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "T108",
@@ -3086,7 +3761,8 @@
     "width_max": 3.0,
     "captured": 0.42,
     "smoother_than_raw": true
-   }
+   },
+   "wisps": "none"
   },
   {
    "id": "E001",

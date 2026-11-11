@@ -121,13 +121,21 @@ the owner's official opinion later. Each says what I did in the meantime.
 23. **[ANSWERED 2026-11-11: looks good.]** **Tuft fuzz band.** Recorded below the spike tips down to where the haze
    fades (coverage 0.10, the middle of three levels tried), tapering to nothing
    at each peet. *Meantime:* proposed; picture `docs/images/tuft_fuzz.png`.
-24. **What counts as a wisp vs a fringe tip.** Your guide: a wisp reaches
+24. **[ANSWERED 2026-11-11: judgment calls make sense; classify everything.]** **What counts as a wisp vs a fringe tip.** Your guide: a wisp reaches
    *clearly* past the fringe. I use 6 px past the intermediate fur's outer edge;
    hairs poking out less than that stay with the fringe as its tips (like the
    tuft's fuzz stays with the tuft). Many tiny pieces fall below it.
-25. **Wisps vs whiskers.** Long (>= 40 px), straight (>= 95%) and fairly dark
+25. **[ANSWERED 2026-11-11: judgment calls make sense; classify everything.]** **Wisps vs whiskers.** Long (>= 40 px), straight (>= 95%) and fairly dark
    (>= 40% opacity) = whisker, done in the last step; everything else past the
    fringe = wisp. In region 1 that makes 6 whiskers (incl. the eyebrow whiskers
    from his left ear and a loose whisker section) and 5 wisps. Right split?
-26. **Very faint wisp S07** (17% opacity, ~10 px, at x 847, y 481): keep it as a
+26. **[ANSWERED 2026-11-11: judgment calls make sense; classify everything.]** **Very faint wisp S07** (17% opacity, ~10 px, at x 847, y 481): keep it as a
    wisp, or treat it as fringe fuzz?
+27. **Six borderline wisps:** dark, very straight, 30-37 px (just under the 40 px
+   whisker length): B2-S09, B2-S14, B2-S17, B4-S01 at cheek/mouth height (your
+   guide puts whiskers there), B2-S32, B2-S34 lower on his side. *Meantime:*
+   wisps; I'll re-check the four at cheek/mouth height when I do the whiskers,
+   next to the full whiskers.
+28. **The rogue wisp** above his right eye: confirmed against the outline from
+   before the bridge (the bump was exactly this hair's base); traced as one hair
+   across a whisker crossing (B5-S07). Picture `docs/images/rogue_wisp_pixels.png`.

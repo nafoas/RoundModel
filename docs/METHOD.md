@@ -173,6 +173,13 @@ From the golden tiles (`docs/images/golden_tiles.png`):
 7. **Ear halo:** the ear's soft edge.
 8. **Lashes:** outside the body line; the black eye *mark* is inside (§3).
 9. **Rogue wisp above his right eye:** WISP (owner-guided bridge in the outline).
+11. **Everything gets a classification** (owner, 2026-11-11: "make sure everything
+    gets a classification in the end, and it isn't left out"). Each step ends with
+    a pixel accounting: every non-background pixel gets exactly one class, and
+    the count of unclassified pixels must be 0. Leftovers are inspected, not
+    dropped.
+12. **Very long straight hairs (>= 60 px) are whiskers at any opacity**; eyebrow
+    whiskers can be faint.
 10. **Faint see-through haze below a tuft's spike tips:** that tuft's FUZZ (owner,
     2026-11-11: "simply his little fuzz, part of the tuft"). Stored as the tuft's
     fuzz band, not added to its solid shape, and never dropped: it must be

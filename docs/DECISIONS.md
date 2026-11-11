@@ -122,6 +122,10 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **Wisp judgment calls approved** (2026-11-11): 6 px past the fur edge to count
+  as a wisp; long/straight/dark = whisker; the faint wisp kept. "Just make sure
+  everything gets a classification in the end, and it isn't left out." → pixel
+  accounting with 0 unclassified.
 - **The haze below the tuft is the tuft's fuzz** (2026-11-11): "it should be part
   of when we are building him, it shouldn't be forgotten, but it is simply his
   little fuzz, part of the tuft." Recorded as the tuft's fuzz band

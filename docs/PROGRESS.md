@@ -395,3 +395,19 @@ check.py output (if applicable), and the next step.
   Halo along the fur edge (pieces 2, 63) is refused by the tracer (not hair-shaped).
   Result: 5 wisps, 6 whiskers (provisional), 2 lash bits (reserved), 1 fringe tip.
   Saved to `data/strands/wisps.json`; stopped for owner calibration (Q24-Q26).
+- Owner: judgment calls make sense; make sure everything gets a classification.
+- **Wisp step run over all of him** (`tools/trace_wisps.py`, ~2 min): 63 wisps,
+  21 whiskers (provisional), 6 lash bits, 6 fringe tips, 15 blobs, 81 refused
+  (halo). Every wisp viewed on contrast-stretched pixel sheets (B1-B5): all on
+  real hairs, centred, bases into the fringe. Fixes on the way: tuft fuzz now
+  beats the fur band below the peet line ("peet & tuft fringe" for the rest);
+  two long faint eyebrow whiskers had been labelled lashes (opacity 0.38 < 0.40)
+  → very long straight hairs are whiskers at any opacity; the rogue wisp above
+  his right eye had been labelled a lash and was split by a whisker crossing →
+  owner-guided join, checked against the pre-bridge outline bump.
+- **Accounting:** started at 756 unclassified px (a band of side-by-side
+  whiskers in the left fan, hair bases/tips at junctions, a faint fringe halo);
+  rules: touching a hair → that hair (recorded per hair); touching the fringe →
+  its halo; near a hair (<= 20 px) → nearest. **Now 0 unclassified.**
+- **Next:** owner bulk review of wisp sheets; then whiskers (incl. side-by-side
+  whiskers in the left fan, crossings, and the 4 borderline wisps, Q27).
