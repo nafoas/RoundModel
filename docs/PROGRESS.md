@@ -353,3 +353,12 @@ check.py output (if applicable), and the next step.
   the inner corners), right ear's outer end 3 px down the outline; orange ear's
   outer part sweeps down the flare to (351.5, 311.8) (first try had a knee and a
   dip from a forced depth; redone as one gentle curve, max 0.9 deg/2 px).
+
+## 2026-11-11 — Session 6: orange ear base v5
+- Owner: green ear fine (approved). Orange ear: right side down a tiny bit more,
+  left side ~3 px more. **Cause on the right:** v4's 3 px drop eased in over the
+  first 30% of the line, so near the inner notch it was only 0-1.6 px below v2.
+  **v5:** v4 lowered 3 px along its whole length, eased in over 14 px at the notch
+  (6 px gave a 27 deg kink, 10 px 14 deg; 14 px 7.9 deg, like the other joins),
+  outer end slid 3 px further down the outline to (348.6, 313.8). Inside the body.
+  Awaiting owner (Q21).

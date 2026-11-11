@@ -102,8 +102,13 @@ the owner's official opinion later. Each says what I did in the meantime.
    on the other), so both are 12 px lower in the middle, easing to no change at
    the inner corners. *Meantime:* proposed; if 12 px is more than you meant, I
    can go halfway. Thin red = v2 in `docs/images/ear_*_pixels.png`.
-20. **Ears v4.** Both bases 3 px below v2 (easing to 0 at the inner corners).
+20. **[ANSWERED 2026-11-11: green ear fine; orange ear's right side down a tiny bit more, left side ~3 px more → v5.]** **Ears v4.** Both bases 3 px below v2 (easing to 0 at the inner corners).
    The orange ear's base flares outward below its hook (the outline runs
    straight from the hook to (351.5, 311.8), then curves as his head's side);
    the line now sweeps down that flare and ends where it becomes his head.
    *Meantime:* proposed. Thin red = v2 in `docs/images/ear_*_pixels.png`.
+21. **Orange ear base v5.** 3 px below v4 along its whole length; at the inner
+   notch the drop eases in over 14 px (a 6 px ease kinked), so the right side is
+   1.7 px lower at x 505 and 3 px lower from x 500 on; outer end 3 px further
+   down the outline. *Meantime:* proposed. Thin red = v4 in
+   `docs/images/ear_left_pixels.png`.
