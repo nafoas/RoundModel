@@ -122,6 +122,11 @@ excuse and was withdrawn.)
   may be cut off. They're protected in the outline at sub-pixel precision and
   checked pixel by pixel on every run.
 
+- **The haze below the tuft is the tuft's fuzz** (2026-11-11): "it should be part
+  of when we are building him, it shouldn't be forgotten, but it is simply his
+  little fuzz, part of the tuft." Recorded as the tuft's fuzz band
+  (`tools/tuft_fuzz.py` → `data/strands/tuft_fuzz.json`), soft and
+  semi-transparent, and on the build checklist.
 - **Ear bases approved** (2026-11-11): green (image right) v4, orange (image
   left) v5.
 - **Ears go down to their base** (2026-11-09): "the ears go down to the base,

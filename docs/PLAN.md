@@ -108,6 +108,18 @@ Prince is built in separate layers so no layer can distort another:
   it if they show the whiskers. Whiskers lying over the fur inside the outline
   need separate careful tracing.
 
+## Build checklist: things that must not be forgotten when he's built
+Owner: some layers are soft or partly hidden and must still be rendered.
+- **Intermediate fur** around his body (`data/strands/intermediate_fur.json`).
+- **The tuft's fuzz**, the see-through haze of hair tips below the underfluff
+  tuft's spikes (`data/strands/tuft_fuzz.json`), as soft semi-transparent tips
+  whose opacity follows the photo's fur coverage.
+- **Parts continue under what covers them** (METHOD §3b): the cream peet under
+  the tuft's fur, ears and eyes under lashes and whiskers. Build the whole part,
+  then lay the covering fur over it.
+- **Whiskers, eyebrow whiskers and wisps**, each exactly as traced, added last.
+- **The black hotot eye marks**, every pixel.
+
 ## Owner's goals for how this runs
 - **Set it and forget it.** The owner has a real rabbit to look after and does
   not want to babysit sessions. Human input happens up front (Phase 1) and at

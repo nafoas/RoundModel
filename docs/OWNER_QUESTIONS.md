@@ -112,9 +112,12 @@ the owner's official opinion later. Each says what I did in the meantime.
    1.7 px lower at x 505 and 3 px lower from x 500 on; outer end 3 px further
    down the outline. *Meantime:* proposed. Thin red = v4 in
    `docs/images/ear_left_pixels.png`.
-22. **The tuft's spike tips.** The tuft's lower edge now follows each of its
+22. **[ANSWERED 2026-11-11: the haze is the tuft's little fuzz, part of the tuft; don't forget it when building him.]** **The tuft's spike tips.** The tuft's lower edge now follows each of its
    hanging spikes at the photo's exact edge (half-opaque level), so the tips
    are in. Below them, mostly under the right half (x 535-575, y 1220-1232),
    there's a faint gray haze of hair tips, only partly opaque. *Meantime:* left
    out of the tuft; by the guide they'd be wisps (thin hairs below), traced in
    the wisp step. Should they be part of the tuft instead?
+23. **Tuft fuzz band.** Recorded below the spike tips down to where the haze
+   fades (coverage 0.10, the middle of three levels tried), tapering to nothing
+   at each peet. *Meantime:* proposed; picture `docs/images/tuft_fuzz.png`.

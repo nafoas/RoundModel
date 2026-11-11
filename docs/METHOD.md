@@ -173,6 +173,10 @@ From the golden tiles (`docs/images/golden_tiles.png`):
 7. **Ear halo:** the ear's soft edge.
 8. **Lashes:** outside the body line; the black eye *mark* is inside (§3).
 9. **Rogue wisp above his right eye:** WISP (owner-guided bridge in the outline).
+10. **Faint see-through haze below a tuft's spike tips:** that tuft's FUZZ (owner,
+    2026-11-11: "simply his little fuzz, part of the tuft"). Stored as the tuft's
+    fuzz band, not added to its solid shape, and never dropped: it must be
+    rendered when he's built (see PLAN.md "Build checklist").
 
 Parts, each with its own colour and step: head, undercarriage, each ear, each
 peet, fluff tufts, wisps, whiskers. Order: body outline → ears → peets → fluff →

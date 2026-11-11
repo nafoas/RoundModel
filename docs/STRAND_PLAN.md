@@ -175,7 +175,11 @@ Original description:
 **Fluff (2026-11-11): the underfluff tuft's lower edge is pixel-precise, spike
 tips included** (`tools/tuft_edge.py` → `data/lines/tuft_edge_precise.json`,
 spliced into the outline; tuft part in `data/strands/parts_peets.json`, +92 px²).
-Self-checked, awaiting owner review (Q22). Picture: `docs/images/tuft_fluff_pixels.png`.
+Picture: `docs/images/tuft_fluff_pixels.png`. **Tuft fuzz** (owner: the haze is
+the tuft's fuzz): `python tools/tuft_fuzz.py` → `data/strands/tuft_fuzz.json`, a band
+below the spike tips to where the haze ends (coverage 0.10), tapering to zero at
+both peet dividers; ~620 px², median 3.9 px deep, up to 12.9 px. Picture:
+`docs/images/tuft_fuzz.png`. Self-checked, awaiting owner review (Q23).
 
 **Ears: OWNER-APPROVED 2026-11-11** (green v4, orange v5). Split off reproducibly:
 `python tools/split_ears.py` → `data/strands/parts_ears.json`.

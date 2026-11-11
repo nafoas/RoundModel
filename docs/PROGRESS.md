@@ -373,3 +373,10 @@ check.py output (if applicable), and the next step.
   (<= 0.06 px²), dividers still end on the outline (0.14 / 0.46 px), tuft +92 px²;
   the two joins (~20 deg vs 5 before) checked at 16x: real corners, not kinks.
   Faint haze below the spike tips left for the owner (Q22). 16 tests pass.
+- Owner: the haze below the tuft is the tuft's fuzz, part of the tuft, not to be
+  forgotten when building him. Added `tools/tuft_fuzz.py` → `data/strands/tuft_fuzz.json`:
+  band from the tuft's spike edge to where coverage drops below 0.10 (three levels
+  tried, middle kept), smoothed (no stair-steps), tapered to zero over 10 px at each
+  divider end (first try had a vertical wall at the right end and a jag under the
+  hook spike). ~620 px², median 3.9 px deep. Not added to the tuft's solid shape.
+  Added a "Build checklist" to PLAN.md and guide #10 to METHOD.
