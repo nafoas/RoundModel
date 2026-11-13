@@ -149,35 +149,32 @@ the owner's official opinion later. Each says what I did in the meantime.
 31. **B5-S06** (long eyebrow whisker above his right eye) stops ~10 px short of his
    fur where it crosses the rogue wisp. *Meantime:* left for the lash/eye step,
    which works in that area anyway.
-32. **Face whiskers, second pass (2026-11-13):** 9 traced (pictures
-   `docs/images/face_whiskers_image_left.png` / `..._image_right.png`, one zoom per
-   whisker `face_whisker_<id>.png`; magenta guides 3 px either side of each line,
-   dashed yellow = inferred, dotted blue = faint, not classified). Continuations of
-   B1-S11, B2-S02, B2-S08, B2-S16, B4-S02, B5-S17; face-only FW-01, FW-02 (new),
-   FW-03 (new, below B2-S16). *Meantime:* as traced, weight 0.
-33. **B2-S02's face line is linked by position**: its own search went off its
-   line; a search started on his outline 10 px from its root end reaches the same
-   face line, heading the same way. *Meantime:* linked as its continuation.
-34. **Seven whiskers show no face part**: B2-S12, B2-S15, B2-S20 (his left side,
-   image right, low) and the shared-root fan B4-S12/S15/S17 (his right side,
-   image left, low cheek, where the fur is busy). C01-C05 lie where the fan's face
-   parts could be. *Meantime:* outside parts only.
-35. **Fainter lines C01-C13** (dotted blue, numbered on the sheets; in
-   `faint_candidates_not_classified`) are NOT classified as whiskers. Which, if
-   any, are whiskers? *Meantime:* body fur.
-36. **Full length (owner: "the inferred whiskers don't go for the full length"):
-   not done.** Beyond each traced end the line I can see in the stretched photo
-   (e.g. B5-S17 bending down toward his nose, FW-01 running on toward x~345)
-   measures as no different from the fur around it by every test I tried, so the
-   tool cannot follow it on its own without also "following" fur streaks (a test
-   run that did so wandered, crossed other whiskers and ran past the pad).
-   Options: (a) you mark roughly where each whisker goes and ends, and any I
-   missed (a rough line drawn on a sheet is enough); I fit each to sub-pixel
-   within a narrow band around your line, as with the eye bridge; (b) I try one
-   more detector tuned to soft, wider lines, and stop if it doesn't separate
-   them; (c) leave the hidden/faint ends to the whisker-pad step. Also: should
-   "full length" run all the way to each whisker's root on his whisker pad
-   (inferred where it can't be seen)?
-37. **FW-02 shares B5-S17's first ~15 px** (within 1 px), then they part: two
-   whiskers from one spot at the edge of his fur (like the outside fan), or one
-   line? *Meantime:* both as traced.
+32. **Face whiskers, third pass (2026-11-13), with the line view:** 12 traced.
+   Pictures: the line view itself `docs/images/face_whiskers_lineview_image_left.png`
+   / `..._image_right.png` (darker = more whisker-like, along the whisker
+   directions); the photo `face_whiskers_image_left.png` / `..._image_right.png`;
+   one zoom per whisker `face_whisker_<id>.png`. Continuations of B1-S11, B2-S02,
+   B2-S08, B2-S16, B4-S02, B5-S17; face-only FW-01..FW-06. *Meantime:* as traced,
+   weight 0. Is any whisker you can see still missing, or any end short?
+33. **B2-S02's face line is linked by position** (a search from 10 px beside its
+   root end reaches it). *Meantime:* linked.
+34. **His right-side fan (B4-S12/S15/S17, shared root):** FW-05 was found by a
+   search from that root, so it is probably one of them; which one I can't tell.
+   *Meantime:* FW-05, noted as "from the fan root". B2-S12, B2-S15, B2-S20 still
+   show no face part.
+35. **Line-view candidates L01-L07** (orange on the sheets; grey = judged not a
+   whisker), NOT classified as whiskers:
+   - L01 (x~193, y~777): faint line, but next to the fur band so the test can't judge it;
+   - L02 (x~339, y~856), L03 (x~298, y~926), L06 (x~688, y~851), L07 (x~829, y~852):
+     stand out, but lie in the dark parted-fur streaks low by his mouth and chin,
+     where fur clumps look like whiskers;
+   - L04 (x~815, y~594): short (61 px), above B1-S11;
+   - L05 (x~932, y~702): runs along his fur band, parallel to his outline: not a whisker.
+   Old-view faint lines: C01, C04, C05 are now FW-04/05/06; C02, C07, C09, C10, C11,
+   C13 are the same lines as L01/L02/L03/L06; C03, C06, C08, C12 remain listed.
+   Which of these are whiskers? *Meantime:* body fur.
+36. **Full length:** much longer now (the line view follows the faint stretches).
+   Should "full length" also run on to each whisker's root on his whisker pad,
+   inferred where it can't be seen?
+37. **FW-02 shares B5-S17's first ~15 px**, then they part: two whiskers from one
+   spot, or one line? *Meantime:* both as traced.

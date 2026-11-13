@@ -491,3 +491,27 @@ check.py output (if applicable), and the next step.
   match is claimed.
 - **Next:** owner's choice on Q36 (full length) and answers on C01-C13 (Q35).
 
+## 2026-11-13 — Session 6 (cont.): face whiskers, third pass (the line view)
+- Owner: "recalibrate the views you're using to try and increase the contrast? Use
+  a different method of highlighting them ... I don't wanna leave a single whisker
+  unaccounted for." Photo used: `data/photos/anchor_front.webp` (the only one).
+- Measured on the 9 traced face whiskers vs the fur beside them: colour channels
+  and colour differences do not help (whiskers differ from fur only in
+  brightness). Long thin line filters do: 12 scales tried, best 2 px across x 14 px
+  along (whisker/fur 2.3 vs ~1.3); restricting to the whisker direction field
+  (smoothed from traced whiskers) removes fur streaks crossing them.
+- New `tools/whisker_lineview.py` (part 2b, run by face_whiskers.py): the same
+  whole-path search in the line view; extensions of traced whiskers; new
+  candidates with a side-by-side test and photo fits; one-by-one verdicts (judgment
+  calls, in the tool). Test `tests/test_whisker_lineview.py` (finds a faint curved
+  whisker, ignores a darker streak crossing the whisker directions).
+- Result: 12 face whiskers (was 9), 14044 px WHISKER (weight 0); 6 whiskers longer
+  (B5-S17 +125 px); FW-04/05/06 new (= the old faint lines C01/C04/C05, found
+  independently); inferred links mostly replaced by seen lines. Earlier parts moved
+  median 0.02-0.15 px (up to 1.7 px only at the old, least certain ends). All new
+  and extended lines viewed at 3-6x on the photo: each sits on its line.
+  7 candidates L01-L07 for the owner (Q35). Lesson 17.
+- Tests: 25 passed. `check.py` does not exist yet (PLAN.md: not built), so no
+  match is claimed.
+- **Next:** owner review (Q32-Q37), especially L01-L07 and any whisker still missing.
+

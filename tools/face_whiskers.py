@@ -41,7 +41,8 @@ Two kinds of starts:
     (owner, 2026-11-13: several had been missed).
 Overlapping finds are merged (a continuation wins over a sweep find).
 
-Usage: python tools/face_whiskers.py [--sweep-cache PATH] [--interior-cache PATH]
+Usage: python tools/face_whiskers.py [--sweep-cache PATH] [--interior-cache PATH] [--line-cache PATH]
+Part 2b (the line view, tools/whisker_lineview.py) runs after the first pass.
 """
 from __future__ import annotations
 
@@ -627,7 +628,7 @@ def sheets(doc=None):
         doc = json.loads((ROOT / "data/strands/face_whiskers.json").read_text())
     grey = F.grey
 
-    def panel(box, sc, items, faint=(), label=""):
+    def panel(box, sc, items, faint=(), label="", lvc=()):
         x0, y0, x1, y1 = box
         # display only: the photo's grey with its large-scale shading taken out (local
         # contrast), so faint lines show the same on lit and shadowed fur
@@ -659,6 +660,14 @@ def sheets(doc=None):
             m = f[len(f) // 2]
             if box[0] <= m[0] < box[2] and box[1] <= m[1] < box[3]:
                 dr.text(P(m + np.array([2, 3])), fc["id"], fill=(80, 160, 255))
+        for lc_ in lvc:
+            f = dense(np.array(lc_["points"]))
+            col = (150, 150, 150) if lc_["verdict"] == "not a whisker" else (255, 140, 0)
+            for i in range(0, len(f) - 1, 5):
+                dr.line([P(f[i]), P(f[min(i + 3, len(f) - 1)])], fill=col, width=2)
+            m = f[len(f) // 2]
+            if box[0] <= m[0] < box[2] and box[1] <= m[1] < box[3]:
+                dr.text(P(m + np.array([3, 4])), lc_["id"], fill=col)
         for w_ in items:
             guides(dense(np.array(w_["inferred_entry"])) if len(w_["inferred_entry"]) > 1 else np.zeros((0, 2)),
                    (255, 190, 0), dash=True)
@@ -674,9 +683,41 @@ def sheets(doc=None):
     for side, box in (("image_left", (130, 560, 470, 900)), ("image_right", (630, 620, 990, 900))):
         items = [w_ for w_ in W if box[0] <= np.array(w_["centreline"])[:, 0].mean() <= box[2]]
         fa = [f for f in doc["faint_candidates_not_classified"] if box[0] <= np.array(f["points"])[:, 0].mean() <= box[2]]
+        lvc = [c for c in doc.get("line_view_candidates", []) if box[0] <= np.array(c["points"])[:, 0].mean() <= box[2]]
         im = panel(box, 3, items, fa, f"face whiskers, {side.replace('_', ' ')} cheek: photo, local contrast (top); "
-                                     f"magenta = traced whisker (guides 3 px each side), dashed yellow = inferred, dotted blue = faint, not classified")
+                                     f"magenta = whisker (guides 3 px each side), dashed yellow = inferred, dotted blue = faint, "
+                                     f"orange L = line-view candidate for the owner, grey L = judged not a whisker", lvc)
         im.save(ROOT / f"docs/images/face_whiskers_{side}.png"); imgs.append(im)
+    # the line view itself (owner's request: a different way of highlighting them)
+    import whisker_lineview as lv
+    LV = lv.LineView(lv.field_lines(W, F))
+    A = LV.along_view()
+    for side, box in (("image_left", (130, 560, 470, 960)), ("image_right", (630, 560, 1000, 920))):
+        x0, y0, x1, y1 = box; sc = 2
+        a = A[y0 - lv.Y0:y1 - lv.Y0, x0 - lv.X0:x1 - lv.X0]
+        g = np.clip(255 - np.clip(a, 0, 8) / 8 * 255, 0, 255).astype(np.uint8)
+        im = Image.fromarray(g).resize(((x1 - x0) * sc, (y1 - y0) * sc), Image.LANCZOS).convert("RGB")
+        top = im.copy(); dr = ImageDraw.Draw(im)
+        P = lambda z: ((z[0] - x0) * sc, (z[1] - y0) * sc)
+        for w_ in W:
+            cl = np.array(w_["centreline"]); t = np.gradient(cl, axis=0); t /= np.linalg.norm(t, axis=1, keepdims=True) + 1e-12
+            n = np.c_[-t[:, 1], t[:, 0]]
+            if not (box[0] <= cl[:, 0].mean() <= box[2]):
+                continue
+            for sg in (-1, 1):
+                dr.line([P(z) for z in cl + sg * 4 * n], fill=(255, 0, 150), width=1)
+            dr.text(P(cl[0] + np.array([0, -12])), w_["id"], fill=(0, 170, 0))
+        for c in doc.get("line_view_candidates", []):
+            f = dense(np.array(c["points"]))
+            if not (box[0] <= f[:, 0].mean() <= box[2]):
+                continue
+            col = (150, 150, 150) if c["verdict"] == "not a whisker" else (255, 140, 0)
+            for i in range(0, len(f) - 1, 5):
+                dr.line([P(f[i]), P(f[min(i + 3, len(f) - 1)])], fill=col, width=2)
+            dr.text(P(f[len(f) // 2] + np.array([4, 4])), c["id"], fill=col)
+        dr.text((6, 6), "line view: long thin line filters along the whisker directions (darker = more line-like)", fill=(0, 170, 0))
+        out = Image.new("RGB", (im.width, im.height * 2 + 6), (30, 30, 30)); out.paste(top, (0, 0)); out.paste(im, (0, im.height + 6))
+        out.save(ROOT / f"docs/images/face_whiskers_lineview_{side}.png")
     for w_ in W:
         cl = np.array(w_["centreline"]); en = np.array(w_["inferred_entry"]).reshape(-1, 2)
         allp = np.vstack([en, cl]) if len(en) else cl
@@ -690,6 +731,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sweep-cache", type=Path, default=None)
     ap.add_argument("--interior-cache", type=Path, default=None)
+    ap.add_argument("--line-cache", type=Path, default=None)
     ap.add_argument("--sheets-only", action="store_true")
     args = ap.parse_args()
     if args.sheets_only:
@@ -697,8 +739,17 @@ def main() -> int:
     F, conts, cont_found, sweep_found = run(args.sweep_cache, interior_cache=args.interior_cache)
     kept, notes, faint = select(F, cont_found, sweep_found, conts)
     doc = save(F, kept, notes, faint)
+    # part 2b: the line view (tools/whisker_lineview.py): extends whiskers, finds missed ones
+    import whisker_lineview as lv
+    ext, cands, _ = lv.run(F, doc, args.line_cache)
+    doc = lv.apply(F, doc, ext, cands)
+    (ROOT / "data/strands/face_whiskers.json").write_text(json.dumps(doc, indent=1))
+    for k_, n_ in doc["line_view"]["extensions"].items():
+        print(f"line view: {k_} extended by {n_} px")
+    for c in doc["line_view_candidates"]:
+        print(f"line view candidate {c['id']} ({c['verdict']}): margin {c['margin']:+.2f}  {c['reason']}")
     for w_ in doc["whiskers"]:
-        print(f"{w_['id']:12s} {w_['kind']:12s} face {w_['length_px']:6.1f} px  inferred entry {w_['inferred_entry_px']:5.1f} px  "
+        print(f"{w_['id']:12s} {w_['kind']:22s} face {w_['length_px']:6.1f} px  inferred entry {w_['inferred_entry_px']:5.1f} px  "
               f"contrast {w_['median_line_contrast']:4.1f}  depth {w_['median_depth_grey']:4.1f} grey  sigma {w_['median_sigma_px']:.2f}")
     for n in notes:
         print("note:", n)

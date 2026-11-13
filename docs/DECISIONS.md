@@ -287,4 +287,10 @@ excuse and was withdrawn.)
    whiskers that fade toward his nose were cut short (owner: "don't go for the
    full length"). → Search everywhere a part can be; judge where something ends
    against its background (here: the fur around it), not against its own strength.
+17. **Calling something "not separable" after trying one way of looking.** I said
+   the faint whisker ends measured the same as fur by every test, but every test
+   used the same short-scale view. The owner said to change the view: long line
+   filters along the whisker directions found 3 more whiskers and up to 125 px
+   more of the others. → Before saying something can't be done, try a different
+   representation (scale, direction, colour), not just different thresholds.
 
