@@ -279,3 +279,12 @@ excuse and was withdrawn.)
    line where the whisker bends onto his cheek. → When a tool returns nothing
    or stops early, find out why before changing approach (look at what it did,
    step by step); for faint curving lines, search for the whole path at once.
+16. **Looking only where I expected things, and judging ends by the thing itself.**
+   Face whiskers were searched for only from his outline and known whisker roots,
+   and had to be visible near the outline, so whiskers whose visible part starts
+   deeper in his cheek were never looked for (owner: "you missed several"). Each
+   whisker's end was set where it fell to half its own typical darkness, so
+   whiskers that fade toward his nose were cut short (owner: "don't go for the
+   full length"). → Search everywhere a part can be; judge where something ends
+   against its background (here: the fur around it), not against its own strength.
+

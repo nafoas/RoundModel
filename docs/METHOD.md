@@ -199,8 +199,10 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     about the size of the photo's compression blocks. A whisker's face part counts
     only where its line stands out from plain fur for >= 40 px; between his
     outline and that point (the busy fur band) the link is *inferred* and drawn
-    dashed for the owner. Fainter lines are listed as candidates and stay body
-    fur until the owner says otherwise.
+    dashed for the owner. Fainter lines are listed as candidates (C01, C02...)
+    and stay body fur until the owner says otherwise. Search the whole cheek, not
+    just from his outline; judge where a whisker ends against the fur around it,
+    not against the whisker's own strength (owner, 2026-11-13).
 10. **Faint see-through haze below a tuft's spike tips:** that tuft's FUZZ (owner,
     2026-11-11: "simply his little fuzz, part of the tuft"). Stored as the tuft's
     fuzz band, not added to its solid shape, and never dropped: it must be

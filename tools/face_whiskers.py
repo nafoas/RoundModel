@@ -35,10 +35,13 @@ tracer off it). Instead each whisker's path over the face is found in one go:
 Two kinds of starts:
   - continuations: every traced whisker whose root end is at his cheek outline;
   - a sweep: a start every 3 px along both cheek outlines, for face whiskers
-    whose outside part is hidden or too short to trace.
+    whose outside part is hidden or too short to trace;
+  - starts across both cheeks (every 5 px down six vertical lines, searching
+    both ways), for whiskers whose visible part does not reach his outline
+    (owner, 2026-11-13: several had been missed).
 Overlapping finds are merged (a continuation wins over a sweep find).
 
-Usage: python tools/face_whiskers.py [--sweep-cache PATH]
+Usage: python tools/face_whiskers.py [--sweep-cache PATH] [--interior-cache PATH]
 """
 from __future__ import annotations
 
@@ -78,10 +81,18 @@ WINDOW = 24                 # px running mean
 T = 3.5                     # running-mean line contrast that counts as a whisker
 FAINT_T = 2.5               # a whisker is followed into its fainter parts down to this; fainter lines on their own are only listed
 GAP, MIN_LEN, ENTRY = 16, 40, 64
+FUR_LEVEL = 1.8             # running line contrast along a searched path through plain fur (forehead, median)
+END_H_K = 1.17              # a whisker ends where its contrast falls to about the fur's level:
+                            # END_H = END_H_K x the fur's robust speckle around its end
+                            # (forehead: speckle 1.88 -> 2.2, just above a searched path's 1.8 in plain fur)
+SPECKLE_HALF = 30           # px: box half-size for measuring the fur's speckle
 SEARCH_LEN = 360.0
 SWEEP_Y = (560.0, 900.0)    # cheek height for sweep starts
 SWEEP_STEP = 3.0
 SWEEP_K0MAX, SWEEP_KMAX = 0.70, 1.0
+INTERIOR_X = (220, 300, 380, 720, 800, 880)   # vertical lines of starts across both cheeks
+INTERIOR_Y = (560.0, 900.0, 5.0)
+INTERIOR_LEN = 320.0
 CONT_ROOT_DIST = 25.0       # px: whisker root end this close to the outline continues onto the face
 CONT_Y = (540.0, 940.0)
 
@@ -139,7 +150,7 @@ class Face:
         return v[0] - np.mean(v[1:], 0)
 
     # ---- whole-path search ----
-    def search(self, start, th0, length=SEARCH_LEN, k0max=K0MAX, kmax=KMAX):
+    def search(self, start, th0, length=SEARCH_LEN, k0max=K0MAX, kmax=KMAX, kstep=1, c0=C0, band_rule=True):
         start = np.asarray(start, float)
         free = FREE + 1.5 * max(0.0, -float(self.sdist(start)))
         t0 = np.array([np.cos(th0), np.sin(th0)]); n0 = np.array([-t0[1], t0[0]])
@@ -158,11 +169,11 @@ class Face:
             c = np.minimum(c, CAP)
             c = np.where(self.neutral(P), 0.0, c)
             c = np.where(self.valid(P), c, -1e3)
-            if x >= free:
+            if band_rule and x >= free:
                 c = np.where(self.sdist(P) < BAND, -1e3, c)
-            seg = c.mean(-1) - C0
+            seg = c.mean(-1) - c0
             best = np.full_like(V, -np.inf); prev = np.zeros(V.shape, np.int16)
-            for d in (-1, 0, 1):
+            for d in range(-kstep, kstep + 1):
                 src = idx + d; okk = (src >= 0) & (src < len(K))
                 Vs = np.full_like(V, -np.inf); Vs[:, okk] = V[:, src[okk]]
                 m = Vs > best
@@ -189,11 +200,13 @@ class Face:
     # ---- along-path measures ----
     def line_profile(self, path):
         q = dense(path)
+        if len(q) < 3:                      # no path worth the name: nothing to measure
+            return q, np.full(len(q), np.nan)
         t = np.gradient(q, axis=0); t /= np.linalg.norm(t, axis=1, keepdims=True) + 1e-12
         c = self.contrast(q, t)
         return q, np.where(self.neutral(q), np.nan, c)
 
-    def cut(self, q, wv):
+    def cut(self, q, wv, entry_rule=True):
         """Hysteresis: a stretch counts as a whisker if its running contrast is >= T
         for >= MIN_LEN px (gaps <= GAP bridged) starting within ENTRY px of the body
         entry; it is then extended both ways while the running contrast stays
@@ -204,11 +217,15 @@ class Face:
             return None
         ie = int(ins[0])
         strong = None
-        for a, b in chains(wv):
-            if b - a >= MIN_LEN and a - ie <= ENTRY:
-                strong = (a, b); break
-            if a - ie > ENTRY:
-                break
+        if entry_rule:
+            for a, b in chains(wv):
+                if b - a >= MIN_LEN and a - ie <= ENTRY:
+                    strong = (a, b); break
+                if a - ie > ENTRY:
+                    break
+        else:                                   # found inside his face: its longest strong stretch
+            cs = [ab for ab in chains(wv) if ab[1] - ab[0] >= MIN_LEN]
+            strong = max(cs, key=lambda ab: ab[1] - ab[0]) if cs else None
         if strong is None:
             return None
         for a, b in chains(wv, FAINT_T):
@@ -241,24 +258,42 @@ class Face:
             pts.append(p + c * nn if good else p); sig.append(sg); dep.append(A); ok.append(good)
         return np.array(pts), np.array(sig), np.array(dep), np.array(ok)
 
-    def finish(self, q, a, b):
+    def finish(self, q, a, b, both_ends=False):
         """Final whisker line from the searched path q, kept stretch [a, b].
         Far end: change point of the per-point line contrast along the whole
-        searched path (the index where the running sum of contrast minus half
-        the stretch's median contrast peaks), which is unbiased between "line"
-        and "plain fur"; the 24 px running window alone blurs it by ~12 px.
+        searched path: the index where the running sum of (contrast - h) peaks,
+        h = END_H_K x the robust speckle of the fur around the stretch's far end
+        (just above what a searched path through that fur scores). So a whisker
+        ends where it can no longer be told from the fur around it, not where it
+        gets fainter than its own typical strength (that cut fading whiskers
+        short; owner, 2026-11-13).
         Then per-point sub-pixel fits, and through them a least-squares cubic
         spline (knots every 32 px: whiskers are smooth arcs and do not wiggle at
         that scale), each fit weighted by how deep its dip is."""
         _, c = self.line_profile(q)
         cc = np.nan_to_num(c)
         mu = float(np.median(cc[a:b + 1]))
-        end = a + int(np.argmax(np.cumsum(cc[a:] - mu / 2)))
+        h = END_H_K * self.speckle(q[b])
+        end = a + int(np.argmax(np.cumsum(cc[a:] - h)))
+        if both_ends:                       # the near end the same way (lines found inside his face)
+            h0 = END_H_K * self.speckle(q[a])
+            a = end - int(np.argmax(np.cumsum((cc[:end + 1] - h0)[::-1])))
         base = np.asarray(q[a:end + 1], float)
         pts, sig, dep, ok = self.refine(base, resample=False)
         line = smooth_line(base, pts, np.where(ok, np.clip(dep, 0, None), 0.0))
         return dict(centreline=line, sigma=sig, depth=dep, fit_ok=ok, end_index=end,
-                    median_contrast=mu, median_depth=float(np.median(dep[ok])) if ok.any() else float("nan"))
+                    median_contrast=mu, end_level=h, median_depth=float(np.median(dep[ok])) if ok.any() else float("nan"))
+
+    def speckle(self, p):
+        """robust spread (1.4826 x MAD) of the detail map D in a box around p"""
+        x, y = int(round(p[0])), int(round(p[1]))
+        y0, x0 = max(0, y - SPECKLE_HALF), max(0, x - SPECKLE_HALF)
+        a = self.D[y0:y + SPECKLE_HALF + 1, x0:x + SPECKLE_HALF + 1]
+        gy, gx = np.mgrid[y0:y0 + a.shape[0], x0:x0 + a.shape[1]] + 0.5
+        P = np.stack([gx, gy], -1)
+        m = (self.sdist(P) >= BAND) & self.valid(P)          # his face fur only: not the fur band, eyes, nose
+        a = a[m] if m.sum() >= 200 else a.ravel()
+        return float(1.4826 * np.median(np.abs(a - np.median(a))))
 
     def find(self, start, th, **kw):
         path = self.search(start, th, **kw)
@@ -268,7 +303,9 @@ class Face:
 
 
 def dense(path, step=1.0):
-    path = np.asarray(path, float)
+    path = np.asarray(path, float).reshape(-1, 2)
+    if len(path) < 2:
+        return path.copy()
     seg = np.hypot(*np.diff(path, axis=0).T); s = np.r_[0, np.cumsum(seg)]
     u = np.arange(0, s[-1] + 1e-9, step)
     return np.c_[np.interp(u, s, path[:, 0]), np.interp(u, s, path[:, 1])]
@@ -356,7 +393,19 @@ def sweep_starts(F: Face):
     return [(p, 0.0 if p[0] < mid else np.pi) for p in ob if SWEEP_Y[0] <= p[1] <= SWEEP_Y[1]]
 
 
-def run(sweep_cache: Path | None = None, procs: int = 4):
+def interior_starts():
+    """starts across both cheeks (every 5 px down vertical lines), searching both
+    ways: whiskers whose visible part does not reach his outline"""
+    return [((float(x), float(y)), th) for x in INTERIOR_X
+            for y in np.arange(INTERIOR_Y[0], INTERIOR_Y[1] + 1, INTERIOR_Y[2]) for th in (0.0, np.pi)]
+
+
+def _job_interior(arg):
+    (x, y), th = arg
+    return _F.find(np.array([x, y]), th, length=INTERIOR_LEN, k0max=SWEEP_K0MAX, kmax=SWEEP_KMAX)
+
+
+def run(sweep_cache: Path | None = None, procs: int = 4, interior_cache: Path | None = None):
     from multiprocessing import Pool
     F = Face()
     data = json.loads((ROOT / "data/strands/wisps.json").read_text())
@@ -377,8 +426,26 @@ def run(sweep_cache: Path | None = None, procs: int = 4):
             found = list(pool.imap(_job, jobs, chunksize=2))
         if sweep_cache:
             sweep_cache.write_bytes(pickle.dumps(found))
+    if interior_cache and interior_cache.exists():
+        inner = pickle.loads(interior_cache.read_bytes())
+        for r in inner:
+            r["cut"] = F.cut(r["q"], r["wv"])
+    else:
+        with Pool(procs, initializer=_init) as pool:
+            inner = list(pool.imap(_job_interior, interior_starts(), chunksize=4))
+        if interior_cache:
+            interior_cache.write_bytes(pickle.dumps(inner))
+    joined = []
+    for r0, r1 in zip(inner[0::2], inner[1::2]):   # same start, searched both ways: one path through it
+        q = np.vstack([r1["q"][::-1], r0["q"][1:]]) if len(r1["q"]) and len(r0["q"]) else (r0["q"] if len(r0["q"]) else r1["q"])
+        if len(q) < 3:
+            continue
+        qd, c = F.line_profile(q)
+        wv = windowed(c)
+        joined.append(dict(start=r0["start"], th=r0["th"], q=qd, wv=wv, cut=F.cut(qd, wv, entry_rule=False),
+                           inside=True))
     cont_found = dict(zip([c[0] for c in conts], found[:len(conts)]))
-    sweep_found = found[len(conts):]
+    sweep_found = found[len(conts):] + joined
     return F, conts, cont_found, sweep_found
 
 
@@ -414,28 +481,48 @@ def select(F: Face, cont_found: dict, sweep_found: list, conts: list | None = No
         sw.append(dict(kind="face only", of=None, r=r, seg=r["q"][a:b + 1],
                        score=float(np.nanmean(r["wv"][a:b + 1])) * (b - a + 1)))
     sw.sort(key=lambda x: -x["score"])
+    n_cont = len(kept)
     for x in sw:
         if all(overlap(x["seg"], y["seg"]) < 0.5 for y in kept):
             kept.append(x)
-    # a face-only line that starts at the root end of a whisker with no face part yet,
-    # heading the same way, is that whisker's continuation (its own search went off it)
+    # the same line found more than once: keep the find that covers the most of it
+    # (finished length), so a better-scoring but shorter find never shortens a whisker
+    for i in range(n_cont, len(kept)):
+        x = kept[i]
+        alts = [y for y in sw if overlap(y["seg"], x["seg"]) >= 0.5]
+        def flen(y):
+            ie_, a_, b_ = y["r"]["cut"]
+            cl_ = F.finish(y["r"]["q"], a_, b_, both_ends=bool(y["r"].get("inside")))["centreline"]
+            return float(np.hypot(*np.diff(cl_, axis=0).T).sum()) if len(cl_) > 1 else 0.0
+        kept[i] = max(alts, key=flen)
+    # a face-only line reached by a search that starts at the root end of a whisker with
+    # no face part yet, heading the same way, is that whisker's continuation (its own
+    # search went off it). The search may be a weaker find of the same line.
     have = {y["of"] for y in kept if y["of"]}
+    outline_finds = [y for y in sw if not y["r"].get("inside")]
     for x in kept:
         if x["kind"] != "face only" or not conts:
             continue
-        q = x["r"]["q"]; d0 = q[min(10, len(q) - 1)] - q[0]; a0 = np.arctan2(d0[1], d0[0])
         best = None
-        for k, p, th in conts:
-            if k in have:
+        for y in [x] + [y for y in outline_finds if y is not x and overlap(y["seg"], x["seg"]) >= 0.5]:
+            if y["r"].get("inside"):
                 continue
-            dist = float(np.hypot(*(x["r"]["start"] - p)))
-            ang = abs((np.degrees(a0 - th) + 180) % 360 - 180)
-            if dist <= LINK_DIST and ang <= LINK_ANGLE and (best is None or dist < best[1]):
-                best = (k, dist, ang)
+            q = y["r"]["q"]; d0 = q[min(10, len(q) - 1)] - q[0]; a0 = np.arctan2(d0[1], d0[0])
+            for k, p, th in conts:
+                if k in have:
+                    continue
+                dist = float(np.hypot(*(y["r"]["start"] - p)))
+                ang = abs((np.degrees(a0 - th) + 180) % 360 - 180)
+                if dist <= LINK_DIST and ang <= LINK_ANGLE and (best is None or dist < best[1]):
+                    best = (k, dist, ang, y)
         if best:
-            k, dist, ang = best
+            k, dist, ang, y = best
             x["kind"] = "continuation (linked)"; x["of"] = k; have.add(k)
             x["root"] = next(p for kk, p, _ in conts if kk == k)
+            # the inferred link: the root-end search from its start to where it meets the line
+            yq = y["r"]["q"]; dd = cKDTree(dense(x["seg"])).query(yq)[0]
+            meet = int(np.flatnonzero(dd <= 2.0)[0]) if (dd <= 2.0).any() else len(yq) - 1
+            x["link_path"] = yq[:meet + 1]
             notes[:] = [n for n in notes if not n.startswith(f"{k}:")]
             notes.append(f"{k}: its own search went off its line; a sweep start {dist:.0f} px from its root end "
                          f"(heading {ang:.0f} deg from its direction) found the face line it runs into - linked "
@@ -453,19 +540,37 @@ def select(F: Face, cont_found: dict, sweep_found: list, conts: list | None = No
 
 
 def save(F: Face, kept: list, notes: list, faint: list):
-    out, n_face_only = [], 0
+    # stable names: a face-only line keeps the name it had in the saved data (same line)
+    prev = []
+    path_ = ROOT / "data/strands/face_whiskers.json"
+    if path_.exists():
+        prev = [(w_["id"], np.array(w_["centreline"])) for w_ in json.loads(path_.read_text())["whiskers"]
+                if w_["kind"] == "face only"]
+    used = {i for i, _ in prev}
+    n_face_only = max([int(i[3:]) for i in used] or [0])
+    out = []
     for x in sorted(kept, key=lambda x: (not x["kind"].startswith("continuation"), x["of"] or "", x["seg"][0][1])):
         r = x["r"]; ie, a, b = r["cut"]
-        fin = F.finish(r["q"], a, b)
+        fin = F.finish(r["q"], a, b, both_ends=bool(r.get("inside")))
         if x["kind"].startswith("continuation"):
             fid = f"{x['of']}-face"
         else:
-            n_face_only += 1; fid = f"FW-{n_face_only:02d}"
+            same = [i for i, cl0 in prev if overlap(x["seg"], cl0) >= 0.5]
+            if same:
+                fid = same[0]
+            else:
+                n_face_only += 1; fid = f"FW-{n_face_only:02d}"
         entry = r["q"][:a + 1]
         if "root" in x:      # linked: the inferred link starts at the whisker's own root end
-            entry = np.vstack([x["root"], entry])
+            entry = np.vstack([x["root"], x.get("link_path", entry)])
+        elif abs(float(F.sdist(r["start"]))) > NEAR_OUTLINE + 3:
+            entry = np.zeros((0, 2))   # started inside his face: no link through the fur band to infer
         entry = dense(entry) if len(entry) > 1 else np.zeros((0, 2))
         cl = fin["centreline"]
+        if F.sdist(cl[0]) > F.sdist(cl[-1]):
+            # every face whisker runs from his outline side toward his nose
+            cl = cl[::-1]
+            fin = dict(fin, centreline=cl, sigma=fin["sigma"][::-1], depth=fin["depth"][::-1], fit_ok=fin["fit_ok"][::-1])
         # footprint: pixels whose centre lies within 2 sigma (>= 1 px) of the line
         sg = np.nan_to_num(fin["sigma"], nan=1.0)
         lo_ = np.floor(cl.min(0) - 6).astype(int); hi_ = np.ceil(cl.max(0) + 6).astype(int)
@@ -504,7 +609,8 @@ def save(F: Face, kept: list, notes: list, faint: list):
         accounting=dict(face_whisker_pixels=int(sum(o["footprint_px"] for o in out)),
                         note=("inside the outline every pixel is already classified (head / undercarriage / "
                               "parts); these pixels are additionally marked WHISKER (weight 0) on top")),
-        faint_candidates_not_classified=[np.round(f, 1)[::4].tolist() for f in faint],
+        faint_candidates_not_classified=[dict(id=f"C{i + 1:02d}", points=np.round(f, 1)[::4].tolist())
+                                         for i, f in enumerate(sorted(faint, key=lambda f: (f[:, 0].mean() > 549, f[:, 1].mean())))],
     )
     (ROOT / "data/strands/face_whiskers.json").write_text(json.dumps(doc, indent=1))
     return doc
@@ -512,7 +618,8 @@ def save(F: Face, kept: list, notes: list, faint: list):
 
 def sheets(doc=None):
     """Review pictures (docs/images/face_whiskers_*.png). Photo shown in grey with its
-    contrast stretched over his fur so the faint lines can be seen; guides 3 px either
+    large-scale shading taken out and contrast stretched over his fur, so the faint
+    lines can be seen; guides 3 px either
     side of each traced line (the line itself is left uncovered); dashed = inferred."""
     from PIL import ImageDraw
     F = Face()
@@ -522,11 +629,13 @@ def sheets(doc=None):
 
     def panel(box, sc, items, faint=(), label=""):
         x0, y0, x1, y1 = box
-        a = grey[y0:y1, x0:x1]
+        # display only: the photo's grey with its large-scale shading taken out (local
+        # contrast), so faint lines show the same on lit and shadowed fur
+        a = (grey - ndi.gaussian_filter(grey, 12))[y0:y1, x0:x1]
         gx, gy = np.meshgrid(np.arange(x0, x1) + 0.5, np.arange(y0, y1) + 0.5)
         ins = F.sdist(np.stack([gx, gy], -1)) > 3
-        lo, hi = np.percentile(a[ins], [1, 99]) if ins.any() else (0, 255)
-        a = np.clip((a - lo) / max(hi - lo, 1) * 235 + 10, 0, 255).astype(np.uint8)
+        lo, hi = np.percentile(a[ins], [1, 99]) if ins.any() else (a.min(), a.max())
+        a = np.clip((a - lo) / max(hi - lo, 1e-6) * 235 + 10, 0, 255).astype(np.uint8)
         im = Image.fromarray(a).resize(((x1 - x0) * sc, (y1 - y0) * sc), Image.LANCZOS).convert("RGB")
         top = im.copy(); dr = ImageDraw.Draw(im)
         P = lambda z: ((z[0] - x0) * sc, (z[1] - y0) * sc)
@@ -543,10 +652,13 @@ def sheets(doc=None):
                         dr.line([P(g[i]), P(g[min(i + 2, len(g) - 1)])], fill=col, width=1)
                 else:
                     dr.line([P(z) for z in g], fill=col, width=1)
-        for f in faint:
-            f = dense(np.array(f))
+        for fc in faint:
+            f = dense(np.array(fc["points"]))
             for i in range(0, len(f) - 1, 6):
                 dr.line([P(f[i]), P(f[min(i + 2, len(f) - 1)])], fill=(80, 160, 255), width=1)
+            m = f[len(f) // 2]
+            if box[0] <= m[0] < box[2] and box[1] <= m[1] < box[3]:
+                dr.text(P(m + np.array([2, 3])), fc["id"], fill=(80, 160, 255))
         for w_ in items:
             guides(dense(np.array(w_["inferred_entry"])) if len(w_["inferred_entry"]) > 1 else np.zeros((0, 2)),
                    (255, 190, 0), dash=True)
@@ -559,10 +671,10 @@ def sheets(doc=None):
         return out
     W = doc["whiskers"]
     imgs = []
-    for side, box in (("image_left", (130, 560, 420, 760)), ("image_right", (760, 620, 990, 880))):
+    for side, box in (("image_left", (130, 560, 470, 900)), ("image_right", (630, 620, 990, 900))):
         items = [w_ for w_ in W if box[0] <= np.array(w_["centreline"])[:, 0].mean() <= box[2]]
-        fa = [f for f in doc["faint_candidates_not_classified"] if box[0] <= np.array(f)[:, 0].mean() <= box[2]]
-        im = panel(box, 3, items, fa, f"face whiskers, {side.replace('_', ' ')} cheek: photo (top); "
+        fa = [f for f in doc["faint_candidates_not_classified"] if box[0] <= np.array(f["points"])[:, 0].mean() <= box[2]]
+        im = panel(box, 3, items, fa, f"face whiskers, {side.replace('_', ' ')} cheek: photo, local contrast (top); "
                                      f"magenta = traced whisker (guides 3 px each side), dashed yellow = inferred, dotted blue = faint, not classified")
         im.save(ROOT / f"docs/images/face_whiskers_{side}.png"); imgs.append(im)
     for w_ in W:
@@ -577,11 +689,12 @@ def sheets(doc=None):
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sweep-cache", type=Path, default=None)
+    ap.add_argument("--interior-cache", type=Path, default=None)
     ap.add_argument("--sheets-only", action="store_true")
     args = ap.parse_args()
     if args.sheets_only:
         sheets(); return 0
-    F, conts, cont_found, sweep_found = run(args.sweep_cache)
+    F, conts, cont_found, sweep_found = run(args.sweep_cache, interior_cache=args.interior_cache)
     kept, notes, faint = select(F, cont_found, sweep_found, conts)
     doc = save(F, kept, notes, faint)
     for w_ in doc["whiskers"]:

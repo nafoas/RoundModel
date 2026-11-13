@@ -459,3 +459,35 @@ check.py output (if applicable), and the next step.
   the separate precise steps the owner listed (ears' pixel tweaks, lashes/eyes,
   whisker pads, mouth and nose), then the head/undercarriage split.
 
+## 2026-11-13 — Session 6 (cont.): face whiskers, second pass (owner's review)
+- Owner: "the inferred whiskers don't go for the full length, and you missed
+  several whiskers along the way, but the method is solid".
+- Photo used as reference of him: `data/photos/anchor_front.webp` (the only one).
+- Causes found: (1) searches only started at his outline or known roots and the
+  line had to be visible within 64 px of the outline; (2) a whisker's end was set
+  where it fell to half its own typical strength; (3) lines found from inside his
+  cheek were followed only the way the search went; (4) when one line was found
+  twice, the better-scoring but shorter find won. Lesson 16.
+- Fixes (tools/face_whiskers.py): cheek-wide starts (6 x 69 x 2 searches, joined
+  through each start); end = change point against 1.17 x the local fur speckle
+  (fur on his face only), calibrated on his forehead (plain fur, no whiskers);
+  longest find kept; face-only names stable across runs; every face whisker runs
+  outline -> nose; a linked whisker keeps its link when a longer find wins.
+  Bugs fixed on the way: a zero-length path crashed the line measurement; the
+  fur-speckle box took in the dark fur band (FW-01 collapsed to nothing).
+- Result: 9 face whiskers (was 7): FW-02, FW-03 new; B4-S02 +23 px, FW-01 +17 px,
+  others unchanged or a little longer; no whisker shorter than before. 7746 px
+  marked WHISKER (weight 0). 13 faint lines numbered C01-C13 (not classified).
+  New lines checked at 5-7x on the photo: each sits on its line.
+- **Stopped on "full length" (rule 5).** Tried, on the traced ends: follow on
+  while the 24 px running contrast >= 2.5 (0 px gained); let it bend faster (the
+  bend was found, but it stays at fur level); follow the faintest evidence with
+  no cost (wandered, crossed whiskers, overshot the pad); extend each whisker's
+  own arc (curled away or crossed); test against side-by-side copies, and against
+  identical searches started 12-30 px beside it (margins 0.01-0.16: noise). The
+  continuations are visible to the eye but not separable from fur by these
+  measures. Options for the owner in Q36.
+- Tests: 24 passed. `check.py` does not exist yet (PLAN.md: not built), so no
+  match is claimed.
+- **Next:** owner's choice on Q36 (full length) and answers on C01-C13 (Q35).
+

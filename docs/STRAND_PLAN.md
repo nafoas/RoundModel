@@ -172,27 +172,31 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**Whiskers, part 2 (2026-11-11): the whiskers lying over his face, first pass,
-self-checked at full resolution; owner review pending.**
-`python tools/face_whiskers.py [--sweep-cache PATH]` (~25 min with 4 cores; with
-the cache ~3 min). On his white fur his light whiskers show only as faint lines
-5-12 grey levels darker than the fur beside them, so each face line is found as a
-whole path (dynamic programming over smooth arcs, <= 0.22 deg/px bend; eyes,
-nose/mouth and the outline band off limits), accepted where its running contrast
-is clearly above plain fur (>= 3.5 for >= 40 px), followed into its faint parts
-(>= 2.5), ended at the contrast change point, and fitted to the photo at every
-1 px (sub-pixel centre, width, depth; smooth spline). Starts: the root end of
-every whisker at his cheeks, plus a sweep every 3 px along both cheek outlines.
-Tested on synthetic faint curved lines (0.15-0.25 px along the line; ends within
-~2 px, as the line fades). **Result: 7 face whiskers**: continuations of B1-S11,
-B2-S08, B2-S16, B4-S02, B5-S17, B2-S02 (linked: found from a sweep start 12 px
-from its root), and FW-01 (face only, his right cheek, image left). Between his
-outline and where each line can be seen the link is *inferred* (7-64 px, dashed).
-Seven whiskers show no face part (B2-S12, B2-S15, B2-S20, the fan B4-S12/S15/S17).
-8 fainter lines listed, not classified (stay body fur). 5997 px marked WHISKER
-(weight 0) on top of the body. `data/strands/face_whiskers.json`; sheets
-`docs/images/face_whiskers_image_{left,right}.png`, `face_whisker_<id>.png`.
-Questions Q32-Q35.
+**Whiskers, part 2: the whiskers lying over his face. Second pass (2026-11-13)
+after the owner's review ("the inferred whiskers don't go for the full length,
+and you missed several whiskers along the way, but the method is solid").
+Self-checked at full resolution; owner review pending; NOT yet full length.**
+`python tools/face_whiskers.py [--sweep-cache PATH] [--interior-cache PATH]`
+(~45 min with 4 cores; with both caches ~3 min). Method unchanged (whole-path
+search over smooth arcs on a local-contrast map; accepted where the running
+contrast is clearly above plain fur, >= 3.5 for >= 40 px; followed into its faint
+parts, >= 2.5; per-px fits on the photo + spline). Fixed in this pass:
+- starts across both cheeks (six vertical lines, every 5 px, both ways, joined
+  into one path through each start), not only at his outline: 2 more whiskers
+  (FW-02, FW-03);
+- ends judged against the fur around them (1.17 x its speckle, calibrated on his
+  forehead), not against the whisker's own strength: B4-S02 +23 px;
+- the same line found twice keeps the find that covers most of it: FW-01 +17 px;
+  FW-03 +48 px.
+**Result: 9 face whiskers**, 7746 px marked WHISKER (weight 0) over the body:
+continuations of B1-S11, B2-S02 (linked), B2-S08, B2-S16, B4-S02, B5-S17, and
+face-only FW-01, FW-02, FW-03. 13 fainter lines numbered C01-C13, not classified.
+**Not fixed (stopped, rule 5):** the stretches beyond each traced end that the
+owner can see (e.g. B5-S17 bending down toward his nose, FW-01 running on) and the
+remaining faint whiskers measure at the level of the fur texture by every test
+tried (24 px running contrast, change point, side-by-side copies, identical
+searches started beside them). Options in OWNER_QUESTIONS Q36.
+Sheets `docs/images/face_whiskers_image_{left,right}.png`, `face_whisker_<id>.png`.
 
 **Whiskers, part 1 (2026-11-11): the whiskers out past his fur, self-checked.**
 `python tools/trace_whiskers.py` (after trace_wisps): 21 whiskers re-traced with a
