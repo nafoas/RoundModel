@@ -739,19 +739,21 @@ def main() -> int:
     args = ap.parse_args()
     if args.sheets_only:
         sheets(); return 0
+    path_ = ROOT / "data/strands/face_whiskers.json"          # names stay stable against the saved data
+    prev_doc = json.loads(path_.read_text()) if path_.exists() else None
     F, conts, cont_found, sweep_found = run(args.sweep_cache, interior_cache=args.interior_cache)
     kept, notes, faint = select(F, cont_found, sweep_found, conts)
     doc = save(F, kept, notes, faint)
     # part 2b: the line view (tools/whisker_lineview.py): extends whiskers, finds missed ones
     import whisker_lineview as lv
     ext, cands, _ = lv.run(F, doc, args.line_cache)
-    doc = lv.apply(F, doc, ext, cands)
+    doc = lv.apply(F, doc, ext, cands, prev_doc)
     # part 2c: whole length in the combined view (tools/whisker_fulllength.py)
     import whisker_fulllength as wf
-    doc = wf.run(F, doc, args.full_cache)
+    doc = wf.run(F, doc, args.full_cache, prev=prev_doc)
     (ROOT / "data/strands/face_whiskers.json").write_text(json.dumps(doc, indent=1))
     for k_, n_ in doc["full_length"]["sweep_extensions"].items():
-        print(f"combined view sweep: {k_} +{n_} px")
+        print(f"combined view sweep: {k_}: {n_}")
     for i_, rr in enumerate(doc["full_length"]["follow_rounds"]):
         print(f"follow round {i_ + 1}: " + ", ".join(f"{a}/{b} +{n} px (margin {m:+.1f})" for a, b, n, m in rr))
     for k_, n_ in doc["line_view"]["extensions"].items():
@@ -761,7 +763,7 @@ def main() -> int:
         print(f"line view candidate {c['id']} ({c['verdict']}): margin {mg}  {c['reason']}")
     for w_ in doc["whiskers"]:
         print(f"{w_['id']:12s} {w_['kind']:22s} face {w_['length_px']:6.1f} px  inferred entry {w_['inferred_entry_px']:5.1f} px  "
-              f"contrast {w_['median_line_contrast']:4.1f}  depth {w_['median_depth_grey']:4.1f} grey  sigma {w_['median_sigma_px']:.2f}")
+              f"contrast {w_.get('median_line_contrast', float('nan')):4.1f}  depth {w_['median_depth_grey']:4.1f} grey  sigma {w_['median_sigma_px']:.2f}")
     for n in notes:
         print("note:", n)
     print("faint candidates (not classified):", len(faint))

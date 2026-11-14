@@ -75,8 +75,8 @@ VERDICTS = [
     ((338.0, 856.0), "L02", WHISKER, "L02: owner, 2026-11-13"),
     ((299.0, 925.0), "L03", WHISKER, "L03: owner, 2026-11-13"),
     ((817.0, 594.0), "L04", WHISKER, "L04: owner, 2026-11-13"),
-    ((931.0, 701.0), "L05", UNCERTAIN, "L05: runs along the inside of his fur band, parallel to his outline; owner: "
-     "\"even I can't entirely tell\""),
+    ((931.0, 701.0), "L05", WHISKER, "L05: owner, 2026-11-14 (\"I think they're all whiskers\"; first: "
+     "\"even I can't entirely tell\")"),
     ((687.0, 851.0), "L06", WHISKER, "L06: owner, 2026-11-13"),
     ((827.0, 851.0), "L07", WHISKER, "L07: owner, 2026-11-13"),
 ]
@@ -350,7 +350,7 @@ def fit_line(F: fw.Face, base: np.ndarray):
     return cl, sig, dep, ok
 
 
-def apply(F: fw.Face, doc: dict, ext: dict, cands: list[dict]):
+def apply(F: fw.Face, doc: dict, ext: dict, cands: list[dict], prev_doc: dict | None = None):
     """extend whiskers, add accepted new whiskers, list the rest; updates doc in place"""
     W = {w["id"]: w for w in doc["whiskers"]}
     for (k, side), piece in ext.items():
@@ -367,11 +367,8 @@ def apply(F: fw.Face, doc: dict, ext: dict, cands: list[dict]):
             w["inferred_entry"] = np.round(en, 2).tolist()
             w["inferred_entry_px"] = round(float(np.hypot(*np.diff(en, axis=0).T).sum()) if len(en) > 1 else 0.0, 1)
     # new whiskers (judged "whisker"): stable names from the saved data where the same line was there before
-    path_ = fw.ROOT / "data/strands/face_whiskers.json"
-    prev = []
-    if path_.exists():
-        prev = [(w_["id"], np.array(w_["centreline"])) for w_ in json.loads(path_.read_text())["whiskers"]
-                if w_["id"].startswith("FW-")]
+    prev = [(w_["id"], np.array(w_["centreline"])) for w_ in (prev_doc or {}).get("whiskers", [])
+            if w_["id"].startswith("FW-")]
     taken = {w["id"] for w in doc["whiskers"]}
     n = max([int(i[3:]) for i in taken | {i for i, _ in prev} if i.startswith("FW-")] or [0])
     listed = []

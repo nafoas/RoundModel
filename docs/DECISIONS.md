@@ -186,6 +186,16 @@ excuse and was withdrawn.)
   areas into their own classification that I'll sort out manually later"):
   "uncertain: owner sorts manually". L01-L04, L06, L07 are whiskers (owner).
 
+- **The whisker rule** (owner, 2026-11-14): "I think they're all whiskers. And the ones
+  that connect to another whisker are, as far as I know, part of the same whisker ... they
+  are all emanating from his little whisker pads ... pointing towards the whisker pads, and
+  they are all straight ... Some of them are genuinely faint, and we shouldn't artificially
+  make them more prominent in the photo - but we shouldn't forget them either."
+  So: L05, L08-L11 are whiskers; L12-L19 are parts of the whiskers they join (each
+  joined whisker is refitted as one gentle arc through the photo fits); every whisker is
+  checked against the pads (`tools/whisker_pads.py`); faint whiskers keep their measured
+  strength when he is built (never boosted) and are never dropped.
+
 ## The peets / underfluff / body line (approved 2026-11-07)
 
 - Under his body, his pelvis isn't visible: a fur tuft hangs between the peets.

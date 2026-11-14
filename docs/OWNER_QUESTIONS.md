@@ -157,22 +157,25 @@ the owner's official opinion later. Each says what I did in the meantime.
 33. **B2-S02's face line is linked by position.** *Meantime:* linked.
 34. **His right-side fan (B4-S12/S15/S17):** FW-05 was found from that shared root;
    which of the three it is I can't tell. B2-S12, B2-S15, B2-S20 still show no face part.
-35. **To sort by hand ("uncertain: owner sorts manually", bold cyan on the sheets).**
-   One review sheet per candidate: `docs/images/candidates/L??.png`, all in
-   `docs/images/candidates/candidates.pdf` (where it is on his face; the photo as it is;
-   the photo with brightness stretched in true colour; contrast evened out; the line view;
-   unmarked and marked; my read, which is not a decision). Side-by-side test (plain fur
-   reaches 0.94 one time in 20):
-   - possible continuations: L12 B5-S17 (-0.34), L13 FW-07 (-0.12), L14 FW-06
-     (+0.19), L15 B2-S08 (+0.22), L16 B2-S16 (+0.43), L17 FW-10 (+0.89),
-     L18 FW-12 (-0.07), L19 B2-S02 (+0.85);
-   - possible whiskers on their own: L08 (+0.52), L09 (+1.52), L10 (+1.19),
-     L11 (untestable: every search beside it lands on B2-S08 or B2-S16);
-   - L05 (+1.81, but it runs along his fur band, and the test also rewards a long edge).
-   For each: whisker (all of it, or up to where?), or fur? Old-view faint lines still
-   unmatched: C03, C06, C08, C12.
-36. **Full length:** should each whisker also run on to its root on his whisker pad,
-   inferred where it can't be seen?
-37. **FW-02 shares B5-S17's first ~19 px**, then they part: two whiskers from one
-   spot, or one line? *Meantime:* both as traced.
+35. **[ANSWERED 2026-11-14: all are whiskers; continuations are parts of the same whisker.]**
+   L05, L08-L11 are FW-13..FW-17; L12-L19 joined into B5-S17, FW-07, FW-06, B2-S08, B2-S16,
+   FW-10, FW-12, B2-S02 (each refitted as one arc; FW-12's photo fits lie 2.7 px from its arc,
+   the others 0.7-1.5 px). Sheets kept: `docs/images/candidates/`.
+36. **Roots on his whisker pads:** every face whisker stops 45-280 px short of its pad
+   (the nose/mouth zone has been off limits, kept for its own step). By your rule each
+   runs on into its pad. Trace them into the pads now (inferred where they can't be seen),
+   or in the whisker-pad step?
+37. **FW-02 shares B5-S17's first ~19 px**, then they part: two whiskers from one spot?
+   *Meantime:* both as traced.
+38. **Outside parts and face parts that line up (your rule), not yet joined:**
+   - B2-S20 (outside) and FW-03 (face): 2 px off its line, 3 deg apart: one whisker?
+   - his right-side fan B4-S12 / B4-S15 (outside, shared root): FW-05 starts on their line
+     (22 deg apart; FW-05 is already noted as from that root), FW-06 9-11 px off (19 deg);
+   - B2-S15 (outside): only B2-S16's face line is near (12 px off, same direction): a shared
+     root like the fan, or its face part is too faint to see?
+   - B2-S12 (outside): nothing clear (FW-17 9 px off but 36 deg apart);
+   - the borderline wisps B2-S14 and B2-S17 (Q27) line up with FW-03's outer end (4-5 deg):
+     outside parts of whiskers rather than wisps?
+   - FW-02, FW-13, FW-17 start at the outside part of B5-S17, B2-S02, B2-S08 (shared roots?).
+   Details in `data/strands/whisker_pads.json`.
 

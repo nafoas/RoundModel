@@ -108,7 +108,11 @@ Prince is built in separate layers so no layer can distort another:
   it if they show the whiskers. Whiskers lying over the fur inside the outline
   need separate careful tracing.
 
-## Build checklist: things that must not be forgotten when he's built
+## Build checklist
+
+- [ ] **Faint whiskers at their measured strength** (owner, 2026-11-14): each face whisker
+  stores its measured depth/width per px (`data/strands/face_whiskers.json`); render them at
+  that strength, never boosted, and never drop one.: things that must not be forgotten when he's built
 Owner: some layers are soft or partly hidden and must still be rendered.
 - **Intermediate fur** around his body (`data/strands/intermediate_fur.json`).
 - **The tuft's fuzz**, the see-through haze of hair tips below the underfluff

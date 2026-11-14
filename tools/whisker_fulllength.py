@@ -65,8 +65,30 @@ ROUNDS = 5
 JOIN_DIST, JOIN_ANGLE = 5.0, 25.0
 LINK_DIST, LINK_ANGLE = 15.0, 35.0
 
-# judgment calls on candidates found by this pass (midpoint, verdict, reason)
-FULL_VERDICTS: list = []
+# Owner, 2026-11-14: "I think they're all whiskers. And the ones that connect to another whisker
+# are, as far as I know, part of the same whisker ... they are all emanating from his little
+# whisker pads ... pointing towards the whisker pads, and they are all straight ... Some of them
+# are genuinely faint, and we shouldn't artificially make them more prominent in the photo - but
+# we shouldn't forget them either."
+OWNER_SAYS = "owner, 2026-11-14: \"I think they're all whiskers\""
+FULL_VERDICTS: list = [                 # (midpoint, verdict, reason): candidates found by this pass
+    ((311.0, 574.0), lv.WHISKER, "L08: " + OWNER_SAYS),
+    ((434.0, 828.0), lv.WHISKER, "L09: " + OWNER_SAYS),
+    ((913.0, 726.0), lv.WHISKER, "L10: " + OWNER_SAYS),
+    ((906.0, 789.0), lv.WHISKER, "L11: " + OWNER_SAYS),
+]
+# possible continuations the owner says are part of the same whisker (L12-L19): added whatever the test says
+OWNER_CONTINUATIONS = [                  # matched by where the piece is (its midpoint), never by a whisker name
+    ((431.0, 673.0), "L12"), ((287.0, 789.0), "L13"), ((303.0, 731.0), "L14"), ((772.0, 712.0), "L15"),
+    ((767.0, 768.0), "L16"), ((727.0, 628.0), "L17"), ((717.0, 801.0), "L18"), ((803.0, 702.0), "L19"),
+]
+
+
+def owner_continuation(piece):
+    q = fw.dense(piece); m = q[len(q) // 2]
+    hit = [lid for (x, y), lid in OWNER_CONTINUATIONS if np.hypot(m[0] - x, m[1] - y) <= lv.VERDICT_DIST]
+    return hit[0] if hit else None
+STRAIGHT_DEG = 2                         # owner-confirmed joins: the whole whisker as one gentle arc
 
 
 def bank2(img, across, along):
@@ -228,13 +250,39 @@ def max_turn(cl):
     return float(np.degrees(np.abs(np.diff(a))).max()) if len(a) > 2 else 0.0
 
 
-def grow(F, w, side, piece, notes=None):
+def smooth_whole(F, base):
+    """one smooth curve through the whole whisker (owner: whiskers are straight): photo fits at
+    every px, then a weighted polynomial of degree STRAIGHT_DEG along its main axis"""
+    base = fw.dense(base)
+    pts, sig, dep, ok = F.refine(base, resample=False)
+    w = np.where(ok, np.clip(dep, 0, None), 0.0) + 1e-3
+    c0 = pts.mean(0); u, sv, vt = np.linalg.svd(pts - c0, full_matrices=False)
+    ax = vt[0]; nx = np.array([-ax[1], ax[0]])
+    s_ = (pts - c0) @ ax; t_ = (pts - c0) @ nx
+    coef = np.polyfit(s_, t_, STRAIGHT_DEG, w=np.sqrt(w))
+    sb = (base - c0) @ ax
+    cl = c0 + sb[:, None] * ax + np.polyval(coef, sb)[:, None] * nx
+    return cl, sig, dep, ok, float(np.sqrt(np.average((t_ - np.polyval(coef, s_)) ** 2, weights=w)))
+
+
+def grow(F, w, side, piece, notes=None, owner=None):
     """add a piece at one end and refit the whole line on the photo (as part 2b); refused
-    (returns False) if the result would bend sharper than any whisker does"""
+    (returns False) if the result would bend sharper than any whisker does. owner: the owner
+    says the piece is part of this whisker; it is added, as one smooth curve if needed."""
     cl = np.array(w["centreline"])
     base = np.vstack([cl, piece]) if side == "nose" else np.vstack([piece[::-1], cl])
     new_cl, sig, dep, ok = lv.fit_line(F, base)
-    if max_turn(new_cl) > MAX_TURN:
+    if owner:
+        # owner: whiskers are straight. The found piece can wander (into a dark patch of fur);
+        # the whole whisker is refitted as ONE gentle arc through the photo fits.
+        new_cl, sig, dep, ok, rms = smooth_whole(F, base)
+        w["arc_fit_rms_px"] = round(rms, 2)
+        if notes is not None:
+            notes.append(f"{w['id']}: {owner} joined; whole whisker refitted as one arc (degree {STRAIGHT_DEG}); "
+                         f"photo fits lie {rms:.1f} px from it (rms)")
+    if owner:
+        w.setdefault("owner_confirmed_stretches", []).append(dict(found_as=owner, at_end=side, px=int(len(piece))))
+    elif max_turn(new_cl) > MAX_TURN:
         if notes is not None:
             notes.append(f"{w['id']}: a {len(piece)} px piece at its {side} end was refused (it would bend "
                          f"{max_turn(new_cl):.1f} deg/px)")
@@ -310,6 +358,27 @@ def link_outside(F, doc, notes):
                          f"(heading {ang:.0f} deg apart): linked as its continuation (owner review)")
 
 
+PREV = None          # the data saved before this run (stable names)
+
+
+def add_whisker(F, doc, seg, why, lid):
+    """a candidate judged a whisker joins the whiskers (sub-pixel fit, outline -> nose)"""
+    cl, sig, dep, ok = lv.fit_line(F, seg)
+    if F.sdist(cl[0]) > F.sdist(cl[-1]):
+        cl, sig, dep, ok = cl[::-1], sig[::-1], dep[::-1], ok[::-1]
+    taken = {w["id"] for w in doc["whiskers"]}
+    same = [w["id"] for w in (PREV or {}).get("whiskers", []) if w["id"] not in taken
+            and w["id"].startswith("FW-") and fw.overlap(cl, np.array(w["centreline"])) >= 0.5]
+    n = max(int(i[3:]) for i in taken | {w["id"] for w in (PREV or {}).get("whiskers", [])} if i.startswith("FW-"))
+    doc["whiskers"].append(dict(
+        id=same[0] if same else f"FW-{n + 1:02d}", kind="face only (combined view)", found_as=lid, owner_confirmed=True,
+        continues=None, judgment=why, median_depth_grey=round(float(np.median(dep[ok])) if ok.any() else float("nan"), 1),
+        median_sigma_px=round(float(np.nanmedian(sig[ok])) if ok.any() else float("nan"), 2),
+        status="owner-confirmed whisker; faint: rendered at its measured strength, never boosted",
+        weight=0, centreline=np.round(cl, 2).tolist(), sigma=np.round(sig, 2).tolist(),
+        depth_grey=np.round(dep, 1).tolist(), inferred_entry=[]))
+
+
 def footprints(doc):
     for w in doc["whiskers"]:
         cl = np.array(w["centreline"]); sg = np.nan_to_num(np.array(w["sigma"], float), nan=1.0)
@@ -323,7 +392,9 @@ def footprints(doc):
     doc["accounting"]["face_whisker_pixels"] = int(sum(w["footprint_px"] for w in doc["whiskers"]))
 
 
-def run(F, doc, cache: Path | None = None, procs: int = 4):
+def run(F, doc, cache: Path | None = None, procs: int = 4, prev: dict | None = None):
+    global PREV
+    PREV = prev
     from multiprocessing import Pool
     notes = doc["notes"]
     lv.VIEW = CombinedView
@@ -351,7 +422,11 @@ def run(F, doc, cache: Path | None = None, procs: int = 4):
         margins = beside_margins(F, pool, [(p, th, float(len(pc)), sd == "nose") for k, sd, pc, p, th in items],
                                  doc, [k for k, sd, pc, p, th in items])
         for (k, side, piece, p, th), (m, own) in zip(items, margins):
-            if m is not None and m >= MARGIN and own >= MIN_MEAN and on_other(doc, k, piece) < ON_OTHER \
+            if owner_continuation(piece):
+                lid = owner_continuation(piece)
+                grow(F, W[k], side, piece, notes, owner=lid)
+                sweep_ext[f"{k}/{side}"] = f"{len(piece)} px ({lid}, owner)"
+            elif m is not None and m >= MARGIN and own >= MIN_MEAN and on_other(doc, k, piece) < ON_OTHER \
                     and grow(F, W[k], side, piece, notes):
                 sweep_ext[f"{k}/{side}"] = int(len(piece))
             else:
@@ -383,6 +458,9 @@ def run(F, doc, cache: Path | None = None, procs: int = 4):
         v = [(vv, why) for (x, y), vv, why in FULL_VERDICTS if np.hypot(m[0] - x, m[1] - y) <= lv.VERDICT_DIST]
         verdict, why = v[0] if v else (lv.UNCERTAIN, "not yet judged")
         nl += 1
+        if verdict == lv.WHISKER:
+            add_whisker(F, doc, q, why, f"L{nl:02d}")
+            continue
         pts, sg, dep, ok = F.refine(q)
         doc["line_view_candidates"].append(dict(
             id=f"L{nl:02d}", verdict=verdict, reason=why, margin=round(c.get("margin", float("nan")), 2),

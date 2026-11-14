@@ -554,3 +554,23 @@ check.py output (if applicable), and the next step.
 - Tests: 27 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
 - **Next:** owner sorts L05, L08-L19 with the sheets (Q35).
 
+## 2026-11-14 — Session 6 (cont.): the owner's whisker rule; is this all of them?
+- Owner: all the grey areas are whiskers; continuations are part of the same whisker; the
+  rule: whiskers come from his whisker pads, point to them, and are straight; faint ones are
+  never boosted and never forgotten. Photo used: `data/photos/anchor_front.webp`.
+- Applied: L05, L08-L11 -> FW-13..FW-17; L12-L19 joined (matched by where the piece is, not
+  by name). Bugs on the way: whisker names shifted between runs (an owner-confirmed piece
+  missed its whisker) -> names now stable against the saved data; FW-12's joined piece
+  wandered into a dark fur patch (S-bend) -> every owner-joined whisker refitted as one
+  gentle arc (photo fits 0.7-1.5 px from the arcs; FW-12 2.7 px).
+- 23 face whiskers, 27891 px WHISKER (weight 0), no grey areas left.
+- New `tools/whisker_pads.py` (completeness by the rule): pads at (504, 695) and (661, 702);
+  a scan of every straight line pointing into a pad finds no untraced line at the normal
+  level (the one hit on the left is B5-S17's own arc), 3 + 1 at a fainter level, where
+  control lines through the same fur find 20 + 8, so nothing stands out from fur. What is
+  still open is parts, not whole whiskers: roots into the pads (Q36), and outside/face parts
+  that line up but aren't joined (Q38).
+- Tests: 27 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
+- **Next:** owner on Q36 (roots into the pads) and Q38 (joins); then the separate precise
+  steps (ears' tweaks, lashes/eyes, whisker pads, mouth and nose).
+
