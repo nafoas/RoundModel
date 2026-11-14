@@ -757,7 +757,8 @@ def main() -> int:
     for k_, n_ in doc["line_view"]["extensions"].items():
         print(f"line view: {k_} extended by {n_} px")
     for c in doc["line_view_candidates"]:
-        print(f"line view candidate {c['id']} ({c['verdict']}): margin {c['margin']:+.2f}  {c['reason']}")
+        mg = "untestable" if c.get("margin") is None else f"{c['margin']:+.2f}"
+        print(f"line view candidate {c['id']} ({c['verdict']}): margin {mg}  {c['reason']}")
     for w_ in doc["whiskers"]:
         print(f"{w_['id']:12s} {w_['kind']:22s} face {w_['length_px']:6.1f} px  inferred entry {w_['inferred_entry_px']:5.1f} px  "
               f"contrast {w_['median_line_contrast']:4.1f}  depth {w_['median_depth_grey']:4.1f} grey  sigma {w_['median_sigma_px']:.2f}")

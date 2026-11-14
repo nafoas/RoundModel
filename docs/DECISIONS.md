@@ -303,4 +303,10 @@ excuse and was withdrawn.)
    test it ran 87 px past a whisker's end. Both were caught only because I measured
    them. → Calibrate every threshold on known negatives (plain fur) and known
    positives before using it, and test the real acceptance step, not a part of it.
+19. **Two tests for one question, and a view that invents colour.** Continuations were
+   scored with neighbouring whiskers left out, but lines on their own with an older test
+   that compared a line lying between two whiskers against those whiskers (L11: -0.25,
+   really untestable); and my first review sheets stretched the colour channels, making
+   his white fur look blue and yellow. Both found while making the owner's review sheets.
+   → One question, one test, everywhere; a view must never show what isn't in the photo.
 

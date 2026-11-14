@@ -210,6 +210,12 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     (`tools/whisker_fulllength.py`). Every added stretch must beat identical
     searches beside it by what plain fur reaches only 5% of the time (calibrate
     any such bar on plain fur; never set it by hand).
+17. **Review sheets for grey areas** (`tools/candidate_sheets.py`): locator, the photo as
+    it is, the photo with brightness stretched in TRUE colour (never stretch the colour
+    channels separately or together: his fur's tiny real colour shifts become false
+    blue/yellow/pink), contrast evened out, the line view; unmarked and marked (guides
+    beside the line, never on it); measurements; my read, labelled as not a decision.
+    One question, one test: every candidate is scored by the same side-by-side test.
 16. **"Uncertain: owner sorts manually"** (owner, 2026-11-14): grey areas that
     neither the measurements nor I can call go to their own class, drawn bold cyan,
     for the owner to sort by hand. They are not whiskers and not fur until then.

@@ -17386,8 +17386,8 @@
    "id": "L05",
    "verdict": "uncertain: owner sorts manually",
    "reason": "L05: runs along the inside of his fur band, parallel to his outline; owner: \"even I can't entirely tell\"",
-   "margin": -0.06,
-   "line_score": 6.42,
+   "margin": 1.81,
+   "line_score": 6.02,
    "sigma_px": 1.76,
    "depth_grey": 6.5,
    "points": [
@@ -17499,14 +17499,15 @@
      887.4,
      674.6
     ]
-   ]
+   ],
+   "margin_before_recheck": -0.06
   },
   {
    "id": "L08",
    "verdict": "uncertain: owner sorts manually",
-   "reason": "not yet judged",
-   "margin": 0.68,
-   "line_score": 3.72,
+   "reason": "possible whisker on its own; beats searches beside it by +0.52 (needs 0.94)",
+   "margin": 0.52,
+   "line_score": 3.76,
    "sigma_px": 1.85,
    "depth_grey": 3.7,
    "found_by": "combined view (part 2c)",
@@ -17699,14 +17700,15 @@
      398.0,
      604.5
     ]
-   ]
+   ],
+   "margin_before_recheck": 0.68
   },
   {
    "id": "L09",
    "verdict": "uncertain: owner sorts manually",
-   "reason": "not yet judged",
-   "margin": 1.13,
-   "line_score": 5.6,
+   "reason": "possible whisker on its own; beats searches beside it by +1.52 (needs 0.94)",
+   "margin": 1.52,
+   "line_score": 4.55,
    "sigma_px": 2.26,
    "depth_grey": 4.3,
    "found_by": "combined view (part 2c)",
@@ -17795,14 +17797,15 @@
      464.6,
      801.4
     ]
-   ]
+   ],
+   "margin_before_recheck": 1.13
   },
   {
    "id": "L10",
    "verdict": "uncertain: owner sorts manually",
-   "reason": "not yet judged",
-   "margin": 1.79,
-   "line_score": 4.26,
+   "reason": "possible whisker on its own; beats searches beside it by +1.19 (needs 0.94)",
+   "margin": 1.19,
+   "line_score": 4.22,
    "sigma_px": 1.61,
    "depth_grey": 3.7,
    "found_by": "combined view (part 2c)",
@@ -17903,14 +17906,15 @@
      954.7,
      745.3
     ]
-   ]
+   ],
+   "margin_before_recheck": 1.79
   },
   {
    "id": "L11",
    "verdict": "uncertain: owner sorts manually",
-   "reason": "not yet judged",
-   "margin": -0.25,
-   "line_score": 3.16,
+   "reason": "possible whisker on its own; untestable: every search beside it lies on a neighbouring whisker or the fur band",
+   "margin": null,
+   "line_score": 5.4,
    "sigma_px": 1.96,
    "depth_grey": 4.3,
    "found_by": "combined view (part 2c)",
@@ -18063,15 +18067,16 @@
      839.9,
      760.5
     ]
-   ]
+   ],
+   "margin_before_recheck": -0.25
   },
   {
    "id": "L12",
    "verdict": "uncertain: owner sorts manually",
    "continues": "B5-S17-face",
    "at_end": "nose",
-   "reason": "possible continuation of B5-S17-face at its nose end; does not clearly beat searches beside it (margin +0.36, needs 0.94)",
-   "margin": 0.36,
+   "reason": "possible continuation of B5-S17-face at its nose end; beats searches beside it by -0.34 (needs 0.94)",
+   "margin": -0.34,
    "found_by": "combined view (part 2c)",
    "points": [
     [
@@ -18158,15 +18163,17 @@
      465.8,
      693.2
     ]
-   ]
+   ],
+   "margin_before_recheck": 0.36,
+   "line_score": 1.63
   },
   {
    "id": "L13",
    "verdict": "uncertain: owner sorts manually",
    "continues": "FW-07",
    "at_end": "nose",
-   "reason": "possible continuation of FW-07 at its nose end; does not clearly beat searches beside it (margin -2.12, needs 0.94)",
-   "margin": -2.12,
+   "reason": "possible continuation of FW-07 at its nose end; beats searches beside it by -0.12 (needs 0.94)",
+   "margin": -0.12,
    "found_by": "combined view (part 2c)",
    "points": [
     [
@@ -18201,15 +18208,17 @@
      298.4,
      781.2
     ]
-   ]
+   ],
+   "margin_before_recheck": -2.12,
+   "line_score": 3.01
   },
   {
    "id": "L14",
    "verdict": "uncertain: owner sorts manually",
    "continues": "FW-06",
    "at_end": "nose",
-   "reason": "possible continuation of FW-06 at its nose end; does not clearly beat searches beside it (margin +0.24, needs 0.94)",
-   "margin": 0.24,
+   "reason": "possible continuation of FW-06 at its nose end; beats searches beside it by +0.19 (needs 0.94)",
+   "margin": 0.19,
    "found_by": "combined view (part 2c)",
    "points": [
     [
@@ -18352,15 +18361,17 @@
      369.1,
      714.4
     ]
-   ]
+   ],
+   "margin_before_recheck": 0.24,
+   "line_score": 2.75
   },
   {
    "id": "L15",
    "verdict": "uncertain: owner sorts manually",
    "continues": "B2-S08-face",
    "at_end": "nose",
-   "reason": "possible continuation of B2-S08-face at its nose end; does not clearly beat searches beside it (margin +0.29, needs 0.94)",
-   "margin": 0.29,
+   "reason": "possible continuation of B2-S08-face at its nose end; beats searches beside it by +0.22 (needs 0.94)",
+   "margin": 0.22,
    "found_by": "combined view (part 2c)",
    "points": [
     [
@@ -18503,15 +18514,17 @@
      704.6,
      701.7
     ]
-   ]
+   ],
+   "margin_before_recheck": 0.29,
+   "line_score": 2.82
   },
   {
    "id": "L16",
    "verdict": "uncertain: owner sorts manually",
    "continues": "B2-S16-face",
    "at_end": "nose",
-   "reason": "possible continuation of B2-S16-face at its nose end; does not clearly beat searches beside it (margin -0.00, needs 0.94)",
-   "margin": -0.0,
+   "reason": "possible continuation of B2-S16-face at its nose end; beats searches beside it by +0.43 (needs 0.94)",
+   "margin": 0.43,
    "found_by": "combined view (part 2c)",
    "points": [
     [
@@ -18610,15 +18623,17 @@
      723.7,
      751.4
     ]
-   ]
+   ],
+   "margin_before_recheck": -0.0,
+   "line_score": 3.07
   },
   {
    "id": "L17",
    "verdict": "uncertain: owner sorts manually",
    "continues": "FW-10",
    "at_end": "nose",
-   "reason": "possible continuation of FW-10 at its nose end; does not clearly beat searches beside it (margin +0.53, needs 0.94)",
-   "margin": 0.53,
+   "reason": "possible continuation of FW-10 at its nose end; beats searches beside it by +0.89 (needs 0.94)",
+   "margin": 0.89,
    "found_by": "combined view (part 2c)",
    "points": [
     [
@@ -18753,15 +18768,17 @@
      665.5,
      644.5
     ]
-   ]
+   ],
+   "margin_before_recheck": 0.53,
+   "line_score": 3.32
   },
   {
    "id": "L18",
    "verdict": "uncertain: owner sorts manually",
    "continues": "FW-12",
    "at_end": "nose",
-   "reason": "possible continuation of FW-12 at its nose end; does not clearly beat searches beside it (margin -0.84, needs 0.94)",
-   "margin": -0.84,
+   "reason": "possible continuation of FW-12 at its nose end; beats searches beside it by -0.07 (needs 0.94)",
+   "margin": -0.07,
    "found_by": "combined view (part 2c)",
    "points": [
     [
@@ -18940,15 +18957,17 @@
      634.2,
      777.8
     ]
-   ]
+   ],
+   "margin_before_recheck": -0.84,
+   "line_score": 2.66
   },
   {
    "id": "L19",
    "verdict": "uncertain: owner sorts manually",
    "continues": "B2-S02-face",
    "at_end": "nose",
-   "reason": "possible continuation of B2-S02-face at its nose end; does not clearly beat searches beside it (margin +0.83, needs 0.94)",
-   "margin": 0.83,
+   "reason": "possible continuation of B2-S02-face at its nose end; beats searches beside it by +0.85 (needs 0.94)",
+   "margin": 0.85,
    "found_by": "combined view (part 2c)",
    "points": [
     [
@@ -19011,7 +19030,9 @@
      775.8,
      695.3
     ]
-   ]
+   ],
+   "margin_before_recheck": 0.83,
+   "line_score": 2.78
   }
  ],
  "line_view": {

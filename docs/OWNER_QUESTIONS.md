@@ -157,15 +157,20 @@ the owner's official opinion later. Each says what I did in the meantime.
 33. **B2-S02's face line is linked by position.** *Meantime:* linked.
 34. **His right-side fan (B4-S12/S15/S17):** FW-05 was found from that shared root;
    which of the three it is I can't tell. B2-S12, B2-S15, B2-S20 still show no face part.
-35. **To sort by hand ("uncertain: owner sorts manually", bold cyan on the sheets):**
-   - possible continuations: L12 (B5-S17, toward his nose), L13 (FW-07), L14 (FW-06),
-     L15 (B2-S08), L16 (B2-S16), L17 (FW-10), L18 (FW-12), L19 (B2-S02);
-   - fainter possible whiskers: L08, L09, L10, L11;
-   - L05 (along the inside of his fur band).
-   Each is within what plain fur reaches by every measure I have, so I can't confirm
-   them. For each: whisker (all of it, or up to where?), or fur? A rough mark on a
-   sheet is enough; I fit it to sub-pixel.
-   Old-view faint lines still unmatched: C03, C06, C08, C12.
+35. **To sort by hand ("uncertain: owner sorts manually", bold cyan on the sheets).**
+   One review sheet per candidate: `docs/images/candidates/L??.png`, all in
+   `docs/images/candidates/candidates.pdf` (where it is on his face; the photo as it is;
+   the photo with brightness stretched in true colour; contrast evened out; the line view;
+   unmarked and marked; my read, which is not a decision). Side-by-side test (plain fur
+   reaches 0.94 one time in 20):
+   - possible continuations: L12 B5-S17 (-0.34), L13 FW-07 (-0.12), L14 FW-06
+     (+0.19), L15 B2-S08 (+0.22), L16 B2-S16 (+0.43), L17 FW-10 (+0.89),
+     L18 FW-12 (-0.07), L19 B2-S02 (+0.85);
+   - possible whiskers on their own: L08 (+0.52), L09 (+1.52), L10 (+1.19),
+     L11 (untestable: every search beside it lands on B2-S08 or B2-S16);
+   - L05 (+1.81, but it runs along his fur band, and the test also rewards a long edge).
+   For each: whisker (all of it, or up to where?), or fur? Old-view faint lines still
+   unmatched: C03, C06, C08, C12.
 36. **Full length:** should each whisker also run on to its root on his whisker pad,
    inferred where it can't be seen?
 37. **FW-02 shares B5-S17's first ~19 px**, then they part: two whiskers from one

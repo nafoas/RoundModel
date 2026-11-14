@@ -158,7 +158,8 @@ def beside_margins(F, pool, items, doc=None, ids=None):
         own = [v for (j, o), (v, q) in zip(meta, res) if j == i and o == 0]
         oth = [v for (j, o), (v, q) in zip(meta, res) if j == i and o != 0
                and not (tr is not None and len(q) and (tr.query(q)[0] <= 3.0).mean() >= ON_OTHER)]
-        out.append(((own[0] - max(oth)) if (own and oth) else -np.inf, own[0] if own else -np.inf))
+        # no beside-search left (all on neighbouring whiskers or in the fur band): untestable, None
+        out.append(((own[0] - max(oth)) if (own and oth) else (None if own else -np.inf), own[0] if own else -np.inf))
     return out
 
 
@@ -211,7 +212,7 @@ def follow_round(F, doc, pool, done):
                              doc, [pc[0] for pc in pieces])
     accepted = []
     for (wid, side, q, c, p, th, br), (m, own) in zip(pieces, margins):
-        if m >= MARGIN:
+        if m is not None and m >= MARGIN:
             accepted.append((wid, side, q, round(float(m), 2)))
         else:
             done.add((wid, side))
@@ -350,7 +351,7 @@ def run(F, doc, cache: Path | None = None, procs: int = 4):
         margins = beside_margins(F, pool, [(p, th, float(len(pc)), sd == "nose") for k, sd, pc, p, th in items],
                                  doc, [k for k, sd, pc, p, th in items])
         for (k, side, piece, p, th), (m, own) in zip(items, margins):
-            if m >= MARGIN and own >= MIN_MEAN and on_other(doc, k, piece) < ON_OTHER \
+            if m is not None and m >= MARGIN and own >= MIN_MEAN and on_other(doc, k, piece) < ON_OTHER \
                     and grow(F, W[k], side, piece, notes):
                 sweep_ext[f"{k}/{side}"] = int(len(piece))
             else:
@@ -393,9 +394,30 @@ def run(F, doc, cache: Path | None = None, procs: int = 4):
         nl += 1
         doc["line_view_candidates"].append(dict(
             id=f"L{nl:02d}", verdict=lv.UNCERTAIN, continues=k, at_end=side,
-            reason=f"possible continuation of {k} at its {side} end; does not clearly beat searches beside it "
-                   f"(margin {m:+.2f}, needs {MARGIN})", margin=round(float(m), 2),
+            reason="possible continuation (re-tested below)", margin=None if m is None else round(float(m), 2),
             found_by="combined view (part 2c)", points=np.round(piece, 1)[::4].tolist()))
+    # 4. every grey-area candidate re-tested the SAME way as the continuations (from its
+    # start, fixed length, beside-searches lying along a known whisker left out): the older
+    # test compared lines between two whiskers against those whiskers (owner review, 2026-11-14)
+    with Pool(procs, initializer=lv._init, initargs=(lines,)) as pool:
+        def recheck(cs):
+            items = []
+            for c in cs:
+                q = fw.dense(np.array(c["points"]))
+                d0 = q[min(10, len(q) - 1)] - q[0]
+                items.append((tuple(q[0]), float(np.arctan2(d0[1], d0[0])), float(len(q)), True))
+            return beside_margins(F, pool, items, doc, ["(none)"] * len(items)) if items else []
+        old_ = [c for c in doc.get("line_view_candidates", []) if c["verdict"] != lv.WHISKER]
+        for c, (m, own) in zip(old_, recheck(old_)):
+            c["margin_before_recheck"] = c.get("margin")
+            c["margin"] = None if m is None else round(float(m), 2)
+            c["line_score"] = round(float(own), 2)
+            test = ("untestable: every search beside it lies on a neighbouring whisker or the fur band"
+                    if m is None else f"beats searches beside it by {m:+.2f} (needs {MARGIN})")
+            if c.get("continues"):
+                c["reason"] = f"possible continuation of {c['continues']} at its {c['at_end']} end; {test}"
+            elif c["reason"] == "not yet judged":
+                c["reason"] = f"possible whisker on its own; {test}"
     footprints(doc)
     doc["full_length"] = dict(
         about=__doc__.split("\n\n")[0], view="combined: line view + contrast-evened grey (12 px), filter 2 x 24 px",

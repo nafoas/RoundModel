@@ -536,3 +536,21 @@ check.py output (if applicable), and the next step.
 - Tests: 27 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
 - **Next:** owner sorts L05, L08-L19 (Q35); any whisker still missing (a rough mark is enough).
 
+## 2026-11-14 — Session 6 (cont.): review sheets for the grey areas
+- Owner: "help me discern these by showing a few views of each of them, both with this
+  view and his base image". Photo used: `data/photos/anchor_front.webp` (the only one).
+- New `tools/candidate_sheets.py`: one sheet per uncertain candidate (L05, L08-L19) +
+  one PDF (`docs/images/candidates/`). Each: locator, photo as it is, photo with brightness
+  stretched in true colour, contrast evened out, line view; unmarked + marked; test result;
+  my read (not a decision). All 13 sheets looked at; reads in the tool (READS).
+- Fixes found on the way: (1) the stretched-photo panel first invented colour (channels
+  stretched separately, then together); now brightness only, true colour added back.
+  (2) Lines on their own had been scored with an older side-by-side test that counted
+  neighbouring whiskers as "beside" (L11 between B2-S08/B2-S16); every candidate is now
+  re-tested the same way; a candidate with no fair comparison is "untestable", not a
+  number. Rechecked: L09 +1.52, L10 +1.19 beat the fur bar; L17 +0.89, L19 +0.85
+  just under; L11 untestable; L05 +1.81 (edge of the fur band, which the test also
+  rewards). Whiskers unchanged (18, 18194 px). Lesson 19.
+- Tests: 27 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
+- **Next:** owner sorts L05, L08-L19 with the sheets (Q35).
+
