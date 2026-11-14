@@ -151,11 +151,12 @@ class Face:
         return v[0] - np.mean(v[1:], 0)
 
     # ---- whole-path search ----
-    def search(self, start, th0, length=SEARCH_LEN, k0max=K0MAX, kmax=KMAX, kstep=1, c0=C0, band_rule=True):
+    def search(self, start, th0, length=SEARCH_LEN, k0max=K0MAX, kmax=KMAX, kstep=1, c0=C0, band_rule=True,
+               ymax=YMAX):
         start = np.asarray(start, float)
         free = FREE + 1.5 * max(0.0, -float(self.sdist(start)))
         t0 = np.array([np.cos(th0), np.sin(th0)]); n0 = np.array([-t0[1], t0[0]])
-        ny = int(round(YMAX / DY)); Y = np.arange(-ny, ny + 1) * DY
+        ny = int(round(ymax / DY)); Y = np.arange(-ny, ny + 1) * DY
         nk = int(round(kmax / DK)); K = np.arange(-nk, nk + 1)
         V = np.full((len(Y), len(K)), -np.inf); V[ny, np.abs(K * DK) <= k0max] = 0.0
         hist, backs = [V], []
@@ -662,9 +663,9 @@ def sheets(doc=None):
                 dr.text(P(m + np.array([2, 3])), fc["id"], fill=(80, 160, 255))
         for lc_ in lvc:
             f = dense(np.array(lc_["points"]))
-            col = (150, 150, 150) if lc_["verdict"] == "not a whisker" else (255, 140, 0)
+            col = (0, 200, 255) if lc_["verdict"] != "whisker" else (255, 140, 0)
             for i in range(0, len(f) - 1, 5):
-                dr.line([P(f[i]), P(f[min(i + 3, len(f) - 1)])], fill=col, width=2)
+                dr.line([P(f[i]), P(f[min(i + 3, len(f) - 1)])], fill=col, width=3)
             m = f[len(f) // 2]
             if box[0] <= m[0] < box[2] and box[1] <= m[1] < box[3]:
                 dr.text(P(m + np.array([3, 4])), lc_["id"], fill=col)
@@ -686,7 +687,7 @@ def sheets(doc=None):
         lvc = [c for c in doc.get("line_view_candidates", []) if box[0] <= np.array(c["points"])[:, 0].mean() <= box[2]]
         im = panel(box, 3, items, fa, f"face whiskers, {side.replace('_', ' ')} cheek: photo, local contrast (top); "
                                      f"magenta = whisker (guides 3 px each side), dashed yellow = inferred, dotted blue = faint, "
-                                     f"orange L = line-view candidate for the owner, grey L = judged not a whisker", lvc)
+                                     f"bold cyan L = uncertain: owner sorts manually", lvc)
         im.save(ROOT / f"docs/images/face_whiskers_{side}.png"); imgs.append(im)
     # the line view itself (owner's request: a different way of highlighting them)
     import whisker_lineview as lv
@@ -711,11 +712,12 @@ def sheets(doc=None):
             f = dense(np.array(c["points"]))
             if not (box[0] <= f[:, 0].mean() <= box[2]):
                 continue
-            col = (150, 150, 150) if c["verdict"] == "not a whisker" else (255, 140, 0)
+            col = (0, 200, 255) if c["verdict"] != "whisker" else (255, 140, 0)
             for i in range(0, len(f) - 1, 5):
-                dr.line([P(f[i]), P(f[min(i + 3, len(f) - 1)])], fill=col, width=2)
+                dr.line([P(f[i]), P(f[min(i + 3, len(f) - 1)])], fill=col, width=3)
             dr.text(P(f[len(f) // 2] + np.array([4, 4])), c["id"], fill=col)
-        dr.text((6, 6), "line view: long thin line filters along the whisker directions (darker = more line-like)", fill=(0, 170, 0))
+        dr.text((6, 6), "line view: long thin line filters along the whisker directions (darker = more line-like); "
+                        "magenta = whisker, bold cyan L = uncertain: owner sorts manually", fill=(0, 170, 0))
         out = Image.new("RGB", (im.width, im.height * 2 + 6), (30, 30, 30)); out.paste(top, (0, 0)); out.paste(im, (0, im.height + 6))
         out.save(ROOT / f"docs/images/face_whiskers_lineview_{side}.png")
     for w_ in W:
@@ -732,6 +734,7 @@ def main() -> int:
     ap.add_argument("--sweep-cache", type=Path, default=None)
     ap.add_argument("--interior-cache", type=Path, default=None)
     ap.add_argument("--line-cache", type=Path, default=None)
+    ap.add_argument("--full-cache", type=Path, default=None)
     ap.add_argument("--sheets-only", action="store_true")
     args = ap.parse_args()
     if args.sheets_only:
@@ -743,7 +746,14 @@ def main() -> int:
     import whisker_lineview as lv
     ext, cands, _ = lv.run(F, doc, args.line_cache)
     doc = lv.apply(F, doc, ext, cands)
+    # part 2c: whole length in the combined view (tools/whisker_fulllength.py)
+    import whisker_fulllength as wf
+    doc = wf.run(F, doc, args.full_cache)
     (ROOT / "data/strands/face_whiskers.json").write_text(json.dumps(doc, indent=1))
+    for k_, n_ in doc["full_length"]["sweep_extensions"].items():
+        print(f"combined view sweep: {k_} +{n_} px")
+    for i_, rr in enumerate(doc["full_length"]["follow_rounds"]):
+        print(f"follow round {i_ + 1}: " + ", ".join(f"{a}/{b} +{n} px (margin {m:+.1f})" for a, b, n, m in rr))
     for k_, n_ in doc["line_view"]["extensions"].items():
         print(f"line view: {k_} extended by {n_} px")
     for c in doc["line_view_candidates"]:

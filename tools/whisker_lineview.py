@@ -56,27 +56,29 @@ FIELD_SIGMA = 70.0                       # px: smoothing of the direction field
 T_L, FAINT_L, H_L, MIN_L = 4.0, 3.0, 2.5, 40
 EXT_MIN = 15                             # px: shortest extension piece kept
 ATTACH = 6.0                             # px: an extension piece must start this close to the whisker's end
+CONTINUE_ANGLE = 30.0                    # deg: and leave within this of the whisker's own direction there
 BESIDE = (8.0, 12.0, 16.0, 20.0)         # px: offsets for the side-by-side test
 TEST_LEN = 120.0
 
 # Judgment calls on candidates (checked one by one at full resolution on the photo,
 # the line view and the stand-out test). Keyed by the candidate's midpoint (px).
 # verdict: "whisker" | "not a whisker" | "unsure" (owner decides).
+WHISKER, UNCERTAIN = "whisker", "uncertain: owner sorts manually"
 VERDICTS = [
-    ((236.0, 767.0), "whisker", "found from the shared root of his right-side fan (B4-S12/S15/S17); a faint line "
-     "visible on the photo along its whole length; beats every search beside it by 1.9"),
-    ((245.0, 722.0), "whisker", "faint line visible on the photo; beats every search beside it by 1.3"),
-    ((216.0, 839.0), "whisker", "faint straight line visible on the photo; beats every search beside it by 2.5"),
-    ((931.0, 701.0), "not a whisker", "runs along the inside of his fur band, parallel to his outline (whiskers "
-     "cross it); does not beat searches beside it (-0.1)"),
-    ((193.0, 777.0), "unsure", "faint line on the photo, but the test is spoiled by the fur band beside it "
-     "(searches there score higher)"),
-    ((338.0, 856.0), "unsure", "stands out (+2.7), but lies in the dark parted-fur streaks low on his cheek, "
-     "where fur clumps look like whisker lines"),
-    ((687.0, 851.0), "unsure", "stands out (+2.2), but wide (sigma 2.2) and in the dark streaks beside his mouth"),
-    ((299.0, 925.0), "unsure", "stands out (+1.2), in the streaky fur below his cheek"),
-    ((827.0, 851.0), "unsure", "stands out (+3.7), but in streaky fur low on his left cheek"),
-    ((817.0, 594.0), "unsure", "short (61 px), above B1-S11; stands out (+3.5)"),
+    # owner, 2026-11-13: "Those are all whiskers" (L01-L07), then: "L05 does need more
+    # scrutiny. But even I can't entirely tell. Put L05 and similar grey areas into
+    # their own classification that I'll sort out manually later."
+    ((236.0, 767.0), None, WHISKER, "found from the shared root of his right-side fan; beats every search beside it by 1.9"),
+    ((245.0, 722.0), None, WHISKER, "faint line on the photo; beats every search beside it by 1.3"),
+    ((216.0, 839.0), None, WHISKER, "faint straight line on the photo; beats every search beside it by 2.5"),
+    ((193.0, 777.0), "L01", WHISKER, "L01: owner, 2026-11-13"),
+    ((338.0, 856.0), "L02", WHISKER, "L02: owner, 2026-11-13"),
+    ((299.0, 925.0), "L03", WHISKER, "L03: owner, 2026-11-13"),
+    ((817.0, 594.0), "L04", WHISKER, "L04: owner, 2026-11-13"),
+    ((931.0, 701.0), "L05", UNCERTAIN, "L05: runs along the inside of his fur band, parallel to his outline; owner: "
+     "\"even I can't entirely tell\""),
+    ((687.0, 851.0), "L06", WHISKER, "L06: owner, 2026-11-13"),
+    ((827.0, 851.0), "L07", WHISKER, "L07: owner, 2026-11-13"),
 ]
 VERDICT_DIST = 18.0
 
@@ -165,9 +167,12 @@ class LineView(fw.Face):
 _L: LineView | None = None
 
 
+VIEW = None          # view class for the workers (default LineView; part 2c sets its own)
+
+
 def _init(lines):
     global _L
-    _L = LineView(lines)
+    _L = (VIEW or LineView)(lines)
 
 
 def _job(a):
@@ -256,6 +261,14 @@ def classify(found: list[dict], whiskers: list[dict]):
                 end = tr[-1] if side == "nose" else tr[0]
                 if np.hypot(*(piece[0] - end)) > np.hypot(*(piece[-1] - end)):
                     piece = piece[::-1]                  # every piece runs away from the whisker
+                # it must CONTINUE the whisker: leave in the whisker's own direction at that end
+                # (a piece that branches off near an end and runs back along it is another line)
+                cur = tr if side == "nose" else tr[::-1]
+                t_w = cur[-1] - cur[-min(11, len(cur))]
+                t_p = piece[min(10, len(piece) - 1)] - piece[0]
+                cosang = float(t_w @ t_p) / (np.linalg.norm(t_w) * np.linalg.norm(t_p) + 1e-9)
+                if cosang < np.cos(np.radians(CONTINUE_ANGLE)):
+                    continue
                 if (k, side) not in ext or len(piece) > len(ext[(k, side)]):
                     ext[(k, side)] = piece
     # new lines: one per line (longest find), and not a line already traced or extended
@@ -297,11 +310,15 @@ def standout(F: fw.Face, cands: list[dict], procs: int, lines):
 def verdict(c):
     q = fw.dense(c["seg"]); m = q[len(q) // 2]
     best = None
-    for (x, y), v, why in VERDICTS:
+    for (x, y), lid, v, why in VERDICTS:
         d = float(np.hypot(m[0] - x, m[1] - y))
         if d <= VERDICT_DIST and (best is None or d < best[0]):
-            best = (d, v, why)
-    return (best[1], best[2]) if best else ("unsure", "not yet judged: owner")
+            best = (d, lid, v, why)
+    if best:
+        c["lid"] = best[1]
+        return best[2], best[3]
+    c["lid"] = None
+    return UNCERTAIN, "not yet judged"
 
 
 def run(F: fw.Face, doc: dict, cache: Path | None = None, procs: int = 4):
@@ -360,7 +377,7 @@ def apply(F: fw.Face, doc: dict, ext: dict, cands: list[dict]):
     listed = []
     for c in sorted(cands, key=lambda c: (c["seg"][:, 0].mean() > 549, c["seg"][:, 1].mean())):
         c["id"] = None
-        if c["verdict"] != "whisker":
+        if c["verdict"] != WHISKER:
             listed.append(c); continue
         cl, sig, dep, ok = fit_line(F, c["seg"])
         if F.sdist(cl[0]) > F.sdist(cl[-1]):
@@ -372,7 +389,8 @@ def apply(F: fw.Face, doc: dict, ext: dict, cands: list[dict]):
             n += 1; fid = f"FW-{n:02d}"
         taken.add(fid); c["id"] = fid
         doc["whiskers"].append(dict(
-            id=fid, kind="face only (line view)",
+            id=fid, kind="face only (line view)", found_as=c["lid"],
+            owner_confirmed=bool(c["lid"]),
             continues=c["kind"][5:] if c["kind"].startswith("root:") else None,
             length_px=round(float(np.hypot(*np.diff(cl, axis=0).T).sum()), 1), inferred_entry_px=0.0,
             median_line_contrast=round(c["score"], 2),
@@ -385,10 +403,14 @@ def apply(F: fw.Face, doc: dict, ext: dict, cands: list[dict]):
         if c["kind"].startswith("root:"):
             doc["notes"].append(f"{fid}: found by a search from the root end of {c['kind'][5:]} (his right-side "
                                 f"fan shares one root, so it may be any of B4-S12/S15/S17): owner review")
+    nl = max([int(c["lid"][1:]) for c in cands if c.get("lid")] or [0])
+    for c in listed:
+        if not c.get("lid"):
+            nl += 1; c["lid"] = f"L{nl:02d}"
     doc["line_view_candidates"] = [dict(
-        id=f"L{i + 1:02d}", verdict=c["verdict"], reason=c["reason"], margin=round(c["margin"], 2),
+        id=c["lid"], verdict=c["verdict"], reason=c["reason"], margin=round(c["margin"], 2),
         line_score=round(c["line_score"], 2), sigma_px=round(c["sigma"], 2), depth_grey=round(c["depth"], 1),
-        points=np.round(fw.dense(c["seg"]), 1)[::4].tolist()) for i, c in enumerate(listed)]
+        points=np.round(fw.dense(c["seg"]), 1)[::4].tolist()) for c in listed]
     doc["line_view"] = dict(
         about=__doc__.split("\n\n")[0],
         filters=dict(angles=NA, across_sigma_px=ACROSS, along_sigma_px=ALONG, direction_tolerance_deg=25,

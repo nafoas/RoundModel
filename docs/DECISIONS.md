@@ -182,6 +182,10 @@ excuse and was withdrawn.)
   whiskers, until the owner says. Reason: colouring fur as whisker would remove
   it from every other step (weight 0); a missed whisker can still be added.
 
+- **Grey areas get their own class** (owner, 2026-11-14: "Put L05 and similar grey
+  areas into their own classification that I'll sort out manually later"):
+  "uncertain: owner sorts manually". L01-L04, L06, L07 are whiskers (owner).
+
 ## The peets / underfluff / body line (approved 2026-11-07)
 
 - Under his body, his pelvis isn't visible: a fur tuft hangs between the peets.
@@ -293,4 +297,10 @@ excuse and was withdrawn.)
    filters along the whisker directions found 3 more whiskers and up to 125 px
    more of the others. → Before saying something can't be done, try a different
    representation (scale, direction, colour), not just different thresholds.
+18. **Setting a pass/fail bar by hand.** The side-by-side test's bar (0.5) was my
+   guess; measured on plain fur it let 10% of fur through. The follow's cost per px
+   (1.5) was below what a searched path through plain fur scores, so in a synthetic
+   test it ran 87 px past a whisker's end. Both were caught only because I measured
+   them. → Calibrate every threshold on known negatives (plain fur) and known
+   positives before using it, and test the real acceptance step, not a part of it.
 

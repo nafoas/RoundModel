@@ -172,6 +172,29 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**Whiskers, part 2: fourth pass (2026-11-14), owner: "Those are all whiskers but a
+lot of them are missing segments ... be more rigorous ... look for fainter traces.
+Try other combinations of color and contrast"; L05 and similar grey areas go to
+their own class, "uncertain: owner sorts manually". Self-checked; owner review pending.**
+- Colour/contrast, measured on all known face whiskers vs fur (AUC): every brightness
+  channel ~0.988; colour channels 0.50-0.70 (whiskers and fur are the same colour);
+  best R/G/B mix 0.981; gamma/log no better. On the faintest quarter: contrast evened
+  out (12 px) + filter 2 x 24 px 0.965, current 0.959, their average (the COMBINED
+  view, now used) 0.969. Picture `docs/images/face_whiskers_views_compared.png`.
+- `tools/whisker_fulllength.py` (part 2c): cheek-wide sweep again in the combined
+  view; every whisker followed from both ends (smooth arcs, gap bridging, cost per
+  px above plain fur's searched-path level); each piece must beat identical searches
+  started beside it by 0.94 (plain fur's 95th percentile, calibrated on 75 random
+  cheek starts) and continue the whisker's own direction, never bend > 3 deg/px, and
+  not run along another whisker. Tests: bridges a 25 px gap and ends at the end;
+  nothing from plain fur.
+- **Result: 18 face whiskers** (L01-L04, L06, L07 are FW-07..FW-12, owner), 18194 px
+  WHISKER (weight 0); confirmed extensions B1-S11 +16, FW-01 +14, FW-09 +32.
+  **Uncertain (owner sorts manually), bold cyan on the sheets:** possible
+  continuations L12 (B5-S17), L13 (FW-07), L14 (FW-06), L15 (B2-S08), L16 (B2-S16),
+  L17 (FW-10), L18 (FW-12), L19 (B2-S02), 30-175 px each; fainter new lines L08-L11;
+  L05. They are within what plain fur reaches by every measure I have.
+
 **Whiskers, part 2: the whiskers lying over his face. Third pass (2026-11-13),
 with the line view the owner asked for ("recalibrate the views ... use a different
 method of highlighting them"). Self-checked at full resolution; owner review pending.**

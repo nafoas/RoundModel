@@ -515,3 +515,24 @@ check.py output (if applicable), and the next step.
   match is claimed.
 - **Next:** owner review (Q32-Q37), especially L01-L07 and any whisker still missing.
 
+## 2026-11-14 — Session 6 (cont.): face whiskers, fourth pass (rigour, colour/contrast)
+- Owner: L01-L07 are all whiskers (then: L05 and similar grey areas go to a new class,
+  "uncertain: owner sorts manually"); "a lot of them are missing segments ... be more
+  rigorous ... look for fainter traces ... try other combinations of color and contrast".
+  Photo used: `data/photos/anchor_front.webp` (the only one).
+- Colour/contrast tested on every known face whisker vs fur (19 views + best RGB mix):
+  colour carries no whisker signal; contrast evened out (12 px) + a longer filter is
+  best on the faintest parts; combined view adopted (AUC 0.969 on the faintest quarter).
+- New `tools/whisker_fulllength.py` (part 2c) + `tests/test_whisker_fulllength.py`.
+  Fixes found on the way: extension pieces were attached without checking they continue
+  the whisker's direction (B5-S17 folded back on itself; FW-10 turned sharply) → direction
+  and bend checks (also in part 2b); sweep pieces had skipped the side-by-side test →
+  same test for all; the test's bar (0.5) and the follow's cost (1.5) were hand-set and
+  both too loose (fur passed 10%; 87 px overshoot in a synthetic test) → calibrated on
+  plain fur (bar 0.94 = fur's 95th pct; cost 2.5). Lesson 18.
+- Result: 18 face whiskers, 18194 px WHISKER (weight 0); confirmed extensions +16/+14/+32
+  px. 13 grey areas for the owner (L05, L08-L19), bold cyan on the sheets. A container
+  restart killed one run; rerun from the caches, data from the killed run not used.
+- Tests: 27 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
+- **Next:** owner sorts L05, L08-L19 (Q35); any whisker still missing (a rough mark is enough).
+

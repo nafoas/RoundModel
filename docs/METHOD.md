@@ -205,7 +205,14 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     not against the whisker's own strength (owner, 2026-11-13). When a faint
     line can't be told from fur, change the view before giving up: colour did not
     help, long thin line filters along the whisker directions did (the "line
-    view", `tools/whisker_lineview.py`; owner's idea, 2026-11-13).
+    view", `tools/whisker_lineview.py`; owner's idea, 2026-11-13). Evening out
+    the contrast (12 px) before a longer filter helps the faintest parts most
+    (`tools/whisker_fulllength.py`). Every added stretch must beat identical
+    searches beside it by what plain fur reaches only 5% of the time (calibrate
+    any such bar on plain fur; never set it by hand).
+16. **"Uncertain: owner sorts manually"** (owner, 2026-11-14): grey areas that
+    neither the measurements nor I can call go to their own class, drawn bold cyan,
+    for the owner to sort by hand. They are not whiskers and not fur until then.
 10. **Faint see-through haze below a tuft's spike tips:** that tuft's FUZZ (owner,
     2026-11-11: "simply his little fuzz, part of the tuft"). Stored as the tuft's
     fuzz band, not added to its solid shape, and never dropped: it must be
@@ -306,5 +313,5 @@ still required.
 | Approved peet line | `data/lines/peet_line.json` |
 | Review images | `docs/images/` (batch sheets, golden tiles, eye-corner pixel grids) |
 | Whiskers outside the outline | `tools/trace_whiskers.py` (after `tools/trace_wisps.py`) → `data/strands/wisps.json` |
-| Whiskers over his face | `tools/face_whiskers.py` (+ line view `tools/whisker_lineview.py`) → `data/strands/face_whiskers.json`, sheets `docs/images/face_whisker*.png` |
+| Whiskers over his face | `tools/face_whiskers.py` (+ line view `tools/whisker_lineview.py`, whole length `tools/whisker_fulllength.py`) → `data/strands/face_whiskers.json`, sheets `docs/images/face_whisker*.png` |
 | Tests | `tests/` (`python -m pytest -q`) |
