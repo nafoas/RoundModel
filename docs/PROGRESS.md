@@ -612,3 +612,15 @@ check.py output (if applicable), and the next step.
 - Tests: 32 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
 - **Next:** owner review of the pads (Q39) and the whiskers (Q37, Q40, Q41).
 
+## 2026-11-14 — Session 6 (cont.): pads, third try (follow his mouth around and up)
+- Owner: the muzzle outline still didn't follow his pads; then (stopping a colour-saturation
+  attempt): "Just follow the edges of his mouth around and up ... look at the big perspective."
+- Looked at his whole face at normal size. New outline (`whisker_chains.measure_muzzle`): the lip
+  line traced from the middle of his mouth outward until it fades into fur (to x 405 and 709),
+  round each side and up to the nostril wing tips, along the bottom of his nose; one smooth
+  sub-pixel curve; split at the philtrum. Test: synthetic lip line followed to median < 1.5 px.
+- Whiskers re-traced: 19 of 28 reach a pad on their own bend; the upper whiskers bunch at the
+  nostril-wing corner (question Q39); FW-13, FW-14 flagged. Lesson 22.
+- Tests: 32 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
+- **Next:** owner review of the pads (Q39) and whiskers (Q37, Q40, Q41).
+

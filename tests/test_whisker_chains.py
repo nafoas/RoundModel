@@ -35,25 +35,29 @@ def test_nothing_inferred_at_the_pad():
     assert len(pts) == 1
 
 
-def test_muzzle_ring_follows_the_crease_and_encloses_the_nose():
-    """synthetic face: a raised disc (radius 150) with a darker crease at its edge, a dark nose in it"""
+def test_pad_outline_follows_the_lip_line_and_reaches_the_nostrils():
+    """synthetic muzzle: a dark lip line y = 820 + 0.15 |x - 548| from x 420 to 680 on speckled fur,
+    a dark nose above; the outline must run along the lip line and up to both nostril wing tips"""
     from scipy import ndimage as ndi
 
     class _F:
         pass
-    H, W = 700, 800
+    H, W = 1000, 1100
     yy, xx = np.mgrid[0:H, 0:W] + 0.5
-    c = np.array([400.0, 380.0])
-    r = np.hypot(xx - c[0], yy - c[1])
     rng = np.random.default_rng(0)
-    g = 200 + 12 * np.exp(-((r - 120) / 40) ** 2) - 14 * np.exp(-((r - 150) / 8) ** 2) + rng.normal(0, 2, (H, W))
-    nose = (np.abs(xx - c[0]) < 40) & (yy > c[1] - 70) & (yy < c[1] - 40)
+    g = 200 + ndi.gaussian_filter(rng.normal(0, 6, (H, W)), 1.0)
+    lip_y = 820 + 0.15 * np.abs(xx - 548)
+    g -= 25 * np.exp(-((yy - lip_y) / 2.5) ** 2) * (np.abs(xx - 548) <= 130)
+    nose = (np.abs(xx - 548) < 80 - 0.9 * (yy - 690)) & (yy > 690) & (yy < 760)
     g[nose] = 90
     F = _F(); F.grey = g
-    pads = {"landmarks": {"philtrum_x": c[0], "philtrum_top": c[1] - 20, "philtrum_bottom": c[1] + 20},
-            "nose_mask": nose}
-    ring, centre = wc.measure_muzzle(F, pads)
-    rr = np.hypot(*(ring - c).T)
-    assert np.median(np.abs(rr - 150)) < 4 and np.abs(rr - 150).max() < 12
-    from matplotlib.path import Path as MPath
-    assert MPath(ring).contains_points(np.c_[xx[nose], yy[nose]]).all()
+    pads = {"nose_mask": nose, "landmarks": {
+        "philtrum_x": 548.0, "philtrum_top": 760.0, "philtrum_bottom": 815.0,
+        "nostril_wing_left": np.array([470.0, 692.0]), "nostril_wing_right": np.array([626.0, 692.0])}}
+    ring, centre, info = wc.measure_muzzle(F, pads)
+    low = ring[(ring[:, 1] > 800) & (np.abs(ring[:, 0] - 548) < 110)]
+    err = np.abs(low[:, 1] - (820 + 0.15 * np.abs(low[:, 0] - 548)))
+    assert len(low) > 50 and np.median(err) < 1.5
+    for k in ("image_left", "image_right"):
+        assert abs(info[k]["lip_corner"][0] - 548) > 100          # followed the lip line out to near its end
+    assert min(np.hypot(*(ring - [470.0, 692.0]).T)) < 4 and min(np.hypot(*(ring - [626.0, 692.0]).T)) < 4

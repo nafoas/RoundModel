@@ -200,9 +200,10 @@ excuse and was withdrawn.)
   trace them to the pads now even though the pads are their own later step.
 - **His pads are the whole raised muzzle** (owner, 2026-11-14: "it should fully encircle the
   little bnuy mouf thing, where there is an elevated mouf area above the little mouf that goes
-  to the nose ... That whole area has whiskers, so those are his pads"). My first outline was
-  only the upper lip under each nostril (too narrow). Now: the closed shading crease around the
-  muzzle, split at the philtrum. The pad step refines it; roots move with it.
+  to the nose ... That whole area has whiskers, so those are his pads"), then: "Just follow the
+  edges of his mouth around and up ... it is very apparent where his little elevated round whisker
+  pads are. Go back and look at the big perspective." Now: the lip line, round each side and up to
+  the nostril wings, along the bottom of his nose; split at the philtrum. Roots move with it.
 
 ## The peets / underfluff / body line (approved 2026-11-07)
 
@@ -338,4 +339,9 @@ excuse and was withdrawn.)
    whiskers' directions. The owner pointed at the photo: the whole raised muzzle is the pad,
    and its edge shows in the shading. → Before defining a region, look at the part as a shape in
    the photo (shading, bulges, fur direction), not just at a few points on it.
+22. **Making an obvious thing hard.** For the pads I tried a blurred-shading ring, then colour
+   saturation levels with edge snapping, while the outline was plain to see in the photo at normal
+   size: the edges of his mouth, around and up. → For a part that is obvious to the eye, look at the
+   whole face at normal size first and follow the visible feature (here the lip line); measure only
+   to place it precisely.
 

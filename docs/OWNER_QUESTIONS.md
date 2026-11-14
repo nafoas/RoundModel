@@ -170,12 +170,13 @@ the owner's official opinion later. Each says what I did in the meantime.
    FW-16's outside part is W-F01; B4-S01 is a second whisker on B4-S02's face line; the fan's
    B4-S12/B4-S15 run under the fur along FW-05's line; B2-S12 and B2-S15 run under the fur;
    B2-S14 and B2-S17 stay wisps (one arc through them and FW-03 fits only 2.3-2.6 px).
-39. **His pads = the raised muzzle** (redone 2026-11-14 after your note): the cyan outline in
-   `docs/images/whiskers_full/pads.png` (first page of the PDF), traced along the shading crease
-   where the muzzle turns away: the lip line along the bottom, up both sides, closing over the top
-   of his nose. Right? In particular: should it close over the top of his nose like that, or meet
-   the nose lower down?
-40. **One whisker still doesn't fit your rule:** FW-13 (L05) is 2-4x darker than any whisker on his
+39. **His pads, third try (2026-11-14):** along his lip line, round each side and up to the
+   nostril wing, along the bottom of his nose (`docs/images/whiskers_full/pads.png`). Right?
+   The upper whiskers on both cheeks aim at or a little above the nostril wing tips, so their
+   inferred roots bunch at that top corner: do his pads reach a little further up the sides of
+   his nose?
+40. **Two whiskers don't fit your rule:** FW-14 (L08) points above his nose; its inferred path
+   would cross the nose (marked DOUBT). And FW-13 (L05) is 2-4x darker than any whisker on his
    face, runs along the inside edge of his fur band and points toward his eye; to reach his pad it
    would have to reverse its bend. (FW-14, the other doubt, now reaches the muzzle naturally.)
    *Meantime:* traced to the pad, marked DOUBT.

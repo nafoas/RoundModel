@@ -222,8 +222,9 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     fur band, under the fur, against the white background, to the pad. An inferred stretch
     keeps the whisker's own bend and bends only as much as it must. Its outer end is a tip
     outside, or goes out of view round his cheek (his face is round), or goes under the fur.
-    **His pads are the whole raised muzzle** around his nose and mouth (owner, 2026-11-14),
-    measured as the shading crease where it turns away; a whisker reaches its pad on entering it.
+    **His pads** (owner, 2026-11-14): follow the edges of his mouth around and up: the lip line,
+    round each side, up to the nostril wings, along the bottom of his nose. A whisker reaches its
+    pad on entering it. Look at the big picture first; don't hunt for subtle patterns.
 17. **Review sheets for grey areas** (`tools/candidate_sheets.py`): locator, the photo as
     it is, the photo with brightness stretched in TRUE colour (never stretch the colour
     channels separately or together: his fur's tiny real colour shifts become false
