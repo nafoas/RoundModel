@@ -274,12 +274,12 @@ def grow(F, w, side, piece, notes=None, owner=None):
     new_cl, sig, dep, ok = lv.fit_line(F, base)
     if owner:
         # owner: whiskers are straight. The found piece can wander (into a dark patch of fur);
-        # the whole whisker is refitted as ONE gentle arc through the photo fits.
-        new_cl, sig, dep, ok, rms = smooth_whole(F, base)
-        w["arc_fit_rms_px"] = round(rms, 2)
-        if notes is not None:
-            notes.append(f"{w['id']}: {owner} joined; whole whisker refitted as one arc (degree {STRAIGHT_DEG}); "
-                         f"photo fits lie {rms:.1f} px from it (rms)")
+        # the whole whisker is refitted as ONE gentle arc through the photo fits - at the END of the
+        # pass (refit_arcs), after its ends have been followed (refitting first changed its end
+        # direction and lost a confirmed stretch).
+        w["needs_arc"] = owner
+        if max_turn(new_cl) > MAX_TURN:          # keep the joined line sane until the final refit
+            new_cl, sig, dep, ok, _ = smooth_whole(F, base)
     if owner:
         w.setdefault("owner_confirmed_stretches", []).append(dict(found_as=owner, at_end=side, px=int(len(piece))))
     elif max_turn(new_cl) > MAX_TURN:
@@ -368,7 +368,9 @@ def add_whisker(F, doc, seg, why, lid):
         cl, sig, dep, ok = cl[::-1], sig[::-1], dep[::-1], ok[::-1]
     taken = {w["id"] for w in doc["whiskers"]}
     same = [w["id"] for w in (PREV or {}).get("whiskers", []) if w["id"] not in taken
-            and w["id"].startswith("FW-") and fw.overlap(cl, np.array(w["centreline"])) >= 0.5]
+            and w.get("found_as") == lid] or \
+           [w["id"] for w in (PREV or {}).get("whiskers", []) if w["id"] not in taken
+            and w["id"].startswith("FW-") and fw.overlap(cl, np.array(w["centreline"]), 4.0) >= 0.5]
     n = max(int(i[3:]) for i in taken | {w["id"] for w in (PREV or {}).get("whiskers", [])} if i.startswith("FW-"))
     doc["whiskers"].append(dict(
         id=same[0] if same else f"FW-{n + 1:02d}", kind="face only (combined view)", found_as=lid, owner_confirmed=True,
@@ -448,6 +450,14 @@ def run(F, doc, cache: Path | None = None, procs: int = 4, prev: dict | None = N
                     done.add((wid, side)); continue
                 if try_join(F, doc, wid, side, notes):
                     done.add((wid, side))
+    # owner-joined whiskers: one gentle arc each, now that their ends have been followed
+    for w in doc["whiskers"]:
+        if w.pop("needs_arc", None):
+            cl, sig, dep, ok, rms = smooth_whole(F, np.array(w["centreline"]))
+            w["centreline"] = np.round(cl, 2).tolist(); w["sigma"] = np.round(sig, 2).tolist()
+            w["depth_grey"] = np.round(dep, 1).tolist(); w["arc_fit_rms_px"] = round(rms, 2)
+            notes.append(f"{w['id']}: owner-joined; whole whisker refitted as one arc (degree {STRAIGHT_DEG}); "
+                         f"photo fits lie {rms:.1f} px from it (rms)")
     # 3. candidates: side-by-side test and verdicts (default: uncertain, owner sorts)
     if cands:
         lv.standout(F, cands, procs, lines)

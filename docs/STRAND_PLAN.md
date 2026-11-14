@@ -172,6 +172,19 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**Whiskers, part 3 (2026-11-14): every whisker pad to tip.** Owner: "whiskers don't just
+abruptly cut off ... trace the little guy's whiskers to them [the pads] now, so we don't go
+hunting for whisker connections on his little round body in a few steps", and "examine these
+in closer detail and try to determine these individually". `python tools/whisker_chains.py`
+(after face_whiskers.py) -> `data/strands/whiskers_full.json`, `docs/WHISKER_MAP.md` (every
+decision with its measurement), sheets `docs/images/whiskers_full/` (one per whisker + both
+sides + one PDF). 28 pad whiskers, each one line from its pad to its tip; inferred stretches
+labelled. Junctions decided one by one by fitting one arc through both pieces (same whisker:
+0.1-0.8 px; different: 2-10 px), darkness (a line carrying two whiskers reads ~2x) and
+direction. Working pad outline measured from the photo (upper lip under each nostril wing,
+raised to where 90% of the whiskers point). Two doubtful: FW-13 (L05) and FW-14 (L08) would
+have to bend more than any whisker to reach the pad. Self-checked; owner review pending.
+
 **Whiskers, part 2: fourth pass (2026-11-14), owner: "Those are all whiskers but a
 lot of them are missing segments ... be more rigorous ... look for fainter traces.
 Try other combinations of color and contrast"; L05 and similar grey areas go to

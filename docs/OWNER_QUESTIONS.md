@@ -161,21 +161,25 @@ the owner's official opinion later. Each says what I did in the meantime.
    L05, L08-L11 are FW-13..FW-17; L12-L19 joined into B5-S17, FW-07, FW-06, B2-S08, B2-S16,
    FW-10, FW-12, B2-S02 (each refitted as one arc; FW-12's photo fits lie 2.7 px from its arc,
    the others 0.7-1.5 px). Sheets kept: `docs/images/candidates/`.
-36. **Roots on his whisker pads:** every face whisker stops 45-280 px short of its pad
-   (the nose/mouth zone has been off limits, kept for its own step). By your rule each
-   runs on into its pad. Trace them into the pads now (inferred where they can't be seen),
-   or in the whisker-pad step?
-37. **FW-02 shares B5-S17's first ~19 px**, then they part: two whiskers from one spot?
-   *Meantime:* both as traced.
-38. **Outside parts and face parts that line up (your rule), not yet joined:**
-   - B2-S20 (outside) and FW-03 (face): 2 px off its line, 3 deg apart: one whisker?
-   - his right-side fan B4-S12 / B4-S15 (outside, shared root): FW-05 starts on their line
-     (22 deg apart; FW-05 is already noted as from that root), FW-06 9-11 px off (19 deg);
-   - B2-S15 (outside): only B2-S16's face line is near (12 px off, same direction): a shared
-     root like the fan, or its face part is too faint to see?
-   - B2-S12 (outside): nothing clear (FW-17 9 px off but 36 deg apart);
-   - the borderline wisps B2-S14 and B2-S17 (Q27) line up with FW-03's outer end (4-5 deg):
-     outside parts of whiskers rather than wisps?
-   - FW-02, FW-13, FW-17 start at the outside part of B5-S17, B2-S02, B2-S08 (shared roots?).
-   Details in `data/strands/whisker_pads.json`.
+36. **[ANSWERED 2026-11-14: trace them to the pads now; whiskers don't just cut off.]** Done:
+   `docs/WHISKER_MAP.md`, `docs/images/whiskers_full/whiskers_full.pdf`.
+37. **FW-02 and B5-S17:** decided as two whiskers sharing B5-S17's outside root stretch (that
+   stretch is 2.8x as dark as the rest of B5-S17). Right?
+38. **[ANSWERED by measurement 2026-11-14; please check `docs/WHISKER_MAP.md`.]**
+   B2-S20 + FW-03 + B2-S29 one whisker; FW-07's outside part is B4-S13; FW-04's tip is B4-S06;
+   FW-16's outside part is W-F01; B4-S01 is a second whisker on B4-S02's face line; the fan's
+   B4-S12/B4-S15 run under the fur along FW-05's line; B2-S12 and B2-S15 run under the fur;
+   B2-S14 and B2-S17 stay wisps (one arc through them and FW-03 fits only 2.3-2.6 px).
+39. **The working pad outline** (cyan on the sheets): the upper lip under each nostril wing, measured
+   from the photo, raised up the side of his nose to where 90% of his whiskers point. Each whisker's
+   root is where it reaches this outline. Close enough for now? (The pad step refines it.)
+40. **Two whiskers that don't fit your rule:**
+   - FW-13 (L05): 2-4x darker than any whisker on his face; it runs along the inside edge of his fur
+     band, points toward his eye, and would need its bend reversed to reach the pad;
+   - FW-14 (L08): points above his nose and would need 0.33 deg/px of bend (more than any whisker).
+   Their roots may be higher up the side of his nose, or they aren't pad whiskers. *Meantime:*
+   traced to the pad, marked DOUBT.
+41. **Outer ends:** FW-01, FW-06, FW-14 and FW-17 reach his outline with nothing outside, so they go
+   round his cheek out of view. FW-08, FW-09, FW-10, FW-12 and FW-15 stop mid-face at full strength,
+   so they go under the fur. FW-11 fades like a tip. Do those match what you see?
 

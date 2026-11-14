@@ -574,3 +574,27 @@ check.py output (if applicable), and the next step.
 - **Next:** owner on Q36 (roots into the pads) and Q38 (joins); then the separate precise
   steps (ears' tweaks, lashes/eyes, whisker pads, mouth and nose).
 
+## 2026-11-14 — Session 6 (cont.): every whisker pad to tip
+- Owner: examine the junctions individually (the pictures are hard to read); whiskers don't just
+  cut off; trace them to the pads now. Photo used: `data/photos/anchor_front.webp` (the only one).
+- Junctions measured one by one (`docs/WHISKER_MAP.md` has every decision and its numbers): one
+  arc through both pieces (0.1-0.8 px = same whisker; 2-10 px = not), darkness (a stretch carrying
+  two whiskers reads ~2x), direction. New links: FW-03 = B2-S20 + the 'loose' B2-S29 (0.28 px
+  across a 45 px invisible stretch); FW-07 = B4-S13 (0.09 px); FW-04's tip = B4-S06; FW-16 =
+  W-F01; B4-S01 shares B4-S02's face line; FW-02 shares B5-S17's root stretch (2.8x dark);
+  FW-13 shares B2-S02's root stretch (flagged).
+- Pads: nose, philtrum and mouth measured from the photo; working pad outline = upper lip under
+  each nostril wing, raised to where 90% of the whiskers point (the first, unraised outline made
+  most paths funnel into one corner: whiskers point a little above the wing end).
+- New `tools/whisker_chains.py` (+ `tests/test_whisker_chains.py`): 28 pad whiskers, each one line
+  pad to tip, inferred stretches labelled; inferred paths keep each whisker's own bend (26 of 28
+  reach the pad on their own bend); FW-13 and FW-14 flagged (would need more bend than any whisker).
+  Bugs on the way: 4 px sampling of pad points made a 15 px reach look like a sharp bend
+  (FW-15: 147 px detour) -> follow its own bend to the exact crossing first; a seen end already at
+  the pad got a 176 px loop (B5-S17) -> nothing inferred at the pad; sheets cropped B2-S29 off.
+  Regression found by diffing runs: the arc refit ran before following ends (FW-12 lost 80 px)
+  and renamed FW-12 -> refit last, names follow the owner's L-numbers. Lesson 20.
+- Tests: 31 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
+- **Next:** owner review (Q37-Q41); then the separate precise steps (whisker pads, mouth and nose,
+  ears' tweaks, lashes/eyes).
+

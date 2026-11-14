@@ -196,6 +196,11 @@ excuse and was withdrawn.)
   checked against the pads (`tools/whisker_pads.py`); faint whiskers keep their measured
   strength when he is built (never boosted) and are never dropped.
 
+- **Whiskers pad to tip, now** (owner, 2026-11-14): "whiskers don't just abruptly cut off";
+  trace them to the pads now even though the pads are their own later step. A working pad
+  outline is used (measured from the photo, raised to where the whiskers point); the pad step
+  refines it, and roots move with it.
+
 ## The peets / underfluff / body line (approved 2026-11-07)
 
 - Under his body, his pelvis isn't visible: a fur tuft hangs between the peets.
@@ -319,4 +324,10 @@ excuse and was withdrawn.)
    really untestable); and my first review sheets stretched the colour channels, making
    his white fur look blue and yellow. Both found while making the owner's review sheets.
    → One question, one test, everywhere; a view must never show what isn't in the photo.
+20. **An improvement that quietly undid another.** Refitting owner-joined whiskers as arcs
+   before following their ends changed FW-12's end direction, and a confirmed 80 px stretch
+   was lost. The same refit moved lines more than the 2 px name match allowed, so FW-12 was
+   renamed FW-18. Both were caught by comparing run outputs. → After any change, diff the
+   results against the previous run (lengths, names, counts) before believing it. Order the
+   steps so a cosmetic refit comes last.
 

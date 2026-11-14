@@ -369,6 +369,7 @@ def apply(F: fw.Face, doc: dict, ext: dict, cands: list[dict], prev_doc: dict | 
     # new whiskers (judged "whisker"): stable names from the saved data where the same line was there before
     prev = [(w_["id"], np.array(w_["centreline"])) for w_ in (prev_doc or {}).get("whiskers", [])
             if w_["id"].startswith("FW-")]
+    prev_lid = {w_.get("found_as"): w_["id"] for w_ in (prev_doc or {}).get("whiskers", []) if w_.get("found_as")}
     taken = {w["id"] for w in doc["whiskers"]}
     n = max([int(i[3:]) for i in taken | {i for i, _ in prev} if i.startswith("FW-")] or [0])
     listed = []
@@ -379,7 +380,9 @@ def apply(F: fw.Face, doc: dict, ext: dict, cands: list[dict], prev_doc: dict | 
         cl, sig, dep, ok = fit_line(F, c["seg"])
         if F.sdist(cl[0]) > F.sdist(cl[-1]):
             cl, sig, dep, ok = cl[::-1], sig[::-1], dep[::-1], ok[::-1]
-        same = [i for i, p in prev if i not in taken and fw.overlap(cl, p) >= 0.5]
+        # stable names: the owner's L-number first (lines move when refitted), then the line itself
+        same = ([prev_lid[c["lid"]]] if c.get("lid") in prev_lid and prev_lid[c["lid"]] not in taken else
+                [i for i, p in prev if i not in taken and fw.overlap(cl, p, 4.0) >= 0.5])
         if same:
             fid = same[0]
         else:

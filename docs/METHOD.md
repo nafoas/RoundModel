@@ -215,6 +215,13 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     (`tools/whisker_pads.py`): a line that runs into a whisker's end in the same
     direction is the same whisker (refit the whole whisker as one gentle arc, so a found
     piece can't wander into a dark patch of fur).
+19. **Whiskers are continuous, pad to tip** (owner, 2026-11-14): every whisker is one line
+    from its root on the pad to its tip (`tools/whisker_chains.py`). Pieces belong together
+    when one arc through both fits to about 1 px or better; a line carrying two whiskers reads
+    about twice as dark. Where it can't be seen, the line is inferred and labelled: through the
+    fur band, under the fur, against the white background, to the pad. An inferred stretch
+    keeps the whisker's own bend and bends only as much as it must. Its outer end is a tip
+    outside, or goes out of view round his cheek (his face is round), or goes under the fur.
 17. **Review sheets for grey areas** (`tools/candidate_sheets.py`): locator, the photo as
     it is, the photo with brightness stretched in TRUE colour (never stretch the colour
     channels separately or together: his fur's tiny real colour shifts become false
@@ -327,4 +334,5 @@ still required.
 | Whiskers over his face | `tools/face_whiskers.py` (+ line view `tools/whisker_lineview.py`, whole length `tools/whisker_fulllength.py`) → `data/strands/face_whiskers.json`, sheets `docs/images/face_whisker*.png` |
 | Grey-area review sheets | `tools/candidate_sheets.py` → `docs/images/candidates/` |
 | Whisker completeness (pads) | `tools/whisker_pads.py` → `data/strands/whisker_pads.json` |
+| Every whisker pad to tip | `tools/whisker_chains.py` → `data/strands/whiskers_full.json`, `docs/WHISKER_MAP.md`, `docs/images/whiskers_full/` |
 | Tests | `tests/` (`python -m pytest -q`) |
