@@ -598,3 +598,17 @@ check.py output (if applicable), and the next step.
 - **Next:** owner review (Q37-Q41); then the separate precise steps (whisker pads, mouth and nose,
   ears' tweaks, lashes/eyes).
 
+## 2026-11-14 — Session 6 (cont.): his pads are the whole raised muzzle
+- Owner: the pad outline was too narrow; it should encircle the whole raised "mouf" area from the
+  mouth up to the nose; that whole area has whiskers. Photo used: `data/photos/anchor_front.webp`.
+- Looked at the muzzle as a shape: shading at bulge scale (6-40 px) shows the raised area and the
+  crease where it turns away. Traced it as one closed ring (rays from the middle of the philtrum,
+  stays in the shading dip, changes radius smoothly, never through the nose), smoothed to a
+  sub-pixel curve; split at the philtrum into the two pads. Synthetic test (follows a crease at
+  r 150 to within 4 px median, encloses the nose).
+- Whiskers re-traced to it: 25 of 28 reach their pad on their own bend; inferred to-pad stretches
+  much shorter; FW-14's doubt resolved (reaches the muzzle in 44 px); FW-13 still flagged.
+  Lesson 21. Pads picture: `docs/images/whiskers_full/pads.png`.
+- Tests: 32 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
+- **Next:** owner review of the pads (Q39) and the whiskers (Q37, Q40, Q41).
+

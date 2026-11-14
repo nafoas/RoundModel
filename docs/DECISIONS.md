@@ -197,9 +197,12 @@ excuse and was withdrawn.)
   strength when he is built (never boosted) and are never dropped.
 
 - **Whiskers pad to tip, now** (owner, 2026-11-14): "whiskers don't just abruptly cut off";
-  trace them to the pads now even though the pads are their own later step. A working pad
-  outline is used (measured from the photo, raised to where the whiskers point); the pad step
-  refines it, and roots move with it.
+  trace them to the pads now even though the pads are their own later step.
+- **His pads are the whole raised muzzle** (owner, 2026-11-14: "it should fully encircle the
+  little bnuy mouf thing, where there is an elevated mouf area above the little mouf that goes
+  to the nose ... That whole area has whiskers, so those are his pads"). My first outline was
+  only the upper lip under each nostril (too narrow). Now: the closed shading crease around the
+  muzzle, split at the philtrum. The pad step refines it; roots move with it.
 
 ## The peets / underfluff / body line (approved 2026-11-07)
 
@@ -330,4 +333,9 @@ excuse and was withdrawn.)
    renamed FW-18. Both were caught by comparing run outputs. → After any change, diff the
    results against the previous run (lengths, names, counts) before believing it. Order the
    steps so a cosmetic refit comes last.
+21. **Defining a part from too little.** I drew the pads from a few landmarks (nostril wing,
+   philtrum, mouth corner) as just the lip under each nostril, then patched it upward from the
+   whiskers' directions. The owner pointed at the photo: the whole raised muzzle is the pad,
+   and its edge shows in the shading. → Before defining a region, look at the part as a shape in
+   the photo (shading, bulges, fur direction), not just at a few points on it.
 

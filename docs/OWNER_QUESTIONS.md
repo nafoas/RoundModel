@@ -170,15 +170,15 @@ the owner's official opinion later. Each says what I did in the meantime.
    FW-16's outside part is W-F01; B4-S01 is a second whisker on B4-S02's face line; the fan's
    B4-S12/B4-S15 run under the fur along FW-05's line; B2-S12 and B2-S15 run under the fur;
    B2-S14 and B2-S17 stay wisps (one arc through them and FW-03 fits only 2.3-2.6 px).
-39. **The working pad outline** (cyan on the sheets): the upper lip under each nostril wing, measured
-   from the photo, raised up the side of his nose to where 90% of his whiskers point. Each whisker's
-   root is where it reaches this outline. Close enough for now? (The pad step refines it.)
-40. **Two whiskers that don't fit your rule:**
-   - FW-13 (L05): 2-4x darker than any whisker on his face; it runs along the inside edge of his fur
-     band, points toward his eye, and would need its bend reversed to reach the pad;
-   - FW-14 (L08): points above his nose and would need 0.33 deg/px of bend (more than any whisker).
-   Their roots may be higher up the side of his nose, or they aren't pad whiskers. *Meantime:*
-   traced to the pad, marked DOUBT.
+39. **His pads = the raised muzzle** (redone 2026-11-14 after your note): the cyan outline in
+   `docs/images/whiskers_full/pads.png` (first page of the PDF), traced along the shading crease
+   where the muzzle turns away: the lip line along the bottom, up both sides, closing over the top
+   of his nose. Right? In particular: should it close over the top of his nose like that, or meet
+   the nose lower down?
+40. **One whisker still doesn't fit your rule:** FW-13 (L05) is 2-4x darker than any whisker on his
+   face, runs along the inside edge of his fur band and points toward his eye; to reach his pad it
+   would have to reverse its bend. (FW-14, the other doubt, now reaches the muzzle naturally.)
+   *Meantime:* traced to the pad, marked DOUBT.
 41. **Outer ends:** FW-01, FW-06, FW-14 and FW-17 reach his outline with nothing outside, so they go
    round his cheek out of view. FW-08, FW-09, FW-10, FW-12 and FW-15 stop mid-face at full strength,
    so they go under the fur. FW-11 fades like a tip. Do those match what you see?

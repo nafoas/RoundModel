@@ -161,6 +161,7 @@ def measure_pads(F):
     dark = a < med - 0.30 * (med - np.percentile(a, 1))
     lab, n = ndi.label(dark); sizes = ndi.sum(dark, lab, range(1, n + 1))
     ys, xs = np.nonzero(lab == int(np.argmax(sizes)) + 1); xs = xs + x0; ys = ys + y0
+    nose_mask = np.zeros(g.shape, bool); nose_mask[ys, xs] = True
     rows = {y: (xs[ys == y].min(), xs[ys == y].max()) for y in np.unique(ys)}
     widths = {y: r[1] - r[0] for y, r in rows.items()}
     ph = [y for y in sorted(rows) if widths[y] <= 30 and y > min(rows) + 30]     # philtrum rows
@@ -176,7 +177,8 @@ def measure_pads(F):
            [np.array([ph_x - 4, ph_top]), np.array([ph_x - 4, ph_bot]), mouth_l]
     right = [wing_r] + [np.array([rows[y][1], y], float) for y in nose_rows if y > yr][::4] + \
             [np.array([ph_x + 4, ph_top]), np.array([ph_x + 4, ph_bot]), mouth_r]
-    return {"image_left": dict(outline=np.array(left), lateral=[wing_l, mouth_l]),
+    return {"nose_mask": nose_mask,
+            "image_left": dict(outline=np.array(left), lateral=[wing_l, mouth_l]),
             "image_right": dict(outline=np.array(right), lateral=[wing_r, mouth_r]),
             "landmarks": dict(nostril_wing_left=wing_l, nostril_wing_right=wing_r, philtrum_x=ph_x,
                               philtrum_top=ph_top, philtrum_bottom=ph_bot, mouth_corner_left=mouth_l,
@@ -189,27 +191,73 @@ AT_PAD = 6.0                   # px: a seen end this close to (or inside) its pa
 PAD_TOP_PCT = 10               # the pad reaches up to where 90% of that side's whiskers point
 
 
-def raise_pads(pads, face_ends):
-    """By the owner's rule the pad is where the whiskers point: extend each pad's lateral edge up
-    from the nostril wing end to the 10th-percentile height at which that side's whiskers' own
-    continuations cross the nostril wing's vertical (never below the wing end)."""
-    for side, ends in face_ends.items():
-        wing = pads[side]["lateral"][0]
-        ys = []
-        for p0, t0, k in ends:
-            pts = arc_to(p0, t0, k, 600)
-            sgn = 1 if side == "image_left" else -1
-            if sgn * (p0[0] - wing[0]) >= 0:
-                ys.append(p0[1]); continue
-            hit = np.flatnonzero(sgn * (pts[:, 0] - wing[0]) >= 0)
-            if len(hit):
-                ys.append(pts[hit[0], 1])
-        top = min(float(np.percentile(ys, PAD_TOP_PCT)), wing[1])
-        tp = np.array([wing[0], top])
-        pads[side]["lateral"] = [tp] + list(pads[side]["lateral"])
-        pads[side]["outline"] = np.vstack([tp, pads[side]["outline"]])
-        pads[side]["top_from_whiskers"] = round(top, 1)
-    return pads
+RING_C_FROM = "philtrum"       # ring rays start at the middle of the philtrum
+RING_R = (30, 240)             # px: ring radius range searched
+RING_STEP_DEG = 3
+RING_MAX_JUMP = 6              # px change of radius per 3 deg step
+RING_SMOOTH = 1.0              # px rms: the ring is a smooth sub-pixel curve (gentle edges)
+
+
+def measure_muzzle(F, pads):
+    """The whisker pads (owner, 2026-11-14): the whole raised muzzle around his nose and mouth,
+    "the elevated mouf area above the little mouf that goes to the nose". Measured as the closed
+    crease where the raised area turns away: walking rays out from the middle of the philtrum,
+    the ring that stays in the shading's dip (shading at 6-40 px scale), changes radius smoothly,
+    never cuts through the nose, and closes on itself. Returns the ring (closed, smooth)."""
+    from scipy.interpolate import splev, splprep
+    g = F.grey
+    shade = ndi.gaussian_filter(ndi.gaussian_filter(g, 6) - ndi.gaussian_filter(g, 40), 2)
+    L_ = pads["landmarks"]
+    c = np.array([L_["philtrum_x"], (L_["philtrum_top"] + L_["philtrum_bottom"]) / 2])
+    TH = np.radians(np.arange(270, 270 + 360, RING_STEP_DEG)); R = np.arange(RING_R[0], RING_R[1] + 1, 1.0)
+    P = c + R[None, :, None] * np.stack([np.cos(TH), np.sin(TH)], -1)[:, None, :]
+    val = ndi.map_coordinates(shade, [P[..., 1].ravel() - 0.5, P[..., 0].ravel() - 0.5], order=1).reshape(P.shape[:2])
+    nose = ndi.binary_dilation(pads["nose_mask"], iterations=10).astype(float)
+    nd = ndi.map_coordinates(nose, [P[..., 1].ravel() - 0.5, P[..., 0].ravel() - 0.5], order=0).reshape(P.shape[:2])
+    deg = np.degrees(TH) % 360
+    cost = val.copy()
+    for i in range(len(TH)):
+        if deg[i] >= 180 or deg[i] <= 0:
+            cost[i, R < 100] = 1e3                  # above the mouth line: not the nose's own edges
+        cost[i, nd[i] > 0] = 1e3                    # never through the nose
+    best = None
+    for r0 in range(120, 200, 2):
+        j0 = int(r0 - RING_R[0]); V = np.full(len(R), np.inf); V[j0] = cost[0, j0]; back = []
+        for i in range(1, len(TH)):
+            Vn = np.full(len(R), np.inf); Bn = np.zeros(len(R), int)
+            for d_ in range(-RING_MAX_JUMP, RING_MAX_JUMP + 1):
+                src = np.arange(len(R)) - d_; ok = (src >= 0) & (src < len(R))
+                cand = np.full(len(R), np.inf); cand[ok] = V[src[ok]] + 0.15 * abs(d_)
+                m = cand < Vn; Vn[m] = cand[m]; Bn[m] = src[m]
+            V = Vn + cost[i]; back.append(Bn)
+        ends = np.arange(max(0, j0 - RING_MAX_JUMP), min(len(R), j0 + RING_MAX_JUMP + 1))
+        je = ends[np.argmin(V[ends])]
+        if best is None or V[je] < best[0]:
+            path = [je]
+            for Bn in back[::-1]:
+                path.append(Bn[path[-1]])
+            best = (V[je], path[::-1])
+    raw = np.array([P[i, j] for i, j in enumerate(best[1])])
+    tck, _ = splprep([raw[:, 0], raw[:, 1]], per=1, s=len(raw) * RING_SMOOTH ** 2)
+    x, y = splev(np.linspace(0, 1, 721)[:-1], tck)
+    return np.c_[x, y], c
+
+
+def muzzle_pads(F, pads):
+    """split the muzzle ring into the two pads at the philtrum; each pad's 'lateral' edge is the
+    ring on its side (top middle -> round its side -> bottom middle)"""
+    ring, c = measure_muzzle(F, pads)
+    mid = pads["landmarks"]["philtrum_x"]
+    i_top = int(np.argmin(np.where(ring[:, 1] < c[1], np.abs(ring[:, 0] - mid), np.inf)))
+    i_bot = int(np.argmin(np.where(ring[:, 1] > c[1], np.abs(ring[:, 0] - mid), np.inf)))
+    n = len(ring)
+    seq = lambda a, b: [ring[k % n] for k in range(a, b + (n if b < a else 0) + 1)]
+    arc1 = np.array(seq(i_top, i_bot)); arc2 = np.array(seq(i_bot, i_top))[::-1]     # both top -> bottom
+    left_arc, right_arc = (arc1, arc2) if arc1[:, 0].mean() < arc2[:, 0].mean() else (arc2, arc1)
+    out = {"ring": ring, "landmarks": pads["landmarks"]}
+    for side, arc in (("image_left", left_arc), ("image_right", right_arc)):
+        out[side] = dict(lateral=[q for q in arc], outline=np.vstack([arc, [mid, arc[-1][1]], [mid, arc[0][1]]]))
+    return out
 
 
 def _nearest_on(poly, p):
@@ -291,7 +339,7 @@ def build(F, V=None):
         if spec["face"]:
             fp = face[spec["face"]]["line"]
             ends["image_left" if fp[:, 0].mean() < mid else "image_right"].append((fp[-1], tangent(fp, True), own_curvature(fp)))
-    pads = raise_pads(pads, ends)
+    pads = muzzle_pads(F, pads)            # owner, 2026-11-14: the whole raised muzzle is the pads
     result, used_face = [], set()
     for spec in WHISKERS:
         segs = []          # (points ordered root(pad) -> tip, label)
@@ -354,8 +402,7 @@ def build(F, V=None):
         if len(to_pad) > 30 and (abs(np.degrees(k_used)) > MAX_BEND_DEG or (fpart is not None and change > MAX_BEND_DEG)):
             doubt = (f"to reach the pad outline it must bend {np.degrees(k_used):+.2f} deg/px against its own "
                      f"{np.degrees(k_own):+.2f} (whiskers on his face bend at most {MAX_BEND_DEG}); it points "
-                     f"{'above' if nose_end[1] < pads[side]['lateral'][0][1] else 'away from'} its pad: its root may be "
-                     f"higher (up the side of his nose), or it is not a pad whisker")
+                     f"away from its pad: it may not be a pad whisker")
         rec = dict(id=spec["id"], side=side, why=spec["why"], shares=spec.get("shares"), outer_end=outer, doubt=doubt,
                    pieces=[lab for _, lab in segs],
                    to_pad=dict(px=int(len(to_pad)), bend_deg_per_px=round(float(np.degrees(k_used)), 3),
@@ -392,8 +439,7 @@ def sheets(F, recs, pads, V):
             im = Image.fromarray(src).convert("RGB").resize(((x1 - x0) * sc, (y1 - y0) * sc), Image.LANCZOS)
             top = im.copy(); dr = ImageDraw.Draw(im)
             P = lambda z: ((z[0] - x0) * sc, (z[1] - y0) * sc)
-            for sd in ("image_left", "image_right"):
-                dr.line([P(z) for z in np.vstack([pads[sd]["outline"], pads[sd]["outline"][:1]])], fill=(0, 190, 255), width=2)
+            dr.line([P(z) for z in np.vstack([pads["ring"], pads["ring"][:1]])], fill=(0, 190, 255), width=2)
             for r in recs:
                 if r["id"] in focus:
                     continue
@@ -430,7 +476,30 @@ def sheets(F, recs, pads, V):
         x0, y0 = max(x0, 0), max(y0, 0); x1, y1 = min(x1, W_), min(y1, H_)      # the whole whisker, always
         sc = int(np.clip(700 // max(x1 - x0, 1), 1, 4))
         draw((x0, y0, x1, y1), sc, {r["id"]}, f"{r['id']}: {key}").save(OUT_IMG / f"{r['id']}.png")
-    pages = []
+    # the pads alone, for the owner to check (photo; shading at bulge scale; evened-out photo)
+    ring = pads["ring"]; x0, y0, x1, y1 = 300, 500, 800, 940; sc = 2
+    shade = ndi.gaussian_filter(g, 6) - ndi.gaussian_filter(g, 40)
+
+    def st(a, lo=1, hi=99):
+        l, h = np.percentile(a, [lo, hi]); return np.clip((a - l) / (h - l) * 255, 0, 255).astype(np.uint8)
+    cols = []
+    for title, a in (("photo", F.photo[y0:y1, x0:x1]), ("shading at bulge scale (6-40 px)", st(shade[y0:y1, x0:x1])),
+                     ("photo, brightness evened", st(flat[y0:y1, x0:x1], 0.5, 99.5))):
+        im = Image.fromarray(a).convert("RGB").resize(((x1 - x0) * sc, (y1 - y0) * sc), Image.LANCZOS)
+        top = im.copy(); dr = ImageDraw.Draw(im); P = lambda z: ((z[0] - x0) * sc, (z[1] - y0) * sc)
+        dr.line([P(z) for z in np.vstack([ring, ring[:1]])], fill=(0, 190, 255), width=2)
+        mid = pads["landmarks"]["philtrum_x"]
+        dr.line([P((mid, ring[:, 1].min())), P((mid, ring[:, 1].max()))], fill=(0, 190, 255), width=1)
+        ImageDraw.Draw(top).text((6, 6), title, fill=(255, 0, 150))
+        col = Image.new("RGB", (im.width, im.height * 2 + 4), (30, 30, 30)); col.paste(top, (0, 0)); col.paste(im, (0, im.height + 4))
+        cols.append(col)
+    pp = Image.new("RGB", (cols[0].width * 3 + 12, cols[0].height + 28), (255, 255, 255))
+    for i, col in enumerate(cols):
+        pp.paste(col, (i * (col.width + 6), 28))
+    ImageDraw.Draw(pp).text((6, 8), "his whisker pads: the raised muzzle (cyan), traced along the shading crease where it "
+                            "turns away; split at the philtrum (thin line). Top: unmarked.", fill=(0, 0, 0))
+    pp.save(OUT_IMG / "pads.png")
+    pages = [pp]
     for side, box in (("image_left", (60, 540, 560, 1060)), ("image_right", (530, 540, 1098, 1060))):
         ids = {r["id"] for r in recs if r["side"] == side}
         im = draw(box, 2, ids, f"all whiskers, {side.replace('_', ' ')} side: {key}"); im.save(OUT_IMG / f"all_{side}.png")
@@ -447,13 +516,11 @@ def write_map(recs, pads, missing, outs):
          "`docs/images/whiskers_full/`). Owner, 2026-11-14: whiskers don't just cut off; trace them to",
          "the pads now. Each decision below was made individually from measurements (one arc through",
          "both pieces: how close it fits; darkness; direction). Inferred stretches are labelled.", "",
-         "Working pad outline (refined in the whisker-pad step): the upper lip under each nostril wing,",
-         f"measured from the photo: nostril wings end at {pads['landmarks']['nostril_wing_left'].round(0).tolist()} and "
-         f"{pads['landmarks']['nostril_wing_right'].round(0).tolist()}, philtrum at x {pads['landmarks']['philtrum_x']:.0f}, "
-         f"mouth corners {pads['landmarks']['mouth_corner_left'].round(0).tolist()} and "
-         f"{pads['landmarks']['mouth_corner_right'].round(0).tolist()}; raised up the side of his nose to where 90% of",
-         f"that side's whiskers point (your rule: they point to the pads): y {pads['image_left']['top_from_whiskers']:.0f} "
-         f"(image left) and {pads['image_right']['top_from_whiskers']:.0f} (image right).", ""]
+         "His pads (owner, 2026-11-14): the whole raised muzzle around his nose and mouth, \"the elevated",
+         "mouf area above the little mouf that goes to the nose\". Measured as the closed shading crease",
+         "where the raised area turns away (the lip line along the bottom, up both sides, over the nose),",
+         "split at the philtrum into his two pads (cyan on the pictures). A whisker reaches its pad where",
+         "it enters this area. Judgment boundary: owner review.", ""]
     for side, name in (("image_right", "His left side (image right)"), ("image_left", "His right side (image left)")):
         L += [f"## {name}", "", "| whisker | made of | why | to its pad | outer end |", "|---|---|---|---|---|"]
         for r in recs:
@@ -487,8 +554,10 @@ def main() -> int:
     if missing:
         print("face whiskers not assigned:", missing)
     doc = dict(about=__doc__.split("\n\n")[0] + " " + __doc__.split("\n\n")[1],
-               pads={k: dict(outline=np.round(v["outline"], 1).tolist(), top_from_whiskers=v["top_from_whiskers"])
-                     for k, v in pads.items() if k != "landmarks"},
+               pads=dict(muzzle_ring=np.round(pads["ring"], 2).tolist(),
+                         about=("the whole raised muzzle around his nose and mouth (owner, 2026-11-14), measured as "
+                                "the closed shading crease where it turns away; split at the philtrum into his two pads; "
+                                "judgment boundary, owner review")),
                landmarks={k: (np.round(v, 1).tolist() if isinstance(v, np.ndarray) else v) for k, v in pads["landmarks"].items()},
                whiskers=recs, not_pad_whiskers=NOT_PAD,
                reclassified_outside_pieces={"B4-S01": "wisp -> outside part of whisker B4-S01 (shares B4-S02's face line)",

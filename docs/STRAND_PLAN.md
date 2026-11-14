@@ -181,9 +181,11 @@ decision with its measurement), sheets `docs/images/whiskers_full/` (one per whi
 sides + one PDF). 28 pad whiskers, each one line from its pad to its tip; inferred stretches
 labelled. Junctions decided one by one by fitting one arc through both pieces (same whisker:
 0.1-0.8 px; different: 2-10 px), darkness (a line carrying two whiskers reads ~2x) and
-direction. Working pad outline measured from the photo (upper lip under each nostril wing,
-raised to where 90% of the whiskers point). Two doubtful: FW-13 (L05) and FW-14 (L08) would
-have to bend more than any whisker to reach the pad. Self-checked; owner review pending.
+direction. **Pads (owner, 2026-11-14): the whole raised muzzle around his nose and mouth**,
+traced as the closed shading crease where it turns away (lip line along the bottom, up both
+sides, over the nose), split at the philtrum; picture `docs/images/whiskers_full/pads.png`.
+25 of 28 whiskers reach it on their own bend; one doubtful: FW-13 (L05) would have to reverse
+its bend. Self-checked; owner review pending.
 
 **Whiskers, part 2: fourth pass (2026-11-14), owner: "Those are all whiskers but a
 lot of them are missing segments ... be more rigorous ... look for fainter traces.
