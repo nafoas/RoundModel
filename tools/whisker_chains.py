@@ -59,10 +59,12 @@ WHISKERS = [
          why="one arc through the outside and face parts fits to 0.45 px (gap 22 px)"),
     dict(id="B2-S02", outside=["B2-S02"], face="B2-S02-face",
          why="one arc fits to 1.6 px; points at his pad. (FW-13 fits B2-S02 better, 0.7 px, but does not point at a pad)"),
-    dict(id="FW-13", outside=["B2-S02"], face="FW-13", shares="B2-S02",
-         why="your L05. Starts on B2-S02's outside root stretch (one arc 0.7 px), so it shares that stretch. "
+    dict(id="FW-13", outside=[], face="FW-13",
+         why="your L05. Meets B2-S02's root at his outline, but does not take over B2-S02's outside part: "
+             "B2-S02's darkness tapers smoothly from the root (no step, so no second whisker on it), and two "
+             "straight whiskers meeting at 17 deg separate within a few px, where no second line shows. "
              "FLAG: 2-4x darker than any whisker on his face, runs along the inside edge of his fur band, "
-             "and points 158 px off the pad (toward his eye); to reach the pad it must bend more than any whisker"),
+             "points toward his eye; to reach the pad it must reverse its bend"),
     dict(id="B2-S08", outside=["B2-S08"], face="B2-S08-face", why="one arc fits to 0.10 px (gap 8 px)"),
     dict(id="B2-S16", outside=["B2-S16"], face="B2-S16-face", why="one arc fits to 0.32 px (gap 6 px)"),
     dict(id="B2-S20", outside=["B2-S20", "gap", "B2-S29"], face="FW-03",
@@ -88,9 +90,12 @@ WHISKERS = [
          why="traced as a borderline wisp (34 px, straight). Fits B4-S02-face too (one arc 0.78 px, 2 deg), "
              "and B4-S02-face is the darkest line on that cheek (1.5-2x its neighbours): two whiskers share it"),
     dict(id="B5-S17", outside=["B5-S17"], face="B5-S17-face", why="one arc fits to 0.42 px (gap 8 px)"),
-    dict(id="FW-02", outside=["B5-S17"], face="FW-02", shares="B5-S17",
-         why="starts exactly on B5-S17's root (one arc 1.2 px); B5-S17's root stretch is 2.8x as dark as the "
-             "rest of it (B2-S08 and B1-S11, also rooted at the outline: 1.0x): two whiskers share that stretch"),
+    dict(id="FW-02", outside=[], face="FW-02",
+         why="converges onto B5-S17 at his outline (19 px apart at its nose end, 0.6 px at the outline). It "
+             "does not take over B5-S17's 188 px outside part: B5-S17's darkness tapers smoothly from the root "
+             "(2.6, 1.5, 1.3, 0.9 ... no step, so no second whisker on it), and two straight whiskers meeting at "
+             "~13 deg separate within a few px, where no second line shows. Its tip is at or just past the "
+             "outline, too light to see against the white background"),
     dict(id="B4-S17", outside=["B4-S17"], face="FW-05",
          why="the fan (three whiskers on one root line). FW-05 fits all three (0.37-0.55 px) but carries one "
              "whisker's darkness; B4-S17 fits best (0.37 px, smallest bend)"),
@@ -110,11 +115,10 @@ WHISKERS = [
     dict(id="FW-09", outside=[], face="FW-09", why="your L03"),
     dict(id="FW-15", outside=[], face="FW-15", why="your L09"),
 ]
-NOT_PAD = {   # outside whiskers that root elsewhere (their own step)
-    "B1-S01": "eyebrow whisker (his left)", "B1-S02": "eyebrow whisker (his left)",
-    "B1-S03": "eyebrow whisker (his left)", "B1-S07": "loose piece beside his left eye: nothing lines up with it",
-    "B5-S01": "eyebrow whisker (his right)", "B5-S02": "eyebrow whisker (his right)",
-    "B5-S06": "eyebrow whisker (his right)", "B5-S08": "eyebrow whisker (his right)",
+BROW = ["B1-S01", "B1-S02", "B1-S03", "B1-S07", "B5-S01", "B5-S02", "B5-S06", "B5-S08"]
+BROW_WHY = {
+    "B1-S07": "loose piece beside his left eye; its own arc continued reaches his brow outline (inferred stretch)",
+    "B5-S06": "stops 22 px short of his fur where it crosses the rogue wisp; its own arc continued to his brow",
 }
 
 
@@ -188,7 +192,6 @@ def measure_pads(F):
 AT_PAD = 6.0                   # px: a seen end this close to (or inside) its pad has reached it
 
 
-PAD_TOP_PCT = 10               # the pad reaches up to where 90% of that side's whiskers point
 
 
 LIP_SCALE = (3.0, 20.0)        # px: dark-line view for the lip line (fine minus coarse smoothing)
@@ -273,9 +276,11 @@ def muzzle_pads(F, pads):
     seq = lambda a, b: [ring[k % n] for k in range(a, b + (n if b < a else 0) + 1)]
     arc1 = np.array(seq(i_top, i_bot)); arc2 = np.array(seq(i_bot, i_top))[::-1]     # both top -> bottom
     left_arc, right_arc = (arc1, arc2) if arc1[:, 0].mean() < arc2[:, 0].mean() else (arc2, arc1)
-    out = {"ring": ring, "landmarks": pads["landmarks"], "pad_info": info}
+    out = {"ring": ring, "landmarks": pads["landmarks"], "pad_info": info,
+           "nose": ndi.binary_dilation(pads["nose_mask"], iterations=2)}
     for side, arc in (("image_left", left_arc), ("image_right", right_arc)):
-        out[side] = dict(lateral=[q for q in arc], outline=np.vstack([arc, [mid, arc[-1][1]], [mid, arc[0][1]]]))
+        out[side] = dict(lateral=[q for q in arc], outline=np.vstack([arc, [mid, arc[-1][1]], [mid, arc[0][1]]]),
+                         nose=out["nose"])
     return out
 
 
@@ -307,14 +312,18 @@ def path_to_pad(p0, t0, k_own, pad):
     """circular arc from p0 (heading t0) to the pad's lateral edge: its own bend if that reaches the
     edge, else the smallest change of bend that does. Returns (points, curvature used, own curvature)."""
     lat = pad["lateral"]
+    nose = pad.get("nose")
+    hits_nose = (lambda pts: nose is not None and len(pts) and
+                 nose[np.clip(pts[:, 1].astype(int), 0, nose.shape[0] - 1),
+                      np.clip(pts[:, 0].astype(int), 0, nose.shape[1] - 1)].any())
     if MPath(pad["outline"]).contains_point(p0) or _nearest_on(lat, p0) <= AT_PAD:
         return p0[None].copy(), k_own, k_own          # already at its pad: nothing to infer
-    # 1. its own bend: where does it cross the pad's lateral edge?
+    # 1. its own bend: where does it cross the pad's lateral edge? (never through his nose)
     own = np.vstack([p0, arc_to(p0, t0, k_own, OWN_REACH)])
     for i in range(len(own) - 1):
         for a, b in zip(lat[:-1], lat[1:]):
             q = seg_cross(own[i], own[i + 1], a, b)
-            if q is not None:
+            if q is not None and not hits_nose(own[1:i + 1]):
                 return np.vstack([own[1:i + 1], q]), k_own, k_own
     # 2. it doesn't: the smallest change of bend that reaches the edge (targets 1 px apart)
     cands = []
@@ -330,9 +339,11 @@ def path_to_pad(p0, t0, k_own, pad):
         k = 2 * np.sin(alpha) / dist                                     # circle through p0 (tangent t0) and q
         L = dist if abs(alpha) < 1e-6 else abs(2 * alpha / k)
         cands.append((abs(k - k_own), k, L, q))
+    cands.sort(key=lambda c: c[0])
+    cands = [c for c in cands if not hits_nose(arc_to(p0, t0, c[1], c[2]))][:1]
     if not cands:
         return None, None, k_own
-    _, k, L, q = min(cands, key=lambda c: c[0])
+    _, k, L, q = cands[0]
     pts = arc_to(p0, t0, k, L)
     return np.vstack([pts[:-1], q]) if len(pts) > 1 else q[None], k, k_own
 
@@ -380,7 +391,7 @@ def build(F, V=None):
         else:
             o0 = out_lines[0]                                   # root -> tip
             nose_end, t_in = o0[0], -tangent(o0, False)
-            k_own = -own_curvature(o0[::-1])                   # bend continued inward
+            k_own = own_curvature(o0[::-1])                    # its own bend, continued inward past the root end
         to_pad, k_used, _ = path_to_pad(nose_end, t_in, k_own, pads[side])
         if to_pad is None:
             raise RuntimeError(f"{spec['id']}: no gentle path to its pad")
@@ -438,10 +449,27 @@ def build(F, V=None):
                     rec.setdefault("seen_along_inferred", {})[key] = round(float(np.mean(np.nan_to_num(wv) >= SEEN_LEVEL)), 2)
         result.append(rec)
     missing = sorted(set(face) - used_face)
-    return result, pads, missing, outs
+    # eyebrow whiskers: root at his brow outline; a root end short of it is continued on its own arc
+    brows = []
+    for k in BROW:
+        o0 = outs[k]["line"]                                   # root -> tip
+        sd = float(F.sdist(o0[0]))
+        segs = [(o0, "outside (seen)")]
+        if sd < -3:
+            ext = arc_to(o0[0], -tangent(o0, False), own_curvature(o0[::-1]), 200)
+            inside = np.flatnonzero(F.sdist(ext) >= 0)
+            ext = ext[:inside[0] + 1] if len(inside) else ext[:int(-sd * 1.5)]
+            segs.insert(0, (ext[::-1], "inferred, to his brow"))
+        line = np.vstack([q for q, _ in segs]); labels = np.concatenate([[lab] * len(q) for q, lab in segs])
+        brows.append(dict(id=k, side="image_left" if o0[:, 0].mean() < pads["landmarks"]["philtrum_x"] else "image_right",
+                          kind="eyebrow whisker", root="at his brow outline, above the eye (the eye step refines it)",
+                          why=BROW_WHY.get(k, "roots at his brow outline; seen all the way"),
+                          inferred_px=int(sum(len(q) for q, lab in segs if lab.startswith("inferred"))),
+                          centreline=np.round(line, 2).tolist(), labels=labels.tolist()))
+    return result, pads, missing, outs, brows
 
 
-def sheets(F, recs, pads, V):
+def sheets(F, recs, pads, V, brows=()):
     OUT_IMG.mkdir(parents=True, exist_ok=True)
     g = F.grey; flat = g * (g.mean() / np.maximum(ndi.gaussian_filter(g, 20), 1))
     chroma = F.photo.astype(float) - F.photo.astype(float).mean(2, keepdims=True)
@@ -521,6 +549,37 @@ def sheets(F, recs, pads, V):
                             "of his nose; split at the philtrum (thin line). Top: unmarked.", fill=(0, 0, 0))
     pp.save(OUT_IMG / "pads.png")
     pages = [pp]
+    # eyebrow whiskers, both brows (photo with brightness evened; solid green seen, dashed orange inferred)
+    bimgs = []
+    for title, box in (("his right brow (image left)", (170, 180, 470, 520)), ("his left brow (image right)", (600, 150, 920, 520))):
+        x0, y0, x1, y1 = box; sc = 2
+        a = flat[y0:y1, x0:x1]; l, h = np.percentile(a, [1, 99])
+        a = np.clip((a - l) / (h - l) * 255, 0, 255).astype(np.uint8)
+        im = Image.fromarray(a).convert("RGB").resize(((x1 - x0) * sc, (y1 - y0) * sc), Image.LANCZOS)
+        top = im.copy(); dr = ImageDraw.Draw(im); P = lambda z: ((z[0] - x0) * sc, (z[1] - y0) * sc)
+        for b in brows:
+            q = np.array(b["centreline"]); lab = np.array(b["labels"])
+            if not (x0 <= q[:, 0].mean() <= x1):
+                continue
+            t = np.gradient(q, axis=0); t /= np.linalg.norm(t, axis=1, keepdims=True) + 1e-12; n = np.c_[-t[:, 1], t[:, 0]]
+            for sg in (-1, 1):
+                gl = q + sg * 4 * n
+                for i in range(len(gl) - 1):
+                    seen = lab[i].startswith("outside")
+                    if not seen and (i // 3) % 2:
+                        continue
+                    dr.line([P(gl[i]), P(gl[i + 1])], fill=(0, 170, 0) if seen else (255, 140, 0), width=1)
+            dr.text(P(q[0] + np.array([5, 5])), b["id"], fill=(255, 0, 150))
+        ImageDraw.Draw(top).text((6, 6), title, fill=(255, 0, 150))
+        col = Image.new("RGB", (im.width * 2 + 6, im.height), (30, 30, 30)); col.paste(top, (0, 0)); col.paste(im, (im.width + 6, 0))
+        bimgs.append(col)
+    bp = Image.new("RGB", (max(i.width for i in bimgs), sum(i.height for i in bimgs) + 40), (255, 255, 255))
+    y_ = 30
+    for i in bimgs:
+        bp.paste(i, (0, y_)); y_ += i.height + 6
+    ImageDraw.Draw(bp).text((6, 8), "eyebrow whiskers: solid green = seen; dashed orange = inferred to his brow. "
+                            "Left: unmarked.", fill=(0, 0, 0))
+    bp.save(OUT_IMG / "brows.png"); pages.append(bp)
     for side, box in (("image_left", (60, 540, 560, 1060)), ("image_right", (530, 540, 1098, 1060))):
         ids = {r["id"] for r in recs if r["side"] == side}
         im = draw(box, 2, ids, f"all whiskers, {side.replace('_', ' ')} side: {key}"); im.save(OUT_IMG / f"all_{side}.png")
@@ -530,7 +589,7 @@ def sheets(F, recs, pads, V):
     pages[0].save(OUT_IMG / "whiskers_full.pdf", save_all=True, append_images=pages[1:], resolution=110)
 
 
-def write_map(recs, pads, missing, outs):
+def write_map(recs, pads, missing, outs, brows, faint):
     L = ["# Prince's whiskers, pad to tip", "",
          "Every whisker on his face as one continuous line from its root on his whisker pad to its tip",
          "(`tools/whisker_chains.py`, data `data/strands/whiskers_full.json`, pictures",
@@ -558,21 +617,104 @@ def write_map(recs, pads, missing, outs):
             L.append(f"| {r['id']} | {' + '.join(parts)} | {r['why']} | {tp['px'] if tp['px'] > 1 else 0} px inferred"
                      f"{f', a line seen along {seen:.0%} of it' if seen is not None else ''}{extra} | {r['outer_end']} |")
         L.append("")
-    L += ["## Outside whiskers that root elsewhere", ""]
-    for k, v in NOT_PAD.items():
-        L.append(f"- {k}: {v} (for the eye/brow step)")
+    L += ["## Eyebrow whiskers (rooted at his brow, above each eye)", "",
+          "| whisker | side | why | inferred |", "|---|---|---|---|"]
+    for b in brows:
+        L.append(f"| {b['id']} | {b['side'].replace('_', ' ')} | {b['why']} | {b['inferred_px']} px |")
+    L += ["", "Their roots sit at his brow outline right beside the eye marks; the eye step refines them.", "",
+          "## Faint lines from the first view (C01-C13): final status", ""]
+    for c in faint:
+        L.append(f"- {c['id']}: {c['status']}")
     if missing:
         L += ["", "## Face whiskers not assigned (should be none)", "", ", ".join(missing)]
     (ROOT / "docs/WHISKER_MAP.md").write_text("\n".join(L) + "\n")
+
+
+FAINT_VERDICTS = {   # the first view's faint lines not on any whisker, judged by the owner's rule (2026-11-14)
+    "C03": ("fur", "does not stand out from the fur beside it (-0.62) and points 161 px away from his pad"),
+    "C06": ("uncertain: owner sorts manually", "stands out (+2.94) but lies inside his pad by the mouth corner, "
+            "pointing 45 deg off; could be a whisker near its root, or the lip's own shading"),
+    "C08": ("uncertain: owner sorts manually", "stands out (+2.42) and points roughly at his pad (19 deg off, 57 px from "
+            "its centre), in the streaky fur low on his right cheek"),
+    "C12": ("uncertain: owner sorts manually", "barely stands out (+1.14, fur reaches 0.94 one time in 20) and points "
+            "162 px away from any pad: leans fur"),
+}
+
+
+def unsure_sheet(F, recs, faint):
+    """one close-up per thing still uncertain: the photo (brightness evened, true colour) unmarked, then
+    marked (guides 5 px either side, so the line itself stays visible). docs/images/whiskers_full/unsure.png"""
+    g = F.grey; flat = g * (g.mean() / np.maximum(ndi.gaussian_filter(g, 20), 1))
+    chroma = F.photo.astype(float) - F.photo.astype(float).mean(2, keepdims=True)
+    R = {r["id"]: r for r in recs}
+    items = [(c["id"], np.array(c["points"]), None, c["status"]) for c in faint if c["status"].startswith("uncertain")]
+    for k in ("FW-13", "FW-14", "FW-02"):
+        if k in R:
+            items.append((k, np.array(R[k]["centreline"]), np.array(R[k]["labels"]),
+                          R[k].get("doubt") or R[k]["why"]))
+    rows = []
+    for name, q, lab, note in items:
+        x0, y0 = np.floor(q.min(0) - 30).astype(int); x1, y1 = np.ceil(q.max(0) + 30).astype(int)
+        sc = float(np.clip(560 / max(x1 - x0, y1 - y0), 1, 5))
+        a = flat[y0:y1, x0:x1]; l, h = np.percentile(a, [1, 99])
+        ph = np.clip(np.clip((a - l) / (h - l) * 255, 0, 255)[..., None] + chroma[y0:y1, x0:x1], 0, 255).astype(np.uint8)
+        im = Image.fromarray(ph).resize((int((x1 - x0) * sc), int((y1 - y0) * sc)), Image.LANCZOS)
+        mk = im.copy(); dr = ImageDraw.Draw(mk); P = lambda z: ((z[0] - x0) * sc, (z[1] - y0) * sc)
+        qq = dense(q); t = np.gradient(qq, axis=0); t /= np.linalg.norm(t, axis=1, keepdims=True) + 1e-12
+        n = np.c_[-t[:, 1], t[:, 0]]
+        lab_d = None if lab is None else lab[np.clip(np.round(np.linspace(0, len(lab) - 1, len(qq))).astype(int), 0, len(lab) - 1)]
+        for sg in (-1, 1):
+            gl = qq + sg * 5 * n
+            for i in range(len(gl) - 1):
+                seen = lab_d is None or lab_d[i].startswith(("outside", "face (seen)"))
+                if not seen and (i // 3) % 2:
+                    continue
+                dr.line([P(gl[i]), P(gl[i + 1])], fill=(0, 200, 255) if lab_d is None else
+                        ((255, 0, 150) if seen else (255, 140, 0)), width=2)
+        row = Image.new("RGB", (im.width * 2 + 6, im.height + 44), (255, 255, 255))
+        row.paste(im, (0, 44)); row.paste(mk, (im.width + 6, 44))
+        d_ = ImageDraw.Draw(row); d_.text((4, 4), name, fill=(0, 0, 0))
+        words, line_, lines_ = note.split(), "", []
+        for w_ in words:
+            if len(line_) + len(w_) > 150:
+                lines_.append(line_); line_ = ""
+            line_ += w_ + " "
+        lines_.append(line_)
+        for i, t_ in enumerate(lines_[:2]):
+            d_.text((60, 4 + 14 * i), t_, fill=(60, 60, 60))
+        rows.append(row)
+    W_ = max(r.width for r in rows); out = Image.new("RGB", (W_, sum(r.height + 10 for r in rows)), (255, 255, 255))
+    y_ = 0
+    for r in rows:
+        out.paste(r, (0, y_)); y_ += r.height + 10
+    out.save(OUT_IMG / "unsure.png")
+    return out
+
+
+def faint_status(d, recs):
+    from scipy.spatial import cKDTree
+    out = []
+    lines = {r["id"]: np.array(r["centreline"]) for r in recs}
+    for c in d.get("faint_candidates_not_classified", []):
+        p = dense(np.array(c["points"]))
+        on = [k for k, q in lines.items() if (cKDTree(q).query(p)[0] <= 3).mean() >= 0.3]
+        if on:
+            st = f"part of whisker {', '.join(on)}"
+        else:
+            v, why = FAINT_VERDICTS.get(c["id"], ("uncertain: owner sorts manually", "not judged"))
+            st = f"{v}: {why}"
+        out.append(dict(id=c["id"], status=st, on=on, points=c["points"]))
+    return out
 
 
 def main() -> int:
     F = fw.Face()
     d = json.loads((ROOT / "data/strands/face_whiskers.json").read_text())
     V = wf.CombinedView(lv.field_lines(d["whiskers"], F))
-    recs, pads, missing, outs = build(F, V)
+    recs, pads, missing, outs, brows = build(F, V)
     if missing:
         print("face whiskers not assigned:", missing)
+    faint = faint_status(d, recs)
     doc = dict(about=__doc__.split("\n\n")[0] + " " + __doc__.split("\n\n")[1],
                pads=dict(muzzle_ring=np.round(pads["ring"], 2).tolist(),
                          corners=pads["pad_info"],
@@ -581,15 +723,16 @@ def main() -> int:
                                 "bottom of his nose "
                                 "(see measure_muzzle); split at the philtrum into his two pads; owner review")),
                landmarks={k: (np.round(v, 1).tolist() if isinstance(v, np.ndarray) else v) for k, v in pads["landmarks"].items()},
-               whiskers=recs, not_pad_whiskers=NOT_PAD,
+               whiskers=recs, eyebrow_whiskers=brows, faint_lines=faint,
                reclassified_outside_pieces={"B4-S01": "wisp -> outside part of whisker B4-S01 (shares B4-S02's face line)",
                                             "B4-S13": "wisp -> outside part of FW-07", "B4-S06": "fringe tip -> tip of FW-04",
                                             "W-F01": "fine hair -> outside part of FW-16",
                                             "B2-S29": "loose whisker section -> outer part of B2-S20"},
                status="first pass, self-checked; owner review pending")
     (ROOT / "data/strands/whiskers_full.json").write_text(json.dumps(doc, indent=1, default=lambda x: x.item()))
-    write_map(recs, pads, missing, outs)
-    sheets(F, recs, pads, V)
+    write_map(recs, pads, missing, outs, brows, faint)
+    sheets(F, recs, pads, V, brows)
+    unsure_sheet(F, recs, faint)
     for r in recs:
         tp = r["to_pad"]
         print(f"{r['id']:7s} {r['side'][6:]:5s} to pad {tp['px']:3d} px (own bend {tp['own_bend_deg_per_px']:+.2f}, "

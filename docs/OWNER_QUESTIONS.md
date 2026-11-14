@@ -139,14 +139,14 @@ the owner's official opinion later. Each says what I did in the meantime.
 28. **The rogue wisp** above his right eye: confirmed against the outline from
    before the bridge (the bump was exactly this hair's base); traced as one hair
    across a whisker crossing (B5-S07). Picture `docs/images/rogue_wisp_pixels.png`.
-29. **Shared whisker roots** (his right-side fan, image left): measured darkness
+29. [ANSWERED by measurement 2026-11-14: the fan is three whiskers; each has its own line; B4-S12/S15 run under the fur along FW-05.] **Shared whisker roots** (his right-side fan, image left): measured darkness
    says three whiskers (B4-S12, B4-S17, B4-S15) lie on one line near the root;
    each now has its own line through the shared stretch. *Meantime:* as traced;
    picture `docs/images/whiskers_3.png`.
-30. **Loose whisker sections** B1-S07 (beside his left eye) and B2-S29 (left side,
+30. [ANSWERED 2026-11-14: B2-S29 is the outer part of B2-S20; B1-S07 continued on its own arc to his brow (82 px inferred), eye step to confirm.] **Loose whisker sections** B1-S07 (beside his left eye) and B2-S29 (left side,
    low): their link back to his head is too faint to see. *Meantime:* traced as
    what's visible, classified whisker.
-31. **B5-S06** (long eyebrow whisker above his right eye) stops ~10 px short of his
+31. [ANSWERED 2026-11-14: continued on its own arc to his brow (25 px inferred), eye step to confirm.] **B5-S06** (long eyebrow whisker above his right eye) stops ~10 px short of his
    fur where it crosses the rogue wisp. *Meantime:* left for the lash/eye step,
    which works in that area anyway.
 32. **Face whiskers, fourth pass (2026-11-14):** 18 traced (12 before + L01-L04,
@@ -163,24 +163,21 @@ the owner's official opinion later. Each says what I did in the meantime.
    the others 0.7-1.5 px). Sheets kept: `docs/images/candidates/`.
 36. **[ANSWERED 2026-11-14: trace them to the pads now; whiskers don't just cut off.]** Done:
    `docs/WHISKER_MAP.md`, `docs/images/whiskers_full/whiskers_full.pdf`.
-37. **FW-02 and B5-S17:** decided as two whiskers sharing B5-S17's outside root stretch (that
-   stretch is 2.8x as dark as the rest of B5-S17). Right?
-38. **[ANSWERED by measurement 2026-11-14; please check `docs/WHISKER_MAP.md`.]**
-   B2-S20 + FW-03 + B2-S29 one whisker; FW-07's outside part is B4-S13; FW-04's tip is B4-S06;
-   FW-16's outside part is W-F01; B4-S01 is a second whisker on B4-S02's face line; the fan's
-   B4-S12/B4-S15 run under the fur along FW-05's line; B2-S12 and B2-S15 run under the fur;
-   B2-S14 and B2-S17 stay wisps (one arc through them and FW-03 fits only 2.3-2.6 px).
-39. **His pads, third try (2026-11-14):** along his lip line, round each side and up to the
-   nostril wing, along the bottom of his nose (`docs/images/whiskers_full/pads.png`). Right?
-   The upper whiskers on both cheeks aim at or a little above the nostril wing tips, so their
-   inferred roots bunch at that top corner: do his pads reach a little further up the sides of
-   his nose?
-40. **Two whiskers don't fit your rule:** FW-14 (L08) points above his nose; its inferred path
-   would cross the nose (marked DOUBT). And FW-13 (L05) is 2-4x darker than any whisker on his
-   face, runs along the inside edge of his fur band and points toward his eye; to reach his pad it
-   would have to reverse its bend. (FW-14, the other doubt, now reaches the muzzle naturally.)
-   *Meantime:* traced to the pad, marked DOUBT.
-41. **Outer ends:** FW-01, FW-06, FW-14 and FW-17 reach his outline with nothing outside, so they go
-   round his cheek out of view. FW-08, FW-09, FW-10, FW-12 and FW-15 stop mid-face at full strength,
-   so they go under the fur. FW-11 fades like a tip. Do those match what you see?
+37. **FW-02 and FW-13 (changed 2026-11-14 in the final cleanup):** each meets another whisker's root at
+   his outline (B5-S17, B2-S02). They no longer take over that whisker's outside part: its darkness
+   tapers smoothly from the root (no step, so no second whisker on it), and two straight whiskers meeting
+   at 13-17 deg separate within a few px, where no second line shows. Both now end at his outline (out of
+   view). Close-ups: `docs/images/whiskers_full/unsure.png`.
+38. **[ANSWERED by measurement 2026-11-14.]** Joins in `docs/WHISKER_MAP.md`.
+39. **[ANSWERED 2026-11-14: "a pretty good pad outline".]**
+40. **Two whiskers don't fit your rule** (close-ups in `unsure.png`): FW-13 (L05) would have to reverse
+   its bend to reach a pad; FW-14 (L08) points above his nose and must swing round the nostril
+   (0.60 deg/px). Pad whiskers, or something else?
+41. **Outer ends:** FW-01, FW-02, FW-06, FW-13, FW-14 and FW-17 reach his outline with nothing outside,
+   so they go round his cheek out of view. FW-08, FW-09, FW-10, FW-12 and FW-15 stop mid-face at
+   full strength, so they go under the fur. FW-11 fades like a tip.
+42. **Three faint lines (close-ups in `unsure.png`):** C06 (inside his pad by the mouth corner; stands
+   out, points 45 deg off), C08 (low on his right cheek; stands out, points roughly at the pad), C12
+   (barely stands out, points 162 px off any pad: leans fur). Whiskers or fur? (C03 judged fur: it
+   does not stand out and points away from the pad.)
 

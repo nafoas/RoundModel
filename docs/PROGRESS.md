@@ -624,3 +624,19 @@ check.py output (if applicable), and the next step.
 - Tests: 32 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
 - **Next:** owner review of the pads (Q39) and whiskers (Q37, Q40, Q41).
 
+## 2026-11-14 — Session 6 (cont.): whiskers, final cleanup
+- Owner: the pad outline is "pretty good"; overview of everything left, clean up, find whiskers that
+  are one, show what's uncertain, then move on. Photo used: `data/photos/anchor_front.webp` (the only one).
+- Inventory: nothing unaccounted (21 outside pieces, 23 face parts, 4 reclassified outside pieces).
+- Checks: no two whiskers' seen parts line up end to end; overlaps are filled-in roots converging near
+  the pads, one crossing (FW-16 / B2-S02), and the declared shared lines.
+- Fixes: FW-02 / FW-13 end at his outline instead of taking over B5-S17's / B2-S02's outside part
+  (darkness tapers, no step; lesson 23); inferred roots may not cross his nose; sign bug in the inward
+  continuation of whiskers with hidden face parts (lesson 24, test added); eyebrow whiskers completed to
+  his brow; final status for faint lines C01-C13 (C03 fur; C06, C08, C12 for the owner); dead code removed;
+  whisker_pads.py's points renamed "convergence_points" (not the pad outline).
+- Result: 28 pad whiskers + 8 eyebrow whiskers, each continuous; 21 of 28 reach their pad on their own
+  bend. Uncertain items on one page: `docs/images/whiskers_full/unsure.png`.
+- Tests: 33 passed. Completeness scan rerun: no untraced line pointing into a pad stands out from fur (the one hit lies across B5-S17's own curve). `check.py` does not exist yet (PLAN.md: not built); no match claimed.
+- **Next:** owner on Q37, Q40-Q42; then move on (owner's choice of next part).
+

@@ -61,3 +61,16 @@ def test_pad_outline_follows_the_lip_line_and_reaches_the_nostrils():
     for k in ("image_left", "image_right"):
         assert abs(info[k]["lip_corner"][0] - 548) > 100          # followed the lip line out to near its end
     assert min(np.hypot(*(ring - [470.0, 692.0]).T)) < 4 and min(np.hypot(*(ring - [626.0, 692.0]).T)) < 4
+
+
+def test_inward_continuation_keeps_its_own_bend():
+    """a line on a circle, ordered root -> tip: continuing past its root end with its own bend stays on
+    the same circle (the bug: the bend's sign was flipped, bending it the other way)"""
+    c, r = np.array([300.0, 300.0]), 250.0
+    a = np.linspace(-0.2, 0.5, 200)
+    line = c + r * np.c_[np.cos(a), np.sin(a)]                     # root at a = -0.2, tip at a = 0.5
+    k = wc.own_curvature(line[::-1])
+    ext = wc.arc_to(line[0], -wc.tangent(line, False), k, 100)
+    wrong = wc.arc_to(line[0], -wc.tangent(line, False), -k, 100)
+    assert np.abs(np.hypot(*(ext - c).T) - r).max() < 3.0           # (direction estimated over 10 px)
+    assert np.abs(np.hypot(*(wrong - c).T) - r).max() > 20.0

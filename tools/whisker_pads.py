@@ -157,7 +157,10 @@ def main() -> int:
         scans[f"accept {T} / follow {FA}"] = row
         print(f"scan at {T}/{FA}: " + "; ".join(f"{s}: {r['count']} untraced pad-pointing (control {r['control_count']})"
                                                 for s, r in row.items()))
-    doc = dict(about=__doc__.split("\n\n")[0], pads={k: np.round(v, 1).tolist() for k, v in pads.items()},
+    doc = dict(about=__doc__.split("\n\n")[0],
+               convergence_points={k: np.round(v, 1).tolist() for k, v in pads.items()},
+               note=("convergence_points: where each side's whiskers point (least squares); not the pad outline, "
+                     "which is in data/strands/whiskers_full.json"),
                per_whisker=per, outside_whiskers_without_face_part=no_face,
                face_whiskers_without_outside_part=no_out, pad_scan=scans)
     (fw.ROOT / "data/strands/whisker_pads.json").write_text(json.dumps(doc, indent=1))

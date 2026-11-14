@@ -172,6 +172,16 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**Whiskers: final cleanup (2026-11-14).** Owner: the pad outline is "pretty good"; overview, clean
+up, merge any whiskers that are one, show what is uncertain. Inventory: all 21 outside whisker pieces and
+all 23 face parts are in a whisker; 4 more outside pieces (traced as wisps/fringe) are parts of whiskers.
+No two whiskers' seen parts line up end to end (no hidden merges). FW-02 and FW-13 no longer take over
+another whisker's outside part (taper, not a step). Inferred roots never cross his nose. Sign bug fixed
+(B2-S12, B2-S15 now reach the pad on their own bend). Eyebrow whiskers completed to his brow (B1-S07 82 px,
+B5-S06 25 px inferred). Faint lines C01-C13 each given a final status. Result: **28 pad whiskers + 8
+eyebrow whiskers**, each one continuous line; 21 of 28 reach the pad on their own bend. Uncertain items:
+`docs/images/whiskers_full/unsure.png` (Q37, Q40-Q42).
+
 **Whiskers, part 3 (2026-11-14): every whisker pad to tip.** Owner: "whiskers don't just
 abruptly cut off ... trace the little guy's whiskers to them [the pads] now, so we don't go
 hunting for whisker connections on his little round body in a few steps", and "examine these

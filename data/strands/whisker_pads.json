@@ -1,52 +1,53 @@
 {
  "about": "Completeness check for the face whiskers, by the owner's rule (2026-11-14):\n\"they are all emanating from his little whisker pads ... they are all pointing towards\nthe whisker pads, and they are all straight.\"",
- "pads": {
+ "convergence_points": {
   "image_left": [
-   503.6,
-   695.0
+   503.3,
+   694.7
   ],
   "image_right": [
-   660.8,
-   701.7
+   681.1,
+   709.5
   ]
  },
+ "note": "convergence_points: where each side's whiskers point (least squares); not the pad outline, which is in data/strands/whiskers_full.json",
  "per_whisker": [
   {
    "id": "B1-S11-face",
    "side": "image_right",
-   "passes_pad_px": 8.2,
-   "ends_short_of_pad_px": 72.0,
+   "passes_pad_px": 20.1,
+   "ends_short_of_pad_px": 57.0,
    "bow_px": 16.1,
    "chord_px": 203.0
   },
   {
    "id": "B2-S02-face",
    "side": "image_right",
-   "passes_pad_px": 41.3,
-   "ends_short_of_pad_px": 114.0,
-   "bow_px": 3.9,
-   "chord_px": 210.0
+   "passes_pad_px": 42.1,
+   "ends_short_of_pad_px": 95.0,
+   "bow_px": 3.8,
+   "chord_px": 209.0
   },
   {
    "id": "B2-S08-face",
    "side": "image_right",
-   "passes_pad_px": 13.6,
-   "ends_short_of_pad_px": 47.0,
+   "passes_pad_px": 16.7,
+   "ends_short_of_pad_px": 29.0,
    "bow_px": 8.9,
    "chord_px": 283.0
   },
   {
    "id": "B2-S16-face",
    "side": "image_right",
-   "passes_pad_px": 36.7,
-   "ends_short_of_pad_px": 80.0,
-   "bow_px": 15.2,
+   "passes_pad_px": 34.1,
+   "ends_short_of_pad_px": 60.0,
+   "bow_px": 15.3,
    "chord_px": 274.0
   },
   {
    "id": "B4-S02-face",
    "side": "image_left",
-   "passes_pad_px": 9.9,
+   "passes_pad_px": 10.1,
    "ends_short_of_pad_px": 125.0,
    "bow_px": 14.5,
    "chord_px": 218.0
@@ -54,15 +55,15 @@
   {
    "id": "B5-S17-face",
    "side": "image_left",
-   "passes_pad_px": 23.2,
+   "passes_pad_px": 23.7,
    "ends_short_of_pad_px": 38.0,
-   "bow_px": 28.7,
+   "bow_px": 28.8,
    "chord_px": 290.0
   },
   {
    "id": "FW-02",
    "side": "image_left",
-   "passes_pad_px": 4.5,
+   "passes_pad_px": 4.7,
    "ends_short_of_pad_px": 215.0,
    "bow_px": 2.1,
    "chord_px": 108.0
@@ -70,7 +71,7 @@
   {
    "id": "FW-01",
    "side": "image_left",
-   "passes_pad_px": 0.6,
+   "passes_pad_px": 0.4,
    "ends_short_of_pad_px": 205.0,
    "bow_px": 12.0,
    "chord_px": 129.0
@@ -78,15 +79,15 @@
   {
    "id": "FW-03",
    "side": "image_right",
-   "passes_pad_px": 14.9,
-   "ends_short_of_pad_px": 189.0,
+   "passes_pad_px": 18.4,
+   "ends_short_of_pad_px": 168.0,
    "bow_px": 5.5,
    "chord_px": 164.0
   },
   {
    "id": "FW-04",
    "side": "image_left",
-   "passes_pad_px": 23.5,
+   "passes_pad_px": 23.2,
    "ends_short_of_pad_px": 164.0,
    "bow_px": 13.0,
    "chord_px": 195.0
@@ -94,7 +95,7 @@
   {
    "id": "FW-05",
    "side": "image_left",
-   "passes_pad_px": 10.5,
+   "passes_pad_px": 10.8,
    "ends_short_of_pad_px": 176.0,
    "bow_px": 12.7,
    "chord_px": 202.0
@@ -102,15 +103,15 @@
   {
    "id": "FW-06",
    "side": "image_left",
-   "passes_pad_px": 11.5,
+   "passes_pad_px": 14.5,
    "ends_short_of_pad_px": 134.0,
-   "bow_px": 9.4,
+   "bow_px": 8.1,
    "chord_px": 237.0
   },
   {
    "id": "FW-07",
    "side": "image_left",
-   "passes_pad_px": 48.0,
+   "passes_pad_px": 45.9,
    "ends_short_of_pad_px": 223.0,
    "bow_px": 0.1,
    "chord_px": 172.0
@@ -118,7 +119,7 @@
   {
    "id": "FW-08",
    "side": "image_left",
-   "passes_pad_px": 78.4,
+   "passes_pad_px": 78.7,
    "ends_short_of_pad_px": 169.0,
    "bow_px": 5.8,
    "chord_px": 140.0
@@ -126,55 +127,55 @@
   {
    "id": "FW-09",
    "side": "image_left",
-   "passes_pad_px": 3.3,
-   "ends_short_of_pad_px": 273.0,
+   "passes_pad_px": 2.9,
+   "ends_short_of_pad_px": 272.0,
    "bow_px": 5.7,
    "chord_px": 104.0
   },
   {
    "id": "FW-10",
    "side": "image_right",
-   "passes_pad_px": 45.4,
-   "ends_short_of_pad_px": 53.0,
-   "bow_px": 0.9,
+   "passes_pad_px": 60.1,
+   "ends_short_of_pad_px": 61.0,
+   "bow_px": 1.6,
    "chord_px": 187.0
   },
   {
    "id": "FW-13",
    "side": "image_right",
-   "passes_pad_px": 152.9,
-   "ends_short_of_pad_px": 229.0,
+   "passes_pad_px": 147.8,
+   "ends_short_of_pad_px": 211.0,
    "bow_px": 1.7,
    "chord_px": 105.0
   },
   {
    "id": "FW-11",
    "side": "image_right",
-   "passes_pad_px": 122.8,
-   "ends_short_of_pad_px": 130.0,
+   "passes_pad_px": 124.4,
+   "ends_short_of_pad_px": 126.0,
    "bow_px": 3.8,
    "chord_px": 86.0
   },
   {
    "id": "FW-12",
    "side": "image_right",
-   "passes_pad_px": 81.9,
-   "ends_short_of_pad_px": 83.0,
-   "bow_px": 15.9,
-   "chord_px": 239.0
+   "passes_pad_px": 77.7,
+   "ends_short_of_pad_px": 91.0,
+   "bow_px": 43.4,
+   "chord_px": 309.0
   },
   {
    "id": "FW-14",
    "side": "image_left",
-   "passes_pad_px": 55.1,
-   "ends_short_of_pad_px": 139.0,
+   "passes_pad_px": 54.9,
+   "ends_short_of_pad_px": 138.0,
    "bow_px": 16.2,
    "chord_px": 181.0
   },
   {
    "id": "FW-15",
    "side": "image_left",
-   "passes_pad_px": 59.9,
+   "passes_pad_px": 60.3,
    "ends_short_of_pad_px": 112.0,
    "bow_px": 1.7,
    "chord_px": 82.0
@@ -182,16 +183,16 @@
   {
    "id": "FW-16",
    "side": "image_right",
-   "passes_pad_px": 59.5,
-   "ends_short_of_pad_px": 210.0,
+   "passes_pad_px": 60.4,
+   "ends_short_of_pad_px": 189.0,
    "bow_px": 2.7,
    "chord_px": 93.0
   },
   {
    "id": "FW-17",
    "side": "image_right",
-   "passes_pad_px": 7.5,
-   "ends_short_of_pad_px": 189.0,
+   "passes_pad_px": 7.7,
+   "ends_short_of_pad_px": 167.0,
    "bow_px": 4.4,
    "chord_px": 144.0
   }
@@ -244,10 +245,10 @@
      "angle_deg": 11.0
     },
     {
-     "face": "FW-12",
-     "off_line_px": 57.8,
-     "in_px": 116.0,
-     "angle_deg": 0.0
+     "face": "FW-17",
+     "off_line_px": 59.8,
+     "in_px": 53.0,
+     "angle_deg": 20.0
     }
    ]
   },
@@ -265,16 +266,16 @@
      "angle_deg": 3.0
     },
     {
-     "face": "FW-12",
-     "off_line_px": 36.2,
-     "in_px": 113.0,
+     "face": "B2-S16-face",
+     "off_line_px": 45.8,
+     "in_px": 31.0,
      "angle_deg": 8.0
     },
     {
-     "face": "B2-S16-face",
-     "off_line_px": 45.7,
-     "in_px": 31.0,
-     "angle_deg": 8.0
+     "face": "FW-12",
+     "off_line_px": 54.4,
+     "in_px": 33.0,
+     "angle_deg": 14.0
     }
    ]
   },
@@ -293,9 +294,9 @@
     },
     {
      "face": "FW-06",
-     "off_line_px": 9.3,
+     "off_line_px": 10.6,
      "in_px": 23.0,
-     "angle_deg": 23.0
+     "angle_deg": 24.0
     },
     {
      "face": "FW-04",
@@ -320,9 +321,9 @@
     },
     {
      "face": "FW-06",
-     "off_line_px": 11.0,
+     "off_line_px": 12.3,
      "in_px": 23.0,
-     "angle_deg": 23.0
+     "angle_deg": 24.0
     },
     {
      "face": "FW-04",
@@ -407,15 +408,8 @@
   },
   {
    "face": "FW-06",
-   "outer_end_inside_outline_px": 5.0,
-   "lines_up_with": [
-    {
-     "strand": "B4-S12",
-     "cls": "whisker (last step)",
-     "gap_px": 25.0,
-     "angle_deg": 20.0
-    }
-   ]
+   "outer_end_inside_outline_px": 4.0,
+   "lines_up_with": []
   },
   {
    "face": "FW-07",
@@ -462,7 +456,7 @@
   },
   {
    "face": "FW-12",
-   "outer_end_inside_outline_px": 105.0,
+   "outer_end_inside_outline_px": 43.0,
    "lines_up_with": []
   },
   {
@@ -499,156 +493,156 @@
     "pad_pointing_untraced": [
      [
       [
-       369.2,
-       633.9
+       369.9,
+       634.7
       ],
       [
-       365.3,
-       633.0
+       366.0,
+       633.7
       ],
       [
-       361.4,
-       632.1
+       362.1,
+       632.7
       ],
       [
-       357.5,
-       631.1
+       358.2,
+       631.8
       ],
       [
-       353.6,
-       630.2
+       354.4,
+       630.8
       ],
       [
-       349.7,
-       629.3
+       350.5,
+       629.8
       ],
       [
-       345.8,
-       628.3
+       346.6,
+       628.9
       ],
       [
-       341.9,
-       627.4
+       342.7,
+       627.9
       ],
       [
-       338.1,
-       626.5
+       338.8,
+       626.9
       ],
       [
-       334.2,
-       625.5
+       334.9,
+       626.0
       ],
       [
-       330.3,
-       624.6
+       331.1,
+       625.0
       ],
       [
-       326.4,
-       623.7
+       327.2,
+       624.0
       ],
       [
-       322.5,
-       622.7
+       323.3,
+       623.1
       ],
       [
-       318.6,
-       621.8
+       319.4,
+       622.1
       ],
       [
-       314.7,
-       620.9
+       315.5,
+       621.1
       ],
       [
-       310.8,
-       619.9
+       311.7,
+       620.2
       ],
       [
-       306.9,
-       619.0
+       307.8,
+       619.2
       ],
       [
-       303.0,
-       618.1
+       303.9,
+       618.2
       ],
       [
-       299.2,
-       617.1
+       300.0,
+       617.3
       ],
       [
-       295.3,
-       616.2
+       296.1,
+       616.3
       ],
       [
-       291.4,
-       615.2
+       292.3,
+       615.3
       ],
       [
-       287.5,
-       614.3
+       288.4,
+       614.4
       ],
       [
-       283.6,
+       284.5,
        613.4
       ],
       [
-       279.7,
+       280.6,
        612.4
       ],
       [
-       275.8,
+       276.7,
        611.5
       ],
       [
-       271.9,
-       610.6
+       272.9,
+       610.5
       ],
       [
-       268.0,
-       609.6
+       269.0,
+       609.5
       ],
       [
-       264.2,
-       608.7
+       265.1,
+       608.6
       ],
       [
-       260.3,
-       607.8
+       261.2,
+       607.6
       ],
       [
-       256.4,
-       606.8
+       257.3,
+       606.6
       ],
       [
-       252.5,
-       605.9
+       253.4,
+       605.7
       ],
       [
-       248.6,
-       605.0
+       249.6,
+       604.7
       ],
       [
-       244.7,
-       604.0
+       245.7,
+       603.7
       ],
       [
-       240.8,
-       603.1
+       241.8,
+       602.7
       ],
       [
-       236.9,
-       602.2
+       237.9,
+       601.8
       ]
      ]
     ],
     "count": 1,
-    "line_px": 1354745,
+    "line_px": 1354514,
     "control_count": 11,
     "control_line_px": 1497131
    },
    "image_right": {
     "pad_pointing_untraced": [],
     "count": 0,
-    "line_px": 1356802,
+    "line_px": 1286321,
     "control_count": 0,
     "control_line_px": 1493172
    }
@@ -658,343 +652,268 @@
     "pad_pointing_untraced": [
      [
       [
-       369.2,
-       633.9
+       369.9,
+       634.7
       ],
       [
-       365.3,
-       633.0
+       366.0,
+       633.7
       ],
       [
-       361.4,
-       632.1
+       362.1,
+       632.7
       ],
       [
-       357.5,
-       631.1
+       358.2,
+       631.8
       ],
       [
-       353.6,
-       630.2
+       354.4,
+       630.8
       ],
       [
-       349.7,
-       629.3
+       350.5,
+       629.8
       ],
       [
-       345.8,
-       628.3
+       346.6,
+       628.9
       ],
       [
-       341.9,
-       627.4
+       342.7,
+       627.9
       ],
       [
-       338.1,
-       626.5
+       338.8,
+       626.9
       ],
       [
-       334.2,
-       625.5
+       334.9,
+       626.0
       ],
       [
-       330.3,
-       624.6
+       331.1,
+       625.0
       ],
       [
-       326.4,
-       623.7
+       327.2,
+       624.0
       ],
       [
-       322.5,
-       622.7
+       323.3,
+       623.1
       ],
       [
-       318.6,
-       621.8
+       319.4,
+       622.1
       ],
       [
-       314.7,
-       620.9
+       315.5,
+       621.1
       ],
       [
-       310.8,
-       619.9
+       311.7,
+       620.2
       ],
       [
-       306.9,
-       619.0
+       307.8,
+       619.2
       ],
       [
-       303.0,
-       618.1
+       303.9,
+       618.2
       ],
       [
-       299.2,
-       617.1
-      ],
-      [
-       295.3,
-       616.2
-      ],
-      [
-       291.4,
-       615.2
-      ],
-      [
-       287.5,
-       614.3
-      ],
-      [
-       283.6,
-       613.4
-      ],
-      [
-       279.7,
-       612.4
-      ],
-      [
-       275.8,
-       611.5
-      ],
-      [
-       271.9,
-       610.6
-      ],
-      [
-       268.0,
-       609.6
-      ],
-      [
-       264.2,
-       608.7
-      ],
-      [
-       260.3,
-       607.8
-      ],
-      [
-       256.4,
-       606.8
-      ],
-      [
-       252.5,
-       605.9
-      ],
-      [
-       248.6,
-       605.0
-      ],
-      [
-       244.7,
-       604.0
-      ],
-      [
-       240.8,
-       603.1
-      ],
-      [
-       236.9,
-       602.2
-      ]
-     ],
-     [
-      [
-       298.6,
-       697.0
-      ],
-      [
-       294.6,
-       697.0
-      ],
-      [
-       290.6,
-       697.0
-      ],
-      [
-       286.6,
-       697.0
-      ],
-      [
-       282.6,
-       697.0
-      ],
-      [
-       278.6,
-       697.0
-      ],
-      [
-       274.6,
-       697.0
-      ],
-      [
-       270.6,
-       697.0
-      ],
-      [
-       266.6,
-       697.0
-      ],
-      [
-       262.6,
-       697.0
-      ],
-      [
-       258.6,
-       697.0
-      ],
-      [
-       254.6,
-       697.0
-      ],
-      [
-       250.6,
-       697.0
-      ],
-      [
-       246.6,
-       697.0
-      ],
-      [
-       242.6,
-       697.0
-      ],
-      [
-       238.6,
-       697.0
-      ]
-     ],
-     [
-      [
-       299.8,
-       584.5
+       300.0,
+       617.3
       ],
       [
        296.1,
-       583.0
+       616.3
       ],
       [
-       292.4,
-       581.4
+       292.3,
+       615.3
       ],
       [
-       288.8,
-       579.8
+       288.4,
+       614.4
       ],
       [
-       285.1,
-       578.2
+       284.5,
+       613.4
       ],
       [
-       281.4,
-       576.6
+       280.6,
+       612.4
+      ],
+      [
+       276.7,
+       611.5
+      ],
+      [
+       272.9,
+       610.5
+      ],
+      [
+       269.0,
+       609.5
+      ],
+      [
+       265.1,
+       608.6
+      ],
+      [
+       261.2,
+       607.6
+      ],
+      [
+       257.3,
+       606.6
+      ],
+      [
+       253.4,
+       605.7
+      ],
+      [
+       249.6,
+       604.7
+      ],
+      [
+       245.7,
+       603.7
+      ],
+      [
+       241.8,
+       602.7
+      ],
+      [
+       237.9,
+       601.8
+      ]
+     ],
+     [
+      [
+       299.6,
+       584.3
+      ],
+      [
+       296.0,
+       582.7
+      ],
+      [
+       292.3,
+       581.1
+      ],
+      [
+       288.6,
+       579.5
+      ],
+      [
+       285.0,
+       577.8
+      ],
+      [
+       281.3,
+       576.2
       ],
       [
        277.7,
-       575.0
+       574.6
       ],
       [
-       274.1,
-       573.4
+       274.0,
+       573.0
       ],
       [
        270.4,
-       571.8
+       571.3
       ],
       [
        266.7,
-       570.2
+       569.7
       ],
       [
        263.1,
-       568.6
+       568.1
       ],
       [
        259.4,
-       567.0
+       566.4
       ],
       [
-       255.7,
-       565.4
+       255.8,
+       564.8
       ],
       [
        252.1,
-       563.8
+       563.2
       ],
       [
        248.4,
-       562.2
+       561.6
+      ]
+     ],
+     [
+      [
+       236.5,
+       634.3
+      ],
+      [
+       232.5,
+       633.6
+      ],
+      [
+       228.6,
+       633.0
+      ],
+      [
+       224.6,
+       632.4
+      ],
+      [
+       220.7,
+       631.8
+      ],
+      [
+       216.7,
+       631.1
+      ],
+      [
+       212.8,
+       630.5
+      ],
+      [
+       208.8,
+       629.9
+      ],
+      [
+       204.9,
+       629.3
+      ],
+      [
+       200.9,
+       628.6
+      ],
+      [
+       197.0,
+       628.0
+      ],
+      [
+       193.0,
+       627.4
       ]
      ]
     ],
     "count": 3,
-    "line_px": 1354745,
+    "line_px": 1354514,
     "control_count": 20,
     "control_line_px": 1497131
    },
    "image_right": {
-    "pad_pointing_untraced": [
-     [
-      [
-       748.7,
-       732.2
-      ],
-      [
-       752.6,
-       732.9
-      ],
-      [
-       756.5,
-       733.7
-      ],
-      [
-       760.5,
-       734.4
-      ],
-      [
-       764.4,
-       735.1
-      ],
-      [
-       768.3,
-       735.8
-      ],
-      [
-       772.3,
-       736.6
-      ],
-      [
-       776.2,
-       737.3
-      ],
-      [
-       780.1,
-       738.0
-      ],
-      [
-       784.1,
-       738.8
-      ],
-      [
-       788.0,
-       739.5
-      ],
-      [
-       791.9,
-       740.2
-      ],
-      [
-       795.9,
-       740.9
-      ],
-      [
-       799.8,
-       741.7
-      ]
-     ]
-    ],
-    "count": 1,
-    "line_px": 1356802,
+    "pad_pointing_untraced": [],
+    "count": 0,
+    "line_px": 1286321,
     "control_count": 8,
     "control_line_px": 1493172
    }

@@ -344,4 +344,13 @@ excuse and was withdrawn.)
    size: the edges of his mouth, around and up. → For a part that is obvious to the eye, look at the
    whole face at normal size first and follow the visible feature (here the lip line); measure only
    to place it precisely.
+23. **Reading a taper as two whiskers.** I took "the root stretch is 2.8x as dark" as two whiskers lying
+   together, and gave FW-02 all 188 px of B5-S17's outside part. Two lines of evidence say no: the
+   darkness falls off smoothly (a taper), where two whiskers then one would show a step (as B4-S02's
+   does), and two straight whiskers that meet at an angle can't run together for 188 px. → Judge a
+   profile by its shape (step or slope), not by one ratio; check a decision against geometry.
+24. **A sign error hidden by a plausible result.** The inward continuation of an outside whisker with
+   no visible face part bent the wrong way (an extra minus sign); the paths still reached the pad, just
+   longer. Found only by checking the reasoning while writing similar code. → Every geometric helper
+   gets a test on a known shape (now: a circle continued past its end stays on the circle).
 
