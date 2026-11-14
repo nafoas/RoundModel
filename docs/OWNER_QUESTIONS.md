@@ -163,21 +163,20 @@ the owner's official opinion later. Each says what I did in the meantime.
    the others 0.7-1.5 px). Sheets kept: `docs/images/candidates/`.
 36. **[ANSWERED 2026-11-14: trace them to the pads now; whiskers don't just cut off.]** Done:
    `docs/WHISKER_MAP.md`, `docs/images/whiskers_full/whiskers_full.pdf`.
-37. **FW-02 and FW-13 (changed 2026-11-14 in the final cleanup):** each meets another whisker's root at
-   his outline (B5-S17, B2-S02). They no longer take over that whisker's outside part: its darkness
-   tapers smoothly from the root (no step, so no second whisker on it), and two straight whiskers meeting
-   at 13-17 deg separate within a few px, where no second line shows. Both now end at his outline (out of
-   view). Close-ups: `docs/images/whiskers_full/unsure.png`.
+37. **[ANSWERED 2026-11-14: fine.]** FW-02 and FW-13 end at his outline.
 38. **[ANSWERED by measurement 2026-11-14.]** Joins in `docs/WHISKER_MAP.md`.
 39. **[ANSWERED 2026-11-14: "a pretty good pad outline".]**
-40. **Two whiskers don't fit your rule** (close-ups in `unsure.png`): FW-13 (L05) would have to reverse
-   its bend to reach a pad; FW-14 (L08) points above his nose and must swing round the nostril
-   (0.60 deg/px). Pad whiskers, or something else?
-41. **Outer ends:** FW-01, FW-02, FW-06, FW-13, FW-14 and FW-17 reach his outline with nothing outside,
-   so they go round his cheek out of view. FW-08, FW-09, FW-10, FW-12 and FW-15 stop mid-face at
-   full strength, so they go under the fur. FW-11 fades like a tip.
-42. **Three faint lines (close-ups in `unsure.png`):** C06 (inside his pad by the mouth corner; stands
-   out, points 45 deg off), C08 (low on his right cheek; stands out, points roughly at the pad), C12
-   (barely stands out, points 162 px off any pad: leans fur). Whiskers or fur? (C03 judged fur: it
-   does not stand out and points away from the pad.)
+40. **[ANSWERED 2026-11-14: bends are fine; FW-14 may be two whiskers -> split into FW-14 and FW-19.]**
+   Follow-up: FW-19 (the steeper half) points just above his nostril, so to reach his pad its
+   inferred root has to curl round the nostril (picture `docs/images/whiskers_full/unsure.png`).
+   Is that right, or does it root at the top corner of the pad by the nostril?
+41. **Where do the outer ends go? (asked again more plainly 2026-11-14)** Some whiskers lie on his
+   face but nothing of them shows outside his outline. For those I had to guess where their outer
+   parts are: (a) the line reaches the edge of his face: it carries on round the side of his round
+   head, out of view (FW-01, FW-02, FW-06, FW-13, FW-14, FW-17, FW-18, FW-19); (b) the line stops in the
+   middle of his cheek while still dark: it dips under his fur (FW-08, FW-09, FW-10, FW-12, FW-15);
+   (c) the line fades out thinly: that's its tip (FW-11). It matters for the 3D model: for (a) and
+   (b) there's more whisker than the photo shows. OK to build them that way?
+42. **[ANSWERED 2026-11-14: C06, C08 not whiskers -> Bnuy Perturbances BP-02, BP-03 (with C03 -> BP-01);
+   C12 is a whisker -> FW-18.]**
 

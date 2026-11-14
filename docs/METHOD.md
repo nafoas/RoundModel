@@ -225,6 +225,12 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     **His pads** (owner, 2026-11-14): follow the edges of his mouth around and up: the lip line,
     round each side, up to the nostril wings, along the bottom of his nose. A whisker reaches its
     pad on entering it. Look at the big picture first; don't hunt for subtle patterns.
+20. **Bnuy Perturbances (BP)** (owner, 2026-11-14): something in his fur that is neither whisker nor
+    plain fur (fluff sticking up, debris?). Never drop it: give it a BP number and keep it in
+    `data/strands/whiskers_full.json` and `docs/WHISKER_MAP.md` for later.
+21. **Whiskers bend** (owner, 2026-11-14): less than fur, but they do; a bend needed to reach the pad is
+    a note, not a reason to doubt a whisker. An S-shaped trace is two whiskers (split it where the two
+    straight parts cross; check which part carries on past the joint).
 17. **Review sheets for grey areas** (`tools/candidate_sheets.py`): locator, the photo as
     it is, the photo with brightness stretched in TRUE colour (never stretch the colour
     channels separately or together: his fur's tiny real colour shifts become false

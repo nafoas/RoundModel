@@ -74,3 +74,13 @@ def test_inward_continuation_keeps_its_own_bend():
     wrong = wc.arc_to(line[0], -wc.tangent(line, False), -k, 100)
     assert np.abs(np.hypot(*(ext - c).T) - r).max() < 3.0           # (direction estimated over 10 px)
     assert np.abs(np.hypot(*(wrong - c).T) - r).max() > 20.0
+
+
+def test_split_two_finds_where_two_straight_whiskers_meet():
+    """an S-ish trace: level for 80 px, then 25 deg steeper; the split lands at the joint"""
+    a = np.c_[np.arange(0, 80.0), np.full(80, 100.0)]
+    th = np.radians(25)
+    b = a[-1] + np.c_[np.arange(1, 121.0) * np.cos(th), np.arange(1, 121.0) * np.sin(th)]
+    j = wc.split_two(np.vstack([a, b]))
+    q = wc.dense(np.vstack([a, b]))
+    assert np.hypot(*(q[j] - a[-1])) < 4

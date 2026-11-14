@@ -17,7 +17,7 @@ split at the philtrum. A whisker reaches its pad where it enters this area. Owne
 |---|---|---|---|---|
 | B1-S11 | to pad + face (seen) + fur band + outside (seen) | one arc through the outside and face parts fits to 0.45 px (gap 22 px) | 62 px inferred, a line seen along 0% of it | outside tip |
 | B2-S02 | to pad + face (seen) + fur band + outside (seen) | one arc fits to 1.6 px; points at his pad. (FW-13 fits B2-S02 better, 0.7 px, but does not point at a pad) | 146 px inferred, a line seen along 0% of it; bends -0.16 deg/px more than its own end | outside tip |
-| FW-13 | to pad + face (seen) | your L05. Meets B2-S02's root at his outline, but does not take over B2-S02's outside part: B2-S02's darkness tapers smoothly from the root (no step, so no second whisker on it), and two straight whiskers meeting at 17 deg separate within a few px, where no second line shows. FLAG: 2-4x darker than any whisker on his face, runs along the inside edge of his fur band, points toward his eye; to reach the pad it must reverse its bend | 295 px inferred, a line seen along 0% of it; bends -0.40 deg/px more than its own end; **DOUBT: to reach the pad outline it must bend -0.29 deg/px against its own +0.11 (whiskers on his face bend at most 0.25); it points away from its pad: it may not be a pad whisker** | out of view: reaches his outline with nothing outside, so it goes round his cheek |
+| FW-13 | to pad + face (seen) | your L05. Meets B2-S02's root at his outline, but does not take over B2-S02's outside part: B2-S02's darkness tapers smoothly from the root (no step, so no second whisker on it), and two straight whiskers meeting at 17 deg separate within a few px, where no second line shows. FLAG: 2-4x darker than any whisker on his face, runs along the inside edge of his fur band, points toward his eye; to reach the pad it must reverse its bend | 295 px inferred, a line seen along 0% of it; bends -0.40 deg/px more than its own end; bends -0.29 deg/px to reach its pad (its own end bends +0.11): a bent whisker | out of view: reaches his outline with nothing outside, so it goes round his cheek |
 | B2-S08 | to pad + face (seen) + fur band + outside (seen) | one arc fits to 0.10 px (gap 8 px) | 44 px inferred, a line seen along 0% of it | outside tip |
 | B2-S16 | to pad + face (seen) + fur band + outside (seen) | one arc fits to 0.32 px (gap 6 px) | 20 px inferred, a line seen along 0% of it | outside tip |
 | B2-S20 | to pad + face (seen) + fur band + outside (seen) + between outside pieces + outside (seen) | FW-03 + B2-S20: one arc 0.73 px; B2-S20 + B2-S29 (the 'loose' piece): one arc 0.28 px across a 45 px stretch where the light whisker doesn't show against the white background | 123 px inferred, a line seen along 6% of it | outside tip |
@@ -28,6 +28,7 @@ split at the philtrum. A whisker reaches its pad where it enters this area. Owne
 | FW-10 | to pad + face (seen) | your L04 + L17; nothing outside on its line | 56 px inferred, a line seen along 0% of it; bends -0.18 deg/px more than its own end | goes under the fur 40 px inside his outline (stops at 1.8x its usual darkness, not tapering); where its line meets his outline nothing comes out |
 | FW-12 | to pad + face (seen) | your L07 + L18; nothing outside on its line | 0 px inferred | goes under the fur 43 px inside his outline (stops at 1.3x its usual darkness, not tapering); where its line meets his outline nothing comes out |
 | FW-11 | to pad + face (seen) | your L06; by his mouth, far from his outline | 0 px inferred | fades like a tip, 230 px inside his outline (last 20 px at 0.5x its usual darkness) |
+| FW-18 | to pad + face (seen) | the first view's faint line C12 (owner, 2026-11-14: a whisker); extended on its own bend while it beats the fur beside it | 237 px inferred, a line seen along 0% of it | out of view: reaches his outline with nothing outside, so it goes round his cheek |
 
 ## His right side (image left)
 
@@ -44,7 +45,8 @@ split at the philtrum. A whisker reaches its pad where it enters this area. Owne
 | FW-04 | to pad + face (seen) + fur band + outside (seen) | its tip pokes out of the fringe as B4-S06 (traced as a fringe tip: on its line, 6 deg) | 114 px inferred, a line seen along 3% of it | outside tip |
 | FW-01 | to pad + face (seen) | nothing outside on its line | 135 px inferred, a line seen along 0% of it | out of view: reaches his outline with nothing outside, so it goes round his cheek |
 | FW-06 | to pad + face (seen) | your L01 + L14; nothing outside on its line | 58 px inferred, a line seen along 0% of it | out of view: reaches his outline with nothing outside, so it goes round his cheek |
-| FW-14 | to pad + face (seen) | your L08; nothing outside on its line | 234 px inferred, a line seen along 0% of it; bends +0.65 deg/px more than its own end; **DOUBT: to reach the pad outline it must bend +0.60 deg/px against its own -0.06 (whiskers on his face bend at most 0.25); it points away from its pad: it may not be a pad whisker** | out of view: reaches his outline with nothing outside, so it goes round his cheek |
+| FW-14 | to pad + face (seen) | your L08, split (owner, 2026-11-14: "may be two whiskers"): the trace was S-shaped (level, then 25 deg steeper); the level part carries on past the joint on its own gentle bend and stands out from the fur beside it, while the steeper part carried back past the joint shows nothing. This is the level whisker | 177 px inferred, a line seen along 0% of it | out of view: reaches his outline with nothing outside, so it goes round his cheek |
+| FW-19 | to pad + face (seen) | the steeper half of the old FW-14: meets the level whisker at the joint and shares its outer stretch (like the fan) | 236 px inferred, a line seen along 0% of it; bends +0.66 deg/px more than its own end; bends +0.60 deg/px to reach its pad (its own end bends -0.06): a bent whisker | out of view: reaches his outline with nothing outside, so it goes round his cheek |
 | FW-08 | to pad + face (seen) | your L02 | 0 px inferred | goes under the fur 120 px inside his outline (stops at 0.7x its usual darkness, not tapering); where its line meets his outline nothing comes out |
 | FW-09 | to pad + face (seen) | your L03 | 102 px inferred, a line seen along 29% of it | goes under the fur 80 px inside his outline (stops at 1.2x its usual darkness, not tapering); where its line meets his outline nothing comes out |
 | FW-15 | to pad + face (seen) | your L09 | 0 px inferred | goes under the fur 253 px inside his outline (stops at 1.1x its usual darkness, not tapering); where its line meets his outline nothing comes out |
@@ -64,18 +66,27 @@ split at the philtrum. A whisker reaches its pad where it enters this area. Owne
 
 Their roots sit at his brow outline right beside the eye marks; the eye step refines them.
 
+## Bnuy Perturbances (BP)
+
+Owner, 2026-11-14: lines that are not whiskers but are *something* (fluff sticking up, debris in his
+fur?). Kept so they aren't forgotten; addressed later.
+
+- BP-01 (was C03) at (170, 777), ~44 px: not a whisker: does not stand out from the fur beside it and points away from his pad; something in his fur (fluff sticking up, or debris), to address later
+- BP-02 (was C06) at (452, 839), ~41 px: not a whisker (owner): a line inside his pad by the mouth corner that stands out; something in his fur, to address later
+- BP-03 (was C08) at (291, 853), ~44 px: not a whisker (owner): a line low on his right cheek that stands out; something in his fur, to address later
+
 ## Faint lines from the first view (C01-C13): final status
 
 - C01: part of whisker FW-04
 - C02: part of whisker FW-06
-- C03: fur: does not stand out from the fur beside it (-0.62) and points 161 px away from his pad
+- C03: Bnuy Perturbance BP-01: not a whisker: does not stand out from the fur beside it and points away from his pad; something in his fur (fluff sticking up, or debris), to address later
 - C04: part of whisker B4-S17, B4-S12, B4-S15
 - C05: part of whisker FW-07
-- C06: uncertain: owner sorts manually: stands out (+2.94) but lies inside his pad by the mouth corner, pointing 45 deg off; could be a whisker near its root, or the lip's own shading
+- C06: Bnuy Perturbance BP-02: not a whisker (owner): a line inside his pad by the mouth corner that stands out; something in his fur, to address later
 - C07: part of whisker FW-08, FW-09
-- C08: uncertain: owner sorts manually: stands out (+2.42) and points roughly at his pad (19 deg off, 57 px from its centre), in the streaky fur low on his right cheek
+- C08: Bnuy Perturbance BP-03: not a whisker (owner): a line low on his right cheek that stands out; something in his fur, to address later
 - C09: part of whisker FW-08
 - C10: part of whisker FW-09
 - C11: part of whisker FW-09
-- C12: uncertain: owner sorts manually: barely stands out (+1.14, fur reaches 0.94 one time in 20) and points 162 px away from any pad: leans fur
+- C12: whisker FW-18 (owner, 2026-11-14)
 - C13: part of whisker FW-11

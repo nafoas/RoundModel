@@ -640,3 +640,17 @@ check.py output (if applicable), and the next step.
 - Tests: 33 passed. Completeness scan rerun: no untraced line pointing into a pad stands out from fur (the one hit lies across B5-S17's own curve). `check.py` does not exist yet (PLAN.md: not built); no match claimed.
 - **Next:** owner on Q37, Q40-Q42; then move on (owner's choice of next part).
 
+## 2026-11-14 — Session 6 (cont.): owner's whisker answers applied
+- Owner: C06, C08 not whiskers; the rest are; keep the non-whiskers as "Bnuy Perturbances" (BP); bends
+  are fine (whiskers bend, less than fur); FW-14 may be two whiskers; didn't understand Q41.
+- FW-14: the trace was S-shaped (level, then 25 deg steeper). Split where the two straight parts cross;
+  the level part carries on past the joint on its own bend and beats the fur beside it (+1.31 at 80 px,
+  measured with copies on the steeper line left out); the steeper part carried back shows nothing
+  (-0.42) -> FW-14 (level) + FW-19 (steeper, sharing the outer stretch). A first follow slid onto the
+  steeper line (the stronger line pulls a flexible search): measured straight / own-bend instead.
+- C12 -> FW-18 (extended on its own bend while it beats the fur beside it). C03/C06/C08 -> BP-01..03.
+- 30 pad whiskers + 8 eyebrow whiskers; 23 of 30 reach their pad on their own bend. Close-ups of the
+  new and odd ones: `docs/images/whiskers_full/unsure.png`. Q41 re-asked in plain words.
+- Tests: 34 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
+- **Next:** owner on Q40 follow-up (FW-19) and Q41; then move on.
+

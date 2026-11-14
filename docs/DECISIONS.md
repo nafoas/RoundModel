@@ -205,6 +205,14 @@ excuse and was withdrawn.)
   pads are. Go back and look at the big perspective." Now: the lip line, round each side and up to
   the nostril wings, along the bottom of his nose; split at the philtrum. Roots move with it.
 
+- **Whisker answers, 2026-11-14:** C06 and C08 are not whiskers; C12 is (now FW-18). FW-13 and the
+  others that bend are fine: "Whiskers bend, they just aren't as flexible as fur" (a bend is a note,
+  not a doubt). FW-14 "may be two whiskers": measured and split (FW-14 level, FW-19 steeper, sharing
+  the outer stretch).
+- **Bnuy Perturbances (BP)** (owner, 2026-11-14): "I wouldn't completely forget all the things we
+  labeled as non whiskers as they seem like they are *something*. Some fluff sticking up, maybe some
+  debris in his fur?" Their own class, kept for later: BP-01 (was C03), BP-02 (C06), BP-03 (C08).
+
 ## The peets / underfluff / body line (approved 2026-11-07)
 
 - Under his body, his pelvis isn't visible: a fur tuft hangs between the peets.

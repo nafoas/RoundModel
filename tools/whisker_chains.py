@@ -110,7 +110,16 @@ WHISKERS = [
          why="its tip pokes out of the fringe as B4-S06 (traced as a fringe tip: on its line, 6 deg)"),
     dict(id="FW-01", outside=[], face="FW-01", why="nothing outside on its line"),
     dict(id="FW-06", outside=[], face="FW-06", why="your L01 + L14; nothing outside on its line"),
-    dict(id="FW-14", outside=[], face="FW-14", why="your L08; nothing outside on its line"),
+    dict(id="FW-14", outside=[], face="FW-14",
+         why="your L08, split (owner, 2026-11-14: \"may be two whiskers\"): the trace was S-shaped (level, then 25 deg "
+             "steeper); the level part carries on past the joint on its own gentle bend and stands out from the fur "
+             "beside it, while the steeper part carried back past the joint shows nothing. This is the level whisker"),
+    dict(id="FW-19", outside=[], face="FW-19", shares="FW-14",
+         why="the steeper half of the old FW-14: meets the level whisker at the joint and shares its outer stretch "
+             "(like the fan)"),
+    dict(id="FW-18", outside=[], face="FW-18",
+         why="the first view's faint line C12 (owner, 2026-11-14: a whisker); extended on its own bend while it "
+             "beats the fur beside it"),
     dict(id="FW-08", outside=[], face="FW-08", why="your L02"),
     dict(id="FW-09", outside=[], face="FW-09", why="your L03"),
     dict(id="FW-15", outside=[], face="FW-15", why="your L09"),
@@ -360,8 +369,64 @@ def load_pieces(F):
     return outs, face, d
 
 
+def bend_extend(V, F, line, others, step=5, max_len=200):
+    """extend a face line past its nose end on its own bend for as long as the stretch beats parallel copies
+    8-20 px either side (copies lying on another whisker left out) by wf.MARGIN. Returns the added points."""
+    from scipy.spatial import cKDTree
+    line = dense(line)
+    t = tangent(line, True, 20); k = own_curvature(line)
+    to = cKDTree(np.vstack(others)) if others else None
+    n_of = lambda P: np.c_[-np.gradient(P, axis=0)[:, 1], np.gradient(P, axis=0)[:, 0]] / \
+        (np.linalg.norm(np.gradient(P, axis=0), axis=1, keepdims=True) + 1e-12)
+
+    def score(P):
+        _, c = V.line_profile(P); return float(np.mean(np.nan_to_num(c)))
+    best = 0
+    full = arc_to(line[-1], t, k, max_len)
+    for L in range(step * 4, max_len + 1, step):
+        P = full[:L]; n = n_of(P)
+        beside = [score(P + s_ * o * n) for o in (8, 12, 16, 20) for s_ in (-1, 1)
+                  if to is None or (to.query(P + s_ * o * n)[0] <= 3).mean() < 0.3]
+        if beside and score(P) - max(beside) >= wf.MARGIN:
+            best = L
+    return full[:best]
+
+
+def split_two(line):
+    """an S-shaped trace made of two straight-ish parts: the index where their lines cross"""
+    q = dense(line)
+    A, B = q[:int(0.35 * len(q))], q[int(0.45 * len(q)):]
+    ta = (A[-1] - A[0]) / np.linalg.norm(A[-1] - A[0]); tb = (B[-1] - B[0]) / np.linalg.norm(B[-1] - B[0])
+    s_ = np.linalg.solve(np.c_[ta, -tb], B[0] - A[0])
+    X = A[0] + s_[0] * ta
+    return int(np.argmin(np.hypot(*(q - X).T)))
+
+
+def extra_face_lines(F, face, d):
+    """owner decisions of 2026-11-14: FW-14 is two whiskers; the faint line C12 is a whisker"""
+    V = wf.CombinedView(lv.field_lines(d["whiskers"], F))
+    others = [v["line"] for k, v in face.items() if k != "FW-14"]
+    q = face["FW-14"]["line"]; j = split_two(q)
+    A = q[:j + 1]; B = q[j:]
+    A = np.vstack([A, bend_extend(V, F, A, others + [B])])     # copies landing on the steeper whisker don't count
+    clA, *_ = lv.fit_line(F, A)
+    face["FW-14"] = dict(line=dense(clA), w=dict(face["FW-14"]["w"], split_at=np.round(q[j], 1).tolist()))
+    face["FW-19"] = dict(line=dense(np.vstack([q[:j], B])), w=dict(face["FW-14"]["w"], id="FW-19"))
+    c12 = next(c for c in d.get("faint_candidates_not_classified", []) if c["id"] == "C12")
+    c = dense(np.array(c12["points"]))
+    # outline -> nose: the end nearer his outline first
+    if F.sdist(c[0]) > F.sdist(c[-1]):
+        c = c[::-1]
+    c = np.vstack([c, bend_extend(V, F, c, others)])
+    c = np.vstack([bend_extend(V, F, c[::-1], others)[::-1], c])
+    clC, sg, dep, ok = lv.fit_line(F, c)
+    face["FW-18"] = dict(line=dense(clC), w=dict(id="FW-18", found_as="C12", depth_grey=np.round(dep, 1).tolist()))
+    return face
+
+
 def build(F, V=None):
     outs, face, d = load_pieces(F)
+    face = extra_face_lines(F, face, d)
     pads = measure_pads(F)
     mid = pads["landmarks"]["philtrum_x"]
     ends = {"image_left": [], "image_right": []}
@@ -427,13 +492,13 @@ def build(F, V=None):
                          f"goes under the fur {sd:.0f} px inside his outline (stops at {ratio:.1f}x its usual darkness, "
                          f"not tapering); where its line meets his outline nothing comes out")
         line = np.vstack([s for s, _ in segs]); labels = np.concatenate([[lab] * len(s) for s, lab in segs])
-        doubt = None
+        doubt = None      # owner, 2026-11-14: "Whiskers bend, they just aren't as flexible as fur" - a bend is fine
         change = abs(np.degrees(k_used - k_own))
-        if len(to_pad) > 30 and (abs(np.degrees(k_used)) > MAX_BEND_DEG or (fpart is not None and change > MAX_BEND_DEG)):
-            doubt = (f"to reach the pad outline it must bend {np.degrees(k_used):+.2f} deg/px against its own "
-                     f"{np.degrees(k_own):+.2f} (whiskers on his face bend at most {MAX_BEND_DEG}); it points "
-                     f"away from its pad: it may not be a pad whisker")
+        bend_note = (f"bends {np.degrees(k_used):+.2f} deg/px to reach its pad (its own end bends "
+                     f"{np.degrees(k_own):+.2f}): a bent whisker" if len(to_pad) > 30 and
+                     (abs(np.degrees(k_used)) > MAX_BEND_DEG or change > MAX_BEND_DEG) else None)
         rec = dict(id=spec["id"], side=side, why=spec["why"], shares=spec.get("shares"), outer_end=outer, doubt=doubt,
+                   bend_note=bend_note,
                    pieces=[lab for _, lab in segs],
                    to_pad=dict(px=int(len(to_pad)), bend_deg_per_px=round(float(np.degrees(k_used)), 3),
                                own_bend_deg_per_px=round(float(np.degrees(k_own)), 3),
@@ -612,8 +677,8 @@ def write_map(recs, pads, missing, outs, brows, faint):
             tp = r["to_pad"]
             seen = r.get("seen_along_inferred", {}).get("to_pad")
             extra = f"; bends {tp['extra_bend_deg_per_px']:+.2f} deg/px more than its own end" if abs(tp["extra_bend_deg_per_px"]) > 0.02 else ""
-            if r.get("doubt"):
-                extra += f"; **DOUBT: {r['doubt']}**"
+            if r.get("bend_note"):
+                extra += f"; {r['bend_note']}"
             L.append(f"| {r['id']} | {' + '.join(parts)} | {r['why']} | {tp['px'] if tp['px'] > 1 else 0} px inferred"
                      f"{f', a line seen along {seen:.0%} of it' if seen is not None else ''}{extra} | {r['outer_end']} |")
         L.append("")
@@ -622,7 +687,12 @@ def write_map(recs, pads, missing, outs, brows, faint):
     for b in brows:
         L.append(f"| {b['id']} | {b['side'].replace('_', ' ')} | {b['why']} | {b['inferred_px']} px |")
     L += ["", "Their roots sit at his brow outline right beside the eye marks; the eye step refines them.", "",
-          "## Faint lines from the first view (C01-C13): final status", ""]
+          "## Bnuy Perturbances (BP)", "",
+          "Owner, 2026-11-14: lines that are not whiskers but are *something* (fluff sticking up, debris in his",
+          "fur?). Kept so they aren't forgotten; addressed later.", ""]
+    for b in perturbances(faint):
+        L.append(f"- {b['id']} (was {b['was']}) at ({b['where'][0]:.0f}, {b['where'][1]:.0f}), ~{b['length_px']} px: {b['note']}")
+    L += ["", "## Faint lines from the first view (C01-C13): final status", ""]
     for c in faint:
         L.append(f"- {c['id']}: {c['status']}")
     if missing:
@@ -630,14 +700,13 @@ def write_map(recs, pads, missing, outs, brows, faint):
     (ROOT / "docs/WHISKER_MAP.md").write_text("\n".join(L) + "\n")
 
 
-FAINT_VERDICTS = {   # the first view's faint lines not on any whisker, judged by the owner's rule (2026-11-14)
-    "C03": ("fur", "does not stand out from the fur beside it (-0.62) and points 161 px away from his pad"),
-    "C06": ("uncertain: owner sorts manually", "stands out (+2.94) but lies inside his pad by the mouth corner, "
-            "pointing 45 deg off; could be a whisker near its root, or the lip's own shading"),
-    "C08": ("uncertain: owner sorts manually", "stands out (+2.42) and points roughly at his pad (19 deg off, 57 px from "
-            "its centre), in the streaky fur low on his right cheek"),
-    "C12": ("uncertain: owner sorts manually", "barely stands out (+1.14, fur reaches 0.94 one time in 20) and points "
-            "162 px away from any pad: leans fur"),
+FAINT_VERDICTS = {   # the first view's faint lines not on any whisker (owner, 2026-11-14)
+    "C03": ("Bnuy Perturbance BP-01", "not a whisker: does not stand out from the fur beside it and points away from "
+            "his pad; something in his fur (fluff sticking up, or debris), to address later"),
+    "C06": ("Bnuy Perturbance BP-02", "not a whisker (owner): a line inside his pad by the mouth corner that stands out; "
+            "something in his fur, to address later"),
+    "C08": ("Bnuy Perturbance BP-03", "not a whisker (owner): a line low on his right cheek that stands out; something "
+            "in his fur, to address later"),
 }
 
 
@@ -647,8 +716,9 @@ def unsure_sheet(F, recs, faint):
     g = F.grey; flat = g * (g.mean() / np.maximum(ndi.gaussian_filter(g, 20), 1))
     chroma = F.photo.astype(float) - F.photo.astype(float).mean(2, keepdims=True)
     R = {r["id"]: r for r in recs}
-    items = [(c["id"], np.array(c["points"]), None, c["status"]) for c in faint if c["status"].startswith("uncertain")]
-    for k in ("FW-13", "FW-14", "FW-02"):
+    items = [(c["status"].split()[2].rstrip(":") + f" (was {c['id']})", np.array(c["points"]), None, c["status"])
+             for c in faint if c["status"].startswith(("uncertain", "Bnuy"))]
+    for k in ("FW-14", "FW-19", "FW-18"):
         if k in R:
             items.append((k, np.array(R[k]["centreline"]), np.array(R[k]["labels"]),
                           R[k].get("doubt") or R[k]["why"]))
@@ -671,17 +741,18 @@ def unsure_sheet(F, recs, faint):
                     continue
                 dr.line([P(gl[i]), P(gl[i + 1])], fill=(0, 200, 255) if lab_d is None else
                         ((255, 0, 150) if seen else (255, 140, 0)), width=2)
-        row = Image.new("RGB", (im.width * 2 + 6, im.height + 44), (255, 255, 255))
-        row.paste(im, (0, 44)); row.paste(mk, (im.width + 6, 44))
+        row = Image.new("RGB", (im.width * 2 + 6, im.height + 50), (255, 255, 255))
+        row.paste(im, (0, 50)); row.paste(mk, (im.width + 6, 50))
         d_ = ImageDraw.Draw(row); d_.text((4, 4), name, fill=(0, 0, 0))
+        note = note if len(name) < 8 else note
         words, line_, lines_ = note.split(), "", []
         for w_ in words:
-            if len(line_) + len(w_) > 150:
+            if len(line_) + len(w_) > 130:
                 lines_.append(line_); line_ = ""
             line_ += w_ + " "
         lines_.append(line_)
         for i, t_ in enumerate(lines_[:2]):
-            d_.text((60, 4 + 14 * i), t_, fill=(60, 60, 60))
+            d_.text((4, 18 + 13 * i), t_, fill=(60, 60, 60))
         rows.append(row)
     W_ = max(r.width for r in rows); out = Image.new("RGB", (W_, sum(r.height + 10 for r in rows)), (255, 255, 255))
     y_ = 0
@@ -698,12 +769,26 @@ def faint_status(d, recs):
     for c in d.get("faint_candidates_not_classified", []):
         p = dense(np.array(c["points"]))
         on = [k for k, q in lines.items() if (cKDTree(q).query(p)[0] <= 3).mean() >= 0.3]
-        if on:
+        if c["id"] == "C12":
+            st = "whisker FW-18 (owner, 2026-11-14)"
+        elif on:
             st = f"part of whisker {', '.join(on)}"
         else:
             v, why = FAINT_VERDICTS.get(c["id"], ("uncertain: owner sorts manually", "not judged"))
             st = f"{v}: {why}"
         out.append(dict(id=c["id"], status=st, on=on, points=c["points"]))
+    return out
+
+
+def perturbances(faint):
+    """Bnuy Perturbances (owner, 2026-11-14): things in his fur that are not whiskers but are *something*
+    (fluff sticking up, debris?), kept so they are not forgotten; addressed later"""
+    out = []
+    for c in faint:
+        if c["status"].startswith("Bnuy Perturbance"):
+            p = dense(np.array(c["points"])); m = p[len(p) // 2]
+            out.append(dict(id=c["status"].split()[2].rstrip(":"), was=c["id"], where=np.round(m, 0).tolist(),
+                            length_px=int(len(p)), note=c["status"].split(": ", 1)[1], points=c["points"]))
     return out
 
 
@@ -723,7 +808,7 @@ def main() -> int:
                                 "bottom of his nose "
                                 "(see measure_muzzle); split at the philtrum into his two pads; owner review")),
                landmarks={k: (np.round(v, 1).tolist() if isinstance(v, np.ndarray) else v) for k, v in pads["landmarks"].items()},
-               whiskers=recs, eyebrow_whiskers=brows, faint_lines=faint,
+               whiskers=recs, eyebrow_whiskers=brows, faint_lines=faint, bnuy_perturbances=perturbances(faint),
                reclassified_outside_pieces={"B4-S01": "wisp -> outside part of whisker B4-S01 (shares B4-S02's face line)",
                                             "B4-S13": "wisp -> outside part of FW-07", "B4-S06": "fringe tip -> tip of FW-04",
                                             "W-F01": "fine hair -> outside part of FW-16",
