@@ -342,6 +342,7 @@ still required.
 | Edge tiles + ledger | `tools/edge_tiles.py` → `data/strands/ledger.json` |
 | Body outline (gentle + sensitive + eye-mark protection + owner-guided bridges) | `tools/body_outline.py` → `data/strands/body_outline.json` |
 | Approved peet line | `data/lines/peet_line.json` |
+| Approved body-part lines (head line, fold, ear strip) | `data/lines/body_parts_lines.json` |
 | Review images | `docs/images/` (batch sheets, golden tiles, eye-corner pixel grids) |
 | Whiskers outside the outline | `tools/trace_whiskers.py` (after `tools/trace_wisps.py`) → `data/strands/wisps.json` |
 | Whiskers over his face | `tools/face_whiskers.py` (+ line view `tools/whisker_lineview.py`, whole length `tools/whisker_fulllength.py`) → `data/strands/face_whiskers.json`, sheets `docs/images/face_whisker*.png` |

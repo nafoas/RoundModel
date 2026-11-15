@@ -45,15 +45,25 @@ import whisker_chains as wc  # noqa: E402
 
 ROOT = fw.ROOT
 OUT = ROOT / "docs/images/body_parts"
+APPROVED_LINES = ROOT / "data/lines/body_parts_lines.json"     # owner-approved 2026-11-15: frozen, used as is
 CREASE_ACROSS, CREASE_ALONG = 8.0, 30.0
 CREASE_SEEN = 1.5
 FOLD_BAND = (880.0, 1120.0)
 HEAD_RMS, FOLD_RMS = 1.0, 2.0
 EAR_STRIP_PX = 4.0          # owner, 2026-11-15: "a tiny, thin strip" joining his ears, like his peets
-COLOURS = {1: (255, 170, 60), 2: (90, 200, 255), 3: (170, 110, 255), 4: (120, 120, 120), 5: (120, 220, 120)}
-NAMES = {1: "head", 2: "intermediate bnuy", 3: "undercarriage", 4: "peets & underfluff", 5: "ears"}
+COLOURS = {1: (255, 170, 60), 2: (90, 200, 255), 3: (170, 110, 255), 4: (120, 120, 120), 5: (120, 220, 120),
+           6: (230, 50, 50), 7: (0, 165, 165), 8: (245, 225, 0)}
+NAMES = {1: "head", 2: "intermediate bnuy", 3: "undercarriage", 4: "peets & underfluff fringe (beyond the parts)",
+         5: "ears", 6: "cream peet (image left)", 7: "underfluff tuft", 8: "gray peet (image right)"}
+# the peets step's approved parts each keep their own region (owner, 2026-11-15: add the peets to the map)
+PART_CODE = {"cream_peet_image_left": 6, "underfluff_tuft": 7, "gray_peet_image_right": 8}
 # approved parts win outright over the new regions (lesson 25): file -> region they must carry
 APPROVED_PARTS = {"data/strands/parts_peets.json": 4, "data/strands/parts_ears.json": 5}
+
+
+def part_code(f, k):
+    """The region an approved part must carry: its own (peets, tuft) or its file's (ears)."""
+    return PART_CODE.get(k, APPROVED_PARTS[f])
 
 
 @lru_cache(maxsize=2)
@@ -165,11 +175,12 @@ def head_line(F, pads):
                               rise_deg=L["rise_deg"], axis_x=float(axis))
     raw = np.vstack([L["inferred"][::-1], L["seen"][::-1], under, Rr["inferred"]])
     line = smooth(raw, HEAD_RMS)
-    t_seen = cKDTree(L["seen"]); t_under = cKDTree(under); t_mir = cKDTree(Rr["inferred"])
-    labels = np.where(t_seen.query(line)[0] < 3, "seen",
-                      np.where(t_under.query(line)[0] < 3, "under his mouth (owner-guided)",
-                               np.where((t_mir.query(line)[0] < 3) & (line[:, 0] > B[0]),
-                                        "mirror of the image-left side (owner-guided)", "inferred")))
+    # each point takes the kind of the raw point nearest to it (labels follow position along the line, so they
+    # don't flicker where the smoothing strays a pixel or two from the raw trace)
+    kinds = np.array(["inferred"] * len(L["inferred"]) + ["seen"] * len(L["seen"])
+                     + ["under his mouth (owner-guided)"] * len(under)
+                     + ["mirror of the image-left side (owner-guided)"] * len(Rr["inferred"]))
+    labels = kinds[cKDTree(raw).query(line)[1]]
     return line, labels, out, under
 
 
@@ -211,7 +222,7 @@ def regions(F, head, fold, details=False):
     reg[inside & below_peet] = 4
     # the approved parts last, so nothing new overrules them (the ears had been coloured head, 2026-11-15)
     for (f, k), m in masks.items():
-        reg[m] = APPROVED_PARTS[f]
+        reg[m] = part_code(f, k)
     # his body outline runs up to ~1 px beyond the approved ear polygons along the ears' sides (two approved
     # outlines differing by a pixel): head pixels touching an ear and above that ear's base are ear edge
     for (f, k), m in masks.items():
@@ -246,7 +257,7 @@ def ear_strip(F, reg, masks):
 
 def leaks(reg):
     """Pixels inside each approved part that carry any other label (must all be 0)."""
-    return {k: int((m & (reg != APPROVED_PARTS[f])).sum()) for (f, k), m in approved_masks(*reg.shape).items()}
+    return {k: int((m & (reg != part_code(f, k))).sum()) for (f, k), m in approved_masks(*reg.shape).items()}
 
 
 def sheets(F, head, hl, fold, fl, reg):
@@ -266,8 +277,9 @@ def sheets(F, head, hl, fold, fl, reg):
         plain = Image.fromarray(F.photo[y0:y1, x0:x1]).resize(im.size, Image.LANCZOS)
         o = Image.new("RGB", (im.width * 2 + 6, im.height + 40), (255, 255, 255))
         o.paste(plain, (0, 40)); o.paste(im, (im.width + 6, 40)); d = ImageDraw.Draw(o)
-        d.text((6, 4), "HEAD (orange) / INTERMEDIATE BNUY (blue) / UNDERCARRIAGE (purple); grey = peets & underfluff, "
-                       "green = ears (approved parts, unchanged) + thin strip joining them (owner). Left: the photo, unmarked.", fill=(0, 0, 0))
+        d.text((6, 4), "HEAD (orange) / INTERMEDIATE BNUY (blue) / UNDERCARRIAGE (purple) / EARS (green, + thin strip joining "
+                       "them) / CREAM PEET (red) / UNDERFLUFF TUFT (teal) / GRAY PEET (yellow); grey = fringe below "
+                       "the peet line, beyond the parts. Left: the photo, unmarked.", fill=(0, 0, 0))
         d.text((6, 20), "magenta = where his head ends; dark blue = the lower fold. Solid = seen in the photo, or placed "
                         "by the owner's guidance (under his mouth; image-right cheek = mirror of image-left); "
                         "dashed = carried on to his edge.", fill=(0, 0, 0))
@@ -280,6 +292,21 @@ def main() -> int:
     pads = wc.muzzle_pads(F, wc.measure_pads(F))
     head, hl, cheeks, under = head_line(F, pads)
     fold, fl = fold_line(F)
+    status, drift = "proposal (drawn guess), owner review pending", None
+    if APPROVED_LINES.exists():
+        # the approved lines are used exactly as saved; the recomputed ones are only compared, so a code change
+        # that would move them shows up here instead of silently changing his parts
+        a = json.loads(APPROVED_LINES.read_text())
+        lines = {}
+        for n, (cur, lab) in (("head_line", (head, hl)), ("fold_line", (fold, fl))):
+            pts = np.array(a[n]["sampled_curve"])
+            labs = np.empty(len(pts), dtype=object)
+            for r in a[n]["label_runs"]:
+                labs[r["from_index"]:r["to_index"] + 1] = r["label"]
+            lines[n] = (pts, labs.astype(str), float(cKDTree(cur).query(pts)[0].max()))
+        (head, hl, dh), (fold, fl, dfo) = lines["head_line"], lines["fold_line"]
+        drift = dict(head_line=round(dh, 2), fold_line=round(dfo, 2))
+        status = f"{a['status']}: lines from {APPROVED_LINES.relative_to(ROOT)}"
     reg, det = regions(F, head, fold, details=True)
     leak = leaks(reg)
     if any(leak.values()):
@@ -291,7 +318,7 @@ def main() -> int:
     doc = dict(
         about=__doc__.split("\n\n")[0] + " " + __doc__.split("\n\n")[1],
         photo="data/photos/anchor_front.webp",
-        status="proposal (drawn guess), owner review pending",
+        status=status,
         head_line=dict(points=np.round(head, 2).tolist(), labels=hl.tolist(),
                        cheeks={k: dict(seen_to=np.round(v["seen"][-1], 1).tolist() if len(v["seen"]) else None,
                                        rise_deg=round(v["rise_deg"], 1), mirrored_from=v.get("mirrored_from"),
@@ -303,6 +330,7 @@ def main() -> int:
         fold_line=dict(points=np.round(fold, 2).tolist(), labels=fl.tolist()),
         pixels={NAMES[k]: int((reg == k).sum()) for k in NAMES},
         checks=dict(approved_parts_wrongly_labelled_px=leak,
+                    recomputed_lines_drift_from_approved_px=drift,
                     ear_edge_px_beyond_ear_parts=det["ear_edge_px"],
                     ear_strip=dict(px=det["ear_strip_px"], thickness_px=det["ear_strip_thickness_px"],
                                    about="owner-guided: a tiny, thin strip joining his ears along the top of "
@@ -316,6 +344,7 @@ def main() -> int:
     print("fold meets his outline at", np.round(fold[0], 0).tolist(), np.round(fold[-1], 0).tolist())
     print("pixels:", doc["pixels"])
     print("approved parts wrongly labelled (px):", leak)
+    print("status:", status, "| recomputed lines drift from approved (px):", drift)
     return 0
 
 

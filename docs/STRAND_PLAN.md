@@ -173,7 +173,9 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
-**BODY PARTS (2026-11-15): Head / Intermediate Bnuy / Undercarriage, proposal for the owner.**
+**BODY PARTS (2026-11-15): Head / Intermediate Bnuy / Undercarriage: OWNER-APPROVED.** Lines frozen in
+`data/lines/body_parts_lines.json`; the region map (`docs/images/body_parts/proposal_body.png`) shows every
+part: head, intermediate bnuy, undercarriage, ears (+ strip), cream peet, underfluff tuft, gray peet.
 `python tools/body_parts.py` -> `data/strands/body_parts.json`, `docs/images/body_parts/proposal_*.png`.
 Head line (after two rounds of owner changes): one gentle line under his whole mouth (from just under
 each mouth corner, where the dark band fades halfway; nose, under-nose cheeks, pads, both lips all in the

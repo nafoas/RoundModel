@@ -386,7 +386,9 @@ excuse and was withdrawn.)
    every new region map is counted against every approved part before it is shown (now 0 px leaked).
    Then (owner): flat under his mouth, so the head line is symmetric on both sides (the whole line is
    one half mirrored about an upright line); and "a tiny, thin strip" joins his ears along the top of
-   his head, like his peets (owner's reason to come).
+   his head, like his peets (owner's reason to come). **Approved 2026-11-15**, saved frozen to
+   `data/lines/body_parts_lines.json`; the region map also shows each peets-step part in its own colour
+   (owner: "a fully mapped out image of his regions").
    Checking every approved part found the same fault at the ears (coloured head, out of the pictures'
    crop): a review picture must show every part the map touches, not just the part being changed.
 

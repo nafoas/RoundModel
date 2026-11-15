@@ -720,6 +720,19 @@ check.py output (if applicable), and the next step.
   Checked at full size (mouth 2x with axis and level guides; ears 4x, pixel edges). Pixels: head 338816,
   intermediate bnuy 141888, undercarriage 100173, peets & underfluff 41248, ears + strip 15556. Approved
   parts: 0 px leaked. Tests: 37 passed. Photo used: `data/photos/anchor_front.webp`.
-- **Next:** owner on Q43 update 3 (owner has a plan to share next); once approved, save the head line and fold as approved lines in
-  `data/lines/` (like `peet_line.json`) and mark the three parts approved.
+- Owner: "just add the peets one to it, so we can have a fully mapped out image of his regions". The
+  map now shows each approved peets-step part in its own colour: cream peet red, underfluff tuft teal,
+  gray peet yellow (the peets picture's orange/purple/green are already head/undercarriage/ears here);
+  grey is only the 318 px of fringe below the peet line beyond the parts. (That edit was interrupted
+  by a misclick mid-run; it had been written in full, checked, then finished.)
+- **Owner approved the three body parts** (Q43). Saved, frozen: `data/lines/body_parts_lines.json`
+  (head line with its seen / inferred / owner-guided stretches, the fold, the ear strip). The tool now
+  uses those lines exactly as saved and only compares its own recomputed lines with them (drift 0.01 px
+  both); `data/strands/body_parts.json` status OWNER-APPROVED. Labels along the head line now follow
+  position along it (they had flickered between seen and inferred where the smoothing strays a pixel).
+  Pixels: head 338817, intermediate bnuy 141888, undercarriage 100172, ears + strip 15556, cream peet
+  18825, underfluff tuft 5189, gray peet 16916, fringe 318 (1 px moved head/undercarriage: the saved
+  points are rounded to 0.01 px). Approved parts: 0 px leaked. Tests: 37 passed. Checked at full size:
+  whole map; peets at 2x with the photo above. Photo used: `data/photos/anchor_front.webp`.
+- **Next:** the owner has ideas to share; then the next part per the plan.
 

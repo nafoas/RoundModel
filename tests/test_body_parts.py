@@ -32,7 +32,7 @@ def test_leak_check_catches_a_region_inside_an_approved_part():
     masks = bp.approved_masks(H, W)
     reg = np.zeros((H, W), np.uint8)
     for (f, k), m in masks.items():
-        reg[m] = bp.APPROVED_PARTS[f]
+        reg[m] = bp.part_code(f, k)
     assert not any(bp.leaks(reg).values())
     (f, k), m = next((fk, m) for fk, m in masks.items() if "gray_peet" in fk[1])
     r, c = np.argwhere(m)[len(np.argwhere(m)) // 2]
