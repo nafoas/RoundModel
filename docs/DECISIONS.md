@@ -217,6 +217,12 @@ excuse and was withdrawn.)
   then "either goes backwards or stays with the fluff"; FW-19's curve is "a consistent curve ... a
   whisker actually making". **Whisker step closed** (owner: move on once reasonably sure).
 
+- **The body is three parts, not two** (owner, 2026-11-15): "We do Head, then Intermediate Bnuy, then
+  Undercarriage ... See that dark line under his mouth that goes up through his cheeks diagonally to his
+  edge? That seems like where his head ends - he doesn't have a visible neck but that crease is the
+  closest thing." The lower boundary (the fold under his chin, found first) the owner agreed with.
+  Proposal: `tools/body_parts.py`, `data/strands/body_parts.json`, `docs/images/body_parts/`.
+
 ## The peets / underfluff / body line (approved 2026-11-07)
 
 - Under his body, his pelvis isn't visible: a fur tuft hangs between the peets.

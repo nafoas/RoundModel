@@ -343,5 +343,6 @@ still required.
 | Whiskers over his face | `tools/face_whiskers.py` (+ line view `tools/whisker_lineview.py`, whole length `tools/whisker_fulllength.py`) → `data/strands/face_whiskers.json`, sheets `docs/images/face_whisker*.png` |
 | Grey-area review sheets | `tools/candidate_sheets.py` → `docs/images/candidates/` |
 | Whisker completeness (pads) | `tools/whisker_pads.py` → `data/strands/whisker_pads.json` |
+| Head / intermediate bnuy / undercarriage | `tools/body_parts.py` → `data/strands/body_parts.json`, `docs/images/body_parts/` |
 | Every whisker pad to tip | `tools/whisker_chains.py` → `data/strands/whiskers_full.json`, `docs/WHISKER_MAP.md`, `docs/images/whiskers_full/` |
 | Tests | `tests/` (`python -m pytest -q`) |

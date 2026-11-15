@@ -175,4 +175,10 @@ the owner's official opinion later. Each says what I did in the meantime.
    FW-15) stay "dips under the fur".
 42. **[ANSWERED 2026-11-14: C06, C08 not whiskers -> Bnuy Perturbances BP-02, BP-03 (with C03 -> BP-01);
    C12 is a whisker -> FW-18.]**
+43. **Head / Intermediate Bnuy / Undercarriage (2026-11-15), drawn guess:** `docs/images/body_parts/
+   proposal_body.png` and `proposal_zoom.png`. Where his head ends (magenta): along the dark line under his
+   mouth, then up each cheek crease (solid where I can see it, about 150 px from each mouth corner), then
+   carried straight on to his edge (dashed), meeting it at about y 667 (image left) and y 647 (image right).
+   The lower fold (blue), as you agreed. Is the head line right, especially where the dashed parts meet
+   his edge?
 

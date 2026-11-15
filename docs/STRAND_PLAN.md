@@ -40,8 +40,9 @@ one simple shape at a time is easier and safer than shaping everything at once.
 
 | Part | Notes |
 |---|---|
-| BODY: head | smoother, sloping; ends at the chin fold |
-| BODY: undercarriage | fluffier mass under the chin, down to the peets |
+| BODY: head | smoother, sloping; ends at the dark crease under his mouth that rises diagonally through his cheeks to his edge (owner, 2026-11-15) |
+| BODY: intermediate bnuy | between that crease and the soft fold under his chin (owner, 2026-11-15) |
+| BODY: undercarriage | fluffier mass from the fold under his chin down to the peets |
 | EARS (left, right) | short, wide, rounded |
 | LEFT PEET | its own part, like each ear: own colour, own shaping step |
 | RIGHT PEET | its own part, like each ear: own colour, own shaping step |
@@ -172,6 +173,15 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**BODY PARTS (2026-11-15): Head / Intermediate Bnuy / Undercarriage, proposal for the owner.**
+`python tools/body_parts.py` -> `data/strands/body_parts.json`, `docs/images/body_parts/proposal_*.png`.
+Head line: the pads' lip line under his mouth (within 0.9 px median of the approved pad outline), then
+each cheek crease, seen rising ~45 deg from the mouth corner (left to (255, 767), right to (796, 780)),
+carried on straight to his edge (inferred, dashed): meets it at (162, 667) and (933, 647). Fold: the
+shading valley under his chin, ~y 1045 in the middle, meeting his edge at (151, 876) and (957, 900).
+Found by looking first (the owner's pointer), then measuring: a "darkest curve" search latched onto the
+shaded sides of his face (rejected); a view of only up-and-out creases shows the cheek creases.
+
 **WHISKERS: DONE (2026-11-14).** 30 pad whiskers + 8 eyebrow whiskers, each one continuous line from
 root to tip (`data/strands/whiskers_full.json`, `docs/WHISKER_MAP.md`); 3 Bnuy Perturbances kept for later.
 Outer ends past his outline turn back or lie with the fringe fluff (owner). Remaining for later steps:

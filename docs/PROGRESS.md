@@ -665,3 +665,19 @@ check.py output (if applicable), and the next step.
 - **Next:** the owner picks the next part (open per plan: ears' pixel tweaks, lashes/eyes, whisker pads,
   mouth and nose, head/undercarriage split, then the 3D build).
 
+## 2026-11-15 — Session 6 (cont.): body parts: Head / Intermediate Bnuy / Undercarriage
+- Owner chose the head/undercarriage split next, in this session; then: three parts, not two. The head ends
+  at "that dark line under his mouth that goes up through his cheeks diagonally to his edge"; the lower
+  boundary (the fold under his chin) is the undercarriage's. Photo used: `data/photos/anchor_front.webp`.
+- Looked at the whole body first (photo, evened shading, fur roughness, bulge-scale shading). Measured
+  profiles: chin bulge y ~900-960, fold below it y ~1030-1050, fur roughness doubles below the fold.
+- Head line: a "darkest curve to the outline" search hugged the shaded sides of his face (the darkest-path
+  trap, rejected); a step tracer on bulge shading climbed at its slope limit (rejected). A view showing only
+  creases slanting up and out from the mouth corners shows the cheek creases; followed from each corner.
+  Two bugs on the way: the carried-on part copied a short flat stretch (went level), then a 5 px dip made
+  the "diagonal" point downward (crossed the fold) -> seen part = from the lowest point near the corner to
+  the highest point the crease reaches; carried on in that diagonal's direction.
+- New `tools/body_parts.py` (+ `tests/test_body_parts.py`), proposal pictures `docs/images/body_parts/`.
+  Owner review: Q43.
+- **Next:** owner on Q43; then the head / intermediate / undercarriage become the approved parts.
+
