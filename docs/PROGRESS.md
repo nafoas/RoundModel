@@ -710,6 +710,16 @@ check.py output (if applicable), and the next step.
   peets & underfluff 41248, ears 15256. Pads clear the head line by >= 15.3 px. Tests: 37 passed.
   Checked at full size: both cheek ends on one level guide (2x); both peets close up (photo beside tint,
   3x); both ears' edges pixel by pixel (6x). Photo used: `data/photos/anchor_front.webp`.
-- **Next:** owner on Q43 update 2; once approved, save the head line and fold as approved lines in
+- Owner: two more changes, nothing else. (1) Under his mouth the line still rose to the picture's right:
+  "keep that flat, and then connect it back to the diagonal, so that his head boundary is symmetrical".
+  Now the whole head line is the picture-left half mirrored about one upright line (x 553.7, halfway
+  between the two places it meets his edge at y 666.5), level under his mouth at y 895.9; the earlier
+  tilt allowance is gone. Mirror mismatch <= 0.6 px; pads clear it by >= 21 px. (2) "Connecting his
+  little ears with a tiny strip between them ... kinda like his peets" (owner has a reason, later): the
+  top of his head between the ears, his outline's inner 4 px, ear to ear, coloured with the ears (300 px).
+  Checked at full size (mouth 2x with axis and level guides; ears 4x, pixel edges). Pixels: head 338816,
+  intermediate bnuy 141888, undercarriage 100173, peets & underfluff 41248, ears + strip 15556. Approved
+  parts: 0 px leaked. Tests: 37 passed. Photo used: `data/photos/anchor_front.webp`.
+- **Next:** owner on Q43 update 3 (owner has a plan to share next); once approved, save the head line and fold as approved lines in
   `data/lines/` (like `peet_line.json`) and mark the three parts approved.
 

@@ -384,6 +384,9 @@ excuse and was withdrawn.)
    which stops short of his edge (x 785), so 910 px inside the approved grey peet were coloured
    undercarriage; the owner spotted it. → Approved part polygons win outright over any new region, and
    every new region map is counted against every approved part before it is shown (now 0 px leaked).
+   Then (owner): flat under his mouth, so the head line is symmetric on both sides (the whole line is
+   one half mirrored about an upright line); and "a tiny, thin strip" joins his ears along the top of
+   his head, like his peets (owner's reason to come).
    Checking every approved part found the same fault at the ears (coloured head, out of the pictures'
    crop): a review picture must show every part the map touches, not just the part being changed.
 

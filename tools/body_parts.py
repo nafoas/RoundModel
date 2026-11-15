@@ -49,6 +49,7 @@ CREASE_ACROSS, CREASE_ALONG = 8.0, 30.0
 CREASE_SEEN = 1.5
 FOLD_BAND = (880.0, 1120.0)
 HEAD_RMS, FOLD_RMS = 1.0, 2.0
+EAR_STRIP_PX = 4.0          # owner, 2026-11-15: "a tiny, thin strip" joining his ears, like his peets
 COLOURS = {1: (255, 170, 60), 2: (90, 200, 255), 3: (170, 110, 255), 4: (120, 120, 120), 5: (120, 220, 120)}
 NAMES = {1: "head", 2: "intermediate bnuy", 3: "undercarriage", 4: "peets & underfluff", 5: "ears"}
 # approved parts win outright over the new regions (lesson 25): file -> region they must carry
@@ -144,25 +145,24 @@ def head_line(F, pads):
         v = ndi.map_coordinates(bulge, [ys - 0.5, np.full(len(ys), x - 0.5)], order=1)
         i = int(np.argmin(v)); return ys[i + int(np.argmax(v[i:] > v[i] / 2))]
     cl = np.array(info["image_left"]["lip_corner"]); cr = np.array(info["image_right"]["lip_corner"])
-    A = np.array([cl[0], band_end(cl[0], cl[1])]); B = np.array([cr[0], band_end(cr[0], cr[1])])
-    xs = np.arange(A[0], B[0] + 0.5, 1.0)
-    under = np.c_[xs, A[1] + (xs - A[0]) / (B[0] - A[0]) * (B[1] - A[1])]
+    A = np.array([cl[0], band_end(cl[0], cl[1])])
     L, Rr = out["image_left"], out["image_right"]
-    # owner, 2026-11-15: the image-right side went up "just a tiny, tiny, tiny bit too high ... ideally, mirror
-    # the line on the left on the right": the image-right cheek line is the image-left one mirrored (left-right).
-    # His face is tipped a few degrees in this photo (image-right nostril wing 16 px and lip corner 22 px higher),
-    # so B starts higher than A; that difference is spread along the cheek (all of it at B, none at his edge), and
-    # the mirrored shape is stretched across to his outline, so both sides meet his edge at the same height.
+    # owner, 2026-11-15: mirror the image-left cheek line on the image right; then: "keep that flat, and then
+    # connect it back to the diagonal, so that his head boundary is symmetrical on both sides". So the whole
+    # head line is symmetric about one upright axis, halfway between where the image-left line meets his edge
+    # and his edge at that same height on the image right; under his mouth it stays level at A's height.
     left_cheek = np.vstack([A, L["seen"], L["inferred"]])
-    f = (A[0] - left_cheek[:, 0]) / (A[0] - left_cheek[-1, 0])
     y_meet = left_cheek[-1, 1]
-    xo = np.arange(B[0], F.grey.shape[1], 0.25)
+    xo = np.arange(cr[0], F.grey.shape[1], 0.25)
     x_out = xo[int(np.argmax(F.sdist(np.c_[xo, np.full(len(xo), y_meet)]) <= 0))]
-    mir = np.c_[B[0] + f * (x_out - B[0]), left_cheek[:, 1] + (1 - f) * (B[1] - A[1])]
+    axis = (left_cheek[-1, 0] + x_out) / 2
+    B = np.array([2 * axis - A[0], A[1]])
+    xs = np.arange(A[0], B[0] + 0.5, 1.0)
+    under = np.c_[xs, np.full(len(xs), A[1])]
+    mir = np.c_[2 * axis - left_cheek[:, 0], left_cheek[:, 1]]
     Rr = dict(Rr, seen=np.zeros((0, 2)), inferred=mir[1:], mirrored=True)
-    q = mir[1:1 + len(L["seen"])]; tq = np.linalg.svd(q - q.mean(0))[2][0]
     out["image_right"] = dict(out["image_right"], mirrored_from="image_left", seen=Rr["seen"], inferred=Rr["inferred"],
-                              rise_deg=float(np.degrees(np.arctan2(abs(tq[1]), abs(tq[0])))))
+                              rise_deg=L["rise_deg"], axis_x=float(axis))
     raw = np.vstack([L["inferred"][::-1], L["seen"][::-1], under, Rr["inferred"]])
     line = smooth(raw, HEAD_RMS)
     t_seen = cKDTree(L["seen"]); t_under = cKDTree(under); t_mir = cKDTree(Rr["inferred"])
@@ -189,7 +189,7 @@ def fold_line(F):
     return line, labels
 
 
-def regions(F, head, fold):
+def regions(F, head, fold, details=False):
     H, W = F.grey.shape
     yy, xx = np.mgrid[0:H, 0:W] + 0.5
     inside = F.sdist(np.stack([xx, yy], -1)) > 0
@@ -221,7 +221,27 @@ def regions(F, head, fold):
         base = ndi.maximum_filter1d(base, 5)
         edge = (reg == 1) & ndi.binary_dilation(m, iterations=2) & (yy - 0.5 < base[None, :])
         reg[edge] = 5
+    n_edge = int((reg == 5).sum()) - sum(int(m.sum()) for (f, k), m in masks.items() if APPROVED_PARTS[f] == 5)
+    strip = ear_strip(F, reg, masks)
+    reg[strip] = 5
+    if details:
+        return reg, dict(ear_edge_px=n_edge, ear_strip_px=int(strip.sum()), ear_strip_thickness_px=EAR_STRIP_PX)
     return reg
+
+
+def ear_strip(F, reg, masks):
+    """Owner, 2026-11-15: join his ears with "a tiny, thin strip" between them, like his peets: the top of
+    his head between the two ears, his outline's inner EAR_STRIP_PX px, ear to ear."""
+    H, W = reg.shape
+    yy, xx = np.mgrid[0:H, 0:W] + 0.5
+    ears = [m for (f, k), m in masks.items() if APPROVED_PARTS[f] == 5]
+    cx = sorted(float(xx[m].mean()) for m in ears)
+    top = max(float(yy[m].max()) for m in ears)
+    sd = F.sdist(np.stack([xx, yy], -1))
+    band = (sd > 0) & (sd <= EAR_STRIP_PX) & (xx >= cx[0]) & (xx <= cx[-1]) & (yy <= top) & (reg == 1)
+    lab, n = ndi.label(band | np.any(ears, 0))
+    keep = set(np.unique(lab[ears[0]])) & set(np.unique(lab[ears[1]])) - {0}
+    return band & np.isin(lab, list(keep))
 
 
 def leaks(reg):
@@ -247,7 +267,7 @@ def sheets(F, head, hl, fold, fl, reg):
         o = Image.new("RGB", (im.width * 2 + 6, im.height + 40), (255, 255, 255))
         o.paste(plain, (0, 40)); o.paste(im, (im.width + 6, 40)); d = ImageDraw.Draw(o)
         d.text((6, 4), "HEAD (orange) / INTERMEDIATE BNUY (blue) / UNDERCARRIAGE (purple); grey = peets & underfluff, "
-                       "green = ears (approved parts, unchanged). Left: the photo, unmarked.", fill=(0, 0, 0))
+                       "green = ears (approved parts, unchanged) + thin strip joining them (owner). Left: the photo, unmarked.", fill=(0, 0, 0))
         d.text((6, 20), "magenta = where his head ends; dark blue = the lower fold. Solid = seen in the photo, or placed "
                         "by the owner's guidance (under his mouth; image-right cheek = mirror of image-left); "
                         "dashed = carried on to his edge.", fill=(0, 0, 0))
@@ -260,7 +280,7 @@ def main() -> int:
     pads = wc.muzzle_pads(F, wc.measure_pads(F))
     head, hl, cheeks, under = head_line(F, pads)
     fold, fl = fold_line(F)
-    reg = regions(F, head, fold)
+    reg, det = regions(F, head, fold, details=True)
     leak = leaks(reg)
     if any(leak.values()):
         raise SystemExit(f"a new region overrules an approved part: {leak}")
@@ -283,8 +303,10 @@ def main() -> int:
         fold_line=dict(points=np.round(fold, 2).tolist(), labels=fl.tolist()),
         pixels={NAMES[k]: int((reg == k).sum()) for k in NAMES},
         checks=dict(approved_parts_wrongly_labelled_px=leak,
-                    ear_edge_px_beyond_ear_parts=int(((reg == 5) & ~np.any([m for (f, k), m in approved_masks(
-                        *reg.shape).items() if APPROVED_PARTS[f] == 5], 0)).sum()),
+                    ear_edge_px_beyond_ear_parts=det["ear_edge_px"],
+                    ear_strip=dict(px=det["ear_strip_px"], thickness_px=det["ear_strip_thickness_px"],
+                                   about="owner-guided: a tiny, thin strip joining his ears along the top of "
+                                         "his head, like his peets"),
                     note=("every approved part (peets, underfluff, ears) keeps its own label; must all be 0. "
                           "ear_edge: pixels inside his body outline, touching an ear above its base, outside "
                           "the ear polygon by ~1 px (the two approved outlines differ by a pixel there)")),

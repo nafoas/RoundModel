@@ -179,7 +179,8 @@ Head line (after two rounds of owner changes): one gentle line under his whole m
 each mouth corner, where the dark band fades halfway; nose, under-nose cheeks, pads, both lips all in the
 head; pads clear it by >= 15 px), then the picture-left cheek crease, seen rising ~47 deg to (255, 767) and
 carried on straight to his edge (dashed) at (162, 667); the picture-right cheek is its mirror (owner),
-meeting his edge at the same height, (946, 667). Approved parts (peets, underfluff, ears) always win:
+meeting his edge at the same height, (946, 667); then (owner) level under his mouth, so the whole line is
+symmetric about x 553.7. A 4 px strip along the top of his head joins his ears (owner). Approved parts (peets, underfluff, ears) always win:
 the tool stops if any of their pixels carries another label. Fold: the
 shading valley under his chin, ~y 1045 in the middle, meeting his edge at (151, 876) and (957, 900).
 Found by looking first (the owner's pointer), then measuring: a "darkest curve" search latched onto the

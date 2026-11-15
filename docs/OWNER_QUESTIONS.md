@@ -196,4 +196,8 @@ the owner's official opinion later. Each says what I did in the meantime.
    undercarriage inside either peet. Same cause checked everywhere: your ears were being coloured as head
    (out of sight above the old pictures); fixed the same way, now green, and the overview shows his whole
    body. Is the head line now right?
+   **Update 3 (2026-11-15):** your two changes. (1) Under his mouth the line now stays flat (level with
+   where the picture-left diagonal evens out) and joins the mirrored diagonal: the whole head line is
+   symmetric about one upright line (x 553.7; mirror mismatch <= 0.6 px), both ends at y 666.5. (2) His
+   ears are joined by a thin strip (4 px) along the top of his head between them, like his peets.
 
