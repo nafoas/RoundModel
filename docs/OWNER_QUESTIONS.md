@@ -185,4 +185,15 @@ the owner's official opinion later. Each says what I did in the meantime.
    whole mouth (it had followed the lip and split it into two zones): one gentle line from just under each
    mouth corner, no bump in the middle; his nose, under-nose cheeks, pads and both lips are all in the head
    (pads clear it by >= 13 px). Pictures updated.
+   **Update 2 (2026-11-15):** your two small changes. (1) "His right side" read as the picture's right
+   (it was the one going higher: it met his edge at y 647 vs y 667): that cheek line is now the mirror of
+   the picture's-left one, and both meet his edge at the same height (y 667). His face is tipped a few
+   degrees in this photo (picture-right nostril wing 16 px and lip corner 22 px higher), so the mirrored
+   line starts 28 px higher under that mouth corner and takes that up gently along the cheek. If you meant
+   the other side, or want the tilt kept at his edge, say so. (2) Your-left (grey) peet: 910 px inside
+   the approved peet parts were coloured undercarriage (the approved peet line stopped short of his edge
+   at x 785); now the approved peet parts always win and the line is carried on to his edge: 0 px of
+   undercarriage inside either peet. Same cause checked everywhere: your ears were being coloured as head
+   (out of sight above the old pictures); fixed the same way, now green, and the overview shows his whole
+   body. Is the head line now right?
 

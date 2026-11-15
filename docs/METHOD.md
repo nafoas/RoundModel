@@ -231,6 +231,10 @@ From the golden tiles (`docs/images/golden_tiles.png`):
 21. **Whiskers bend** (owner, 2026-11-14): less than fur, but they do; a bend needed to reach the pad is
     a note, not a reason to doubt a whisker. An S-shaped trace is two whiskers (split it where the two
     straight parts cross; check which part carries on past the joint).
+22. **Approved parts win** (lesson 25, 2026-11-15): a new region map never overrules an approved part
+    (peets, underfluff, ears, ...). Count every approved part's pixels against the new map before
+    showing it (all must keep their own label), and show every part the map touches in the review
+    picture, not just the part being changed.
 17. **Review sheets for grey areas** (`tools/candidate_sheets.py`): locator, the photo as
     it is, the photo with brightness stretched in TRUE colour (never stretch the colour
     channels separately or together: his fur's tiny real colour shifts become false

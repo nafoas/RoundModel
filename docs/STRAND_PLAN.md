@@ -175,9 +175,12 @@ Original description:
 ### 3. Annotate each tile strand by strand — IN PROGRESS
 **BODY PARTS (2026-11-15): Head / Intermediate Bnuy / Undercarriage, proposal for the owner.**
 `python tools/body_parts.py` -> `data/strands/body_parts.json`, `docs/images/body_parts/proposal_*.png`.
-Head line: the pads' lip line under his mouth (within 0.9 px median of the approved pad outline), then
-each cheek crease, seen rising ~45 deg from the mouth corner (left to (255, 767), right to (796, 780)),
-carried on straight to his edge (inferred, dashed): meets it at (162, 667) and (933, 647). Fold: the
+Head line (after two rounds of owner changes): one gentle line under his whole mouth (from just under
+each mouth corner, where the dark band fades halfway; nose, under-nose cheeks, pads, both lips all in the
+head; pads clear it by >= 15 px), then the picture-left cheek crease, seen rising ~47 deg to (255, 767) and
+carried on straight to his edge (dashed) at (162, 667); the picture-right cheek is its mirror (owner),
+meeting his edge at the same height, (946, 667). Approved parts (peets, underfluff, ears) always win:
+the tool stops if any of their pixels carries another label. Fold: the
 shading valley under his chin, ~y 1045 in the middle, meeting his edge at (151, 876) and (957, 900).
 Found by looking first (the owner's pointer), then measuring: a "darkest curve" search latched onto the
 shaded sides of his face (rejected); a view of only up-and-out creases shows the cheek creases.

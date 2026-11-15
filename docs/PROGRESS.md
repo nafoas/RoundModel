@@ -685,4 +685,31 @@ check.py output (if applicable), and the next step.
   bump up in the middle; nose, under-nose cheeks and pads all in the head. Done: one gentle line from just
   under each mouth corner (where the dark band under it fades halfway); pads clear it by >= 13 px. Brightness
   profiles show no sharp lower-lip edge; the line sits where the mouth's shadow levels out into chin fur.
+- Owner: two small changes. (1) The cheek line "goes up just a tiny, tiny, tiny bit too high on his right
+  side - ideally, mirror the line on the left on the right". Read as the picture's right (the higher one,
+  meeting his edge at y 647 vs 667); stated to the owner to correct if meant the other way. The
+  picture-right cheek line is now the picture-left one mirrored. First try (a plain mirror from the point
+  under the right mouth corner) still met his edge 13 px higher (y 654): his face is tipped a few degrees
+  in the anchor photo (right nostril wing 16 px, lip corner 22 px higher), so that start point is 28 px
+  higher. Now that 28 px is taken up gently along the cheek and the shape is stretched across to his
+  edge: both sides meet it at y 666.6. Labelled owner-guided; the legend says so (it was drawn solid
+  under a legend saying solid = seen). (2) "His left peet": the undercarriage drifted into the grey peet.
+  Cause: the region code used only the approved peet line, which stops at x 785, short of his edge, so
+  910 px inside the approved peet parts (`data/strands/parts_peets.json`) were coloured undercarriage.
+  Fix: the approved peet parts always count as peets & underfluff, and the peet line is carried on to his
+  edge at both ends. Re-checked both peets: 0 px of head / intermediate / undercarriage inside either;
+  318 px of peets & underfluff lie just beyond the parts (the carried-on line).
+- Same cause, re-checked everywhere it could apply (every approved part against the new map): the
+  approved ears (`data/strands/parts_ears.json`) were coloured head, 7878 + 7262 px, out of sight above
+  the pictures' crop. Fixed the same way (approved parts win; ears now their own colour, green), plus a
+  1 px sliver along the ears' sides (106 px inside his body outline but just outside the ear polygons,
+  above the ear bases: the two approved outlines differ by a pixel there) given to the ear it touches.
+  The tool now counts every approved part's pixels against the map and stops if any carry another label
+  (all 0; recorded in `body_parts.json` checks) + a test for that check. The overview picture now shows
+  his whole body, ears included. Pixels now: head 332228, intermediate bnuy 148776, undercarriage 100173,
+  peets & underfluff 41248, ears 15256. Pads clear the head line by >= 15.3 px. Tests: 37 passed.
+  Checked at full size: both cheek ends on one level guide (2x); both peets close up (photo beside tint,
+  3x); both ears' edges pixel by pixel (6x). Photo used: `data/photos/anchor_front.webp`.
+- **Next:** owner on Q43 update 2; once approved, save the head line and fold as approved lines in
+  `data/lines/` (like `peet_line.json`) and mark the three parts approved.
 

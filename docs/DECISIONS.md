@@ -227,6 +227,10 @@ excuse and was withdrawn.)
   are part of his head". Why three parts (owner): the undercarriage fur "runs down, gets very fluffy and
   wispy, a bit rougher, definitely thicker"; the head fur is "slick, short, and not rough"; the
   intermediate is the slow transition (measured roughness down his middle: ~1.5 / ~2.5 / ~3.7).
+  Then (owner): the cheek line went "a tiny, tiny, tiny bit too high on his right side - ideally, mirror
+  the line on the left on the right": the picture-right cheek line is the picture-left one mirrored, both
+  meeting his edge at the same height; his face's small tilt in this photo is taken up along the cheek.
+  The undercarriage had leaked into the approved grey peet: see lesson 25.
 
 ## The peets / underfluff / body line (approved 2026-11-07)
 
@@ -376,4 +380,10 @@ excuse and was withdrawn.)
    no visible face part bent the wrong way (an extra minus sign); the paths still reached the pad, just
    longer. Found only by checking the reasoning while writing similar code. → Every geometric helper
    gets a test on a known shape (now: a circle continued past its end stays on the circle).
+25. **A new region overruling an approved part.** The body-parts map used only the approved peet line,
+   which stops short of his edge (x 785), so 910 px inside the approved grey peet were coloured
+   undercarriage; the owner spotted it. → Approved part polygons win outright over any new region, and
+   every new region map is counted against every approved part before it is shown (now 0 px leaked).
+   Checking every approved part found the same fault at the ears (coloured head, out of the pictures'
+   crop): a review picture must show every part the map touches, not just the part being changed.
 
