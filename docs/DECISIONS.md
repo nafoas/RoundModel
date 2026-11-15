@@ -222,6 +222,11 @@ excuse and was withdrawn.)
   edge? That seems like where his head ends - he doesn't have a visible neck but that crease is the
   closest thing." The lower boundary (the fold under his chin, found first) the owner agreed with.
   Proposal: `tools/body_parts.py`, `data/strands/body_parts.json`, `docs/images/body_parts/`.
+  Then: the head line runs under his whole mouth, not along the lip ("splitting his lip into two zones");
+  "his little nose, under-nose cheeks, and little pads above his mouth are all in one area since those
+  are part of his head". Why three parts (owner): the undercarriage fur "runs down, gets very fluffy and
+  wispy, a bit rougher, definitely thicker"; the head fur is "slick, short, and not rough"; the
+  intermediate is the slow transition (measured roughness down his middle: ~1.5 / ~2.5 / ~3.7).
 
 ## The peets / underfluff / body line (approved 2026-11-07)
 

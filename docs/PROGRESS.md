@@ -680,4 +680,9 @@ check.py output (if applicable), and the next step.
 - New `tools/body_parts.py` (+ `tests/test_body_parts.py`), proposal pictures `docs/images/body_parts/`.
   Owner review: Q43.
 - **Next:** owner on Q43; then the head / intermediate / undercarriage become the approved parts.
+- Owner: agrees with three parts (head slick and short, undercarriage thick and rough, intermediate the
+  slow transition); move the middle of the head line down under his mouth (it split the lip in two), no
+  bump up in the middle; nose, under-nose cheeks and pads all in the head. Done: one gentle line from just
+  under each mouth corner (where the dark band under it fades halfway); pads clear it by >= 13 px. Brightness
+  profiles show no sharp lower-lip edge; the line sits where the mouth's shadow levels out into chin fur.
 

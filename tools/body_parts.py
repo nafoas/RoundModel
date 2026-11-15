@@ -7,9 +7,10 @@ cheeks diagonally to his edge? That seems like where his head ends - he doesn't 
 but that crease is the closest thing."
 
 Two lines across his body (judgment lines, METHOD §4: shown as a drawn guess for the owner):
-1. HEAD LINE (head ends): the dark line under his mouth = the pads' lip line (approved pad outline,
-   tools/whisker_chains.py), then on each side the crease rising diagonally through his cheek from the
-   mouth corner. The crease is found in a view that shows only creases slanting up and outward
+1. HEAD LINE (head ends): under his whole mouth (owner, 2026-11-15: not along the lip, which split it
+   into two zones): one gentle line from just under one mouth corner to the other, so his nose, the
+   cheeks under it, his pads and both lips are all in the head; then on each side the crease rising
+   diagonally through his cheek from the mouth corner. The crease is found in a view that shows only creases slanting up and outward
    (oriented line filters, 8 px across x 30 px along, 0..70 deg on that side), followed from the mouth
    corner outward (dynamic programming: rises up to 53 deg, never drops more than 1 px per 3 px).
    SEEN: from the lowest point near the corner up to the highest point the crease reaches while it is
@@ -111,26 +112,33 @@ def head_line(F, pads):
                 break
             run_end = i
         i_top = int(np.argmin(ln[:run_end + 1, 1])); i_start = int(np.argmax(ln[:i_top + 1, 1]))
-        seen = ln[:i_top + 1]; diag = ln[i_start:i_top + 1]
+        seen = ln[i_start:i_top + 1]; diag = seen
         u, s_, vt = np.linalg.svd(diag - diag.mean(0)); t = vt[0]
         if t @ (diag[-1] - diag[0]) < 0:
             t = -t
         out[side] = dict(seen=seen, inferred=to_outline(F, seen[-1], t),
                          rise_deg=float(np.degrees(np.arctan2(-t[1], abs(t[0])))))
-    # the pads' lip line between the two mouth corners (approved pad outline)
-    ring = pads["ring"]; cl = np.array(info["image_left"]["lip_corner"]); cr = np.array(info["image_right"]["lip_corner"])
-    il = int(np.argmin(np.hypot(*(ring - cl).T))); ir = int(np.argmin(np.hypot(*(ring - cr).T))); n = len(ring)
-    seq = lambda a, b: np.array([ring[k % n] for k in range(a, b + (n if b < a else 0) + 1)])
-    a1, a2 = seq(ir, il), seq(il, ir)
-    lip = a1 if a1[:, 1].mean() > a2[:, 1].mean() else a2
-    if lip[0][0] > lip[-1][0]:
-        lip = lip[::-1]
+    # under his mouth (owner, 2026-11-15: "move the center ... down a little bit ... make sure his little nose,
+    # under-nose cheeks, and little pads above his mouth are all in one area"): one gentle line from just under
+    # each mouth corner (where the dark band under the corner fades halfway back to his fur) to the other, so the
+    # whole mouth, both lips, the nose and the pads are in the head; no bump up in the middle.
+    bulge = ndi.gaussian_filter(g, 8) - ndi.gaussian_filter(g, 60)
+
+    def band_end(x, y0):
+        ys = np.arange(y0 - 15, y0 + 90, 1.0)
+        v = ndi.map_coordinates(bulge, [ys - 0.5, np.full(len(ys), x - 0.5)], order=1)
+        i = int(np.argmin(v)); return ys[i + int(np.argmax(v[i:] > v[i] / 2))]
+    cl = np.array(info["image_left"]["lip_corner"]); cr = np.array(info["image_right"]["lip_corner"])
+    A = np.array([cl[0], band_end(cl[0], cl[1])]); B = np.array([cr[0], band_end(cr[0], cr[1])])
+    xs = np.arange(A[0], B[0] + 0.5, 1.0)
+    under = np.c_[xs, A[1] + (xs - A[0]) / (B[0] - A[0]) * (B[1] - A[1])]
     L, Rr = out["image_left"], out["image_right"]
-    raw = np.vstack([L["inferred"][::-1], L["seen"][::-1], lip, Rr["seen"], Rr["inferred"]])
+    raw = np.vstack([L["inferred"][::-1], L["seen"][::-1], under, Rr["seen"], Rr["inferred"]])
     line = smooth(raw, HEAD_RMS)
-    seen_pts = cKDTree(np.vstack([L["seen"], Rr["seen"], lip]))
-    labels = np.where(seen_pts.query(line)[0] < 3, "seen", "inferred")
-    return line, labels, out, lip
+    t_seen = cKDTree(np.vstack([L["seen"], Rr["seen"]])); t_under = cKDTree(under)
+    labels = np.where(t_seen.query(line)[0] < 3, "seen",
+                      np.where(t_under.query(line)[0] < 3, "under his mouth (owner-guided)", "inferred"))
+    return line, labels, out, under
 
 
 def fold_line(F):
@@ -194,11 +202,13 @@ def sheets(F, head, hl, fold, fl, reg):
 def main() -> int:
     F = fw.Face()
     pads = wc.muzzle_pads(F, wc.measure_pads(F))
-    head, hl, cheeks, lip = head_line(F, pads)
+    head, hl, cheeks, under = head_line(F, pads)
     fold, fl = fold_line(F)
     reg = regions(F, head, fold)
     sheets(F, head, hl, fold, fl, reg)
-    lipd = cKDTree(head).query(lip)[0]
+    # checks: his pads (and so his nose, under-nose cheeks and mouth) lie wholly in the head
+    ring = pads["ring"]; o = head[np.argsort(head[:, 0])]
+    pad_clear = float(np.min(np.interp(ring[:, 0], o[:, 0], o[:, 1]) - ring[:, 1]))
     doc = dict(
         about=__doc__.split("\n\n")[0] + " " + __doc__.split("\n\n")[1],
         photo="data/photos/anchor_front.webp",
@@ -208,7 +218,8 @@ def main() -> int:
                                        inferred_px=int(len(v["inferred"])),
                                        meets_outline=np.round(v["inferred"][-1], 1).tolist() if len(v["inferred"]) else None)
                                for k, v in cheeks.items()},
-                       vs_pad_lip_line_px=dict(median=round(float(np.median(lipd)), 2), max=round(float(lipd.max()), 2))),
+                       under_mouth=dict(from_=np.round(under[0], 1).tolist(), to=np.round(under[-1], 1).tolist()),
+                       pads_above_by_px_min=round(pad_clear, 1)),
         fold_line=dict(points=np.round(fold, 2).tolist(), labels=fl.tolist()),
         pixels={NAMES[k]: int((reg == k).sum()) for k in NAMES},
     )

@@ -181,4 +181,8 @@ the owner's official opinion later. Each says what I did in the meantime.
    carried straight on to his edge (dashed), meeting it at about y 667 (image left) and y 647 (image right).
    The lower fold (blue), as you agreed. Is the head line right, especially where the dashed parts meet
    his edge?
+   **Update (2026-11-15):** you agreed with the three parts; the middle stretch moved down to run under his
+   whole mouth (it had followed the lip and split it into two zones): one gentle line from just under each
+   mouth corner, no bump in the middle; his nose, under-nose cheeks, pads and both lips are all in the head
+   (pads clear it by >= 13 px). Pictures updated.
 
