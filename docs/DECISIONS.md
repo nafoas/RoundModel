@@ -213,6 +213,10 @@ excuse and was withdrawn.)
   labeled as non whiskers as they seem like they are *something*. Some fluff sticking up, maybe some
   debris in his fur?" Their own class, kept for later: BP-01 (was C03), BP-02 (C06), BP-03 (C08).
 
+- **Whisker outer ends** (owner, 2026-11-14): a whisker that reaches the edge of his face goes past it,
+  then "either goes backwards or stays with the fluff"; FW-19's curve is "a consistent curve ... a
+  whisker actually making". **Whisker step closed** (owner: move on once reasonably sure).
+
 ## The peets / underfluff / body line (approved 2026-11-07)
 
 - Under his body, his pelvis isn't visible: a fur tuft hangs between the peets.

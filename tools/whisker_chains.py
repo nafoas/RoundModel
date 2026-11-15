@@ -483,7 +483,9 @@ def build(F, V=None):
         else:
             sd = float(F.sdist(fpart[0]))
             if sd <= 25:
-                outer = "out of view: reaches his outline with nothing outside, so it goes round his cheek"
+                outer = ("past his outline: it reaches the edge of his face and carries on, then either turns back "
+                         "(away from the camera) or lies along the fringe fluff, mixed in with it (owner, 2026-11-14); "
+                         "nothing shows along its straight line in the fringe")
             else:
                 dep = np.array(face[spec["face"]]["w"]["depth_grey"], float)
                 ratio = np.nanmedian(dep[:20]) / max(np.nanmedian(dep), 1e-6)

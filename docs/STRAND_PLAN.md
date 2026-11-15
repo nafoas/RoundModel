@@ -172,6 +172,11 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**WHISKERS: DONE (2026-11-14).** 30 pad whiskers + 8 eyebrow whiskers, each one continuous line from
+root to tip (`data/strands/whiskers_full.json`, `docs/WHISKER_MAP.md`); 3 Bnuy Perturbances kept for later.
+Outer ends past his outline turn back or lie with the fringe fluff (owner). Remaining for later steps:
+roots on the pads move with the pad step; eyebrow-whisker roots (B1-S07, B5-S06 inferred) with the eye step.
+
 **Whiskers: owner's answers applied (2026-11-14).** C12 is whisker FW-18 (extended on its own bend
 while it beats the fur, traced to the pad); C03, C06, C08 are Bnuy Perturbances BP-01..03 (kept for
 later); bends are notes, not doubts; FW-14 split into FW-14 (level, carries on past the joint) and FW-19

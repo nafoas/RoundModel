@@ -110,6 +110,11 @@ Prince is built in separate layers so no layer can distort another:
 
 ## Build checklist
 
+- [ ] **Whiskers past the edge of his face** (owner, 2026-11-14): a face whisker that reaches his outline
+  with nothing outside carries on past it, then turns back (away from the camera) or lies along the
+  fringe fluff. Build that part; it is not in the photo as a separate line. Whiskers that stop mid-cheek
+  while still dark dip under the fur. Data: `outer_end` in `data/strands/whiskers_full.json`.
+- [ ] **Bnuy Perturbances BP-01..03**: decide what they are before building (fluff, debris?).
 - [ ] **Faint whiskers at their measured strength** (owner, 2026-11-14): each face whisker
   stores its measured depth/width per px (`data/strands/face_whiskers.json`); render them at
   that strength, never boosted, and never drop one.: things that must not be forgotten when he's built

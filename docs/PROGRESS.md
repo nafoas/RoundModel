@@ -654,3 +654,14 @@ check.py output (if applicable), and the next step.
 - Tests: 34 passed. `check.py` does not exist yet (PLAN.md: not built); no match claimed.
 - **Next:** owner on Q40 follow-up (FW-19) and Q41; then move on.
 
+## 2026-11-14 — Session 6 (cont.): whiskers closed
+- Owner: a whisker reaching the edge of his face goes past it, then "either goes backwards or stays with
+  the fluff"; FW-19's curve is fine (a consistent curve a whisker could make).
+- Checked the eight such whiskers: none carries on straight into the fringe (straight line no darker than
+  the fringe beside it), which fits. Outer ends relabelled; build checklist (PLAN.md) updated, including
+  the Bnuy Perturbances.
+- **Whisker step done:** 30 pad whiskers + 8 eyebrow whiskers, continuous root to tip; BP-01..03 kept.
+  Left to later steps: pad roots move with the pad step; eyebrow roots (B1-S07, B5-S06) with the eye step.
+- **Next:** the owner picks the next part (open per plan: ears' pixel tweaks, lashes/eyes, whisker pads,
+  mouth and nose, head/undercarriage split, then the 3D build).
+

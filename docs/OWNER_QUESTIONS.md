@@ -166,17 +166,13 @@ the owner's official opinion later. Each says what I did in the meantime.
 37. **[ANSWERED 2026-11-14: fine.]** FW-02 and FW-13 end at his outline.
 38. **[ANSWERED by measurement 2026-11-14.]** Joins in `docs/WHISKER_MAP.md`.
 39. **[ANSWERED 2026-11-14: "a pretty good pad outline".]**
-40. **[ANSWERED 2026-11-14: bends are fine; FW-14 may be two whiskers -> split into FW-14 and FW-19.]**
-   Follow-up: FW-19 (the steeper half) points just above his nostril, so to reach his pad its
-   inferred root has to curl round the nostril (picture `docs/images/whiskers_full/unsure.png`).
-   Is that right, or does it root at the top corner of the pad by the nostril?
-41. **Where do the outer ends go? (asked again more plainly 2026-11-14)** Some whiskers lie on his
-   face but nothing of them shows outside his outline. For those I had to guess where their outer
-   parts are: (a) the line reaches the edge of his face: it carries on round the side of his round
-   head, out of view (FW-01, FW-02, FW-06, FW-13, FW-14, FW-17, FW-18, FW-19); (b) the line stops in the
-   middle of his cheek while still dark: it dips under his fur (FW-08, FW-09, FW-10, FW-12, FW-15);
-   (c) the line fades out thinly: that's its tip (FW-11). It matters for the 3D model: for (a) and
-   (b) there's more whisker than the photo shows. OK to build them that way?
+40. **[ANSWERED 2026-11-14: bends are fine; FW-14 was two whiskers -> FW-14 and FW-19; FW-19's curve
+   is fine: "a consistent curve, that I could imagine a whisker actually making".]**
+41. **[ANSWERED 2026-11-14: a whisker reaching the edge of his face goes past it, then "either goes
+   backwards or stays with the fluff".]** Checked: none of the eight carries on straight into the fringe
+   (its straight line there is no darker than the fringe beside it), which fits. Recorded as their outer
+   ends; build checklist updated. Whiskers that stop mid-cheek while dark (FW-08, FW-09, FW-10, FW-12,
+   FW-15) stay "dips under the fur".
 42. **[ANSWERED 2026-11-14: C06, C08 not whiskers -> Bnuy Perturbances BP-02, BP-03 (with C03 -> BP-01);
    C12 is a whisker -> FW-18.]**
 
