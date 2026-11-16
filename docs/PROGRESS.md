@@ -966,3 +966,17 @@ check.py output (if applicable), and the next step.
   shading fits were missing part of his lit side; limit it to around his nose (not yet changed in
   tools/depth_lines.py: the shell refits are stopped).
 - **Next:** owner's call: read his face's depth from his fur's brightness under this one light.
+
+## 2026-11-16 — Session 6 (cont.): depth read from the light on his fur (NOT settled)
+- `tools/depth_from_light.py`: light calibrated on his outline (one soft light, ~34 deg from straight up toward
+  his right, explains 95% of his edge's brightness); depth read over his visible fur so each spot faces the way
+  its brightness says; held by his nose at six inches, edge-on outline, smoothness on facing, a loose pull to
+  the shell. A measurement, not the model.
+- Run 1 overfit (smoothness effectively off; top of head 24 cm back; light solved as from behind): discarded.
+- Runs 2-3: real depth in the middle at last (cm behind his nose: chin 1.7, chest 4.0, top of head 7.0; the
+  flat shell had ~0, 0.2, 4.5). But lopsided: his right side reads nearer than his nose (right eye 0.75, left
+  2.96), i.e. the light from his right is read as his face turning ~25 deg (pairs measured ~8). Holding his
+  mirror pairs to the measured turn (run 3) did not fix it. Held-out eye check: fur around his eyes faces 76 /
+  69 deg vs 56 / 65 from the ovals. **Not settled**; outputs `data/scene/depth_from_light.json`,
+  `docs/images/space/light_depth*.png` are this run, kept for the record.
+- Paused here: the owner is explaining why no extra angles of him are offered (the previous attempt).
