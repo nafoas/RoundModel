@@ -8983,12 +8983,12 @@
  "pixels": {
   "head": 338817,
   "intermediate bnuy": 141888,
-  "undercarriage": 100172,
-  "peets & underfluff fringe (beyond the parts)": 318,
+  "undercarriage": 100467,
+  "unassigned below the peet line (must be 0)": 0,
   "ears": 15556,
-  "cream peet (image left)": 18825,
-  "underfluff tuft": 5189,
-  "gray peet (image right)": 16916
+  "cream peet (image left)": 18846,
+  "underfluff tuft": 5190,
+  "gray peet (image right)": 16917
  },
  "checks": {
   "approved_parts_wrongly_labelled_px": {
@@ -8997,6 +8997,10 @@
    "gray_peet_image_right": 0,
    "ear_image_left": 0,
    "ear_image_right": 0
+  },
+  "unassigned_px": {
+   "inside_his_outline": 0,
+   "grey_left": 0
   },
   "recomputed_lines_drift_from_approved_px": {
    "head_line": 0.01,

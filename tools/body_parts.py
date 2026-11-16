@@ -53,7 +53,7 @@ HEAD_RMS, FOLD_RMS = 1.0, 2.0
 EAR_STRIP_PX = 4.0          # owner, 2026-11-15: "a tiny, thin strip" joining his ears, like his peets
 COLOURS = {1: (255, 170, 60), 2: (90, 200, 255), 3: (170, 110, 255), 4: (120, 120, 120), 5: (120, 220, 120),
            6: (230, 50, 50), 7: (0, 165, 165), 8: (245, 225, 0)}
-NAMES = {1: "head", 2: "intermediate bnuy", 3: "undercarriage", 4: "peets & underfluff fringe (beyond the parts)",
+NAMES = {1: "head", 2: "intermediate bnuy", 3: "undercarriage", 4: "unassigned below the peet line (must be 0)",
          5: "ears", 6: "cream peet (image left)", 7: "underfluff tuft", 8: "gray peet (image right)"}
 # the peets step's approved parts each keep their own region (owner, 2026-11-15: add the peets to the map)
 PART_CODE = {"cream_peet_image_left": 6, "underfluff_tuft": 7, "gray_peet_image_right": 8}
@@ -223,6 +223,23 @@ def regions(F, head, fold, details=False):
     # the approved parts last, so nothing new overrules them (the ears had been coloured head, 2026-11-15)
     for (f, k), m in masks.items():
         reg[m] = part_code(f, k)
+    # owner, 2026-11-16: no grey left. What is still left below the peet line outside the approved parts: a
+    # patch touching the undercarriage is his side fur hanging down beside a peet -> undercarriage; a sliver
+    # touching only peets-step parts (his outline running a pixel past a part's edge) -> the part it touches most
+    lab, n = ndi.label(reg == 4)
+    for i in range(1, n + 1):
+        m = lab == i; nb = reg[ndi.binary_dilation(m) & ~m]
+        counts = {int(c): int((nb == c).sum()) for c in np.unique(nb) if c in PART_CODE.values()}
+        reg[m] = 3 if (nb == 3).any() or not counts else max(sorted(counts), key=counts.get)
+    # likewise undercarriage pixels caught in a 1-2 px sliver between a peets-step part and his outline (beside
+    # the cream peet, below the notch the peet line starts at): they go to the part they touch
+    u = reg == 3
+    thin = u & ~ndi.binary_opening(u, structure=np.ones((3, 3), bool))
+    peet_parts = np.isin(reg, list(PART_CODE.values()))
+    near = thin & ndi.binary_dilation(peet_parts, structure=np.ones((3, 3), bool))
+    if near.any():
+        idx = ndi.distance_transform_edt(~peet_parts, return_distances=False, return_indices=True)
+        reg[near] = reg[idx[0][near], idx[1][near]]
     # his body outline runs up to ~1 px beyond the approved ear polygons along the ears' sides (two approved
     # outlines differing by a pixel): head pixels touching an ear and above that ear's base are ear edge
     for (f, k), m in masks.items():
@@ -278,8 +295,8 @@ def sheets(F, head, hl, fold, fl, reg):
         o = Image.new("RGB", (im.width * 2 + 6, im.height + 40), (255, 255, 255))
         o.paste(plain, (0, 40)); o.paste(im, (im.width + 6, 40)); d = ImageDraw.Draw(o)
         d.text((6, 4), "HEAD (orange) / INTERMEDIATE BNUY (blue) / UNDERCARRIAGE (purple) / EARS (green, + thin strip joining "
-                       "them) / CREAM PEET (red) / UNDERFLUFF TUFT (teal) / GRAY PEET (yellow); grey = fringe below "
-                       "the peet line, beyond the parts. Left: the photo, unmarked.", fill=(0, 0, 0))
+                       "them) / CREAM PEET (red) / UNDERFLUFF TUFT (teal) / GRAY PEET (yellow). Every pixel of him is "
+                       "assigned. Left: the photo, unmarked.", fill=(0, 0, 0))
         d.text((6, 20), "magenta = where his head ends; dark blue = the lower fold. Solid = seen in the photo, or placed "
                         "by the owner's guidance (under his mouth; image-right cheek = mirror of image-left); "
                         "dashed = carried on to his edge.", fill=(0, 0, 0))
@@ -309,6 +326,11 @@ def main() -> int:
         status = f"{a['status']}: lines from {APPROVED_LINES.relative_to(ROOT)}"
     reg, det = regions(F, head, fold, details=True)
     leak = leaks(reg)
+    yy, xx = np.mgrid[0:reg.shape[0], 0:reg.shape[1]] + 0.5
+    unassigned = dict(inside_his_outline=int(((F.sdist(np.stack([xx, yy], -1)) > 0) & (reg == 0)).sum()),
+                      grey_left=int((reg == 4).sum()))
+    if any(unassigned.values()):
+        raise SystemExit(f"part of him is unassigned: {unassigned}")
     if any(leak.values()):
         raise SystemExit(f"a new region overrules an approved part: {leak}")
     sheets(F, head, hl, fold, fl, reg)
@@ -330,6 +352,7 @@ def main() -> int:
         fold_line=dict(points=np.round(fold, 2).tolist(), labels=fl.tolist()),
         pixels={NAMES[k]: int((reg == k).sum()) for k in NAMES},
         checks=dict(approved_parts_wrongly_labelled_px=leak,
+                    unassigned_px=unassigned,
                     recomputed_lines_drift_from_approved_px=drift,
                     ear_edge_px_beyond_ear_parts=det["ear_edge_px"],
                     ear_strip=dict(px=det["ear_strip_px"], thickness_px=det["ear_strip_thickness_px"],

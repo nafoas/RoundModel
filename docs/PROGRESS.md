@@ -734,5 +734,25 @@ check.py output (if applicable), and the next step.
   18825, underfluff tuft 5189, gray peet 16916, fringe 318 (1 px moved head/undercarriage: the saved
   points are rounded to 0.01 px). Approved parts: 0 px leaked. Tests: 37 passed. Checked at full size:
   whole map; peets at 2x with the photo above. Photo used: `data/photos/anchor_front.webp`.
-- **Next:** the owner has ideas to share; then the next part per the plan.
+
+## 2026-11-16 — Session 6 (cont.): every bit of him assigned
+- Owner: "fix the remaining little grey areas, then once every little bit of him is assigned I can give
+  proper advice". The grey (318 px below the peet line, outside the approved parts) was 10 pieces: one
+  307 px wedge of dark side fur hanging down beside the gray peet's top-right corner, outside its approved
+  edge -> undercarriage (it touches it); 9 single pixels between a peet part's edge and his outline (the
+  same 1 px mismatch as at the ears) -> the part they touch (cream peet 7, underfluff tuft 1; one at the
+  undercarriage junction -> undercarriage).
+- Looking at full size found more of the same cause in another colour: 13 undercarriage pixels in a 1 px
+  sliver between the peets and his outline (beside the cream peet, below the notch the peet line starts
+  at) -> the peet part they touch (cream 12, gray 1).
+- Whole-map check: inside his outline 0 px unassigned, 0 grey (the tool now stops if either is not 0);
+  every colour is one piece, except 2 single pixels of underfluff tuft that are inside the approved tuft
+  outline, at tips of its spiky lower edge thinner than a pixel. Approved parts: 0 px leaked.
+- Pixels: head 338817, intermediate bnuy 141888, undercarriage 100467, ears + strip 15556, cream peet
+  18846, underfluff tuft 5190, gray peet 16917. Tests: 37 passed. Checked at full size: the wedge and
+  peet edges at 4x and the whole peet area at 2x (hard pixel edges, photo above).
+  Photo used: `data/photos/anchor_front.webp`.
+- One edit of mine reported success but never reached the file; caught because the result didn't change.
+  Since then every edit is confirmed in the file and by its result.
+- **Next:** the owner's advice, now that every bit of him is assigned.
 
