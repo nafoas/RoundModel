@@ -168,66 +168,102 @@ def normals(sh, Q, e=0.02):
     return n / np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
 
 
-def light_from_eyes(cam, lm, sh):
-    """The room's main light, from the catchlights in his eyes (owner, 2026-11-16: "the lights in his eyes"). Each
-    eye's visible surface is a small curved mirror (a spherical cap through the eye's oval, facing the way the oval
-    says); a catchlight is where that mirror reflects the light into the camera, so the light's direction is the
-    camera's line of sight reflected there. How much the eye bulges is not known: the bulge at which the two eyes
-    agree best is used, and the two directions are averaged."""
-    out = {}
+def eye_geometry(cam, lm, sh, k, ratios=np.arange(1.2, 2.01, 0.05)):
+    """One eye, MEASURED from its own outline (owner: "find the actual angle of his eyes rather than guess"): the
+    eye's visible surface is a rounded cap (part of a ball) through a round opening; projected through the camera,
+    its outline must match the eye's measured edge (tools/landmarks.py, lashes and fur already dropped). Fitted:
+    where the opening is, which way it faces, its size, and how much the cap bulges (ball radius / opening radius;
+    1 = half a ball, large = flat). The eye's distance comes from the shell."""
+    import landmarks as lmt
+    from scipy.optimize import least_squares
+    from scipy.spatial import ConvexHull
+    from matplotlib.path import Path as MP
+    lum = np.array(Image.open(ROOT / "data/photos/anchor_front.webp").convert("RGB")).astype(float).mean(2)
+    E = lmt.measure_eye(lum, lmt.EYE_BOXES[k]); pts = E["edge_points"][E["kept"]]
+    c0 = np.array(lm[k]["at_px"]); r = cam.ray([c0])[0]
+    hit, _ = trace(sh, cam.C, r[None], steps=200, t0=5.0, t1=45.0); depth = float(hit[0])
+    a, b = E["semi_axes"]; ang = np.radians(E["angle_deg"]); mn = np.array([-np.sin(ang), np.cos(ang)])
+    if (c0[0] - cam.cx) * mn[0] < 0:
+        mn = -mn
 
-    def one(k, bulge):
-        e_px = np.array(lm[k]["at_px"]); a, b = lm[k]["oval"]["semi_axes_px"]
-        ang = np.radians(lm[k]["oval"]["long_axis_angle_deg"])
-        r = cam.ray([e_px])[0]; hit, _ = trace(sh, cam.C, r[None], steps=200, t0=5.0, t1=45.0)
-        if not np.isfinite(hit[0]):
-            return None
-        D = cam.C + r * hit[0]; theta = np.arccos(b / a)
-        mn = np.array([-np.sin(ang), np.cos(ang)])
-        if (e_px[0] - cam.cx) * mn[0] < 0:
-            mn = -mn
-        side = cam.ray([e_px + mn * 5])[0] - r; side -= (side @ r) * r; side /= np.linalg.norm(side)
-        e = np.cos(theta) * (-r) + np.sin(theta) * side
-        rd = a * float((D - cam.C) @ cam.forward) / cam.f; R = bulge * rd
-        c = D - e * np.sqrt(max(R * R - rd * rd, 0.0))
-        h = cam.ray([lm[k + "_catchlight"]["at_px"]])[0]; oc = cam.C - c; bq = oc @ h; disc = bq * bq - (oc @ oc - R * R)
-        if disc < 0:
-            return None
-        P = cam.C + (-bq - np.sqrt(disc)) * h; n = (P - c) / R; v = (cam.C - P) / np.linalg.norm(cam.C - P)
-        return 2 * (n @ v) * n - v
-    best = None
-    for bulge in np.arange(1.0, 1.3, 0.01):
-        a, b = one("eye_his_right", bulge), one("eye_his_left", bulge)
-        if a is None or b is None:
-            continue
-        apart = float(np.degrees(np.arccos(np.clip(a @ b, -1, 1))))
-        if best is None or apart < best[0]:
-            best = (apart, float(bulge), a, b)
-    apart, bulge, a, b = best
-    l = (a + b) / np.linalg.norm(a + b)
-    for nm, v in (("his_right_eye", a), ("his_left_eye", b), ("together", l)):
-        out[nm] = dict(up_deg=round(float(np.degrees(np.arcsin(v[1]))), 1),
-                       toward_his_left_deg=round(float(np.degrees(np.arctan2(v[0], v[2]))), 1))
-    return l, dict(directions=out, eyes_apart_deg=round(apart, 1), eye_bulge=round(bulge, 2), room_vector=np.round(l, 4).tolist())
+    def geom(v):
+        cx, cy, th, phi, rd = v; rr = cam.ray([[cx, cy]])[0]; D = cam.C + rr * depth
+        dp = np.array([np.cos(phi), np.sin(phi)])
+        side = cam.ray([[cx + dp[0] * 5, cy + dp[1] * 5]])[0] - rr; side -= (side @ rr) * rr; side /= np.linalg.norm(side)
+        return D, np.cos(th) * (-rr) + np.sin(th) * side
+
+    def cap(D, e, rd, ratio):
+        R = ratio * rd; back = np.sqrt(max(R * R - rd * rd, 0.0)); c = D - e * back
+        u = np.cross(e, [0, 1, 0]); u /= np.linalg.norm(u); w = np.cross(e, u)
+        B, Ps = np.meshgrid(np.linspace(0, np.arccos(np.clip(back / R, -1, 1)), 14), np.linspace(0, 2 * np.pi, 48, endpoint=False))
+        d = np.cos(B)[..., None] * e + np.sin(B)[..., None] * (np.cos(Ps)[..., None] * u + np.sin(Ps)[..., None] * w)
+        return (c + R * d).reshape(-1, 3), c, R
+
+    def outline_dist(q2, q):
+        h = ConvexHull(q2); poly = q2[h.vertices]; poly = np.vstack([poly, poly[:1]]); s0 = poly[:-1]; ab = poly[1:] - s0
+        t = np.clip(((q[:, None, :] - s0) * ab).sum(2) / (ab * ab).sum(1), 0, 1)
+        dd = np.linalg.norm(q[:, None, :] - (s0 + t[..., None] * ab), axis=2).min(1)
+        return np.where(MP(poly).contains_points(q), -dd, dd)
+    best, curve = None, []
+    for ratio in ratios:
+        f = lambda v: outline_dist(cam.project(cap(*geom(v), v[4], ratio)[0]), pts)
+        res = least_squares(f, [c0[0], c0[1], np.arccos(b / a), np.arctan2(mn[1], mn[0]), a * depth / cam.f],
+                            diff_step=1e-3, max_nfev=300)
+        rms = float(np.sqrt(np.mean(res.fun ** 2))); curve.append((round(float(ratio), 2), round(rms, 3)))
+        if best is None or rms < best[0]:
+            best = (rms, float(ratio), res.x)
+    rms, ratio, v = best; D, e = geom(v); _, c, R = cap(D, e, v[4], ratio)
+    return dict(centre=c, radius=R, faces=e, bulge=ratio, fit_rms_px=rms, faces_deg=float(np.degrees(v[2])),
+                opening_cm=float(v[4]), fit_by_bulge=curve)
+
+
+def light_from_eyes(cam, lm, sh):
+    """The room's lights, from the catchlights in his eyes (owner: "the lights in his eyes"; "there might be multiple
+    light sources"). Each eye is MEASURED (eye_geometry); its catchlight is where that small curved mirror reflects
+    a light into the camera, so the light's direction is the camera's line of sight reflected there. His eyes face
+    sideways, so each eye catches the light on its own side: one light per eye (if the two agree within 30 deg,
+    they are one light)."""
+    lights, info = [], {}
+    for k in ("eye_his_right", "eye_his_left"):
+        g = eye_geometry(cam, lm, sh, k)
+        h = cam.ray([lm[k + "_catchlight"]["at_px"]])[0]; oc = cam.C - g["centre"]; bq = oc @ h
+        disc = bq * bq - (oc @ oc - g["radius"] ** 2)
+        P = cam.C + (-bq - np.sqrt(max(disc, 0.0))) * h; n = (P - g["centre"]) / g["radius"]
+        v = (cam.C - P) / np.linalg.norm(cam.C - P); l = 2 * (n @ v) * n - v
+        lights.append(l)
+        info[k] = dict(eye_bulge=round(g["bulge"], 2), eye_fit_rms_px=round(g["fit_rms_px"], 3),
+                       eye_faces_deg=round(g["faces_deg"], 1), fit_by_bulge=g["fit_by_bulge"],
+                       light_up_deg=round(float(np.degrees(np.arcsin(l[1]))), 1),
+                       light_toward_his_left_deg=round(float(np.degrees(np.arctan2(l[0], l[2]))), 1),
+                       light_room_vector=np.round(l, 4).tolist())
+    apart = float(np.degrees(np.arccos(np.clip(lights[0] @ lights[1], -1, 1))))
+    if apart < 30:
+        lights = [(lights[0] + lights[1]) / np.linalg.norm(lights[0] + lights[1])]
+    info["apart_deg"] = round(apart, 1); info["lights"] = len(lights)
+    return lights, info
 
 
 def shading_fit(sh, cam_small, obs, use, steps=72, light=None):
     """Light the shell and compare with his fur: residual per used pixel (0 where the shell misses), R2, light.
     light None: the soft light that best explains his fur (ambient + one direction, solved exactly for each shape).
-    light given (a direction): only its strength and the ambient are solved: his shape must explain the rest."""
+    light given (one direction, or a list of them): only their strengths and the ambient are solved: his shape
+    must explain the rest."""
     ys, xs = np.mgrid[0:cam_small.height, 0:cam_small.width] + 0.5
     d = cam_small.ray(np.c_[xs.ravel(), ys.ravel()])[use]
     hit, _ = trace(sh, cam_small.C, d, steps=steps, t0=5.0, t1=45.0)
     h = np.isfinite(hit)
-    res = np.zeros(len(d)); r2, light = 0.0, np.zeros(4)
+    res = np.zeros(len(d)); r2, coef = 0.0, np.zeros(4 if light is None else 1 + len(np.atleast_2d(light)))
     if h.sum() > 50:
         n = normals(sh, cam_small.C + d[h] * hit[h][:, None])
-        A = np.c_[np.ones(h.sum()), n] if light is None else np.c_[np.ones(h.sum()), np.clip(n @ light, 0, None)]
+        if light is None:
+            A = np.c_[np.ones(h.sum()), n]
+        else:
+            Ls = np.atleast_2d(np.asarray(light, float))
+            A = np.c_[np.ones(h.sum()), np.clip(n @ Ls.T, 0, None)]
         coef, *_ = np.linalg.lstsq(A, obs[h], rcond=None)
         pred = A @ coef; res[h] = obs[h] - pred
         r2 = 1 - ((obs[h] - pred) ** 2).sum() / max(((obs[h] - obs[h].mean()) ** 2).sum(), 1e-9)
-        light = coef
-    return res, float(r2), light, h
+    return res, float(r2), coef, h
 
 
 def eye_check(sh, cam, lm):
@@ -248,12 +284,15 @@ def eye_check(sh, cam, lm):
 EYE_SD_DEG = 3.0          # how closely the shell must turn his eyes the way their ovals say
 
 
-def eye_rays(cam, lm):
-    return {k: (cam.ray([lm[k]["at_px"]])[0], float(np.degrees(np.arccos(lm[k]["oval"]["short_over_long"]))))
+def eye_rays(cam, lm, measured=None):
+    """Each eye's ray, and how far it faces away from the camera: measured from its outline as a bulging cap
+    (eye_geometry) when given, else from its flat oval (short/long = cos)."""
+    return {k: (cam.ray([lm[k]["at_px"]])[0],
+                measured[k] if measured else float(np.degrees(np.arccos(lm[k]["oval"]["short_over_long"]))))
             for k in ("eye_his_right", "eye_his_left")}
 
 
-def fit_face(cam, lm, start, use_eyes=True, start_outline_only=None, light=None):
+def fit_face(cam, lm, start, use_eyes=True, start_outline_only=None, light=None, eye_deg=None):
     """Fit the shell's face and body depth to his outline, his eye directions (each eye is round: its oval says how
     far it faces away from the camera), the light on his fur, and his nose. No part thinner than 0.9 of its
     width (he is round, owner). use_eyes=False: eyes held out (that first try flattened his body into a slab)."""
@@ -269,7 +308,7 @@ def fit_face(cam, lm, start, use_eyes=True, start_outline_only=None, light=None)
     nose = cam.C + 15.24 * cam.ray([lm["nose_y_centre"]["at_px"]])[0]
     chin = cam.C + cam.ray([lm["chin_midline"]["at_px"]])[0] * 16.24
     names = Shell.FREE_FACE
-    eyes = eye_rays(cam, lm)
+    eyes = eye_rays(cam, lm, eye_deg)
     lo_b = dict(body_w=2, body_h=2, head_w=1.5, head_h=1.5, blend=0.3, body_c=2, head_c=1.5, muzzle_w=0.5, muzzle_h=0.5,
                 muzzle_c=0.3, muzzle_blend=0.2, body_y=0.5, muzzle_z=-2.0, muzzle_y=-6.0)
     hi_b = dict(body_w=12, body_h=12, head_w=9, head_h=9, blend=3.0, body_c=14, head_c=10, muzzle_w=4, muzzle_h=4,
@@ -541,16 +580,17 @@ def main() -> int:
         lm = load("data/strands/landmarks.json")["landmarks"]
         cur = load("data/scene/shell.json"); start = Shell(**cur["shell"])
         light, info = light_from_eyes(cam, lm, start)
-        print("light from his eyes:", json.dumps(info))
-        sh, q, _ = fit_face(cam, lm, start, start_outline_only=start, light=light)
+        print("lights from his eyes:", json.dumps({k: v for k, v in info.items()}))
+        eye_deg = {k: info[k]["eye_faces_deg"] for k in ("eye_his_right", "eye_his_left")}
+        sh, q, _ = fit_face(cam, lm, start, start_outline_only=start, light=light, eye_deg=eye_deg)
         q["shading_r2_before_this_fit"] = q.pop("shading_r2_outline_only_shell")
         q["light_from_eyes"] = info
         q["light_from_eyes_with_this_shell"] = light_from_eyes(cam, lm, sh)[1]
         print(json.dumps(asdict(sh), indent=1)); print(json.dumps(q, indent=1))
         (ROOT / "data/scene/shell.json").write_text(json.dumps(dict(
             about="Rough parametric shell for the depth lines (prince/shell.py). NOT the model. Its face and body depth "
-                  "fitted to his outline, his eye directions and his nose, and to the light on his fur with the light's "
-                  "direction fixed from the catchlights in his eyes.",
+                  "fitted to his outline, his eye directions (each eye measured from its outline as a bulging cap) and "
+                  "his nose, and to the light on his fur, lit by the two lights his eyes' catchlights show.",
             shell=asdict(sh), fit=q, fit_before=cur["fit"], assumed="his back (not seen by the camera)"), indent=1))
         if "--nodraw" not in sys.argv:
             draw(sh)
