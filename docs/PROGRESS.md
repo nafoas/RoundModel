@@ -937,3 +937,19 @@ check.py output (if applicable), and the next step.
   so; owner: "stop, this is quite silly". `data/scene/shell.json` holds the last (two-light) refit; the
   pictures and 3D page are still from the previous (eye-direction) shell.
 - **Next:** the owner's direction.
+
+## 2026-11-16 — Session 6 (cont.): reading the light straight from his fur (owner: keep it simple)
+- Owner: "You're making this too hard ... Look at the shading. Look at the albedo. Look at his little eyes.
+  Then just narrow down where the light must be coming from." He is white all over, so his fur's brightness
+  and colour are the light. Read directly (`docs/images/space/light_reading.png`; 4 x 4 grid over his fur):
+  brightest and warmest at the top of his head and down his right side (197-198, red-blue +11); his left
+  side's edge mildly warm; the middle of his face, his chest and belly darkest and bluest (109-124, -21 to
+  -26).
+- Lights: a warm main light above him on his right side (from the side: his face's middle, facing the camera,
+  is not in it); a weaker warm light from his left; a dim cool fill lighting what faces the camera or faces
+  down. His eyes agree: catchlights high in both eyes (lights above, ~35 deg up), each eye catching the light
+  on its own side.
+- For his shape: warm = his surface faces up or to a side; cool = faces the camera or down. The cool middle is
+  narrow at his forehead and widens into his chest and belly: his front is round and curves under.
+- **Next:** owner's call: read his face's depth directly from this (each spot's warm/cool and bright/dark
+  says which way it faces; those directions add up into his shape).
