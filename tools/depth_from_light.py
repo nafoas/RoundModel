@@ -34,9 +34,12 @@ from prince.shell import Shell, trace  # noqa: E402
 OUT_IMG = ROOT / "docs/images/space"
 SCALE = 1 / 8             # solve on a 1/8-size grid (each cell 8 x 8 photo pixels, ~1 mm on him)
 SHADE_SD = 8.0            # grey levels
-SMOOTH_W = 3.0
+NORMAL_W = 8.0            # how strongly neighbouring spots must face alike (scale-free smoothness)
 EDGE_W = 4.0
+PRIOR_SD_CM = 5.0         # a very loose pull toward the earlier shell, only to stop run-aways
 NOSE_CM = 15.24
+TOWARD_CAMERA = 0.0       # the light's front/back part: owner: "a very shallow angle" (overhead / to his right),
+                          # and his face's middle is about as bright as his edges' average -> ~0 (tried +-10)
 
 
 def load(p):
@@ -89,7 +92,7 @@ def calibrate(rgb, outline, ins, skip, feature):
                 strength=float(np.hypot(c[1], c[2])), edge_points=int(len(a)))
 
 
-def solve(cam, rgb, lm, sh, cal, ins, skip, feature):
+def solve(cam, rgb, lm, sh, cal, ins, skip, feature, toward_camera=TOWARD_CAMERA):
     H, W = ins.shape
     cs = Camera(R=cam.R, C=cam.C, f=cam.f * SCALE, cx=cam.cx * SCALE, cy=cam.cy * SCALE,
                 width=int(W * SCALE), height=int(H * SCALE))
@@ -135,41 +138,39 @@ def solve(cam, rgb, lm, sh, cal, ins, skip, feature):
         n *= np.where((n * rc).sum(1) > 0, -1.0, 1.0)[:, None]   # facing the camera
         return n
 
-    def residuals(v):
-        d, hz = v[:N], v[N]
+    pairs = np.r_[np.c_[np.arange(N), R_][R_ >= 0], np.c_[np.arange(N), D_][D_ >= 0]]
+
+    def residuals(d):
         n = normals(d)
-        pred = a0 + gx * n[:, 0] + gy * (-n[:, 1]) + hz * (-n[:, 2])
+        pred = a0 + gx * n[:, 0] + gy * (-n[:, 1]) + toward_camera * (-n[:, 2])
         r_sh = (I[cells[shade_i, 0], cells[shade_i, 1]] - pred[shade_i]) / SHADE_SD
-        lap = d[full] * 4 - d[R_[full]] - d[L_[full]] - d[D_[full]] - d[U_[full]]
-        r_sm = SMOOTH_W * lap
+        r_sm = NORMAL_W * (n[pairs[:, 0]] - n[pairs[:, 1]]).ravel()
         r_ed = EDGE_W * (n[edge] * rc[edge]).sum(1)              # edge-on: facing at right angles to the ray
-        return np.r_[r_sh, r_sm, r_ed, (d[nose_i] - NOSE_CM) / 0.05]
-    # which unknowns each residual depends on
-    rows = len(shade_i) + full.sum() + edge.sum() + 1
-    S = lil_matrix((rows, N + 1), dtype=int); r = 0
+        return np.r_[r_sh, r_sm, r_ed, (d - d0) / PRIOR_SD_CM, (d[nose_i] - NOSE_CM) / 0.05]
+    # which unknowns each residual depends on (a spot's facing uses its four neighbours)
     neigh = np.c_[np.arange(N), R_, L_, D_, U_]
+    rows = len(shade_i) + 3 * len(pairs) + edge.sum() + N + 1
+    S = lil_matrix((rows, N), dtype=int); r = 0
     for i in shade_i:
-        for j in neigh[i]:
-            if j >= 0: S[r, j] = 1
-        S[r, N] = 1; r += 1
-    for i in np.flatnonzero(full):
-        for j in neigh[i]: S[r, j] = 1
-        r += 1
+        S[r, neigh[i][neigh[i] >= 0]] = 1; r += 1
+    for a, b in pairs:
+        cols = np.unique(np.r_[neigh[a], neigh[b]]); cols = cols[cols >= 0]
+        for _ in range(3):
+            S[r, cols] = 1; r += 1
     for i in np.flatnonzero(edge):
-        for j in neigh[i]:
-            if j >= 0: S[r, j] = 1
-        r += 1
+        S[r, neigh[i][neigh[i] >= 0]] = 1; r += 1
+    for i in range(N):
+        S[r, i] = 1; r += 1
     S[r, nose_i] = 1
     t0 = time.time()
-    x0 = np.r_[d0, 0.0]
-    res = least_squares(residuals, x0, jac_sparsity=S, method="trf", x_scale="jac", max_nfev=80, verbose=0)
-    d = res.x[:N]; n = normals(d)
-    pred = a0 + gx * n[:, 0] + gy * (-n[:, 1]) + res.x[N] * (-n[:, 2])
+    res = least_squares(residuals, d0.copy(), jac_sparsity=S, method="trf", x_scale="jac", max_nfev=60, verbose=0)
+    d = res.x; n = normals(d)
+    pred = a0 + gx * n[:, 0] + gy * (-n[:, 1]) + toward_camera * (-n[:, 2])
     obs = I[cells[shade_i, 0], cells[shade_i, 1]]
     r2 = 1 - ((obs - pred[shade_i]) ** 2).sum() / ((obs - obs.mean()) ** 2).sum()
     depth = np.full((h, w), np.nan); depth[cells[:, 0], cells[:, 1]] = d
     P = np.full((h, w, 3), np.nan); P[cells[:, 0], cells[:, 1]] = cam.C + rays[inside] * d[:, None]
-    return dict(depth=depth, points=P, cam_small=cs, toward_camera=float(res.x[N]), shading_r2=float(r2),
+    return dict(depth=depth, points=P, cam_small=cs, toward_camera=float(toward_camera), shading_r2=float(r2),
                 seconds=round(time.time() - t0, 1), evaluations=int(res.nfev), cells=N)
 
 
@@ -261,14 +262,19 @@ def main() -> int:
     cal = calibrate(rgb, outline, ins, skip, feature)
     print("light from his outline:", {k: round(v, 3) if isinstance(v, float) else v for k, v in cal.items()})
     sh = Shell(**load("data/scene/shell.json")["shell"])
+    sens = {}
+    for tc in (-10.0, 10.0):                                     # how much the answer depends on the light's front/back part
+        o2 = solve(cam, rgb, lm, sh, cal, ins, skip, feature, toward_camera=tc)
+        sens[f"light front/back part {tc:+g}"] = features(o2, lm)
     out = solve(cam, rgb, lm, sh, cal, ins, skip, feature)
     feats = features(out, lm); eyes = eye_check(out, lm, cam)
+    print("sensitivity:", json.dumps(sens))
     print("depth solved:", {k: v for k, v in out.items() if k in ("toward_camera", "shading_r2", "seconds", "evaluations", "cells")})
     print("cm behind the front of his nose:", json.dumps(feats, indent=1)); print("eyes (held out):", eyes)
     pictures(rgb, out, lm, cam)
     (ROOT / "data/scene/depth_from_light.json").write_text(json.dumps(dict(
         about=__doc__.split("\n\n")[0], light=cal, light_toward_camera=out["toward_camera"],
-        shading_explained=round(out["shading_r2"], 3), cm_behind_nose=feats, eyes_held_out=eyes,
+        shading_explained=round(out["shading_r2"], 3), cm_behind_nose=feats, eyes_held_out=eyes, sensitivity=sens,
         grid_scale=SCALE, depth_cm_along_rays=np.round(np.nan_to_num(out["depth"], nan=-1), 3).tolist()), indent=0))
     return 0
 
