@@ -47,16 +47,26 @@ camera data. Placed like that (`tools/scene.py`, `data/cameras.json`):
 | Input | Value | From |
 |---|---|---|
 | Distance, camera to his nose | 15.24 cm, six inches (range 12-15.24) | owner |
-| Height | his eyes 0.5 cm above the camera (range 0-1) | owner ("a tiny bit lower") |
+| Height | his eyes 2.4 cm above the camera: as little below eye level as lets him be at least an adult Netherland Dwarf (top of his head >= 12.7 cm) | owner ("a tiny bit lower") + owner's size floor |
 | Tilt | level, tilted up 1 deg (range 0-2); not turned, not rolled | owner ("straight on", "ever so slightly up") |
-| Aim point in the picture | x 548 (his nose), y 476 (puts his eyes a touch above the camera); NOT the picture's centre (lesson 26) | owner's memory + the photo |
-| Lens | 1437 px: the SHORTEST lens that fits (a 26 mm-equivalent phone main camera, the picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it). Any longer lens makes him 5-9 cm across, hamster-sized, so it fails the owner's check "is this the size of a little fluffy rabbit?" | the photo + owner's size check |
+| Aim point in the picture | x 548 (his nose), y 610 (the camera's height on him: between his eyes and his nose); NOT the picture's centre (lesson 26) | owner's memory + the photo |
+| Lens | 1237 px: the SHORTEST lens that fits (a 26 mm-equivalent phone main camera, the picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it); any longer lens makes him smaller | the photo + owner's size floor |
 | His peets' front | right under the front of his face | assumed |
 
-Result: camera 7.7 cm above the surface, 15.0 cm in front of the origin, level (tilted up 1 deg).
-**His size (rough, `his_size_estimate_cm` in `data/cameras.json`): about 12.3 cm wide, 10.5 cm to the top
-of his head, ear tips 11.3 cm, eyes 8.2 cm up, nose 5.1 cm up**: a little fluffy rabbit. A measurement of
-him (width across his widest point, or height to the top of his head) would confirm it.
+**His size floor (owner, 2026-11-16):** he is an adult dwarf, "not a juvenile": at least an adult
+Netherland Dwarf, the smallest breed: shoulder height 12.7-15.2 cm, body length 19-23 cm, 0.9-1.1 kg, ears
+5-6.4 cm ([dimensions.com](https://dimensions.com/element/netherland-dwarf-rabbit),
+[Wikipedia](https://en.wikipedia.org/wiki/Netherland_Dwarf_rabbit)). No source gives a loafing height or
+width, so the floor is: the top of his head at least 12.7 cm. (At his eyes' height, the shortest lens made
+him 12.3 cm wide and 10.5 cm tall: too small, owner.) At six inches, only the camera's height on him and
+the lens can change his size; the lens is already the shortest that fits, so the camera sat a little
+lower: 2.4 cm below his eyes, between his eye and nose height (with a 24 mm-equivalent lens it would be
+about 1.5 cm).
+
+Result: camera 7.4 cm above the surface, 15.2 cm in front of the origin, level (tilted up 1 deg).
+**His size (rough, `his_size_estimate_cm` in `data/cameras.json`): about 15.5 cm wide, 12.7 cm to the top
+of his head, ear tips 13.6 cm, eyes 9.9 cm up, nose 6.0 cm up**: at the floor, so he may be a little
+bigger. A measurement of him (width across his widest point, or height to the top of his head) would pin it.
 In the 3D page the floor's horizon runs through his eyes, as a level camera at his eye level should.
 
 Nothing measured depends on these numbers: landmarks and part outlines stay in picture pixels, and the
@@ -65,15 +75,15 @@ rays are recomputed from them whenever the camera changes.
 ## How he is being looked at (`tools/facing.py` -> `data/scene/facing.json`, `docs/images/space/facing.png`)
 
 With the camera fixed as above, from the photo:
-- **His head is tipped about 5 deg, his left side up** (a little head tilt toward his right): solid (4-6
+- **His head is tipped about 6 deg, his left side up** (a little head tilt toward his right): solid (5-7
   whatever pair is left out, landmarks wobbled by their uncertainty, or the camera moved across the owner's
   ranges). His peets don't tip the same way, so it is his head, not the phone.
 - **His head is turned toward his own left (his nose toward the picture's right), about 5-9 deg**: the
-  direction is solid (the six mirror pairs give 9.0, the two eye ovals 5.5, and his nose sits right of the
+  direction is solid (the six mirror pairs give 7.8, the two eye ovals 5.7, and his nose sits right of the
   middle of his eyes); the amount is not yet (the pairs disagree: his mouth, lip corners and ear bases can
   be truly lopsided; the eyes and nostrils alone leave it loose). It firms up with his round shell or
   another photo.
-- His body, from where his peets meet the surface (rough): turned about 3 deg toward his right.
+- His body, from where his peets meet the surface (rough): turned about 3.5 deg toward his right.
 - His head's nod (up or down) needs his depth: later.
 
 ## What exists (steps 1-3)

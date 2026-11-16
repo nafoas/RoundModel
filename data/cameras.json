@@ -4,9 +4,9 @@
   "photo": "data/photos/anchor_front.webp",
   "status": "placed as the owner remembers the shot (2026-11-16); lens: the shortest that fits, which gives a little fluffy rabbit (owner's size check)",
   "position_cm": [
-   0.1364,
-   7.6542,
-   15.0298
+   0.1601,
+   7.4048,
+   15.1778
   ],
   "rotation_room_to_camera": [
    [
@@ -25,10 +25,10 @@
     -0.9998476952
    ]
   ],
-  "focal_px": 1437.2663,
+  "focal_px": 1236.5504,
   "principal_point_px": [
    548.0,
-   476.2981
+   609.9026
   ],
   "image_size_px": [
    1098,
@@ -37,14 +37,14 @@
   "yaw_deg": -0.0,
   "pitch_deg": -1.0,
   "roll_deg": 0.0,
-  "fov_horizontal_deg": 41.811,
-  "fov_vertical_deg": 52.994,
+  "fov_horizontal_deg": 47.88,
+  "fov_vertical_deg": 60.179,
   "inputs": {
    "distance": "OWNER: camera to his nose 15.24 cm ('he was roughly 6 inches away from the camera'; 'it couldn't have been more than six inches away'; range 12-15.24)",
-   "height": "OWNER: 'basically exactly at his eye level. Maybe just a tiny bit lower' -> his eyes 0.5 cm above the camera (range 0-1)",
+   "height": "OWNER: 'basically exactly at his eye level. Maybe just a tiny bit lower' -> his eyes 2.40 cm above the camera -- the smallest drop below his eyes at which he reaches an adult Netherland Dwarf's size (top of his head >= 12.7 cm, owner's floor)",
    "tilt": "OWNER: straight on, 'maybe looking ever so slightly up' -> tilted up 1.0 deg (range 0-2), not turned",
-   "aim": "from the owner's memory: the camera aimed at his face, so its aim point in this (cropped) picture is x 548.0 (his nose), y 476.3 (the height that puts his eyes a touch above the camera); NOT the picture's centre (lesson 26)",
-   "lens": "1437.3 px: the SHORTEST lens that fits (26.0 mm-equivalent phone main camera, this picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it). Owner's check, 'is this the size of a little fluffy rabbit?': any longer lens makes him too small (5-9 cm across, hamster-sized), so this one is used",
+   "aim": "from the owner's memory: the camera aimed at his face, so its aim point in this (cropped) picture is x 548.0 (his nose), y 609.9 (the height that puts his eyes a touch above the camera); NOT the picture's centre (lesson 26)",
+   "lens": "1236.6 px: the SHORTEST lens that fits (26.0 mm-equivalent phone main camera, this picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it); a longer lens would make him smaller still, below an adult Netherland Dwarf (owner's floor)",
    "surface": "he sat on a soft surface (his peets may sink in a little); y = 0 is that surface",
    "peets_under_face": "ASSUMED: the front of his peets is right under the front of his face",
    "origin": "the surface under floor_contact_midpoint (data/strands/landmarks.json)"
@@ -56,17 +56,18 @@
    "right": 979.89,
    "y": 808.57
   },
-  "depth_of_his_front_cm": 14.984,
-  "nose_height_cm": 5.14,
+  "depth_of_his_front_cm": 15.152,
+  "nose_height_cm": 6.04,
   "his_size_estimate_cm": {
-   "width": 12.3,
-   "top_of_head": 10.5,
-   "ear_tips": 11.3,
-   "eyes": 8.2,
-   "nose": 5.1,
+   "width": 15.5,
+   "top_of_head": 12.7,
+   "ear_tips": 13.6,
+   "eyes": 9.9,
+   "nose": 6.0,
    "how": "rough: body taken as round; top of head and ears 3.0 cm behind his nose; check: is this the size of a little fluffy rabbit? (owner)"
   },
-  "widest_outline_at_nose_distance_cm": 8.71,
+  "eyes_above_camera_cm": 2.4,
+  "widest_outline_at_nose_distance_cm": 10.24,
   "note_width": "his widest outline at his nose's distance; his sides are further back, so he is wider"
  }
 }

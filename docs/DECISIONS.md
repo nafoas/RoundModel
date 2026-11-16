@@ -104,6 +104,13 @@ excuse and was withdrawn.)
   fluffy rabbit?'" Distance alone needs the lens; the size check picks it: only the shortest lens that
   fits gives a little fluffy rabbit (about 12 cm wide, 10.5 cm to the top of his head); longer lenses give
   5-9 cm. **The size check is a standing test for every measurement of him.**
+- **His size floor: an adult Netherland Dwarf** (owner, 2026-11-16): "That would make him incredibly
+  small. He's of a small breed, but he's not a juvenile. Go off of the measurements for a netherland dwarf
+  as your floor, since that is the smallest rabbit breed ... He is a dwarf of some kind but I don't know
+  what breed." Adult Netherland Dwarf: shoulder height 12.7-15.2 cm, length 19-23 cm, 0.9-1.1 kg
+  (dimensions.com, Wikipedia). Floor used: the top of his head at least 12.7 cm. At six inches with the
+  shortest lens that fits, that puts the camera 2.4 cm below his eyes (between his eye and nose height);
+  he comes out about 15.5 cm wide, 12.7 cm to the top of his head.
 
 ## Edges
 

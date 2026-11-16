@@ -79,7 +79,8 @@ Pass criteria live in `config/thresholds.json`.
 - [~] **3D grounding** (owner, 2026-11-16; `docs/SPACE.md`) — CURRENT. Steps 1-3 done as a first pass
   (room + camera `prince/space.py`; 27 landmarks; every part as rays from the anchor camera; interactive
   room `docs/space/room.html`); camera placed as the owner remembers the shot (six inches, level, eye
-  level; lens = the shortest that fits, which gives a little fluffy rabbit ~12 x 10.5 cm) and how he faces (head tipped ~5 deg, turned ~5-9 deg toward his left; `tools/facing.py`);
+  level, 2.4 cm below his eyes so he is at least an adult Netherland Dwarf: ~15.5 cm wide, 12.7 cm to the top
+  of his head) and how he faces (head tipped ~5 deg, turned ~5-9 deg toward his left; `tools/facing.py`);
   next: depth lines (rough round shell, parts on it); new angles placed by their landmarks.
 - [ ] 2b: soft measurement masks rendered from the classified parts (landmarks and camera file: done, above)
 - [ ] 2c: whisker/wisp 3D strand builder + 1-px projection test

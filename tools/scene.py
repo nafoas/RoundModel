@@ -38,6 +38,12 @@ PROVISIONAL_F35_MM = 26.0              # lens: still unknown (phone main camera 
 OWNER_CAMERA_TO_NOSE_CM = 15.24        # owner: "roughly 6 inches away from the camera", "couldn't have been more" (range 12-15.24)
 OWNER_TILT_UP_DEG = 1.0                # owner: "maybe looking ever so slightly up" (range 0-2)
 OWNER_EYES_ABOVE_CAMERA_CM = 0.5       # owner: "basically exactly at his eye level. Maybe just a tiny bit lower"
+# owner, 2026-11-16: he is an adult dwarf, "not a juvenile": "Go off of the measurements for a netherland dwarf as your
+# floor, since that is the smallest rabbit breed". Adult Netherland Dwarf: shoulder height 12.7-15.2 cm, body length
+# 19-23 cm, 0.9-1.1 kg (dimensions.com/element/netherland-dwarf-rabbit; en.wikipedia.org/wiki/Netherland_Dwarf_rabbit).
+# No source gives a loafing height or width, so the floor is: the top of his head at least the breed's lowest
+# shoulder height. The camera goes below his eyes only as far as it must for him to reach it.
+ND_FLOOR_TOP_OF_HEAD_CM = 12.7
 EYES_BEHIND_NOSE_CM = 2.0              # assumption (small effect): his eyes are ~2 cm further back than his nose
 FAR_PAST_ORIGIN_CM = 16.0          # drawn rays reach this far past the camera-to-origin distance (drawing only)
 PART_COLOURS = {"head": (235, 140, 30), "intermediate bnuy": (60, 160, 230), "undercarriage": (140, 90, 230),
@@ -101,9 +107,19 @@ def size_estimate(cam, lm, nose_pt, width_px, behind_nose_cm=3.0):
                     f"check: is this the size of a little fluffy rabbit? (owner)")
 
 
-def anchor_camera(W, H, lm, outline, up=OWNER_TILT_UP_DEG, d_nose=OWNER_CAMERA_TO_NOSE_CM,
-                  eyes_above=OWNER_EYES_ABOVE_CAMERA_CM):
-    f, cx, cy = aim_and_lens(W, H, lm, up=up, eyes_above=eyes_above, d_nose=d_nose)
+def anchor_camera(W, H, lm, outline, up=OWNER_TILT_UP_DEG, d_nose=OWNER_CAMERA_TO_NOSE_CM, eyes_above=None,
+                  f35=PROVISIONAL_F35_MM, floor_cm=ND_FLOOR_TOP_OF_HEAD_CM):
+    """eyes_above None: the smallest drop below his eyes (from OWNER_EYES_ABOVE_CAMERA_CM, in 0.05 cm steps) at which
+    the top of his head reaches floor_cm (an adult Netherland Dwarf at least)."""
+    if eyes_above is None:
+        for e in np.arange(OWNER_EYES_ABOVE_CAMERA_CM, 8.0, 0.05):
+            c_, p_ = anchor_camera(W, H, lm, outline, up=up, d_nose=d_nose, eyes_above=float(e), f35=f35)
+            if p_["his_size_estimate_cm"]["top_of_head"] >= floor_cm:
+                p_["inputs"]["height"] += (f" -- the smallest drop below his eyes at which he reaches an adult Netherland "
+                                           f"Dwarf's size (top of his head >= {floor_cm} cm, owner's floor)")
+                return c_, p_
+        raise SystemExit("no camera height reaches the Netherland Dwarf floor")
+    f, cx, cy = aim_and_lens(W, H, lm, f35=f35, up=up, eyes_above=eyes_above, d_nose=d_nose)
     nose = np.array(lm["nose_y_centre"]["at_px"]); contact = np.array(lm["floor_contact_midpoint"]["at_px"])
     cam = Camera.orbit([0, 0, -1.0], 1.0, pitch_deg=-up, f=f, width=W, height=H, cx=cx, cy=cy)
     cam.C = np.zeros(3)
@@ -117,16 +133,15 @@ def anchor_camera(W, H, lm, outline, up=OWNER_TILT_UP_DEG, d_nose=OWNER_CAMERA_T
     inputs = dict(
         distance=f"OWNER: camera to his nose {d_nose} cm ('he was roughly 6 inches away from the camera'; 'it couldn't "
                  f"have been more than six inches away'; range 12-15.24)",
-        height=f"OWNER: 'basically exactly at his eye level. Maybe just a tiny bit lower' -> his eyes {eyes_above} cm "
-               f"above the camera (range 0-1)",
+        height=f"OWNER: 'basically exactly at his eye level. Maybe just a tiny bit lower' -> his eyes {eyes_above:.2f} cm "
+               f"above the camera",
         tilt=f"OWNER: straight on, 'maybe looking ever so slightly up' -> tilted up {up} deg (range 0-2), not turned",
         aim=f"from the owner's memory: the camera aimed at his face, so its aim point in this (cropped) picture is "
             f"x {cx:.1f} (his nose), y {cy:.1f} (the height that puts his eyes a touch above the camera); NOT the "
             f"picture's centre (lesson 26)",
         lens=f"{f:.1f} px: the SHORTEST lens that fits ({PROVISIONAL_F35_MM} mm-equivalent phone main camera, this "
-             f"picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it). Owner's "
-             f"check, 'is this the size of a little fluffy rabbit?': any longer lens makes him too small (5-9 cm "
-             f"across, hamster-sized), so this one is used",
+             f"picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it); a longer "
+             f"lens would make him smaller still, below an adult Netherland Dwarf (owner's floor)",
         surface="he sat on a soft surface (his peets may sink in a little); y = 0 is that surface",
         peets_under_face="ASSUMED: the front of his peets is right under the front of his face",
         origin="the surface under floor_contact_midpoint (data/strands/landmarks.json)")
@@ -135,7 +150,7 @@ def anchor_camera(W, H, lm, outline, up=OWNER_TILT_UP_DEG, d_nose=OWNER_CAMERA_T
                            "would confirm the lens and his size",
                      widest_outline_px=dict(width=round(width_px, 2), left=round(xl, 2), right=round(xr, 2), y=round(yw, 2)),
                      depth_of_his_front_cm=round(depth_nose, 3), nose_height_cm=round(float(nose_pt[1]), 2),
-                     his_size_estimate_cm=size_estimate(cam, lm, nose_pt, width_px),
+                     his_size_estimate_cm=size_estimate(cam, lm, nose_pt, width_px), eyes_above_camera_cm=round(eyes_above, 2),
                      widest_outline_at_nose_distance_cm=round(width_px * depth_nose / f, 2),
                      note_width="his widest outline at his nose's distance; his sides are further back, so he is wider")
 

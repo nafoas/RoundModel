@@ -161,7 +161,11 @@ to the outline.
   hairs, *including their bases*, belong to the wisp layer, not the body.
 
 ## His size (2026-11-16, from the anchor photo and the owner's memory of the shot; rough)
-About **12.3 cm wide, 10.5 cm to the top of his head, ear tips 11.3 cm, eyes 8.2 cm and nose 5.1 cm above
-the surface he sits on** (`data/cameras.json`, `his_size_estimate_cm`; how: `docs/SPACE.md`). Owner's
-check for any measurement of him: "is this the size of a little fluffy rabbit?" A tape measure (width
-across his widest point, or height to the top of his head) would confirm it.
+He is an adult dwarf of unknown breed (owner): **at least an adult Netherland Dwarf**, the smallest breed
+(shoulder height 12.7-15.2 cm, body length 19-23 cm, 0.9-1.1 kg, ears 5-6.4 cm:
+[dimensions.com](https://dimensions.com/element/netherland-dwarf-rabbit),
+[Wikipedia](https://en.wikipedia.org/wiki/Netherland_Dwarf_rabbit)). From the shot, at that floor: about
+**15.5 cm wide, 12.7 cm to the top of his head, ear tips 13.6 cm, eyes 9.9 cm and nose 6.0 cm above the
+surface he sits on** (`data/cameras.json`, `his_size_estimate_cm`; how: `docs/SPACE.md`). He may be a
+little bigger. Owner's check for any measurement of him: "is this the size of a little fluffy rabbit?" A
+tape measure (width across his widest point, or height to the top of his head) would pin it.

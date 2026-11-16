@@ -71,7 +71,12 @@ def main() -> int:
                 outline=outline, lines=lines, landmarks=lms, facing=facing,
                 photo="data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode())
     three = (ROOT / "tools/vendor/three-0.159.0.min.js").read_text()
-    html = PAGE.replace("/*THREE*/", three).replace("/*DATA*/", json.dumps(data))
+    sz = cam["his_size_estimate_cm"]
+    camtext = (f"The camera is placed as the owner remembers the shot: straight on, about six inches from his nose, level, "
+               f"{cam['eyes_above_camera_cm']:.1f} cm below his eyes (as little below as lets him be at least an adult "
+               f"Netherland Dwarf). His size from it (rough): about {sz['width']:.1f} cm wide, {sz['top_of_head']:.1f} cm to "
+               f"the top of his head, ear tips {sz['ear_tips']:.1f} cm.")
+    html = PAGE.replace("/*THREE*/", three).replace("/*DATA*/", json.dumps(data)).replace("/*CAMTEXT*/", camtext)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(html)
     print("wrote", OUT.relative_to(ROOT), f"{len(html) / 1e6:.2f} MB;", len(idx), "outline rays,", len(lms), "landmarks")
@@ -97,9 +102,7 @@ PAGE = r"""<!DOCTYPE html>
  <h1>Prince's room</h1>
  <p>Centimetres. Floor grid 2 cm. <b>+X</b> his left, <b>+Y</b> up, <b>+Z</b> his forward; origin on the floor under the
  front of his peets. Every pixel of the photo is a ray from the camera: he is somewhere along each one (how far is a later step).
- The camera is placed as the owner remembers the shot (straight on, about six inches from his nose, a touch below his eye
- level). Lens: the shortest that fits, which makes him a little fluffy rabbit (about 12 cm wide, 10.5 cm to the top of his
- head); any longer lens would make him too small.</p>
+ /*CAMTEXT*/</p>
  <p><span class="key" style="background:#eb8c1e"></span>head<span class="key" style="background:#3ca0e6"></span>intermediate
  <span class="key" style="background:#8c5ae6"></span>undercarriage<span class="key" style="background:#46be5a"></span>ears
  <span class="key" style="background:#148c3c"></span>top of head<span class="key" style="background:#dc3232"></span>/<span class="key" style="background:#c8aa00"></span>peets

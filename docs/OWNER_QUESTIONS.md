@@ -219,3 +219,6 @@ the owner's official opinion later. Each says what I did in the meantime.
    **Answered (2026-11-16):** "roughly 6 inches away from the camera"; size check "is this the size of a
    little fluffy rabbit?" -> the shortest lens that fits; he is about 12.3 cm wide, 10.5 cm to the top of
    his head. A tape measure would still confirm it (optional).
+   **Corrected (2026-11-16):** owner: too small, he's an adult; floor = an adult Netherland Dwarf (top of
+   his head >= 12.7 cm) -> camera 2.4 cm below his eyes; he is about 15.5 cm wide, 12.7 cm to the top of
+   his head (at the floor; maybe a little bigger).

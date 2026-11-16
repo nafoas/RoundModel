@@ -108,9 +108,10 @@ def main() -> int:
     photo = Image.open(ROOT / "data/photos/anchor_front.webp").convert("RGB"); W, H = photo.size
     outline = np.array(json.loads((ROOT / "data/strands/body_outline.json").read_text())["sampled_curve"])
     across = []
+    e0 = sc.anchor_camera(W, H, lm, outline)[1]["eyes_above_camera_cm"]
     for up in (0.0, 1.0, 2.0):
         for d in (12.0, 13.5, 15.24):
-            for eyes_above in (0.0, 0.5, 1.0):
+            for eyes_above in (max(e0 - 1.0, 0.0), e0, e0 + 1.0):
                 c2, _ = sc.anchor_camera(W, H, lm, outline, up=up, d_nose=d, eyes_above=eyes_above)
                 X2, _ = analyse(c2, lm); Xb2, _ = body_axis(c2, lm)
                 across.append(turn_tip(X2) + (turn_tip(Xb2)[0],))
@@ -147,7 +148,9 @@ def main() -> int:
         eyes_and_nostrils_only=dict(turned_tipped_deg=t2, landmark_wobble_2sd_turned=np.percentile(mc2[:, 0], [2.5, 97.5]).round(1).tolist(),
                                     note="the two pairs that fit best (misfit < 0.5 deg); two pairs alone leave the turn loose"),
         summary=dict(
-            tipped=f"his left side up, about {tip:.0f} deg (4-6 whatever is left out or wobbled): SOLID",
+            tipped=(f"his left side up, about {tip:.0f} deg ({min(np.percentile(mc[:, 1], 2.5), min(v[1] for v in loo.values()), across[:, 1].min()):.0f}-"
+                    f"{max(np.percentile(mc[:, 1], 97.5), max(v[1] for v in loo.values()), across[:, 1].max()):.0f} whatever is left "
+                    f"out, wobbled or moved): SOLID"),
             turned=(f"toward his own left (his nose toward the picture's right), about 5-9 deg: the DIRECTION is solid "
                     f"(the mirror pairs {turn:.1f}, the eye ovals {eyes['turn_deg']:.1f}, his nose right of the middle of "
                     f"his eyes all agree); the AMOUNT is not yet (the pairs disagree: mouth, lip corners and ear bases can "
@@ -192,7 +195,7 @@ def sheet(photo, lm, cam, X, Xb, peets, doc):
                      f"{'right' if doc['body']['turned_deg'] < 0 else 'left'}.", fill=(0, 0, 0), font=small)
     d.text((10, 66), "orange: his mirror pairs; red: his peets' lowest points; blue: his head's left-right axis; "
                      "grey: level (the camera's left-right)", fill=(60, 60, 60), font=small)
-    d.text((10, 88), "Camera fixed as the owner remembers the shot (straight on, about six inches, a touch below eye level).",
+    d.text((10, 88), "Camera as the owner remembers the shot (straight on, about six inches), a little below his eyes.",
            fill=(60, 60, 60), font=small)
     # top view: camera, his body axis (at his peets), his head axis (at his eyes)
     view = Camera.orbit([0, 0, 5.5], 200, yaw_deg=0, pitch_deg=89.5, f=6400, width=620, height=880)

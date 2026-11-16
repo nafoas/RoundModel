@@ -848,3 +848,20 @@ check.py output (if applicable), and the next step.
   (tipped 5.1, turned 9.1 by the pairs). Docs: SPACE (steps list), DECISIONS (size check as a standing
   test), PRINCE_SPEC (his size), Q44, PLAN. Tests: 49 passed.
 - **Next:** step 5 of the 3D grounding, depth lines, on the owner's go.
+
+## 2026-11-16 — Session 6 (cont.): his size floor: an adult Netherland Dwarf
+- Owner: 12.3 x 10.5 cm "would make him incredibly small. He's of a small breed, but he's not a juvenile.
+  Go off of the measurements for a netherland dwarf as your floor". Looked up (web): adult Netherland Dwarf
+  shoulder height 12.7-15.2 cm, length 19-23 cm, 0.9-1.1 kg, ears 5-6.4 cm (dimensions.com, Wikipedia; one
+  outlier site's 33-50 cm length disagrees with the rest and was not used). No loafing height or width
+  published -> floor: the top of his head >= 12.7 cm.
+- At six inches only the camera's height on him and the lens change his size; the lens was already the
+  shortest that fits, so the camera sits lower: the smallest drop below his eyes that reaches the floor is
+  2.4 cm (between his eye and nose height; ~1.5 cm with a 24 mm lens). `tools/scene.py` now searches for
+  it (`ND_FLOOR_TOP_OF_HEAD_CM`; the lens is passed through properly: a default bound at definition time
+  had made a 24 mm comparison silently use 26 mm). Camera 7.4 cm up, 15.2 cm in front, lens 1237 px; his
+  size (rough): 15.5 cm wide, 12.7 to the top of his head, ear tips 13.6, eyes 9.9, nose 6.0.
+- How he faces, re-measured with this camera: head tipped 6.0 deg his left side up (5-7), turned 7.8 deg
+  toward his left (eye ovals 5.7; direction solid, amount 5-9); body 3.5 deg toward his right (rough).
+- The 3D page's text is now generated from the camera file (it had hand-typed old sizes). Tests: 49 passed.
+- **Next:** owner review; then step 5 of the 3D grounding (depth lines) on the owner's go.
