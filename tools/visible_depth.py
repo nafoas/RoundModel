@@ -74,7 +74,7 @@ def run_moge2(img):
     model = MoGeModel.from_pretrained(MODELS["moge2"]).eval()
     t = torch.tensor(np.asarray(img, dtype=np.float32) / 255.0).permute(2, 0, 1)
     with torch.no_grad():
-        out = model.infer(t)
+        out = model.infer(t, use_fp16=False)                     # full precision (half precision needs a GPU)
     P = out["points"].numpy()                                       # (H, W, 3) metres, its camera
     K = out["intrinsics"].numpy()                                   # normalised: fx in picture widths
     dist = np.linalg.norm(P, axis=-1)
@@ -115,7 +115,14 @@ def main() -> int:
     lm = load("data/strands/landmarks.json")["landmarks"]
     mask = him_mask(H, W)
     results = {}
+    only = [a for a in sys.argv[1:] if a in MODELS]
     for name, fn in (("depthpro", run_depthpro), ("moge2", run_moge2)):
+        if only and name not in only:
+            meta = ROOT / f"data/scene/visible_depth_{name}.png"
+            if meta.exists():
+                d = np.array(Image.open(meta)).astype(float) / 100.0
+                results[name] = (np.where(d > 0, d, np.nan), None)
+            continue
         t0 = time.time()
         r = fn(img)
         dist_cm = r["distance_m"] * 100.0
@@ -133,8 +140,10 @@ def main() -> int:
         (ROOT / f"data/scene/visible_depth_{name}.json").write_text(json.dumps(meta, indent=1))
         results[name] = (dist_cm, c)
         print(name, json.dumps(c))
+    if len(results) < 2:
+        return 0
     d1, d2 = results["depthpro"][0], results["moge2"][0]
-    diff = (d1 - d2)[mask]
+    diff = (d1 - d2)[mask & np.isfinite(d1) & np.isfinite(d2)]
     print("the two models, distance difference over his pixels (cm): median %.2f, middle 90%% %.2f to %.2f"
           % (np.median(diff), np.percentile(diff, 5), np.percentile(diff, 95)))
     return 0
