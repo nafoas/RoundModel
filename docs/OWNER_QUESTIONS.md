@@ -237,3 +237,5 @@ the owner's official opinion later. Each says what I did in the meantime.
    near it; he can be loafing anywhere): measures it directly; (b) your guidance, e.g. how far his nose
    sticks out past his chest, or a rough side sketch, marked owner-guided; (c) I try reading his midline's
    light alone (forehead bright, under the muzzle dark) for its slope: objective but assumes light from above.
+   **[CLOSED 2026-11-16: Q45 and Q46: the depth approach was scrapped by the owner ("I dislike this. Scrap it,
+   lemme think of another method"); no side photos (see DECISIONS, "He is not static").]**

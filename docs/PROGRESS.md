@@ -980,3 +980,15 @@ check.py output (if applicable), and the next step.
   69 deg vs 56 / 65 from the ovals. **Not settled**; outputs `data/scene/depth_from_light.json`,
   `docs/images/space/light_depth*.png` are this run, kept for the record.
 - Paused here: the owner is explaining why no extra angles of him are offered (the previous attempt).
+
+## 2026-11-16 — Session 6 (cont.): depth approach scrapped (owner)
+- Owner (after the reason no extra angles are offered: a rigid numbers method cannot cope with a rabbit that
+  moves): "Literally everywhere. It's not a viable method." Shown what exists; then: "I dislike this. Scrap it,
+  lemme think of another method."
+- Removed (recoverable from git history, commit ac8e35a): `prince/shell.py`, `tools/depth_lines.py`,
+  `tools/depth_from_light.py`, `tests/test_shell.py`, `data/scene/shell*.json`, `data/scene/depth_from_light.json`,
+  `docs/images/space/depth_*.png`, `light_depth*.png`; the shell taken out of the 3D page. Docs marked scrapped
+  (SPACE, PLAN, STRAND_PLAN, METHOD, Q45/Q46 closed, DECISIONS).
+- Kept: room + camera (`prince/space.py`, `tools/scene.py`), his size (approved), landmarks, rays, his head's
+  tilt/turn (`tools/facing.py`), the light read from his fur (`docs/images/space/light_reading.png`).
+- **Next:** the owner's new method.

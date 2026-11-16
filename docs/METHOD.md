@@ -370,5 +370,4 @@ still required.
 | Anchor camera + every part as rays | `tools/scene.py` → `data/cameras.json`, `data/scene/anchor_rays.json`, `docs/images/space/room_*.png` |
 | The room, interactive (one file) | `tools/room_viewer.py` → `docs/space/room.html` |
 | How he is being looked at (head turn and tip, body turn) | `tools/facing.py` → `data/scene/facing.json`, `docs/images/space/facing.png` |
-| Rough shell (scaffold, not the model) + depth lines | `prince/shell.py`, `tools/depth_lines.py` → `data/scene/shell.json`, `shell_view.json`, `docs/images/space/depth_*.png` |
 | Tests | `tests/` (`python -m pytest -q`) |

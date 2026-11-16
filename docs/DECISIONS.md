@@ -305,6 +305,12 @@ excuse and was withdrawn.)
   flat face, the "two lights"), the measurement is what is wrong: say so and ask, don't push it harder. Don't
   ask for more photos; work from the anchor and the owner.
 
+- **The depth approach is scrapped** (owner, 2026-11-16): "Literally everywhere. It's not a viable method"
+  (rigid, numbers-first assumptions throughout the tools); "I dislike this. Scrap it, lemme think of another
+  method." Removed: the blob shell and its fits, its depth lines, the depth-from-light reading (git history,
+  commit ac8e35a). Kept: the room, camera, his size, landmarks, rays, his head's tilt/turn, the light read from
+  his fur. Next method: the owner's.
+
 ## Photos and repo (2026-11-07)
 
 - Work moved to the public repo `nafoas/RoundModel`, on a fresh branch

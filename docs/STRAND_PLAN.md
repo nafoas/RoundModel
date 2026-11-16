@@ -177,7 +177,7 @@ Original description:
 Steps 1-3 first pass: the room and cameras (`prince/space.py`), 27 named landmarks
 (`data/strands/landmarks.json`), every part as rays from the anchor camera (`data/scene/anchor_rays.json`),
 the room in 3D (`docs/space/room.html`). Step 4: camera as the owner remembers the shot, his size
-(approved), how he faces. Step 5 (first pass): depth lines on a rough round shell (`docs/SPACE.md`).
+(approved), how he faces. Step 5 (depth lines): SCRAPPED by the owner; another method to come.
 
 **BODY PARTS (2026-11-15): Head / Intermediate Bnuy / Undercarriage: OWNER-APPROVED.** Lines frozen in
 `data/lines/body_parts_lines.json`; the region map (`docs/images/body_parts/proposal_body.png`) shows every

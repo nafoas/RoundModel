@@ -48,12 +48,6 @@ def main() -> int:
     lines = [dict(name=s["name"], ends=ends(s["directions_room"])) for s in rays["sets"] if s["name"] != "his outline"]
     lms = [dict(name=s["name"], part=s["part"], kind=s["kind"], end=ends(s["directions_room"])[0]) for s in rays["landmarks"]]
     facing = None
-    shell = None
-    spath = ROOT / "data/scene/shell_view.json"
-    if spath.exists():                                   # the rough shell and its depth lines (tools/depth_lines.py)
-        sv = json.loads(spath.read_text())
-        shell = dict(v=[c for p in sv["vertices"] for c in p], f=[i for t in sv["faces"] for i in t],
-                     c=[round(c / 255, 3) for p in sv["colours"] for c in p], lines=sv["lines"])
     import re as _re
     cam_d = float(_re.search(r"camera to his nose ([0-9.]+) cm", cam["inputs"]["distance"]).group(1))
     fpath = ROOT / "data/scene/facing.json"
@@ -74,7 +68,7 @@ def main() -> int:
     data = dict(camera=dict(C=C.tolist(), R=cam["rotation_room_to_camera"], f=cam["focal_px"],
                             cx=cam["principal_point_px"][0], cy=cam["principal_point_px"][1],
                             W=cam["image_size_px"][0], H=cam["image_size_px"][1], status=cam["status"]),
-                outline=outline, lines=lines, landmarks=lms, facing=facing, shell=shell,
+                outline=outline, lines=lines, landmarks=lms, facing=facing,
                 photo="data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode())
     three = (ROOT / "tools/vendor/three-0.159.0.min.js").read_text()
     sz = cam["his_size_estimate_cm"]
@@ -117,8 +111,7 @@ PAGE = r"""<!DOCTYPE html>
  <button data-v="side">His left side</button><button data-v="top">From above</button></div>
  <div><label><input type="checkbox" id="cOut"> outline rays</label><label><input type="checkbox" id="cLm"> landmark rays</label>
  <label><input type="checkbox" id="cLines"> part-line rays</label><label><input type="checkbox" id="cTags" checked> labels</label>
- <label><input type="checkbox" id="cFace" checked> how he faces</label>
- <label><input type="checkbox" id="cShell" checked> his rough shell</label><label><input type="checkbox" id="cDepth" checked> depth lines</label></div>
+ <label><input type="checkbox" id="cFace" checked> how he faces</label></div>
  <p id="faceNote" style="color:#1f4fb4"></p>
  <p>Drag: turn around. Wheel / pinch: closer. Right-drag / two fingers: move.</p>
 </div>
@@ -171,19 +164,7 @@ if (D.facing){ const f=D.facing; const L=(a,b,col)=>gFace.add(new THREE.Line(new
   L(f.head[0],f.head[1],0x1f5adc); L(f.head[2],f.head[3],0x1f5adc); L(f.body[0],f.body[1],0xc81e1e); L(f.body[2],f.body[3],0xc81e1e);
   document.getElementById('faceNote').textContent = 'Blue: his head (left-right axis, and the way it faces). Red: his body, from his peets. ' + f.text + '.'; }
 scene.add(gFace);
-// the rough shell (NOT the model): painted with his parts where the camera saw him; grey = not seen (ASSUMED round)
-const gShell = new THREE.Group(), gDepth = new THREE.Group();
-if (D.shell){ const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(D.shell.v,3));
-  g.setAttribute('color',new THREE.Float32BufferAttribute(D.shell.c,3)); g.setIndex(D.shell.f); g.computeVertexNormals();
-  gShell.add(new THREE.Mesh(g,new THREE.MeshLambertMaterial({vertexColors:true, transparent:true, opacity:0.92, side:THREE.DoubleSide})));
-  scene.add(new THREE.AmbientLight(0xffffff,0.55)); const L=new THREE.DirectionalLight(0xffffff,0.9); L.position.set(10,30,25); scene.add(L);
-  const lerp=(a,b,t)=>a+(b-a)*t;
-  D.shell.lines.forEach(l=>{ const col = l.kind==='level'? new THREE.Color(0x009696) : l.kind==='midline'? new THREE.Color(0xf0c800)
-        : new THREE.Color(lerp(0.9,0.16,Math.min(l.value/14,1)), lerp(0.24,0.35,Math.min(l.value/14,1)), lerp(0.16,0.9,Math.min(l.value/14,1)));
-    const pts=l.points.map(p=>new THREE.Vector3(p[0],p[1],p[2]).multiplyScalar(1.0));
-    // nudge the line a hair outward from the shell's middle so it shows on the surface
-    gDepth.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({color:col}))); });
-  scene.add(gShell); scene.add(gDepth); }
+
 // ---- labels
 const tags = []; function tag(text, p, colour){ const el=document.createElement('div'); el.className='tag'; el.textContent=text; el.style.color=colour||'#111'; document.body.appendChild(el); tags.push({el,p:p.clone()}); }
 tag('origin', new THREE.Vector3(0,0,0)); tag('+X his left', V([4.3,0,0]),'#c02020'); tag('+Y up', V([0,4.3,0]),'#208020'); tag('+Z his forward', V([0,0,4.3]),'#2040c0');
@@ -221,7 +202,7 @@ el.addEventListener('touchmove',e=>{ for(const t of e.changedTouches) touches.se
 el.addEventListener('touchend',e=>{ for(const t of e.changedTouches) touches.delete(t.identifier); if(touches.size<2) pinch=null; },{passive:true});
 // ---- toggles, resize, drawing
 const tog=(id,obj)=>document.getElementById(id).onchange=e=>{obj.visible=e.target.checked; draw();};
-tog('cOut',gOut); tog('cLm',gLm); tog('cLines',gLines); tog('cFace',gFace); tog('cShell',gShell); tog('cDepth',gDepth);
+tog('cOut',gOut); tog('cLm',gLm); tog('cLines',gLines); tog('cFace',gFace);
 document.getElementById('cTags').onchange=()=>draw();
 document.getElementById('hide').onclick=e=>{ const u=document.getElementById('ui'); const h=u.style.display!=='none'; u.style.display=h?'none':''; e.target.textContent=h?'show panel':'hide panel'; };
 function resize(){ renderer.setSize(innerWidth,innerHeight); view.aspect=innerWidth/innerHeight; if(mode==='cam') camProjection(); else view.updateProjectionMatrix(); draw(); }

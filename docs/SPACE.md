@@ -97,7 +97,7 @@ With the camera fixed as above, from the photo:
 - `tools/room_viewer.py` -> `docs/space/room.html`: the room in 3D, interactive, one file, no internet
   needed (three.js r159, MIT, in `tools/vendor/`). "Camera's view" puts your eye where the anchor
   camera was (with its off-centre aim point): every ray shrinks to a point on the photo. Blue and red
-  lines show how his head and body face.
+  lines show how his head and body face. (The scrapped shell is no longer shown.)
 - `tools/facing.py`: how he is being looked at (above).
 
 ## His parts in 3D (owner)
@@ -108,25 +108,15 @@ With the camera fixed as above, from the photo:
 - The thin strip joining his ears is the top of his head seen from above; the underfluff tuft between
   his peets is his belly. In 3D they are where his top and his belly start going back.
 
-## Depth lines (step 5): `prince/shell.py`, `tools/depth_lines.py`
+## Depth lines (step 5): SCRAPPED by the owner (2026-11-16)
 
-**A rough round shell, measured, never built from his outline (rule 1).** His body (sitting into the surface he
-rests on), his head (with its measured turn and tip) and his raised muzzle (whisker pads), smoothly joined, each
-with its own width, height and depth.
-
-**First pass, owner: "very very flat"** (lesson 28): fitted to his outline only, its face was flat. Now fitted to
-his outline (97.3% overlap where scored), his two eye directions (each eye is round; its oval says how far it
-faces away: his right eye 55.9 deg on the shell vs 56.2 measured; his left 53.8 vs 64.9, its oval the least
-certain), his nose at six inches (0.8 mm), and checked against the light on his fur (explains 83% of its
-brightness, vs 72% for the flat shell).
-
-**Still flat in the middle (not settled):** cm behind the front of his nose, new shell: nostril wings 0.3,
-mouth / lip corners 0.0-0.2, chin 0.0, chest (lower fold) 0.2, eyes 2.4-2.6, top of his head 4.5. From one
-straight-on photo how far back his chin and chest sit is not measurable: a chest further back and bigger fits
-his outline as well, and the light on his fur does not pin the light's direction. Owner's call (Q46).
-
-**ASSUMED: his back** (never seen; drawn round). Pictures: `docs/images/space/depth_*.png`, 3D:
-`docs/space/room.html`.
+The depth approach was scrapped: the parametric blob shell fitted to his outline (its face came out flat), its
+depth lines, and the depth read from the light on his fur (lopsided; its chest dipped below the surface he sits
+on). Owner: "I dislike this. Scrap it, lemme think of another method." Removed from the repo (recoverable from
+git history at commit ac8e35a). Don't rebuild it; the owner is choosing another method.
+Kept from this work, as findings: the light read straight from his fur and eyes (one soft light from above,
+about 34 deg toward his right; the blue in the shade is his navy blanket; `docs/images/space/light_reading.png`),
+and that his eyes bulge (not flat) and face well to the sides.
 
 ## The 3D grounding steps (owner reviews each)
 
@@ -135,8 +125,7 @@ his outline as well, and the light on his fur does not pin the light's direction
 3. Every part and boundary as rays from the anchor camera: done.
 4. Place the anchor camera (as the owner remembers the shot) and work out how he is being looked at:
    done (above). Open: his head's nod (needs depth).
-5. Depth lines: in progress (above): his face's sides and top now measured; the middle of his face and
-   his chest still flat (Q46).
+5. Depth lines: SCRAPPED (above). The owner is thinking of another method.
 6. When the owner adds another angle: solve its camera from the landmarks, project his parts, compare,
    and only then use it for depth.
 
