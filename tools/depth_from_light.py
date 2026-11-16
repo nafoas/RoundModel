@@ -37,6 +37,10 @@ SHADE_SD = 8.0            # grey levels
 NORMAL_W = 8.0            # how strongly neighbouring spots must face alike (scale-free smoothness)
 EDGE_W = 4.0
 PRIOR_SD_CM = 5.0         # a very loose pull toward the earlier shell, only to stop run-aways
+PAIR_SD_CM = 0.3          # his mirror pairs line up along his measured left-right direction (tools/facing.py):
+                          # without this, the light from his right is read as his face turning (~25 deg vs 8)
+MIRROR_PAIRS = [("eye_his_left", "eye_his_right"), ("nostril_wing_his_left", "nostril_wing_his_right"),
+                ("mouth_corner_his_left", "mouth_corner_his_right"), ("lip_corner_his_left", "lip_corner_his_right")]
 NOSE_CM = 15.24
 TOWARD_CAMERA = 0.0       # the light's front/back part: owner: "a very shallow angle" (overhead / to his right),
                           # and his face's middle is about as bright as his edges' average -> ~0 (tried +-10)
@@ -139,6 +143,14 @@ def solve(cam, rgb, lm, sh, cal, ins, skip, feature, toward_camera=TOWARD_CAMERA
         return n
 
     pairs = np.r_[np.c_[np.arange(N), R_][R_ >= 0], np.c_[np.arange(N), D_][D_ >= 0]]
+    X_cam = cam.R @ np.array(load("data/scene/facing.json")["head"]["left_right_axis_room"])
+    mp = []
+    for a_, b_ in MIRROR_PAIRS:
+        pa = np.array(lm[a_]["at_px"]) * SCALE; pb = np.array(lm[b_]["at_px"]) * SCALE
+        ia, ib = idx[int(pa[1]), int(pa[0])], idx[int(pb[1]), int(pb[0])]
+        if ia >= 0 and ib >= 0:
+            mp.append((ia, ib))
+    mp = np.array(mp)
 
     def residuals(d):
         n = normals(d)
@@ -146,10 +158,12 @@ def solve(cam, rgb, lm, sh, cal, ins, skip, feature, toward_camera=TOWARD_CAMERA
         r_sh = (I[cells[shade_i, 0], cells[shade_i, 1]] - pred[shade_i]) / SHADE_SD
         r_sm = NORMAL_W * (n[pairs[:, 0]] - n[pairs[:, 1]]).ravel()
         r_ed = EDGE_W * (n[edge] * rc[edge]).sum(1)              # edge-on: facing at right angles to the ray
-        return np.r_[r_sh, r_sm, r_ed, (d - d0) / PRIOR_SD_CM, (d[nose_i] - NOSE_CM) / 0.05]
+        dv = rc[mp[:, 0]] * d[mp[:, 0], None] - rc[mp[:, 1]] * d[mp[:, 1], None]
+        r_mp = (dv - (dv @ X_cam)[:, None] * X_cam).ravel() / PAIR_SD_CM
+        return np.r_[r_sh, r_sm, r_ed, (d - d0) / PRIOR_SD_CM, (d[nose_i] - NOSE_CM) / 0.05, r_mp]
     # which unknowns each residual depends on (a spot's facing uses its four neighbours)
     neigh = np.c_[np.arange(N), R_, L_, D_, U_]
-    rows = len(shade_i) + 3 * len(pairs) + edge.sum() + N + 1
+    rows = len(shade_i) + 3 * len(pairs) + edge.sum() + N + 1 + 3 * len(mp)
     S = lil_matrix((rows, N), dtype=int); r = 0
     for i in shade_i:
         S[r, neigh[i][neigh[i] >= 0]] = 1; r += 1
@@ -161,7 +175,10 @@ def solve(cam, rgb, lm, sh, cal, ins, skip, feature, toward_camera=TOWARD_CAMERA
         S[r, neigh[i][neigh[i] >= 0]] = 1; r += 1
     for i in range(N):
         S[r, i] = 1; r += 1
-    S[r, nose_i] = 1
+    S[r, nose_i] = 1; r += 1
+    for a_, b_ in mp:
+        for _ in range(3):
+            S[r, [a_, b_]] = 1; r += 1
     t0 = time.time()
     res = least_squares(residuals, d0.copy(), jac_sparsity=S, method="trf", x_scale="jac", max_nfev=60, verbose=0)
     d = res.x; n = normals(d)
