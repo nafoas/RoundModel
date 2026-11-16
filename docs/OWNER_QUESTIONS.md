@@ -220,6 +220,12 @@ the owner's official opinion later. Each says what I did in the meantime.
    little fluffy rabbit?" -> the shortest lens that fits; he is about 12.3 cm wide, 10.5 cm to the top of
    his head. A tape measure would still confirm it (optional).
    **Corrected (2026-11-16):** owner: too small, he's an adult; size floor: the top of
-   his head >= 12.7 cm) -> camera 2.4 cm below his eyes; he is about 15.5 cm wide, 12.7 cm to the top of
+   his head >= 12.7 cm -> camera 2.4 cm below his eyes; he is about 15.5 cm wide, 12.7 cm to the top of
    his head (at the floor; maybe a little bigger).
    **[ANSWERED 2026-11-16: "those numbers seem to fit him"; no tape measure.]**
+
+45. **Depth lines (2026-11-16), first pass:** `docs/images/space/depth_lines.png` (rings every 1 cm of height,
+   slices every 1 cm going back), `depth_side.png`, `depth_top.png`, `depth_behind.png`, and in 3D
+   `docs/space/room.html`. (a) Do the lines look like him going back? (b) How far back does he go: is he
+   about as long front to back as he is wide when he loafs, or longer? (Drawn round for now.) A side photo
+   of him loafing would measure it.

@@ -883,3 +883,27 @@ check.py output (if applicable), and the next step.
   outside number kept is the owner's floor on his overall size (top of his head >= 12.7 cm), named as such
   (`SIZE_FLOOR_TOP_OF_HEAD_CM`). PRINCE_SPEC "He is him" and DECISIONS rewritten to describe him, not a
   breed; METHOD item 24. Earlier PROGRESS entries are history and left as written.
+
+## 2026-11-16 — Session 6 (cont.): step 5 of the 3D grounding, depth lines (first pass)
+- Owner: "Begin." Photo used: `data/photos/anchor_front.webp`.
+- Rule 1 kept: the shell (`prince/shell.py`) is parametric (two smoothly joined ellipsoids: body sitting
+  into the surface, head with the measured turn/tip; 11 numbers) and his outline only measures it
+  (`tools/depth_lines.py`: silhouette through the anchor camera vs his outline; ears, peets and tuft not
+  scored; nose on the surface at six inches; head ends at his chin).
+- Fit history (each looked at on the photo): 80% overlap with nonsense shapes -> cause: a traced hit read
+  "on the edge" not "inside" (fixed: read 4 mm past the hit) and zero-start settings never moved (fixed:
+  real first steps) -> 94% but a head egg running below the surface -> clip at the surface, head ends at
+  his chin -> 91%, shell shifted sideways and unable to reach his chest's bottom -> body may sit into the
+  surface (flat underside) -> **97.5%**, nose on the surface (0.03 mm), 4 starts agree. Lesson 27.
+  Rough result: body 13.9 cm wide, top of his head 13.4 cm; the head/body join hit its tightest limit
+  (0.5 cm): crisp, consistent with almost no neck. ASSUMED: as deep as wide (round).
+- Lines: level rings every 1 cm, slices every 1 cm going back, midline, drawn through the anchor camera only
+  where it can see them; the surface's 1 cm grid around him. From six inches the camera sees only the front
+  ~5 cm of him (the 5 cm slice is at his outline). Views from his side, above, behind his shoulder, with his
+  approved parts painted where the camera saw him (hatched grey where it could not); the shell and lines in
+  the 3D page (rays now off by default).
+- Bugs found on the way, each fixed with a test where it applies: integer start distance in the tracer;
+  far views drew no lines (visibility traced only 60 cm); I misread the side view's highest point (checked:
+  it is on top of his head, 5 cm behind his nose); an ellipsoid's exact centre read as surface (0/0).
+- Tests: 54 passed.
+- **Next:** owner review (Q45: how far back he goes; a side photo would measure it).

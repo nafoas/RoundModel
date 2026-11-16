@@ -108,6 +108,27 @@ With the camera fixed as above, from the photo:
 - The thin strip joining his ears is the top of his head seen from above; the underfluff tuft between
   his peets is his belly. In 3D they are where his top and his belly start going back.
 
+## Depth lines (step 5, first pass): `prince/shell.py`, `tools/depth_lines.py`
+
+**A rough round shell, measured against his outline (rule 1: never built from it).** Two smoothly joined
+ellipsoids: his body, sitting into the surface he rests on (so his underside is flat), and his head with
+its measured turn and tip. Its 11 numbers were adjusted until its silhouette through the anchor camera
+matched his outline: 97.5% overlap over what was scored (his ears, peets and belly tuft are separate parts
+and were not scored), his nose on its surface (0.03 mm), his head ending at his chin (the approved head
+line), every one of 4 starting points agreeing. Result (rough): body 13.9 cm wide, top of his head
+13.4 cm. **It is a scaffold for the lines, not the model.**
+
+**ASSUMED: how far back he goes.** One front photo cannot show it; the shell is drawn as deep as it is
+wide (round) until the owner says otherwise or a side photo shows it. Everything the camera did not see is
+hatched grey in the views.
+
+What the depth lines show (`docs/images/space/depth_lines.png`): level rings every 1 cm of height, and
+slices every 1 cm going back from the front of his face. **From six inches the camera sees only the front
+~5 cm of him**: the 5 cm slice is already at his outline. Everything behind that is hidden, which is why
+a photo-shaped flat mask was wrong. Views: `depth_side.png`, `depth_top.png`, `depth_behind.png` (the
+shell painted with his approved parts where the camera saw him), and in 3D: `docs/space/room.html`
+("his rough shell", "depth lines").
+
 ## The 3D grounding steps (owner reviews each)
 
 1. Define the room: done.
@@ -115,9 +136,7 @@ With the camera fixed as above, from the photo:
 3. Every part and boundary as rays from the anchor camera: done.
 4. Place the anchor camera (as the owner remembers the shot) and work out how he is being looked at:
    done (above). Open: his head's nod (needs depth).
-5. **Next: depth lines.** A first rough round shell from the outline rule (his surface is edge-on along
-   his outline), his symmetry and his size, with his parts painted on it; floor grid, midline and
-   wrap-around rings drawn back onto the photo; side and top views.
+5. Depth lines: first pass done (above). Open: how far back he goes (ASSUMED round).
 6. When the owner adds another angle: solve its camera from the landmarks, project his parts, compare,
    and only then use it for depth.
 

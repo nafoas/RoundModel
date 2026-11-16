@@ -1,0 +1,37 @@
+{
+ "about": "Rough parametric shell for the depth lines (prince/shell.py). NOT the model. Fitted to his outline through the anchor camera (the outline only measures it).",
+ "shell": {
+  "body_x": 0.28812035627802435,
+  "body_z": -6.793352748564624,
+  "body_w": 6.9436339032739625,
+  "body_h": 7.740577844396469,
+  "body_y": 4.424372626820231,
+  "head_x": 0.017209173481407047,
+  "head_y": 8.407849415953567,
+  "head_z": -5.01886495513021,
+  "head_w": 4.19269339850954,
+  "head_h": 5.052411944866318,
+  "blend": 0.498722322338903,
+  "head_turn_deg": 7.8,
+  "head_tip_deg": 6.0,
+  "depth_ratio": 1.0
+ },
+ "fit": {
+  "iou_scored": 0.9747,
+  "loss": 0.014896207899959813,
+  "evaluations": 4012,
+  "seconds": 331.4,
+  "starts_loss": [
+   0.01498,
+   0.01492,
+   0.01492,
+   0.01543
+  ],
+  "structure_penalty": 2e-06,
+  "chin_height_cm": 4.02,
+  "head_lowest_cm": 3.36,
+  "nose_off_surface_cm": 0.003,
+  "fit_scale": 0.15
+ },
+ "assumed": "front-to-back depth: round (each part as deep as it is wide), until the owner says otherwise or a side photo shows it"
+}

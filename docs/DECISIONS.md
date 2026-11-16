@@ -442,4 +442,10 @@ excuse and was withdrawn.)
    assumption was in the lens guess (focal length from this picture's size = uncropped). → Never assume an
    edited picture is uncropped: the aim point and the lens are unknowns, fixed from what the owner
    remembers (camera level, about at his eye height) and from measurements, not from the picture's frame.
+27. **A fit that lands somewhere odd from every start: suspect the score, not the shape.** The first shell fits
+   gave a "head" taller than him sitting behind his body (80% overlap). Cause: tracing stops at the
+   surface, so a ray that hit read as "on the edge" (half in), never inside; the fit could not fill him and
+   bent the shapes to compensate. Also: the optimiser's first steps for settings that start at exactly 0
+   are microscopic, so left-right positions never moved. Fixed both; 97.5% overlap. → Before tuning a
+   model, check that a known answer scores perfectly (rule 8), and give every setting a real first step.
 

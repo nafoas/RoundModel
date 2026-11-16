@@ -81,7 +81,8 @@ Pass criteria live in `config/thresholds.json`.
   room `docs/space/room.html`); camera placed as the owner remembers the shot (six inches, level, eye
   level, 2.4 cm below his eyes so he reaches the owner's size floor: ~15.5 cm wide, 12.7 cm to the top
   of his head) and how he faces (head tipped ~5 deg, turned ~5-9 deg toward his left; `tools/facing.py`);
-  next: depth lines (rough round shell, parts on it); new angles placed by their landmarks.
+  depth lines on a rough round shell measured against his outline (first pass; how far back he goes is
+  ASSUMED round until a side photo or the owner says); next: new angles placed by their landmarks.
 - [ ] 2b: soft measurement masks rendered from the classified parts (landmarks and camera file: done, above)
 - [ ] 2c: whisker/wisp 3D strand builder + 1-px projection test
 
