@@ -60,19 +60,39 @@ class Shell:
     blend: float = 2.0        # how softly head and body join (cm)
     head_turn_deg: float = 0.0    # + toward his left (tools/facing.py)
     head_tip_deg: float = 0.0     # + his left side up
-    depth_ratio: float = 1.0      # front-to-back / side-to-side: ASSUMED round
+    depth_ratio: float = 1.0      # used only where a part's own depth is not given (0): front-to-back / side-to-side
+    # owner, 2026-11-16: the face came out flat ("you kept the actual part where depth was important flat"). So the
+    # head and body each have their OWN front-to-back depth, measured from the light on his fur (tools/depth_lines.py),
+    # and his raised muzzle (the whisker pads, owner: "elevated mouf area") is its own rounded form on his face.
+    body_c: float = 0.0           # body half-depth (cm); 0: body_w * depth_ratio
+    head_c: float = 0.0           # head half-depth (cm); 0: head_w * depth_ratio
+    muzzle_y: float = -2.0        # muzzle centre in the head's own frame: below the head centre (cm) ...
+    muzzle_z: float = 3.5         # ... and forward of it (cm)
+    muzzle_w: float = 0.0         # muzzle half-width (cm); 0: no muzzle
+    muzzle_h: float = 1.5
+    muzzle_c: float = 1.5         # muzzle half-depth (cm)
+    muzzle_blend: float = 0.8     # how softly the muzzle joins the face (cm)
 
     FREE = ("body_x", "body_z", "body_w", "body_h", "head_x", "head_y", "head_z", "head_w", "head_h", "blend", "body_y")
+    FREE_FACE = FREE + ("body_c", "head_c", "muzzle_y", "muzzle_z", "muzzle_w", "muzzle_h", "muzzle_c", "muzzle_blend")
 
     def head_rotation(self):
         return rot_y(np.radians(self.head_turn_deg)) @ rot_z(np.radians(self.head_tip_deg))
 
+    def depths(self):
+        return (self.body_c if self.body_c > 0 else self.body_w * self.depth_ratio,
+                self.head_c if self.head_c > 0 else self.head_w * self.depth_ratio)
+
     def parts_sdf(self, P):
+        """Distances to his body, and to his head (with its muzzle, if any), each on its own."""
         P = np.atleast_2d(P)
-        b = ellipsoid_sdf(P - [self.body_x, self.body_y, self.body_z],
-                          np.array([self.body_w, self.body_h, self.body_w * self.depth_ratio]))
+        bc, hc = self.depths()
+        b = ellipsoid_sdf(P - [self.body_x, self.body_y, self.body_z], np.array([self.body_w, self.body_h, bc]))
         q = (P - [self.head_x, self.head_y, self.head_z]) @ self.head_rotation()      # into the head's own frame
-        h = ellipsoid_sdf(q, np.array([self.head_w, self.head_h, self.head_w * self.depth_ratio]))
+        h = ellipsoid_sdf(q, np.array([self.head_w, self.head_h, hc]))
+        if self.muzzle_w > 0:
+            m = ellipsoid_sdf(q - [0.0, self.muzzle_y, self.muzzle_z], np.array([self.muzzle_w, self.muzzle_h, self.muzzle_c]))
+            h = smooth_union(h, m, self.muzzle_blend)
         return b, h
 
     def sdf(self, P):
@@ -80,19 +100,21 @@ class Shell:
         b, h = self.parts_sdf(P)
         return np.maximum(smooth_union(b, h, self.blend), -P[:, 1])     # nothing of him below the surface (y = 0)
 
-    def vector(self):
-        return np.array([getattr(self, k) for k in self.FREE], float)
+    def vector(self, names=None):
+        return np.array([getattr(self, k) for k in (names or self.FREE)], float)
 
-    def with_vector(self, v):
-        d = asdict(self); d.update(dict(zip(self.FREE, map(float, v))))
+    def with_vector(self, v, names=None):
+        d = asdict(self); d.update(dict(zip(names or self.FREE, map(float, v))))
         return Shell(**d)
 
     def bounds(self, pad=1.0):
-        lo = np.array([min(self.body_x - self.body_w, self.head_x - self.head_w * 1.5) - pad, -pad,
-                       min(self.body_z - self.body_w * self.depth_ratio, self.head_z - self.head_w * 1.5) - pad])
-        hi = np.array([max(self.body_x + self.body_w, self.head_x + self.head_w * 1.5) + pad,
-                       max(self.body_y + self.body_h, self.head_y + self.head_h * 1.5) + pad,
-                       max(self.body_z + self.body_w * self.depth_ratio, self.head_z + self.head_w * 1.5) + pad])
+        bc, hc = self.depths()
+        reach = max(self.head_w, self.head_h, hc) * 1.2 + (abs(self.muzzle_z) + self.muzzle_c if self.muzzle_w > 0 else 0)
+        lo = np.array([min(self.body_x - self.body_w, self.head_x - reach) - pad, -pad,
+                       min(self.body_z - bc, self.head_z - reach) - pad])
+        hi = np.array([max(self.body_x + self.body_w, self.head_x + reach) + pad,
+                       max(self.body_y + self.body_h, self.head_y + reach) + pad,
+                       max(self.body_z + bc, self.head_z + reach) + pad])
         return lo, hi
 
 

@@ -134,6 +134,113 @@ def fit(cam, lm, facing):
                     nose_off_surface_cm=round(float(sh.sdf(nose)[0]), 3), fit_scale=FIT_SCALE), (cs, frac, care)
 
 
+# ---------------------------------------------------------------- the face's depth, from the light on his fur
+SHADE_WEIGHT = 0.25       # shading residuals (grey levels / 20) relative to silhouette residuals (0..1)
+
+
+def fur_shading(W, H):
+    """His fur's large-scale brightness (fur texture blurred away), and where it can be read: inside his outline,
+    away from the fuzzy fringe, not his ears / peets / tuft (separate parts), not his eyes, eye marks, mouth
+    lines (dark) or his pink nose (not white fur). His grey-blue chest IS shading and stays in."""
+    from matplotlib.path import Path as MP
+    rgb = np.array(Image.open(ROOT / "data/photos/anchor_front.webp").convert("RGB")).astype(float)
+    L = rgb.mean(2)
+    outline = np.array(load("data/strands/body_outline.json")["sampled_curve"])
+    yy, xx = np.mgrid[0:H, 0:W] + 0.5; P = np.c_[xx.ravel(), yy.ravel()]
+    ins = MP(outline).contains_points(P).reshape(H, W)
+    skip = np.zeros(H * W, bool)
+    for f in ("data/strands/parts_ears.json", "data/strands/parts_peets.json"):
+        for v in load(f)["parts"].values():
+            skip |= MP(np.array(v["exterior"])).contains_points(P)
+    skip = skip.reshape(H, W)
+    dark = (L < 70) | (L < ndi.gaussian_filter(L, 15) - 40)
+    pink = (rgb[..., 0] - rgb[..., 2]) > 15
+    feature = ndi.binary_dilation(dark | pink, iterations=5)
+    valid = ins & (ndi.distance_transform_edt(ins) > 18) & ~skip & ~feature
+    m = valid.astype(float)
+    Lb = ndi.gaussian_filter(L * m, 6) / np.maximum(ndi.gaussian_filter(m, 6), 1e-6)
+    return Lb, valid
+
+
+def normals(sh, Q, e=0.02):
+    n = np.stack([sh.sdf(Q + [e, 0, 0]) - sh.sdf(Q - [e, 0, 0]), sh.sdf(Q + [0, e, 0]) - sh.sdf(Q - [0, e, 0]),
+                  sh.sdf(Q + [0, 0, e]) - sh.sdf(Q - [0, 0, e])], 1)
+    return n / np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
+
+
+def shading_fit(sh, cam_small, obs, use, steps=72):
+    """Light the shell with the soft light that best explains his fur (ambient + one direction, solved exactly
+    for each shape): returns residual per used pixel (0 where the shell misses), R2, the light."""
+    ys, xs = np.mgrid[0:cam_small.height, 0:cam_small.width] + 0.5
+    d = cam_small.ray(np.c_[xs.ravel(), ys.ravel()])[use]
+    hit, _ = trace(sh, cam_small.C, d, steps=steps, t0=5.0, t1=45.0)
+    h = np.isfinite(hit)
+    res = np.zeros(len(d)); r2, light = 0.0, np.zeros(4)
+    if h.sum() > 50:
+        n = normals(sh, cam_small.C + d[h] * hit[h][:, None])
+        A = np.c_[np.ones(h.sum()), n]; light, *_ = np.linalg.lstsq(A, obs[h], rcond=None)
+        pred = A @ light; res[h] = obs[h] - pred
+        r2 = 1 - ((obs[h] - pred) ** 2).sum() / max(((obs[h] - obs[h].mean()) ** 2).sum(), 1e-9)
+    return res, float(r2), light, h
+
+
+def eye_check(sh, cam, lm):
+    """HELD OUT of the fit: does the shell make his eyes face the way their ovals say? An eye is round; seen at an
+    angle it is an oval with short/long = cos(angle between the line of sight and the way the eye faces)."""
+    out = {}
+    for k in ("eye_his_right", "eye_his_left"):
+        r = cam.ray([lm[k]["at_px"]])[0]
+        hit, _ = trace(sh, cam.C, r[None], steps=200, t0=5.0, t1=45.0)
+        if not np.isfinite(hit[0]):
+            out[k] = None; continue
+        n = normals(sh, (cam.C + r * hit[0])[None])[0]
+        out[k] = dict(shell_deg=round(float(np.degrees(np.arccos(np.clip(-r @ n, -1, 1)))), 1),
+                      eye_oval_deg=round(float(np.degrees(np.arccos(lm[k]["oval"]["short_over_long"]))), 1))
+    return out
+
+
+def fit_face(cam, lm, start):
+    """Fit the shell's face and body depth to his outline, the light on his fur and his nose (eyes held out)."""
+    from scipy.optimize import least_squares
+    W, H = cam.width, cam.height
+    cs = scaled(cam, FIT_SCALE)
+    frac, care = masks(cs, W, H)
+    Lb, valid = fur_shading(W, H)
+    ys, xs = np.mgrid[0:cs.height, 0:cs.width] + 0.5
+    px = np.clip((np.c_[xs.ravel(), ys.ravel()] / FIT_SCALE).astype(int), 0, [W - 1, H - 1])
+    use = valid[px[:, 1], px[:, 0]] & (frac.ravel() > 0.99)
+    obs = Lb[px[use, 1], px[use, 0]]
+    nose = cam.C + 15.24 * cam.ray([lm["nose_y_centre"]["at_px"]])[0]
+    chin = cam.C + cam.ray([lm["chin_midline"]["at_px"]])[0] * 16.24
+    names = Shell.FREE_FACE
+    lo_b = dict(body_w=2, body_h=2, head_w=1.5, head_h=1.5, blend=0.3, body_c=2, head_c=1.5, muzzle_w=0.5, muzzle_h=0.5,
+                muzzle_c=0.3, muzzle_blend=0.2, body_y=0.5, muzzle_z=-2.0, muzzle_y=-6.0)
+    hi_b = dict(body_w=12, body_h=12, head_w=9, head_h=9, blend=3.0, body_c=14, head_c=10, muzzle_w=4, muzzle_h=4,
+                muzzle_c=4, muzzle_blend=2.0, body_y=12, muzzle_z=8.0, muzzle_y=2.0)
+    lo = np.array([lo_b.get(k, -30.0) for k in names]); hi = np.array([hi_b.get(k, 30.0) for k in names])
+    x0 = np.clip(start.vector(names), lo + 1e-6, hi - 1e-6)
+    n_eval = [0]
+
+    def residuals(v):
+        n_eval[0] += 1
+        sh = start.with_vector(v, names)
+        sil = silhouette(sh, cs)
+        r_sil = (sil - frac)[care]
+        r_sh, _, _, _ = shading_fit(sh, cs, obs, use)
+        bad = [max(0.0, sh.body_y - sh.body_h), max(0.0, sh.body_h - sh.head_y + 0.5),
+               max(0.0, abs((sh.head_y - sh.head_h) - chin[1]) - 1.0)]
+        return np.r_[r_sil, SHADE_WEIGHT * r_sh / 20.0, float(sh.sdf(nose)[0]) / 0.1, 10 * np.array(bad)]
+    t0 = time.time()
+    r = least_squares(residuals, x0, bounds=(lo, hi), diff_step=0.02, x_scale=0.5, max_nfev=60, verbose=0)
+    sh = start.with_vector(r.x, names)
+    sil = silhouette(sh, cs) > 0.5; tgt = frac > 0.5
+    iou = float((sil & tgt & care).sum() / max(((sil | tgt) & care).sum(), 1))
+    _, r2, light, _ = shading_fit(sh, cs, obs, use)
+    return sh, dict(iou_scored=round(iou, 4), shading_r2=round(r2, 3), light_ambient_xyz=np.round(light, 1).tolist(),
+                    nose_off_surface_cm=round(float(sh.sdf(nose)[0]), 3), evaluations=n_eval[0],
+                    seconds=round(time.time() - t0, 1), cost=float(r.cost), eyes_held_out=eye_check(sh, cam, lm)), (cs, obs, use)
+
+
 # ---------------------------------------------------------------- the lines and views
 REGION_COLOURS = {1: (235, 140, 30), 2: (60, 160, 230), 3: (140, 90, 230), 5: (70, 190, 90), 6: (220, 50, 50),
                   7: (0, 150, 150), 8: (200, 170, 0)}
@@ -339,7 +446,37 @@ def photo_mask(W, H, s):
     return Image.fromarray((m * 255).astype(np.uint8)).resize((W * s, H * s), Image.NEAREST)
 
 
+def face_start(cam, lm, sh):
+    """Start for the face fit: the outline-only shell, plus a muzzle at his whisker pads (the approved pad outline,
+    data/strands/whiskers_full.json), its size from that outline at his nose's distance."""
+    ring = np.array(load("data/strands/whiskers_full.json")["pads"]["muzzle_ring"])
+    nose = cam.C + 15.24 * cam.ray([lm["nose_y_centre"]["at_px"]])[0]
+    depth = float((nose - cam.C) @ cam.forward) + 0.5
+    half_w = (ring[:, 0].max() - ring[:, 0].min()) / 2 * depth / cam.f
+    half_h = (ring[:, 1].max() - ring[:, 1].min()) / 2 * depth / cam.f
+    local = (nose - [sh.head_x, sh.head_y, sh.head_z]) @ sh.head_rotation()
+    from dataclasses import replace
+    return replace(sh, body_c=sh.body_w * sh.depth_ratio, head_c=sh.head_w * sh.depth_ratio, muzzle_w=float(half_w),
+                   muzzle_h=float(half_h), muzzle_c=1.2, muzzle_y=float(local[1] - 0.6), muzzle_z=float(local[2] - 1.2),
+                   muzzle_blend=0.8)
+
+
 def main() -> int:
+    if "--face" in sys.argv:
+        cam = Camera.from_dict(load("data/cameras.json")["anchor_front"])
+        lm = load("data/strands/landmarks.json")["landmarks"]
+        old = load("data/scene/shell.json")
+        start = face_start(cam, lm, Shell(**old["shell"]))
+        sh, q, _ = fit_face(cam, lm, start)
+        print(json.dumps(asdict(sh), indent=1)); print(json.dumps(q, indent=1))
+        (ROOT / "data/scene/shell.json").write_text(json.dumps(dict(
+            about="Rough parametric shell for the depth lines (prince/shell.py). NOT the model. Its face and body depth "
+                  "fitted to his outline, the light on his fur, and his nose (his eye directions held out as a check).",
+            shell=asdict(sh), fit=q, outline_only_fit_before=old["fit"],
+            assumed="his back (not seen by the camera)"), indent=1))
+        if "--nodraw" not in sys.argv:
+            draw(sh)
+        return 0
     if "--draw" in sys.argv and (ROOT / "data/scene/shell.json").exists():
         sh = Shell(**load("data/scene/shell.json")["shell"])
         draw(sh)
