@@ -199,8 +199,18 @@ def eye_check(sh, cam, lm):
     return out
 
 
-def fit_face(cam, lm, start):
-    """Fit the shell's face and body depth to his outline, the light on his fur and his nose (eyes held out)."""
+EYE_SD_DEG = 3.0          # how closely the shell must turn his eyes the way their ovals say
+
+
+def eye_rays(cam, lm):
+    return {k: (cam.ray([lm[k]["at_px"]])[0], float(np.degrees(np.arccos(lm[k]["oval"]["short_over_long"]))))
+            for k in ("eye_his_right", "eye_his_left")}
+
+
+def fit_face(cam, lm, start, use_eyes=True, start_outline_only=None):
+    """Fit the shell's face and body depth to his outline, his eye directions (each eye is round: its oval says how
+    far it faces away from the camera), the light on his fur, and his nose. No part thinner than 0.9 of its
+    width (he is round, owner). use_eyes=False: eyes held out (that first try flattened his body into a slab)."""
     from scipy.optimize import least_squares
     W, H = cam.width, cam.height
     cs = scaled(cam, FIT_SCALE)
@@ -213,6 +223,7 @@ def fit_face(cam, lm, start):
     nose = cam.C + 15.24 * cam.ray([lm["nose_y_centre"]["at_px"]])[0]
     chin = cam.C + cam.ray([lm["chin_midline"]["at_px"]])[0] * 16.24
     names = Shell.FREE_FACE
+    eyes = eye_rays(cam, lm)
     lo_b = dict(body_w=2, body_h=2, head_w=1.5, head_h=1.5, blend=0.3, body_c=2, head_c=1.5, muzzle_w=0.5, muzzle_h=0.5,
                 muzzle_c=0.3, muzzle_blend=0.2, body_y=0.5, muzzle_z=-2.0, muzzle_y=-6.0)
     hi_b = dict(body_w=12, body_h=12, head_w=9, head_h=9, blend=3.0, body_c=14, head_c=10, muzzle_w=4, muzzle_h=4,
@@ -227,16 +238,30 @@ def fit_face(cam, lm, start):
         sil = silhouette(sh, cs)
         r_sil = (sil - frac)[care]
         r_sh, _, _, _ = shading_fit(sh, cs, obs, use)
+        bc, hc = sh.depths()
         bad = [max(0.0, sh.body_y - sh.body_h), max(0.0, sh.body_h - sh.head_y + 0.5),
-               max(0.0, abs((sh.head_y - sh.head_h) - chin[1]) - 1.0)]
-        return np.r_[r_sil, SHADE_WEIGHT * r_sh / 20.0, float(sh.sdf(nose)[0]) / 0.1, 10 * np.array(bad)]
+               max(0.0, abs((sh.head_y - sh.head_h) - chin[1]) - 1.0),
+               max(0.0, 0.9 * sh.body_w - bc), max(0.0, 0.9 * sh.head_w - hc)]
+        r_eye = []
+        if use_eyes:
+            for r, want in eyes.values():
+                hit, _ = trace(sh, cam.C, r[None], steps=160, t0=5.0, t1=45.0)
+                if np.isfinite(hit[0]):
+                    n = normals(sh, (cam.C + r * hit[0])[None])[0]
+                    r_eye.append((float(np.degrees(np.arccos(np.clip(-r @ n, -1, 1)))) - want) / EYE_SD_DEG)
+                else:
+                    r_eye.append(10.0)
+        return np.r_[r_sil, SHADE_WEIGHT * r_sh / 20.0, float(sh.sdf(nose)[0]) / 0.1, 10 * np.array(bad), np.array(r_eye)]
     t0 = time.time()
     r = least_squares(residuals, x0, bounds=(lo, hi), diff_step=0.02, x_scale=0.5, max_nfev=60, verbose=0)
     sh = start.with_vector(r.x, names)
     sil = silhouette(sh, cs) > 0.5; tgt = frac > 0.5
     iou = float((sil & tgt & care).sum() / max(((sil | tgt) & care).sum(), 1))
     _, r2, light, _ = shading_fit(sh, cs, obs, use)
+    _, r2_start, light0, _ = shading_fit(start_outline_only, cs, obs, use) if start_outline_only is not None else (0, None, None, 0)
     return sh, dict(iou_scored=round(iou, 4), shading_r2=round(r2, 3), light_ambient_xyz=np.round(light, 1).tolist(),
+                    shading_r2_outline_only_shell=None if r2_start is None else round(r2_start, 3),
+                    eyes_used_in_fit=use_eyes,
                     nose_off_surface_cm=round(float(sh.sdf(nose)[0]), 3), evaluations=n_eval[0],
                     seconds=round(time.time() - t0, 1), cost=float(r.cost), eyes_held_out=eye_check(sh, cam, lm)), (cs, obs, use)
 
@@ -467,11 +492,11 @@ def main() -> int:
         lm = load("data/strands/landmarks.json")["landmarks"]
         old = load("data/scene/shell.json")
         start = face_start(cam, lm, Shell(**old["shell"]))
-        sh, q, _ = fit_face(cam, lm, start)
+        sh, q, _ = fit_face(cam, lm, start, start_outline_only=Shell(**old["shell"]))
         print(json.dumps(asdict(sh), indent=1)); print(json.dumps(q, indent=1))
         (ROOT / "data/scene/shell.json").write_text(json.dumps(dict(
             about="Rough parametric shell for the depth lines (prince/shell.py). NOT the model. Its face and body depth "
-                  "fitted to his outline, the light on his fur, and his nose (his eye directions held out as a check).",
+                  "fitted to his outline, his eye directions, the light on his fur and his nose.",
             shell=asdict(sh), fit=q, outline_only_fit_before=old["fit"],
             assumed="his back (not seen by the camera)"), indent=1))
         if "--nodraw" not in sys.argv:
