@@ -37,27 +37,27 @@ pitch > 0 = above looking down, roll > 0 = camera turned clockwise (the room loo
 
 Cameras live in `data/cameras.json`, one entry per photo.
 
-## The anchor camera: as the owner remembers the shot (lens provisional)
+## The anchor camera: as the owner remembers the shot
 
-Owner, 2026-11-16: straight on, no more than six inches away, "basically exactly at his eye level. Maybe
-just a tiny bit lower", looking level or "ever so slightly up"; he sat on a soft surface; the picture was
-cropped when his background was removed. The photo carries no camera data. Placed like that
-(`tools/scene.py`, `data/cameras.json`):
+Owner, 2026-11-16: straight on, "roughly 6 inches away from the camera" ("it couldn't have been more"),
+"basically exactly at his eye level. Maybe just a tiny bit lower", looking level or "ever so slightly up";
+he sat on a soft surface; the picture was cropped when his background was removed. The photo carries no
+camera data. Placed like that (`tools/scene.py`, `data/cameras.json`):
 
 | Input | Value | From |
 |---|---|---|
-| Distance, camera to his nose | 13 cm (range 10-15.24) | owner |
+| Distance, camera to his nose | 15.24 cm, six inches (range 12-15.24) | owner |
 | Height | his eyes 0.5 cm above the camera (range 0-1) | owner ("a tiny bit lower") |
 | Tilt | level, tilted up 1 deg (range 0-2); not turned, not rolled | owner ("straight on", "ever so slightly up") |
-| Aim point in the picture | x 548 (his nose), y 482 (puts his eyes a touch above the camera); NOT the picture's centre (lesson 26) | owner's memory + the photo |
-| Lens | 1428 px: a 26 mm-equivalent phone main camera, the picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it (the SHORTEST lens that fits) | **PROVISIONAL** |
+| Aim point in the picture | x 548 (his nose), y 476 (puts his eyes a touch above the camera); NOT the picture's centre (lesson 26) | owner's memory + the photo |
+| Lens | 1437 px: the SHORTEST lens that fits (a 26 mm-equivalent phone main camera, the picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it). Any longer lens makes him 5-9 cm across, hamster-sized, so it fails the owner's check "is this the size of a little fluffy rabbit?" | the photo + owner's size check |
 | His peets' front | right under the front of his face | assumed |
 
-Result: camera 6.5 cm above the surface, 12.8 cm in front of the origin, level (tilted up 1 deg). His nose
-4.4 cm up; his widest outline is 7.5 cm across at his nose's distance (he is wider: his sides are further
-back). A longer lens (tighter crop, or zoom) makes him smaller; **his real size fixes it** (his width across
-his widest point, or his height to the top of his head). In the 3D page the floor's horizon runs through
-his eyes, as a level camera at his eye level should.
+Result: camera 7.7 cm above the surface, 15.0 cm in front of the origin, level (tilted up 1 deg).
+**His size (rough, `his_size_estimate_cm` in `data/cameras.json`): about 12.3 cm wide, 10.5 cm to the top
+of his head, ear tips 11.3 cm, eyes 8.2 cm up, nose 5.1 cm up**: a little fluffy rabbit. A measurement of
+him (width across his widest point, or height to the top of his head) would confirm it.
+In the 3D page the floor's horizon runs through his eyes, as a level camera at his eye level should.
 
 Nothing measured depends on these numbers: landmarks and part outlines stay in picture pixels, and the
 rays are recomputed from them whenever the camera changes.
@@ -100,12 +100,19 @@ With the camera fixed as above, from the photo:
 - The thin strip joining his ears is the top of his head seen from above; the underfluff tuft between
   his peets is his belly. In 3D they are where his top and his belly start going back.
 
-## Next steps (owner reviews each)
+## The 3D grounding steps (owner reviews each)
 
-4. Done as far as the photo allows (above): camera as the owner remembers it; how he faces. Still open:
-   his real size (fixes the lens), and his head's nod (needs his depth).
-5. Depth lines: a first rough round shell from the outline rule (his surface is edge-on along his
-   outline) and his symmetry, the parts painted on it; floor grid, midline and wrap-around rings drawn
-   back onto the photo; side and top views.
-6. When a new angle arrives: solve its camera from the landmarks, project the parts, compare, and only
-   then use it for depth.
+1. Define the room: done.
+2. Name the landmarks: done.
+3. Every part and boundary as rays from the anchor camera: done.
+4. Place the anchor camera (as the owner remembers the shot) and work out how he is being looked at:
+   done (above). Open: his head's nod (needs depth).
+5. **Next: depth lines.** A first rough round shell from the outline rule (his surface is edge-on along
+   his outline), his symmetry and his size, with his parts painted on it; floor grid, midline and
+   wrap-around rings drawn back onto the photo; side and top views.
+6. When the owner adds another angle: solve its camera from the landmarks, project his parts, compare,
+   and only then use it for depth.
+
+After the 3D grounding, the broader plan resumes (`docs/PLAN.md`, `docs/STRAND_PLAN.md`): the paused part
+steps (ears' pixel tweaks, eyes / lashes / hotot marks, whisker pads, mouth, nose, Bnuy Perturbances),
+then building and fitting the 3D model.

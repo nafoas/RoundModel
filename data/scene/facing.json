@@ -2,19 +2,19 @@
  "about": "How Prince is being looked at in the anchor photo: how his head and body are turned and tipped relative\nto the camera (owner, 2026-11-16: \"place the camera about six inches away ... exactly as it was when I\ncaptured it, and then determine what way he is being looked at\").",
  "camera": "data/cameras.json anchor_front (as the owner remembers the shot; lens provisional)",
  "head": {
-  "turned_deg": 9.0,
-  "tipped_deg": 5.2,
+  "turned_deg": 9.1,
+  "tipped_deg": 5.1,
   "meaning": "turned + = toward his own left (his nose toward the picture's right, his right cheek nearer the camera); tipped + = his left side up (a little head tilt toward his right)",
   "left_right_axis_room": [
-   0.98357,
-   0.08984,
-   -0.15661
+   0.98345,
+   0.08917,
+   -0.1577
   ],
   "pair_misfit_deg": {
    "eye": 0.35,
    "nostril_wing": 0.4,
    "mouth_corner": 3.61,
-   "lip_corner": 3.18,
+   "lip_corner": 3.17,
    "ear_base_inner": 2.57,
    "ear_base_outer": 2.23
   },
@@ -25,16 +25,16 @@
    ],
    "tipped": [
     4.7,
-    5.6
+    5.5
    ]
   },
   "leave_one_pair_out": {
    "without eye pair": [
-    8.8,
+    8.9,
     5.2
    ],
    "without nostril_wing pair": [
-    9.3,
+    9.4,
     5.2
    ],
    "without mouth_corner pair": [
@@ -42,33 +42,33 @@
     4.5
    ],
    "without lip_corner pair": [
-    15.6,
+    15.7,
     5.6
    ],
    "without ear_base_inner pair": [
-    14.6,
-    4.1
+    14.7,
+    4.0
    ],
    "without ear_base_outer pair": [
-    4.5,
+    4.6,
     6.0
    ]
   },
   "over_the_owners_ranges": {
    "turned": [
-    8.3,
+    8.4,
     9.8
    ],
    "tipped": [
     4.8,
-    5.6
+    5.5
    ]
   }
  },
  "eyes_check": {
   "turn_deg": 5.5,
-  "eyes_face_this_far_to_the_side_deg": 53.3,
-  "fit_residual": 0.0006,
+  "eyes_face_this_far_to_the_side_deg": 53.4,
+  "fit_residual": 0.0004,
   "ovals": {
    "eye_his_left": 0.424,
    "eye_his_right": 0.556
@@ -78,14 +78,14 @@
   "turned_deg": -3.3,
   "peets_on_the_surface_cm": [
    [
-    1.31,
+    1.52,
     0.0,
-    0.08
+    0.09
    ],
    [
-    -1.32,
+    -1.54,
     0.0,
-    -0.08
+    -0.09
    ]
   ],
   "over_the_owners_ranges": [
@@ -102,13 +102,13 @@
   ],
   "landmark_wobble_2sd_turned": [
    -2.6,
-   18.9
+   19.0
   ],
   "note": "the two pairs that fit best (misfit < 0.5 deg); two pairs alone leave the turn loose"
  },
  "summary": {
   "tipped": "his left side up, about 5 deg (4-6 whatever is left out or wobbled): SOLID",
-  "turned": "toward his own left (his nose toward the picture's right), about 5-9 deg: the DIRECTION is solid (the mirror pairs 9.0, the eye ovals 5.5, his nose right of the middle of his eyes all agree); the AMOUNT is not yet (the pairs disagree: mouth, lip corners and ear bases can be truly lopsided; pixel uncertainty alone allows roughly 0-15 deg). It firms up with his round shell or another photo",
+  "turned": "toward his own left (his nose toward the picture's right), about 5-9 deg: the DIRECTION is solid (the mirror pairs 9.1, the eye ovals 5.5, his nose right of the middle of his eyes all agree); the AMOUNT is not yet (the pairs disagree: mouth, lip corners and ear bases can be truly lopsided; pixel uncertainty alone allows roughly 0-15 deg). It firms up with his round shell or another photo",
   "body": "rough: about 3 deg toward his right (from his peets' lowest points)",
   "head_vs_body": "his head is turned toward his left on his body and tipped; the camera was straight on and level"
  },

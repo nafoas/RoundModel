@@ -159,3 +159,9 @@ to the outline.
   part-by-part and strand-by-strand: `docs/STRAND_PLAN.md`.
 - **Owner's definition:** fluff under the feet and the full length of wispy
   hairs, *including their bases*, belong to the wisp layer, not the body.
+
+## His size (2026-11-16, from the anchor photo and the owner's memory of the shot; rough)
+About **12.3 cm wide, 10.5 cm to the top of his head, ear tips 11.3 cm, eyes 8.2 cm and nose 5.1 cm above
+the surface he sits on** (`data/cameras.json`, `his_size_estimate_cm`; how: `docs/SPACE.md`). Owner's
+check for any measurement of him: "is this the size of a little fluffy rabbit?" A tape measure (width
+across his widest point, or height to the top of his head) would confirm it.

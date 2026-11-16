@@ -98,6 +98,12 @@ excuse and was withdrawn.)
   **Owner's method for step 4:** place the camera about six inches from him, straight on, a touch below
   his eye level, exactly as it was, and then determine from the photo how HE is being looked at (how
   he is turned), rather than tilting the camera to fit.
+- **His size from the shot** (owner, 2026-11-16): "he was roughly 6 inches away from the camera, I
+  remember that, you could use that to find his size"; and "he is a very round fluffy little guy ... it
+  is pretty easy to see if your measurements are good by simply asking 'is this the size of a little
+  fluffy rabbit?'" Distance alone needs the lens; the size check picks it: only the shortest lens that
+  fits gives a little fluffy rabbit (about 12 cm wide, 10.5 cm to the top of his head); longer lenses give
+  5-9 cm. **The size check is a standing test for every measurement of him.**
 
 ## Edges
 

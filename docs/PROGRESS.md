@@ -833,3 +833,18 @@ check.py output (if applicable), and the next step.
   his eyes, as a level camera at eye level should. Tested in headless Chromium: no errors.
 - Tests: 49 passed.
 - **Next:** owner review; his real size would fix the lens. Then depth lines (rough round shell).
+
+## 2026-11-16 — Session 6 (cont.): his size from six inches
+- Owner: "he was roughly 6 inches away from the camera ... you could use that to find his size"; check any
+  measurement with "is this the size of a little fluffy rabbit?". Asked which step this was: the 3D
+  grounding steps are now listed in `docs/SPACE.md` (1-4 done, 5 depth lines next, 6 new angles).
+- Distance alone needs the lens (size = distance x how much of the view he fills, and how much of the
+  view a pixel covers depends on the lens and the crop). Tabled his size for lenses from the shortest that
+  fits (1428-1437 px) to 2x: only the shortest gives a little fluffy rabbit (12.4 x 10.6 cm at six
+  inches); 1.15x already gives 10.3 x 9.2, 1.5x 7.3 x 7.1, 2x 5.2 x 5.4. So: distance 15.24 cm (six inches),
+  lens = the shortest that fits (1437 px), no longer marked provisional. Camera 7.7 cm up, 15.0 cm in
+  front; his size (rough): 12.3 cm wide, 10.5 cm to the top of his head, ear tips 11.3, eyes 8.2, nose
+  5.1 (`his_size_estimate_cm`, new `size_estimate()` in `tools/scene.py`). How he faces is unchanged
+  (tipped 5.1, turned 9.1 by the pairs). Docs: SPACE (steps list), DECISIONS (size check as a standing
+  test), PRINCE_SPEC (his size), Q44, PLAN. Tests: 49 passed.
+- **Next:** step 5 of the 3D grounding, depth lines, on the owner's go.

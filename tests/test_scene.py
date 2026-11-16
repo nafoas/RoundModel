@@ -25,7 +25,7 @@ def test_anchor_camera_is_placed_as_the_owner_remembers_the_shot():
     assert -2.0 <= pitch <= 0.0                                  # level, or tilted up a touch (owner)
     assert abs(cam.cx - lm["nose_y_centre"]["at_px"][0]) < 1e-6  # aimed at his face, not the picture's centre
     nose = cam.ray([lm["nose_y_centre"]["at_px"]])[0]
-    nose_pt = cam.C + 13.0 * nose                                # owner: no more than six inches away
+    nose_pt = cam.C + 15.24 * nose                               # owner: roughly six inches away
     assert abs(nose_pt[1] - doc["nose_height_cm"]) < 0.01
     eyes = (np.array(lm["eye_his_left"]["at_px"]) + np.array(lm["eye_his_right"]["at_px"])) / 2
     up = np.degrees(np.arcsin(cam.ray([eyes])[0][1]))

@@ -48,12 +48,14 @@ def main() -> int:
     lines = [dict(name=s["name"], ends=ends(s["directions_room"])) for s in rays["sets"] if s["name"] != "his outline"]
     lms = [dict(name=s["name"], part=s["part"], kind=s["kind"], end=ends(s["directions_room"])[0]) for s in rays["landmarks"]]
     facing = None
+    import re as _re
+    cam_d = float(_re.search(r"camera to his nose ([0-9.]+) cm", cam["inputs"]["distance"]).group(1))
     fpath = ROOT / "data/scene/facing.json"
     if fpath.exists():                                   # how he is turned (tools/facing.py), drawn where he is
         fd = json.loads(fpath.read_text())
         lmk = {s["name"]: np.array(s["directions_room"][0]) for s in rays["landmarks"]}
         eyes_dir = lmk["eye_his_left"] + lmk["eye_his_right"]; eyes_dir /= np.linalg.norm(eyes_dir)
-        E = C + eyes_dir * 15.0                          # his eyes ~2 cm behind his nose, ~13 cm away (approximate)
+        E = C + eyes_dir * (cam_d + 2.0)                 # his eyes ~2 cm behind his nose (approximate)
         Xh = np.array(fd["head"]["left_right_axis_room"]); up = np.array([0.0, 1.0, 0.0])
         Yh = up - (up @ Xh) * Xh; Yh /= np.linalg.norm(Yh); Zh = np.cross(Xh, Yh)
         Pb = np.array(fd["body"]["peets_on_the_surface_cm"]); Xb = Pb[0] - Pb[1]; Xb /= np.linalg.norm(Xb)
@@ -95,8 +97,9 @@ PAGE = r"""<!DOCTYPE html>
  <h1>Prince's room</h1>
  <p>Centimetres. Floor grid 2 cm. <b>+X</b> his left, <b>+Y</b> up, <b>+Z</b> his forward; origin on the floor under the
  front of his peets. Every pixel of the photo is a ray from the camera: he is somewhere along each one (how far is a later step).
- The camera is placed as the owner remembers the shot (straight on, about 13 cm from his nose, a touch below his eye
- level); its lens is <b>PROVISIONAL</b> until we know his real size.</p>
+ The camera is placed as the owner remembers the shot (straight on, about six inches from his nose, a touch below his eye
+ level). Lens: the shortest that fits, which makes him a little fluffy rabbit (about 12 cm wide, 10.5 cm to the top of his
+ head); any longer lens would make him too small.</p>
  <p><span class="key" style="background:#eb8c1e"></span>head<span class="key" style="background:#3ca0e6"></span>intermediate
  <span class="key" style="background:#8c5ae6"></span>undercarriage<span class="key" style="background:#46be5a"></span>ears
  <span class="key" style="background:#148c3c"></span>top of head<span class="key" style="background:#dc3232"></span>/<span class="key" style="background:#c8aa00"></span>peets
@@ -161,7 +164,7 @@ scene.add(gFace);
 // ---- labels
 const tags = []; function tag(text, p, colour){ const el=document.createElement('div'); el.className='tag'; el.textContent=text; el.style.color=colour||'#111'; document.body.appendChild(el); tags.push({el,p:p.clone()}); }
 tag('origin', new THREE.Vector3(0,0,0)); tag('+X his left', V([4.3,0,0]),'#c02020'); tag('+Y up', V([0,4.3,0]),'#208020'); tag('+Z his forward', V([0,0,4.3]),'#2040c0');
-tag('anchor camera (lens provisional)', C.clone().addScaledVector(up,1.0));
+tag('anchor camera', C.clone().addScaledVector(up,1.0));
 if (D.facing){ tag('head faces', V(D.facing.head[3]), '#1f5adc'); tag('body faces', V(D.facing.body[3]), '#c81e1e'); } tag(C.y.toFixed(1)+' cm up', C.clone().add(foot).multiplyScalar(0.5));
 tag(Math.hypot(C.x,C.z).toFixed(1)+' cm away', foot.clone().multiplyScalar(0.5));
 D.landmarks.filter(l=>/^(eye_his_(left|right)|nose_y_centre|ear_tip_his_(left|right)|crown_front|chin_midline|belly_front|peet_bottom_his_(left|right))$/.test(l.name))

@@ -109,7 +109,7 @@ def main() -> int:
     outline = np.array(json.loads((ROOT / "data/strands/body_outline.json").read_text())["sampled_curve"])
     across = []
     for up in (0.0, 1.0, 2.0):
-        for d in (10.0, 13.0, 15.24):
+        for d in (12.0, 13.5, 15.24):
             for eyes_above in (0.0, 0.5, 1.0):
                 c2, _ = sc.anchor_camera(W, H, lm, outline, up=up, d_nose=d, eyes_above=eyes_above)
                 X2, _ = analyse(c2, lm); Xb2, _ = body_axis(c2, lm)
@@ -192,7 +192,7 @@ def sheet(photo, lm, cam, X, Xb, peets, doc):
                      f"{'right' if doc['body']['turned_deg'] < 0 else 'left'}.", fill=(0, 0, 0), font=small)
     d.text((10, 66), "orange: his mirror pairs; red: his peets' lowest points; blue: his head's left-right axis; "
                      "grey: level (the camera's left-right)", fill=(60, 60, 60), font=small)
-    d.text((10, 88), "Camera fixed as the owner remembers the shot (straight on, ~13 cm, a touch below eye level).",
+    d.text((10, 88), "Camera fixed as the owner remembers the shot (straight on, about six inches, a touch below eye level).",
            fill=(60, 60, 60), font=small)
     # top view: camera, his body axis (at his peets), his head axis (at his eyes)
     view = Camera.orbit([0, 0, 5.5], 200, yaw_deg=0, pitch_deg=89.5, f=6400, width=620, height=880)

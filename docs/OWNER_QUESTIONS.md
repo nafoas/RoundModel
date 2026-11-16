@@ -216,3 +216,6 @@ the owner's official opinion later. Each says what I did in the meantime.
    **Done (2026-11-16):** camera placed so (level, 13 cm, his eyes a touch above it, aimed at his face);
    he is tipped ~5 deg (his left side up) and turned ~5-9 deg toward his left (`docs/images/space/facing.png`).
    Still open: his real size: his width across his widest point, or his height to the top of his head.
+   **Answered (2026-11-16):** "roughly 6 inches away from the camera"; size check "is this the size of a
+   little fluffy rabbit?" -> the shortest lens that fits; he is about 12.3 cm wide, 10.5 cm to the top of
+   his head. A tape measure would still confirm it (optional).
