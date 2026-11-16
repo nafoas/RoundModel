@@ -907,3 +907,19 @@ check.py output (if applicable), and the next step.
   it is on top of his head, 5 cm behind his nose); an ellipsoid's exact centre read as surface (0/0).
 - Tests: 54 passed.
 - **Next:** owner review (Q45: how far back he goes; a side photo would measure it).
+
+## 2026-11-16 — Session 6 (cont.): owner: the face is flat; two fixes; still flat in the middle
+- Owner: "the resulting shape is very very flat ... you kept the actual part where depth was important flat,
+  then just rounded out the back. Determining face depth ... from what we can see, is far more important."
+- Cause: the shell was fitted to his outline only (lesson 28). Measured it: lighting the flat shell explains
+  only 72% of his fur's brightness (corrected mask: only eyes, eye marks, mouth lines and his pink nose left
+  out; his grey-blue chest kept, it had been wrongly dropped as "dark").
+- Shell given its own head/body depths and a muzzle (`prince/shell.py`). Fit 1 (outline + shading + nose,
+  eyes held out): squashed his body into a 4 cm slab, eye check worse (45/46 deg vs 56/65): not used.
+  Fit 2 (outline + both eye directions + shading + nose, no part thinner than 0.9 of its width): outline
+  97.3%, nose 0.8 mm, his right eye 55.9 vs 56.2 deg, his left 53.8 vs 64.9, shading 83% (vs 72% flat).
+- Measured per feature (cm behind his nose, flat -> new): eyes 1.7-2.0 -> 2.4-2.6, top of head 2.6 -> 4.5;
+  but nostril wings 0.3, mouth corners 0.0, chin 0.0, chest 0.2: **still flat in the middle**. Stopped
+  (rule 5): from one straight-on photo how far back his chin and chest sit is not settled (a chest further
+  back and bigger fits his outline as well; two equally good shading fits disagree about the light's
+  direction). Pictures redrawn from fit 2 but not presented as right. Owner's call: Q46.

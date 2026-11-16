@@ -448,4 +448,16 @@ excuse and was withdrawn.)
    bent the shapes to compensate. Also: the optimiser's first steps for settings that start at exactly 0
    are microscopic, so left-right positions never moved. Fixed both; 97.5% overlap. → Before tuning a
    model, check that a known answer scores perfectly (rule 8), and give every setting a real first step.
+28. **A flat face presented as depth** (owner, 2026-11-16: "the resulting shape is very very flat. You've not
+   effectively modeled his actual depth- you kept the actual part where depth was important flat, then just
+   rounded out the back"). Cause: the shell was fitted to his outline only, and an outline says nothing about
+   the surface inside it; the face was whatever two broad ellipsoids gave. → Measure the visible surface
+   with what the photo has inside the outline (eye directions, the light on his fur), and report depth as
+   numbers per feature (cm behind his nose), never only as pictures. Fix so far: head/body depths and a
+   muzzle, fitted to outline + eye directions + shading (shading explains 83% vs 72%); the first try
+   (shading, eyes held out) flattened his body into a slab and failed the eye check, so it was not used.
+   **Still flat in the middle**: his nostril wings, mouth, chin and chest sit within 3 mm of his nose's
+   depth. From one straight-on photo how far back his chin and chest sit is not settled: a chest further
+   back and bigger fits his outline as well, and the light on his fur does not fix the light's direction
+   (two equally good fits disagree). Owner's call (Q46).
 

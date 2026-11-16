@@ -108,26 +108,25 @@ With the camera fixed as above, from the photo:
 - The thin strip joining his ears is the top of his head seen from above; the underfluff tuft between
   his peets is his belly. In 3D they are where his top and his belly start going back.
 
-## Depth lines (step 5, first pass): `prince/shell.py`, `tools/depth_lines.py`
+## Depth lines (step 5): `prince/shell.py`, `tools/depth_lines.py`
 
-**A rough round shell, measured against his outline (rule 1: never built from it).** Two smoothly joined
-ellipsoids: his body, sitting into the surface he rests on (so his underside is flat), and his head with
-its measured turn and tip. Its 11 numbers were adjusted until its silhouette through the anchor camera
-matched his outline: 97.5% overlap over what was scored (his ears, peets and belly tuft are separate parts
-and were not scored), his nose on its surface (0.03 mm), his head ending at his chin (the approved head
-line), every one of 4 starting points agreeing. Result (rough): body 13.9 cm wide, top of his head
-13.4 cm. **It is a scaffold for the lines, not the model.**
+**A rough round shell, measured, never built from his outline (rule 1).** His body (sitting into the surface he
+rests on), his head (with its measured turn and tip) and his raised muzzle (whisker pads), smoothly joined, each
+with its own width, height and depth.
 
-**ASSUMED: how far back he goes.** One front photo cannot show it; the shell is drawn as deep as it is
-wide (round) until the owner says otherwise or a side photo shows it. Everything the camera did not see is
-hatched grey in the views.
+**First pass, owner: "very very flat"** (lesson 28): fitted to his outline only, its face was flat. Now fitted to
+his outline (97.3% overlap where scored), his two eye directions (each eye is round; its oval says how far it
+faces away: his right eye 55.9 deg on the shell vs 56.2 measured; his left 53.8 vs 64.9, its oval the least
+certain), his nose at six inches (0.8 mm), and checked against the light on his fur (explains 83% of its
+brightness, vs 72% for the flat shell).
 
-What the depth lines show (`docs/images/space/depth_lines.png`): level rings every 1 cm of height, and
-slices every 1 cm going back from the front of his face. **From six inches the camera sees only the front
-~5 cm of him**: the 5 cm slice is already at his outline. Everything behind that is hidden, which is why
-a photo-shaped flat mask was wrong. Views: `depth_side.png`, `depth_top.png`, `depth_behind.png` (the
-shell painted with his approved parts where the camera saw him), and in 3D: `docs/space/room.html`
-("his rough shell", "depth lines").
+**Still flat in the middle (not settled):** cm behind the front of his nose, new shell: nostril wings 0.3,
+mouth / lip corners 0.0-0.2, chin 0.0, chest (lower fold) 0.2, eyes 2.4-2.6, top of his head 4.5. From one
+straight-on photo how far back his chin and chest sit is not measurable: a chest further back and bigger fits
+his outline as well, and the light on his fur does not pin the light's direction. Owner's call (Q46).
+
+**ASSUMED: his back** (never seen; drawn round). Pictures: `docs/images/space/depth_*.png`, 3D:
+`docs/space/room.html`.
 
 ## The 3D grounding steps (owner reviews each)
 
@@ -136,7 +135,8 @@ shell painted with his approved parts where the camera saw him), and in 3D: `doc
 3. Every part and boundary as rays from the anchor camera: done.
 4. Place the anchor camera (as the owner remembers the shot) and work out how he is being looked at:
    done (above). Open: his head's nod (needs depth).
-5. Depth lines: first pass done (above). Open: how far back he goes (ASSUMED round).
+5. Depth lines: in progress (above): his face's sides and top now measured; the middle of his face and
+   his chest still flat (Q46).
 6. When the owner adds another angle: solve its camera from the landmarks, project his parts, compare,
    and only then use it for depth.
 

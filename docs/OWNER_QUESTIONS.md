@@ -229,3 +229,11 @@ the owner's official opinion later. Each says what I did in the meantime.
    `docs/space/room.html`. (a) Do the lines look like him going back? (b) How far back does he go: is he
    about as long front to back as he is wide when he loafs, or longer? (Drawn round for now.) A side photo
    of him loafing would measure it.
+   **Owner (2026-11-16):** "the resulting shape is very very flat ... you kept the actual part where depth
+   was important flat". Logged (lesson 28); see Q46.
+46. **The middle of his face is still flat (2026-11-16).** Measured, cm behind his nose: nostril wings 0.3,
+   mouth corners 0.0, chin 0.0, chest 0.2 (eyes 2.4-2.6, top of head 4.5). From this one photo how far back
+   his chin and chest sit is not settled. Ways to settle it: (a) a side photo of him (profile, any angle
+   near it; he can be loafing anywhere): measures it directly; (b) your guidance, e.g. how far his nose
+   sticks out past his chest, or a rough side sketch, marked owner-guided; (c) I try reading his midline's
+   light alone (forehead bright, under the muzzle dark) for its slope: objective but assumes light from above.
