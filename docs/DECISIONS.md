@@ -75,6 +75,12 @@ excuse and was withdrawn.)
 - Measured: the head-to-undercarriage join has no notch in the outline; it
   shows only as the chin fold and a change in fur texture (undercarriage fur is
   about twice as rough). He's widest at mouth/chin level.
+- **Why the parts exist: to trace every shape back** (owner, 2026-11-16): "so that we can trace
+  all the shapes back, and never lose sight of what actually makes him, him." Last time, the model
+  "would consistently misinterpret areas of him between shots of him, and be confused as to what
+  went to what". So before sculpting, his model is anchored in real 3D space (camera, floor, which
+  way he faces): the parts are what get carried from photo to photo and into 3D, so a region of
+  him keeps one identity in every shot.
 
 ## Edges
 
