@@ -66,7 +66,8 @@ about 1.5 cm).
 Result: camera 7.4 cm above the surface, 15.2 cm in front of the origin, level (tilted up 1 deg).
 **His size (rough, `his_size_estimate_cm` in `data/cameras.json`): about 15.5 cm wide, 12.7 cm to the top
 of his head, ear tips 13.6 cm, eyes 9.9 cm up, nose 6.0 cm up**: at the floor, so he may be a little
-bigger. A measurement of him (width across his widest point, or height to the top of his head) would pin it.
+bigger. **Owner-approved 2026-11-16: "those numbers seem to fit him"** (no tape measure, so as not to
+disturb him).
 In the 3D page the floor's horizon runs through his eyes, as a level camera at his eye level should.
 
 Nothing measured depends on these numbers: landmarks and part outlines stay in picture pixels, and the

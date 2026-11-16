@@ -110,7 +110,13 @@ excuse and was withdrawn.)
   what breed." Adult Netherland Dwarf: shoulder height 12.7-15.2 cm, length 19-23 cm, 0.9-1.1 kg
   (dimensions.com, Wikipedia). Floor used: the top of his head at least 12.7 cm. At six inches with the
   shortest lens that fits, that puts the camera 2.4 cm below his eyes (between his eye and nose height);
-  he comes out about 15.5 cm wide, 12.7 cm to the top of his head.
+  he comes out about 15.5 cm wide, 12.7 cm to the top of his head. **Owner: "those numbers seem to fit
+  him"** (approved; no tape measure, so as not to disturb him).
+- **What kind of rabbit he is** (owner, 2026-11-16): a dwarf of unknown breed, maybe half Dwarf Hotot,
+  half Netherland Dwarf (or Hotot x Polish). Fluffier and rounder than a purebred Dwarf Hotot, less
+  defined hotot eye rings, an even smoother face ("his little ridge between his eyes just gently slopes
+  down to his little mouth"), even less neck, even tinier ears. Kept in `docs/PRINCE_SPEC.md` as identity
+  features.
 
 ## Edges
 

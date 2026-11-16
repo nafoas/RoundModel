@@ -166,6 +166,18 @@ He is an adult dwarf of unknown breed (owner): **at least an adult Netherland Dw
 [dimensions.com](https://dimensions.com/element/netherland-dwarf-rabbit),
 [Wikipedia](https://en.wikipedia.org/wiki/Netherland_Dwarf_rabbit)). From the shot, at that floor: about
 **15.5 cm wide, 12.7 cm to the top of his head, ear tips 13.6 cm, eyes 9.9 cm and nose 6.0 cm above the
-surface he sits on** (`data/cameras.json`, `his_size_estimate_cm`; how: `docs/SPACE.md`). He may be a
-little bigger. Owner's check for any measurement of him: "is this the size of a little fluffy rabbit?" A
-tape measure (width across his widest point, or height to the top of his head) would pin it.
+surface he sits on** (`data/cameras.json`, `his_size_estimate_cm`; how: `docs/SPACE.md`).
+**Owner-approved 2026-11-16: "those numbers seem to fit him"** (no tape measure: the owner doesn't want to
+disturb him). Owner's check for any measurement of him: "is this the size of a little fluffy rabbit?"
+
+## What kind of rabbit he is (owner, 2026-11-16)
+A dwarf of some kind, breed unknown. Owner's guess: half Dwarf Hotot, half Netherland Dwarf (maybe Hotot x
+Polish, or something else entirely). Compared with a purebred Dwarf Hotot he is:
+- **incredibly fluffy**, and very round ("his fluffiness and sheer roundness to me rules out purebred dwarf
+  hotot ancestry");
+- **hotot eye rings, but less defined** (softer, thinner black rims);
+- **an even smoother face**: "his little ridge between his eyes just gently slopes down to his little
+  mouth" (one gentle, unbroken slope from brow to mouth: no stop, no bump);
+- **even less of a neck**;
+- **even tinier ears**.
+These are identity features: the model must keep all of them.

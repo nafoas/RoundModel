@@ -222,3 +222,4 @@ the owner's official opinion later. Each says what I did in the meantime.
    **Corrected (2026-11-16):** owner: too small, he's an adult; floor = an adult Netherland Dwarf (top of
    his head >= 12.7 cm) -> camera 2.4 cm below his eyes; he is about 15.5 cm wide, 12.7 cm to the top of
    his head (at the floor; maybe a little bigger).
+   **[ANSWERED 2026-11-16: "those numbers seem to fit him"; no tape measure.]**

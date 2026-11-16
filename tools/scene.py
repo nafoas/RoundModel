@@ -330,8 +330,9 @@ def main() -> int:
     sets, lmk, err, reg, F = build_rays(cam, lm)
     camdoc = {"about": "Cameras in Prince's room (prince/space.py). One entry per photo.",
               "anchor_front": dict(photo="data/photos/anchor_front.webp",
-                                   status="placed as the owner remembers the shot (2026-11-16); lens: the shortest "
-                                          "that fits, which gives a little fluffy rabbit (owner's size check)", **cam.to_dict(), **prov)}
+                                   status="placed as the owner remembers the shot (2026-11-16); his size from it, at "
+                                          "least an adult Netherland Dwarf, APPROVED by the owner ('those numbers "
+                                          "seem to fit him', 2026-11-16)", **cam.to_dict(), **prov)}
     (ROOT / "data/cameras.json").write_text(json.dumps(camdoc, indent=1))
     (ROOT / "data/scene").mkdir(exist_ok=True)
     raydoc = dict(about=__doc__.split("\n\n")[0], camera="data/cameras.json: anchor_front (PROVISIONAL)",

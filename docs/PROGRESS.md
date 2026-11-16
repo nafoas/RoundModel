@@ -865,3 +865,11 @@ check.py output (if applicable), and the next step.
   toward his left (eye ovals 5.7; direction solid, amount 5-9); body 3.5 deg toward his right (rough).
 - The 3D page's text is now generated from the camera file (it had hand-typed old sizes). Tests: 49 passed.
 - **Next:** owner review; then step 5 of the 3D grounding (depth lines) on the owner's go.
+
+## 2026-11-16 — Session 6 (cont.): his size approved; what kind of rabbit he is
+- Owner: "those numbers seem to fit him" (15.5 cm wide, 12.7 cm to the top of his head); no tape measure.
+  Breed unknown, a dwarf: maybe half Dwarf Hotot, half Netherland Dwarf (or Hotot x Polish). Fluffier and
+  rounder than a purebred Dwarf Hotot, less defined hotot eye rings, an even smoother face (the ridge
+  between his eyes slopes gently down to his mouth), even less neck, even tinier ears. Recorded as identity
+  features in PRINCE_SPEC and DECISIONS; camera file status: size approved.
+- **Next:** step 5 of the 3D grounding (depth lines), on the owner's go.
