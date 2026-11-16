@@ -22,7 +22,8 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs/space/room.html"
-RAY_EVERY = 3                      # every 3rd outline point (outline points are 2 px apart)
+RAY_EVERY = 3                      # every 3rd outline point (outline points are 2 px apart); every 3rd cut ray drawn
+VIS_STEP = 5                       # rays cut at measured distances: one every 5 photo pixels
 REACH_PAST_CM = 16.0
 
 COLOURS = {"head": "#eb8c1e", "intermediate bnuy": "#3ca0e6", "undercarriage": "#8c5ae6", "ears": "#46be5a",
@@ -47,6 +48,24 @@ def main() -> int:
                    colours=[COLOURS.get(out["part_per_point"][i], "#888888") for i in idx])
     lines = [dict(name=s["name"], ends=ends(s["directions_room"])) for s in rays["sets"] if s["name"] != "his outline"]
     lms = [dict(name=s["name"], part=s["part"], kind=s["kind"], end=ends(s["directions_room"])[0]) for s in rays["landmarks"]]
+    visible = []                                         # rays cut at measured distances (tools/visible_depth.py)
+    rgb_full = np.array(Image.open(ROOT / "data/photos/anchor_front.webp").convert("RGB"))
+    R_cam = np.array(cam["rotation_room_to_camera"]); fpx = cam["focal_px"]; cx, cy = cam["principal_point_px"]
+    for name, colour in (("depthpro", "#e67e22"), ("moge2", "#2e86de")):
+        mp = ROOT / f"data/scene/visible_depth_{name}.json"
+        if not mp.exists():
+            continue
+        meta = json.loads(mp.read_text())
+        dist = np.array(Image.open(ROOT / meta["file"])).astype(float) / 100.0      # cm; 0 = not him
+        ys, xs = np.mgrid[0:dist.shape[0]:VIS_STEP, 0:dist.shape[1]:VIS_STEP]
+        ys, xs = ys.ravel(), xs.ravel(); keep = dist[ys, xs] > 0; ys, xs = ys[keep], xs[keep]
+        dcam = np.c_[(xs + 0.5 - cx) / fpx, (ys + 0.5 - cy) / fpx, np.ones(len(xs))]
+        dcam /= np.linalg.norm(dcam, axis=1, keepdims=True)
+        P = C + (dcam @ R_cam) * dist[ys, xs][:, None]
+        cols = rgb_full[ys, xs] / 255.0
+        visible.append(dict(name=name, model=meta["model"], colour=colour, checks=meta["checks_not_given_to_the_model"],
+                            p=np.round(P, 3).ravel().tolist(), c=np.round(cols, 3).ravel().tolist(),
+                            rays=np.round(P[::RAY_EVERY], 3).tolist()))
     facing = None
     import re as _re
     cam_d = float(_re.search(r"camera to his nose ([0-9.]+) cm", cam["inputs"]["distance"]).group(1))
@@ -68,7 +87,7 @@ def main() -> int:
     data = dict(camera=dict(C=C.tolist(), R=cam["rotation_room_to_camera"], f=cam["focal_px"],
                             cx=cam["principal_point_px"][0], cy=cam["principal_point_px"][1],
                             W=cam["image_size_px"][0], H=cam["image_size_px"][1], status=cam["status"]),
-                outline=outline, lines=lines, landmarks=lms, facing=facing,
+                outline=outline, lines=lines, landmarks=lms, facing=facing, visible=visible,
                 photo="data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode())
     three = (ROOT / "tools/vendor/three-0.159.0.min.js").read_text()
     sz = cam["his_size_estimate_cm"]
@@ -112,6 +131,8 @@ PAGE = r"""<!DOCTYPE html>
  <div><label><input type="checkbox" id="cOut"> outline rays</label><label><input type="checkbox" id="cLm"> landmark rays</label>
  <label><input type="checkbox" id="cLines"> part-line rays</label><label><input type="checkbox" id="cTags" checked> labels</label>
  <label><input type="checkbox" id="cFace" checked> how he faces</label></div>
+ <div id="visUI"></div>
+ <p id="visNote" style="color:#333"></p>
  <p id="faceNote" style="color:#1f4fb4"></p>
  <p>Drag: turn around. Wheel / pinch: closer. Right-drag / two fingers: move.</p>
 </div>
@@ -158,6 +179,16 @@ function rayGroup(ends, colours, opacity){ const pos=[], col=[]; const tmp=new T
 const gOut = rayGroup(D.outline.ends, D.outline.colours, 0.75); scene.add(gOut); gOut.visible=false;
 const gLm = rayGroup(D.landmarks.map(l=>l.end), null, 0.9); scene.add(gLm); gLm.visible=false;
 const gLines = new THREE.Group(); D.lines.forEach(l=>gLines.add(rayGroup(l.ends.filter((_,i)=>i%4==0), null, 0.35))); gLines.visible=false; scene.add(gLines);
+// what this photo sees of him: every ray cut at the distance a depth model measured (nothing invented)
+const visGroups = [];
+(D.visible||[]).forEach((v,k)=>{ const g=new THREE.Group();
+  const geo=new THREE.BufferGeometry(); geo.setAttribute('position',new THREE.Float32BufferAttribute(v.p,3)); geo.setAttribute('color',new THREE.Float32BufferAttribute(v.c,3));
+  g.add(new THREE.Points(geo,new THREE.PointsMaterial({size:0.09,vertexColors:true,sizeAttenuation:true})));
+  const rg=rayGroup(v.rays.filter((_,i)=>i%6==0), v.rays.filter((_,i)=>i%6==0).map(()=>v.colour), 0.25); g.add(rg);
+  g.visible = (k===0); scene.add(g); visGroups.push(g);
+  const lab=document.createElement('label'); lab.innerHTML=`<input type="checkbox" ${k===0?'checked':''}> his surface: ${v.name==='depthpro'?'Depth Pro (Apple)':'MoGe-2 (Microsoft)'} <span class="key" style="background:${v.colour}"></span>`;
+  lab.querySelector('input').onchange=e=>{g.visible=e.target.checked; draw();}; document.getElementById('visUI').appendChild(lab); });
+if ((D.visible||[]).length){ document.getElementById('visNote').textContent = 'His surface as this photo sees it: every ray from the camera through a pixel of him, cut at the distance a depth model measured. Nothing invented: no smoothing, no filling, nothing he does not show here. ' + D.visible.map(v=>`${v.name==='depthpro'?'Depth Pro':'MoGe-2'}: his nose ${v.checks.nose_distance_cm} cm away`).join('; ') + ' (owner remembers about 15 cm).'; }
 // how he faces (tools/facing.py): blue = his head's left-right axis and the way his head faces; red = his body (from his peets)
 const gFace = new THREE.Group();
 if (D.facing){ const f=D.facing; const L=(a,b,col)=>gFace.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(a),V(b)]), new THREE.LineBasicMaterial({color:col})));
