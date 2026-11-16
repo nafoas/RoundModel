@@ -289,6 +289,22 @@ excuse and was withdrawn.)
   right; then right). Stored in `data/lines/peet_line.json`; picture in
   `docs/images/peet_line_approved.png`.
 
+## He is not static (owner, 2026-11-16)
+
+- **Why no extra angles for now:** with the previous Claude, other angles of him led to "there are
+  discrepancies here", "this doesn't line up", because "rabbits aren't symmetrical from angle to angle, and
+  they can move. Their fur can get smushed. They can lean or shift their weight. They aren't static. A little
+  round fluffball is especially non static." A rigid, numbers-only approach could not cope with him being
+  slightly different from angle to angle, and the owner expects the same pitfall from any rigid method.
+- So: **each photo is its own moment of him**; differences between photos are him moving, never errors to
+  resolve or reasons to push back. His parts carry his identity from shot to shot, not exact geometry: one
+  Prince with some give per photo (head turn, lean, weight shift, fur pressed down), never one frozen shape
+  every photo must match. The anchor decides; other photos (if the owner offers them) only inform what the
+  anchor cannot show, with generous tolerance.
+- **Numbers inform; the owner's eye decides.** When a measurement fights what the owner can plainly see (the
+  flat face, the "two lights"), the measurement is what is wrong: say so and ask, don't push it harder. Don't
+  ask for more photos; work from the anchor and the owner.
+
 ## Photos and repo (2026-11-07)
 
 - Work moved to the public repo `nafoas/RoundModel`, on a fresh branch

@@ -245,6 +245,11 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     breed's ears, head, body or proportions); "just conceptualize him as him ... a little round fluffy
     guy". His shape comes from his photos and the owner only. The one outside number is the owner's floor on
     his overall size (top of his head >= 12.7 cm). His roundness and fluffiness are his own.
+25. **He is not static; numbers inform, the owner's eye decides** (owner, 2026-11-16): he moves, leans,
+    shifts his weight and squashes his fur, so photos of him differ: that is him, never an error ("this
+    doesn't line up" was the previous Claude's failure). Don't treat one photo's numbers as hard rules
+    either: when a measurement fights what the owner can plainly see, the measurement is wrong; say so and
+    ask. Don't ask for more photos; the anchor decides.
 17. **Review sheets for grey areas** (`tools/candidate_sheets.py`): locator, the photo as
     it is, the photo with brightness stretched in TRUE colour (never stretch the colour
     channels separately or together: his fur's tiny real colour shifts become false
