@@ -1004,3 +1004,17 @@ check.py output (if applicable), and the next step.
   = measured, disagreement shown for the owner. Measurements only (rule 1). Feasible here on CPU (Hugging
   Face reachable; 4 cores, 15 GB memory).
 - **Next:** owner's go to run the models.
+
+## 2026-11-16 — Session 6 (cont.): visible depth from two models (owner's plan: invent nothing)
+- Owner's plan: every area of him governed by exactly one photo (other areas from other photos later, no
+  overlap); from this photo only what is visible; each ray cut at the measured distance; don't model him.
+- `tools/visible_depth.py`: Depth Pro (Apple) and MoGe-2 (Microsoft) on the anchor photo, untouched; one distance
+  per pixel of him (637,497 px); saved as `data/scene/visible_depth_<model>.png` (16-bit, 0.01 cm) + `.json`.
+- Absolute distances are not trustworthy for this photo (no scale cues: background removed): his nose at 32 cm
+  (Depth Pro, lens 2312 px) and 335 cm (MoGe-2, lens 1795 px); owner remembers ~15 cm. Cutting OUR camera's rays
+  at a model's own distances would make him 29 cm (or 3 m) wide: each model's distances only fit its own lens.
+- His SHAPE, scale-free (cm behind his nose / his width), agrees in the middle of his face: nostrils 0.02 / 0.02,
+  chin 0.16 / 0.19, chest 0.29 / 0.29, eyes 0.36 / 0.27; both left-right symmetric. They differ toward his edges
+  (widest edge 0.80 / 0.58, belly 0.74 / 0.47, top of head 1.25 / 0.59).
+- Scaled to his approved width (15.5 cm), both models put the camera about 25-31 cm from his nose (Depth Pro 31.3,
+  MoGe-2 25.0), not ~15 cm: they read weaker perspective than six inches would give. Owner's call.

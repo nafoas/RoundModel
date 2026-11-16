@@ -1,0 +1,23 @@
+{
+ "about": "What the anchor photo sees of him, and how far away it is: every ray cut at a measured distance.",
+ "model": "Ruicheng/moge-2-vitl-normal",
+ "photo": "data/photos/anchor_front.webp",
+ "file": "data/scene/visible_depth_moge2.png",
+ "units": "16-bit: distance from the camera to each pixel of him, in 0.01 cm; 0 = not him",
+ "rays": "the room's anchor camera (data/cameras.json): each pixel's ray, cut at this distance",
+ "pixels_of_him": 637497,
+ "checks_not_given_to_the_model": {
+  "nose_distance_cm": 335.41,
+  "owner_remembered_cm": 15.24,
+  "lens_px_model": 1795.4,
+  "lens_px_room_camera": 1236.6,
+  "width_at_widest_outline_cm": 296.7,
+  "distance_range_cm": [
+   335.07,
+   476.18
+  ],
+  "seconds": 18.4,
+  "model_says_invalid_px_of_him": 5
+ },
+ "invented": "nothing: no smoothing, filling or merging; only what this photo sees"
+}
