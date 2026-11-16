@@ -873,3 +873,13 @@ check.py output (if applicable), and the next step.
   between his eyes slopes gently down to his mouth), even less neck, even tinier ears. Recorded as identity
   features in PRINCE_SPEC and DECISIONS; camera file status: size approved.
 - **Next:** step 5 of the 3D grounding (depth lines), on the owner's go.
+
+## 2026-11-16 — Session 6 (cont.): he is him, no breed orthodoxy
+- Owner: "I don't want you to adhere to breed orthodoxy for anything, or look up a breed and then adhere him
+  to it ... just conceptualize him as him ... he is just a little round fluffy guy."
+- Cause of the risk: when setting his size floor I had copied a breed's length, weight and ear length into
+  the docs; the ear length (5-6.4 cm) is far longer than his tiny ears and could later have pulled him
+  toward a breed. Re-checked every mention (docs, tools, tests, data): removed all breed details; the only
+  outside number kept is the owner's floor on his overall size (top of his head >= 12.7 cm), named as such
+  (`SIZE_FLOOR_TOP_OF_HEAD_CM`). PRINCE_SPEC "He is him" and DECISIONS rewritten to describe him, not a
+  breed; METHOD item 24. Earlier PROGRESS entries are history and left as written.

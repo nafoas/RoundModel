@@ -47,21 +47,18 @@ camera data. Placed like that (`tools/scene.py`, `data/cameras.json`):
 | Input | Value | From |
 |---|---|---|
 | Distance, camera to his nose | 15.24 cm, six inches (range 12-15.24) | owner |
-| Height | his eyes 2.4 cm above the camera: as little below eye level as lets him be at least an adult Netherland Dwarf (top of his head >= 12.7 cm) | owner ("a tiny bit lower") + owner's size floor |
+| Height | his eyes 2.4 cm above the camera: as little below eye level as lets him reach the owner's size floor (top of his head >= 12.7 cm) | owner ("a tiny bit lower") + owner's size floor |
 | Tilt | level, tilted up 1 deg (range 0-2); not turned, not rolled | owner ("straight on", "ever so slightly up") |
 | Aim point in the picture | x 548 (his nose), y 610 (the camera's height on him: between his eyes and his nose); NOT the picture's centre (lesson 26) | owner's memory + the photo |
 | Lens | 1237 px: the SHORTEST lens that fits (a 26 mm-equivalent phone main camera, the picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it); any longer lens makes him smaller | the photo + owner's size floor |
 | His peets' front | right under the front of his face | assumed |
 
-**His size floor (owner, 2026-11-16):** he is an adult dwarf, "not a juvenile": at least an adult
-Netherland Dwarf, the smallest breed: shoulder height 12.7-15.2 cm, body length 19-23 cm, 0.9-1.1 kg, ears
-5-6.4 cm ([dimensions.com](https://dimensions.com/element/netherland-dwarf-rabbit),
-[Wikipedia](https://en.wikipedia.org/wiki/Netherland_Dwarf_rabbit)). No source gives a loafing height or
-width, so the floor is: the top of his head at least 12.7 cm. (At his eyes' height, the shortest lens made
-him 12.3 cm wide and 10.5 cm tall: too small, owner.) At six inches, only the camera's height on him and
-the lens can change his size; the lens is already the shortest that fits, so the camera sat a little
-lower: 2.4 cm below his eyes, between his eye and nose height (with a 24 mm-equivalent lens it would be
-about 1.5 cm).
+**His size floor (owner, 2026-11-16):** he is an adult, "not a juvenile": the top of his head is at least
+12.7 cm (the smallest adult rabbit he could be). This is a floor on his overall size ONLY; no breed shapes
+him (owner: he is just him). (At his eyes' height, the shortest lens made him 12.3 cm wide and 10.5 cm tall:
+too small, owner.) At six inches, only the camera's height on him and the lens can change his size; the lens
+is already the shortest that fits, so the camera sat a little lower: 2.4 cm below his eyes, between his eye
+and nose height (with a 24 mm-equivalent lens it would be about 1.5 cm).
 
 Result: camera 7.4 cm above the surface, 15.2 cm in front of the origin, level (tilted up 1 deg).
 **His size (rough, `his_size_estimate_cm` in `data/cameras.json`): about 15.5 cm wide, 12.7 cm to the top

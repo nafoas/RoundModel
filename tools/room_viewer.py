@@ -73,8 +73,8 @@ def main() -> int:
     three = (ROOT / "tools/vendor/three-0.159.0.min.js").read_text()
     sz = cam["his_size_estimate_cm"]
     camtext = (f"The camera is placed as the owner remembers the shot: straight on, about six inches from his nose, level, "
-               f"{cam['eyes_above_camera_cm']:.1f} cm below his eyes (as little below as lets him be at least an adult "
-               f"Netherland Dwarf). His size from it (rough): about {sz['width']:.1f} cm wide, {sz['top_of_head']:.1f} cm to "
+               f"{cam['eyes_above_camera_cm']:.1f} cm below his eyes (as little below as lets him reach the owner's size "
+               f"floor). His size from it (rough): about {sz['width']:.1f} cm wide, {sz['top_of_head']:.1f} cm to "
                f"the top of his head, ear tips {sz['ear_tips']:.1f} cm.")
     html = PAGE.replace("/*THREE*/", three).replace("/*DATA*/", json.dumps(data)).replace("/*CAMTEXT*/", camtext)
     OUT.parent.mkdir(parents=True, exist_ok=True)

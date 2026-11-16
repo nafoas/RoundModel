@@ -30,7 +30,7 @@ def test_anchor_camera_is_placed_as_the_owner_remembers_the_shot():
     eyes = (np.array(lm["eye_his_left"]["at_px"]) + np.array(lm["eye_his_right"]["at_px"])) / 2
     up = np.degrees(np.arcsin(cam.ray([eyes])[0][1]))
     assert 0.0 < up < 12.0                                       # his eyes a little above the camera
-    assert doc["his_size_estimate_cm"]["top_of_head"] >= 12.7    # owner: at least an adult Netherland Dwarf
+    assert doc["his_size_estimate_cm"]["top_of_head"] >= 12.7    # owner's size floor (he is an adult)
     assert abs(np.linalg.det(cam.R) - 1) < 1e-7
 
 

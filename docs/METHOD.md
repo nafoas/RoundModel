@@ -241,6 +241,10 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     left = picture right = room +X). Identity comes from the 3D model, never from how a photo looks: a new
     photo's camera is solved from the landmarks, the labelled model is projected through it, and only then
     does the photo measure anything. Provisional camera numbers are labelled PROVISIONAL everywhere.
+24. **He is him: no breed orthodoxy** (owner, 2026-11-16): never look up a breed and fit him to it (no
+    breed's ears, head, body or proportions); "just conceptualize him as him ... a little round fluffy
+    guy". His shape comes from his photos and the owner only. The one outside number is the owner's floor on
+    his overall size (top of his head >= 12.7 cm). His roundness and fluffiness are his own.
 17. **Review sheets for grey areas** (`tools/candidate_sheets.py`): locator, the photo as
     it is, the photo with brightness stretched in TRUE colour (never stretch the colour
     channels separately or together: his fur's tiny real colour shifts become false

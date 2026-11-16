@@ -161,23 +161,21 @@ to the outline.
   hairs, *including their bases*, belong to the wisp layer, not the body.
 
 ## His size (2026-11-16, from the anchor photo and the owner's memory of the shot; rough)
-He is an adult dwarf of unknown breed (owner): **at least an adult Netherland Dwarf**, the smallest breed
-(shoulder height 12.7-15.2 cm, body length 19-23 cm, 0.9-1.1 kg, ears 5-6.4 cm:
-[dimensions.com](https://dimensions.com/element/netherland-dwarf-rabbit),
-[Wikipedia](https://en.wikipedia.org/wiki/Netherland_Dwarf_rabbit)). From the shot, at that floor: about
-**15.5 cm wide, 12.7 cm to the top of his head, ear tips 13.6 cm, eyes 9.9 cm and nose 6.0 cm above the
-surface he sits on** (`data/cameras.json`, `his_size_estimate_cm`; how: `docs/SPACE.md`).
+About **15.5 cm wide, 12.7 cm to the top of his head, ear tips 13.6 cm, eyes 9.9 cm and nose 6.0 cm above
+the surface he sits on** (`data/cameras.json`, `his_size_estimate_cm`; how: `docs/SPACE.md`).
 **Owner-approved 2026-11-16: "those numbers seem to fit him"** (no tape measure: the owner doesn't want to
-disturb him). Owner's check for any measurement of him: "is this the size of a little fluffy rabbit?"
+disturb him). The only outside number used: a floor on his overall size (the top of his head at least
+12.7 cm, the smallest adult rabbit he could be, at the owner's request). Owner's check for any measurement
+of him: "is this the size of a little fluffy rabbit?"
 
-## What kind of rabbit he is (owner, 2026-11-16)
-A dwarf of some kind, breed unknown. Owner's guess: half Dwarf Hotot, half Netherland Dwarf (maybe Hotot x
-Polish, or something else entirely). Compared with a purebred Dwarf Hotot he is:
-- **incredibly fluffy**, and very round ("his fluffiness and sheer roundness to me rules out purebred dwarf
-  hotot ancestry");
-- **hotot eye rings, but less defined** (softer, thinner black rims);
-- **an even smoother face**: "his little ridge between his eyes just gently slopes down to his little
-  mouth" (one gentle, unbroken slope from brow to mouth: no stop, no bump);
-- **even less of a neck**;
-- **even tinier ears**.
-These are identity features: the model must keep all of them.
+## He is him (owner, 2026-11-16)
+**No breed orthodoxy.** His breed is unknown, and it doesn't matter: "I'd rather you just conceptualize him
+as him than adhering him to a breed ... he is just a little round fluffy guy." Never look up a breed and fit
+him to it: no breed's ears, head, body or proportions. His shape comes from his photos and the owner only.
+What makes him him (owner):
+- **incredibly round and fluffy**: "it is hard to find other rabbits this round"; that's just a him thing;
+- **little hotot eye rings, soft and not sharply defined**;
+- **a very smooth face**: "his little ridge between his eyes just gently slopes down to his little mouth"
+  (one gentle, unbroken slope from brow to mouth: no stop, no bump);
+- **almost no neck**;
+- **tiny ears**.

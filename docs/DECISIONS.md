@@ -104,19 +104,21 @@ excuse and was withdrawn.)
   fluffy rabbit?'" Distance alone needs the lens; the size check picks it: only the shortest lens that
   fits gives a little fluffy rabbit (about 12 cm wide, 10.5 cm to the top of his head); longer lenses give
   5-9 cm. **The size check is a standing test for every measurement of him.**
-- **His size floor: an adult Netherland Dwarf** (owner, 2026-11-16): "That would make him incredibly
-  small. He's of a small breed, but he's not a juvenile. Go off of the measurements for a netherland dwarf
-  as your floor, since that is the smallest rabbit breed ... He is a dwarf of some kind but I don't know
-  what breed." Adult Netherland Dwarf: shoulder height 12.7-15.2 cm, length 19-23 cm, 0.9-1.1 kg
-  (dimensions.com, Wikipedia). Floor used: the top of his head at least 12.7 cm. At six inches with the
+- **His size floor** (owner, 2026-11-16): "That would make him incredibly small. He's of a small breed,
+  but he's not a juvenile. Go off of the measurements for a netherland dwarf as your floor, since that is
+  the smallest rabbit breed." Used ONLY as a floor on his overall size: the top of his head at least
+  12.7 cm (the smallest adult shoulder height, dimensions.com / Wikipedia). Nothing else from any breed. At six inches with the
   shortest lens that fits, that puts the camera 2.4 cm below his eyes (between his eye and nose height);
   he comes out about 15.5 cm wide, 12.7 cm to the top of his head. **Owner: "those numbers seem to fit
   him"** (approved; no tape measure, so as not to disturb him).
-- **What kind of rabbit he is** (owner, 2026-11-16): a dwarf of unknown breed, maybe half Dwarf Hotot,
-  half Netherland Dwarf (or Hotot x Polish). Fluffier and rounder than a purebred Dwarf Hotot, less
-  defined hotot eye rings, an even smoother face ("his little ridge between his eyes just gently slopes
-  down to his little mouth"), even less neck, even tinier ears. Kept in `docs/PRINCE_SPEC.md` as identity
-  features.
+- **He is him: no breed orthodoxy** (owner, 2026-11-16): "I don't want you to adhere to breed orthodoxy
+  for anything, or look up a breed and then adhere him to it ... I'd rather you just conceptualize him as
+  him ... the fact he is so round and fluffy is probably just a him thing ... it is hard to find other
+  rabbits this round. So, he is just a little round fluffy guy. Don't complicate that by trying to
+  meticulously adhere him to other labels." His shape comes from his photos and the owner only. (Breed
+  details copied in earlier, including a breed ear length far longer than his tiny ears, were removed.)
+  What makes him him: incredibly round and fluffy; soft hotot eye rings; a very smooth face (the ridge
+  between his eyes slopes gently down to his mouth); almost no neck; tiny ears (`docs/PRINCE_SPEC.md`).
 
 ## Edges
 

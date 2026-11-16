@@ -38,12 +38,11 @@ PROVISIONAL_F35_MM = 26.0              # lens: still unknown (phone main camera 
 OWNER_CAMERA_TO_NOSE_CM = 15.24        # owner: "roughly 6 inches away from the camera", "couldn't have been more" (range 12-15.24)
 OWNER_TILT_UP_DEG = 1.0                # owner: "maybe looking ever so slightly up" (range 0-2)
 OWNER_EYES_ABOVE_CAMERA_CM = 0.5       # owner: "basically exactly at his eye level. Maybe just a tiny bit lower"
-# owner, 2026-11-16: he is an adult dwarf, "not a juvenile": "Go off of the measurements for a netherland dwarf as your
-# floor, since that is the smallest rabbit breed". Adult Netherland Dwarf: shoulder height 12.7-15.2 cm, body length
-# 19-23 cm, 0.9-1.1 kg (dimensions.com/element/netherland-dwarf-rabbit; en.wikipedia.org/wiki/Netherland_Dwarf_rabbit).
-# No source gives a loafing height or width, so the floor is: the top of his head at least the breed's lowest
-# shoulder height. The camera goes below his eyes only as far as it must for him to reach it.
-ND_FLOOR_TOP_OF_HEAD_CM = 12.7
+# owner, 2026-11-16: he is an adult, "not a juvenile"; use the smallest adult rabbit as the floor on his size: the
+# top of his head at least 12.7 cm (the smallest adult shoulder height, dimensions.com / Wikipedia). A floor on his
+# overall size ONLY: no breed shapes him (owner: "just conceptualize him as him"). The camera goes below his eyes
+# only as far as it must for him to reach it.
+SIZE_FLOOR_TOP_OF_HEAD_CM = 12.7
 EYES_BEHIND_NOSE_CM = 2.0              # assumption (small effect): his eyes are ~2 cm further back than his nose
 FAR_PAST_ORIGIN_CM = 16.0          # drawn rays reach this far past the camera-to-origin distance (drawing only)
 PART_COLOURS = {"head": (235, 140, 30), "intermediate bnuy": (60, 160, 230), "undercarriage": (140, 90, 230),
@@ -108,17 +107,17 @@ def size_estimate(cam, lm, nose_pt, width_px, behind_nose_cm=3.0):
 
 
 def anchor_camera(W, H, lm, outline, up=OWNER_TILT_UP_DEG, d_nose=OWNER_CAMERA_TO_NOSE_CM, eyes_above=None,
-                  f35=PROVISIONAL_F35_MM, floor_cm=ND_FLOOR_TOP_OF_HEAD_CM):
+                  f35=PROVISIONAL_F35_MM, floor_cm=SIZE_FLOOR_TOP_OF_HEAD_CM):
     """eyes_above None: the smallest drop below his eyes (from OWNER_EYES_ABOVE_CAMERA_CM, in 0.05 cm steps) at which
-    the top of his head reaches floor_cm (an adult Netherland Dwarf at least)."""
+    the top of his head reaches floor_cm (the owner's size floor)."""
     if eyes_above is None:
         for e in np.arange(OWNER_EYES_ABOVE_CAMERA_CM, 8.0, 0.05):
             c_, p_ = anchor_camera(W, H, lm, outline, up=up, d_nose=d_nose, eyes_above=float(e), f35=f35)
             if p_["his_size_estimate_cm"]["top_of_head"] >= floor_cm:
-                p_["inputs"]["height"] += (f" -- the smallest drop below his eyes at which he reaches an adult Netherland "
-                                           f"Dwarf's size (top of his head >= {floor_cm} cm, owner's floor)")
+                p_["inputs"]["height"] += (f" -- the smallest drop below his eyes at which he reaches the owner's size floor "
+                                           f"(top of his head >= {floor_cm} cm)")
                 return c_, p_
-        raise SystemExit("no camera height reaches the Netherland Dwarf floor")
+        raise SystemExit("no camera height reaches the size floor")
     f, cx, cy = aim_and_lens(W, H, lm, f35=f35, up=up, eyes_above=eyes_above, d_nose=d_nose)
     nose = np.array(lm["nose_y_centre"]["at_px"]); contact = np.array(lm["floor_contact_midpoint"]["at_px"])
     cam = Camera.orbit([0, 0, -1.0], 1.0, pitch_deg=-up, f=f, width=W, height=H, cx=cx, cy=cy)
@@ -141,7 +140,7 @@ def anchor_camera(W, H, lm, outline, up=OWNER_TILT_UP_DEG, d_nose=OWNER_CAMERA_T
             f"picture's centre (lesson 26)",
         lens=f"{f:.1f} px: the SHORTEST lens that fits ({PROVISIONAL_F35_MM} mm-equivalent phone main camera, this "
              f"picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it); a longer "
-             f"lens would make him smaller still, below an adult Netherland Dwarf (owner's floor)",
+             f"lens would make him smaller still, below the owner's size floor",
         surface="he sat on a soft surface (his peets may sink in a little); y = 0 is that surface",
         peets_under_face="ASSUMED: the front of his peets is right under the front of his face",
         origin="the surface under floor_contact_midpoint (data/strands/landmarks.json)")
@@ -331,7 +330,7 @@ def main() -> int:
     camdoc = {"about": "Cameras in Prince's room (prince/space.py). One entry per photo.",
               "anchor_front": dict(photo="data/photos/anchor_front.webp",
                                    status="placed as the owner remembers the shot (2026-11-16); his size from it, at "
-                                          "least an adult Netherland Dwarf, APPROVED by the owner ('those numbers "
+                                          "least the owner's size floor, APPROVED by the owner ('those numbers "
                                           "seem to fit him', 2026-11-16)", **cam.to_dict(), **prov)}
     (ROOT / "data/cameras.json").write_text(json.dumps(camdoc, indent=1))
     (ROOT / "data/scene").mkdir(exist_ok=True)
