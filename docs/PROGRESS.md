@@ -992,3 +992,15 @@ check.py output (if applicable), and the next step.
 - Kept: room + camera (`prince/space.py`, `tools/scene.py`), his size (approved), landmarks, rays, his head's
   tilt/turn (`tools/facing.py`), the light read from his fur (`docs/images/space/light_reading.png`).
 - **Next:** the owner's new method.
+
+## 2026-11-16 — Session 6 (cont.): research: depth from one photo
+- Owner: research the most objective way to discern depth from a 2D image; first, what is left (shown: the room,
+  camera, size, landmarks, rays, his head's tilt/turn, the light from his fur; screenshots of the 3D room).
+- Research written up in `docs/DEPTH_RESEARCH.md`: classic shape-from-shading is underconstrained on one photo
+  (bas-relief ambiguity: exactly the flat / lopsided faces we got); the field now uses depth models learned
+  from millions of real photos (Depth Pro, MoGe-2, Depth Anything 3; surface-direction models). Most
+  objective available: several independent models, each put in the room through our camera and checked
+  against what they were not told (his nose at six inches, his size, his outline, his head's tilt); agreement
+  = measured, disagreement shown for the owner. Measurements only (rule 1). Feasible here on CPU (Hugging
+  Face reachable; 4 cores, 15 GB memory).
+- **Next:** owner's go to run the models.
