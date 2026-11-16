@@ -168,9 +168,53 @@ def normals(sh, Q, e=0.02):
     return n / np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
 
 
-def shading_fit(sh, cam_small, obs, use, steps=72):
-    """Light the shell with the soft light that best explains his fur (ambient + one direction, solved exactly
-    for each shape): returns residual per used pixel (0 where the shell misses), R2, the light."""
+def light_from_eyes(cam, lm, sh):
+    """The room's main light, from the catchlights in his eyes (owner, 2026-11-16: "the lights in his eyes"). Each
+    eye's visible surface is a small curved mirror (a spherical cap through the eye's oval, facing the way the oval
+    says); a catchlight is where that mirror reflects the light into the camera, so the light's direction is the
+    camera's line of sight reflected there. How much the eye bulges is not known: the bulge at which the two eyes
+    agree best is used, and the two directions are averaged."""
+    out = {}
+
+    def one(k, bulge):
+        e_px = np.array(lm[k]["at_px"]); a, b = lm[k]["oval"]["semi_axes_px"]
+        ang = np.radians(lm[k]["oval"]["long_axis_angle_deg"])
+        r = cam.ray([e_px])[0]; hit, _ = trace(sh, cam.C, r[None], steps=200, t0=5.0, t1=45.0)
+        if not np.isfinite(hit[0]):
+            return None
+        D = cam.C + r * hit[0]; theta = np.arccos(b / a)
+        mn = np.array([-np.sin(ang), np.cos(ang)])
+        if (e_px[0] - cam.cx) * mn[0] < 0:
+            mn = -mn
+        side = cam.ray([e_px + mn * 5])[0] - r; side -= (side @ r) * r; side /= np.linalg.norm(side)
+        e = np.cos(theta) * (-r) + np.sin(theta) * side
+        rd = a * float((D - cam.C) @ cam.forward) / cam.f; R = bulge * rd
+        c = D - e * np.sqrt(max(R * R - rd * rd, 0.0))
+        h = cam.ray([lm[k + "_catchlight"]["at_px"]])[0]; oc = cam.C - c; bq = oc @ h; disc = bq * bq - (oc @ oc - R * R)
+        if disc < 0:
+            return None
+        P = cam.C + (-bq - np.sqrt(disc)) * h; n = (P - c) / R; v = (cam.C - P) / np.linalg.norm(cam.C - P)
+        return 2 * (n @ v) * n - v
+    best = None
+    for bulge in np.arange(1.0, 1.3, 0.01):
+        a, b = one("eye_his_right", bulge), one("eye_his_left", bulge)
+        if a is None or b is None:
+            continue
+        apart = float(np.degrees(np.arccos(np.clip(a @ b, -1, 1))))
+        if best is None or apart < best[0]:
+            best = (apart, float(bulge), a, b)
+    apart, bulge, a, b = best
+    l = (a + b) / np.linalg.norm(a + b)
+    for nm, v in (("his_right_eye", a), ("his_left_eye", b), ("together", l)):
+        out[nm] = dict(up_deg=round(float(np.degrees(np.arcsin(v[1]))), 1),
+                       toward_his_left_deg=round(float(np.degrees(np.arctan2(v[0], v[2]))), 1))
+    return l, dict(directions=out, eyes_apart_deg=round(apart, 1), eye_bulge=round(bulge, 2), room_vector=np.round(l, 4).tolist())
+
+
+def shading_fit(sh, cam_small, obs, use, steps=72, light=None):
+    """Light the shell and compare with his fur: residual per used pixel (0 where the shell misses), R2, light.
+    light None: the soft light that best explains his fur (ambient + one direction, solved exactly for each shape).
+    light given (a direction): only its strength and the ambient are solved: his shape must explain the rest."""
     ys, xs = np.mgrid[0:cam_small.height, 0:cam_small.width] + 0.5
     d = cam_small.ray(np.c_[xs.ravel(), ys.ravel()])[use]
     hit, _ = trace(sh, cam_small.C, d, steps=steps, t0=5.0, t1=45.0)
@@ -178,9 +222,11 @@ def shading_fit(sh, cam_small, obs, use, steps=72):
     res = np.zeros(len(d)); r2, light = 0.0, np.zeros(4)
     if h.sum() > 50:
         n = normals(sh, cam_small.C + d[h] * hit[h][:, None])
-        A = np.c_[np.ones(h.sum()), n]; light, *_ = np.linalg.lstsq(A, obs[h], rcond=None)
-        pred = A @ light; res[h] = obs[h] - pred
+        A = np.c_[np.ones(h.sum()), n] if light is None else np.c_[np.ones(h.sum()), np.clip(n @ light, 0, None)]
+        coef, *_ = np.linalg.lstsq(A, obs[h], rcond=None)
+        pred = A @ coef; res[h] = obs[h] - pred
         r2 = 1 - ((obs[h] - pred) ** 2).sum() / max(((obs[h] - obs[h].mean()) ** 2).sum(), 1e-9)
+        light = coef
     return res, float(r2), light, h
 
 
@@ -207,7 +253,7 @@ def eye_rays(cam, lm):
             for k in ("eye_his_right", "eye_his_left")}
 
 
-def fit_face(cam, lm, start, use_eyes=True, start_outline_only=None):
+def fit_face(cam, lm, start, use_eyes=True, start_outline_only=None, light=None):
     """Fit the shell's face and body depth to his outline, his eye directions (each eye is round: its oval says how
     far it faces away from the camera), the light on his fur, and his nose. No part thinner than 0.9 of its
     width (he is round, owner). use_eyes=False: eyes held out (that first try flattened his body into a slab)."""
@@ -237,7 +283,7 @@ def fit_face(cam, lm, start, use_eyes=True, start_outline_only=None):
         sh = start.with_vector(v, names)
         sil = silhouette(sh, cs)
         r_sil = (sil - frac)[care]
-        r_sh, _, _, _ = shading_fit(sh, cs, obs, use)
+        r_sh, _, _, _ = shading_fit(sh, cs, obs, use, light=light)
         bc, hc = sh.depths()
         bad = [max(0.0, sh.body_y - sh.body_h), max(0.0, sh.body_h - sh.head_y + 0.5),
                max(0.0, abs((sh.head_y - sh.head_h) - chin[1]) - 1.0),
@@ -257,9 +303,10 @@ def fit_face(cam, lm, start, use_eyes=True, start_outline_only=None):
     sh = start.with_vector(r.x, names)
     sil = silhouette(sh, cs) > 0.5; tgt = frac > 0.5
     iou = float((sil & tgt & care).sum() / max(((sil | tgt) & care).sum(), 1))
-    _, r2, light, _ = shading_fit(sh, cs, obs, use)
-    _, r2_start, light0, _ = shading_fit(start_outline_only, cs, obs, use) if start_outline_only is not None else (0, None, None, 0)
-    return sh, dict(iou_scored=round(iou, 4), shading_r2=round(r2, 3), light_ambient_xyz=np.round(light, 1).tolist(),
+    _, r2, coef, _ = shading_fit(sh, cs, obs, use, light=light)
+    _, r2_start, _, _ = shading_fit(start_outline_only, cs, obs, use, light=light) if start_outline_only is not None else (0, None, None, 0)
+    return sh, dict(iou_scored=round(iou, 4), shading_r2=round(r2, 3), light_fit=np.round(coef, 1).tolist(),
+                    light_fixed_from_eyes=light is not None,
                     shading_r2_outline_only_shell=None if r2_start is None else round(r2_start, 3),
                     eyes_used_in_fit=use_eyes,
                     nose_off_surface_cm=round(float(sh.sdf(nose)[0]), 3), evaluations=n_eval[0],
@@ -487,6 +534,27 @@ def face_start(cam, lm, sh):
 
 
 def main() -> int:
+    if "--light" in sys.argv:
+        # owner, 2026-11-16: use the lights in his eyes. The light's direction comes from his catchlights; the shell's
+        # face and body are refitted with it fixed, so the brightness on his fur can only be explained by his shape.
+        cam = Camera.from_dict(load("data/cameras.json")["anchor_front"])
+        lm = load("data/strands/landmarks.json")["landmarks"]
+        cur = load("data/scene/shell.json"); start = Shell(**cur["shell"])
+        light, info = light_from_eyes(cam, lm, start)
+        print("light from his eyes:", json.dumps(info))
+        sh, q, _ = fit_face(cam, lm, start, start_outline_only=start, light=light)
+        q["shading_r2_before_this_fit"] = q.pop("shading_r2_outline_only_shell")
+        q["light_from_eyes"] = info
+        q["light_from_eyes_with_this_shell"] = light_from_eyes(cam, lm, sh)[1]
+        print(json.dumps(asdict(sh), indent=1)); print(json.dumps(q, indent=1))
+        (ROOT / "data/scene/shell.json").write_text(json.dumps(dict(
+            about="Rough parametric shell for the depth lines (prince/shell.py). NOT the model. Its face and body depth "
+                  "fitted to his outline, his eye directions and his nose, and to the light on his fur with the light's "
+                  "direction fixed from the catchlights in his eyes.",
+            shell=asdict(sh), fit=q, fit_before=cur["fit"], assumed="his back (not seen by the camera)"), indent=1))
+        if "--nodraw" not in sys.argv:
+            draw(sh)
+        return 0
     if "--face" in sys.argv:
         cam = Camera.from_dict(load("data/cameras.json")["anchor_front"])
         lm = load("data/strands/landmarks.json")["landmarks"]
