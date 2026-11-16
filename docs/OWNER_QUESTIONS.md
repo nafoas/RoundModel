@@ -213,3 +213,6 @@ the owner's official opinion later. Each says what I did in the meantime.
    **Partly answered (2026-11-16):** phone settings unknown; ≤ six inches away; straight on, a touch below
    his eye level, looking level or very slightly up; the picture was cropped. Owner's method: fix the
    camera like that and determine how he is being looked at. Still open: his real size (fixes the lens).
+   **Done (2026-11-16):** camera placed so (level, 13 cm, his eyes a touch above it, aimed at his face);
+   he is tipped ~5 deg (his left side up) and turned ~5-9 deg toward his left (`docs/images/space/facing.png`).
+   Still open: his real size: his width across his widest point, or his height to the top of his head.

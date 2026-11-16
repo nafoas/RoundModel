@@ -37,30 +37,44 @@ pitch > 0 = above looking down, roll > 0 = camera turned clockwise (the room loo
 
 Cameras live in `data/cameras.json`, one entry per photo.
 
-## The anchor camera: PROVISIONAL
+## The anchor camera: as the owner remembers the shot (lens provisional)
 
-**Owner, 2026-11-16 (supersedes the placeholders below, to be applied in step 4):** straight on, about
-six inches (≤ 15 cm) from him, a touch below his eye level, looking level or very slightly up. The
-picture was cropped, so its centre is not where the camera aimed (lesson 26): the aim point is near his
-eye height in the picture, and the lens is unknown (carried as a range until his real size is known).
-Step 4 fixes the camera like that, then measures how HE is turned from his mirror pairs.
+Owner, 2026-11-16: straight on, no more than six inches away, "basically exactly at his eye level. Maybe
+just a tiny bit lower", looking level or "ever so slightly up"; he sat on a soft surface; the picture was
+cropped when his background was removed. The photo carries no camera data. Placed like that
+(`tools/scene.py`, `data/cameras.json`):
 
-The anchor photo carries no camera data, and its background was removed (no floor or wall to measure). So
-the anchor camera's placement is provisional, made from three placeholder inputs (`tools/scene.py`), each
-to be replaced in step 4 by a measurement:
-
-| Placeholder | Value now | Replace with |
+| Input | Value | From |
 |---|---|---|
-| Lens | 26 mm-equivalent phone main camera, not cropped, picture centre on the axis (f = 1084.8 px) | phone model, zoom, crop, or the focal length from the original's photo info |
-| His size | his widest outline (835.8 px across, at y 808.6) is 12 cm | his real width there |
-| Camera height | the line of sight to his nose points 5 deg below level ("roughly his eye/nose height, very slightly above", `docs/PRINCE_SPEC.md`) | how high and how far the phone was |
-| Facing | yaw 0, roll 0 | measured from his symmetry (step 4) |
+| Distance, camera to his nose | 13 cm (range 10-15.24) | owner |
+| Height | his eyes 0.5 cm above the camera (range 0-1) | owner ("a tiny bit lower") |
+| Tilt | level, tilted up 1 deg (range 0-2); not turned, not rolled | owner ("straight on", "ever so slightly up") |
+| Aim point in the picture | x 548 (his nose), y 482 (puts his eyes a touch above the camera); NOT the picture's centre (lesson 26) | owner's memory + the photo |
+| Lens | 1428 px: a 26 mm-equivalent phone main camera, the picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it (the SHORTEST lens that fits) | **PROVISIONAL** |
+| His peets' front | right under the front of his face | assumed |
 
-Or, for all at once: a sheet of paper flat where he sat, photographed from the same spot and zoom.
+Result: camera 6.5 cm above the surface, 12.8 cm in front of the origin, level (tilted up 1 deg). His nose
+4.4 cm up; his widest outline is 7.5 cm across at his nose's distance (he is wider: his sides are further
+back). A longer lens (tighter crop, or zoom) makes him smaller; **his real size fixes it** (his width across
+his widest point, or his height to the top of his head). In the 3D page the floor's horizon runs through
+his eyes, as a level camera at his eye level should.
 
-Result now: camera 8.5 cm above the floor, 15.1 cm in front of the origin, tipped 3.6 deg down.
 Nothing measured depends on these numbers: landmarks and part outlines stay in picture pixels, and the
 rays are recomputed from them whenever the camera changes.
+
+## How he is being looked at (`tools/facing.py` -> `data/scene/facing.json`, `docs/images/space/facing.png`)
+
+With the camera fixed as above, from the photo:
+- **His head is tipped about 5 deg, his left side up** (a little head tilt toward his right): solid (4-6
+  whatever pair is left out, landmarks wobbled by their uncertainty, or the camera moved across the owner's
+  ranges). His peets don't tip the same way, so it is his head, not the phone.
+- **His head is turned toward his own left (his nose toward the picture's right), about 5-9 deg**: the
+  direction is solid (the six mirror pairs give 9.0, the two eye ovals 5.5, and his nose sits right of the
+  middle of his eyes); the amount is not yet (the pairs disagree: his mouth, lip corners and ear bases can
+  be truly lopsided; the eyes and nostrils alone leave it loose). It firms up with his round shell or
+  another photo.
+- His body, from where his peets meet the surface (rough): turned about 3 deg toward his right.
+- His head's nod (up or down) needs his depth: later.
 
 ## What exists (steps 1-3)
 
@@ -74,7 +88,9 @@ rays are recomputed from them whenever the camera changes.
   pictures `docs/images/space/room_behind.png`, `room_side.png`, `room_top.png`.
 - `tools/room_viewer.py` -> `docs/space/room.html`: the room in 3D, interactive, one file, no internet
   needed (three.js r159, MIT, in `tools/vendor/`). "Camera's view" puts your eye where the anchor
-  camera was: every ray shrinks to a point on the photo.
+  camera was (with its off-centre aim point): every ray shrinks to a point on the photo. Blue and red
+  lines show how his head and body face.
+- `tools/facing.py`: how he is being looked at (above).
 
 ## His parts in 3D (owner)
 
@@ -86,8 +102,8 @@ rays are recomputed from them whenever the camera changes.
 
 ## Next steps (owner reviews each)
 
-4. Place the anchor camera from real numbers (lens, his size, camera height), or a range that carries
-   its uncertainty; how he is facing from his symmetry pairs.
+4. Done as far as the photo allows (above): camera as the owner remembers it; how he faces. Still open:
+   his real size (fixes the lens), and his head's nod (needs his depth).
 5. Depth lines: a first rough round shell from the outline rule (his surface is edge-on along his
    outline) and his symmetry, the parts painted on it; floor grid, midline and wrap-around rings drawn
    back onto the photo; side and top views.

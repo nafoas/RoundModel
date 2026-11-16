@@ -2,11 +2,11 @@
  "about": "Cameras in Prince's room (prince/space.py). One entry per photo.",
  "anchor_front": {
   "photo": "data/photos/anchor_front.webp",
-  "status": "PROVISIONAL placement (step 1): lens, his size and camera height are placeholders until step 4",
+  "status": "placed as the owner remembers the shot (2026-11-16); lens PROVISIONAL until his real size is known",
   "position_cm": [
-   0.2033,
-   8.4813,
-   15.0726
+   0.1171,
+   6.5216,
+   12.827
   ],
   "rotation_room_to_camera": [
    [
@@ -16,48 +16,49 @@
    ],
    [
     0.0,
-    -0.99802597,
-    0.06280257
+    -0.9998476952,
+    -0.0174524064
    ],
    [
     0.0,
-    -0.06280257,
-    -0.99802597
+    0.0174524064,
+    -0.9998476952
    ]
   ],
-  "focal_px": 1084.8478,
+  "focal_px": 1428.1395,
   "principal_point_px": [
-   549.0,
-   716.5
+   548.0,
+   482.3732
   ],
   "image_size_px": [
    1098,
    1433
   ],
   "yaw_deg": -0.0,
-  "pitch_deg": 3.6007,
+  "pitch_deg": -1.0,
   "roll_deg": 0.0,
-  "fov_horizontal_deg": 53.684,
-  "fov_vertical_deg": 66.886,
+  "fov_horizontal_deg": 42.055,
+  "fov_vertical_deg": 53.286,
   "inputs": {
-   "lens": "PROVISIONAL: 26.0 mm-equivalent phone main camera, picture not cropped, its centre on the camera's axis -> focal length 1084.8 px",
-   "his_width": "PROVISIONAL: his widest outline (835.8 px, at y 808.6) is 12.0 cm across, at the depth of his front",
-   "camera_height": "PROVISIONAL: the line of sight to his nose points 5.0 deg below level (docs/PRINCE_SPEC.md: camera at roughly his eye/nose height, very slightly above)",
-   "facing": "PROVISIONAL: camera straight in front of him (yaw 0), not turned (roll 0); step 4 measures both",
-   "origin": "the floor under floor_contact_midpoint (data/strands/landmarks.json)"
+   "distance": "OWNER: camera to his nose 13.0 cm ('it couldn't have been more than six inches away'; range 10-15.24)",
+   "height": "OWNER: 'basically exactly at his eye level. Maybe just a tiny bit lower' -> his eyes 0.5 cm above the camera (range 0-1)",
+   "tilt": "OWNER: straight on, 'maybe looking ever so slightly up' -> tilted up 1.0 deg (range 0-2), not turned",
+   "aim": "from the owner's memory: the camera aimed at his face, so its aim point in this (cropped) picture is x 548.0 (his nose), y 482.4 (the height that puts his eyes a touch above the camera); NOT the picture's centre (lesson 26)",
+   "lens": "PROVISIONAL: 26.0 mm-equivalent phone main camera, this picture cropped from a 3:4 frame centred on the aim point, the smallest frame that holds it -> 1428.1 px: the shortest lens that fits",
+   "surface": "he sat on a soft surface (his peets may sink in a little); y = 0 is that surface",
+   "peets_under_face": "ASSUMED: the front of his peets is right under the front of his face",
+   "origin": "the surface under floor_contact_midpoint (data/strands/landmarks.json)"
   },
-  "replace_in_step_4_with": [
-   "the phone model, zoom, and whether the photo was cropped (or its focal length from the original's photo info)",
-   "his real width across his widest outline (cm)",
-   "roughly how high and how far the phone was",
-   "or: a sheet of paper flat where he sat, photographed from the same spot and zoom"
-  ],
+  "still_unknown": "the lens: his real size (width across his widest point, or height to the top of his head) fixes it",
   "widest_outline_px": {
    "width": 835.81,
    "left": 144.08,
    "right": 979.89,
    "y": 808.57
   },
-  "depth_of_his_front_cm": 15.575
+  "depth_of_his_front_cm": 12.789,
+  "nose_height_cm": 4.41,
+  "widest_outline_at_nose_distance_cm": 7.48,
+  "note_width": "his widest outline at his nose's distance; his sides are further back, so he is wider"
  }
 }

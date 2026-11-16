@@ -3,13 +3,14 @@
 The room is defined in prince/space.py (centimetres; floor y = 0; +X his left, +Y up, +Z his forward;
 origin on the floor under the front of his peets, in his midline plane).
 
-Step 1 here: place the anchor camera in the room. Its lens and its distance from him are NOT known yet
-(the photo carries no camera data and the background is removed), so this placement is PROVISIONAL and
-made from three named placeholder inputs, each to be replaced in step 4 by a measurement:
-  1. the lens: a 26 mm-equivalent phone main camera, picture not cropped, centre of the picture on the axis;
-  2. his size: his widest outline is PROVISIONAL_WIDTH_CM across;
-  3. the camera's height: "camera at roughly his eye/nose height, very slightly above" (docs/PRINCE_SPEC.md):
-     the line of sight to his nose points NOSE_RAY_DOWN_DEG below level.
+Step 1 here: place the anchor camera in the room AS THE OWNER REMEMBERS IT (2026-11-16): straight on at his
+face, "basically exactly at his eye level. Maybe just a tiny bit lower", "looking ever so slightly up",
+"it couldn't have been more than six inches away". The photo carries no camera data and was cropped when his
+background was removed, so the picture's centre is NOT where the camera aimed (lesson 26): the aim point is
+put on his face (his nose's left-right position, and the height that puts his eyes a touch above the camera).
+The lens is still PROVISIONAL: a 26 mm-equivalent phone main camera, the picture cropped from a 3:4 frame
+centred on the aim point, the smallest such frame that holds the picture (so this is the SHORTEST lens that
+fits; a tighter crop or zoom means a longer lens and a smaller Prince). His real size will fix it.
 Everything measured in the photo stays in picture pixels (exact); everything in the room is recomputed from
 those pixels whenever the camera changes.
 
@@ -33,9 +34,11 @@ sys.path.insert(0, str(ROOT)); sys.path.insert(0, str(ROOT / "tools"))
 from prince.space import Camera, focal_px_from_35mm  # noqa: E402
 
 OUT_IMG = ROOT / "docs/images/space"
-PROVISIONAL_F35_MM = 26.0
-PROVISIONAL_WIDTH_CM = 12.0
-NOSE_RAY_DOWN_DEG = 5.0
+PROVISIONAL_F35_MM = 26.0              # lens: still unknown (phone main camera assumed)
+OWNER_CAMERA_TO_NOSE_CM = 13.0         # owner: "couldn't have been more than six inches away" (range 10-15.24)
+OWNER_TILT_UP_DEG = 1.0                # owner: "maybe looking ever so slightly up" (range 0-2)
+OWNER_EYES_ABOVE_CAMERA_CM = 0.5       # owner: "basically exactly at his eye level. Maybe just a tiny bit lower"
+EYES_BEHIND_NOSE_CM = 2.0              # assumption (small effect): his eyes are ~2 cm further back than his nose
 FAR_PAST_ORIGIN_CM = 16.0          # drawn rays reach this far past the camera-to-origin distance (drawing only)
 PART_COLOURS = {"head": (235, 140, 30), "intermediate bnuy": (60, 160, 230), "undercarriage": (140, 90, 230),
                 "ears": (70, 190, 90), "top of his head (strip joining his ears)": (20, 140, 60),
@@ -67,33 +70,53 @@ def widest_outline(outline):
     return best
 
 
-def anchor_camera(W, H, lm, outline):
-    f = focal_px_from_35mm(PROVISIONAL_F35_MM, W, H)
+def aim_and_lens(W, H, lm, f35=PROVISIONAL_F35_MM, up=OWNER_TILT_UP_DEG, eyes_above=OWNER_EYES_ABOVE_CAMERA_CM,
+                 d_nose=OWNER_CAMERA_TO_NOSE_CM):
+    """Where the camera aimed in this picture, and the lens (px), from the owner's memory of the shot."""
+    eyes = (np.array(lm["eye_his_left"]["at_px"]) + np.array(lm["eye_his_right"]["at_px"])) / 2
+    nose = np.array(lm["nose_y_centre"]["at_px"])
+    f = focal_px_from_35mm(f35, W, H)
+    for _ in range(30):
+        elev = np.degrees(np.arctan(eyes_above / (d_nose + EYES_BEHIND_NOSE_CM)))   # eyes seen this much above level
+        cx, cy = nose[0], eyes[1] + f * np.tan(np.radians(elev - up))
+        frame_h = 2 * max(cy, H - cy, max(cx, W - cx) * 4 / 3)     # smallest 3:4 portrait frame centred on the aim
+        f = f35 * float(np.hypot(frame_h * 3 / 4, frame_h)) / 43.2666
+    return f, cx, cy
+
+
+def anchor_camera(W, H, lm, outline, up=OWNER_TILT_UP_DEG, d_nose=OWNER_CAMERA_TO_NOSE_CM,
+                  eyes_above=OWNER_EYES_ABOVE_CAMERA_CM):
+    f, cx, cy = aim_and_lens(W, H, lm, up=up, eyes_above=eyes_above, d_nose=d_nose)
     nose = np.array(lm["nose_y_centre"]["at_px"]); contact = np.array(lm["floor_contact_midpoint"]["at_px"])
-    below_axis = np.degrees(np.arctan((nose[1] - H / 2) / f))
-    pitch = NOSE_RAY_DOWN_DEG - below_axis                     # camera tipped down by this much
-    cam = Camera.orbit([0, 0, 0], 1.0, pitch_deg=pitch, f=f, width=W, height=H)
+    cam = Camera.orbit([0, 0, -1.0], 1.0, pitch_deg=-up, f=f, width=W, height=H, cx=cx, cy=cy)
     cam.C = np.zeros(3)
+    N = d_nose * cam.ray([nose])[0]
+    rc = cam.ray([contact])[0]
+    P = rc * (np.hypot(N[0], N[2]) / np.hypot(rc[0], rc[2]))    # the front of his peets right under his face
+    cam.C = -P
+    nose_pt = N - P
     width_px, (xl, xr, yw) = widest_outline(outline)
-    depth = f * PROVISIONAL_WIDTH_CM / width_px                  # camera-axis depth of his front, from his width
-    P = cam.point_at_depth([contact], [depth])[0]               # the floor contact, seen from a camera at 0
-    cam.C = -P                                                  # ... is the room's origin
+    depth_nose = float((nose_pt - cam.C) @ cam.forward)
     inputs = dict(
-        lens=f"PROVISIONAL: {PROVISIONAL_F35_MM} mm-equivalent phone main camera, picture not cropped, its centre "
-             f"on the camera's axis -> focal length {f:.1f} px",
-        his_width=f"PROVISIONAL: his widest outline ({width_px:.1f} px, at y {yw:.1f}) is {PROVISIONAL_WIDTH_CM} cm "
-                  f"across, at the depth of his front",
-        camera_height=f"PROVISIONAL: the line of sight to his nose points {NOSE_RAY_DOWN_DEG} deg below level "
-                      f"(docs/PRINCE_SPEC.md: camera at roughly his eye/nose height, very slightly above)",
-        facing="PROVISIONAL: camera straight in front of him (yaw 0), not turned (roll 0); step 4 measures both",
-        origin="the floor under floor_contact_midpoint (data/strands/landmarks.json)")
-    replace_with = ["the phone model, zoom, and whether the photo was cropped (or its focal length from the "
-                    "original's photo info)", "his real width across his widest outline (cm)",
-                    "roughly how high and how far the phone was", "or: a sheet of paper flat where he sat, "
-                    "photographed from the same spot and zoom"]
-    return cam, dict(inputs=inputs, replace_in_step_4_with=replace_with,
+        distance=f"OWNER: camera to his nose {d_nose} cm ('it couldn't have been more than six inches away'; range 10-15.24)",
+        height=f"OWNER: 'basically exactly at his eye level. Maybe just a tiny bit lower' -> his eyes {eyes_above} cm "
+               f"above the camera (range 0-1)",
+        tilt=f"OWNER: straight on, 'maybe looking ever so slightly up' -> tilted up {up} deg (range 0-2), not turned",
+        aim=f"from the owner's memory: the camera aimed at his face, so its aim point in this (cropped) picture is "
+            f"x {cx:.1f} (his nose), y {cy:.1f} (the height that puts his eyes a touch above the camera); NOT the "
+            f"picture's centre (lesson 26)",
+        lens=f"PROVISIONAL: {PROVISIONAL_F35_MM} mm-equivalent phone main camera, this picture cropped from a 3:4 frame "
+             f"centred on the aim point, the smallest frame that holds it -> {f:.1f} px: the shortest lens that fits",
+        surface="he sat on a soft surface (his peets may sink in a little); y = 0 is that surface",
+        peets_under_face="ASSUMED: the front of his peets is right under the front of his face",
+        origin="the surface under floor_contact_midpoint (data/strands/landmarks.json)")
+    return cam, dict(inputs=inputs,
+                     still_unknown="the lens: his real size (width across his widest point, or height to the top of "
+                                   "his head) fixes it",
                      widest_outline_px=dict(width=round(width_px, 2), left=round(xl, 2), right=round(xr, 2), y=round(yw, 2)),
-                     depth_of_his_front_cm=round(depth, 3))
+                     depth_of_his_front_cm=round(depth_nose, 3), nose_height_cm=round(float(nose_pt[1]), 2),
+                     widest_outline_at_nose_distance_cm=round(width_px * depth_nose / f, 2),
+                     note_width="his widest outline at his nose's distance; his sides are further back, so he is wider")
 
 
 # ---------------------------------------------------------------- step 3: rays
@@ -253,12 +276,12 @@ def draw_room(cam, sets, lm, photo, depth_front, path, view, title):
                          (np.array([0, 0, 4.0]), (40, 80, 220), "+Z his forward")):
         c.line([np.zeros(3), ax], col, 2); c.text(ax, lab, col, small=True)
     c.text(np.zeros(3), "origin", (0, 0, 0), small=True, dx=-40, dy=8)
-    c.text(cam.C, "anchor camera (PROVISIONAL)", (0, 0, 0), small=True, dx=-60, dy=-34)
+    c.text(cam.C, "anchor camera (lens provisional)", (0, 0, 0), small=True, dx=-60, dy=-34)
     c.d.text((10, 8), title, fill=(0, 0, 0), font=c.font)
     c.d.text((10, 8 + 34), "Coloured rays: his outline by part (head orange, intermediate blue, undercarriage purple, "
                            "ears green, peets red/yellow, belly teal); grey: landmarks. Grid: 2 cm.", fill=(60, 60, 60), font=c.small)
-    c.d.text((10, 8 + 62), "He is somewhere along every ray; where (his depth) is step 5. Camera numbers are "
-                           "PROVISIONAL until step 4.", fill=(60, 60, 60), font=c.small)
+    c.d.text((10, 8 + 62), "He is somewhere along every ray; how far is a later step. Camera: as the owner remembers "
+                           "it; its lens is PROVISIONAL.", fill=(60, 60, 60), font=c.small)
     c.done(path)
 
 
@@ -271,8 +294,8 @@ def main() -> int:
     sets, lmk, err, reg, F = build_rays(cam, lm)
     camdoc = {"about": "Cameras in Prince's room (prince/space.py). One entry per photo.",
               "anchor_front": dict(photo="data/photos/anchor_front.webp",
-                                   status="PROVISIONAL placement (step 1): lens, his size and camera height are "
-                                          "placeholders until step 4", **cam.to_dict(), **prov)}
+                                   status="placed as the owner remembers the shot (2026-11-16); lens PROVISIONAL "
+                                          "until his real size is known", **cam.to_dict(), **prov)}
     (ROOT / "data/cameras.json").write_text(json.dumps(camdoc, indent=1))
     (ROOT / "data/scene").mkdir(exist_ok=True)
     raydoc = dict(about=__doc__.split("\n\n")[0], camera="data/cameras.json: anchor_front (PROVISIONAL)",
@@ -293,7 +316,7 @@ def main() -> int:
     for name, view, title in views:
         draw_room(cam, sets, lm, photo, depth_front, OUT_IMG / name, view, title)
     yaw, pitch, roll = cam.angles()
-    print("anchor camera (PROVISIONAL):", dict(position_cm=np.round(cam.C, 2).tolist(), focal_px=round(cam.f, 1),
+    print("anchor camera (lens PROVISIONAL):", dict(position_cm=np.round(cam.C, 2).tolist(), focal_px=round(cam.f, 1),
                                                yaw=round(yaw, 2), pitch=round(pitch, 2), roll=round(roll, 2)))
     print("depth of his front:", depth_front, "cm; widest outline:", prov["widest_outline_px"])
     print("rays:", {e["name"]: len(e["picture_px"]) for e in sets}, "+", len(lmk), "landmarks")

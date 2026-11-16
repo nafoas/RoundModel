@@ -808,3 +808,28 @@ check.py output (if applicable), and the next step.
   a range; his turn, tip and nod from his mirror pairs (eyes, nostrils, mouth and lip corners, ear bases,
   peets), head versus peets to tell his head tilting from the phone tilting; shown in the room for review.
 - **Next:** owner's go-ahead on that, then step 4.
+
+## 2026-11-16 — Session 6 (cont.): camera as the owner remembers it; how he is being looked at
+- Owner: go ahead with the three things proposed (no step numbers: the owner read "step 4" as jumping
+  ahead in the broader plan; it only meant these three). Photo used: `data/photos/anchor_front.webp`.
+- 1. Camera fixed as remembered (`tools/scene.py`): level, tilted up 1 deg, 13 cm from his nose, his eyes
+  0.5 cm above it, aimed at his face: aim point (548, 482) in the picture, not its centre (the picture
+  was cropped, lesson 26). Lens: if a 26 mm-equivalent main camera, the smallest 3:4 frame centred on the
+  aim point that holds the picture gives 1428 px: the shortest lens that fits (PROVISIONAL). Result:
+  camera 6.5 cm above the surface, 12.8 cm in front; his nose 4.4 cm up; widest outline 7.5 cm at his
+  nose's distance. Test updated to the owner's memory.
+- 2. How he is being looked at (`tools/facing.py` -> `data/scene/facing.json`, `facing.png`): his
+  left-right axis from 6 mirror pairs (the one direction in all six camera-pair planes). Head tipped
+  5.2 deg, his left side up: solid (4.1-6.0 leaving any pair out; 4.7-5.6 with landmark wobble; 4.8-5.6
+  across the owner's ranges). Head turned toward his left: pairs 9.0, eye ovals 5.5, nose right of the
+  eyes' middle: direction solid; amount 5-9 deg, not firm (leaving one pair out: 1.6-15.6; mouth, lip
+  corners and ear bases fit worst, misfit 2.2-3.6 deg vs eyes/nostrils 0.4). Body from the peets'
+  lowest points (rough): 3.3 deg toward his right. Nod: needs depth, later. New test: a made-up head
+  turned 7 / tipped 4 comes back exactly, with the right signs.
+- 3. Shown in the room: still views rebuilt; the 3D page shows his head (blue) and body (red) directions.
+  Found while checking the page at full size: its "Camera's view" and picture plane still assumed the
+  camera aimed at the picture's centre (labels landed beside his eyes and ears) -> the page now uses the
+  real aim point (off-centre lens); labels land on every feature, and the floor's horizon runs through
+  his eyes, as a level camera at eye level should. Tested in headless Chromium: no errors.
+- Tests: 49 passed.
+- **Next:** owner review; his real size would fix the lens. Then depth lines (rough round shell).

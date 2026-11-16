@@ -360,4 +360,5 @@ still required.
 | Landmarks (named by his side) | `tools/landmarks.py` → `data/strands/landmarks.json`, `docs/images/space/landmarks*.png` |
 | Anchor camera + every part as rays | `tools/scene.py` → `data/cameras.json`, `data/scene/anchor_rays.json`, `docs/images/space/room_*.png` |
 | The room, interactive (one file) | `tools/room_viewer.py` → `docs/space/room.html` |
+| How he is being looked at (head turn and tip, body turn) | `tools/facing.py` → `data/scene/facing.json`, `docs/images/space/facing.png` |
 | Tests | `tests/` (`python -m pytest -q`) |
