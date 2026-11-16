@@ -923,3 +923,17 @@ check.py output (if applicable), and the next step.
   (rule 5): from one straight-on photo how far back his chin and chest sit is not settled (a chest further
   back and bigger fits his outline as well; two equally good shading fits disagree about the light's
   direction). Pictures redrawn from fit 2 but not presented as right. Owner's call: Q46.
+
+## 2026-11-16 — Session 6 (cont.): lights from his eyes; owner stopped the shell refits
+- Owner: multiple lights (ceiling light, lamps); use albedo, shadows and the lights in his eyes; then: his eyes
+  are clearly not flat, measure their actual angle instead of tuning the eye shape to fit the light.
+- Done: each eye measured from its own outline as a bulging cap (`eye_geometry`): both the same shape (ball
+  radius ~1.4x the opening), facing 62 and 71 deg from the camera. Its catchlight then shows a light per eye:
+  two lights, both ~35 deg up, one on each side of him. Lit by those two fixed lights, the shell explains
+  ~88% of his fur's brightness (one free light: 83%).
+- Not fixed: the middle of his face is still flat (nostril wings, mouth, chin, chest within ~3 mm of his nose)
+  in every refit. Cause: the shell's shape (two broad ellipsoids + a small muzzle) cannot make a nose that
+  sticks out with the chin and chest set back, whatever it is fitted to. I kept refitting instead of saying
+  so; owner: "stop, this is quite silly". `data/scene/shell.json` holds the last (two-light) refit; the
+  pictures and 3D page are still from the previous (eye-direction) shell.
+- **Next:** the owner's direction.
