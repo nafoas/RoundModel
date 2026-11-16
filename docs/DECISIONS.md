@@ -91,6 +91,13 @@ excuse and was withdrawn.)
   when you finally start modeling a 3D space ... previous claude had nothing to anchor him in and I
   think that caused a ton of confusion." Define the room, name the landmarks, turn every part into
   rays from the anchor camera.
+- **How the anchor photo was taken** (owner, 2026-11-16): phone settings unknown; he was very close,
+  "it couldn't have been more than six inches away"; the camera was "basically exactly at his eye level.
+  Maybe just a tiny bit lower", looking at him "basically straight on ... maybe looking ever so slightly
+  up". The background was removed afterwards (and the picture cropped). He sat on a soft surface.
+  **Owner's method for step 4:** place the camera about six inches from him, straight on, a touch below
+  his eye level, exactly as it was, and then determine from the photo how HE is being looked at (how
+  he is turned), rather than tilting the camera to fit.
 
 ## Edges
 
@@ -407,4 +414,11 @@ excuse and was withdrawn.)
    (owner: "a fully mapped out image of his regions").
    Checking every approved part found the same fault at the ears (coloured head, out of the pictures'
    crop): a review picture must show every part the map touches, not just the part being changed.
+26. **The picture's centre is not where the camera aimed.** To place the anchor camera I assumed the
+   phone was aimed at the centre of this picture; with "eyes at eye level" that forced the camera to tip
+   12 deg down, which the owner stopped: it was straight on. Cause: the picture was cropped when he was cut
+   out, so its centre is not the camera's aim point (his eyes sit a third of the way down). The same
+   assumption was in the lens guess (focal length from this picture's size = uncropped). → Never assume an
+   edited picture is uncropped: the aim point and the lens are unknowns, fixed from what the owner
+   remembers (camera level, about at his eye height) and from measurements, not from the picture's frame.
 

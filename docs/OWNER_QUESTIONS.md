@@ -210,3 +210,6 @@ the owner's official opinion later. Each says what I did in the meantime.
    photo was cropped (or the focal length from the original's photo info: just the numbers); his real
    width across his widest point; roughly how high and far the phone was; or a sheet of paper flat where
    he sat, photographed from the same spot and zoom.
+   **Partly answered (2026-11-16):** phone settings unknown; ≤ six inches away; straight on, a touch below
+   his eye level, looking level or very slightly up; the picture was cropped. Owner's method: fix the
+   camera like that and determine how he is being looked at. Still open: his real size (fixes the lens).

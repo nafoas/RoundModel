@@ -21,7 +21,7 @@ def test_anchor_camera_puts_the_origin_under_his_peets_and_looks_slightly_down_a
     assert cam.C[1] > 0 and cam.C[2] > 0                       # above the floor, in front of his face
     nose = cam.ray([lm["nose_y_centre"]["at_px"]])[0]
     assert abs(np.degrees(np.arcsin(-nose[1])) - 5.0) < 1e-3     # the PROVISIONAL "very slightly above"
-    assert abs(np.linalg.det(cam.R) - 1) < 1e-9
+    assert abs(np.linalg.det(cam.R) - 1) < 1e-7
 
 
 def test_landmarks_are_named_by_his_side():

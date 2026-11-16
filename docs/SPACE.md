@@ -39,6 +39,12 @@ Cameras live in `data/cameras.json`, one entry per photo.
 
 ## The anchor camera: PROVISIONAL
 
+**Owner, 2026-11-16 (supersedes the placeholders below, to be applied in step 4):** straight on, about
+six inches (≤ 15 cm) from him, a touch below his eye level, looking level or very slightly up. The
+picture was cropped, so its centre is not where the camera aimed (lesson 26): the aim point is near his
+eye height in the picture, and the lens is unknown (carried as a range until his real size is known).
+Step 4 fixes the camera like that, then measures how HE is turned from his mirror pairs.
+
 The anchor photo carries no camera data, and its background was removed (no floor or wall to measure). So
 the anchor camera's placement is provisional, made from three placeholder inputs (`tools/scene.py`), each
 to be replaced in step 4 by a measurement:

@@ -142,7 +142,7 @@ class Camera:
 
     def to_dict(self):
         yaw, pitch, roll = self.angles()
-        return dict(position_cm=np.round(self.C, 4).tolist(), rotation_room_to_camera=np.round(self.R, 8).tolist(),
+        return dict(position_cm=np.round(self.C, 4).tolist(), rotation_room_to_camera=np.round(self.R, 10).tolist(),
                     focal_px=round(self.f, 4), principal_point_px=[round(self.cx, 4), round(self.cy, 4)],
                     image_size_px=[self.width, self.height],
                     yaw_deg=round(yaw, 4), pitch_deg=round(pitch, 4), roll_deg=round(roll, 4),

@@ -791,3 +791,20 @@ check.py output (if applicable), and the next step.
 - Tests: 48 passed (11 new).
 - **Next:** owner on Q44 (landmarks; the real numbers for the camera), then step 4 (camera from real
   numbers, how he faces from his symmetry), step 5 (depth lines).
+
+## 2026-11-16 — Session 6 (cont.): the anchor camera, owner's memory; a wrong tilt stopped
+- Owner on how the photo was taken: phone settings unknown, no more than six inches away, straight on, a
+  touch below his eye level (looking level or very slightly up), background removed afterwards; he sat on
+  a soft surface. (Shooting details kept general here: this repo is public.)
+- I placed the camera from that with the aim point at the picture's centre: it came out tipped 12 deg
+  down. The owner stopped it ("way too much of a down angle ... it is mostly just straight on").
+  Cause: the picture was cropped, so its centre is not where the camera aimed (lesson 26); the lens guess
+  had the same assumption. Nothing with the wrong tilt was committed: those files were restored to the
+  last commit (the committed camera is still the earlier labelled placeholder).
+- Kept: `prince/space.py` saves the camera's rotation to 10 decimals (8 left it 4e-9 from a pure
+  rotation); the scene test's no-mirroring check allows 1e-7.
+- Owner's method for step 4: fix the camera as it was (straight on, ~six inches, a touch below eye level),
+  then determine how he is being looked at. Proposed: aim point at his eye height in the picture, lens as
+  a range; his turn, tip and nod from his mirror pairs (eyes, nostrils, mouth and lip corners, ear bases,
+  peets), head versus peets to tell his head tilting from the phone tilting; shown in the room for review.
+- **Next:** owner's go-ahead on that, then step 4.
