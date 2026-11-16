@@ -235,6 +235,12 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     (peets, underfluff, ears, ...). Count every approved part's pixels against the new map before
     showing it (all must keep their own label), and show every part the map touches in the review
     picture, not just the part being changed.
+23. **Every pixel is a ray** (owner, 2026-11-16: ground him in a real 3D space; `docs/SPACE.md`): a
+    picture measurement becomes a ray from that photo's camera, never a flat shape; his outline is where
+    his surface turns away from the camera (the line of sight grazes him). Name sides by HIS side (his
+    left = picture right = room +X). Identity comes from the 3D model, never from how a photo looks: a new
+    photo's camera is solved from the landmarks, the labelled model is projected through it, and only then
+    does the photo measure anything. Provisional camera numbers are labelled PROVISIONAL everywhere.
 17. **Review sheets for grey areas** (`tools/candidate_sheets.py`): locator, the photo as
     it is, the photo with brightness stretched in TRUE colour (never stretch the colour
     channels separately or together: his fur's tiny real colour shifts become false
@@ -350,4 +356,8 @@ still required.
 | Whisker completeness (pads) | `tools/whisker_pads.py` → `data/strands/whisker_pads.json` |
 | Head / intermediate bnuy / undercarriage | `tools/body_parts.py` → `data/strands/body_parts.json`, `docs/images/body_parts/` |
 | Every whisker pad to tip | `tools/whisker_chains.py` → `data/strands/whiskers_full.json`, `docs/WHISKER_MAP.md`, `docs/images/whiskers_full/` |
+| Prince's room and cameras (3D) | `prince/space.py` (definition: `docs/SPACE.md`) |
+| Landmarks (named by his side) | `tools/landmarks.py` → `data/strands/landmarks.json`, `docs/images/space/landmarks*.png` |
+| Anchor camera + every part as rays | `tools/scene.py` → `data/cameras.json`, `data/scene/anchor_rays.json`, `docs/images/space/room_*.png` |
+| The room, interactive (one file) | `tools/room_viewer.py` → `docs/space/room.html` |
 | Tests | `tests/` (`python -m pytest -q`) |

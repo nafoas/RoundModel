@@ -201,4 +201,12 @@ the owner's official opinion later. Each says what I did in the meantime.
    where the picture-left diagonal evens out) and joins the mirrored diagonal: the whole head line is
    symmetric about one upright line (x 553.7; mirror mismatch <= 0.6 px), both ends at y 666.5. (2) His
    ears are joined by a thin strip (4 px) along the top of his head between them, like his peets.
-
+44. **3D grounding, steps 1-3 (2026-11-16), first pass:** `docs/SPACE.md`, the room in 3D
+   `docs/space/room.html`, pictures `docs/images/space/`. (a) Are the 27 landmarks right
+   (`docs/images/space/landmarks.png`, eyes `landmarks_eyes.png`)? Each eye's centre is from an oval fitted
+   to the eyeball's sides; where the eyeball meets the lashes there is no light-dark edge, so its top is
+   carried on from the sides (±4 px; the eye step draws the eye itself). (b) The anchor camera is
+   PROVISIONAL: to replace the placeholders we need any of: the phone model and zoom and whether the
+   photo was cropped (or the focal length from the original's photo info: just the numbers); his real
+   width across his widest point; roughly how high and far the phone was; or a sheet of paper flat where
+   he sat, photographed from the same spot and zoom.

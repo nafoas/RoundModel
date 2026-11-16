@@ -29,10 +29,11 @@ the unattended loop.
 | `tools/make_masks.py` | (Phase 2b) Produce silhouette masks from photos for *measurement only*. |
 
 ## Coordinate conventions
-- Units: model units ≈ centimeters (absolute scale doesn't matter for fitting).
-- x forward (toward nose), y to Prince's left, z up. Ground plane z = 0.
-- Camera yaw 0° = looking at Prince's face from straight in front. Yaw 90° =
-  viewing his left side. Pitch positive = camera above, looking down.
+**Superseded 2026-11-16 by `docs/SPACE.md` (code: `prince/space.py`, tested):** centimetres; floor
+y = 0; **+X his left, +Y up, +Z his forward**; origin on the floor under the front of his peets, in his
+midline plane. Camera yaw 0° = straight in front of his face, yaw 90° = his left side, pitch positive =
+above looking down (unchanged). The old axes here (x forward, y his left, z up) belonged to the
+unreviewed draft `prince/camera.py` / `model.py` / `render.py`; don't use them.
 
 ## Data layout (`data/` is human-owned)
 - `data/photos/<name>.jpg` — reference photos (same pose only).
@@ -42,7 +43,10 @@ the unattended loop.
   ear_base_r, tail, foot_fl, foot_fr` (any subset per photo; only mark
   visible ones). l/r = Prince's left/right.
 - `data/cameras.json` — initial camera guess per photo (yaw/pitch at minimum).
-  The optimizer may refine non-anchor cameras within bounds.
+  The optimizer may refine non-anchor cameras within bounds. **Now written by `tools/scene.py`**
+  (full camera per `prince/space.py`; the anchor entry is PROVISIONAL until step 4 of the 3D grounding).
+- Landmarks are now in `data/strands/landmarks.json` (`tools/landmarks.py`): named by HIS side
+  (`eye_his_left` ...), each with its part, how found, how sure, mirror partner, kind.
 
 ## Scoring
 Per view: hard IoU of silhouettes, and mean landmark error as a fraction of
@@ -69,8 +73,14 @@ Pass criteria live in `config/thresholds.json`.
 - [ ] Synthetic end-to-end test: recover known parameters from synthetic views.
 - [ ] `optimize.py` with checkpoints, `check.py`, `report.py`
 - [ ] Permission rules protecting the grader (`.claude/settings.json`)
-- [ ] 2a: **part-by-part classification of the anchor photo** (`docs/STRAND_PLAN.md`) — CURRENT
-- [ ] 2b: landmark tool, camera-guess file; soft measurement masks rendered from the classified parts
+- [ ] 2a: **part-by-part classification of the anchor photo** (`docs/STRAND_PLAN.md`) — paused for the 3D
+  grounding below; still to come: ears' pixel tweaks, eyes/lashes/hotot marks, pads, mouth, nose, BPs
+- [x] 2a body parts: Head / Intermediate Bnuy / Undercarriage approved 2026-11-15; every pixel of him assigned 2026-11-16.
+- [~] **3D grounding** (owner, 2026-11-16; `docs/SPACE.md`) — CURRENT. Steps 1-3 done as a first pass
+  (room + camera `prince/space.py`; 27 landmarks; every part as rays from the anchor camera; interactive
+  room `docs/space/room.html`); 4 camera from real numbers + how he faces; 5 depth lines (rough round
+  shell, parts on it); 6 new angles placed by their landmarks.
+- [ ] 2b: soft measurement masks rendered from the classified parts (landmarks and camera file: done, above)
 - [ ] 2c: whisker/wisp 3D strand builder + 1-px projection test
 
 ### Phase 3 — unattended run on real photos

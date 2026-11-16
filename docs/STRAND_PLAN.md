@@ -173,6 +173,11 @@ Original description:
   crops saved as reference. Every later tile is judged against them.
 
 ### 3. Annotate each tile strand by strand — IN PROGRESS
+**3D GROUNDING (2026-11-16), owner: before any sculpting, ground him in a real 3D space** (`docs/SPACE.md`).
+Steps 1-3 first pass: the room and cameras (`prince/space.py`), 27 named landmarks
+(`data/strands/landmarks.json`), every part as rays from the anchor camera (`data/scene/anchor_rays.json`),
+the room in 3D (`docs/space/room.html`). The anchor camera is PROVISIONAL until step 4 (Q44).
+
 **BODY PARTS (2026-11-15): Head / Intermediate Bnuy / Undercarriage: OWNER-APPROVED.** Lines frozen in
 `data/lines/body_parts_lines.json`; the region map (`docs/images/body_parts/proposal_body.png`) shows every
 part: head, intermediate bnuy, undercarriage, ears (+ strip), cream peet, underfluff tuft, gray peet.

@@ -1,0 +1,321 @@
+"""Named landmarks on the anchor photo, each tied to one of his parts (3D grounding, step 2).
+
+Owner, 2026-11-16: anchor his model in a real 3D space so every shape can be traced back and nothing of
+him is misread between shots. Landmarks are the fixed points of him that are unmistakable from almost any
+angle; in a new photo they are found first, and its camera is solved from them.
+
+Each landmark: a name by HIS side (his left = the picture's right = the room's +X), the part it belongs to,
+its picture position (sub-pixel where measured that finely), how it was found, how sure (px), its mirror
+partner, and its kind:
+- "surface point": a fixed point of him (an eye's centre, a nostril wing, an ear-base end);
+- "view-dependent": a point that slides over him as the camera moves (the topmost point of an ear, the
+  catchlight on an eye, where a line crosses his outline). Useful here, never matched as a fixed point.
+
+Usage: python tools/landmarks.py -> data/strands/landmarks.json, docs/images/space/landmarks*.png
+"""
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+from PIL import Image, ImageDraw
+from scipy import ndimage as ndi
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT_IMG = ROOT / "docs/images/space"
+EYE_BOXES = {"eye_his_right": (260, 330, 400, 530), "eye_his_left": (660, 320, 800, 520)}   # picture left / right
+N_DIRS = 180
+
+
+def load(p):
+    return json.loads((ROOT / p).read_text())
+
+
+# ---------------------------------------------------------------- eyes
+def fit_ellipse(P):
+    """Direct least-squares ellipse fit (Fitzgibbon et al. 1999). Returns centre, semi-axes (a >= b),
+    angle of the long axis (deg, picture coords: x right, y down), and the conic."""
+    x, y = P[:, 0] - P[:, 0].mean(), P[:, 1] - P[:, 1].mean()
+    D = np.c_[x * x, x * y, y * y, x, y, np.ones_like(x)]
+    S = D.T @ D
+    C = np.zeros((6, 6)); C[0, 2] = C[2, 0] = 2; C[1, 1] = -1
+    S1, S2, S3 = S[:3, :3], S[:3, 3:], S[3:, 3:]
+    T = -np.linalg.solve(S3, S2.T)
+    M = S1 + S2 @ T
+    M = np.array([M[2] / 2, -M[1], M[0] / 2])
+    w, v = np.linalg.eig(M)
+    v = np.real(v); cond = 4 * v[0] * v[2] - v[1] ** 2
+    a1 = v[:, np.argmax(cond > 0)]
+    A, B, Cc, Dd, E, Fc = np.r_[a1, T @ a1]
+    den = B * B - 4 * A * Cc
+    x0 = (2 * Cc * Dd - B * E) / den; y0 = (2 * A * E - B * Dd) / den
+    num = 2 * (A * E * E + Cc * Dd * Dd - B * Dd * E + den * Fc)
+    r = np.sqrt((A - Cc) ** 2 + B * B)
+    ax1 = -np.sqrt(num * (A + Cc + r)) / den; ax2 = -np.sqrt(num * (A + Cc - r)) / den
+    th = 0.5 * np.arctan2(-B, Cc - A)
+    a, b = (ax1, ax2) if ax1 >= ax2 else (ax2, ax1)
+    if ax1 < ax2:
+        th += np.pi / 2
+    c = np.array([x0 + P[:, 0].mean(), y0 + P[:, 1].mean()])
+    return c, float(a), float(b), float(np.degrees(th) % 180)
+
+
+def ellipse_dist(P, c, a, b, ang):
+    t = np.radians(ang); R = np.array([[np.cos(t), np.sin(t)], [-np.sin(t), np.cos(t)]])
+    q = (P - c) @ R.T
+    s = np.sqrt((q[:, 0] / a) ** 2 + (q[:, 1] / b) ** 2)
+    return (s - 1) * np.sqrt(a * b)                     # approx. distance, + outside
+
+
+def measure_eye(lum, box):
+    """The visible eyeball: a dark, glossy oval. Its edge is measured along N_DIRS directions from its middle
+    (where the brightness crosses halfway between eyeball and fur, to a fraction of a pixel); directions that
+    run into lashes (dark carries on) or fur lying over the eye (bright too early) are dropped by a robust
+    oval fit."""
+    x0, y0, x1, y1 = box
+    L = ndi.gaussian_filter(lum[y0:y1, x0:x1], 0.8)
+    dark = L < 70
+    core = ndi.binary_opening(dark, structure=np.ones((7, 7), bool))         # lashes are thinner than 7 px
+    lab, n = ndi.label(core); k = int(np.argmax(ndi.sum(core, lab, range(1, n + 1)))) + 1
+    ball = ndi.binary_fill_holes(lab == k)
+    cy, cx = np.argwhere(ball).mean(0) + 0.5
+    eye_lum = float(np.median(L[ball & dark]))
+    ring = ndi.binary_dilation(ball, iterations=12) & ~ndi.binary_dilation(ball, iterations=5) & ~dark
+    fur_lum = float(np.median(L[ring])); level = (eye_lum + fur_lum) / 2
+    pts, used = [], []
+    r = np.arange(0, 70, 0.25)
+    for ang in np.linspace(0, 2 * np.pi, N_DIRS, endpoint=False):
+        xs = cx + r * np.cos(ang) - 0.5; ys = cy + r * np.sin(ang) - 0.5
+        v = ndi.map_coordinates(L, [ys, xs], order=1, mode="nearest")
+        above = np.flatnonzero((v[1:] >= level) & (v[:-1] < level) & (r[1:] > 4))
+        if not len(above):
+            continue
+        i = above[0]; t = (level - v[i]) / (v[i + 1] - v[i])
+        rr = r[i] + t * (r[i + 1] - r[i])
+        pts.append([x0 + cx + rr * np.cos(ang), y0 + cy + rr * np.sin(ang)]); used.append(np.degrees(ang))
+    P = np.array(pts); keep = np.ones(len(P), bool)
+    for _ in range(6):
+        c, a, b, th = fit_ellipse(P[keep])
+        d = ellipse_dist(P, c, a, b, th)
+        mad = 1.4826 * np.median(np.abs(d[keep] - np.median(d[keep])))
+        keep = np.abs(d) <= max(2.5 * mad, 0.75)
+    c, a, b, th = fit_ellipse(P[keep]); d = ellipse_dist(P, c, a, b, th)
+    # catchlight: the bright spot inside the eye (brightness-weighted centre of its brightest pixels)
+    t = np.radians(th); Rm = np.array([[np.cos(t), np.sin(t)], [-np.sin(t), np.cos(t)]])
+    H, W = L.shape; gy, gx = np.mgrid[0:H, 0:W] + 0.5
+    q = (np.c_[gx.ravel() + x0, gy.ravel() + y0] - c) @ Rm.T
+    inside = (((q[:, 0] / a) ** 2 + (q[:, 1] / b) ** 2) < 0.8).reshape(H, W)
+    raw = lum[y0:y1, x0:x1]
+    hi = inside & (raw >= np.percentile(raw[inside], 99.5))
+    lab2, n2 = ndi.label(hi); k2 = int(np.argmax(ndi.sum(raw * hi, lab2, range(1, n2 + 1)))) + 1
+    spot = lab2 == k2; w = raw[spot] - level
+    sy, sx = np.argwhere(spot).T
+    catch = np.array([x0 + 0.5 + (sx * w).sum() / w.sum(), y0 + 0.5 + (sy * w).sum() / w.sum()])
+    return dict(centre=c, semi_axes=(a, b), angle_deg=th, aspect=b / a, edge_points=P, kept=keep,
+                rms_px=float(np.sqrt(np.mean(d[keep] ** 2))), kept_fraction=float(keep.mean()),
+                dropped_directions_deg=np.round(np.array(used)[~keep], 0).tolist(),
+                eye_lum=eye_lum, fur_lum=fur_lum, catchlight=catch)
+
+
+# ---------------------------------------------------------------- the rest of him
+def lowest_point(poly, tol=4.0):
+    """The lowest point of a part (largest y); if its bottom is flat, the middle of the flat stretch."""
+    y = poly[:, 1].max(); flat = poly[poly[:, 1] >= y - tol]
+    return np.array([float(np.median(flat[:, 0])), float(y)])
+
+
+def at_x(curve, x):
+    o = curve[np.argsort(curve[:, 0])]
+    return np.array([float(x), float(np.interp(x, o[:, 0], o[:, 1]))])
+
+
+def top_outline_at(outline, x):
+    """His outline's topmost crossing at picture x (the top of his head there)."""
+    seg = np.c_[outline[:-1], outline[1:]]
+    ys = []
+    for x_a, y_a, x_b, y_b in seg:
+        if (x_a - x) * (x_b - x) <= 0 and x_a != x_b:
+            ys.append(y_a + (x - x_a) / (x_b - x_a) * (y_b - y_a))
+    return np.array([float(x), float(min(ys))])
+
+
+def peet_specks(lum, poly, min_contrast=25.0):
+    """Small dark marks on a peet (fixed marks of him): local dark spots well below the fur around them."""
+    from matplotlib.path import Path as MP
+    H, W = lum.shape
+    x0, y0 = np.floor(poly.min(0)).astype(int); x1, y1 = np.ceil(poly.max(0)).astype(int)
+    sub = ndi.gaussian_filter(lum[y0:y1, x0:x1], 1.2)
+    bg = ndi.median_filter(sub, size=21)
+    gy, gx = np.mgrid[y0:y1, x0:x1] + 0.5
+    inside = MP(poly).contains_points(np.c_[gx.ravel(), gy.ravel()]).reshape(sub.shape)
+    inside = ndi.binary_erosion(inside, iterations=12)      # not the darker fur along the peet's own edge
+    c = (bg - sub) * inside
+    lab, n = ndi.label(c > min_contrast)
+    out = []
+    for i in range(1, n + 1):
+        m = lab == i; w = c[m]; yy, xx = np.argwhere(m).T
+        out.append(dict(at=[x0 + 0.5 + float((xx * w).sum() / w.sum()), y0 + 0.5 + float((yy * w).sum() / w.sum())],
+                        contrast=round(float(w.max()), 1), px=int(m.sum())))
+    return sorted(out, key=lambda s: -s["contrast"])
+
+
+def main() -> int:
+    photo = np.array(Image.open(ROOT / "data/photos/anchor_front.webp").convert("RGB"))
+    lum = photo.astype(float).mean(2)
+    outline = np.array(load("data/strands/body_outline.json")["sampled_curve"])
+    ears = load("data/strands/parts_ears.json")["parts"]
+    peets = load("data/strands/parts_peets.json")["parts"]
+    bases = load("data/strands/ear_bases.json")
+    lines = load("data/lines/body_parts_lines.json")
+    face = load("data/strands/whiskers_full.json")
+    fl = face["landmarks"]; corners = face["pads"]["corners"]
+    head, fold = np.array(lines["head_line"]["sampled_curve"]), np.array(lines["fold_line"]["sampled_curve"])
+    axis_x = lines["head_line"]["axis_x"]
+
+    LM = {}
+
+    def add(name, part, at, how, sure_px, kind="surface point", mirror=None, **extra):
+        LM[name] = dict(part=part, at_px=np.round(np.asarray(at, float), 2).tolist(), how=how, sure_px=sure_px,
+                        kind=kind, mirror_of=mirror, **extra)
+
+    eyes = {}
+    for name, box in EYE_BOXES.items():
+        e = eyes[name] = measure_eye(lum, box)
+        mirror = "eye_his_left" if name == "eye_his_right" else "eye_his_right"
+        add(name, "head", e["centre"],
+            f"centre of an oval fitted to the eyeball's edge, measured in {N_DIRS} directions to a fraction of a "
+            f"pixel; {int(e['kept'].sum())}/{len(e['kept'])} kept (the rest ran into lashes or fur over the eye); "
+            f"fit rms {e['rms_px']:.2f} px. Where the eyeball meets the lashes there is no light-dark edge (dark "
+            f"into dark), so the oval's top there is carried on from its sides and can sit several px short of "
+            f"the eyeball's top; the eye step draws the eye's own outline", 4.0, mirror=mirror,
+            oval=dict(semi_axes_px=np.round(e["semi_axes"], 2).tolist(), long_axis_angle_deg=round(e["angle_deg"], 1),
+                      short_over_long=round(e["aspect"], 3),
+                      note=("an eye is round; seen at an angle it shows as an oval. short/long is a depth clue "
+                            "(how far the eye faces away from the camera), used in step 4")))
+        add(name + "_catchlight", "head", e["catchlight"],
+            "brightness-weighted centre of the brightest spot inside the eye (the light's reflection)", 0.5,
+            kind="view-dependent", mirror=mirror + "_catchlight")
+    add("nostril_wing_his_right", "head", fl["nostril_wing_left"], "outer end of the nose's dark shape "
+        "(tools/whisker_chains.py measure_pads), whole pixels; the shape fades out gradually there", 3.0,
+        mirror="nostril_wing_his_left")
+    add("nostril_wing_his_left", "head", fl["nostril_wing_right"], "as nostril_wing_his_right", 3.0,
+        mirror="nostril_wing_his_right")
+    add("nose_y_centre", "head", [fl["philtrum_x"], fl["philtrum_top"]],
+        "where the two sides of his nose meet and the philtrum starts (the middle of the Y)", 1.5)
+    add("philtrum_bottom", "head", [fl["philtrum_x"], fl["philtrum_bottom"]],
+        "bottom of the philtrum, where his mouth splits", 1.5)
+    add("mouth_corner_his_right", "head", fl["mouth_corner_left"], "outer end of the mouth's dark line, whole px",
+        1.5, mirror="mouth_corner_his_left")
+    add("mouth_corner_his_left", "head", fl["mouth_corner_right"], "as mouth_corner_his_right", 1.5,
+        mirror="mouth_corner_his_right")
+    add("lip_corner_his_right", "head", corners["image_left"]["lip_corner"],
+        "corner of the approved whisker-pad outline at his lip line", 2.0, mirror="lip_corner_his_left")
+    add("lip_corner_his_left", "head", corners["image_right"]["lip_corner"], "as lip_corner_his_right", 2.0,
+        mirror="lip_corner_his_right")
+    add("chin_midline", "head", at_x(head, axis_x),
+        "the approved head line where it crosses his midline (under his mouth)", 1.0,
+        note="owner-guided line (data/lines/body_parts_lines.json)")
+    # ears (picture left = his right)
+    for side, key, base_key in (("his_right", "ear_image_left", "ear_image_left_base"),
+                                ("his_left", "ear_image_right", "ear_image_right_base")):
+        other = "his_left" if side == "his_right" else "his_right"
+        poly = np.array(ears[key]["exterior"]); b = np.array(bases[base_key])
+        inner, outer = (b[0], b[-1]) if abs(b[0, 0] - axis_x) < abs(b[-1, 0] - axis_x) else (b[-1], b[0])
+        add(f"ear_tip_{side}", f"ear ({side.replace('_', ' ')})", poly[np.argmin(poly[:, 1])],
+            "topmost point of the approved ear outline", 1.0, kind="view-dependent", mirror=f"ear_tip_{other}")
+        add(f"ear_base_inner_{side}", f"ear ({side.replace('_', ' ')})", inner,
+            "inner end of the approved ear base (a notch in his outline)", 1.0, mirror=f"ear_base_inner_{other}")
+        add(f"ear_base_outer_{side}", f"ear ({side.replace('_', ' ')})", outer,
+            "outer end of the approved ear base (a notch in his outline)", 1.0, mirror=f"ear_base_outer_{other}")
+    crown_x = (LM["ear_base_inner_his_right"]["at_px"][0] + LM["ear_base_inner_his_left"]["at_px"][0]) / 2
+    add("crown_front", "top of his head (the strip joining his ears)", top_outline_at(outline, crown_x),
+        "his outline at the middle of the strip joining his ears", 1.0, kind="view-dependent",
+        note=("owner: the strip is the top of his head seen from above; here his head's top starts going back, "
+              "so this point is where the camera's line of sight grazes it"))
+    # body
+    add("fold_midline", "intermediate bnuy / undercarriage", at_x(fold, axis_x),
+        "the approved lower fold where it crosses his midline", 2.0)
+    for side, key in (("his_right", "cream_peet_image_left"), ("his_left", "gray_peet_image_right")):
+        other = "his_left" if side == "his_right" else "his_right"
+        poly = np.array(peets[key]["exterior"])
+        add(f"peet_bottom_{side}", f"peet ({side.replace('_', ' ')})", lowest_point(poly),
+            "lowest point of the approved peet outline (where it meets the floor)", 1.0,
+            kind="view-dependent", mirror=f"peet_bottom_{other}",
+            note="used to put the floor under him; a rounded peet touches the floor near here")
+        sp = peet_specks(lum, poly)
+        for i, s in enumerate(sp[:3]):
+            add(f"peet_mark_{side}_{i + 1}", f"peet ({side.replace('_', ' ')})", s["at"],
+                f"small dark mark on the peet (contrast {s['contrast']} grey levels, {s['px']} px)", 1.5,
+                note="a mark on his fur, so a fixed point of him if it shows in another photo")
+    tuft = np.array(peets["underfluff_tuft"]["exterior"])
+    add("belly_front", "belly (the underfluff tuft)", tuft.mean(0),
+        "middle of the underfluff tuft", 5.0, kind="view-dependent",
+        note="owner: the tuft is his belly seen from below; it carries on back underneath him")
+    pr, pl = np.array(LM["peet_bottom_his_right"]["at_px"]), np.array(LM["peet_bottom_his_left"]["at_px"])
+    add("floor_contact_midpoint", "floor", (pr + pl) / 2,
+        "midpoint of his two peets' lowest points: the room's origin is on the floor under here", 1.0,
+        kind="view-dependent")
+
+    pairs = sorted({tuple(sorted((k, v["mirror_of"]))) for k, v in LM.items() if v["mirror_of"]})
+    doc = dict(about=__doc__.split("\n\n")[0], photo="data/photos/anchor_front.webp",
+               coords="picture px, x right, y down; pixel (c, r) covers [c, c+1) x [r, r+1)",
+               sides="named by HIS side: his left = the picture's right = the room's +X",
+               status="first pass, owner review pending", landmarks=LM, mirror_pairs=[list(p) for p in pairs],
+               eye_fit={k: dict(rms_px=round(e["rms_px"], 3), kept_fraction=round(e["kept_fraction"], 3),
+                                dropped_directions_deg=e["dropped_directions_deg"],
+                                eyeball_lum=round(e["eye_lum"], 1), fur_lum=round(e["fur_lum"], 1))
+                        for k, e in eyes.items()})
+    (ROOT / "data/strands/landmarks.json").write_text(json.dumps(doc, indent=1))
+    sheets(photo, LM, eyes)
+    for k, v in LM.items():
+        print(f"{k:32s} {v['part']:45s} {v['at_px']}  ±{v['sure_px']}  {v['kind']}")
+    print({k: (round(e['rms_px'], 2), round(e['kept_fraction'], 2), round(e['aspect'], 3)) for k, e in eyes.items()})
+    return 0
+
+
+def sheets(photo, LM, eyes):
+    OUT_IMG.mkdir(parents=True, exist_ok=True)
+    sc = 2
+    im = Image.fromarray(photo).resize((photo.shape[1] * sc, photo.shape[0] * sc), Image.LANCZOS)
+    d = ImageDraw.Draw(im)
+    for k, v in LM.items():
+        x, y = (np.array(v["at_px"]) * sc)
+        col = (220, 0, 120) if v["kind"] == "surface point" else (0, 120, 220)
+        d.line([(x - 9, y), (x + 9, y)], fill=col, width=2); d.line([(x, y - 9), (x, y + 9)], fill=col, width=2)
+        d.text((x + 8, y + 4), k, fill=col)
+    for e in eyes.values():
+        c, (a, b), th = e["centre"], e["semi_axes"], np.radians(e["angle_deg"])
+        t = np.linspace(0, 2 * np.pi, 200)
+        pts = c + np.c_[a * np.cos(t) * np.cos(th) - b * np.sin(t) * np.sin(th), a * np.cos(t) * np.sin(th) + b * np.sin(t) * np.cos(th)]
+        d.line([tuple(p * sc) for p in pts], fill=(255, 200, 0), width=1)
+    d.text((10, 10), "Landmarks (first pass). Magenta = fixed points of him; blue = view-dependent points. "
+                     "Names are by HIS side (his left = picture right). Yellow = fitted eye ovals.", fill=(0, 0, 0))
+    im.save(OUT_IMG / "landmarks.png")
+    # eyes at 6x: photo, and photo with the measured edge points (kept green, dropped red) and the oval
+    rows = []
+    for name, box in EYE_BOXES.items():
+        e = eyes[name]; x0, y0, x1, y1 = box; s = 6
+        crop = Image.fromarray(photo[y0:y1, x0:x1]).resize(((x1 - x0) * s, (y1 - y0) * s), Image.LANCZOS)
+        mk = crop.copy(); dr = ImageDraw.Draw(mk)
+        c, (a, b), th = e["centre"], e["semi_axes"], np.radians(e["angle_deg"])
+        t = np.linspace(0, 2 * np.pi, 400)
+        pts = c + np.c_[a * np.cos(t) * np.cos(th) - b * np.sin(t) * np.sin(th), a * np.cos(t) * np.sin(th) + b * np.sin(t) * np.cos(th)]
+        dr.line([((p[0] - x0) * s, (p[1] - y0) * s) for p in pts], fill=(255, 200, 0), width=2)
+        for p, k in zip(e["edge_points"], e["kept"]):
+            X, Y = (p[0] - x0) * s, (p[1] - y0) * s
+            dr.ellipse([X - 3, Y - 3, X + 3, Y + 3], fill=(0, 200, 0) if k else (255, 0, 0))
+        for p, col in ((c, (220, 0, 120)), (e["catchlight"], (0, 120, 220))):
+            X, Y = (p[0] - x0) * s, (p[1] - y0) * s
+            dr.line([(X - 12, Y), (X + 12, Y)], fill=col, width=2); dr.line([(X, Y - 12), (X, Y + 12)], fill=col, width=2)
+        row = Image.new("RGB", (crop.width * 2 + 8, crop.height), (30, 30, 30)); row.paste(crop, (0, 0)); row.paste(mk, (crop.width + 8, 0))
+        rows.append(row)
+    o = Image.new("RGB", (rows[0].width, sum(r.height for r in rows) + 8), (30, 30, 30)); y = 0
+    for r in rows:
+        o.paste(r, (0, y)); y += r.height + 8
+    o.save(OUT_IMG / "landmarks_eyes.png")
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

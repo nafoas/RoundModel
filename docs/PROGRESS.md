@@ -756,3 +756,38 @@ check.py output (if applicable), and the next step.
   Since then every edit is confirmed in the file and by its result.
 - **Next:** the owner's advice, now that every bit of him is assigned.
 
+
+## 2026-11-16 — Session 6 (cont.): 3D grounding, steps 1-3 (first pass)
+- Owner: ground him in a real 3D space before any sculpting ("previous claude had nothing to anchor him
+  in and I think that caused a ton of confusion"); the parts exist so every shape can be traced back
+  between shots. The green strip joining his ears = the top of his head seen from above; the tuft between
+  his peets = his belly. Logged in DECISIONS. Photo used: `data/photos/anchor_front.webp` (the only one).
+- Checked first: one photo, no camera data (no EXIF), background removed (no floor/wall to measure).
+- Step 1, the room: new `prince/space.py` (cm; floor y = 0; +X his left, +Y up, +Z his forward; origin on
+  the floor under the front of his peets) and a pinhole camera (project, pixel -> ray, floor hits, orbit
+  placement with the plan's yaw/pitch words). The unlogged draft `prince/camera.py` was reviewed and not
+  used (orbit only, no lens model, no pixel -> ray). 8 tests pin every convention (his left shows on the
+  picture's right, up is up, no mirroring, angles round-trip, pixel -> ray -> pixel exact); one caught a
+  flipped cross product on the first run. PLAN's old axes (x forward, z up, from the draft) marked
+  superseded. `docs/SPACE.md` defines the room.
+- Step 2, landmarks (`tools/landmarks.py` -> `data/strands/landmarks.json`): 27, named by HIS side, each
+  with part, picture position, how found, how sure, mirror partner, kind (fixed surface point or
+  view-dependent). Eyes: an oval fitted to the eyeball's edge measured in 180 directions, robust to lashes
+  and fur (his right eye 61% of directions kept, rms 0.68 px; his left 87%, 1.16 px); the top where the
+  eyeball meets the lashes has no light-dark edge, so the centres are ±4 px and the eye step will draw the
+  eyes properly. The eyes show as ovals (short/long 0.56 and 0.42): a depth clue for step 4. Found and
+  fixed on the way: 3 false "peet marks" on his right peet (darker fur along its edge) -> marks must be
+  well inside a peet; the gray peet's bottom point at its corner -> middle of its flat bottom; nostril
+  wings ±3 px (their dark shape fades out). His left peet's two dark specks are kept as fixed marks.
+- Step 3, rays (`tools/scene.py`): the anchor camera placed PROVISIONALLY from three named placeholders
+  (26 mm-equivalent lens, his widest outline = 12 cm, nose seen 5 deg below level) -> 8.5 cm up, 15.1 cm
+  in front, tipped 3.6 deg down (`data/cameras.json`). Every part as rays (`data/scene/anchor_rays.json`):
+  his outline (1628 rays, by part, marked grazing), head line, fold, peet line, ear bases, every approved
+  part's outline, every landmark; each ray lands back on its pixel to 0.006 px. Pictures
+  `docs/images/space/room_behind.png`, `room_side.png`, `room_top.png` (rays end at one length, so no flat
+  cut-out at their far end), and the room in 3D, interactive: `docs/space/room.html` (three.js r159, MIT,
+  inlined; tested in headless Chromium: all four views and dragging, no errors; "Camera's view" puts the
+  eye where the camera was and every ray shrinks to its pixel).
+- Tests: 48 passed (11 new).
+- **Next:** owner on Q44 (landmarks; the real numbers for the camera), then step 4 (camera from real
+  numbers, how he faces from his symmetry), step 5 (depth lines).

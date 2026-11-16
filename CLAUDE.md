@@ -94,6 +94,7 @@ checked pixel by pixel, owner-guided bridges, and stop if a fix makes it worse.
 - `docs/STRAND_PLAN.md`: current plan: classifying the anchor photo part by part.
 - `docs/PLAN.md`: the overall pipeline (numeric fitting, unattended runs).
 - `docs/PRINCE_SPEC.md`: what Prince looks like, with measurements.
+- `docs/SPACE.md`: his 3D room (axes, floor, cameras): every pixel is a ray, sides by HIS side.
 - `docs/PROGRESS.md`: running log. Read the latest entry first.
 - `data/`: owner-owned inputs (photos, approved lines). `prince/`: library code
   (currently an unreviewed draft; see PROGRESS). `tests/`: run

@@ -1,0 +1,480 @@
+{
+ "about": "Named landmarks on the anchor photo, each tied to one of his parts (3D grounding, step 2).",
+ "photo": "data/photos/anchor_front.webp",
+ "coords": "picture px, x right, y down; pixel (c, r) covers [c, c+1) x [r, r+1)",
+ "sides": "named by HIS side: his left = the picture's right = the room's +X",
+ "status": "first pass, owner review pending",
+ "landmarks": {
+  "eye_his_right": {
+   "part": "head",
+   "at_px": [
+    337.0,
+    474.09
+   ],
+   "how": "centre of an oval fitted to the eyeball's edge, measured in 180 directions to a fraction of a pixel; 110/180 kept (the rest ran into lashes or fur over the eye); fit rms 0.68 px. Where the eyeball meets the lashes there is no light-dark edge (dark into dark), so the oval's top there is carried on from its sides and can sit several px short of the eyeball's top; the eye step draws the eye's own outline",
+   "sure_px": 4.0,
+   "kind": "surface point",
+   "mirror_of": "eye_his_left",
+   "oval": {
+    "semi_axes_px": [
+     35.33,
+     19.64
+    ],
+    "long_axis_angle_deg": 98.8,
+    "short_over_long": 0.556,
+    "note": "an eye is round; seen at an angle it shows as an oval. short/long is a depth clue (how far the eye faces away from the camera), used in step 4"
+   }
+  },
+  "eye_his_right_catchlight": {
+   "part": "head",
+   "at_px": [
+    338.25,
+    456.75
+   ],
+   "how": "brightness-weighted centre of the brightest spot inside the eye (the light's reflection)",
+   "sure_px": 0.5,
+   "kind": "view-dependent",
+   "mirror_of": "eye_his_left_catchlight"
+  },
+  "eye_his_left": {
+   "part": "head",
+   "at_px": [
+    698.81,
+    445.33
+   ],
+   "how": "centre of an oval fitted to the eyeball's edge, measured in 180 directions to a fraction of a pixel; 156/179 kept (the rest ran into lashes or fur over the eye); fit rms 1.16 px. Where the eyeball meets the lashes there is no light-dark edge (dark into dark), so the oval's top there is carried on from its sides and can sit several px short of the eyeball's top; the eye step draws the eye's own outline",
+   "sure_px": 4.0,
+   "kind": "surface point",
+   "mirror_of": "eye_his_right",
+   "oval": {
+    "semi_axes_px": [
+     41.77,
+     17.73
+    ],
+    "long_axis_angle_deg": 69.8,
+    "short_over_long": 0.424,
+    "note": "an eye is round; seen at an angle it shows as an oval. short/long is a depth clue (how far the eye faces away from the camera), used in step 4"
+   }
+  },
+  "eye_his_left_catchlight": {
+   "part": "head",
+   "at_px": [
+    693.71,
+    432.41
+   ],
+   "how": "brightness-weighted centre of the brightest spot inside the eye (the light's reflection)",
+   "sure_px": 0.5,
+   "kind": "view-dependent",
+   "mirror_of": "eye_his_right_catchlight"
+  },
+  "nostril_wing_his_right": {
+   "part": "head",
+   "at_px": [
+    463.0,
+    692.0
+   ],
+   "how": "outer end of the nose's dark shape (tools/whisker_chains.py measure_pads), whole pixels; the shape fades out gradually there",
+   "sure_px": 3.0,
+   "kind": "surface point",
+   "mirror_of": "nostril_wing_his_left"
+  },
+  "nostril_wing_his_left": {
+   "part": "head",
+   "at_px": [
+    617.0,
+    676.0
+   ],
+   "how": "as nostril_wing_his_right",
+   "sure_px": 3.0,
+   "kind": "surface point",
+   "mirror_of": "nostril_wing_his_right"
+  },
+  "nose_y_centre": {
+   "part": "head",
+   "at_px": [
+    548.0,
+    743.0
+   ],
+   "how": "where the two sides of his nose meet and the philtrum starts (the middle of the Y)",
+   "sure_px": 1.5,
+   "kind": "surface point",
+   "mirror_of": null
+  },
+  "philtrum_bottom": {
+   "part": "head",
+   "at_px": [
+    548.0,
+    819.0
+   ],
+   "how": "bottom of the philtrum, where his mouth splits",
+   "sure_px": 1.5,
+   "kind": "surface point",
+   "mirror_of": null
+  },
+  "mouth_corner_his_right": {
+   "part": "head",
+   "at_px": [
+    488.0,
+    854.0
+   ],
+   "how": "outer end of the mouth's dark line, whole px",
+   "sure_px": 1.5,
+   "kind": "surface point",
+   "mirror_of": "mouth_corner_his_left"
+  },
+  "mouth_corner_his_left": {
+   "part": "head",
+   "at_px": [
+    595.0,
+    833.0
+   ],
+   "how": "as mouth_corner_his_right",
+   "sure_px": 1.5,
+   "kind": "surface point",
+   "mirror_of": "mouth_corner_his_right"
+  },
+  "lip_corner_his_right": {
+   "part": "head",
+   "at_px": [
+    405.0,
+    873.9
+   ],
+   "how": "corner of the approved whisker-pad outline at his lip line",
+   "sure_px": 2.0,
+   "kind": "surface point",
+   "mirror_of": "lip_corner_his_left"
+  },
+  "lip_corner_his_left": {
+   "part": "head",
+   "at_px": [
+    709.0,
+    851.7
+   ],
+   "how": "as lip_corner_his_right",
+   "sure_px": 2.0,
+   "kind": "surface point",
+   "mirror_of": "lip_corner_his_right"
+  },
+  "chin_midline": {
+   "part": "head",
+   "at_px": [
+    553.67,
+    896.25
+   ],
+   "how": "the approved head line where it crosses his midline (under his mouth)",
+   "sure_px": 1.0,
+   "kind": "surface point",
+   "mirror_of": null,
+   "note": "owner-guided line (data/lines/body_parts_lines.json)"
+  },
+  "ear_tip_his_right": {
+   "part": "ear (his right)",
+   "at_px": [
+    421.95,
+    215.32
+   ],
+   "how": "topmost point of the approved ear outline",
+   "sure_px": 1.0,
+   "kind": "view-dependent",
+   "mirror_of": "ear_tip_his_left"
+  },
+  "ear_base_inner_his_right": {
+   "part": "ear (his right)",
+   "at_px": [
+    511.7,
+    279.3
+   ],
+   "how": "inner end of the approved ear base (a notch in his outline)",
+   "sure_px": 1.0,
+   "kind": "surface point",
+   "mirror_of": "ear_base_inner_his_left"
+  },
+  "ear_base_outer_his_right": {
+   "part": "ear (his right)",
+   "at_px": [
+    348.61,
+    313.78
+   ],
+   "how": "outer end of the approved ear base (a notch in his outline)",
+   "sure_px": 1.0,
+   "kind": "surface point",
+   "mirror_of": "ear_base_outer_his_left"
+  },
+  "ear_tip_his_left": {
+   "part": "ear (his left)",
+   "at_px": [
+    670.84,
+    204.07
+   ],
+   "how": "topmost point of the approved ear outline",
+   "sure_px": 1.0,
+   "kind": "view-dependent",
+   "mirror_of": "ear_tip_his_right"
+  },
+  "ear_base_inner_his_left": {
+   "part": "ear (his left)",
+   "at_px": [
+    577.1,
+    272.0
+   ],
+   "how": "inner end of the approved ear base (a notch in his outline)",
+   "sure_px": 1.0,
+   "kind": "surface point",
+   "mirror_of": "ear_base_inner_his_right"
+  },
+  "ear_base_outer_his_left": {
+   "part": "ear (his left)",
+   "at_px": [
+    716.46,
+    303.11
+   ],
+   "how": "outer end of the approved ear base (a notch in his outline)",
+   "sure_px": 1.0,
+   "kind": "surface point",
+   "mirror_of": "ear_base_outer_his_right"
+  },
+  "crown_front": {
+   "part": "top of his head (the strip joining his ears)",
+   "at_px": [
+    544.4,
+    275.21
+   ],
+   "how": "his outline at the middle of the strip joining his ears",
+   "sure_px": 1.0,
+   "kind": "view-dependent",
+   "mirror_of": null,
+   "note": "owner: the strip is the top of his head seen from above; here his head's top starts going back, so this point is where the camera's line of sight grazes it"
+  },
+  "fold_midline": {
+   "part": "intermediate bnuy / undercarriage",
+   "at_px": [
+    553.67,
+    1046.98
+   ],
+   "how": "the approved lower fold where it crosses his midline",
+   "sure_px": 2.0,
+   "kind": "surface point",
+   "mirror_of": null
+  },
+  "peet_bottom_his_right": {
+   "part": "peet (his right)",
+   "at_px": [
+    387.17,
+    1235.72
+   ],
+   "how": "lowest point of the approved peet outline (where it meets the floor)",
+   "sure_px": 1.0,
+   "kind": "view-dependent",
+   "mirror_of": "peet_bottom_his_left",
+   "note": "used to put the floor under him; a rounded peet touches the floor near here"
+  },
+  "peet_bottom_his_left": {
+   "part": "peet (his left)",
+   "at_px": [
+    682.51,
+    1244.54
+   ],
+   "how": "lowest point of the approved peet outline (where it meets the floor)",
+   "sure_px": 1.0,
+   "kind": "view-dependent",
+   "mirror_of": "peet_bottom_his_right",
+   "note": "used to put the floor under him; a rounded peet touches the floor near here"
+  },
+  "peet_mark_his_left_1": {
+   "part": "peet (his left)",
+   "at_px": [
+    685.49,
+    1220.19
+   ],
+   "how": "small dark mark on the peet (contrast 47.3 grey levels, 51 px)",
+   "sure_px": 1.5,
+   "kind": "surface point",
+   "mirror_of": null,
+   "note": "a mark on his fur, so a fixed point of him if it shows in another photo"
+  },
+  "peet_mark_his_left_2": {
+   "part": "peet (his left)",
+   "at_px": [
+    767.84,
+    1223.0
+   ],
+   "how": "small dark mark on the peet (contrast 38.7 grey levels, 22 px)",
+   "sure_px": 1.5,
+   "kind": "surface point",
+   "mirror_of": null,
+   "note": "a mark on his fur, so a fixed point of him if it shows in another photo"
+  },
+  "belly_front": {
+   "part": "belly (the underfluff tuft)",
+   "at_px": [
+    513.74,
+    1194.15
+   ],
+   "how": "middle of the underfluff tuft",
+   "sure_px": 5.0,
+   "kind": "view-dependent",
+   "mirror_of": null,
+   "note": "owner: the tuft is his belly seen from below; it carries on back underneath him"
+  },
+  "floor_contact_midpoint": {
+   "part": "floor",
+   "at_px": [
+    534.84,
+    1240.13
+   ],
+   "how": "midpoint of his two peets' lowest points: the room's origin is on the floor under here",
+   "sure_px": 1.0,
+   "kind": "view-dependent",
+   "mirror_of": null
+  }
+ },
+ "mirror_pairs": [
+  [
+   "ear_base_inner_his_left",
+   "ear_base_inner_his_right"
+  ],
+  [
+   "ear_base_outer_his_left",
+   "ear_base_outer_his_right"
+  ],
+  [
+   "ear_tip_his_left",
+   "ear_tip_his_right"
+  ],
+  [
+   "eye_his_left",
+   "eye_his_right"
+  ],
+  [
+   "eye_his_left_catchlight",
+   "eye_his_right_catchlight"
+  ],
+  [
+   "lip_corner_his_left",
+   "lip_corner_his_right"
+  ],
+  [
+   "mouth_corner_his_left",
+   "mouth_corner_his_right"
+  ],
+  [
+   "nostril_wing_his_left",
+   "nostril_wing_his_right"
+  ],
+  [
+   "peet_bottom_his_left",
+   "peet_bottom_his_right"
+  ]
+ ],
+ "eye_fit": {
+  "eye_his_right": {
+   "rms_px": 0.68,
+   "kept_fraction": 0.611,
+   "dropped_directions_deg": [
+    42.0,
+    44.0,
+    46.0,
+    48.0,
+    50.0,
+    52.0,
+    54.0,
+    56.0,
+    58.0,
+    64.0,
+    70.0,
+    72.0,
+    74.0,
+    76.0,
+    80.0,
+    82.0,
+    88.0,
+    90.0,
+    92.0,
+    94.0,
+    96.0,
+    98.0,
+    250.0,
+    252.0,
+    254.0,
+    256.0,
+    258.0,
+    260.0,
+    262.0,
+    264.0,
+    266.0,
+    268.0,
+    270.0,
+    272.0,
+    274.0,
+    276.0,
+    278.0,
+    280.0,
+    282.0,
+    284.0,
+    286.0,
+    288.0,
+    290.0,
+    292.0,
+    294.0,
+    296.0,
+    298.0,
+    300.0,
+    302.0,
+    304.0,
+    306.0,
+    308.0,
+    310.0,
+    312.0,
+    314.0,
+    316.0,
+    318.0,
+    320.0,
+    322.0,
+    324.0,
+    326.0,
+    328.0,
+    330.0,
+    332.0,
+    334.0,
+    336.0,
+    338.0,
+    340.0,
+    342.0,
+    348.0
+   ],
+   "eyeball_lum": 36.4,
+   "fur_lum": 175.8
+  },
+  "eye_his_left": {
+   "rms_px": 1.156,
+   "kept_fraction": 0.872,
+   "dropped_directions_deg": [
+    76.0,
+    78.0,
+    88.0,
+    90.0,
+    92.0,
+    94.0,
+    96.0,
+    98.0,
+    100.0,
+    102.0,
+    104.0,
+    240.0,
+    242.0,
+    244.0,
+    246.0,
+    248.0,
+    250.0,
+    252.0,
+    254.0,
+    256.0,
+    258.0,
+    260.0,
+    262.0
+   ],
+   "eyeball_lum": 26.9,
+   "fur_lum": 147.3
+  }
+ }
+}

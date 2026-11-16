@@ -81,6 +81,16 @@ excuse and was withdrawn.)
   went to what". So before sculpting, his model is anchored in real 3D space (camera, floor, which
   way he faces): the parts are what get carried from photo to photo and into 3D, so a region of
   him keeps one identity in every shot.
+- **The two connecting strips are his top and his belly** (owner, 2026-11-16): "the little green
+  part of his ears are to represent the top of his head, when looking at him from the top down,
+  and the little blue part between peets are likewise for his little belly." The thin green strip
+  joining his ears is the sliver of the top of his head the front photo shows (it carries on back
+  over his crown); the underfluff tuft between his peets is the sliver of his belly (it carries on
+  back underneath him). In 3D they are where the top of his head and his belly start going back.
+- **Steps 1-3 of the 3D grounding, in a real 3D space** (owner, 2026-11-16): "I want this to be
+  when you finally start modeling a 3D space ... previous claude had nothing to anchor him in and I
+  think that caused a ton of confusion." Define the room, name the landmarks, turn every part into
+  rays from the anchor camera.
 
 ## Edges
 
