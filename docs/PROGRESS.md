@@ -953,3 +953,16 @@ check.py output (if applicable), and the next step.
   narrow at his forehead and widens into his chest and belly: his front is round and curves under.
 - **Next:** owner's call: read his face's depth directly from this (each spot's warm/cool and bright/dark
   says which way it faces; those directions add up into his shape).
+
+## 2026-11-16 — Session 6 (cont.): one soft light, read from his outline (owner)
+- Owner: navy blue blanket under him (some of the blue underneath); maybe one light at a shallow angle on his
+  right, not two. Measured with no shape assumed: fur brightness (red, least touched by the blanket) just
+  inside his outline vs the outline's facing direction: brightest facing up-and-toward-his-right (226),
+  darkest facing down-toward-his-left (95, bluest, -13). One soft light from ~33 deg from straight up toward
+  his right explains 94.3% (two lights 94.5%): one light. Eyes agree (catchlights high in both). The blue goes
+  with the shade (facing down, toward the blanket). Front/back of the light: not from the outline; his face's
+  dim middle says overhead and to his right, skimming across his face (owner: "very shallow angle").
+- Bug found: the pink-nose filter (red - blue > 15) also dropped warm-lit fur on his right side, so earlier
+  shading fits were missing part of his lit side; limit it to around his nose (not yet changed in
+  tools/depth_lines.py: the shell refits are stopped).
+- **Next:** owner's call: read his face's depth from his fur's brightness under this one light.

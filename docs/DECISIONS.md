@@ -460,4 +460,14 @@ excuse and was withdrawn.)
    depth. From one straight-on photo how far back his chin and chest sit is not settled: a chest further
    back and bigger fits his outline as well, and the light on his fur does not fix the light's direction
    (two equally good fits disagree). Owner's call (Q46).
+- **The light in the anchor photo** (owner, 2026-11-16): ceiling light and lamps in the room; a navy blue
+  blanket under him ("some of the blueness from underneath is from that"); "are you sure it needs two
+  lights? The light might just be at a very shallow angle on his right". Checked with no shape assumed: along
+  his outline his surface is edge-on, facing straight out, so the fur's brightness just inside the outline vs
+  the direction it faces shows the light directly. **One soft light from above, about 33 deg from straight
+  up toward his right, explains 94% of it** (two lights: 94.5%, no better); the darkest edge faces the
+  opposite way (down, toward his left); catchlights high in both eyes agree. The blue goes with the shade,
+  which faces down toward the blanket. Withdrawn: "one light per eye" (it came from an eye model that could
+  be pushed either way). Also found: the pink-nose filter (red minus blue > 15) had been dropping the warm-lit
+  fur on his right side everywhere; it must be limited to the area around his nose.
 
