@@ -111,6 +111,8 @@ excuse and was withdrawn.)
   shortest lens that fits, that puts the camera 2.4 cm below his eyes (between his eye and nose height);
   he comes out about 15.5 cm wide, 12.7 cm to the top of his head. **Owner: "those numbers seem to fit
   him"** (approved; no tape measure, so as not to disturb him).
+  **Superseded 2026-11-17** (see "Depth: only what each photo sees"): with the depth model's camera he is 15.5 cm
+  wide and 16.7 cm to the top of his head; the floor (12.7) still holds as a floor.
 - **He is him: no breed orthodoxy** (owner, 2026-11-16): "I don't want you to adhere to breed orthodoxy
   for anything, or look up a breed and then adhere him to it ... I'd rather you just conceptualize him as
   him ... the fact he is so round and fluffy is probably just a him thing ... it is hard to find other
@@ -336,7 +338,12 @@ excuse and was withdrawn.)
   surface and his edges pulled up to 40 cm back. They agree only on the middle of his face (chin, chest within
   0.5 cm). **MoGe-2 is used from here on**; Depth Pro is kept, set aside, for the record (off by default in
   the 3D page). The comparison was there to see before asking: say the obvious plainly.
-- **Open, for the owner (Q47):** with the models' cameras his approved width and his approved height cannot
+- **His size: whatever the model says** (owner, 2026-11-17: "I agree with whatever the model says. If the model
+  says so then I agree"). MoGe-2 gives his proportions and the camera; it cannot give his real size from this
+  photo (alone: 2 m wide, 3.35 m away; no background to judge by), so his approved width (15.5 cm) sets the
+  size: top of his head 16.7 cm, eyes 13.4, nose 9.5, ear tips 18.0; camera 24.5 cm from his nose, 12.9 cm up.
+  Above his adult floor (12.7). The six-inch camera's numbers are superseded.
+- **Was open (Q47, answered above):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
   The 12.7 came from the six-inch camera, which also ASSUMED his peets were right under his face; both models
   put them behind his nose (MoGe-2 5.7 cm, Depth Pro 13 cm).

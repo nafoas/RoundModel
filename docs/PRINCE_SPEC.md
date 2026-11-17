@@ -160,8 +160,11 @@ to the outline.
 - **Owner's definition:** fluff under the feet and the full length of wispy
   hairs, *including their bases*, belong to the wisp layer, not the body.
 
-## His size (2026-11-16, from the anchor photo and the owner's memory of the shot; rough)
-About **15.5 cm wide, 12.7 cm to the top of his head, ear tips 13.6 cm, eyes 9.9 cm and nose 6.0 cm above
+## His size
+**Now (2026-11-17), from MoGe-2's measurement of the anchor photo:** about **15.5 cm wide (approved), 16.7 cm to the top of his head, ear tips 18.0 cm, eyes 13.4 cm and nose 9.5 cm above the surface he sits on**; the camera was 24.5 cm from his nose. Owner: "I agree with whatever the model says." The model gives his proportions; it cannot give his real size from this photo (alone it made him 2 m wide: no background), so the approved width sets the size. It clears his adult floor (12.7 cm). `docs/SPACE.md`, `data/scene/visible_depth_moge2.json`.
+
+SUPERSEDED (2026-11-16, from the owner's memory of the shot, six inches; it assumed his peets right under
+his face): about **15.5 cm wide, 12.7 cm to the top of his head, ear tips 13.6 cm, eyes 9.9 cm and nose 6.0 cm above
 the surface he sits on** (`data/cameras.json`, `his_size_estimate_cm`; how: `docs/SPACE.md`).
 **Owner-approved 2026-11-16: "those numbers seem to fit him"** (no tape measure: the owner doesn't want to
 disturb him). The only outside number used: a floor on his overall size (the top of his head at least

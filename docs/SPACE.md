@@ -61,7 +61,8 @@ is already the shortest that fits, so the camera sat a little lower: 2.4 cm belo
 and nose height (with a 24 mm-equivalent lens it would be about 1.5 cm).
 
 Result: camera 7.4 cm above the surface, 15.2 cm in front of the origin, level (tilted up 1 deg).
-**His size (rough, `his_size_estimate_cm` in `data/cameras.json`): about 15.5 cm wide, 12.7 cm to the top
+**SUPERSEDED 2026-11-17 by the depth model (below, "His surface as the anchor photo sees it"): 15.5 cm wide,
+16.7 cm to the top of his head.** Was: **his size (rough, `his_size_estimate_cm` in `data/cameras.json`): about 15.5 cm wide, 12.7 cm to the top
 of his head, ear tips 13.6 cm, eyes 9.9 cm up, nose 6.0 cm up**: at the floor, so he may be a little
 bigger. **Owner-approved 2026-11-16: "those numbers seem to fit him"** (no tape measure, so as not to
 disturb him).
@@ -141,6 +142,9 @@ what it shows. `tools/visible_depth.py` (tests `tests/test_visible_depth.py`):
 | Depth Pro | 30.4 cm | 14.3 cm | 18.3 cm | 14.8 | 11.0 | 19.7 | 13.1 cm | 5.6 deg below the aim |
 | MoGe-2 | 24.5 cm | 12.9 cm | 16.7 cm | 13.4 | 9.5 | 18.0 | 5.7 cm | 7.1 deg below the aim |
 
+**His size from here on: MoGe-2's** (owner, 2026-11-17: "I agree with whatever the model says"): 15.5 cm wide
+(approved; the model alone cannot tell size from this photo), 16.7 cm to the top of his head, eyes 13.4, nose
+9.5, ear tips 18.0; camera 24.5 cm from his nose, 12.9 cm up. Above his adult floor (12.7).
 **MoGe-2 is used from here on** (owner, 2026-11-17: "very obvious which one looks more like a rabbit"; overlay
 `docs/images/space/visible_depth_compare.png`); Depth Pro is kept, set aside, for the record.
 (Six-inch camera, for comparison: 15.2 cm, 7.4 cm, top of head 12.7, eyes 9.9, nose 6.0, peets assumed

@@ -252,3 +252,6 @@ the owner's official opinion later. Each says what I did in the meantime.
    **(b) answered (2026-11-17):** "it is very obvious which one looks more like a rabbit": MoGe-2; Depth Pro set
    aside. **(a) still open, now for MoGe-2 only:** 15.5 cm wide -> top of his head 16.7 cm; or top of his head
    12.7 cm -> 11.8 cm wide; or a size you give.
+   **[ANSWERED 2026-11-17: "I agree with whatever the model says. If the model says so then I agree." The model
+   cannot give his real size from this photo, so the approved width stays: 15.5 cm wide, 16.7 cm to the top of
+   his head (above the 12.7 floor).]**

@@ -1054,3 +1054,14 @@ check.py output (if applicable), and the next step.
   set aside (kept, off by default in the 3D page). Logged in DECISIONS; Q47 (b) answered, (a) open for MoGe-2.
 - Tests: 56 passed. check.py: does not exist (no match claimed).
 - **Next:** the owner's call on his size (Q47 a): 15.5 cm wide (top of head 16.7) or 12.7 tall (11.8 wide).
+
+## 2026-11-17 — Session 6 (cont.): his size from the model (owner)
+- Owner (Q47): "I agree with whatever the model says. If the model says so then I agree."
+- MoGe-2 cannot tell his real size from this photo (alone: 2 m wide, 3.35 m away; no background), so his
+  approved width stays the one size number; the rest is the model's: **15.5 cm wide, 16.7 cm to the top of his
+  head, eyes 13.4, nose 9.5, ear tips 18.0; camera 24.5 cm from his nose, 12.9 cm up**. Above his adult floor
+  (12.7). The six-inch camera's size numbers marked superseded (DECISIONS, SPACE, PRINCE_SPEC, PLAN; Q47 closed).
+- No code or data changed (the placement already used the approved width). check.py: does not exist.
+- **Next (owner's go):** make MoGe-2's camera the room's camera for the anchor photo (`data/cameras.json`), so
+  his outline, landmark and part-line rays and how he faces are all worked out from the same camera as his
+  surface (today they still come from the six-inch camera).
