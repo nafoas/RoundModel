@@ -1043,3 +1043,14 @@ check.py output (if applicable), and the next step.
   his outermost 4 px on a toggle, camera's view per model (photo hidden), the six-inch camera kept, off by
   default. Tests: 56 passed (7 new, `tests/test_visible_depth.py`). check.py: does not exist (no match claimed).
 - **Next:** the owner's answer to Q47 and their look at the two surfaces; then the next photo's areas.
+
+## 2026-11-17 — Session 6 (cont.): the two models compared; MoGe-2 it is (owner)
+- Owner: "compare them both. Personally, I think it is very obvious which one looks more like a rabbit."
+- Overlaid in the same views (`docs/images/space/visible_depth_compare.png`, from `tools/visible_depth.py`),
+  both 15.5 cm wide, cm behind his nose (MoGe-2 / Depth Pro): chin 2.6 / 2.2, chest 3.7 / 4.0 (agree);
+  eyes 4.4-4.7 / 5.8-6.1, top of head 8.4 / 14.3, belly 6.1 / 10.3, peets 5.7 / 13.1, ear tip 10.0 / 17.5;
+  lowest point -0.1 / -1.1 cm (4 px inside his outline), deepest seen 11.7 / 27.2 cm (edges: 12.3 / 43.7).
+  MoGe-2 sits up like a rabbit; Depth Pro is a forward-leaning wedge. **MoGe-2 used from here on**; Depth Pro
+  set aside (kept, off by default in the 3D page). Logged in DECISIONS; Q47 (b) answered, (a) open for MoGe-2.
+- Tests: 56 passed. check.py: does not exist (no match claimed).
+- **Next:** the owner's call on his size (Q47 a): 15.5 cm wide (top of head 16.7) or 12.7 tall (11.8 wide).

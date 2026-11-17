@@ -269,6 +269,39 @@ def picture(placed, rgb):
     print("wrote", out.relative_to(ROOT))
 
 
+def compare_picture(placed):
+    """Both models overlaid in the same views (from his left side; from above), tinted by model, so they are
+    compared on top of each other, not across panels. Every 3rd pixel of him; nose, eyes and peet bottoms marked."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    tint = {"depthpro": "#e67e22", "moge2": "#2e86de"}
+    fig, ax = plt.subplots(1, 2, figsize=(14, 7.4), facecolor="white")
+    for name, (cam, P, rep) in placed.items():
+        q = P[::3, ::3].reshape(-1, 3); q = q[np.isfinite(q[:, 0])]
+        L = rep["landmarks_room_cm"]
+        marks = np.array([L[k] for k in ("nose_y_centre", "eye_his_right", "eye_his_left",
+                                         "peet_bottom_his_right", "peet_bottom_his_left")])
+        for a_, (i, j) in zip(ax, ((2, 1), (0, 2))):
+            a_.scatter(q[:, i], q[:, j], s=0.5, c=tint[name], alpha=0.25, linewidths=0)
+            a_.scatter(marks[:, i], marks[:, j], s=60, c=tint[name], edgecolors="black", linewidths=0.8, zorder=5)
+    for a_, title, xl, yl, xlim, ylim in (
+            (ax[0], "from his left side (his forward is to the left)", "z: his forward (cm)", "y: up (cm)", (18, -14), (-3, 24)),
+            (ax[1], "from above (his forward is up; his left on the left)", "x: his left (cm)", "z: his forward (cm)", (14, -14), (-14, 16))):
+        a_.set_xlim(*xlim); a_.set_ylim(*ylim); a_.set_aspect("equal"); a_.grid(color="#dddddd", lw=0.5)
+        a_.set_title(title, fontsize=11); a_.set_xlabel(xl); a_.set_ylabel(yl)
+    ax[0].axhline(0, color="#333", lw=1)
+    for name in placed:
+        ax[1].scatter([], [], s=60, c=tint[name], edgecolors="black", label=NAMES[name])
+    ax[1].legend(loc="lower right", fontsize=10)
+    fig.suptitle("The two depth models on top of each other, both 15.5 cm wide, origin under the middle of his peets.\n"
+                 "Big dots: his nose, eyes and peet bottoms. Nothing invented: every dot is one pixel of him.", fontsize=11)
+    fig.tight_layout()
+    out = OUT_IMG / "visible_depth_compare.png"
+    fig.savefig(out, dpi=110); plt.close(fig)
+    print("wrote", out.relative_to(ROOT))
+
+
 def main() -> int:
     img = Image.open(ROOT / "data/photos/anchor_front.webp").convert("RGB")
     W, H = img.size
@@ -295,6 +328,7 @@ def main() -> int:
         placed[name] = (cam, P, report)
         print(name, json.dumps({k: v for k, v in report.items() if k not in ("landmarks_room_cm",)}, indent=1))
     picture(placed, np.asarray(img))
+    compare_picture(placed)
     return 0
 
 

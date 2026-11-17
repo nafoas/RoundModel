@@ -329,6 +329,13 @@ excuse and was withdrawn.)
 - **Nothing is removed or smoothed.** His outermost 4 px blend into the removed background, so their
   distances are least sure (Depth Pro pulls them far back): they are shown, on their own toggle, and edge
   measurements are read 4 px inside his outline.
+- **MoGe-2 is the one that looks like him** (owner, 2026-11-17, after both were shown: "Personally, I think it
+  is very obvious which one looks more like a rabbit"). Overlaid (`docs/images/space/visible_depth_compare.png`):
+  MoGe-2 sits up with his peets under his chest (5.7 cm behind his nose), nothing below the surface, seen
+  about 12 cm back; Depth Pro is a wedge with his nose 13 cm out over his peets, his chest dipping below the
+  surface and his edges pulled up to 40 cm back. They agree only on the middle of his face (chin, chest within
+  0.5 cm). **MoGe-2 is used from here on**; Depth Pro is kept, set aside, for the record (off by default in
+  the 3D page). The comparison was there to see before asking: say the obvious plainly.
 - **Open, for the owner (Q47):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
   The 12.7 came from the six-inch camera, which also ASSUMED his peets were right under his face; both models

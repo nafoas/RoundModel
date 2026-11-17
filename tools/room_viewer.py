@@ -57,7 +57,7 @@ def main() -> int:
     import visible_depth as vd
     tagged = ("eye_his_right", "eye_his_left", "nose_y_centre", "crown_front", "ear_tip_his_right", "ear_tip_his_left",
               "chin_midline", "peet_bottom_his_right", "peet_bottom_his_left")
-    for name, colour in (("depthpro", "#e67e22"), ("moge2", "#2e86de")):
+    for name, colour in (("moge2", "#2e86de"), ("depthpro", "#e67e22")):   # MoGe-2 first: shown by default (owner, 2026-11-17)
         if not (ROOT / f"data/scene/visible_depth_{name}.json").exists():
             continue
         vcam, P, meta = vd.room_points(name)
@@ -70,7 +70,7 @@ def main() -> int:
         pts, cols = P[ys, xs], rgb_full[ys, xs] / 255.0
         cd = pl["camera"]
         visible.append(dict(
-            name=name, label=vd.NAMES[name], colour=colour,
+            name=name, label=vd.NAMES[name] + ("" if name == "moge2" else ", set aside"), colour=colour,
             camera=dict(C=cd["position_cm"], R=cd["rotation_room_to_camera"], f=cd["focal_px"],
                         cx=cd["principal_point_px"][0], cy=cd["principal_point_px"][1], W=cd["image_size_px"][0],
                         H=cd["image_size_px"][1]),

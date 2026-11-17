@@ -141,6 +141,8 @@ what it shows. `tools/visible_depth.py` (tests `tests/test_visible_depth.py`):
 | Depth Pro | 30.4 cm | 14.3 cm | 18.3 cm | 14.8 | 11.0 | 19.7 | 13.1 cm | 5.6 deg below the aim |
 | MoGe-2 | 24.5 cm | 12.9 cm | 16.7 cm | 13.4 | 9.5 | 18.0 | 5.7 cm | 7.1 deg below the aim |
 
+**MoGe-2 is used from here on** (owner, 2026-11-17: "very obvious which one looks more like a rabbit"; overlay
+`docs/images/space/visible_depth_compare.png`); Depth Pro is kept, set aside, for the record.
 (Six-inch camera, for comparison: 15.2 cm, 7.4 cm, top of head 12.7, eyes 9.9, nose 6.0, peets assumed
 right under his face, aim 4.9 deg above the picture's centre.) Free checks: his two peet bottoms come out
 level within 0.13 cm (Depth Pro) and 0.01 cm (MoGe-2). **Open (Q47):** at the models' distance his approved

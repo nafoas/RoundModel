@@ -249,3 +249,6 @@ the owner's official opinion later. Each says what I did in the meantime.
    behind his nose (MoGe-2 5.7 cm, Depth Pro 13 cm), and a further camera means less perspective.
    (a) Which should hold: his width, his height, or neither (a size you give)? (b) Do the side views look like
    him sitting (`docs/images/space/visible_depth_side_top.png`, and the 3D page)?
+   **(b) answered (2026-11-17):** "it is very obvious which one looks more like a rabbit": MoGe-2; Depth Pro set
+   aside. **(a) still open, now for MoGe-2 only:** 15.5 cm wide -> top of his head 16.7 cm; or top of his head
+   12.7 cm -> 11.8 cm wide; or a size you give.
