@@ -311,6 +311,29 @@ excuse and was withdrawn.)
   commit ac8e35a). Kept: the room, camera, his size, landmarks, rays, his head's tilt/turn, the light read from
   his fur. Next method: the owner's.
 
+## Depth: only what each photo sees (owner, 2026-11-16)
+
+- **The owner's method:** "Have it invent absolutely nothing." Every area of him is governed by exactly ONE
+  photo; other angles (later) cover other areas, with no overlap. From each photo, the depth of ONLY what it
+  shows; "each ray is brought to the exact distance calculated", so the rays show his surface. "Don't model
+  him yet, just have the rays correspond to the data."
+- **Measured by two independent depth models**, shown separately, never merged: Depth Pro (Apple) and MoGe-2
+  (Microsoft) (`docs/DEPTH_RESEARCH.md`). Owner: "Yes" to showing both.
+- **Each model keeps its own camera** (owner, 2026-11-16, on the models putting the camera 25-30 cm away, not
+  six inches: "a foot away that is more zoomed in is fairly similar to six inches. Maybe I misremembered.
+  Either way I trust them."). So: its own lens and its own rays; one number per model changes its units so
+  he is his approved width (15.5 cm), never his shape; straight on. Which way is up comes from the owner's
+  memory, "basically exactly at his eye level. Maybe just a tiny bit lower" (his eyes 0.5 cm above the
+  camera), because the photo was cropped and its centre is not where the camera aimed (lesson 26). The
+  surface he sits on goes through his two peet bottoms; the origin under their middle.
+- **Nothing is removed or smoothed.** His outermost 4 px blend into the removed background, so their
+  distances are least sure (Depth Pro pulls them far back): they are shown, on their own toggle, and edge
+  measurements are read 4 px inside his outline.
+- **Open, for the owner (Q47):** with the models' cameras his approved width and his approved height cannot
+  both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
+  The 12.7 came from the six-inch camera, which also ASSUMED his peets were right under his face; both models
+  put them behind his nose (MoGe-2 5.7 cm, Depth Pro 13 cm).
+
 ## Photos and repo (2026-11-07)
 
 - Work moved to the public repo `nafoas/RoundModel`, on a fresh branch
@@ -482,6 +505,18 @@ excuse and was withdrawn.)
    depth. From one straight-on photo how far back his chin and chest sit is not settled: a chest further
    back and bigger fits his outline as well, and the light on his fur does not fix the light's direction
    (two equally good fits disagree). Owner's call (Q46).
+29. **Lesson 26 again, inside the depth models** (caught before showing, 2026-11-17). Each depth model assumes
+   the picture's centre is straight ahead; set "level" on that, its camera landed at his nose height, 4.6 cm
+   below his eyes. Same cause as 26: the picture was cropped. → A model's camera fixes his shape, never
+   which way is up; up comes from the owner's memory (eye level, a tiny bit lower). Checked every other
+   place the assumption could hide: the room camera (already fixed by 26) and the 3D page's camera view (it
+   uses each camera's own principal point).
+30. **A flat chart of two room axes can be a mirror image** (caught before showing, 2026-11-17). A side view
+   plotted as forward-to-the-right with up is the view from his RIGHT, not his left; a top view with forward
+   up and his left to the right is seen from below. → For any flat chart of room coordinates, work out which
+   way the viewer looks and reverse the axis if needed; check with a feature that has a side (his left eye,
+   his grey peet). The older room pictures and the 3D page project through a real camera, so they cannot
+   mirror (checked).
 - **The light in the anchor photo** (owner, 2026-11-16): ceiling light and lamps in the room; a navy blue
   blanket under him ("some of the blueness from underneath is from that"); "are you sure it needs two
   lights? The light might just be at a very shallow angle on his right". Checked with no shape assumed: along

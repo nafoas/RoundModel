@@ -239,3 +239,13 @@ the owner's official opinion later. Each says what I did in the meantime.
    light alone (forehead bright, under the muzzle dark) for its slope: objective but assumes light from above.
    **[CLOSED 2026-11-16: Q45 and Q46: the depth approach was scrapped by the owner ("I dislike this. Scrap it,
    lemme think of another method"); no side photos (see DECISIONS, "He is not static").]**
+47. **His size, with the depth models' cameras (2026-11-17).** The models put the camera 24.5 cm (MoGe-2) and
+   30.4 cm (Depth Pro) from his nose. At that distance his approved width and his approved height cannot both
+   hold (one number per model sets his size; his proportions are the model's):
+   - his width held at 15.5 cm: top of his head 16.7 cm (MoGe-2) / 18.3 cm (Depth Pro), eyes 13.4 / 14.8,
+     nose 9.5 / 11.0, ear tips 18.0 / 19.7;
+   - the top of his head held at 12.7 cm: about 11.8 cm (MoGe-2) / 10.8 cm (Depth Pro) wide.
+   Why it changed: the six-inch camera assumed his peets were right under his face; both models put them
+   behind his nose (MoGe-2 5.7 cm, Depth Pro 13 cm), and a further camera means less perspective.
+   (a) Which should hold: his width, his height, or neither (a size you give)? (b) Do the side views look like
+   him sitting (`docs/images/space/visible_depth_side_top.png`, and the 3D page)?

@@ -3,20 +3,221 @@
  "model": "apple/DepthPro-hf",
  "photo": "data/photos/anchor_front.webp",
  "file": "data/scene/visible_depth_depthpro.png",
- "units": "16-bit: distance from the camera to each pixel of him, in 0.01 cm; 0 = not him",
- "rays": "the room's anchor camera (data/cameras.json): each pixel's ray, cut at this distance",
+ "units": "16-bit: distance from the model's camera to each pixel of him, in 0.01 of the model's own cm; 0 = not him",
  "pixels_of_him": 637497,
- "checks_not_given_to_the_model": {
-  "nose_distance_cm": 32.28,
-  "owner_remembered_cm": 15.24,
-  "lens_px_model": 2312.0,
-  "lens_px_room_camera": 1236.6,
-  "width_at_widest_outline_cm": 29.31,
-  "distance_range_cm": [
-   32.38,
-   51.75
+ "lens_px": 2312.0,
+ "principal_point": "the picture's centre (as the model assumes)",
+ "seconds": 99.6,
+ "invented": "nothing: no smoothing, filling or merging; only what this photo sees",
+ "placed_in_the_room": {
+  "how": "each pixel of him: the ray from THIS model's own camera (below: its own lens and rays, straight on) cut at this model's distance x scale. Up: turned so his eyes are 0.5 cm above the camera (owner: 'basically exactly at his eye level. Maybe just a tiny bit lower'). The surface he sits on (y = 0) goes through the middle of his two peet bottoms; the origin is under that middle. Checks are reported only: nothing was changed to meet them.",
+  "camera": {
+   "position_cm": [
+    0.2682,
+    14.2638,
+    43.3361
+   ],
+   "rotation_room_to_camera": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     -0.9953038802,
+     0.0967997209
+    ],
+    [
+     0.0,
+     -0.0967997209,
+     -0.9953038802
+    ]
+   ],
+   "focal_px": 2312.0,
+   "principal_point_px": [
+    549.0,
+    716.5
+   ],
+   "image_size_px": [
+    1098,
+    1433
+   ],
+   "yaw_deg": -0.0,
+   "pitch_deg": 5.5549,
+   "roll_deg": 0.0,
+   "fov_horizontal_deg": 26.716,
+   "fov_vertical_deg": 34.437
+  },
+  "scale": 0.942495,
+  "scale_means": "the model's own units x 0.9425: the model alone made him 16.4 cm wide; one number brings him to his approved 15.5 cm (his shape is not changed)",
+  "width_read_at": "his widest outline (picture row 808), 4 px inside it on each side (the outermost pixels blend into the removed background); read 2 / 4 / 8 px inside, he would be 15.8 / 15.5 / 15.08 cm wide at this scale",
+  "camera_to_nose_cm": 30.44,
+  "camera_height_cm": 14.26,
+  "his_eyes_above_camera_cm": 0.5,
+  "picture_centre_points": "5.6 deg down: the cropped picture's centre is not where the camera aimed (lesson 26)",
+  "eye_heights_cm": {
+   "his_right": 14.54,
+   "his_left": 14.98
+  },
+  "nose_height_cm": 10.97,
+  "top_of_head_cm": 18.28,
+  "ear_tips_cm": [
+   19.77,
+   19.68
   ],
-  "seconds": 99.6
- },
- "invented": "nothing: no smoothing, filling or merging; only what this photo sees"
+  "edge_landmarks_read": "4 px inside his outline (top of head, ear tips, peet bottoms)",
+  "peet_bottoms_cm": {
+   "note": "the surface goes through the middle of the two; how far each is above it",
+   "his_right": 0.13,
+   "his_left": -0.13
+  },
+  "lowest_point_of_him_cm": {
+   "all": -6.19,
+   "more_than_4_px_inside": -1.12
+  },
+  "highest_point_of_him_cm": {
+   "all": 21.82,
+   "more_than_4_px_inside": 19.78
+  },
+  "deepest_point_behind_nose_cm": {
+   "all": 43.7,
+   "more_than_4_px_inside": 27.22
+  },
+  "behind_nose_cm": {
+   "eye_his_right": 5.81,
+   "eye_his_left": 6.13,
+   "chin_midline": 2.22,
+   "fold_midline": 3.95,
+   "crown_front": 14.34,
+   "belly_front": 10.33
+  },
+  "landmarks_room_cm": {
+   "belly_front": [
+    -0.367,
+    1.673,
+    2.743
+   ],
+   "chin_midline": [
+    0.332,
+    8.533,
+    10.858
+   ],
+   "crown_front": [
+    0.178,
+    18.282,
+    -1.261
+   ],
+   "ear_base_inner_his_left": [
+    0.901,
+    19.087,
+    -8.736
+   ],
+   "ear_base_inner_his_right": [
+    -0.591,
+    19.0,
+    -9.023
+   ],
+   "ear_base_outer_his_left": [
+    3.482,
+    17.888,
+    -1.969
+   ],
+   "ear_base_outer_his_right": [
+    -3.753,
+    17.822,
+    -3.891
+   ],
+   "ear_tip_his_left": [
+    2.614,
+    19.68,
+    -1.833
+   ],
+   "ear_tip_his_right": [
+    -2.323,
+    19.774,
+    -4.457
+   ],
+   "eye_his_left": [
+    2.61,
+    14.983,
+    6.944
+   ],
+   "eye_his_right": [
+    -3.022,
+    14.536,
+    7.265
+   ],
+   "fold_midline": [
+    0.336,
+    5.93,
+    9.123
+   ],
+   "lip_corner_his_left": [
+    2.51,
+    9.248,
+    11.297
+   ],
+   "lip_corner_his_right": [
+    -1.726,
+    9.0,
+    11.677
+   ],
+   "mouth_corner_his_left": [
+    0.894,
+    9.641,
+    12.181
+   ],
+   "mouth_corner_his_right": [
+    -0.574,
+    9.28,
+    11.728
+   ],
+   "nose_y_centre": [
+    0.255,
+    10.969,
+    13.076
+   ],
+   "nostril_wing_his_left": [
+    1.173,
+    11.82,
+    12.663
+   ],
+   "nostril_wing_his_right": [
+    -0.878,
+    11.605,
+    12.64
+   ],
+   "peet_bottom_his_left": [
+    2.851,
+    -0.127,
+    -0.115
+   ],
+   "peet_bottom_his_right": [
+    -2.851,
+    0.127,
+    0.115
+   ],
+   "peet_mark_his_left_1": [
+    2.894,
+    0.315,
+    0.007
+   ],
+   "peet_mark_his_left_2": [
+    4.783,
+    -0.776,
+    -3.194
+   ],
+   "philtrum_bottom": [
+    0.255,
+    9.87,
+    12.442
+   ]
+  },
+  "owner_remembered": {
+   "camera_to_nose_cm": 15.24,
+   "camera": "basically exactly at his eye level, maybe a tiny bit lower; level, maybe ever so slightly up",
+   "top_of_head_floor_cm": 12.7
+  }
+ }
 }

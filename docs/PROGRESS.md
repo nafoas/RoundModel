@@ -1018,3 +1018,28 @@ check.py output (if applicable), and the next step.
   (widest edge 0.80 / 0.58, belly 0.74 / 0.47, top of head 1.25 / 0.59).
 - Scaled to his approved width (15.5 cm), both models put the camera about 25-31 cm from his nose (Depth Pro 31.3,
   MoGe-2 25.0), not ~15 cm: they read weaker perspective than six inches would give. Owner's call.
+
+## 2026-11-17 — Session 6 (cont.): each model's surface placed in the room with its own camera
+- Owner, on the models' camera distance (25-30 cm, not six inches): "Maybe I misremembered. Either way I trust
+  them." So each model is placed with ITS OWN camera (`tools/visible_depth.py`, now two steps: `--measure` runs
+  the models; by default it only places them): its own lens and rays, straight on; one number per model so he
+  is 15.5 cm wide (approved), shape untouched; up from the owner's memory (eyes 0.5 cm above the camera); the
+  surface through his two peet bottoms, origin under their middle. Every point lies on its own pixel's ray
+  (reprojection error ~1e-13 px). Nothing smoothed, filled, removed or merged.
+- Caught before showing: (1) lesson 26 again inside the models (they assume the cropped picture's centre is
+  straight ahead; "level" on that put the camera at his nose height): up now from the owner's memory (lesson
+  29); (2) the new flat side/top chart was a mirror image (lesson 30), fixed; older pictures and the 3D page
+  checked: they project through real cameras. (3) A sign slip in the tilt search (hit its limit), fixed.
+- Results (cm): Depth Pro: camera 30.4 from his nose, 14.3 up; top of head 18.3, eyes 14.8, nose 11.0, ear tips
+  19.7; peets 13.1 behind his nose. MoGe-2: camera 24.5, 12.9 up; top of head 16.7, eyes 13.4, nose 9.5, ear
+  tips 18.0; peets 5.7 behind his nose. Peet bottoms level within 0.13 / 0.01 (free check). The cropped
+  picture's centre is 5.6 / 7.1 deg below where the camera aimed (six-inch camera: 4.9).
+- Seen from the side (`docs/images/space/visible_depth_side_top.png`): MoGe-2 looks like a rabbit sitting up;
+  Depth Pro leans his face 13 cm out over his peets and pulls his outermost pixels far back (edge blend).
+- **Open (Q47):** his approved width and height cannot both hold with the models' cameras (at 15.5 cm wide the
+  top of his head is 16.7-18.3 cm, not 12.7). The 12.7 relied on the six-inch camera's assumption that his
+  peets sit right under his face. Owner's call.
+- 3D page (`docs/space/room.html`) rebuilt: each model with its own camera, his points coloured as the photo,
+  his outermost 4 px on a toggle, camera's view per model (photo hidden), the six-inch camera kept, off by
+  default. Tests: 56 passed (7 new, `tests/test_visible_depth.py`). check.py: does not exist (no match claimed).
+- **Next:** the owner's answer to Q47 and their look at the two surfaces; then the next photo's areas.

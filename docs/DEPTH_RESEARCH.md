@@ -45,7 +45,8 @@ back: not measurements.
 
 No single model is the truth. Objectivity comes from **independent witnesses agreeing**:
 1. Run 2-3 of the leaders above (different makers, different training) on the anchor photo.
-2. Put each one's surface into the room through our camera.
+2. Put each one's surface into the room (as done, owner 2026-11-16: through each model's OWN camera, since
+   each model's distances only fit its own lens; see `docs/SPACE.md`).
 3. **Check each against what we already know and they were not told**: his nose at about six inches (Depth
    Pro and MoGe estimate distance and lens themselves), his approved size, his outline (the surface must be
    edge-on there), his head's tilt.

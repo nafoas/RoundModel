@@ -95,9 +95,10 @@ With the camera fixed as above, from the photo:
   rays, coloured by part, marked *grazing*; the approved part lines and part outlines; every landmark),
   pictures `docs/images/space/room_behind.png`, `room_side.png`, `room_top.png`.
 - `tools/room_viewer.py` -> `docs/space/room.html`: the room in 3D, interactive, one file, no internet
-  needed (three.js r159, MIT, in `tools/vendor/`). "Camera's view" puts your eye where the anchor
-  camera was (with its off-centre aim point): every ray shrinks to a point on the photo. Blue and red
-  lines show how his head and body face. (The scrapped shell is no longer shown.)
+  needed (three.js r159, MIT, in `tools/vendor/`). Shows his surface as each depth model measured it, with
+  that model's camera; "Camera's view" puts your eye where the shown camera was (with its own principal
+  point; the photo hidden, so every point lands on its own pixel). The six-inch camera, its rays and the
+  blue/red facing lines are under "The camera as first remembered". (The scrapped shell is no longer shown.)
 - `tools/facing.py`: how he is being looked at (above).
 
 ## His parts in 3D (owner)
@@ -118,6 +119,35 @@ Kept from this work, as findings: the light read straight from his fur and eyes 
 about 34 deg toward his right; the blue in the shade is his navy blanket; `docs/images/space/light_reading.png`),
 and that his eyes bulge (not flat) and face well to the sides.
 
+## His surface as the anchor photo sees it (owner's method, 2026-11-16)
+
+"Have it invent absolutely nothing": every area of him is governed by one photo, and from each photo only
+what it shows. `tools/visible_depth.py` (tests `tests/test_visible_depth.py`):
+- Two depth models measure one distance for every pixel of him (637,497 px): Depth Pro (Apple) and MoGe-2
+  (Microsoft), each with its own lens estimate. Saved untouched: `data/scene/visible_depth_<model>.png`
+  (16-bit) and `.json`. `python tools/visible_depth.py --measure` re-runs them (slow); without it, only the
+  placing below is redone.
+- **Placed in the room, each with ITS OWN camera** (owner: "Either way I trust them"): its own lens and rays,
+  straight on; one number per model sets the units so he is 15.5 cm wide (approved), shape untouched; up
+  from the owner's memory (his eyes 0.5 cm above the camera: "basically exactly at his eye level. Maybe just
+  a tiny bit lower"), not from the cropped picture's centre (lessons 26, 29); the surface through his two
+  peet bottoms, the origin under their middle. Every pixel's ray from that camera, cut at the model's
+  distance: each point lies exactly on its own pixel. Nothing smoothed, filled or merged.
+- His outermost 4 px blend into the removed background: their distances are least sure (Depth Pro pulls
+  them up to 40 cm back). Shown on their own toggle; edge landmarks and his width are read 4 px inside.
+
+| Model | Camera to his nose | Camera height | Top of his head | Eyes | Nose | Ear tips | Peets behind his nose | Picture's centre |
+|---|---|---|---|---|---|---|---|---|
+| Depth Pro | 30.4 cm | 14.3 cm | 18.3 cm | 14.8 | 11.0 | 19.7 | 13.1 cm | 5.6 deg below the aim |
+| MoGe-2 | 24.5 cm | 12.9 cm | 16.7 cm | 13.4 | 9.5 | 18.0 | 5.7 cm | 7.1 deg below the aim |
+
+(Six-inch camera, for comparison: 15.2 cm, 7.4 cm, top of head 12.7, eyes 9.9, nose 6.0, peets assumed
+right under his face, aim 4.9 deg above the picture's centre.) Free checks: his two peet bottoms come out
+level within 0.13 cm (Depth Pro) and 0.01 cm (MoGe-2). **Open (Q47):** at the models' distance his approved
+width and height cannot both hold. Pictures: `docs/images/space/visible_depth_side_top.png`; 3D:
+`docs/space/room.html` (the six-inch camera is still there, off by default, with the rays and facing lines
+that were worked out with it).
+
 ## The 3D grounding steps (owner reviews each)
 
 1. Define the room: done.
@@ -125,7 +155,8 @@ and that his eyes bulge (not flat) and face well to the sides.
 3. Every part and boundary as rays from the anchor camera: done.
 4. Place the anchor camera (as the owner remembers the shot) and work out how he is being looked at:
    done (above). Open: his head's nod (needs depth).
-5. Depth lines: SCRAPPED (above). The owner is thinking of another method.
+5. Depth lines: SCRAPPED (above). Replaced by the owner's method: his surface as each photo sees it, measured
+   by two depth models, each placed with its own camera (above). Open: his size (Q47).
 6. When the owner adds another angle: solve its camera from the landmarks, project his parts, compare,
    and only then use it for depth.
 
