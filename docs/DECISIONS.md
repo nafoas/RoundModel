@@ -343,6 +343,9 @@ excuse and was withdrawn.)
   photo (alone: 2 m wide, 3.35 m away; no background to judge by), so his approved width (15.5 cm) sets the
   size: top of his head 16.7 cm, eyes 13.4, nose 9.5, ear tips 18.0; camera 24.5 cm from his nose, 12.9 cm up.
   Above his adult floor (12.7). The six-inch camera's numbers are superseded.
+- **The room's camera for the anchor photo is the depth model's** (owner, 2026-11-17: "Yes"). His outline,
+  landmark and part-line rays, the room pictures and how he faces are worked out from MoGe-2's camera, the same
+  one his measured surface comes from. The six-inch camera stays in `data/cameras.json` as a superseded record.
 - **Was open (Q47, answered above):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
   The 12.7 came from the six-inch camera, which also ASSUMED his peets were right under his face; both models

@@ -42,7 +42,7 @@ from prince.space import Camera  # noqa: E402
 OUT_IMG = ROOT / "docs/images/space"
 MODELS = {"depthpro": "apple/DepthPro-hf", "moge2": "Ruicheng/moge-2-vitl-normal"}
 NAMES = {"depthpro": "Depth Pro (Apple)", "moge2": "MoGe-2 (Microsoft)"}
-WIDTH_CM = 15.5          # his width, OWNER-approved 2026-11-16 (data/cameras.json his_size_estimate_cm)
+WIDTH_CM = 15.5          # his width, OWNER-approved 2026-11-16 (sets his size; the model cannot tell size here)
 EYES_ABOVE_CAMERA_CM = 0.5  # OWNER: "basically exactly at his eye level. Maybe just a tiny bit lower" (sets which way is up)
 EDGE_INSET_PX = 4        # his outline's outermost pixels blend into the removed background: width read 4 px inside
 NEAR_PX = 3              # a landmark's 3D point: the median of the pixels of him within 3 px (6 for a peet bottom)
@@ -312,7 +312,8 @@ def main() -> int:
         for name in [a for a in args if a in MODELS] or list(MODELS):
             measure(name, img, mask)
             print("measured", name)
-    widest_y = int(load("data/cameras.json")["anchor_front"]["widest_outline_px"]["y"])
+    from scene import widest_outline                              # his outline only: no camera involved
+    widest_y = int(widest_outline(np.array(load("data/strands/body_outline.json")["sampled_curve"]))[1][2])
     placed = {}
     for name in MODELS:
         cam, P, s, report = place(name, mask, lm, widest_y)

@@ -84,7 +84,7 @@ Pass criteria live in `config/thresholds.json`.
   depth lines: SCRAPPED by the owner (2026-11-16; the shell and the depth-from-light reading were removed).
   Replaced by the owner's method (2026-11-16/17): his surface as each photo sees it, measured by a depth model
   (MoGe-2), placed with its own camera, nothing invented; his size from it: 15.5 cm wide, 16.7 cm to the top
-  of his head (`docs/SPACE.md`). Next: put the room's camera for this photo on MoGe-2's (owner's go).
+  of his head (`docs/SPACE.md`). The room's camera for this photo is MoGe-2's (owner, 2026-11-17).
 - [ ] 2b: soft measurement masks rendered from the classified parts (landmarks and camera file: done, above)
 - [ ] 2c: whisker/wisp 3D strand builder + 1-px projection test
 

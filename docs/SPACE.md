@@ -35,9 +35,18 @@ Picture coordinates as everywhere in the project: pixel (c, r) covers [c, c+1) x
 Placement words (as in `docs/PLAN.md`): yaw 0 = straight in front of his face, yaw 90 = on his left,
 pitch > 0 = above looking down, roll > 0 = camera turned clockwise (the room looks turned anticlockwise).
 
-Cameras live in `data/cameras.json`, one entry per photo.
+Cameras live in `data/cameras.json`, one entry per photo (plus the superseded six-inch record).
 
-## The anchor camera: as the owner remembers the shot
+## The anchor camera: the depth model's (since 2026-11-17)
+
+Owner, 2026-11-17: "I agree with whatever the model says", and yes to making it the room's camera. The room's
+camera for the anchor photo (`data/cameras.json` `anchor_front`) is MoGe-2's, as placed in "His surface as
+the anchor photo sees it" (below): its own lens (1795 px), straight on, his eyes 0.5 cm above it, 24.5 cm from
+his nose, 12.9 cm up; his approved width (15.5 cm) sets the size. His outline, landmark and part-line rays
+(`data/scene/anchor_rays.json`), the room pictures and how he faces (`data/scene/facing.json`) are all worked
+out from it, so everything for this photo shares one camera.
+
+### Superseded: the camera as the owner first remembered the shot (kept in `data/cameras.json` as `anchor_front_six_inches_superseded`)
 
 Owner, 2026-11-16: straight on, "roughly 6 inches away from the camera" ("it couldn't have been more"),
 "basically exactly at his eye level. Maybe just a tiny bit lower", looking level or "ever so slightly up";
@@ -73,17 +82,17 @@ rays are recomputed from them whenever the camera changes.
 
 ## How he is being looked at (`tools/facing.py` -> `data/scene/facing.json`, `docs/images/space/facing.png`)
 
-With the camera fixed as above, from the photo:
-- **His head is tipped about 6 deg, his left side up** (a little head tilt toward his right): solid (5-7
-  whatever pair is left out, landmarks wobbled by their uncertainty, or the camera moved across the owner's
-  ranges). His peets don't tip the same way, so it is his head, not the phone.
-- **His head is turned toward his own left (his nose toward the picture's right), about 5-9 deg**: the
-  direction is solid (the six mirror pairs give 7.8, the two eye ovals 5.7, and his nose sits right of the
-  middle of his eyes); the amount is not yet (the pairs disagree: his mouth, lip corners and ear bases can
-  be truly lopsided; the eyes and nostrils alone leave it loose). It firms up with his round shell or
-  another photo.
-- His body, from where his peets meet the surface (rough): turned about 3.5 deg toward his right.
-- His head's nod (up or down) needs his depth: later.
+With the room's camera (the depth model's, since 2026-11-17), from the photo:
+- **His head is tipped about 5 deg, his left side up** (a little head tilt toward his right): solid (4-6
+  whatever pair is left out, landmarks wobbled by their uncertainty, or the camera varied: the other model's
+  lens, tilted 2 deg). His peets don't tip the same way, so it is his head, not the phone.
+- **His head is turned toward his own left (his nose toward the picture's right), about 5-13 deg**: the
+  direction is solid (the six mirror pairs give 12.7, the two eye ovals 5.3, and his nose sits right of the
+  middle of his eyes); the amount is not (the pairs disagree: his mouth, lip corners and ear bases can be
+  truly lopsided; with this longer lens the pairs spread more than with the six-inch camera, which gave 7.8
+  and 5.7). His measured surface could settle it (not done yet).
+- His body, from where his peets meet the surface (rough): turned about 4 deg toward his right.
+- His head's nod (up or down): his measured surface has it; not read yet.
 
 ## What exists (steps 1-3)
 

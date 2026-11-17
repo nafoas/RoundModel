@@ -82,14 +82,11 @@ def main() -> int:
                         eyes=round((pl["eye_heights_cm"]["his_left"] + pl["eye_heights_cm"]["his_right"]) / 2, 1),
                         nosey=pl["nose_height_cm"], ears=pl["ear_tips_cm"], scale=pl["scale_means"])))
     facing = None
-    import re as _re
-    cam_d = float(_re.search(r"camera to his nose ([0-9.]+) cm", cam["inputs"]["distance"]).group(1))
     fpath = ROOT / "data/scene/facing.json"
     if fpath.exists():                                   # how he is turned (tools/facing.py), drawn where he is
         fd = json.loads(fpath.read_text())
-        lmk = {s["name"]: np.array(s["directions_room"][0]) for s in rays["landmarks"]}
-        eyes_dir = lmk["eye_his_left"] + lmk["eye_his_right"]; eyes_dir /= np.linalg.norm(eyes_dir)
-        E = C + eyes_dir * (cam_d + 2.0)                 # his eyes ~2 cm behind his nose (approximate)
+        Lm = vd.load("data/scene/visible_depth_moge2.json")["placed_in_the_room"]["landmarks_room_cm"]
+        E = (np.array(Lm["eye_his_left"]) + np.array(Lm["eye_his_right"])) / 2      # his eyes, as measured
         Xh = np.array(fd["head"]["left_right_axis_room"]); up = np.array([0.0, 1.0, 0.0])
         Yh = up - (up @ Xh) * Xh; Yh /= np.linalg.norm(Yh); Zh = np.cross(Xh, Yh)
         Pb = np.array(fd["body"]["peets_on_the_surface_cm"]); Xb = Pb[0] - Pb[1]; Xb /= np.linalg.norm(Xb)
@@ -106,12 +103,10 @@ def main() -> int:
                 photo="data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode())
     three = (ROOT / "tools/vendor/three-0.159.0.min.js").read_text()
     sz = cam["his_size_estimate_cm"]
-    camtext = (f"Placed as first remembered: straight on, about six inches from his nose, level, "
-               f"{cam['eyes_above_camera_cm']:.1f} cm below his eyes, his peets assumed right under his face. His size "
-               f"from it (rough): about {sz['width']:.1f} cm wide, {sz['top_of_head']:.1f} cm to the top of his head, "
-               f"ear tips {sz['ear_tips']:.1f} cm. The depth models place the camera further away (owner: \"Maybe I "
-               f"misremembered. Either way I trust them\"). Its outline, landmark and part-line rays and the "
-               f"blue/red facing lines were worked out with this camera.")
+    camtext = (f"Its rays through his outline (coloured by part), his landmarks and his part lines, and how he faces, "
+               f"are all worked out from it. His size: {sz['width']} cm wide (approved), {sz['top_of_head']} cm "
+               f"to the top of his head, ear tips {sz['ear_tips']} cm, eyes {sz['eyes']}, nose {sz['nose']}. "
+               f"(The six-inch camera first remembered is kept in data/cameras.json as a superseded record.)")
     html = PAGE.replace("/*THREE*/", three).replace("/*DATA*/", json.dumps(data)).replace("/*CAMTEXT*/", camtext)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(html)
@@ -150,17 +145,14 @@ PAGE = r"""<!DOCTYPE html>
  <label><input type="checkbox" id="cTags" checked> labels</label></div>
  <p style="color:#555">His outermost 4 px blend into the removed background, so their distances are least sure.
  In the camera's view the photo is hidden: what you see is his measured surface, every point on its own pixel.</p>
- <details><summary>The camera as first remembered (six inches)</summary>
-  <p>/*CAMTEXT*/</p>
-  <div><label><input type="checkbox" id="cRem"> show it</label><label><input type="checkbox" id="cOut"> outline rays</label>
-  <label><input type="checkbox" id="cLm"> landmark rays</label><label><input type="checkbox" id="cLines"> part-line rays</label>
-  <label><input type="checkbox" id="cFace" checked> how he faces</label></div>
+ <p><b>The room's camera for this photo is MoGe-2's.</b> /*CAMTEXT*/</p>
+ <div><label><input type="checkbox" id="cOut"> outline rays</label><label><input type="checkbox" id="cLm"> landmark rays</label>
+  <label><input type="checkbox" id="cLines"> part-line rays</label><label><input type="checkbox" id="cFace" checked> how he faces</label></div>
   <p><span class="key" style="background:#eb8c1e"></span>head<span class="key" style="background:#3ca0e6"></span>intermediate
   <span class="key" style="background:#8c5ae6"></span>undercarriage<span class="key" style="background:#46be5a"></span>ears
   <span class="key" style="background:#148c3c"></span>top of head<span class="key" style="background:#dc3232"></span>/<span class="key" style="background:#c8aa00"></span>peets
   <span class="key" style="background:#009696"></span>belly<span class="key" style="background:#555"></span>landmarks</p>
   <p id="faceNote" style="color:#1f4fb4"></p>
- </details>
  <p>Drag: turn around. Wheel / pinch: closer. Right-drag / two fingers: move.</p>
 </div>
 <button id="hide">hide panel</button>
@@ -223,11 +215,11 @@ const models = (D.visible||[]).map((v,k)=>{
 function note(){ document.getElementById('visNote').innerHTML = models.filter(m=>m.g.visible).map(m=>{ const r=m.v.report;
   return `<b>${m.v.label}</b>: camera ${r.nose} cm from his nose, ${r.height} cm up (his eyes 0.5 cm above it). Him: 15.5 cm wide, top of his head ${r.top} cm up, eyes ${r.eyes}, nose ${r.nosey}, ear tips ${r.ears[0]} / ${r.ears[1]}.`; }).join('<br>') || 'Tick a model to see his surface.'; }
 note();
-// ---- the camera as first remembered (six inches), with its outline / landmark / part-line rays and the facing lines
-const rem = makeCam(D.camera, '#222222', 'camera as first remembered');
-const gOut = rayGroup(rem.C, D.outline.ends, D.outline.colours, 0.75); rem.g.add(gOut); gOut.visible=false;
-const gLm = rayGroup(rem.C, D.landmarks.map(l=>l.end), null, 0.9); rem.g.add(gLm); gLm.visible=false;
-const gLines = new THREE.Group(); D.lines.forEach(l=>gLines.add(rayGroup(rem.C, l.ends.filter((_,i)=>i%4==0), null, 0.35))); gLines.visible=false; rem.g.add(gLines);
+// ---- the room's camera for this photo (MoGe-2's): rays through his outline, landmarks and part lines; how he faces
+const RC = V(D.camera.C);
+const gOut = rayGroup(RC, D.outline.ends, D.outline.colours, 0.75); scene.add(gOut); gOut.visible=false;
+const gLm = rayGroup(RC, D.landmarks.map(l=>l.end), null, 0.9); scene.add(gLm); gLm.visible=false;
+const gLines = new THREE.Group(); D.lines.forEach(l=>gLines.add(rayGroup(RC, l.ends.filter((_,i)=>i%4==0), null, 0.35))); gLines.visible=false; scene.add(gLines);
 D.landmarks.filter(l=>/^(eye_his_(left|right)|nose_y_centre|ear_tip_his_(left|right)|crown_front|chin_midline|belly_front|peet_bottom_his_(left|right))$/.test(l.name))
   .forEach(l=>tag(l.name.replace(/_/g,' '), V(l.end), '#444', gLm));
 const gFace = new THREE.Group();
@@ -235,9 +227,9 @@ if (D.facing){ const f=D.facing; const L=(a,b,col)=>gFace.add(new THREE.Line(new
   L(f.head[0],f.head[1],0x1f5adc); L(f.head[2],f.head[3],0x1f5adc); L(f.body[0],f.body[1],0xc81e1e); L(f.body[2],f.body[3],0xc81e1e);
   tag('head faces', V(f.head[3]), '#1f5adc', gFace); tag('body faces', V(f.body[3]), '#c81e1e', gFace);
   document.getElementById('faceNote').textContent = 'Blue: his head (left-right axis, and the way it faces). Red: his body, from his peets. ' + f.text + '.'; }
-rem.g.add(gFace); rem.g.visible = false;
+scene.add(gFace);
 // ---- views
-function activeCam(){ return models.find(m=>m.g.visible) || (rem.g.visible ? rem : (models[0] || rem)); }
+function activeCam(){ return models.find(m=>m.g.visible) || models[0]; }
 let camNow = activeCam();
 const target = new THREE.Vector3(); let yaw=0.42, pitch=0.28, dist=60, mode='orbit';
 function placeView(){ if(mode==='cam') return; view.position.set(target.x+dist*Math.sin(yaw)*Math.cos(pitch), target.y+dist*Math.sin(pitch), target.z+dist*Math.cos(yaw)*Math.cos(pitch)); view.up.set(0,1,0); view.lookAt(target); view.fov=45; view.updateProjectionMatrix(); }
@@ -271,7 +263,7 @@ el.addEventListener('touchmove',e=>{ for(const t of e.changedTouches) touches.se
 el.addEventListener('touchend',e=>{ for(const t of e.changedTouches) touches.delete(t.identifier); if(touches.size<2) pinch=null; },{passive:true});
 // ---- toggles, resize, drawing
 const tog=(id,obj)=>document.getElementById(id).onchange=e=>{obj.visible=e.target.checked; draw();};
-tog('cRem',rem.g); tog('cOut',gOut); tog('cLm',gLm); tog('cLines',gLines); tog('cFace',gFace);
+tog('cOut',gOut); tog('cLm',gLm); tog('cLines',gLines); tog('cFace',gFace);
 document.getElementById('cBand').onchange=e=>{ bands.forEach(b=>b.visible=e.target.checked); draw(); };
 document.getElementById('cRays').onchange=e=>{ rayls.forEach(b=>b.visible=e.target.checked); draw(); };
 document.getElementById('cTags').onchange=()=>draw();

@@ -14,24 +14,29 @@ def load(p):
     return json.loads((ROOT / p).read_text())
 
 
-def test_anchor_camera_is_placed_as_the_owner_remembers_the_shot():
-    doc = load("data/cameras.json")["anchor_front"]
-    cam = Camera.from_dict(doc)
-    lm = load("data/strands/landmarks.json")["landmarks"]
-    assert np.allclose(cam.project([[0, 0, 0]])[0], lm["floor_contact_midpoint"]["at_px"], atol=1e-3)
-    assert cam.C[1] > 0 and cam.C[2] > 0                       # above the surface, in front of his face
+def test_anchor_camera_is_the_depth_models_camera():
+    """Owner, 2026-11-17: "I agree with whatever the model says": the room's camera for this photo is MoGe-2's."""
+    doc = load("data/cameras.json")
+    cam = Camera.from_dict(doc["anchor_front"])
+    placed = load("data/scene/visible_depth_moge2.json")["placed_in_the_room"]
+    model = Camera.from_dict(placed["camera"])
+    assert np.allclose(cam.C, model.C) and np.allclose(cam.R, model.R) and cam.f == model.f
     yaw, pitch, roll = cam.angles()
-    assert abs(yaw) < 1e-6 and abs(roll) < 1e-6                # straight on
-    assert -2.0 <= pitch <= 0.0                                  # level, or tilted up a touch (owner)
-    assert abs(cam.cx - lm["nose_y_centre"]["at_px"][0]) < 1e-6  # aimed at his face, not the picture's centre
-    nose = cam.ray([lm["nose_y_centre"]["at_px"]])[0]
-    nose_pt = cam.C + 15.24 * nose                               # owner: roughly six inches away
-    assert abs(nose_pt[1] - doc["nose_height_cm"]) < 0.01
-    eyes = (np.array(lm["eye_his_left"]["at_px"]) + np.array(lm["eye_his_right"]["at_px"])) / 2
-    up = np.degrees(np.arcsin(cam.ray([eyes])[0][1]))
-    assert 0.0 < up < 12.0                                       # his eyes a little above the camera
-    assert doc["his_size_estimate_cm"]["top_of_head"] >= 12.7    # owner's size floor (he is an adult)
+    assert abs(yaw) < 1e-6 and abs(roll) < 1e-6                 # straight on
+    assert cam.C[1] > 0 and cam.C[2] > 0                         # above the surface, in front of his face
+    eyes = (np.array(placed["landmarks_room_cm"]["eye_his_left"]) + np.array(placed["landmarks_room_cm"]["eye_his_right"])) / 2
+    assert abs(eyes[1] - cam.C[1] - 0.5) < 0.01                  # owner: eye level, a tiny bit lower
+    lm = load("data/strands/landmarks.json")["landmarks"]
+    assert np.abs(cam.project([[0, 0, 0]])[0] - lm["floor_contact_midpoint"]["at_px"]).max() < 15   # origin under his peets
+    size = doc["anchor_front"]["his_size_estimate_cm"]
+    assert size["width"] == 15.5 and size["top_of_head"] >= 12.7  # approved width; above his adult floor
     assert abs(np.linalg.det(cam.R) - 1) < 1e-7
+
+
+def test_the_six_inch_camera_is_kept_as_a_superseded_record():
+    old = load("data/cameras.json")["anchor_front_six_inches_superseded"]
+    assert old["status"].startswith("SUPERSEDED")
+    assert old["his_size_estimate_cm"]["top_of_head"] == 12.7
 
 
 def test_landmarks_are_named_by_his_side():

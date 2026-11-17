@@ -1065,3 +1065,21 @@ check.py output (if applicable), and the next step.
 - **Next (owner's go):** make MoGe-2's camera the room's camera for the anchor photo (`data/cameras.json`), so
   his outline, landmark and part-line rays and how he faces are all worked out from the same camera as his
   surface (today they still come from the six-inch camera).
+
+## 2026-11-17 — Session 6 (cont.): the room's camera for the anchor photo is the depth model's (owner)
+- Owner: "Yes" to making MoGe-2's camera the room's camera. `tools/scene.py` now takes `anchor_front` from the
+  depth model's placement (`data/scene/visible_depth_moge2.json`); the six-inch camera is kept in
+  `data/cameras.json` as `anchor_front_six_inches_superseded`. His outline, landmark and part-line rays
+  (`data/scene/anchor_rays.json`, reprojection 0.006 px), the room pictures and how he faces were redone with it,
+  so everything for this photo shares one camera. `tools/visible_depth.py` reads his widest row from his outline
+  (no camera needed), so the two tools do not feed each other in a loop.
+- How he faces, with this camera: tipped about 5 deg, his left side up (solid, 4-6); turned toward his left
+  (direction solid; amount 5-13 deg: mirror pairs 12.7, eye ovals 5.3; not settled); body about 4 deg toward
+  his right. Its "5-9 deg" summary had been written in by hand: now computed. The facing picture's header was
+  cut off at the right: split into lines; its top view widened to show the camera at 30 cm.
+- 3D page: one room camera (MoGe-2's) with its outline / landmark / part-line rays and the facing lines (now
+  drawn at his measured eyes and peets); Depth Pro set aside, off by default; the six-inch camera off the page.
+- His size stored to 2 decimals (top of head 16.65: it had shown as 16.6 on the page and 16.7 in the docs).
+- check.py: does not exist (no match claimed).
+- **Next:** owner's look. Possible later: read his head's turn and nod from his measured surface (it could
+  settle the 5-13 deg).

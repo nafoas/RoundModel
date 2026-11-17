@@ -3,20 +3,21 @@
 The room is defined in prince/space.py (centimetres; floor y = 0; +X his left, +Y up, +Z his forward;
 origin on the floor under the front of his peets, in his midline plane).
 
-Step 1 here: place the anchor camera in the room AS THE OWNER REMEMBERS IT (2026-11-16): straight on at his
-face, "basically exactly at his eye level. Maybe just a tiny bit lower", "looking ever so slightly up",
-"it couldn't have been more than six inches away". The photo carries no camera data and was cropped when his
-background was removed, so the picture's centre is NOT where the camera aimed (lesson 26): the aim point is
-put on his face (his nose's left-right position, and the height that puts his eyes a touch above the camera).
-The lens is still PROVISIONAL: a 26 mm-equivalent phone main camera, the picture cropped from a 3:4 frame
-centred on the aim point, the smallest such frame that holds the picture (so this is the SHORTEST lens that
-fits; a tighter crop or zoom means a longer lens and a smaller Prince). His real size will fix it.
+Step 1 here: the anchor camera. Since 2026-11-17 it is the DEPTH MODEL's camera (MoGe-2, as placed by
+tools/visible_depth.py; owner: "I agree with whatever the model says"): its own lens, straight on, up from the
+owner's memory (his eyes 0.5 cm above the camera), his approved width (15.5 cm) setting the size, the surface
+through his peet bottoms. The first camera, placed AS THE OWNER FIRST REMEMBERED THE SHOT (six inches away,
+2026-11-16; anchor_camera() below), is kept in data/cameras.json as a superseded record: it assumed his peets
+right under his face, and the model puts the camera about 24.5 cm away ("Maybe I misremembered. Either way I
+trust them"). The photo carries no camera data and was cropped when his background was removed, so the
+picture's centre is NOT where the camera aimed (lesson 26).
 Everything measured in the photo stays in picture pixels (exact); everything in the room is recomputed from
 those pixels whenever the camera changes.
 
 Step 3 here: every part and boundary of him as RAYS from the anchor camera: his outline (where his surface
 is edge-on to the camera: the line of sight grazes him there), the approved part lines and part outlines,
-and every landmark. A ray fixes a direction, not a depth: he is somewhere along each one (step 5).
+and every landmark. A ray fixes a direction, not a depth: he is somewhere along each one (where: the depth
+model's measurement, tools/visible_depth.py).
 
 Usage: python tools/scene.py -> data/cameras.json, data/scene/anchor_rays.json, docs/images/space/room_*.png
 """
@@ -44,6 +45,7 @@ OWNER_EYES_ABOVE_CAMERA_CM = 0.5       # owner: "basically exactly at his eye le
 # only as far as it must for him to reach it.
 SIZE_FLOOR_TOP_OF_HEAD_CM = 12.7
 EYES_BEHIND_NOSE_CM = 2.0              # assumption (small effect): his eyes are ~2 cm further back than his nose
+DEPTH_MODEL = "moge2"      # owner, 2026-11-17: "very obvious which one looks more like a rabbit"; Depth Pro set aside
 FAR_PAST_ORIGIN_CM = 16.0          # drawn rays reach this far past the camera-to-origin distance (drawing only)
 PART_COLOURS = {"head": (235, 140, 30), "intermediate bnuy": (60, 160, 230), "undercarriage": (140, 90, 230),
                 "ears": (70, 190, 90), "top of his head (strip joining his ears)": (20, 140, 60),
@@ -152,6 +154,40 @@ def anchor_camera(W, H, lm, outline, up=OWNER_TILT_UP_DEG, d_nose=OWNER_CAMERA_T
                      his_size_estimate_cm=size_estimate(cam, lm, nose_pt, width_px), eyes_above_camera_cm=round(eyes_above, 2),
                      widest_outline_at_nose_distance_cm=round(width_px * depth_nose / f, 2),
                      note_width="his widest outline at his nose's distance; his sides are further back, so he is wider")
+
+
+def depth_model_camera(outline, name=DEPTH_MODEL):
+    """The anchor camera as the depth model placed it (tools/visible_depth.py, data/scene/visible_depth_<name>.json),
+    with his size as measured there."""
+    meta = load(f"data/scene/visible_depth_{name}.json"); pl = meta["placed_in_the_room"]
+    cam = Camera.from_dict(pl["camera"])
+    L = {k: np.array(v) for k, v in pl["landmarks_room_cm"].items()}
+    width_px, (xl, xr, yw) = widest_outline(outline)
+    eyes = (L["eye_his_left"] + L["eye_his_right"]) / 2
+    inputs = dict(
+        source=f"the depth model {meta['model']} (data/scene/visible_depth_{name}.json, tools/visible_depth.py); "
+               f"OWNER 2026-11-17: 'I agree with whatever the model says'",
+        lens=f"{cam.f:.1f} px: the model's own estimate; its rays take the picture's centre as straight ahead",
+        distance=f"camera to his nose {pl['camera_to_nose_cm']} cm (the model). The owner first remembered about six "
+                 f"inches: 'Maybe I misremembered. Either way I trust them'",
+        height="OWNER: 'basically exactly at his eye level. Maybe just a tiny bit lower' -> his eyes 0.5 cm above the "
+               "camera; this sets which way is up (the cropped picture's centre does not: lessons 26, 29)",
+        turn="straight on: not turned, not rolled",
+        size="his width, 15.5 cm (OWNER-approved), sets the size; the model cannot tell size from this "
+             "background-free photo. Everything else is the model's",
+        surface="he sat on a soft surface; y = 0 goes through the middle of his two peet bottoms (measured)",
+        origin="the surface under the middle of his two peet bottoms (measured, 4 px inside his outline)")
+    size = dict(width=15.5, top_of_head=round(pl["top_of_head_cm"], 2), ear_tips=round(float(np.mean(pl["ear_tips_cm"])), 2),
+                eyes=round(float(eyes[1]), 2), nose=round(pl["nose_height_cm"], 2),
+                how="measured by the depth model (its proportions), 15.5 cm wide (approved); top of head and ear tips "
+                    "read 4 px inside his outline; OWNER 2026-11-17: 'I agree with whatever the model says'")
+    return cam, dict(inputs=inputs,
+                     widest_outline_px=dict(width=round(width_px, 2), left=round(xl, 2), right=round(xr, 2), y=round(yw, 2)),
+                     camera_to_nose_cm=pl["camera_to_nose_cm"],
+                     depth_of_his_front_cm=round(float((L["nose_y_centre"] - cam.C) @ cam.forward), 3),
+                     nose_height_cm=pl["nose_height_cm"], his_size_estimate_cm=size,
+                     eyes_above_camera_cm=pl["his_eyes_above_camera_cm"],
+                     picture_centre=pl["picture_centre_points"])
 
 
 # ---------------------------------------------------------------- step 3: rays
@@ -271,6 +307,11 @@ class Canvas:
         self.im.resize((self.v.width, self.v.height), Image.LANCZOS).save(path)
 
 
+def lm_point(cam, lm, name="nose_y_centre"):
+    """A landmark's measured point in the room (the depth model's), for labels."""
+    return np.array(load(f"data/scene/visible_depth_{DEPTH_MODEL}.json")["placed_in_the_room"]["landmarks_room_cm"][name])
+
+
 def draw_room(cam, sets, lm, photo, depth_front, path, view, title):
     c = Canvas(view)
     # floor grid, 2 cm squares (darker every 10 cm), around him and under the camera
@@ -315,8 +356,9 @@ def draw_room(cam, sets, lm, photo, depth_front, path, view, title):
     c.d.text((10, 8), title, fill=(0, 0, 0), font=c.font)
     c.d.text((10, 8 + 34), "Coloured rays: his outline by part (head orange, intermediate blue, undercarriage purple, "
                            "ears green, peets red/yellow, belly teal); grey: landmarks. Grid: 2 cm.", fill=(60, 60, 60), font=c.small)
-    c.d.text((10, 8 + 62), "He is somewhere along every ray; how far is a later step. Camera: as the owner remembers "
-                           "it; lens: the shortest that fits (his size check).", fill=(60, 60, 60), font=c.small)
+    c.d.text((10, 8 + 62), "He is somewhere along every ray (where: the depth model, 3D page). Camera: the depth "
+                           f"model's (MoGe-2), {np.linalg.norm(cam.C - lm_point(cam, lm)):.1f} cm from his nose.",
+             fill=(60, 60, 60), font=c.small)
     c.done(path)
 
 
@@ -325,16 +367,22 @@ def main() -> int:
     W, H = photo.size
     lmdoc = load("data/strands/landmarks.json"); lm = lmdoc["landmarks"]
     outline = np.array(load("data/strands/body_outline.json")["sampled_curve"])
-    cam, prov = anchor_camera(W, H, lm, outline)
+    cam6, prov6 = anchor_camera(W, H, lm, outline)              # the six-inch camera: kept as a superseded record
+    cam, prov = depth_model_camera(outline)
     sets, lmk, err, reg, F = build_rays(cam, lm)
     camdoc = {"about": "Cameras in Prince's room (prince/space.py). One entry per photo.",
               "anchor_front": dict(photo="data/photos/anchor_front.webp",
-                                   status="placed as the owner remembers the shot (2026-11-16); his size from it, at "
-                                          "least the owner's size floor, APPROVED by the owner ('those numbers "
-                                          "seem to fit him', 2026-11-16)", **cam.to_dict(), **prov)}
+                                   status="the depth model's camera (MoGe-2), owner 2026-11-17: 'I agree with whatever "
+                                          "the model says'; his size: 15.5 cm wide (approved), the rest measured",
+                                   **cam.to_dict(), **prov),
+              "anchor_front_six_inches_superseded": dict(
+                  photo="data/photos/anchor_front.webp",
+                  status="SUPERSEDED 2026-11-17 by the depth model's camera (anchor_front). Placed as the owner first "
+                         "remembered the shot (2026-11-16, six inches); it assumed his peets right under his face. "
+                         "Kept as a record only", **cam6.to_dict(), **prov6)}
     (ROOT / "data/cameras.json").write_text(json.dumps(camdoc, indent=1))
     (ROOT / "data/scene").mkdir(exist_ok=True)
-    raydoc = dict(about=__doc__.split("\n\n")[0], camera="data/cameras.json: anchor_front (PROVISIONAL)",
+    raydoc = dict(about=__doc__.split("\n\n")[0], camera="data/cameras.json: anchor_front (the depth model's camera)",
                   room="prince/space.py: cm; floor y = 0; +X his left, +Y up, +Z his forward",
                   rule="every pixel is a ray from the camera, never a point on a flat sheet; depth is not decided here",
                   reprojection_max_error_px=err, sets=sets, landmarks=lmk)
