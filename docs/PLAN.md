@@ -76,12 +76,11 @@ Pass criteria live in `config/thresholds.json`.
 - [ ] 2a: **part-by-part classification of the anchor photo** (`docs/STRAND_PLAN.md`) — paused for the 3D
   grounding below; still to come: ears' pixel tweaks, eyes/lashes/hotot marks, pads, mouth, nose, BPs
 - [x] 2a body parts: Head / Intermediate Bnuy / Undercarriage approved 2026-11-15; every pixel of him assigned 2026-11-16.
-- [~] **3D grounding** (owner, 2026-11-16; `docs/SPACE.md`) — CURRENT. Steps 1-3 done as a first pass
-  (room + camera `prince/space.py`; 27 landmarks; every part as rays from the anchor camera; interactive
-  room `docs/space/room.html`); camera placed as the owner remembers the shot (six inches, level, eye
-  level, 2.4 cm below his eyes so he reaches the owner's size floor: ~15.5 cm wide, 12.7 cm to the top
-  of his head) and how he faces (head tipped ~5 deg, turned ~5-9 deg toward his left; `tools/facing.py`);
-  depth lines: SCRAPPED by the owner (2026-11-16; the shell and the depth-from-light reading were removed).
+- [~] **3D grounding** (owner, 2026-11-16; `docs/SPACE.md`) — CURRENT; done for the anchor photo (steps 1-5),
+  step 6 waits for another photo. Room + camera `prince/space.py`; 27 landmarks; every part as rays; interactive
+  room `docs/space/room.html`; how he faces (`tools/facing.py`: head tipped ~5 deg, turned 0.5 deg, nod as
+  measured slopes, read from his measured surface 2026-11-18; the six-inch camera and its 12.7 cm size are
+  superseded); depth lines: SCRAPPED by the owner (2026-11-16; the shell and the depth-from-light reading were removed).
   Replaced by the owner's method (2026-11-16/17): his surface as each photo sees it, measured by a depth model
   (MoGe-2), placed with its own camera, nothing invented; his size from it: 15.5 cm wide, 16.7 cm to the top
   of his head (`docs/SPACE.md`). The room's camera for this photo is MoGe-2's (owner, 2026-11-17).

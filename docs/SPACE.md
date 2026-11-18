@@ -175,10 +175,11 @@ that were worked out with it).
 1. Define the room: done.
 2. Name the landmarks: done.
 3. Every part and boundary as rays from the anchor camera: done.
-4. Place the anchor camera (as the owner remembers the shot) and work out how he is being looked at:
-   done (above). Open: his head's nod (needs depth).
+4. Place the anchor camera and work out how he is being looked at: done. The camera is now the depth model's
+   (MoGe-2, 2026-11-17); his head's tip, turn and nod read from his measured surface (2026-11-18).
 5. Depth lines: SCRAPPED (above). Replaced by the owner's method: his surface as each photo sees it, measured
-   by two depth models, each placed with its own camera (above). Open: his size (Q47).
+   by a depth model with its own camera (above): done for the anchor photo; MoGe-2 chosen; his size settled
+   (15.5 cm wide, 16.65 cm to the top of his head).
 6. When the owner adds another angle: solve its camera from the landmarks, project his parts, compare,
    and only then use it for depth.
 
