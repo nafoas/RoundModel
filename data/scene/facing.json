@@ -2,6 +2,68 @@
  "about": "How Prince is being looked at in the anchor photo: how his head and body are turned and tipped relative\nto the camera (owner, 2026-11-16: \"place the camera about six inches away ... exactly as it was when I\ncaptured it, and then determine what way he is being looked at\").",
  "camera": "data/cameras.json anchor_front (the depth model's camera, MoGe-2)",
  "head": {
+  "turned_deg": 0.5,
+  "tipped_deg": 4.8,
+  "meaning": "turned + = toward his own left (his nose toward the picture's right); tipped + = his left side up",
+  "from_model": "moge2 (data/scene/visible_depth_moge2.json)",
+  "turn_readings_deg": {
+   "eye pair (3D)": -3.2,
+   "nostril_wing pair (3D)": 0.5,
+   "lip_corner pair (3D)": 0.9,
+   "the way his two eyes face": 0.2,
+   "his nose against the middle of his eyes, less his tip": 2.2
+  },
+  "turned_is": "the middle (median) reading",
+  "tip_per_pair_deg": {
+   "eye": 4.4,
+   "nostril_wing": 5.9,
+   "lip_corner": 4.0
+  },
+  "eyes_face_to_the_sides_deg": {
+   "his_left": 46.9,
+   "his_right": 46.6,
+   "points_used": [
+    1139,
+    1068
+   ],
+   "region": "0.7 x each eye's oval"
+  },
+  "nose_against_eyes_cm": {
+   "to_his_left": 0.5,
+   "of_which_his_tip": 0.32
+  },
+  "left_out": {
+   "mouth corners": "only 1.7 cm apart: a 1 mm error in depth is 3.5 deg of turn",
+   "ear bases (inner and outer)": "on his outline, in the outer band whose distances are least sure (inner pair: 52 deg)"
+  },
+  "landmark_wobble_2sd": {
+   "turned": [
+    -0.0,
+    1.1
+   ],
+   "tipped": [
+    4.1,
+    5.6
+   ]
+  },
+  "left_right_axis_room": [
+   0.9965,
+   0.08313,
+   -0.0087
+  ],
+  "nod": {
+   "eyes_middle_to_nose_slopes_below_level_deg": 40.3,
+   "nose_to_chin_slopes_below_level_deg": 46.1,
+   "eyes_face_up_deg": {
+    "his_left": 17.2,
+    "his_right": 12.4,
+    "mean": 14.8
+   },
+   "meaning": "no photo shows his head 'level', so his nod is kept as these measured slopes; a later photo of him is compared against them. (A plane through the front of his face was tried and not used: his muzzle is round, so it depends on the window drawn.)"
+  }
+ },
+ "head_photo_only": {
+  "superseded": "2026-11-18 by the head read from his measured surface ('head'). From the picture alone: his nose sits right of the middle of his eyes, but his 5 deg tip does most of that; the mirror pairs as rays swing with the lens (7.8 deg with the six-inch camera, 12.7 with this one) and lean on the mouth, lip corners and ear bases; the eye ovals differ (5.3) though the eyes' measured surfaces face equally far to each side",
   "turned_deg": 12.7,
   "tipped_deg": 4.9,
   "meaning": "turned + = toward his own left (his nose toward the picture's right, his right cheek nearer the camera); tipped + = his left side up (a little head tilt toward his right)",
@@ -65,7 +127,7 @@
    ]
   }
  },
- "eyes_check": {
+ "eyes_check_photo_only": {
   "turn_deg": 5.3,
   "eyes_face_this_far_to_the_side_deg": 54.9,
   "fit_residual": 0.0006,
@@ -94,7 +156,7 @@
   ],
   "note": "from the lowest point of each peet (view-dependent points, on a soft surface): a rough reading of his body's turn"
  },
- "head_relative_to_body_turned_deg": 16.8,
+ "head_relative_to_body_turned_deg": 4.6,
  "eyes_and_nostrils_only": {
   "turned_tipped_deg": [
    11.6,
@@ -107,11 +169,11 @@
   "note": "the two pairs that fit best (misfit < 0.5 deg); two pairs alone leave the turn loose"
  },
  "summary": {
-  "tipped": "his left side up, about 5 deg (4-6 whatever is left out, wobbled or moved): SOLID",
-  "turned": "toward his own left (his nose toward the picture's right), about 5-13 deg: the DIRECTION is solid (the mirror pairs 12.7, the eye ovals 5.3, his nose right of the middle of his eyes all agree); the AMOUNT is not yet (the pairs disagree: mouth, lip corners and ear bases can be truly lopsided; pixel uncertainty alone allows roughly 0-15 deg). His measured surface (the depth model) could firm it up",
+  "tipped": "his left side up, about 5 deg (measured surface 4-6; the photo alone 5): SOLID",
+  "turned": "hardly at all: 0.5 deg toward his left, square to the camera within about 3 deg: read from his measured surface (readings -3.2 to +2.2: his eyes, nostril wings and lip corners in 3D, the way his two eyes face, his nose against his eyes). The photo alone said 5-13 deg toward his left: it read his tip as part of a turn",
   "body": "rough: about 4 deg toward his right (from his peets' lowest points)",
-  "head_vs_body": "his head is turned toward his left on his body and tipped; the camera was straight on and level"
+  "head_vs_body": "his body is turned about 4 deg toward his right and his head is square to the camera, so on his body his head is turned about 5 deg toward his left, and tipped",
+  "nod": "the line from between his eyes to his nose slopes 40 deg below level; his eyes face about 15 deg up (measured slopes: no photo shows his head level)"
  },
- "not_yet": "his head's nod (up/down): his measured surface (the depth model) has it; not read yet",
  "camera_tilt_note": "tipped is measured against the camera's level; the owner remembers holding it straight on. His peets' line does not tip the same way, so the tip is his head, not the phone"
 }

@@ -1083,3 +1083,22 @@ check.py output (if applicable), and the next step.
 - check.py: does not exist (no match claimed).
 - **Next:** owner's look. Possible later: read his head's turn and nod from his measured surface (it could
   settle the 5-13 deg).
+
+## 2026-11-18 — Session 6 (cont.): his head's turn and nod, read from his measured surface (owner)
+- Owner: "Yes, go ahead" (read his head's turn and nod from the measured 3D points). `tools/facing.py`
+  `from_surface()` reads MoGe-2's room points (`tools/visible_depth.py room_points`): mirror pairs in 3D (eyes,
+  nostril wings, lip corners; mouth corners and ear bases left out, with reasons), the way each eye faces (a
+  plane through its measured surface inside 0.7 x its oval, steady from 0.5 to 0.9), his nose against his eyes
+  less what his tip does; landmarks wobbled. Photo-only reading kept as `head_photo_only` (superseded).
+- Result: **tipped 4.8 deg** (his left side up; 3D pairs 4.0-5.9, wobble 4.1-5.6; photo alone 4.9: agree).
+  **Turned 0.5 deg toward his left** (readings -3.2 to +2.2, wobble 0 to 1.1): square to the camera. The
+  photo-only 5-13 deg came from his tip being read as a turn (DECISIONS lesson 31). Body still ~4 deg toward
+  his right, so on his body his head turns ~5 deg toward his left. **Nod**, as measured slopes: eyes-to-nose
+  line 40 deg below level, nose-to-chin 46, eyes face ~15 deg up (left 17, right 12). A plane through the
+  front of his face was tried and not used (round muzzle: depends on the window).
+- Caught before showing: the 3D pairs first gave a 19 deg tip (a raw point difference handed to a helper that
+  needs a unit direction); fixed; every other caller checked (all unit). The set-aside Depth Pro was looked at
+  only as a cross-check (eye facing +4 to +7, eye pair +3.3): not used.
+- `docs/images/space/facing.png` and the 3D page redrawn (head axis now the measured one). Tests: 58 passed
+  (new: `tests/test_facing.py::test_head_read_from_his_measured_surface`). check.py: does not exist.
+- **Next:** owner's look; then whatever the owner picks.

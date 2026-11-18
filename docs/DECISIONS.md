@@ -346,6 +346,10 @@ excuse and was withdrawn.)
 - **The room's camera for the anchor photo is the depth model's** (owner, 2026-11-17: "Yes"). His outline,
   landmark and part-line rays, the room pictures and how he faces are worked out from MoGe-2's camera, the same
   one his measured surface comes from. The six-inch camera stays in `data/cameras.json` as a superseded record.
+- **His head's pose in the anchor photo, read from his measured surface** (owner, 2026-11-18: "Yes, go
+  ahead"): tipped about 5 deg (his left side up), turned only 0.5 deg toward his left (square to the camera
+  within about 3 deg), his nod kept as measured slopes (eyes-to-nose line 40 deg below level; eyes face 15
+  deg up). This replaces the photo-only "5-13 deg toward his left" (lesson 31). `docs/SPACE.md`.
 - **Was open (Q47, answered above):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
   The 12.7 came from the six-inch camera, which also ASSUMED his peets were right under his face; both models
@@ -534,6 +538,14 @@ excuse and was withdrawn.)
    way the viewer looks and reverse the axis if needed; check with a feature that has a side (his left eye,
    his grey peet). The older room pictures and the 3D page project through a real camera, so they cannot
    mirror (checked).
+31. **A tip read as a turn** (found 2026-11-18, reading his head from his measured surface). From the photo
+   alone his head looked turned 5-13 deg toward his left: his nose sits right of the middle of his eyes. But
+   his head is also tipped 5 deg, and a tip alone moves his nose sideways against his eyes (most of the 0.5
+   cm). In 3D the turn is 0.5 deg. Also caught before showing: the 3D pairs first gave a 19 deg tip, because
+   the turn/tip helper reads the tip as arcsin of a UNIT direction's height and was handed a raw difference
+   of two points (every other caller passes unit directions: checked). → Separate tip and turn before reading
+   either; when a reading from one picture swings with the lens (7.8 -> 12.7), don't trust its amount; and
+   check a helper's input contract (unit vector, pixels vs cm) when reusing it.
 - **The light in the anchor photo** (owner, 2026-11-16): ceiling light and lamps in the room; a navy blue
   blanket under him ("some of the blueness from underneath is from that"); "are you sure it needs two
   lights? The light might just be at a very shallow angle on his right". Checked with no shape assumed: along

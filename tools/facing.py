@@ -14,7 +14,15 @@ model's, MoGe-2; tools/scene.py). Then, from the photo:
   give the turn and how far to the side his eyes face.
 - BODY: where his two peets meet the surface he sits on (their rays met with that surface): the line between
   them runs along his body's left-right axis -> how far his body is turned.
-His head's nod (up or down) needs his depth and comes later.
+- HEAD FROM HIS MEASURED SURFACE (since 2026-11-18; the answer): the same questions read from where the depth
+  model (MoGe-2, tools/visible_depth.py) puts each point of him: (1) mirror pairs in 3D (eyes, nostril wings, lip
+  corners): the line from one to the other runs along his left-right axis; (2) the way each eye faces (a plane
+  through its measured surface): two mirror-image eyes face equally far to each side; (3) his nose against the
+  middle of his eyes, less what his tip alone does. Left out, with reasons: the mouth corners (only 1.7 cm apart)
+  and the ear bases (on his outline, where distances are least sure). His nod: as measured slopes (there is no
+  "level" for a rabbit's head to measure it against); a later photo can be compared with them.
+The photo-only head reading (the mirror pairs as rays, the eye ovals) is kept as a record: it read his tip as
+part of a turn, and swings with the lens.
 
 Uncertainty: every landmark is wobbled by its own uncertainty (data/strands/landmarks.json, sure_px, as 2
 standard deviations), each pair is left out in turn, and the camera is varied (the other depth model's lens;
@@ -41,6 +49,13 @@ HEAD_PAIRS = [("eye_his_left", "eye_his_right"), ("nostril_wing_his_left", "nost
               ("ear_base_inner_his_left", "ear_base_inner_his_right"),
               ("ear_base_outer_his_left", "ear_base_outer_his_right")]
 UP = np.array([0.0, 1.0, 0.0])
+SURFACE_MODEL = "moge2"                  # owner, 2026-11-17: the one that looks like a rabbit
+SURFACE_PAIRS = [("eye_his_left", "eye_his_right"), ("nostril_wing_his_left", "nostril_wing_his_right"),
+                 ("lip_corner_his_left", "lip_corner_his_right")]
+SURFACE_LEFT_OUT = {
+    "mouth corners": "only 1.7 cm apart: a 1 mm error in depth is 3.5 deg of turn",
+    "ear bases (inner and outer)": "on his outline, in the outer band whose distances are least sure (inner pair: 52 deg)"}
+EYE_REGION = 0.7                         # each eye's surface: inside 0.7 x its oval (steady from 0.5 to 0.9)
 
 
 def left_right_axis(cam, pts):
@@ -55,7 +70,8 @@ def left_right_axis(cam, pts):
 
 
 def turn_tip(X):
-    """Turn: + = toward his left (his left side further from a camera in front of him). Tip: + = his left side up."""
+    """Turn: + = toward his left (his left side further from a camera in front of him). Tip: + = his left side up.
+    X must be a unit direction (its tip is read as arcsin of its height)."""
     return float(np.degrees(np.arctan2(-X[2], X[0]))), float(np.degrees(np.arcsin(np.clip(X[1], -1, 1))))
 
 
@@ -80,6 +96,77 @@ def body_axis(cam, lm):
     P = cam.hit_plane([lm["peet_bottom_his_left"]["at_px"], lm["peet_bottom_his_right"]["at_px"]])
     X = P[0] - P[1]; X[1] = 0; X /= np.linalg.norm(X)
     return X, P
+
+
+def eye_facing(P, eye, cam, scale=EYE_REGION):
+    """Which way an eye faces, from its measured surface: the plane through its 3D points inside `scale` x its oval.
+    Returns (degrees toward his left, degrees up, number of points)."""
+    H, W = P.shape[:2]
+    yy, xx = np.mgrid[0:H, 0:W] + 0.5
+    (cx, cy), (a, b) = eye["at_px"], eye["oval"]["semi_axes_px"]; ang = np.radians(eye["oval"]["long_axis_angle_deg"])
+    dx, dy = xx - cx, yy - cy
+    u = dx * np.cos(ang) + dy * np.sin(ang); v = -dx * np.sin(ang) + dy * np.cos(ang)
+    pts = P[(u / (a * scale)) ** 2 + (v / (b * scale)) ** 2 <= 1]; pts = pts[np.isfinite(pts[:, 0])]
+    c = pts.mean(0); n = np.linalg.svd(pts - c, full_matrices=False)[2][2]
+    if n @ (cam.C - c) < 0:
+        n = -n
+    return float(np.degrees(np.arctan2(n[0], n[2]))), float(np.degrees(np.arcsin(np.clip(n[1], -1, 1)))), len(pts)
+
+
+def from_surface(lm, rng, runs=300):
+    """His head's turn, tip and nod read from his measured surface (see the top of this file)."""
+    import visible_depth as vd
+    cam, P, _ = vd.room_points(SURFACE_MODEL)
+    pt = lambda uv: vd.point_near(P, uv)
+
+    def pairs(wobble=False):
+        out = {}
+        for a, b in SURFACE_PAIRS:
+            ua, ub = np.array(lm[a]["at_px"], float), np.array(lm[b]["at_px"], float)
+            if wobble:
+                ua = ua + rng.normal(0, lm[a]["sure_px"] / 2, 2); ub = ub + rng.normal(0, lm[b]["sure_px"] / 2, 2)
+            v = pt(ua) - pt(ub)
+            out[a.replace("_his_left", "")] = turn_tip(v / np.linalg.norm(v))       # turn_tip needs a unit direction
+        return out
+    pr = pairs()
+    tip = float(np.mean([v[1] for v in pr.values()]))
+    eyes = {k: eye_facing(P, lm[k], cam) for k in ("eye_his_left", "eye_his_right")}
+    (azl, ell, nl), (azr, elr, nr) = eyes["eye_his_left"], eyes["eye_his_right"]
+    E = (pt(lm["eye_his_left"]["at_px"]) + pt(lm["eye_his_right"]["at_px"])) / 2
+    d = pt(lm["nose_y_centre"]["at_px"]) - E
+    tip_shift = -d[1] * np.sin(np.radians(tip))                   # his tip alone moves his nose this far to his left
+    nose_turn = float(np.degrees(np.arctan2(d[0] - tip_shift, d[2])))
+    readings = {f"{k} pair (3D)": round(v[0], 1) for k, v in pr.items()}
+    readings["the way his two eyes face"] = round((azl + azr) / 2, 1)
+    readings["his nose against the middle of his eyes, less his tip"] = round(nose_turn, 1)
+    turn = float(np.median(list(readings.values())))
+    wob = []
+    for _ in range(runs):
+        w = pairs(wobble=True)
+        wob.append((np.median([v[0] for v in w.values()] + [(azl + azr) / 2, nose_turn]), np.mean([v[1] for v in w.values()])))
+    wob = np.array(wob)
+    X = np.array([np.cos(np.radians(tip)) * np.cos(np.radians(turn)), np.sin(np.radians(tip)),
+                  -np.cos(np.radians(tip)) * np.sin(np.radians(turn))])
+    slope = lambda v: round(float(np.degrees(np.arctan2(-v[1], np.hypot(v[0], v[2])))), 1)
+    nod = dict(
+        eyes_middle_to_nose_slopes_below_level_deg=slope(d),
+        nose_to_chin_slopes_below_level_deg=slope(pt(lm["chin_midline"]["at_px"]) - pt(lm["nose_y_centre"]["at_px"])),
+        eyes_face_up_deg=dict(his_left=round(ell, 1), his_right=round(elr, 1), mean=round((ell + elr) / 2, 1)),
+        meaning="no photo shows his head 'level', so his nod is kept as these measured slopes; a later photo of him "
+                "is compared against them. (A plane through the front of his face was tried and not used: his muzzle "
+                "is round, so it depends on the window drawn.)")
+    return dict(turned_deg=round(turn, 1), tipped_deg=round(tip, 1),
+                meaning="turned + = toward his own left (his nose toward the picture's right); tipped + = his left side up",
+                from_model=f"{SURFACE_MODEL} (data/scene/visible_depth_{SURFACE_MODEL}.json)",
+                turn_readings_deg=readings, turned_is="the middle (median) reading",
+                tip_per_pair_deg={k: round(v[1], 1) for k, v in pr.items()},
+                eyes_face_to_the_sides_deg=dict(his_left=round(azl, 1), his_right=round(-azr, 1),
+                                                points_used=[nl, nr], region=f"{EYE_REGION} x each eye's oval"),
+                nose_against_eyes_cm=dict(to_his_left=round(float(d[0]), 2), of_which_his_tip=round(float(tip_shift), 2)),
+                left_out=SURFACE_LEFT_OUT,
+                landmark_wobble_2sd=dict(turned=np.percentile(wob[:, 0], [2.5, 97.5]).round(1).tolist(),
+                                         tipped=np.percentile(wob[:, 1], [2.5, 97.5]).round(1).tolist()),
+                left_right_axis_room=np.round(X, 5).tolist(), nod=nod)
 
 
 def analyse(cam, lm, wobble=None):
@@ -128,9 +215,19 @@ def main() -> int:
     mc2 = np.array(mc2)
     Xb, peets_on_surface = body_axis(cam, lm)
     body_turn = turn_tip(Xb)[0]
+    surf = from_surface(lm, rng)
+    sturn, stip = surf["turned_deg"], surf["tipped_deg"]
+    rd = surf["turn_readings_deg"].values()
     doc = dict(
         about=__doc__.split("\n\n")[0], camera="data/cameras.json anchor_front (the depth model's camera, MoGe-2)",
-        head=dict(turned_deg=round(turn, 1), tipped_deg=round(tip, 1),
+        head=surf,
+        head_photo_only=dict(
+                  superseded=("2026-11-18 by the head read from his measured surface ('head'). From the picture alone: "
+                              "his nose sits right of the middle of his eyes, but his 5 deg tip does most of that; the "
+                              "mirror pairs as rays swing with the lens (7.8 deg with the six-inch camera, 12.7 with "
+                              "this one) and lean on the mouth, lip corners and ear bases; the eye ovals differ (5.3) "
+                              "though the eyes' measured surfaces face equally far to each side"),
+                  turned_deg=round(turn, 1), tipped_deg=round(tip, 1),
                   meaning="turned + = toward his own left (his nose toward the picture's right, his right cheek nearer "
                           "the camera); tipped + = his left side up (a little head tilt toward his right)",
                   left_right_axis_room=np.round(X, 5).tolist(),
@@ -140,32 +237,34 @@ def main() -> int:
                   leave_one_pair_out=loo,
                   camera_varied={"turned": [round(float(across[:, 0].min()), 1), round(float(across[:, 0].max()), 1)],
                                           "tipped": [round(float(across[:, 1].min()), 1), round(float(across[:, 1].max()), 1)]}),
-        eyes_check=eyes,
+        eyes_check_photo_only=eyes,
         body=dict(turned_deg=round(body_turn, 1), peets_on_the_surface_cm=np.round(peets_on_surface, 2).tolist(),
                   camera_varied=[round(float(across[:, 2].min()), 1), round(float(across[:, 2].max()), 1)],
                   note=("from the lowest point of each peet (view-dependent points, on a soft surface): a rough "
                         "reading of his body's turn")),
-        head_relative_to_body_turned_deg=round(turn - body_turn, 1),
+        head_relative_to_body_turned_deg=round(sturn - body_turn, 1),
         eyes_and_nostrils_only=dict(turned_tipped_deg=t2, landmark_wobble_2sd_turned=np.percentile(mc2[:, 0], [2.5, 97.5]).round(1).tolist(),
                                     note="the two pairs that fit best (misfit < 0.5 deg); two pairs alone leave the turn loose"),
         summary=dict(
-            tipped=(f"his left side up, about {tip:.0f} deg ({min(np.percentile(mc[:, 1], 2.5), min(v[1] for v in loo.values()), across[:, 1].min()):.0f}-"
-                    f"{max(np.percentile(mc[:, 1], 97.5), max(v[1] for v in loo.values()), across[:, 1].max()):.0f} whatever is left "
-                    f"out, wobbled or moved): SOLID"),
-            turned=(f"toward his own left (his nose toward the picture's right), about {min(turn, eyes['turn_deg']):.0f}-"
-                    f"{max(turn, eyes['turn_deg']):.0f} deg: the DIRECTION is solid "
-                    f"(the mirror pairs {turn:.1f}, the eye ovals {eyes['turn_deg']:.1f}, his nose right of the middle of "
-                    f"his eyes all agree); the AMOUNT is not yet (the pairs disagree: mouth, lip corners and ear bases can "
-                    f"be truly lopsided; pixel uncertainty alone allows roughly 0-15 deg). His measured surface (the "
-                    f"depth model) could firm it up"),
+            tipped=(f"his left side up, about {stip:.0f} deg (measured surface {min(surf['tip_per_pair_deg'].values()):.0f}-"
+                    f"{max(surf['tip_per_pair_deg'].values()):.0f}; the photo alone {tip:.0f}): SOLID"),
+            turned=(f"hardly at all: {abs(sturn):.1f} deg toward his {'left' if sturn >= 0 else 'right'}, square to the "
+                    f"camera within about {max(abs(min(rd)), abs(max(rd))):.0f} deg: read from his measured surface "
+                    f"(readings {min(rd):+.1f} to {max(rd):+.1f}: his eyes, nostril wings and lip corners in 3D, the way "
+                    f"his two eyes face, his nose against his eyes). The photo alone said 5-13 deg toward his left: it "
+                    f"read his tip as part of a turn"),
             body=f"rough: about {abs(body_turn):.0f} deg toward his {'right' if body_turn < 0 else 'left'} (from his peets' lowest points)",
-            head_vs_body="his head is turned toward his left on his body and tipped; the camera was straight on and level"),
-        not_yet="his head's nod (up/down): his measured surface (the depth model) has it; not read yet",
+            head_vs_body=(f"his body is turned about {abs(body_turn):.0f} deg toward his right and his head is square to "
+                          f"the camera, so on his body his head is turned about {abs(sturn - body_turn):.0f} deg toward "
+                          f"his left, and tipped"),
+            nod=(f"the line from between his eyes to his nose slopes {surf['nod']['eyes_middle_to_nose_slopes_below_level_deg']:.0f} "
+                 f"deg below level; his eyes face about {surf['nod']['eyes_face_up_deg']['mean']:.0f} deg up (measured "
+                 f"slopes: no photo shows his head level)")),
         camera_tilt_note=("tipped is measured against the camera's level; the owner remembers holding it straight on. "
                           "His peets' line does not tip the same way, so the tip is his head, not the phone"))
     (ROOT / "data/scene/facing.json").write_text(json.dumps(doc, indent=1))
-    sheet(photo, lm, cam, X, Xb, peets_on_surface, doc)
-    print(json.dumps({k: doc[k] for k in ("head", "eyes_check", "body", "head_relative_to_body_turned_deg")}, indent=1))
+    sheet(photo, lm, cam, np.array(surf["left_right_axis_room"]), Xb, peets_on_surface, doc)
+    print(json.dumps({k: doc[k] for k in ("head", "body", "head_relative_to_body_turned_deg", "summary")}, indent=1))
     return 0
 
 
@@ -174,11 +273,12 @@ def sheet(photo, lm, cam, X, Xb, peets, doc):
     W, H = photo.size
     im = photo.copy().convert("RGB"); d = ImageDraw.Draw(im)
     font = ImageFont.load_default(size=22); small = ImageFont.load_default(size=17)
-    for a, b in HEAD_PAIRS:
+    for a, b in HEAD_PAIRS:                                  # orange: the pairs read in 3D; grey: left out
+        col = (235, 120, 0) if (a, b) in SURFACE_PAIRS else (150, 150, 150)
         pa, pb = lm[a]["at_px"], lm[b]["at_px"]
-        d.line([tuple(pa), tuple(pb)], fill=(235, 120, 0), width=3)
+        d.line([tuple(pa), tuple(pb)], fill=col, width=3)
         for p in (pa, pb):
-            d.ellipse([p[0] - 5, p[1] - 5, p[0] + 5, p[1] + 5], outline=(235, 120, 0), width=2)
+            d.ellipse([p[0] - 5, p[1] - 5, p[0] + 5, p[1] + 5], outline=col, width=2)
     pa, pb = lm["peet_bottom_his_left"]["at_px"], lm["peet_bottom_his_right"]["at_px"]
     d.line([tuple(pa), tuple(pb)], fill=(200, 30, 30), width=3)
     # his head's left-right axis, drawn through the middle of his eyes where the depth model measured them
@@ -188,16 +288,22 @@ def sheet(photo, lm, cam, X, Xb, peets, doc):
     lvl = cam.project([E - 2.5 * np.array([1.0, 0, 0]), E + 2.5 * np.array([1.0, 0, 0])])
     d.line([tuple(lvl[0]), tuple(lvl[1])], fill=(120, 120, 120), width=2)
     h = doc["head"]
-    lo, hi = sorted([h['turned_deg'], doc['eyes_check']['turn_deg']])
-    d.rectangle([0, 0, W, 140], fill=(255, 255, 255))
-    d.text((10, 6), f"Head: tipped {h['tipped_deg']:.1f} deg (his left side up): solid.", fill=(0, 0, 0), font=small)
-    d.text((10, 32), f"Head: turned toward his left about {lo:.0f}-{hi:.0f} deg (mirror pairs {h['turned_deg']:.1f}, eye ovals "
-                     f"{doc['eyes_check']['turn_deg']:.1f}): direction solid, amount not settled.", fill=(0, 0, 0), font=small)
+    rd = list(h["turn_readings_deg"].values()); nod = h["nod"]
+    d.rectangle([0, 0, W, 196], fill=(255, 255, 255))
+    d.text((10, 6), f"Head (from his measured surface): tipped {h['tipped_deg']:.1f} deg, his left side up: solid.",
+           fill=(0, 0, 0), font=small)
+    d.text((10, 32), f"Turned hardly at all: {abs(h['turned_deg']):.1f} deg toward his {'left' if h['turned_deg'] >= 0 else 'right'} "
+                     f"(readings {min(rd):+.1f} to {max(rd):+.1f}). The photo alone said 5-13: it took his tip for a turn.",
+           fill=(0, 0, 0), font=small)
     d.text((10, 58), f"Body (from his peets, rough): turned {abs(doc['body']['turned_deg']):.1f} deg toward his "
-                     f"{'right' if doc['body']['turned_deg'] < 0 else 'left'}.", fill=(0, 0, 0), font=small)
-    d.text((10, 90), "orange: his mirror pairs; red: his peets' lowest points; blue: his head's left-right axis; "
-                     "grey: level (the camera's left-right)", fill=(60, 60, 60), font=small)
-    d.text((10, 112), "Camera: the depth model's (MoGe-2), straight on, about 24.5 cm away, a touch below his eyes.",
+                     f"{'right' if doc['body']['turned_deg'] < 0 else 'left'}; so on his body his head turns "
+                     f"{abs(doc['head_relative_to_body_turned_deg']):.0f} deg toward his left.", fill=(0, 0, 0), font=small)
+    d.text((10, 84), f"Nod (measured slopes): the line from between his eyes to his nose drops {nod['eyes_middle_to_nose_slopes_below_level_deg']:.0f} deg "
+                     f"below level; his eyes face {nod['eyes_face_up_deg']['mean']:.0f} deg up.", fill=(0, 0, 0), font=small)
+    d.text((10, 120), "orange: mirror pairs read in 3D; grey: left out (too close together, or on his outline); red: his peets' "
+                      "lowest points;", fill=(60, 60, 60), font=small)
+    d.text((10, 142), "blue: his head's left-right axis; grey line: level (the camera's left-right).", fill=(60, 60, 60), font=small)
+    d.text((10, 164), "Camera: the depth model's (MoGe-2), straight on, about 24.5 cm away, a touch below his eyes.",
            fill=(60, 60, 60), font=small)
     # top view: camera, his body axis (at his peets), his head axis (at his eyes)
     view = Camera.orbit([0, 0, 13.5], 200, yaw_deg=0, pitch_deg=89.5, f=4300, width=620, height=880)
@@ -224,7 +330,7 @@ def sheet(photo, lm, cam, X, Xb, peets, doc):
     c.text([-9.6, 0, -5.4], "seen from above, 1 cm grid", (40, 40, 40))
     c.text([-9.6, 0, -4.4], "(his eyes and nose where the depth model measured them)", (90, 90, 90), small=True)
     top = c.im.resize((620, 880), Image.LANCZOS)
-    out = Image.new("RGB", (W + 640, H), (255, 255, 255)); out.paste(im, (0, 0)); out.paste(top, (W + 10, 160))
+    out = Image.new("RGB", (W + 640, H), (255, 255, 255)); out.paste(im, (0, 0)); out.paste(top, (W + 10, 210))
     out.save(sc.OUT_IMG / "facing.png")
 
 

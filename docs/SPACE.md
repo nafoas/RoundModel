@@ -82,17 +82,24 @@ rays are recomputed from them whenever the camera changes.
 
 ## How he is being looked at (`tools/facing.py` -> `data/scene/facing.json`, `docs/images/space/facing.png`)
 
-With the room's camera (the depth model's, since 2026-11-17), from the photo:
-- **His head is tipped about 5 deg, his left side up** (a little head tilt toward his right): solid (4-6
-  whatever pair is left out, landmarks wobbled by their uncertainty, or the camera varied: the other model's
-  lens, tilted 2 deg). His peets don't tip the same way, so it is his head, not the phone.
-- **His head is turned toward his own left (his nose toward the picture's right), about 5-13 deg**: the
-  direction is solid (the six mirror pairs give 12.7, the two eye ovals 5.3, and his nose sits right of the
-  middle of his eyes); the amount is not (the pairs disagree: his mouth, lip corners and ear bases can be
-  truly lopsided; with this longer lens the pairs spread more than with the six-inch camera, which gave 7.8
-  and 5.7). His measured surface could settle it (not done yet).
-- His body, from where his peets meet the surface (rough): turned about 4 deg toward his right.
-- His head's nod (up or down): his measured surface has it; not read yet.
+Read from his measured surface (since 2026-11-18; MoGe-2's 3D points, the room's camera):
+- **His head is tipped about 5 deg, his left side up** (a little head tilt toward his right): solid. In 3D his
+  eyes give 4.4, nostril wings 5.9, lip corners 4.0; the photo alone gave 4.9. His peets don't tip the same
+  way, so it is his head, not the phone.
+- **His head is turned hardly at all: 0.5 deg toward his left, square to the camera within about 3 deg.**
+  Five readings: his eyes in 3D -3.2, nostril wings +0.5, lip corners +0.9; the way his two eyes face (a plane
+  through each eye's measured surface, about 1,100 points each: 46.9 and 46.6 deg to each side) +0.2; his
+  nose against the middle of his eyes, less what his tip does, +2.2. Landmarks wobbled: 0 to 1.1. Left out:
+  his mouth corners (only 1.7 cm apart) and ear bases (on his outline, least-sure distances).
+  The photo alone had said 5-13 deg toward his left: his nose sits 0.5 cm to his left of the middle of his
+  eyes, but his 5 deg tip moves it 0.32 cm of that; the mirror pairs as rays swung with the lens (7.8 with the
+  six-inch camera, 12.7 with this one); the eye ovals differ (5.3 deg) though his eyes face equally far to
+  each side, so that difference is something else (how open each eye is, the fur around it).
+- His body, from where his peets meet the surface (rough): turned about 4 deg toward his right; so on his
+  body his head turns about 5 deg toward his left.
+- **His nod**, as measured slopes (no photo shows his head "level" to compare with): the line from between
+  his eyes to his nose drops 40 deg below level; nose to chin 46 deg; his eyes face about 15 deg up (his left
+  17, his right 12: the difference is his tip). A later photo of him is compared against these.
 
 ## What exists (steps 1-3)
 
