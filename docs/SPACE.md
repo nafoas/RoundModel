@@ -180,8 +180,9 @@ that were worked out with it).
 5. Depth lines: SCRAPPED (above). Replaced by the owner's method: his surface as each photo sees it, measured
    by a depth model with its own camera (above): done for the anchor photo; MoGe-2 chosen; his size settled
    (15.5 cm wide, 16.65 cm to the top of his head).
-6. When the owner adds another angle: solve its camera from the landmarks, project his parts, compare,
-   and only then use it for depth.
+6. When the owner adds another angle: the method in `docs/MORE_PHOTOS.md` (agreed 2026-11-18): his biology
+   fixed, his pose per photo; head first, then rigid parts, then his body; masters, seams and gaps by rule.
+   Next photo expected: a belly-up one (his underside, peet undersides).
 
 After the 3D grounding, the broader plan resumes (`docs/PLAN.md`): building his 3D model. The small part
 steps (ears' pixel tweaks, eyes / lashes / hotot marks, whisker pads, mouth, nose, Bnuy Perturbances) wait

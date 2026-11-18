@@ -354,6 +354,15 @@ excuse and was withdrawn.)
   parts are very small. I say we save them for when we work on his fur and other delicate areas"): ears'
   pixel tweaks, eyes / lashes / hotot marks, whisker pads, mouth, nose, Bnuy Perturbances. Nothing before then
   depends on them (his eyes, nose and mouth already have landmarks). On the build checklist (PLAN).
+- **More photos: one Prince, many poses** (owner, 2026-11-18; `docs/MORE_PHOTOS.md`). He moves, shifts his
+  weight and fluffs differently, so photos are compared on his biology (fixed: skull and face proportions,
+  ears, peets, markings, size), never on how he looks; his pose and fur are per photo. The anchor's pose is
+  home. **Entirely objective** (owner: "I don't want any subjective sculpting put into it. That means seams and
+  other areas not covered well would need to be objectively sorted and covered"): masters by a quality score
+  (the anchor first), seams along least disagreement with fixed blend weights, the soft body by the gentlest
+  bend, gaps covered by photos. This replaces the owner-guided seam bridges first proposed. Underside: a
+  belly-up photo exists (mid-roll; the owner won't hold him belly up). Tolerances, seam band and score formula
+  are fixed before any photo is placed.
 - **Was open (Q47, answered above):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
   The 12.7 came from the six-inch camera, which also ASSUMED his peets were right under his face; both models

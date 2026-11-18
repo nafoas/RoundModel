@@ -1112,3 +1112,15 @@ check.py output (if applicable), and the next step.
 - Docs only. check.py: does not exist.
 - **Next (owner's call):** the next photo, or how his measured surfaces become his parametric model (the later
   plan predates the owner's one-photo-per-area method).
+
+## 2026-11-18 — Session 6 (cont.): the method for more photos (owner)
+- Owner: he moves and fluffs differently between photos; previous Claude choked on other angles; make one
+  cohesive model from his objective biology, each photo with one master; and "entirely objective ... no
+  subjective sculpting": seams and poorly covered areas sorted and covered by rule. A belly-up photo exists
+  (mid-roll, awkward angle) for his underside and peet undersides.
+- Written up: `docs/MORE_PHOTOS.md` (linked from CLAUDE.md, SPACE step 6, DECISIONS): biology fixed / pose and
+  fur per photo; home pose = the anchor's; head first, then rigid parts, then the body (as-rigid-as-possible);
+  scale from biology; masters by a quality score (anchor first); seams along least disagreement, fixed blend
+  weights; gaps covered by photos; checks on biology only, tolerances fixed in advance. Docs only.
+- **Next:** the owner sends the belly-up photo (background removed if it shows the room); before placing it, fix
+  the tolerances, seam band and quality-score formula.

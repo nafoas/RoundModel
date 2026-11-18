@@ -96,6 +96,8 @@ checked pixel by pixel, owner-guided bridges, and stop if a fix makes it worse.
 - `docs/PRINCE_SPEC.md`: what Prince looks like, with measurements.
 - `docs/SPACE.md`: his 3D room (axes, floor, cameras): every pixel is a ray, sides by HIS side.
 - `docs/DEPTH_RESEARCH.md`: how to get depth from one photo (the research; the hand-built way was scrapped).
+- `docs/MORE_PHOTOS.md`: the method for every photo after the anchor (his biology fixed, his pose per photo;
+  masters, seams and gaps all by rule, no hand sculpting).
 - `docs/PROGRESS.md`: running log. Read the latest entry first.
 - `data/`: owner-owned inputs (photos, approved lines). `prince/`: library code
   (currently an unreviewed draft; see PROGRESS). `tests/`: run
