@@ -73,8 +73,10 @@ Pass criteria live in `config/thresholds.json`.
 - [ ] Synthetic end-to-end test: recover known parameters from synthetic views.
 - [ ] `optimize.py` with checkpoints, `check.py`, `report.py`
 - [ ] Permission rules protecting the grader (`.claude/settings.json`)
-- [ ] 2a: **part-by-part classification of the anchor photo** (`docs/STRAND_PLAN.md`) — paused for the 3D
-  grounding below; still to come: ears' pixel tweaks, eyes/lashes/hotot marks, pads, mouth, nose, BPs
+- [ ] 2a: **part-by-part classification of the anchor photo** (`docs/STRAND_PLAN.md`) — the small remaining
+  parts are DEFERRED to the fur / delicate-areas stage (owner, 2026-11-18: "The remaining parts are very small.
+  I say we save them for when we work on his fur and other delicate areas"): ears' pixel tweaks,
+  eyes/lashes/hotot marks, whisker pads, mouth, nose, Bnuy Perturbances BP-01..03. Precision protocol when done.
 - [x] 2a body parts: Head / Intermediate Bnuy / Undercarriage approved 2026-11-15; every pixel of him assigned 2026-11-16.
 - [~] **3D grounding** (owner, 2026-11-16; `docs/SPACE.md`) — CURRENT; done for the anchor photo (steps 1-5),
   step 6 waits for another photo. Room + camera `prince/space.py`; 27 landmarks; every part as rays; interactive
@@ -123,6 +125,9 @@ Prince is built in separate layers so no layer can distort another:
   need separate careful tracing.
 
 ## Build checklist: things that must not be forgotten when he's built
+- [ ] **The deferred small parts of the anchor photo** (owner, 2026-11-18: saved for the fur / delicate-areas
+  stage): ears' pixel tweaks, eyes / lashes / hotot eye marks, whisker pads, mouth, nose, Bnuy Perturbances
+  BP-01..03. Identity features: precision protocol (METHOD §3), owner-reviewed.
 Owner: some layers are soft or partly hidden and must still be rendered.
 - **Intermediate fur** around his body (`data/strands/intermediate_fur.json`).
 - **The tuft's fuzz**, the see-through haze of hair tips below the underfluff

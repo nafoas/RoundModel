@@ -1102,3 +1102,13 @@ check.py output (if applicable), and the next step.
 - `docs/images/space/facing.png` and the 3D page redrawn (head axis now the measured one). Tests: 58 passed
   (new: `tests/test_facing.py::test_head_read_from_his_measured_surface`). check.py: does not exist.
 - **Next:** owner's look; then whatever the owner picks.
+
+## 2026-11-18 — Session 6 (cont.): where we are; small parts deferred (owner)
+- Owner asked where we are: 3D grounding is done for the anchor photo (steps 1-5); step 6 (another angle) waits
+  for the owner's next photo. Two stale status lines fixed (SPACE steps 4-5, PLAN 3D grounding).
+- Owner: "The remaining parts are very small. I say we save them for when we work on his fur and other delicate
+  areas." Recorded (PLAN 2a and build checklist, STRAND_PLAN status, DECISIONS, SPACE): ears' pixel tweaks,
+  eyes / lashes / hotot marks, whisker pads, mouth, nose, Bnuy Perturbances, with the precision protocol then.
+- Docs only. check.py: does not exist.
+- **Next (owner's call):** the next photo, or how his measured surfaces become his parametric model (the later
+  plan predates the owner's one-photo-per-area method).

@@ -350,6 +350,10 @@ excuse and was withdrawn.)
   ahead"): tipped about 5 deg (his left side up), turned only 0.5 deg toward his left (square to the camera
   within about 3 deg), his nod kept as measured slopes (eyes-to-nose line 40 deg below level; eyes face 15
   deg up). This replaces the photo-only "5-13 deg toward his left" (lesson 31). `docs/SPACE.md`.
+- **The small remaining parts of the anchor photo wait for the fur stage** (owner, 2026-11-18: "The remaining
+  parts are very small. I say we save them for when we work on his fur and other delicate areas"): ears'
+  pixel tweaks, eyes / lashes / hotot marks, whisker pads, mouth, nose, Bnuy Perturbances. Nothing before then
+  depends on them (his eyes, nose and mouth already have landmarks). On the build checklist (PLAN).
 - **Was open (Q47, answered above):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
   The 12.7 came from the six-inch camera, which also ASSUMED his peets were right under his face; both models

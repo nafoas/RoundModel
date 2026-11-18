@@ -1,7 +1,9 @@
 # Strand-by-strand classification of the anchor photo
 
-**Status: AGREED with the owner (2026-11-07). This is the current plan. Work
-starts with step 1 below. The peets/underfluff/body line is already approved.**
+**Status: AGREED with the owner (2026-11-07). The peets/underfluff/body line is already approved.**
+**2026-11-18 (owner):** the small remaining parts (ears' pixel tweaks, eyes / lashes / hotot marks, whisker
+pads, mouth, nose, Bnuy Perturbances) are saved for the fur / delicate-areas stage ("The remaining parts are
+very small. I say we save them for when we work on his fur and other delicate areas").
 
 ## Why this exists
 Three automatic attempts (2026-11-07) to split the anchor photo into

@@ -183,6 +183,6 @@ that were worked out with it).
 6. When the owner adds another angle: solve its camera from the landmarks, project his parts, compare,
    and only then use it for depth.
 
-After the 3D grounding, the broader plan resumes (`docs/PLAN.md`, `docs/STRAND_PLAN.md`): the paused part
-steps (ears' pixel tweaks, eyes / lashes / hotot marks, whisker pads, mouth, nose, Bnuy Perturbances),
-then building and fitting the 3D model.
+After the 3D grounding, the broader plan resumes (`docs/PLAN.md`): building his 3D model. The small part
+steps (ears' pixel tweaks, eyes / lashes / hotot marks, whisker pads, mouth, nose, Bnuy Perturbances) wait
+for the fur / delicate-areas stage (owner, 2026-11-18).
