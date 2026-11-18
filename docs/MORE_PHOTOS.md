@@ -14,6 +14,12 @@ seams and other areas not covered well would need to be objectively sorted and c
 So: **every placement, seam and fill is decided by a fixed rule from measurements**, never by hand; the owner
 reviews the results. Photos are compared on what he IS, never on how he LOOKS.
 
+## The photos (2026-11-18)
+All in `data/photos/` (`data/photos/index.json`): the anchor, plus 18 photos of him sorted by where the camera
+is around HIS body (`by_angle/01_front` ... `11_front_low`, from the old branch, with the owner's labelled
+sheet). His underside: `by_angle/10_underneath/10_bottom_up.webp` (belly up, mid-roll). Not for measuring:
+`expressions/` (made from the front photo; for his face later) and `ai_generated/` (AI-made close-ups).
+
 ## 1. Three layers of him
 | Layer | Between photos | What it is |
 |---|---|---|

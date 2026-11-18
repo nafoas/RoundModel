@@ -59,6 +59,10 @@ checked pixel by pixel, owner-guided bridges, and stop if a fix makes it worse.
 - **Use all the photos in this branch (`data/photos/`) to the best of your
   ability, and always call out which ones you're using as references of him.**
   The owner adds new angles as they're needed.
+- **Only real photos measure him** (`data/photos/index.json`): the anchor and `data/photos/by_angle/`.
+  `data/photos/ai_generated/` (made by an AI image generator: they invent what no camera saw) and
+  `data/photos/expressions/` (the owner's edits of the front photo, for rigging his face later) are kept
+  but never used to measure him.
 - **The old branch `claude/quirky-hopper-4ag8pj` is abandoned.** Don't follow
   its docs or reuse its tools.
 - **This repo is PUBLIC.** Anything committed can be seen by anyone. Only commit

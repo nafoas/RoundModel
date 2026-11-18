@@ -182,7 +182,7 @@ that were worked out with it).
    (15.5 cm wide, 16.65 cm to the top of his head).
 6. When the owner adds another angle: the method in `docs/MORE_PHOTOS.md` (agreed 2026-11-18): his biology
    fixed, his pose per photo; head first, then rigid parts, then his body; masters, seams and gaps by rule.
-   Next photo expected: a belly-up one (his underside, peet undersides).
+   The photos: `data/photos/by_angle/` (18, sorted 2026-11-18; `data/photos/index.json`).
 
 After the 3D grounding, the broader plan resumes (`docs/PLAN.md`): building his 3D model. The small part
 steps (ears' pixel tweaks, eyes / lashes / hotot marks, whisker pads, mouth, nose, Bnuy Perturbances) wait

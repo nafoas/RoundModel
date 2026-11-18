@@ -1,0 +1,420 @@
+{
+ "about": "Every picture of Prince in this branch, sorted (2026-11-18). Angles are where the camera is around HIS body, sides by HIS side. Sorted by eye; he moves between photos, so each is its own moment of him (docs/DECISIONS.md 'He is not static').",
+ "anchor": {
+  "file": "data/photos/anchor_front.webp",
+  "kind": "photo of him (owner's)",
+  "angle": "front, about his eye level",
+  "use": "the anchor: highest weight, the home pose; identical to the old branch's references/master/master_front_standing.webp"
+ },
+ "measuring_photos": [
+  {
+   "file": "data/photos/by_angle/01_front/01_front.webp",
+   "from_old_branch": "references/sheet_originals/01_front.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front, about level",
+   "his_pose": "sitting up, looking at the camera",
+   "owners_label": "1. Front",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/01_front/18_staring_at_boss.webp",
+   "from_old_branch": "references/sheet_originals/18_staring_at_boss.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front, a little above",
+   "his_pose": "sitting up, looking at the camera",
+   "owners_label": "18. Staring At Boss",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/01_front/11_looking_up_slight.webp",
+   "from_old_branch": "references/sheet_originals/11_looking_up_slight.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front, about level",
+   "his_pose": "sitting up, head raised a little",
+   "owners_label": "11. Looking Up Slight",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/01_front/12_looking_up_more.webp",
+   "from_old_branch": "references/sheet_originals/12_looking_up_more.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front, about level",
+   "his_pose": "sitting up, head raised more",
+   "owners_label": "12. Looking Up More",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/01_front/13_looking_down_slight.webp",
+   "from_old_branch": "references/sheet_originals/13_looking_down_slight.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front, about level",
+   "his_pose": "loafed, head lowered (top of his head shows)",
+   "owners_label": "13. Looking Down Slight",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/01_front/14_looking_down_more.webp",
+   "from_old_branch": "references/sheet_originals/14_looking_down_more.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front, about level",
+   "his_pose": "loafed, head lowered more",
+   "owners_label": "14. Looking Down More",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/01_front/15_looking_left.webp",
+   "from_old_branch": "references/sheet_originals/15_looking_left.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front",
+   "his_pose": "head turned to HIS RIGHT (the picture's left)",
+   "owners_label": "15. Looking Left",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/01_front/16_looking_right.webp",
+   "from_old_branch": "references/sheet_originals/16_looking_right.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front",
+   "his_pose": "head turned to HIS LEFT (the picture's right)",
+   "owners_label": "16. Looking Right",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/02_front_3q_his_right/02_front_3q.webp",
+   "from_old_branch": "references/sheet_originals/02_front_3q.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front three-quarter, from his right",
+   "his_pose": "sitting up, facing about forward",
+   "owners_label": "2. Front 1/4 Right",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/03_side_his_right/03_right_profile.webp",
+   "from_old_branch": "references/sheet_originals/03_right_profile.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "his right side",
+   "his_pose": "sitting, head forward",
+   "owners_label": "3. Right Profile",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/04_back_3q_his_right/04_back_3q_right.webp",
+   "from_old_branch": "references/sheet_originals/04_back_3q_right.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "back three-quarter, from his right",
+   "his_pose": "sitting",
+   "owners_label": "4. Back 1/4 Right",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/05_back/05_back.webp",
+   "from_old_branch": "references/sheet_originals/05_back.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "straight behind",
+   "his_pose": "sitting",
+   "owners_label": "5. Back",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/06_back_3q_his_left/06_back_3q_left.webp",
+   "from_old_branch": "references/sheet_originals/06_back_3q_left.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "back three-quarter, from his left",
+   "his_pose": "sitting",
+   "owners_label": "6. Back 1/4 Left",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/07_side_his_left/07_left_profile.webp",
+   "from_old_branch": "references/sheet_originals/07_left_profile.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "his left side",
+   "his_pose": "sitting, head a little raised",
+   "owners_label": "7. Left Profile",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/08_front_3q_his_left/08_front_3q_left.webp",
+   "from_old_branch": "references/sheet_originals/08_front_3q_left.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front three-quarter, from his left",
+   "his_pose": "sitting up, facing about forward",
+   "owners_label": "8. Front 1/4 Left",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/09_top/09_top_down.webp",
+   "from_old_branch": "references/sheet_originals/09_top_down.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "from above",
+   "his_pose": "lying flat",
+   "owners_label": "9. Top Down",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/10_underneath/10_bottom_up.webp",
+   "from_old_branch": "references/sheet_originals/10_bottom_up.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "from underneath",
+   "his_pose": "belly up, midway through rolling over to flop (owner, 2026-11-18): his belly and all four peet undersides",
+   "owners_label": "10. Bottom Up",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  },
+  {
+   "file": "data/photos/by_angle/11_front_low/17_from_below_da_boss.webp",
+   "from_old_branch": "references/sheet_originals/17_from_below_da_boss.webp",
+   "kind": "photo of him (owner's)",
+   "angle": "front, from well below",
+   "his_pose": "sitting up, looking down at the camera",
+   "owners_label": "17. From Below, “da boss”",
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+  }
+ ],
+ "sheet": [
+  {
+   "file": "data/photos/by_angle/reference_sheet.webp",
+   "from_old_branch": "references/sheet/reference_sheet.webp",
+   "kind": "the owner's labelled sheet of the 18 photos above",
+   "use": "the owner's labels (sides by his side, except 'Looking Left/Right', which name the camera's side)"
+  }
+ ],
+ "expressions": [
+  {
+   "file": "data/photos/expressions/front_blink.webp",
+   "from_old_branch": "references/edited/front_blink.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/front_3q_left_toddle.webp",
+   "from_old_branch": "references/edited/front_3q_left_toddle.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/head_turn_right_mouth_open.webp",
+   "from_old_branch": "references/edited/head_turn_right_mouth_open.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/head_turn_left_mouth_closed.webp",
+   "from_old_branch": "references/edited/head_turn_left_mouth_closed.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/front_head_lifted.webp",
+   "from_old_branch": "references/edited/front_head_lifted.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/front_head_lowered.webp",
+   "from_old_branch": "references/edited/front_head_lowered.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/front_loaf.webp",
+   "from_old_branch": "references/edited/front_loaf.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/front_peet_lift_left.webp",
+   "from_old_branch": "references/edited/front_peet_lift_left.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/front_peet_lift_right.webp",
+   "from_old_branch": "references/edited/front_peet_lift_right.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/back.webp",
+   "from_old_branch": "references/edited/back.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/back_3q_left_high.webp",
+   "from_old_branch": "references/edited/back_3q_left_high.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses",
+   "use": "for rigging his face later (owner, 2026-11-18); NOT for measuring him"
+  },
+  {
+   "file": "data/photos/expressions/front_3q_left_old.webp",
+   "from_old_branch": "references/superseded/front_3q_left_old.webp",
+   "kind": "made by the owner from the front photo (same framing, white background; several keep 31-40% of its exact pixels): stylized expressions and poses; an older version",
+   "use": "for rigging his face later; NOT for measuring him"
+  }
+ ],
+ "ai_generated": [
+  {
+   "file": "data/photos/ai_generated/01-Eye-Close-Front.png",
+   "from_old_branch": "references/closeups/01-Eye-Close-Front.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/02-Eye-Side-On.png",
+   "from_old_branch": "references/closeups/02-Eye-Side-On.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/03-Eye-From-Rear-Neck.png",
+   "from_old_branch": "references/closeups/03-Eye-From-Rear-Neck.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/04-Eye-Looking-Down.png",
+   "from_old_branch": "references/closeups/04-Eye-Looking-Down.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/05-Eye-Looking-Up.png",
+   "from_old_branch": "references/closeups/05-Eye-Looking-Up.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/06-Eyes-and-Bridge-Depth.png",
+   "from_old_branch": "references/closeups/06-Eyes-and-Bridge-Depth.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/07-Head-45-Degrees.png",
+   "from_old_branch": "references/closeups/07-Head-45-Degrees.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/08-Head-Side-Profile.png",
+   "from_old_branch": "references/closeups/08-Head-Side-Profile.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/09-Head-120-Degrees.png",
+   "from_old_branch": "references/closeups/09-Head-120-Degrees.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/10-Whole-Facial-Contour-Side-Depth.png",
+   "from_old_branch": "references/closeups/10-Whole-Facial-Contour-Side-Depth.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/11-Muzzle-From-Above.png",
+   "from_old_branch": "references/closeups/11-Muzzle-From-Above.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/12-Muzzle-From-Below.png",
+   "from_old_branch": "references/closeups/12-Muzzle-From-Below.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/13-Tiny-Ears-Side.png",
+   "from_old_branch": "references/closeups/13-Tiny-Ears-Side.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/14-Tiny-Ears-Top.png",
+   "from_old_branch": "references/closeups/14-Tiny-Ears-Top.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/15-Tiny-Ear-Outward-Fold.png",
+   "from_old_branch": "references/closeups/15-Tiny-Ear-Outward-Fold.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/16-Between-Peets-Up-to-Chin.png",
+   "from_old_branch": "references/closeups/16-Between-Peets-Up-to-Chin.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/17-Source-Left-Peet-Rear-Side.png",
+   "from_old_branch": "references/closeups/17-Source-Left-Peet-Rear-Side.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/18-Source-Right-Peet-Rear-Side.png",
+   "from_old_branch": "references/closeups/18-Source-Right-Peet-Rear-Side.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/19-D4-Approved-Other-Angle.png",
+   "from_old_branch": "references/closeups/19-D4-Approved-Other-Angle.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/20-Other-Eye-D4-Companion.png",
+   "from_old_branch": "references/closeups/20-Other-Eye-D4-Companion.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/21-Local-Side-Muzzle-Alternate.png",
+   "from_old_branch": "references/closeups/21-Local-Side-Muzzle-Alternate.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/22-Underbody-Detail-Alternate.png",
+   "from_old_branch": "references/closeups/22-Underbody-Detail-Alternate.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/23-Source-Left-Peet-Contact-Alternate.png",
+   "from_old_branch": "references/closeups/23-Source-Left-Peet-Contact-Alternate.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/24-Source-Right-Peet-Contact-Alternate.png",
+   "from_old_branch": "references/closeups/24-Source-Right-Peet-Contact-Alternate.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/25-Frontal-Bridge-Alternate.png",
+   "from_old_branch": "references/closeups/25-Frontal-Bridge-Alternate.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/26-Wide-Rear-Head-Alternate.png",
+   "from_old_branch": "references/closeups/26-Wide-Rear-Head-Alternate.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  },
+  {
+   "file": "data/photos/ai_generated/27-Low-Frontal-Muzzle-Alternate.png",
+   "from_old_branch": "references/closeups/27-Low-Frontal-Muzzle-Alternate.png",
+   "kind": "AI-generated: its content credentials (C2PA) say created by ChatGPT's image generator (gpt-image, OpenAI Media Service API) on 2026-10-17, source type 'trainedAlgorithmicMedia'. Not a photo of him",
+   "use": "NOT for measuring him (invents what a camera did not see)"
+  }
+ ],
+ "not_copied": "the old branch's references/sheet/panels/*.png (its own small crops of the sheet: copies of the 18 photos) and its references/*.json (its tools' data); nothing else of that branch is used (CLAUDE.md)"
+}

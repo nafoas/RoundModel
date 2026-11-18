@@ -363,6 +363,19 @@ excuse and was withdrawn.)
   bend, gaps covered by photos. This replaces the owner-guided seam bridges first proposed. Underside: a
   belly-up photo exists (mid-roll; the owner won't hold him belly up). Tolerances, seam band and score formula
   are fixed before any photo is placed.
+- **The old branch's photos, brought in and sorted** (owner, 2026-11-18: "Get them all and sort them by
+  angle"; differences between them are him moving: "Don't get tripped up like past Claude"; backgrounds are
+  blurred, "no worries about privacy"). `data/photos/index.json`:
+  - 18 photos of him in `data/photos/by_angle/` (front x8 with head raised / lowered / turned, front 3/4 his
+    right, his right side, back 3/4 his right, back, back 3/4 his left, his left side, front 3/4 his left, top,
+    underneath = the belly-up roll, front from well below), with the owner's labelled sheet. The owner's labels
+    name his sides, except "Looking Left/Right" (the camera's side: in "Looking Left" he turns to his right).
+  - 12 images made from the front photo (blink, open-mouth "happy" faces, head turns, a back view...) in
+    `data/photos/expressions/`: the owner's stylized expressions, for rigging his face later.
+  - 27 close-ups in `data/photos/ai_generated/`: their content credentials (C2PA) say ChatGPT's image generator
+    made them (gpt-image, 2026-10-17, 'trainedAlgorithmicMedia'). AI-made images invent what no camera saw, so
+    they are kept but never used to measure him (the owner's "invent absolutely nothing").
+  - The old branch's master photo is pixel for pixel our anchor.
 - **Was open (Q47, answered above):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
   The 12.7 came from the six-inch camera, which also ASSUMED his peets were right under his face; both models
