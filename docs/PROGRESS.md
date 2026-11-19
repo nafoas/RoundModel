@@ -1144,3 +1144,18 @@ check.py output (if applicable), and the next step.
   expressions (`data/photos/expressions/`, for rigging his face later); nothing else (owner, 2026-11-19).
   `data/photos/index.json`, CLAUDE.md, DECISIONS, MORE_PHOTOS updated. check.py: does not exist.
 - **Next:** fix the tolerances, seam band and quality score (`docs/MORE_PHOTOS.md`) before placing any photo.
+
+## 2026-11-19 — Session 6 (cont.): how to be objective about a fluffy creature that moves (owner)
+- Owner: "Yes, go ahead. We need to determine how to determine objectivity from a little fluffy creature that
+  moves a lot." Principle: he sets the yardstick; his repeat photos (same angle, different moments) measure how
+  much a measurement changes when only time changes; that spread (2 SD) is the tolerance.
+- `tools/his_variation.py` -> `data/scene/his_variation.json`, `docs/images/space/his_variation_eyes.png`:
+  eye spacing (3D, MoGe-2) / an eye's size (oval fit), anchor + 6 front photos (`by_angle/01_front`). Head level
+  (anchor, 01, 18): 4.59-4.72, within 1.5%. But raised 5.68, lowered 3.10-3.27: the eye size read flat off the
+  picture depends on the viewing angle -> NOT usable (lesson 32). Photo 11's right-eye fit ran into the couch
+  (13 px off): rejected (fits > 3 px). Surface bumpiness 0.06 mm over 1 cm: the "no steeper than his bumps" seam
+  rule would spread 1 mm over ~8 cm -> dropped; seams now: the less-sure surface bends (ARAP) to meet the
+  surer one, the anchor never bends. Score: size of one pixel on his surface. Both marked not usable in the JSON.
+- Stopped here rather than stacking fixes (rule 5). Tests: 59 passed. check.py: does not exist.
+- **Next:** a pose-proof biology measure from 3D distances between rigid points (eyes to eyes / eyes to nose),
+  with his nose found objectively in each photo; the owner's call on how strongly to favour the anchor.

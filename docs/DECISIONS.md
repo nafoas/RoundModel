@@ -373,6 +373,13 @@ excuse and was withdrawn.)
   - 12 images made from the front photo (blink, open-mouth "happy" faces, head turns, a back view...) in
     `data/photos/expressions/`: the owner's stylized expressions, for rigging his face later.
   - The old branch's master photo is pixel for pixel our anchor.
+- **Where the numbers come from** (owner, 2026-11-19: "We need to determine how to determine objectivity from
+  a little fluffy creature that moves a lot"): he sets the yardstick. Photos of him from about the same angle at
+  different moments show how much a measurement changes when only time changes; that spread (2 standard
+  deviations) is the tolerance. First measure not pose-proof (lesson 32); next: 3D distances between rigid
+  points. Seams: no blend band; the less-sure surface bends to meet the surer one; the anchor never bends.
+  Score: the size of one pixel on his surface. Open: how strongly to favour the anchor (owner's call).
+  `docs/MORE_PHOTOS.md` §8.
 - **Was open (Q47, answered above):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
   The 12.7 came from the six-inch camera, which also ASSUMED his peets were right under his face; both models
@@ -569,6 +576,14 @@ excuse and was withdrawn.)
    of two points (every other caller passes unit directions: checked). → Separate tip and turn before reading
    either; when a reading from one picture swings with the lens (7.8 -> 12.7), don't trust its amount; and
    check a helper's input contract (unit vector, pixels vs cm) when reusing it.
+32. **A "biology" measure that was really a viewing-angle measure** (caught 2026-11-19, before any use). To
+   measure how much he varies between moments I took his eye spacing (3D) / an eye's size read flat off the
+   picture. With his head level, three photos agree within 1.5%; but the ratio follows his nod (+20% raised,
+   -33% lowered), because an eye's visible outline changes with the angle it is seen at. His skull did not
+   change; the measure did. -> A biology measure must be built only from 3D distances between rigid points;
+   anything read flat off a picture depends on the view. Same session: a "head level only" filter matched every
+   front photo because their folder is named 01_front (match a photo's own name, not its path); and a seam rule
+   ("no steeper than his surface's bumps") failed on contact with the data (the measured surface is too smooth).
 - **The light in the anchor photo** (owner, 2026-11-16): ceiling light and lamps in the room; a navy blue
   blanket under him ("some of the blueness from underneath is from that"); "are you sure it needs two
   lights? The light might just be at a very shallow angle on his right". Checked with no shape assumed: along

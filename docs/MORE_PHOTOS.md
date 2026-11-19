@@ -46,17 +46,20 @@ Each photo's surface is measured the same way as the anchor's (MoGe-2, its own c
 `tools/visible_depth.py`).
 
 ## 4. Who masters which area: a quality score
-Every patch of his surface gets a score for how well each photo sees it: how face-on, how far from that
-photo's outline (the edge band is least sure), how close the camera. **The anchor masters everything it sees
+Every patch of his surface gets a score for how well each photo sees it: **the size of one of that photo's
+pixels on his surface there** (distance from the camera / focal length / cos of the viewing angle: smaller is
+better; it grows as the camera moves away and as the surface turns edge-on). A photo's outermost 4 px count as
+not seen (measured: their depth blends into the background). **The anchor masters everything it sees
 well** (it is the anchor: CLAUDE.md rule 4); every other patch goes to the photo that scores best. Where
 another photo also sees a mastered patch, it is used ONLY to place that photo (camera and pose): it never
 changes the master's surface.
 
 ## 5. Seams: placed and joined by rule
-Neighbouring areas overlap a little (that overlap is how a photo is placed). Within it the seam runs along the
-path where the two photos' measured surfaces agree best (least-difference seam, as in photo stitching). Across
-a narrow band the two are blended by fixed weights: each point leans toward the photo that sees it more
-face-on. No hand-drawn bridges.
+Neighbouring areas overlap a little (that overlap is how a photo is placed). The seam runs where the two
+photos' scores are equal. **No blending band:** the less-sure photo's surface bends, as gently as possible
+(as-rigid-as-possible), until it meets the surer one along the seam; the anchor never bends. The bend's size
+is reported. (A blend band "no steeper than his surface's own bumps" was tried 2026-11-19 and dropped: the
+measured surface is so smooth that it would spread a 1 mm disagreement over about 8 cm.) No hand-drawn bridges.
 
 ## 6. Gaps: found by rule, covered by photos
 The quality map lists every patch no photo sees well, and where a camera would have to be to see it face-on.
@@ -72,9 +75,23 @@ The only consistency checked between photos: does his biology come out the same 
 peet size, ...) within a tolerance? Everything else differing is expected (pose, fur) and never an error. A
 biology check outside tolerance is shown to the owner; the owner's eye decides. A photo is never "wrong".
 **Fixed before any new photo is placed** (so no number is tuned to make a result look good, rule 8): the
-tolerances, the seam band's width, and the quality score's formula.
+tolerances, the seam rule, and the quality score's formula.
 
-## 8. For each new photo
+## 8. Where the numbers come from (2026-11-19)
+Owner: "We need to determine how to determine objectivity from a little fluffy creature that moves a lot."
+**He sets the yardstick:** photos of him from about the same angle at different moments show how much a
+measurement of him changes when only time changes. That measured spread is the tolerance (2 standard
+deviations: 95%, the usual convention). `tools/his_variation.py` -> `data/scene/his_variation.json`.
+- First try (2026-11-19): his eye spacing (3D) / an eye's size, on the anchor and 6 front photos. With his
+  head level (anchor, 01, 18) it agrees within 1.5%, which is encouraging, but it follows his head's nod
+  (raised +20%, lowered -33%): an eye's size read flat off the picture changes with the angle the eye is seen
+  at. **Not usable.** Next: only 3D distances between rigid points (between his eyes, from his eyes to his
+  nose), which do not change when he turns or nods; that needs his nose found objectively in each photo.
+- Eye fits that run into the background are rejected (more than 3 px off).
+- **The one number measurement cannot give:** how strongly the anchor is favoured (it is "at his most him").
+  Owner's call.
+
+## 9. For each new photo
 1. Owner sends it (background removed if it shows the room: the repo is public).
 2. Landmarks it shares with the anchor, named the same.
 3. Its surface measured (MoGe-2, its own camera).
