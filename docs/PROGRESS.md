@@ -1139,3 +1139,10 @@ check.py output (if applicable), and the next step.
 - check.py: does not exist.
 - **Next:** owner's look at the sorting; then fix the tolerances, seam band and quality score
   (`docs/MORE_PHOTOS.md`) before placing any photo.
+
+## 2026-11-19 — Session 6 (cont.): the AI close-ups explained (owner)
+- Owner: the 27 close-ups were zoomed-in crops of existing photos, upscaled with AI to help the previous attempt;
+  "AI upscaling is very unobjective and we shouldn't use those ones." Recorded in `data/photos/index.json` and
+  DECISIONS (rule: no AI-upscaled, generated or edited image measures him; zoom the real photos instead). They
+  stay in `data/photos/ai_generated/`, unused. Docs and index only.
+- **Next:** fix the tolerances, seam band and quality score (`docs/MORE_PHOTOS.md`) before placing any photo.

@@ -374,7 +374,10 @@ excuse and was withdrawn.)
     `data/photos/expressions/`: the owner's stylized expressions, for rigging his face later.
   - 27 close-ups in `data/photos/ai_generated/`: their content credentials (C2PA) say ChatGPT's image generator
     made them (gpt-image, 2026-10-17, 'trainedAlgorithmicMedia'). AI-made images invent what no camera saw, so
-    they are kept but never used to measure him (the owner's "invent absolutely nothing").
+    they are kept but never used to measure him (the owner's "invent absolutely nothing"). Owner, 2026-11-19:
+    they are zoomed-in crops of existing photos, upscaled with AI to help the previous attempt: "AI upscaling is
+    very unobjective and we shouldn't use those ones." **Rule: no AI-upscaled, generated or edited image ever
+    measures him; for close detail, zoom into the real photos themselves.**
   - The old branch's master photo is pixel for pixel our anchor.
 - **Was open (Q47, answered above):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
