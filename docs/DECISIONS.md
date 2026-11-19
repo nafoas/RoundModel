@@ -378,7 +378,9 @@ excuse and was withdrawn.)
   different moments show how much a measurement changes when only time changes; that spread (2 standard
   deviations) is the tolerance. First measure not pose-proof (lesson 32); next: 3D distances between rigid
   points. Seams: no blend band; the less-sure surface bends to meet the surer one; the anchor never bends.
-  Score: the size of one pixel on his surface. **The anchor masters everything it sees, unless the owner
+  Score: the size of one pixel on his surface. Owner, 2026-11-19: the anchor, 01_front and 18_staring_at_boss
+  are ONE moment (three shots in quick succession); his variation between moments comes from other photos.
+  **The anchor masters everything it sees, unless the owner
   specifies otherwise** (owner: "The little front photo is the original. I think it should remain the master
   unless otherwise specified"); other photos cover only what it does not see.
   `docs/MORE_PHOTOS.md` §8.
@@ -586,6 +588,12 @@ excuse and was withdrawn.)
    anything read flat off a picture depends on the view. Same session: a "head level only" filter matched every
    front photo because their folder is named 01_front (match a photo's own name, not its path); and a seam rule
    ("no steeper than his surface's bumps") failed on contact with the data (the measured surface is too smooth).
+33. **My pointer box shaped the measurement** (caught 2026-11-19, before any use). To find his nose objectively I
+   gave a rough box and took the pink piece in it; but the pink runs from his nose down the stem of his upper lip
+   and past the box, so the "middle of his nose" moved with where I drew the box. -> A finder given a rough box
+   must give the same answer when the box is grown; test that before trusting it. Also: three photos I treated as
+   three moments were one moment (owner: three shots in quick succession), so their agreement measured the
+   measuring, not him. -> Ask which photos are the same moment before using them as "different moments".
 - **The light in the anchor photo** (owner, 2026-11-16): ceiling light and lamps in the room; a navy blue
   blanket under him ("some of the blueness from underneath is from that"); "are you sure it needs two
   lights? The light might just be at a very shallow angle on his right". Checked with no shape assumed: along

@@ -16,7 +16,16 @@ and the owner looks. Nothing here is picked by hand.
    a smooth curved patch over 1 cm squares. Where two photos' surfaces meet, the join may be no steeper than
    this: a disagreement d is spread over a band d / slope wide.
 
-FIRST RESULT (2026-11-19): NEITHER MEASURE IS USABLE YET, as built.
+RESULTS SO FAR (2026-11-19): NO MEASURE IS USABLE YET.
+- Owner, 2026-11-19: the anchor, 01_front and 18_staring_at_boss are ONE moment (three shots in quick
+  succession). So their close agreement (1.5% on the first try) is the measuring's own repeatability, not how
+  he varies between moments; and the pose-proof rule's comparison was really against that repeatability. His
+  variation between moments must come from photos taken at other moments (owner: replace those two with other
+  angles in these tests).
+- The 3D measure (eye spacing / eyes to nose): the nose finder's pink piece runs past its box in every photo
+  (down the stem of his upper lip), so the nose point depended on the box I drew: not objective. With his head
+  lowered (13, 14) his nose hides and the "piece" is faint fur. Next: a nose point that does not depend on the
+  box (the same answer when the box is grown).
 - The eye ratio is not pose-proof: with his head level (anchor, 01, 18) it agrees within about 1.5%, but it
   moves about +20% with his head raised (12) and -33% with it lowered (13, 14). Cause: an eye's size is read
   flat off the picture, and an eye's visible outline changes with the angle it is seen at (lowering his head
@@ -55,17 +64,53 @@ EYE_BOXES = {
     PHOTOS + "13_looking_down_slight.webp": {"eye_his_right": (300, 585, 410, 700), "eye_his_left": (687, 577, 797, 693)},
     PHOTOS + "14_looking_down_more.webp": {"eye_his_right": (279, 696, 389, 816), "eye_his_left": (673, 671, 783, 791)},
 }
+# Rough boxes for his nose: only WHERE TO LOOK; his nose is the pink in it (CIELAB a*, threshold by Otsu's method
+# from the box's own pixels: no number of mine), the largest pink piece.
+NOSE_BOXES = {
+    "data/photos/anchor_front.webp": (460, 640, 640, 800),
+    PHOTOS + "01_front.webp": (500, 590, 660, 740),
+    PHOTOS + "18_staring_at_boss.webp": (490, 580, 650, 730),
+    PHOTOS + "11_looking_up_slight.webp": (420, 300, 600, 450),
+    PHOTOS + "12_looking_up_more.webp": (460, 260, 620, 400),
+    PHOTOS + "13_looking_down_slight.webp": (480, 920, 650, 1060),
+    PHOTOS + "14_looking_down_more.webp": (490, 980, 660, 1120),
+}
+# The anchor, 01 and 18 are ONE moment (owner, 2026-11-19: three shots in quick succession): their spread is the
+# measuring's own repeatability (nothing changed but the camera's position a little), not how he varies.
+SAME_MOMENT = {"anchor_front", "01_front", "18_staring_at_boss"}
+HEAD = {"anchor_front": "level", "01_front": "level", "18_staring_at_boss": "level", "11_looking_up_slight": "raised",
+        "12_looking_up_more": "raised", "13_looking_down_slight": "lowered", "14_looking_down_more": "lowered"}
+POSE_PROOF = 2.0     # decided BEFORE running: a measure is pose-proof if its spread over every head pose is at most
+#                      twice its spread with his head level (otherwise it is measuring his pose, not him)
 FIT_OK_PX = 3.0      # an eye fit further off than this ran into something else (the background): rejected
 SPREAD = 2.0          # tolerance = 2 standard deviations of his moment-to-moment spread (95%: a convention)
 PATCH_CM = 1.0        # bumpiness: departure from a smooth (quadratic) patch over 1 cm squares
 OUT = ROOT / "data/scene/his_variation.json"
 
 
+def find_nose(rgb, box):
+    """His nose in one photo: the largest pink piece in the box (CIELAB a* above Otsu's threshold for the box)."""
+    from scipy import ndimage as ndi
+    from skimage import color, filters
+    x0, y0, x1, y1 = box
+    a = color.rgb2lab(rgb[y0:y1, x0:x1])[..., 1]
+    thr = float(filters.threshold_otsu(a))
+    lab, n = ndi.label(a > thr)
+    k = int(np.argmax(ndi.sum(np.ones_like(a), lab, range(1, n + 1)))) + 1
+    piece = lab == k
+    edge = piece[0].any() or piece[-1].any() or piece[:, 0].any() or piece[:, -1].any()
+    m = np.zeros(rgb.shape[:2], bool); m[y0:y1, x0:x1] = piece
+    return m, thr, not edge          # found = the pink piece lies inside the box (added 2026-11-19, after 13 and 14:
+    #                                  with his head lowered his nose hides and the "piece" is faint fur filling the box)
+
+
 def eyes_in_3d(path, model=None):
-    """Both eyes of one photo: ovals (picture) and the eyes' 3D distance / eye size (that photo's own units)."""
+    """Both eyes and his nose in one photo, in 3D from that photo's own depth (its own units): the first try (eye
+    spacing / an eye's size, read flat: not pose-proof) and the 3D measure (eye spacing / eyes to nose)."""
     img = Image.open(ROOT / path).convert("RGB")
-    lum = np.asarray(img, dtype=float).mean(-1)
+    rgb = np.asarray(img); lum = rgb.astype(float).mean(-1)
     eyes = {k: lmk.measure_eye(lum, box) for k, box in EYE_BOXES[path].items()}
+    nose_mask, nose_thr, nose_found = find_nose(rgb, NOSE_BOXES[path])
     r = vd.run_moge2(img) if model is None else model(img)
     H, W = lum.shape
     cam = vd.model_camera(r["focal_px"], W, H)
@@ -77,12 +122,20 @@ def eyes_in_3d(path, model=None):
         out[k] = dict(centre_px=np.round(e["centre"], 2).tolist(), semi_axes_px=np.round(e["semi_axes"], 2).tolist(),
                       fit_rms_px=round(e["rms_px"], 2), kept=round(e["kept_fraction"], 2),
                       size=float(2 * e["semi_axes"][0] * p[2] / r["focal_px"]), point=p)
-    spacing = float(np.linalg.norm(out["eye_his_left"]["point"] - out["eye_his_right"]["point"]))
+    EL, ER = out["eye_his_left"]["point"], out["eye_his_right"]["point"]
+    spacing = float(np.linalg.norm(EL - ER))
     size = (out["eye_his_left"]["size"] + out["eye_his_right"]["size"]) / 2
+    nose3d = np.median(P[nose_mask], axis=0)
+    to_nose = float(np.linalg.norm(nose3d - (EL + ER) / 2))
     for v in out.values():
         v.pop("point"); v["size"] = round(v["size"], 3)
-    return dict(eyes=out, ratio=round(spacing / size, 4), spacing=round(spacing, 3), eye_size=round(size, 3),
-                units="the photo's own depth units (cancel in the ratio)"), eyes
+    ys, xs = np.nonzero(nose_mask)
+    nose = dict(pixels=int(nose_mask.sum()), centre_px=[round(float(xs.mean()) + 0.5, 1), round(float(ys.mean()) + 0.5, 1)],
+                pink_threshold_a=round(nose_thr, 2), found=nose_found)
+    return dict(eyes=out, nose=nose, head=HEAD[Path(path).stem],
+                ratio=round(spacing / size, 4), spacing=round(spacing, 3), eye_size=round(size, 3),
+                eyes_to_nose=round(to_nose, 3), ratio_3d=round(spacing / to_nose, 4),
+                units="the photo's own depth units (cancel in the ratios)"), dict(eyes=eyes, nose=nose_mask)
 
 
 def bumpiness(name="moge2", patch_cm=PATCH_CM):
@@ -111,63 +164,94 @@ def bumpiness(name="moge2", patch_cm=PATCH_CM):
                 slope=round(float(np.median(res) / (patch_cm / 2)), 4))
 
 
-def picture(results, ovals):
+def picture(results, found):
+    """Each photo's eye ovals (red) and nose (its pink piece outlined in green, its middle a cross), on the photo."""
+    from scipy import ndimage as ndi
     font = ImageFont.load_default(size=26)
     tiles = []
-    for path, (res, eyes) in zip(results, ovals):
+    for path, f in zip(results, found):
         im = Image.open(ROOT / path).convert("RGB"); d = ImageDraw.Draw(im)
-        for e in eyes.values():
+        for e in f["eyes"].values():
             cx, cy = e["centre"]; a, b = e["semi_axes"]; t = np.radians(e["angle_deg"])
-            s = np.linspace(0, 2 * np.pi, 120)
             pts = [(cx + a * np.cos(u) * np.cos(t) - b * np.sin(u) * np.sin(t),
-                    cy + a * np.cos(u) * np.sin(t) + b * np.sin(u) * np.cos(t)) for u in s]
+                    cy + a * np.cos(u) * np.sin(t) + b * np.sin(u) * np.cos(t)) for u in np.linspace(0, 2 * np.pi, 120)]
             d.line(pts + [pts[0]], fill=(255, 40, 40), width=2)
-        ys = [e["centre"][1] for e in eyes.values()]; xs = [e["centre"][0] for e in eyes.values()]
-        box = (int(min(xs)) - 110, int(min(ys)) - 110, int(max(xs)) + 110, int(max(ys)) + 110)
-        t = im.crop(box); t = t.resize((700, int(700 * t.height / t.width)))
-        dd = ImageDraw.Draw(t); dd.rectangle([0, 0, 700, 34], fill=(255, 255, 255))
-        dd.text((6, 4), f"{Path(path).stem}: ratio {results[path]['ratio']:.3f}", fill=(0, 0, 0), font=font)
+        rim = f["nose"] & ~ndi.binary_erosion(f["nose"])
+        arr = np.asarray(im).copy(); arr[ndi.binary_dilation(rim)] = (0, 200, 60); im = Image.fromarray(arr); d = ImageDraw.Draw(im)
+        nx, ny = results[path]["nose"]["centre_px"]
+        d.line([(nx - 12, ny), (nx + 12, ny)], fill=(0, 200, 60), width=3); d.line([(nx, ny - 12), (nx, ny + 12)], fill=(0, 200, 60), width=3)
+        xs = [e["centre"][0] for e in f["eyes"].values()] + [nx]; ys = [e["centre"][1] for e in f["eyes"].values()] + [ny]
+        box = (int(min(xs)) - 90, int(min(ys)) - 90, int(max(xs)) + 90, int(max(ys)) + 90)
+        t = im.crop(box); t = t.resize((600, int(600 * t.height / t.width)))
+        dd = ImageDraw.Draw(t); dd.rectangle([0, 0, 600, 34], fill=(255, 255, 255))
+        r = results[path]
+        dd.text((6, 4), f"{Path(path).stem} ({r['head']}): 3D ratio {r['ratio_3d']:.3f}", fill=(0, 0, 0), font=font)
         tiles.append(t)
-    h = max(t.height for t in tiles)
-    out = Image.new("RGB", (700 * 2, h * ((len(tiles) + 1) // 2)), "white")
+    h = max(t.height for t in tiles); cols = 3
+    out = Image.new("RGB", (600 * cols, h * ((len(tiles) + cols - 1) // cols)), "white")
     for i, t in enumerate(tiles):
-        out.paste(t, ((i % 2) * 700, (i // 2) * h))
+        out.paste(t, ((i % cols) * 600, (i // cols) * h))
     out.save(ROOT / "docs/images/space/his_variation_eyes.png")
 
 
+def spread(results, key):
+    """A measure's spread between moments: every head pose, and head level only (fits that failed left out)."""
+    v = {k: r[key] for k, r in results.items()}
+    if len(v) < 2:
+        return dict(n=len(v), pose_proof=False, note="too few photos measured to say anything")
+    allv = np.array(list(v.values())); lev = np.array([v[k] for k in v if Path(k).stem in SAME_MOMENT])
+    pct = lambda a: round(100 * float(a.std(ddof=1) / a.mean()), 2)
+    by = {h: [round(v[k], 3) for k in v if results[k]["head"] == h] for h in ("level", "raised", "lowered")}
+    return dict(n=len(allv), mean=round(float(allv.mean()), 4), spread_percent=pct(allv),
+                same_moment_spread_percent=pct(lev) if len(lev) > 1 else None,
+                same_moment_is="the anchor, 01 and 18: one moment (owner), so this is the measuring's own "
+                                "repeatability, not his variation", by_head=by,
+                pose_proof=bool(len(lev) > 1 and pct(allv) <= POSE_PROOF * pct(lev)),
+                tolerance_percent=round(SPREAD * pct(allv), 2))
+
+
 def main() -> int:
-    results, ovals = {}, []
+    results, found = {}, []
     for path in EYE_BOXES:
-        res, eyes = eyes_in_3d(path)
-        results[path] = res; ovals.append((res, eyes))
-        print(Path(path).stem, res["ratio"], {k: (v["fit_rms_px"], v["kept"]) for k, v in res["eyes"].items()})
+        res, f = eyes_in_3d(path)
+        results[path] = res; found.append(f)
+        print(Path(path).stem, res["head"], "first try", res["ratio"], "3D", res["ratio_3d"], "nose px", res["nose"]["pixels"],
+              {k: (v["fit_rms_px"], v["kept"]) for k, v in res["eyes"].items()})
     ok = {k: v for k, v in results.items() if all(e["fit_rms_px"] <= FIT_OK_PX for e in v["eyes"].values())}
-    r = np.array([v["ratio"] for v in ok.values()])
-    level = np.array([ok[k]["ratio"] for k in ok if Path(k).stem in ("anchor_front", "01_front", "18_staring_at_boss")])
-    sd = float(r.std(ddof=1))
+    ok3 = {k: v for k, v in ok.items() if v["nose"]["found"]}
+    first, three = spread(ok, "ratio"), spread(ok3, "ratio_3d")
+    first.pop("tolerance_percent")
+    if not three["pose_proof"]:
+        three.pop("tolerance_percent", None)
     bump = bumpiness()
     doc = dict(
         about=__doc__.split("\n\n")[0],
         method=__doc__.split("\n\n")[1].replace("\n", " "),
-        eyes_between_moments=dict(
-            measure="distance between his eyes (3D) / an eye's long diameter: rigid, no units",
-            per_photo=results, rejected_fits=sorted(set(results) - set(ok)), n=len(r),
-            mean=round(float(r.mean()), 4), sd=round(sd, 4), spread_percent=round(100 * sd / float(r.mean()), 2),
-            head_level_only=dict(n=len(level), spread_percent=round(100 * float(level.std(ddof=1) / level.mean()), 2),
-                                 range=[round(float(level.min()), 3), round(float(level.max()), 3)]),
-            usable=False,
-            finding=("NOT a tolerance: the measure follows his head's nod (level 4.6-4.7, raised 5.7, lowered "
-                     "3.1-3.3), because an eye's size read flat off the picture changes with the angle it is seen "
-                     "at. Next: only 3D distances between rigid points.")),
+        per_photo=results, rejected_fits=sorted(set(results) - set(ok)),
+        nose_not_found=sorted(k for k in ok if not ok[k]["nose"]["found"]),
+        pose_proof_rule=f"decided before running: pose-proof if the spread over every head pose is at most {POSE_PROOF:g}x "
+                        f"the spread with his head level",
+        eyes_3d_between_moments=dict(three, measure="distance between his eyes / from the middle of his eyes to his nose, "
+                                                    "both in 3D: rigid points only, no units",
+                                     usable=three["pose_proof"],
+                                     finding=("NOT usable yet: the nose finder's pink piece runs from his nose down the "
+                                              "stem of his upper lip and past the box in every photo, so the 'middle of "
+                                              "his nose' depended on where the box was drawn (and with his head lowered, "
+                                              "13 and 14, his nose hides: the piece was faint fur). Before that check, "
+                                              "head level gave 0.885-0.987 (5.4%). Next: a nose point that does not "
+                                              "depend on the box, tested by growing the box.") if not three["pose_proof"] else "",
+                                     tolerance_is=f"{SPREAD:g} standard deviations of his spread between moments (95%)"),
+        first_try_eyes_flat=dict(first, measure="distance between his eyes (3D) / an eye's long diameter read flat off "
+                                                "the picture", usable=False,
+                                 finding="follows his head's nod: an eye's flat size changes with the angle it is seen at"),
         surface_bumpiness=dict(bump, usable=False,
                                finding=(f"the measured surface is far smoother than his fur: a seam rule of 'no "
                                         f"steeper than this' would spread a 1 mm disagreement over "
                                         f"{0.1 / bump['slope']:.0f} cm. Not used (docs/MORE_PHOTOS.md: the "
                                         f"less-sure surface bends to meet the surer one instead)")))
     OUT.write_text(json.dumps(doc, indent=1))
-    picture(results, ovals)
-    print(json.dumps({k: v for k, v in doc["eyes_between_moments"].items() if k != "per_photo"}, indent=1))
-    print(json.dumps(bump, indent=1))
+    picture(results, found)
+    print(json.dumps({k: doc[k] for k in ("rejected_fits", "nose_not_found", "eyes_3d_between_moments")}, indent=1))
     return 0
 
 

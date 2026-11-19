@@ -4,7 +4,11 @@
   "file": "data/photos/anchor_front.webp",
   "kind": "photo of him (owner's)",
   "angle": "front, about his eye level",
-  "use": "the anchor: highest weight, the home pose; identical to the old branch's references/master/master_front_standing.webp"
+  "use": "the anchor: highest weight, the home pose; identical to the old branch's references/master/master_front_standing.webp",
+  "same_moment_as": [
+   "by_angle/01_front/01_front.webp",
+   "by_angle/01_front/18_staring_at_boss.webp"
+  ]
  },
  "measuring_photos": [
   {
@@ -14,7 +18,9 @@
    "angle": "front, about level",
    "his_pose": "sitting up, looking at the camera",
    "owners_label": "1. Front",
-   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)",
+   "same_moment_as_anchor": true,
+   "note_moment": "the same moment as the anchor (owner, 2026-11-19: three shots taken in quick succession while he stared at the owner; the anchor is the one whose background was removed): the same pose, so it shows the measuring's own repeatability, not how he varies between moments"
   },
   {
    "file": "data/photos/by_angle/01_front/18_staring_at_boss.webp",
@@ -23,7 +29,9 @@
    "angle": "front, a little above",
    "his_pose": "sitting up, looking at the camera",
    "owners_label": "18. Staring At Boss",
-   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)"
+   "use": "measuring him (each area from one master photo: docs/MORE_PHOTOS.md)",
+   "same_moment_as_anchor": true,
+   "note_moment": "the same moment as the anchor (owner, 2026-11-19: three shots taken in quick succession while he stared at the owner; the anchor is the one whose background was removed): the same pose, so it shows the measuring's own repeatability, not how he varies between moments"
   },
   {
    "file": "data/photos/by_angle/01_front/11_looking_up_slight.webp",

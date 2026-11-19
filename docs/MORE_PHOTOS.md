@@ -91,6 +91,15 @@ deviations: 95%, the usual convention). `tools/his_variation.py` -> `data/scene/
   at. **Not usable.** Next: only 3D distances between rigid points (between his eyes, from his eyes to his
   nose), which do not change when he turns or nods; that needs his nose found objectively in each photo.
 - Eye fits that run into the background are rejected (more than 3 px off).
+- Second try (2026-11-19): his eye spacing / the distance from his eyes to his nose, both in 3D. The nose was
+  found as the pink in a rough box, but the pink runs from his nose down the stem of his upper lip and past the
+  box in every photo, so the nose point depended on the box drawn: **not objective, not usable.** With his head
+  lowered (13, 14) his nose hides. Rule learned: a finder must give the same answer when its box is grown.
+- **Owner, 2026-11-19: the anchor, 01_front and 18_staring_at_boss are one moment** (three shots in quick
+  succession). Their agreement (1.5% on the first try) is the measuring's own repeatability, not how he varies;
+  his variation between moments has to come from photos taken at other moments (owner: use other angles).
+- Open: few photos from other moments show both his eyes and his nose (12; 11 with a clean eye fit); a spread
+  needs more. Being decided with the owner.
 - **How strongly the anchor is favoured** (the one choice measurement cannot make): owner, 2026-11-19, "it should
   remain the master unless otherwise specified": it masters everything it sees; no factor to tune.
 

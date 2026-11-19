@@ -1167,3 +1167,21 @@ check.py output (if applicable), and the next step.
   tune. Docs only. check.py: does not exist.
 - **Next:** a pose-proof biology measure (3D distances between rigid points: eyes to eyes, eyes to nose), with his
   nose found objectively in each photo; then the tolerance from his front photos.
+
+## 2026-11-19 — Session 6 (cont.): a pose-proof measure, second try; the burst (owner)
+- Second try (`tools/his_variation.py`): eye spacing / eyes to nose, both in 3D; nose = the pink in a rough box
+  (CIELAB a*, Otsu). Pass rule set BEFORE running: pose-proof if the spread over every pose is <= 2x the spread of
+  the anchor, 01 and 18. Result: failed (17.5% vs 5.4%); looking at what it latched onto: with his head lowered
+  (13, 14) the nose hides and the "piece" was faint fur; and in every photo the pink runs down the stem of his
+  upper lip past the box, so the nose point depended on the box I drew (lesson 33). Added: a nose piece that runs
+  into its box is "not found" (added after seeing the failure; it only rejects detections) -> all six not found.
+  Stopped here (rule 5): no measure is usable yet; the JSON says so and offers no tolerance.
+- Owner (interrupting): the anchor, 01_front and 18_staring_at_boss are ONE moment, three shots in quick
+  succession; "It may be wiser to replace them both with other angles when running these tests." Recorded in
+  `data/photos/index.json`, the tool (their spread = the measuring's own repeatability), MORE_PHOTOS §8,
+  DECISIONS (lesson 33). Other moments showing both eyes and his nose: only 11, 12, 17 (13, 14: nose hides; turned
+  and 3/4 views: an eye hides).
+- Tests: 60 passed. check.py: does not exist.
+- **Next (owner's call):** see the proposal in the session: rigid measures cannot change between moments, so
+  their tolerance is the measuring's repeatability (the burst measures exactly that) and other-moment photos only
+  test pose-proofness; needs a nose point that does not move when its box is grown.
