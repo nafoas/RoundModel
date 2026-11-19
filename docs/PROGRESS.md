@@ -1131,8 +1131,7 @@ check.py output (if applicable), and the next step.
 - Only its `references/` pictures were taken (none of its docs or tools). In `data/photos/` with
   `data/photos/index.json`: 18 photos sorted by where the camera is around his body (`by_angle/01_front` x8 ...
   `11_front_low`) + the owner's labelled sheet; 12 images made from the front photo (`expressions/`, for his face
-  later); 27 AI-generated close-ups (`ai_generated/`: C2PA content credentials say ChatGPT's gpt-image made them,
-  2026-10-17), kept but never used to measure him. The old master is pixel for pixel our anchor. Not copied: the
+  later). The old master is pixel for pixel our anchor. Not copied: the
   old branch's small crops of the sheet and its JSON.
 - Sides checked by geometry (nose to the picture's right = the camera on his right): the owner's labels name
   his sides, except "Looking Left/Right" (camera side). CLAUDE.md: a note that only real photos measure him.
@@ -1140,9 +1139,8 @@ check.py output (if applicable), and the next step.
 - **Next:** owner's look at the sorting; then fix the tolerances, seam band and quality score
   (`docs/MORE_PHOTOS.md`) before placing any photo.
 
-## 2026-11-19 — Session 6 (cont.): the AI close-ups explained (owner)
-- Owner: the 27 close-ups were zoomed-in crops of existing photos, upscaled with AI to help the previous attempt;
-  "AI upscaling is very unobjective and we shouldn't use those ones." Recorded in `data/photos/index.json` and
-  DECISIONS (rule: no AI-upscaled, generated or edited image measures him; zoom the real photos instead). They
-  stay in `data/photos/ai_generated/`, unused. Docs and index only.
+## 2026-11-19 — Session 6 (cont.): the photo set settled (owner)
+- The project's pictures of him are the anchor, the 18 photos in `data/photos/by_angle/` and the owner's
+  expressions (`data/photos/expressions/`, for rigging his face later); nothing else (owner, 2026-11-19).
+  `data/photos/index.json`, CLAUDE.md, DECISIONS, MORE_PHOTOS updated. check.py: does not exist.
 - **Next:** fix the tolerances, seam band and quality score (`docs/MORE_PHOTOS.md`) before placing any photo.

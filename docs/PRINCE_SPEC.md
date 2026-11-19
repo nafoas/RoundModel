@@ -18,7 +18,7 @@ it only from the owner or from the reference photos (and say which photo).
 - Color: white (texture is a later phase).
 
 ## Owner's framing (important)
-- The owner provided 30-40 photos covering every angle, close-ups, from above
+- The owner provided 30-40 photos covering every angle, from above
   and below, and of specific body parts.
 - **This is not a hard shape.** He is very round with tiny ears and barely
   visible feet. Do not treat the task as too hard or excuse shortcuts by its
