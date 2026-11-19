@@ -49,8 +49,11 @@ Each photo's surface is measured the same way as the anchor's (MoGe-2, its own c
 Every patch of his surface gets a score for how well each photo sees it: **the size of one of that photo's
 pixels on his surface there** (distance from the camera / focal length / cos of the viewing angle: smaller is
 better; it grows as the camera moves away and as the surface turns edge-on). A photo's outermost 4 px count as
-not seen (measured: their depth blends into the background). **The anchor masters everything it sees
-well** (it is the anchor: CLAUDE.md rule 4); every other patch goes to the photo that scores best. Where
+not seen (measured: their depth blends into the background). **The anchor masters everything it sees**
+(outside its outermost 4 px), unless the owner specifies otherwise for an area (owner, 2026-11-19: "The little
+front photo is the original. I think it should remain the master unless otherwise specified"; CLAUDE.md rule
+4). Every patch it does not see goes to the other photo that scores best. The score map shows where the anchor
+sees him nearly edge-on (near its outline), so the owner can see where those areas are. Where
 another photo also sees a mastered patch, it is used ONLY to place that photo (camera and pose): it never
 changes the master's surface.
 
@@ -88,8 +91,8 @@ deviations: 95%, the usual convention). `tools/his_variation.py` -> `data/scene/
   at. **Not usable.** Next: only 3D distances between rigid points (between his eyes, from his eyes to his
   nose), which do not change when he turns or nods; that needs his nose found objectively in each photo.
 - Eye fits that run into the background are rejected (more than 3 px off).
-- **The one number measurement cannot give:** how strongly the anchor is favoured (it is "at his most him").
-  Owner's call.
+- **How strongly the anchor is favoured** (the one choice measurement cannot make): owner, 2026-11-19, "it should
+  remain the master unless otherwise specified": it masters everything it sees; no factor to tune.
 
 ## 9. For each new photo
 1. Owner sends it (background removed if it shows the room: the repo is public).

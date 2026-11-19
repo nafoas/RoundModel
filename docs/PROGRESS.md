@@ -1159,3 +1159,11 @@ check.py output (if applicable), and the next step.
 - Stopped here rather than stacking fixes (rule 5). Tests: 59 passed. check.py: does not exist.
 - **Next:** a pose-proof biology measure from 3D distances between rigid points (eyes to eyes / eyes to nose),
   with his nose found objectively in each photo; the owner's call on how strongly to favour the anchor.
+
+## 2026-11-19 — Session 6 (cont.): the front photo stays the master (owner)
+- Owner: "The little front photo is the original. I think it should remain the master unless otherwise
+  specified." Recorded (MORE_PHOTOS §4 and §8, DECISIONS): the anchor masters everything it sees (outside its
+  outermost 4 px); other photos cover only what it does not see, unless the owner names an area. No factor to
+  tune. Docs only. check.py: does not exist.
+- **Next:** a pose-proof biology measure (3D distances between rigid points: eyes to eyes, eyes to nose), with his
+  nose found objectively in each photo; then the tolerance from his front photos.

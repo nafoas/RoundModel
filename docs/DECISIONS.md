@@ -378,7 +378,9 @@ excuse and was withdrawn.)
   different moments show how much a measurement changes when only time changes; that spread (2 standard
   deviations) is the tolerance. First measure not pose-proof (lesson 32); next: 3D distances between rigid
   points. Seams: no blend band; the less-sure surface bends to meet the surer one; the anchor never bends.
-  Score: the size of one pixel on his surface. Open: how strongly to favour the anchor (owner's call).
+  Score: the size of one pixel on his surface. **The anchor masters everything it sees, unless the owner
+  specifies otherwise** (owner: "The little front photo is the original. I think it should remain the master
+  unless otherwise specified"); other photos cover only what it does not see.
   `docs/MORE_PHOTOS.md` §8.
 - **Was open (Q47, answered above):** with the models' cameras his approved width and his approved height cannot
   both hold: at 15.5 cm wide, the top of his head is 16.7 cm (MoGe-2) or 18.3 cm (Depth Pro) up, not 12.7.
