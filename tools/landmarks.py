@@ -119,6 +119,59 @@ def measure_eye(lum, box):
                 eye_lum=eye_lum, fur_lum=fur_lum, catchlight=catch)
 
 
+def measure_whole_eye(lum, box):
+    """NOT IN USE YET (2026-11-19): tried as the fix for the owner's "doesn't encompass his whole eye"; it reaches
+    the top of both eyes, but on his left eye it also takes in the lash fringe and a lower lash tail, and that part
+    depends on the box: where his dark eye meets dark lashes the photo has no edge. Owner's call (docs/DECISIONS.md
+    lesson 34). His whole eye (owner, 2026-11-19: the fitted oval "doesn't encompass his whole eye"). The eye is the dark
+    region (darker than halfway between eyeball and fur) around the eyeball; where it runs on into a clump of
+    lashes (dark into dark: no edge to see) it is cut where the region narrows, i.e. split by a watershed on each
+    pixel's distance from the region's edge, keeping the thickest part. Its outline is a smooth sub-pixel curve;
+    its centre is the region's middle; its oval has the region's own area and spread. `found` is False when the
+    region runs into the box's edge (it joined something outside: background, couch). The rough box only says
+    where to look: growing it must not change the answer (checked when this was written: 0.4 px)."""
+    from skimage import measure as skm, morphology, segmentation
+    x0, y0, x1, y1 = box
+    L = ndi.gaussian_filter(lum[y0:y1, x0:x1], 0.8)
+    dark0 = ndi.binary_opening(L < 70, structure=np.ones((7, 7), bool))            # the eyeball's core
+    lab0, n0 = ndi.label(dark0); k0 = int(np.argmax(ndi.sum(dark0, lab0, range(1, n0 + 1)))) + 1
+    ball = ndi.binary_fill_holes(lab0 == k0)
+    eye_lum = float(np.median(L[ball]))
+    ring = ndi.binary_dilation(ball, iterations=12) & ~ndi.binary_dilation(ball, iterations=5) & (L >= 70)
+    fur_lum = float(np.median(L[ring])); level = (eye_lum + fur_lum) / 2
+    dark = ndi.binary_fill_holes(L < level)
+    lab, _ = ndi.label(dark)
+    seed = tuple(np.round(np.argwhere(ball).mean(0)).astype(int))
+    comp = lab == (lab[seed] if lab[seed] else np.bincount(lab[ball]).argmax())
+    dist = ndi.distance_transform_edt(comp)
+    markers = skm.label(morphology.h_maxima(dist, 2) & comp)                  # thick parts (ripples < 2 px ignored)
+    ws = segmentation.watershed(-dist, markers, mask=comp)
+    eye = ws == ws[np.unravel_index(np.argmax(dist), dist.shape)]             # the thickest part: the eye
+    found = not (eye[0].any() or eye[-1].any() or eye[:, 0].any() or eye[:, -1].any())
+    cut_away = int((comp & ~eye).sum())
+    ys, xs = np.nonzero(eye)
+    c = np.array([x0 + xs.mean() + 0.5, y0 + ys.mean() + 0.5])
+    cov = np.cov(np.c_[xs, ys].T.astype(float))                                 # the region's own oval:
+    w, v = np.linalg.eigh(cov); a, b = 2 * np.sqrt(w[1]), 2 * np.sqrt(w[0])     # same spread as a filled oval
+    th = float(np.degrees(np.arctan2(v[1, 1], v[0, 1])) % 180)
+    cont = max(skm.find_contours(ndi.gaussian_filter(eye.astype(float), 1.0), 0.5), key=len)
+    P = np.c_[x0 + cont[:, 1] + 0.5, y0 + cont[:, 0] + 0.5]                    # smooth outline, picture px
+    d = ellipse_dist(P, c, a, b, th)
+    # catchlight: the bright spot inside the eye (brightness-weighted centre of its brightest pixels)
+    raw = lum[y0:y1, x0:x1]
+    inside = ndi.binary_erosion(eye, iterations=2)
+    hi = inside & (raw >= np.percentile(raw[inside], 99.5))
+    lab2, n2 = ndi.label(hi); k2 = int(np.argmax(ndi.sum(raw * hi, lab2, range(1, n2 + 1)))) + 1
+    spot = lab2 == k2; wgt = raw[spot] - level
+    sy, sx = np.argwhere(spot).T
+    catch = np.array([x0 + 0.5 + (sx * wgt).sum() / wgt.sum(), y0 + 0.5 + (sy * wgt).sum() / wgt.sum()])
+    return dict(centre=c, semi_axes=(float(a), float(b)), angle_deg=th, aspect=float(b / a), edge_points=P,
+                kept=np.ones(len(P), bool), rms_px=float(np.sqrt(np.mean(d ** 2))), kept_fraction=1.0,
+                dropped_directions_deg=[], eye_lum=eye_lum, fur_lum=fur_lum, catchlight=catch,
+                outline=P, region=eye, box=box, found=found, area_px=int(eye.sum()), cut_away_px=cut_away,
+                height_px=int(np.ptp(ys) + 1), width_px=int(np.ptp(xs) + 1))
+
+
 # ---------------------------------------------------------------- the rest of him
 def lowest_point(poly, tol=4.0):
     """The lowest point of a part (largest y); if its bottom is flat, the middle of the flat stretch."""

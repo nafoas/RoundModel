@@ -1185,3 +1185,16 @@ check.py output (if applicable), and the next step.
 - **Next (owner's call):** see the proposal in the session: rigid measures cannot change between moments, so
   their tolerance is the measuring's repeatability (the burst measures exactly that) and other-moment photos only
   test pose-proofness; needs a nose point that does not move when its box is grown.
+
+## 2026-11-19 — Session 6 (cont.): his eye outline (owner flagged)
+- Owner: "the eye shape, especially on the master, is wrong. It doesn't encompass his whole eye." Cause found
+  (DECISIONS lesson 34): the oval was fitted only where dark eye meets light fur; at the top his eye meets dark
+  lashes (no edge), so the oval stopped short. Same cause in every use of that fit (anchor eye landmarks, eye
+  facing, photo-only eye check, his_variation's eye sizes).
+- Tried `measure_whole_eye` (tools/landmarks.py): the dark eye cut from lash clumps at their necks (watershed on
+  distance). Reaches the top of both eyes (his right eye: clearly better); his left eye also takes in the
+  lower-lash fringe and a tail, box-dependent. Texture does not separate eye from lashes (the glossy eye reflects
+  them). NOT adopted; landmarks and everything downstream unchanged. Comparison shown to the owner.
+- Tests: 60 passed. check.py: does not exist.
+- **Next (owner's call):** how to settle the eye boundary where it meets dark lashes; then the nose point that
+  does not depend on its box (owner said yes).
