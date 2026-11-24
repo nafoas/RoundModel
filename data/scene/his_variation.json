@@ -6,29 +6,29 @@
    "eyes": {
     "eye_his_right": {
      "centre_px": [
-      337.0,
-      474.09
+      338.24,
+      468.55
      ],
      "semi_axes_px": [
-      35.33,
-      19.64
+      43.47,
+      19.2
      ],
-     "fit_rms_px": 0.68,
-     "kept": 0.61,
-     "size": 15.48
+     "fit_rms_px": 1.66,
+     "kept": 0.81,
+     "size": 19.038
     },
     "eye_his_left": {
      "centre_px": [
-      698.81,
-      445.33
+      698.53,
+      444.47
      ],
      "semi_axes_px": [
-      41.77,
-      17.73
+      43.66,
+      17.55
      ],
-     "fit_rms_px": 1.16,
-     "kept": 0.87,
-     "size": 18.063
+     "fit_rms_px": 1.28,
+     "kept": 0.88,
+     "size": 18.881
     }
    },
    "nose": {
@@ -41,40 +41,40 @@
     "found": false
    },
    "head": "level",
-   "ratio": 4.7182,
-   "spacing": 79.133,
-   "eye_size": 16.772,
-   "eyes_to_nose": 80.16,
-   "ratio_3d": 0.9872,
+   "ratio": 4.1516,
+   "spacing": 78.711,
+   "eye_size": 18.959,
+   "eyes_to_nose": 80.586,
+   "ratio_3d": 0.9767,
    "units": "the photo's own depth units (cancel in the ratios)"
   },
   "data/photos/by_angle/01_front/01_front.webp": {
    "eyes": {
     "eye_his_right": {
      "centre_px": [
-      377.73,
-      419.61
+      377.37,
+      409.71
      ],
      "semi_axes_px": [
-      40.86,
-      21.32
+      53.24,
+      21.79
      ],
-     "fit_rms_px": 1.0,
-     "kept": 0.79,
-     "size": 6.069
+     "fit_rms_px": 2.41,
+     "kept": 0.81,
+     "size": 7.936
     },
     "eye_his_left": {
      "centre_px": [
-      738.18,
-      402.93
+      737.09,
+      400.0
      ],
      "semi_axes_px": [
-      36.24,
-      19.89
+      40.9,
+      19.5
      ],
-     "fit_rms_px": 0.5,
-     "kept": 0.64,
-     "size": 5.336
+     "fit_rms_px": 1.18,
+     "kept": 0.84,
+     "size": 6.018
     }
    },
    "nose": {
@@ -87,11 +87,11 @@
     "found": false
    },
    "head": "level",
-   "ratio": 4.687,
-   "spacing": 26.728,
-   "eye_size": 5.703,
-   "eyes_to_nose": 28.354,
-   "ratio_3d": 0.9426,
+   "ratio": 3.8218,
+   "spacing": 26.665,
+   "eye_size": 6.977,
+   "eyes_to_nose": 28.803,
+   "ratio_3d": 0.9257,
    "units": "the photo's own depth units (cancel in the ratios)"
   },
   "data/photos/by_angle/01_front/18_staring_at_boss.webp": {
@@ -111,16 +111,16 @@
     },
     "eye_his_left": {
      "centre_px": [
-      716.65,
-      399.84
+      716.14,
+      398.4
      ],
      "semi_axes_px": [
-      37.27,
-      18.46
+      40.3,
+      18.15
      ],
-     "fit_rms_px": 0.91,
-     "kept": 0.81,
-     "size": 5.376
+     "fit_rms_px": 1.24,
+     "kept": 0.88,
+     "size": 5.811
     }
    },
    "nose": {
@@ -133,11 +133,11 @@
     "found": false
    },
    "head": "level",
-   "ratio": 4.5878,
-   "spacing": 25.096,
-   "eye_size": 5.47,
-   "eyes_to_nose": 28.346,
-   "ratio_3d": 0.8853,
+   "ratio": 4.406,
+   "spacing": 25.061,
+   "eye_size": 5.688,
+   "eyes_to_nose": 28.371,
+   "ratio_3d": 0.8833,
    "units": "the photo's own depth units (cancel in the ratios)"
   },
   "data/photos/by_angle/01_front/11_looking_up_slight.webp": {
@@ -348,15 +348,15 @@
  },
  "first_try_eyes_flat": {
   "n": 6,
-  "mean": 4.3406,
-  "spread_percent": 22.53,
-  "same_moment_spread_percent": 1.46,
+  "mean": 4.0717,
+  "spread_percent": 22.86,
+  "same_moment_spread_percent": 7.1,
   "same_moment_is": "the anchor, 01 and 18: one moment (owner), so this is the measuring's own repeatability, not his variation",
   "by_head": {
    "level": [
-    4.718,
-    4.687,
-    4.588
+    4.152,
+    3.822,
+    4.406
    ],
    "raised": [
     5.676

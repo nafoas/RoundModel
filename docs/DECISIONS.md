@@ -594,17 +594,23 @@ excuse and was withdrawn.)
    must give the same answer when the box is grown; test that before trusting it. Also: three photos I treated as
    three moments were one moment (owner: three shots in quick succession), so their agreement measured the
    measuring, not him. -> Ask which photos are the same moment before using them as "different moments".
-34. **The eye oval did not take in his whole eye** (owner, 2026-11-19: "the eye shape, especially on the master,
-   is wrong. It doesn't encompass his whole eye"). Cause: the oval was fitted only where his dark eyeball meets
-   light fur; where it meets his dark lashes (the top of both eyes) there is no light-dark edge, those directions
-   were dropped, and the oval's top was carried on from its sides, short of the eye (his right eye: about 10-15 px).
-   The same cause reaches every use of that fit: the anchor's eye landmarks, the eye-facing reading, the
-   photo-only eye check, the eye sizes in tools/his_variation.py. Tried: his whole dark eye, cut from his lash
-   clumps where the dark region narrows (watershed on distance from its edge; `measure_whole_eye` in
-   tools/landmarks.py): it reaches the top of both eyes, but on his left eye it also takes in the lower-lash fringe
-   and a lash tail, and that part moves with the box. Brightness, colour and texture (his glossy eye reflects the
-   lashes) give no edge there: the photo itself has none. Not adopted (precision protocol: stop if a fix makes
-   anything worse); landmarks unchanged. Owner's call how to settle the boundary.
+34. **The eye oval did not take in his whole eye, and my first fix took in his eye ring** (owner, 2026-11-19: "the
+   eye shape, especially on the master, is wrong. It doesn't encompass his whole eye"; then: "they don't just go
+   around his eye, they go around his little eye ring too, the little black marking"; and: "you keep relying on
+   hard data without taking a step back and thinking 'do rabbit eyes look like this?'").
+   Cause 1: the oval was fitted only where his dark eye meets light fur; at the top his eye meets his dark lashes
+   (no edge), those directions were dropped, and the oval's top was carried on from its sides, short of the eye
+   (his right eye: about 6 px). Cause 2 (my fix): I took everything dark around his eye as eye or lashes and never
+   asked whether part of it was his black hotot ring, an identity feature CLAUDE.md names. The result had tails
+   and notches no eye has. -> **Ask what the thing is before measuring it:** an eye is a smooth, glossy, rounded
+   shape; his ring wraps it like eyeliner (the dark lid edge and his lashes, bunched at the top and the lower
+   corner), as his head-lowered photos (13, 14) show clearly.
+   Fix: his eye is a smooth oval fitted to the eye's own edges and made to pass exactly through the point where
+   his eye meets his lash line (found where the dark region narrows; `lash_line_point`, `fit_ellipse_through` in
+   tools/landmarks.py). The same answer when the box is grown by 20 or 40 px. A check that does not depend on the
+   method: his two eyes now come out the same size (long semi-axis 43.5 and 43.7 px; the old ovals: 35.3 and
+   41.8). Everything that uses his eyes was rerun: landmarks, the camera's up-direction, the room's rays, how he
+   faces, the 3D page, tools/his_variation.py.
 - **The light in the anchor photo** (owner, 2026-11-16): ceiling light and lamps in the room; a navy blue
   blanket under him ("some of the blueness from underneath is from that"); "are you sure it needs two
   lights? The light might just be at a very shallow angle on his right". Checked with no shape assumed: along

@@ -250,6 +250,14 @@ From the golden tiles (`docs/images/golden_tiles.png`):
     doesn't line up" was the previous Claude's failure). Don't treat one photo's numbers as hard rules
     either: when a measurement fights what the owner can plainly see, the measurement is wrong; say so and
     ask. Don't ask for more photos; the anchor decides.
+26. **Step back: does this look like a rabbit's ___?** (owner, 2026-11-19: "you keep relying on hard data
+    without taking a step back and thinking 'do rabbit eyes look like this?' That could go very far.") Before
+    trusting any measured shape, ask what the thing is and whether the result looks like one: an eye is a
+    smooth, glossy, rounded shape (no tails or notches); his black eye ring wraps it like eyeliner; a nose,
+    an ear, a peet each have a shape a rabbit's does. Use what the thing is to decide WHICH edges belong to it
+    (lesson 34); then let the measurements place it exactly. Look at a photo where it is clearest (for his
+    eyes: the head-lowered ones) before deciding in a hard one. This is common sense about a rabbit's parts,
+    not breed orthodoxy (item 24).
 17. **Review sheets for grey areas** (`tools/candidate_sheets.py`): locator, the photo as
     it is, the photo with brightness stretched in TRUE colour (never stretch the colour
     channels separately or together: his fur's tiny real colour shifts become false

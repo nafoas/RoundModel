@@ -34,6 +34,40 @@ def load(p):
 
 
 # ---------------------------------------------------------------- eyes
+def conic_to_ellipse(coef, mx, my):
+    """Conic A x^2 + B xy + C y^2 + D x + E y + F = 0 (in coordinates shifted by mx, my) -> centre, semi-axes (a >= b),
+    long axis angle (deg)."""
+    A, B, Cc, Dd, E, Fc = coef
+    den = B * B - 4 * A * Cc
+    x0 = (2 * Cc * Dd - B * E) / den; y0 = (2 * A * E - B * Dd) / den
+    num = 2 * (A * E * E + Cc * Dd * Dd - B * Dd * E + den * Fc)
+    r = np.sqrt((A - Cc) ** 2 + B * B)
+    ax1 = -np.sqrt(num * (A + Cc + r)) / den; ax2 = -np.sqrt(num * (A + Cc - r)) / den
+    th = 0.5 * np.arctan2(-B, Cc - A)
+    a, b = (ax1, ax2) if ax1 >= ax2 else (ax2, ax1)
+    if ax1 < ax2:
+        th += np.pi / 2
+    return np.array([x0 + mx, y0 + my]), float(a), float(b), float(np.degrees(th) % 180)
+
+
+def fit_ellipse_through(P, T):
+    """The direct least-squares ellipse fit (Fitzgibbon et al. 1999) with one exact condition: the ellipse passes
+    through the point T. (Used for his eye: through the point where his eye meets his lash line, 2026-11-19.)"""
+    from scipy.linalg import eig, null_space
+    mx, my = P[:, 0].mean(), P[:, 1].mean()
+    row = lambda x, y: np.c_[x * x, x * y, y * y, x, y, np.ones_like(x)]
+    D = row(P[:, 0] - mx, P[:, 1] - my)
+    N = null_space(row(np.array([T[0] - mx]), np.array([T[1] - my])))          # conics through T
+    C = np.zeros((6, 6)); C[0, 2] = C[2, 0] = 2; C[1, 1] = -1                  # 4AC - B^2: ellipse when > 0
+    w, V = eig(N.T @ (D.T @ D) @ N, N.T @ C @ N)
+    best = None
+    for lam, y in zip(np.real(w), np.real(V.T)):
+        a = N @ y
+        if np.isfinite(lam) and lam > 0 and 4 * a[0] * a[2] - a[1] ** 2 > 0 and (best is None or lam < best[0]):
+            best = (lam, a)
+    return conic_to_ellipse(best[1], mx, my)
+
+
 def fit_ellipse(P):
     """Direct least-squares ellipse fit (Fitzgibbon et al. 1999). Returns centre, semi-axes (a >= b),
     angle of the long axis (deg, picture coords: x right, y down), and the conic."""
@@ -70,7 +104,10 @@ def ellipse_dist(P, c, a, b, ang):
 
 
 def measure_eye(lum, box):
-    """The visible eyeball: a dark, glossy oval. Its edge is measured along N_DIRS directions from its middle
+    """His eye: a smooth, glossy oval (2026-11-19, owner: the old oval did not take in his whole eye, and a
+    dark-region outline took in his black eye ring; "do rabbit eyes look like this?"). Where his eye meets his
+    upper lashes there is no edge to see, so the oval is made to pass through the point where the eye meets his
+    lash line (lash_line_point) and fitted to the eye's own edges everywhere else. The visible eyeball: a dark, glossy oval. Its edge is measured along N_DIRS directions from its middle
     (where the brightness crosses halfway between eyeball and fur, to a fraction of a pixel); directions that
     run into lashes (dark carries on) or fur lying over the eye (bright too early) are dropped by a robust
     oval fit."""
@@ -96,12 +133,14 @@ def measure_eye(lum, box):
         rr = r[i] + t * (r[i + 1] - r[i])
         pts.append([x0 + cx + rr * np.cos(ang), y0 + cy + rr * np.sin(ang)]); used.append(np.degrees(ang))
     P = np.array(pts); keep = np.ones(len(P), bool)
+    top = lash_line_point(L, level, ball, x0, y0)
+    fit = (lambda Q: fit_ellipse_through(Q, top)) if top is not None else fit_ellipse
     for _ in range(6):
-        c, a, b, th = fit_ellipse(P[keep])
+        c, a, b, th = fit(P[keep])
         d = ellipse_dist(P, c, a, b, th)
         mad = 1.4826 * np.median(np.abs(d[keep] - np.median(d[keep])))
         keep = np.abs(d) <= max(2.5 * mad, 0.75)
-    c, a, b, th = fit_ellipse(P[keep]); d = ellipse_dist(P, c, a, b, th)
+    c, a, b, th = fit(P[keep]); d = ellipse_dist(P, c, a, b, th)
     # catchlight: the bright spot inside the eye (brightness-weighted centre of its brightest pixels)
     t = np.radians(th); Rm = np.array([[np.cos(t), np.sin(t)], [-np.sin(t), np.cos(t)]])
     H, W = L.shape; gy, gx = np.mgrid[0:H, 0:W] + 0.5
@@ -113,63 +152,34 @@ def measure_eye(lum, box):
     spot = lab2 == k2; w = raw[spot] - level
     sy, sx = np.argwhere(spot).T
     catch = np.array([x0 + 0.5 + (sx * w).sum() / w.sum(), y0 + 0.5 + (sy * w).sum() / w.sum()])
-    return dict(centre=c, semi_axes=(a, b), angle_deg=th, aspect=b / a, edge_points=P, kept=keep,
+    return dict(centre=c, semi_axes=(a, b), angle_deg=th, aspect=b / a, edge_points=P, kept=keep, lash_line=top,
                 rms_px=float(np.sqrt(np.mean(d[keep] ** 2))), kept_fraction=float(keep.mean()),
                 dropped_directions_deg=np.round(np.array(used)[~keep], 0).tolist(),
                 eye_lum=eye_lum, fur_lum=fur_lum, catchlight=catch)
 
 
-def measure_whole_eye(lum, box):
-    """NOT IN USE YET (2026-11-19): tried as the fix for the owner's "doesn't encompass his whole eye"; it reaches
-    the top of both eyes, but on his left eye it also takes in the lash fringe and a lower lash tail, and that part
-    depends on the box: where his dark eye meets dark lashes the photo has no edge. Owner's call (docs/DECISIONS.md
-    lesson 34). His whole eye (owner, 2026-11-19: the fitted oval "doesn't encompass his whole eye"). The eye is the dark
-    region (darker than halfway between eyeball and fur) around the eyeball; where it runs on into a clump of
-    lashes (dark into dark: no edge to see) it is cut where the region narrows, i.e. split by a watershed on each
-    pixel's distance from the region's edge, keeping the thickest part. Its outline is a smooth sub-pixel curve;
-    its centre is the region's middle; its oval has the region's own area and spread. `found` is False when the
-    region runs into the box's edge (it joined something outside: background, couch). The rough box only says
-    where to look: growing it must not change the answer (checked when this was written: 0.4 px)."""
+def lash_line_point(L, level, ball, x0, y0):
+    """Where his eye meets his upper lash clump: the dark region around the eyeball (darker than `level`) is split
+    where it narrows (watershed on each pixel's distance from its edge); the eye is the thickest part; the clump is
+    the part above it. Returns the middle of the line between them (picture px), or None when no clump sits on
+    the eye. (2026-11-19: the dark region also holds his black eye ring and lashes, so it is used only to find
+    this one point; owner: "they go around his little eye ring too".)"""
     from skimage import measure as skm, morphology, segmentation
-    x0, y0, x1, y1 = box
-    L = ndi.gaussian_filter(lum[y0:y1, x0:x1], 0.8)
-    dark0 = ndi.binary_opening(L < 70, structure=np.ones((7, 7), bool))            # the eyeball's core
-    lab0, n0 = ndi.label(dark0); k0 = int(np.argmax(ndi.sum(dark0, lab0, range(1, n0 + 1)))) + 1
-    ball = ndi.binary_fill_holes(lab0 == k0)
-    eye_lum = float(np.median(L[ball]))
-    ring = ndi.binary_dilation(ball, iterations=12) & ~ndi.binary_dilation(ball, iterations=5) & (L >= 70)
-    fur_lum = float(np.median(L[ring])); level = (eye_lum + fur_lum) / 2
     dark = ndi.binary_fill_holes(L < level)
     lab, _ = ndi.label(dark)
-    seed = tuple(np.round(np.argwhere(ball).mean(0)).astype(int))
-    comp = lab == (lab[seed] if lab[seed] else np.bincount(lab[ball]).argmax())
+    comp = lab == np.bincount(lab[ball]).argmax()
     dist = ndi.distance_transform_edt(comp)
-    markers = skm.label(morphology.h_maxima(dist, 2) & comp)                  # thick parts (ripples < 2 px ignored)
-    ws = segmentation.watershed(-dist, markers, mask=comp)
-    eye = ws == ws[np.unravel_index(np.argmax(dist), dist.shape)]             # the thickest part: the eye
-    found = not (eye[0].any() or eye[-1].any() or eye[:, 0].any() or eye[:, -1].any())
-    cut_away = int((comp & ~eye).sum())
-    ys, xs = np.nonzero(eye)
-    c = np.array([x0 + xs.mean() + 0.5, y0 + ys.mean() + 0.5])
-    cov = np.cov(np.c_[xs, ys].T.astype(float))                                 # the region's own oval:
-    w, v = np.linalg.eigh(cov); a, b = 2 * np.sqrt(w[1]), 2 * np.sqrt(w[0])     # same spread as a filled oval
-    th = float(np.degrees(np.arctan2(v[1, 1], v[0, 1])) % 180)
-    cont = max(skm.find_contours(ndi.gaussian_filter(eye.astype(float), 1.0), 0.5), key=len)
-    P = np.c_[x0 + cont[:, 1] + 0.5, y0 + cont[:, 0] + 0.5]                    # smooth outline, picture px
-    d = ellipse_dist(P, c, a, b, th)
-    # catchlight: the bright spot inside the eye (brightness-weighted centre of its brightest pixels)
-    raw = lum[y0:y1, x0:x1]
-    inside = ndi.binary_erosion(eye, iterations=2)
-    hi = inside & (raw >= np.percentile(raw[inside], 99.5))
-    lab2, n2 = ndi.label(hi); k2 = int(np.argmax(ndi.sum(raw * hi, lab2, range(1, n2 + 1)))) + 1
-    spot = lab2 == k2; wgt = raw[spot] - level
-    sy, sx = np.argwhere(spot).T
-    catch = np.array([x0 + 0.5 + (sx * wgt).sum() / wgt.sum(), y0 + 0.5 + (sy * wgt).sum() / wgt.sum()])
-    return dict(centre=c, semi_axes=(float(a), float(b)), angle_deg=th, aspect=float(b / a), edge_points=P,
-                kept=np.ones(len(P), bool), rms_px=float(np.sqrt(np.mean(d ** 2))), kept_fraction=1.0,
-                dropped_directions_deg=[], eye_lum=eye_lum, fur_lum=fur_lum, catchlight=catch,
-                outline=P, region=eye, box=box, found=found, area_px=int(eye.sum()), cut_away_px=cut_away,
-                height_px=int(np.ptp(ys) + 1), width_px=int(np.ptp(xs) + 1))
+    ws = segmentation.watershed(-dist, skm.label(morphology.h_maxima(dist, 2) & comp), mask=comp)
+    eye = ws == ws[np.unravel_index(np.argmax(dist), dist.shape)]
+    ey = np.nonzero(eye)[0].mean()
+    best = None
+    for other in set(np.unique(ws[comp])) - {0, int(ws[np.unravel_index(np.argmax(dist), dist.shape)])}:
+        part = ws == other
+        touch = eye & ndi.binary_dilation(part)
+        if touch.sum() and np.nonzero(part)[0].mean() < ey and (best is None or touch.sum() > best[0]):
+            ys, xs = np.nonzero(touch)
+            best = (int(touch.sum()), np.array([x0 + xs.mean() + 0.5, y0 + ys.mean() + 0.5]))
+    return None if best is None else best[1]
 
 
 # ---------------------------------------------------------------- the rest of him
@@ -238,11 +248,12 @@ def main() -> int:
         e = eyes[name] = measure_eye(lum, box)
         mirror = "eye_his_left" if name == "eye_his_right" else "eye_his_right"
         add(name, "head", e["centre"],
-            f"centre of an oval fitted to the eyeball's edge, measured in {N_DIRS} directions to a fraction of a "
-            f"pixel; {int(e['kept'].sum())}/{len(e['kept'])} kept (the rest ran into lashes or fur over the eye); "
-            f"fit rms {e['rms_px']:.2f} px. Where the eyeball meets the lashes there is no light-dark edge (dark "
-            f"into dark), so the oval's top there is carried on from its sides and can sit several px short of "
-            f"the eyeball's top; the eye step draws the eye's own outline", 4.0, mirror=mirror,
+            f"centre of his whole eye: a smooth oval fitted to the eye's own edge (measured in {N_DIRS} directions to "
+            f"a fraction of a pixel; {int(e['kept'].sum())}/{len(e['kept'])} kept: the rest ran into lashes, his "
+            f"black eye ring or fur over the eye; fit rms {e['rms_px']:.2f} px) and passing through the point where "
+            f"his eye meets his lash line (there, dark meets dark: no edge to see) "
+            f"{'' if e['lash_line'] is None else 'at ' + str(np.round(e['lash_line'], 1).tolist())}. 2026-11-19, "
+            f"owner: the earlier oval stopped short of the top of his eye", 2.0, mirror=mirror,
             oval=dict(semi_axes_px=np.round(e["semi_axes"], 2).tolist(), long_axis_angle_deg=round(e["angle_deg"], 1),
                       short_over_long=round(e["aspect"], 3),
                       note=("an eye is round; seen at an angle it shows as an oval. short/long is a depth clue "
@@ -359,7 +370,8 @@ def sheets(photo, LM, eyes):
         for p, k in zip(e["edge_points"], e["kept"]):
             X, Y = (p[0] - x0) * s, (p[1] - y0) * s
             dr.ellipse([X - 3, Y - 3, X + 3, Y + 3], fill=(0, 200, 0) if k else (255, 0, 0))
-        for p, col in ((c, (220, 0, 120)), (e["catchlight"], (0, 120, 220))):
+        marks = ((c, (220, 0, 120)), (e["catchlight"], (0, 120, 220))) + (((e["lash_line"], (255, 0, 0)),) if e["lash_line"] is not None else ())
+        for p, col in marks:
             X, Y = (p[0] - x0) * s, (p[1] - y0) * s
             dr.line([(X - 12, Y), (X + 12, Y)], fill=col, width=2); dr.line([(X, Y - 12), (X, Y + 12)], fill=col, width=2)
         row = Image.new("RGB", (crop.width * 2 + 8, crop.height), (30, 30, 30)); row.paste(crop, (0, 0)); row.paste(mk, (crop.width + 8, 0))

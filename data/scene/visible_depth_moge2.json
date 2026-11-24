@@ -15,8 +15,8 @@
   "camera": {
    "position_cm": [
     0.2614,
-    12.9009,
-    29.9798
+    12.9523,
+    29.9576
    ],
    "rotation_room_to_camera": [
     [
@@ -26,13 +26,13 @@
     ],
     [
      0.0,
-     -0.9922322041,
-     0.1243995704
+     -0.9920174399,
+     0.1261007491
     ],
     [
      0.0,
-     -0.1243995704,
-     -0.9922322041
+     -0.1261007491,
+     -0.9920174399
     ]
    ],
    "focal_px": 1795.4,
@@ -45,7 +45,7 @@
     1433
    ],
    "yaw_deg": -0.0,
-   "pitch_deg": 7.1461,
+   "pitch_deg": 7.2443,
    "roll_deg": 0.0,
    "fov_horizontal_deg": 34.005,
    "fov_vertical_deg": 43.511
@@ -54,18 +54,18 @@
   "scale_means": "the model's own units x 0.0731: the model alone made him 212.1 cm wide; one number brings him to his approved 15.5 cm (his shape is not changed)",
   "width_read_at": "his widest outline (picture row 808), 4 px inside it on each side (the outermost pixels blend into the removed background); read 2 / 4 / 8 px inside, he would be 15.64 / 15.5 / 15.22 cm wide at this scale",
   "camera_to_nose_cm": 24.5,
-  "camera_height_cm": 12.9,
+  "camera_height_cm": 12.95,
   "his_eyes_above_camera_cm": 0.5,
-  "picture_centre_points": "7.1 deg down: the cropped picture's centre is not where the camera aimed (lesson 26)",
+  "picture_centre_points": "7.2 deg down: the cropped picture's centre is not where the camera aimed (lesson 26)",
   "eye_heights_cm": {
-   "his_right": 13.18,
-   "his_left": 13.62
+   "his_right": 13.27,
+   "his_left": 13.64
   },
-  "nose_height_cm": 9.49,
-  "top_of_head_cm": 16.65,
+  "nose_height_cm": 9.5,
+  "top_of_head_cm": 16.64,
   "ear_tips_cm": [
-   17.92,
-   18.0
+   17.91,
+   17.99
   ],
   "edge_landmarks_read": "4 px inside his outline (top of head, ear tips, peet bottoms)",
   "peet_bottoms_cm": {
@@ -78,116 +78,116 @@
    "more_than_4_px_inside": -0.11
   },
   "highest_point_of_him_cm": {
-   "all": 18.19,
-   "more_than_4_px_inside": 18.01
+   "all": 18.18,
+   "more_than_4_px_inside": 18.0
   },
   "deepest_point_behind_nose_cm": {
-   "all": 12.33,
-   "more_than_4_px_inside": 11.7
+   "all": 12.34,
+   "more_than_4_px_inside": 11.71
   },
   "behind_nose_cm": {
-   "eye_his_right": 4.73,
-   "eye_his_left": 4.41,
+   "eye_his_right": 4.74,
+   "eye_his_left": 4.42,
    "chin_midline": 2.63,
-   "fold_midline": 3.71,
-   "crown_front": 8.43,
-   "belly_front": 6.11
+   "fold_midline": 3.7,
+   "crown_front": 8.45,
+   "belly_front": 6.09
   },
   "landmarks_room_cm": {
    "belly_front": [
     -0.364,
-    0.597,
-    -0.391
+    0.596,
+    -0.392
    ],
    "chin_midline": [
     0.33,
-    6.755,
-    3.085
+    6.761,
+    3.074
    ],
    "crown_front": [
     0.179,
-    16.646,
-    -2.718
+    16.641,
+    -2.747
    ],
    "ear_base_inner_his_left": [
     0.781,
-    16.953,
-    -4.35
+    16.945,
+    -4.38
    ],
    "ear_base_inner_his_right": [
     -0.421,
-    16.641,
-    -2.831
+    16.636,
+    -2.859
    ],
    "ear_base_outer_his_left": [
     3.357,
-    16.364,
-    -4.097
+    16.357,
+    -4.125
    ],
    "ear_base_outer_his_right": [
     -3.367,
-    16.07,
-    -3.197
+    16.064,
+    -3.224
    ],
    "ear_tip_his_left": [
     2.475,
-    18.0,
-    -3.528
+    17.994,
+    -3.558
    ],
    "ear_tip_his_right": [
     -2.103,
-    17.92,
-    -4.309
+    17.912,
+    -4.34
    ],
    "eye_his_left": [
-    2.624,
-    13.621,
-    1.302
+    2.623,
+    13.639,
+    1.279
    ],
    "eye_his_right": [
-    -3.132,
-    13.177,
-    0.982
+    -3.107,
+    13.266,
+    0.96
    ],
    "fold_midline": [
     0.334,
-    4.04,
-    2.008
+    4.044,
+    2.001
    ],
    "lip_corner_his_left": [
     2.69,
-    7.479,
-    3.212
+    7.484,
+    3.199
    ],
    "lip_corner_his_right": [
     -1.919,
-    7.157,
-    3.287
+    7.163,
+    3.275
    ],
    "mouth_corner_his_left": [
     0.931,
-    7.952,
-    4.179
+    7.959,
+    4.165
    ],
    "mouth_corner_his_right": [
     -0.642,
-    7.562,
-    3.797
+    7.568,
+    3.784
    ],
    "nose_y_centre": [
     0.248,
-    9.494,
-    5.716
+    9.504,
+    5.7
    ],
    "nostril_wing_his_left": [
     1.198,
-    10.378,
-    5.374
+    10.387,
+    5.356
    ],
    "nostril_wing_his_right": [
     -0.924,
-    10.158,
-    5.392
+    10.168,
+    5.374
    ],
    "peet_bottom_his_left": [
     2.58,
@@ -211,8 +211,8 @@
    ],
    "philtrum_bottom": [
     0.247,
-    8.314,
-    5.017
+    8.323,
+    5.003
    ]
   },
   "owner_remembered": {

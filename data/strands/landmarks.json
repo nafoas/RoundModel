@@ -8,28 +8,28 @@
   "eye_his_right": {
    "part": "head",
    "at_px": [
-    337.0,
-    474.09
+    338.24,
+    468.55
    ],
-   "how": "centre of an oval fitted to the eyeball's edge, measured in 180 directions to a fraction of a pixel; 110/180 kept (the rest ran into lashes or fur over the eye); fit rms 0.68 px. Where the eyeball meets the lashes there is no light-dark edge (dark into dark), so the oval's top there is carried on from its sides and can sit several px short of the eyeball's top; the eye step draws the eye's own outline",
-   "sure_px": 4.0,
+   "how": "centre of his whole eye: a smooth oval fitted to the eye's own edge (measured in 180 directions to a fraction of a pixel; 145/180 kept: the rest ran into lashes, his black eye ring or fur over the eye; fit rms 1.66 px) and passing through the point where his eye meets his lash line (there, dark meets dark: no edge to see) at [347.0, 426.0]. 2026-11-19, owner: the earlier oval stopped short of the top of his eye",
+   "sure_px": 2.0,
    "kind": "surface point",
    "mirror_of": "eye_his_left",
    "oval": {
     "semi_axes_px": [
-     35.33,
-     19.64
+     43.47,
+     19.2
     ],
-    "long_axis_angle_deg": 98.8,
-    "short_over_long": 0.556,
+    "long_axis_angle_deg": 102.6,
+    "short_over_long": 0.442,
     "note": "an eye is round; seen at an angle it shows as an oval. short/long is a depth clue (how far the eye faces away from the camera), used in step 4"
    }
   },
   "eye_his_right_catchlight": {
    "part": "head",
    "at_px": [
-    338.25,
-    456.75
+    337.62,
+    457.88
    ],
    "how": "brightness-weighted centre of the brightest spot inside the eye (the light's reflection)",
    "sure_px": 0.5,
@@ -39,20 +39,20 @@
   "eye_his_left": {
    "part": "head",
    "at_px": [
-    698.81,
-    445.33
+    698.53,
+    444.47
    ],
-   "how": "centre of an oval fitted to the eyeball's edge, measured in 180 directions to a fraction of a pixel; 156/179 kept (the rest ran into lashes or fur over the eye); fit rms 1.16 px. Where the eyeball meets the lashes there is no light-dark edge (dark into dark), so the oval's top there is carried on from its sides and can sit several px short of the eyeball's top; the eye step draws the eye's own outline",
-   "sure_px": 4.0,
+   "how": "centre of his whole eye: a smooth oval fitted to the eye's own edge (measured in 180 directions to a fraction of a pixel; 158/179 kept: the rest ran into lashes, his black eye ring or fur over the eye; fit rms 1.28 px) and passing through the point where his eye meets his lash line (there, dark meets dark: no edge to see) at [687.0, 403.0]. 2026-11-19, owner: the earlier oval stopped short of the top of his eye",
+   "sure_px": 2.0,
    "kind": "surface point",
    "mirror_of": "eye_his_right",
    "oval": {
     "semi_axes_px": [
-     41.77,
-     17.73
+     43.66,
+     17.55
     ],
-    "long_axis_angle_deg": 69.8,
-    "short_over_long": 0.424,
+    "long_axis_angle_deg": 70.2,
+    "short_over_long": 0.402,
     "note": "an eye is round; seen at an angle it shows as an oval. short/long is a depth clue (how far the eye faces away from the camera), used in step 4"
    }
   },
@@ -368,31 +368,9 @@
  ],
  "eye_fit": {
   "eye_his_right": {
-   "rms_px": 0.68,
-   "kept_fraction": 0.611,
+   "rms_px": 1.659,
+   "kept_fraction": 0.806,
    "dropped_directions_deg": [
-    42.0,
-    44.0,
-    46.0,
-    48.0,
-    50.0,
-    52.0,
-    54.0,
-    56.0,
-    58.0,
-    64.0,
-    70.0,
-    72.0,
-    74.0,
-    76.0,
-    80.0,
-    82.0,
-    88.0,
-    90.0,
-    92.0,
-    94.0,
-    96.0,
-    98.0,
     250.0,
     252.0,
     254.0,
@@ -427,27 +405,14 @@
     312.0,
     314.0,
     316.0,
-    318.0,
-    320.0,
-    322.0,
-    324.0,
-    326.0,
-    328.0,
-    330.0,
-    332.0,
-    334.0,
-    336.0,
-    338.0,
-    340.0,
-    342.0,
-    348.0
+    318.0
    ],
    "eyeball_lum": 36.4,
    "fur_lum": 175.8
   },
   "eye_his_left": {
-   "rms_px": 1.156,
-   "kept_fraction": 0.872,
+   "rms_px": 1.278,
+   "kept_fraction": 0.883,
    "dropped_directions_deg": [
     76.0,
     78.0,
@@ -460,8 +425,6 @@
     100.0,
     102.0,
     104.0,
-    240.0,
-    242.0,
     244.0,
     246.0,
     248.0,

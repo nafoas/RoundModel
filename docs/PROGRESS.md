@@ -1198,3 +1198,21 @@ check.py output (if applicable), and the next step.
 - Tests: 60 passed. check.py: does not exist.
 - **Next (owner's call):** how to settle the eye boundary where it meets dark lashes; then the nose point that
   does not depend on its box (owner said yes).
+
+## 2026-11-19 — Session 6 (cont.): his eye, fixed on the front photo (owner)
+- Owner: the whole-eye outline "go[es] around his little eye ring too, the little black marking"; and "you keep
+  relying on hard data without taking a step back and thinking 'do rabbit eyes look like this?'" Both causes
+  named and logged (DECISIONS lesson 34; METHOD item 26: step back, ask what the thing is).
+- Looked at his eyes where clearest (head-lowered photos 13, 14): a smooth glossy almond; his black ring = dark
+  lid edge + lashes, bunched at the top and the lower corner. So his eye = a smooth oval fitted to the eye's own
+  edges, passing exactly through the point where it meets his lash line (`lash_line_point`,
+  `fit_ellipse_through`, tools/landmarks.py). Front photo: the same to 0.01 px with the box grown 20 or 40 px;
+  his two eyes now the same size (43.5 / 43.7 px long semi-axis; the old: 35.3 / 41.8). Eye centres moved:
+  his right 5.7 px up, his left 0.9 px.
+- Rerun of everything using his eyes: landmarks, camera placement (camera 24.5 cm, 12.95 cm up; top of head
+  16.64), the room's rays, how he faces (tipped 4.5, turned 0.5; eyes face 47.1 / 47.0 deg to the sides), the 3D
+  page, his_variation.
+- Not yet right elsewhere: on 01 and 18 his right eye's fit goes wrong (lash point in the dark couch; box cutting
+  off his lashes), recorded in tools/his_variation.py; that measure was already marked not usable.
+- Tests: 60 passed. check.py: does not exist.
+- **Next:** the owner's look at his eyes; then the his_variation eye boxes and the nose point (owner said yes).

@@ -17,6 +17,11 @@ and the owner looks. Nothing here is picked by hand.
    this: a disagreement d is spread over a band d / slope wide.
 
 RESULTS SO FAR (2026-11-19): NO MEASURE IS USABLE YET.
+- Eyes now fitted as smooth ovals through his lash line (tools/landmarks.py, lesson 34). Right on the anchor;
+  on 01 and 18 (same moment) his right eye goes wrong: in 01 the lash-line point lands in the dark where his
+  lashes meet the dark couch behind his head (oval far too big); in 18 the rough box cuts off his lashes, so no
+  lash-line point is found (oval short). Hence their eye ratio spread (7.1%) is the fitting, not him. Next:
+  boxes that hold his lashes, and the dark region kept off a dark background.
 - Owner, 2026-11-19: the anchor, 01_front and 18_staring_at_boss are ONE moment (three shots in quick
   succession). So their close agreement (1.5% on the first try) is the measuring's own repeatability, not how
   he varies between moments; and the pose-proof rule's comparison was really against that repeatability. His
