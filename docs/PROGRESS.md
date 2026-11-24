@@ -1227,3 +1227,15 @@ check.py output (if applicable), and the next step.
   face 47.1 / 46.9 deg to the sides), 3D page, his_variation. DECISIONS lesson 34 updated.
 - Tests: 60 passed. check.py: does not exist.
 - **Next:** the owner's look at his eyes; then the his_variation eye boxes and the nose point.
+
+## 2026-11-24 — Session 6 (cont.): the top of his eye is hidden where his marking touches (owner)
+- Owner: the top still "bulges up"; "the little part of his eye marking directly touches his eye ... eyes don't
+  have corners and bends like that." Tried a smoothing spline (by cross-validation: wiggly; smoothness capped
+  at an oval's sharpest bend: his right eye's top too low, an inward bend on the left eye) and smooth Fourier
+  outlines (cut inside his eye's edges or bend sharply). The photo has no boundary where his marking touches his
+  eye. Stopped (rule 5); per the precision protocol this hidden boundary is owner-guided.
+- `docs/images/space/eye_top_choices.png`: one smooth oval fitted to each eye's measured sides, its top at
+  A (old oval, too short) / B / C / D (forced through his marking). His right eye: tops y 437.5 / 433.7 / 429.8 /
+  426.0; his left eye: 405.2 / 404.5 / 403.7 / 403.0 (2 px apart: any will do).
+- The landmarks still hold the flagged version (top cut by the dark region) until the owner picks. Docs only.
+- **Next:** the owner's pick; then set it, rerun everything using his eyes, and mark it owner-guided.

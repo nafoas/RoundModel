@@ -616,6 +616,16 @@ excuse and was withdrawn.)
    make). Fix: in the top half his eye may not reach past the dark region cut at his lash line, and his eye is
    convex (an eye opening has no dents: the dark region's raw edge dips at reflections and where his ring's
    fringe touches). Same answer with the box grown by 40 px. Rerun of everything downstream.
+   Then (owner: "are you sure it's fixed? Look at how it bulges up. The little part of his eye marking directly
+   touches his eye, which makes it hard to tell there is a difference. But, in general, eyes don't have corners
+   and bends like that"): the "lash line" point is on his marking, above the real top of his eye. Tried: the
+   smoothest curve through his eye's own edges (a smoothing spline: smoothness by cross-validation wiggles at
+   reflections; smoothness capped so no bend is sharper than an oval's: his right eye's top too low, an inward
+   bend on his left eye) and smooth Fourier outlines (cut inside the measured edges or bend sharply). Where his
+   marking touches his eye the photo has no boundary, so no method finds it; six tries guessed it six ways.
+   -> A hidden boundary on an identity feature: owner-guided (CLAUDE.md precision protocol). Choice sheet
+   `docs/images/space/eye_top_choices.png`: the same smooth oval fitted to his eye's measured sides, its top at
+   A (the old oval) ... D (forced, bulges into his marking); his left eye's options differ by only 2 px.
 - **The light in the anchor photo** (owner, 2026-11-16): ceiling light and lamps in the room; a navy blue
   blanket under him ("some of the blueness from underneath is from that"); "are you sure it needs two
   lights? The light might just be at a very shallow angle on his right". Checked with no shape assumed: along
