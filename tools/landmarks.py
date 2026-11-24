@@ -133,7 +133,7 @@ def measure_eye(lum, box):
         rr = r[i] + t * (r[i + 1] - r[i])
         pts.append([x0 + cx + rr * np.cos(ang), y0 + cy + rr * np.sin(ang)]); used.append(np.degrees(ang))
     P = np.array(pts); keep = np.ones(len(P), bool)
-    top = lash_line_point(L, level, ball, x0, y0)
+    top, basin = lash_line_point(L, level, ball, x0, y0)
     fit = (lambda Q: fit_ellipse_through(Q, top)) if top is not None else fit_ellipse
     for _ in range(6):
         c, a, b, th = fit(P[keep])
@@ -141,6 +141,27 @@ def measure_eye(lum, box):
         mad = 1.4826 * np.median(np.abs(d[keep] - np.median(d[keep])))
         keep = np.abs(d) <= max(2.5 * mad, 0.75)
     c, a, b, th = fit(P[keep]); d = ellipse_dist(P, c, a, b, th)
+    # His eye's top narrows to a point where it meets his lashes (an almond's tip, owner 2026-11-19: "Just the top
+    # portion is bad"): an oval bulges past it into fur. So in the top half (the half holding the lash-line point)
+    # the eye may not reach past the dark region, cut at his lash line; the rest is the oval.
+    H_, W_ = L.shape; gy, gx = np.mgrid[0:H_, 0:W_] + 0.5
+    t_ = np.radians(th); R_ = np.array([[np.cos(t_), np.sin(t_)], [-np.sin(t_), np.cos(t_)]])
+    q = (np.c_[gx.ravel() + x0, gy.ravel() + y0] - c) @ R_.T
+    in_oval = (((q[:, 0] / a) ** 2 + (q[:, 1] / b) ** 2) <= 1).reshape(H_, W_)
+    if top is not None:
+        up = (np.c_[gx.ravel() + x0, gy.ravel() + y0] - c) @ ((top - c) / np.linalg.norm(top - c))
+        eye_mask = in_oval & (basin | (up.reshape(H_, W_) <= 0))
+    else:
+        eye_mask = in_oval
+    # an eye opening is convex: no dents (the dark region's raw edge dips at reflections and where his ring's
+    # fringe touches); the smallest convex shape holding it keeps the narrowing tip and fills the dents
+    from skimage.morphology import convex_hull_image
+    eye_mask = convex_hull_image(eye_mask) & (in_oval | eye_mask)
+    from skimage import measure as skm
+    cont = max(skm.find_contours(ndi.gaussian_filter(eye_mask.astype(float), 1.0), 0.5), key=len)
+    outline = np.c_[x0 + cont[:, 1] + 0.5, y0 + cont[:, 0] + 0.5]
+    ys_, xs_ = np.nonzero(eye_mask)
+    c_region = np.array([x0 + xs_.mean() + 0.5, y0 + ys_.mean() + 0.5])
     # catchlight: the bright spot inside the eye (brightness-weighted centre of its brightest pixels)
     t = np.radians(th); Rm = np.array([[np.cos(t), np.sin(t)], [-np.sin(t), np.cos(t)]])
     H, W = L.shape; gy, gx = np.mgrid[0:H, 0:W] + 0.5
@@ -152,7 +173,8 @@ def measure_eye(lum, box):
     spot = lab2 == k2; w = raw[spot] - level
     sy, sx = np.argwhere(spot).T
     catch = np.array([x0 + 0.5 + (sx * w).sum() / w.sum(), y0 + 0.5 + (sy * w).sum() / w.sum()])
-    return dict(centre=c, semi_axes=(a, b), angle_deg=th, aspect=b / a, edge_points=P, kept=keep, lash_line=top,
+    return dict(centre=c_region, oval_centre=c, outline=outline, region=eye_mask,
+                semi_axes=(a, b), angle_deg=th, aspect=b / a, edge_points=P, kept=keep, lash_line=top,
                 rms_px=float(np.sqrt(np.mean(d[keep] ** 2))), kept_fraction=float(keep.mean()),
                 dropped_directions_deg=np.round(np.array(used)[~keep], 0).tolist(),
                 eye_lum=eye_lum, fur_lum=fur_lum, catchlight=catch)
@@ -179,7 +201,7 @@ def lash_line_point(L, level, ball, x0, y0):
         if touch.sum() and np.nonzero(part)[0].mean() < ey and (best is None or touch.sum() > best[0]):
             ys, xs = np.nonzero(touch)
             best = (int(touch.sum()), np.array([x0 + xs.mean() + 0.5, y0 + ys.mean() + 0.5]))
-    return None if best is None else best[1]
+    return (None if best is None else best[1]), eye
 
 
 # ---------------------------------------------------------------- the rest of him
@@ -248,16 +270,19 @@ def main() -> int:
         e = eyes[name] = measure_eye(lum, box)
         mirror = "eye_his_left" if name == "eye_his_right" else "eye_his_right"
         add(name, "head", e["centre"],
-            f"centre of his whole eye: a smooth oval fitted to the eye's own edge (measured in {N_DIRS} directions to "
-            f"a fraction of a pixel; {int(e['kept'].sum())}/{len(e['kept'])} kept: the rest ran into lashes, his "
-            f"black eye ring or fur over the eye; fit rms {e['rms_px']:.2f} px) and passing through the point where "
-            f"his eye meets his lash line (there, dark meets dark: no edge to see) "
-            f"{'' if e['lash_line'] is None else 'at ' + str(np.round(e['lash_line'], 1).tolist())}. 2026-11-19, "
-            f"owner: the earlier oval stopped short of the top of his eye", 2.0, mirror=mirror,
+            f"middle of his whole eye (outline_px): a smooth oval fitted to the eye's own edge (measured in {N_DIRS} "
+            f"directions to a fraction of a pixel; {int(e['kept'].sum())}/{len(e['kept'])} kept: the rest ran into "
+            f"lashes, his black eye ring or fur over the eye; fit rms {e['rms_px']:.2f} px), passing through the point "
+            f"where his eye meets his lash line"
+            f"{'' if e['lash_line'] is None else ' (' + str(np.round(e['lash_line'], 1).tolist()) + ')'}; in its top "
+            f"half it may not reach past the dark region cut at his lash line (his eye narrows to a tip there); and "
+            f"convex, as an eye opening is. 2026-11-19, owner: the earlier oval stopped short of the top of his "
+            f"eye; then the oval's top bulged past it", 2.0, mirror=mirror,
             oval=dict(semi_axes_px=np.round(e["semi_axes"], 2).tolist(), long_axis_angle_deg=round(e["angle_deg"], 1),
                       short_over_long=round(e["aspect"], 3),
-                      note=("an eye is round; seen at an angle it shows as an oval. short/long is a depth clue "
-                            "(how far the eye faces away from the camera), used in step 4")))
+                      note=("the oval fitted to his eye (before its top is narrowed): short/long is a clue to how far "
+                            "the eye faces away from the camera")),
+            outline_px=np.round(e["outline"][::2], 2).tolist())
         add(name + "_catchlight", "head", e["catchlight"],
             "brightness-weighted centre of the brightest spot inside the eye (the light's reflection)", 0.5,
             kind="view-dependent", mirror=mirror + "_catchlight")
@@ -350,12 +375,9 @@ def sheets(photo, LM, eyes):
         d.line([(x - 9, y), (x + 9, y)], fill=col, width=2); d.line([(x, y - 9), (x, y + 9)], fill=col, width=2)
         d.text((x + 8, y + 4), k, fill=col)
     for e in eyes.values():
-        c, (a, b), th = e["centre"], e["semi_axes"], np.radians(e["angle_deg"])
-        t = np.linspace(0, 2 * np.pi, 200)
-        pts = c + np.c_[a * np.cos(t) * np.cos(th) - b * np.sin(t) * np.sin(th), a * np.cos(t) * np.sin(th) + b * np.sin(t) * np.cos(th)]
-        d.line([tuple(p * sc) for p in pts], fill=(255, 200, 0), width=1)
+        d.line([tuple(p * sc) for p in np.vstack([e["outline"], e["outline"][:1]])], fill=(255, 200, 0), width=1)
     d.text((10, 10), "Landmarks (first pass). Magenta = fixed points of him; blue = view-dependent points. "
-                     "Names are by HIS side (his left = picture right). Yellow = fitted eye ovals.", fill=(0, 0, 0))
+                     "Names are by HIS side (his left = picture right). Yellow = his eyes' outlines.", fill=(0, 0, 0))
     im.save(OUT_IMG / "landmarks.png")
     # eyes at 6x: photo, and photo with the measured edge points (kept green, dropped red) and the oval
     rows = []
@@ -363,10 +385,9 @@ def sheets(photo, LM, eyes):
         e = eyes[name]; x0, y0, x1, y1 = box; s = 6
         crop = Image.fromarray(photo[y0:y1, x0:x1]).resize(((x1 - x0) * s, (y1 - y0) * s), Image.LANCZOS)
         mk = crop.copy(); dr = ImageDraw.Draw(mk)
-        c, (a, b), th = e["centre"], e["semi_axes"], np.radians(e["angle_deg"])
-        t = np.linspace(0, 2 * np.pi, 400)
-        pts = c + np.c_[a * np.cos(t) * np.cos(th) - b * np.sin(t) * np.sin(th), a * np.cos(t) * np.sin(th) + b * np.sin(t) * np.cos(th)]
-        dr.line([((p[0] - x0) * s, (p[1] - y0) * s) for p in pts], fill=(255, 200, 0), width=2)
+        c = e["centre"]
+        dr.line([((p[0] - x0) * s, (p[1] - y0) * s) for p in np.vstack([e["outline"], e["outline"][:1]])],
+                fill=(0, 230, 110), width=3)
         for p, k in zip(e["edge_points"], e["kept"]):
             X, Y = (p[0] - x0) * s, (p[1] - y0) * s
             dr.ellipse([X - 3, Y - 3, X + 3, Y + 3], fill=(0, 200, 0) if k else (255, 0, 0))

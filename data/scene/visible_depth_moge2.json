@@ -15,8 +15,8 @@
   "camera": {
    "position_cm": [
     0.2614,
-    12.9523,
-    29.9576
+    12.9454,
+    29.9606
    ],
    "rotation_room_to_camera": [
     [
@@ -26,13 +26,13 @@
     ],
     [
      0.0,
-     -0.9920174399,
-     0.1261007491
+     -0.9920462558,
+     0.1258738513
     ],
     [
      0.0,
-     -0.1261007491,
-     -0.9920174399
+     -0.1258738513,
+     -0.9920462558
     ]
    ],
    "focal_px": 1795.4,
@@ -45,7 +45,7 @@
     1433
    ],
    "yaw_deg": -0.0,
-   "pitch_deg": 7.2443,
+   "pitch_deg": 7.2312,
    "roll_deg": 0.0,
    "fov_horizontal_deg": 34.005,
    "fov_vertical_deg": 43.511
@@ -58,7 +58,7 @@
   "his_eyes_above_camera_cm": 0.5,
   "picture_centre_points": "7.2 deg down: the cropped picture's centre is not where the camera aimed (lesson 26)",
   "eye_heights_cm": {
-   "his_right": 13.27,
+   "his_right": 13.25,
    "his_left": 13.64
   },
   "nose_height_cm": 9.5,
@@ -87,10 +87,10 @@
   },
   "behind_nose_cm": {
    "eye_his_right": 4.74,
-   "eye_his_left": 4.42,
+   "eye_his_left": 4.41,
    "chin_midline": 2.63,
    "fold_midline": 3.7,
-   "crown_front": 8.45,
+   "crown_front": 8.44,
    "belly_front": 6.09
   },
   "landmarks_room_cm": {
@@ -101,93 +101,93 @@
    ],
    "chin_midline": [
     0.33,
-    6.761,
-    3.074
+    6.76,
+    3.075
    ],
    "crown_front": [
     0.179,
-    16.641,
-    -2.747
+    16.642,
+    -2.743
    ],
    "ear_base_inner_his_left": [
     0.781,
-    16.945,
-    -4.38
+    16.946,
+    -4.376
    ],
    "ear_base_inner_his_right": [
     -0.421,
-    16.636,
-    -2.859
+    16.637,
+    -2.856
    ],
    "ear_base_outer_his_left": [
     3.357,
-    16.357,
-    -4.125
+    16.358,
+    -4.121
    ],
    "ear_base_outer_his_right": [
     -3.367,
-    16.064,
-    -3.224
+    16.065,
+    -3.221
    ],
    "ear_tip_his_left": [
     2.475,
-    17.994,
-    -3.558
+    17.995,
+    -3.554
    ],
    "ear_tip_his_right": [
     -2.103,
-    17.912,
-    -4.34
+    17.913,
+    -4.336
    ],
    "eye_his_left": [
     2.623,
-    13.639,
-    1.279
+    13.637,
+    1.29
    ],
    "eye_his_right": [
-    -3.107,
-    13.266,
-    0.96
+    -3.106,
+    13.251,
+    0.966
    ],
    "fold_midline": [
     0.334,
-    4.044,
-    2.001
+    4.043,
+    2.002
    ],
    "lip_corner_his_left": [
     2.69,
     7.484,
-    3.199
+    3.2
    ],
    "lip_corner_his_right": [
     -1.919,
-    7.163,
-    3.275
+    7.162,
+    3.277
    ],
    "mouth_corner_his_left": [
     0.931,
-    7.959,
-    4.165
+    7.958,
+    4.167
    ],
    "mouth_corner_his_right": [
     -0.642,
-    7.568,
-    3.784
+    7.567,
+    3.786
    ],
    "nose_y_centre": [
     0.248,
-    9.504,
-    5.7
+    9.503,
+    5.702
    ],
    "nostril_wing_his_left": [
     1.198,
-    10.387,
-    5.356
+    10.386,
+    5.358
    ],
    "nostril_wing_his_right": [
     -0.924,
-    10.168,
-    5.374
+    10.166,
+    5.376
    ],
    "peet_bottom_his_left": [
     2.58,
@@ -211,8 +211,8 @@
    ],
    "philtrum_bottom": [
     0.247,
-    8.323,
-    5.003
+    8.321,
+    5.005
    ]
   },
   "owner_remembered": {

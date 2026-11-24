@@ -611,6 +611,11 @@ excuse and was withdrawn.)
    method: his two eyes now come out the same size (long semi-axis 43.5 and 43.7 px; the old ovals: 35.3 and
    41.8). Everything that uses his eyes was rerun: landmarks, the camera's up-direction, the room's rays, how he
    faces, the 3D page, tools/his_variation.py.
+   Then (owner: "the new one is almost perfect. Just the top portion is bad"): at 8x the oval bulged past his eye
+   near the top, because his eye narrows to a tip where it meets his lashes (an almond's tip, which an oval cannot
+   make). Fix: in the top half his eye may not reach past the dark region cut at his lash line, and his eye is
+   convex (an eye opening has no dents: the dark region's raw edge dips at reflections and where his ring's
+   fringe touches). Same answer with the box grown by 40 px. Rerun of everything downstream.
 - **The light in the anchor photo** (owner, 2026-11-16): ceiling light and lamps in the room; a navy blue
   blanket under him ("some of the blueness from underneath is from that"); "are you sure it needs two
   lights? The light might just be at a very shallow angle on his right". Checked with no shape assumed: along

@@ -1216,3 +1216,14 @@ check.py output (if applicable), and the next step.
   off his lashes), recorded in tools/his_variation.py; that measure was already marked not usable.
 - Tests: 60 passed. check.py: does not exist.
 - **Next:** the owner's look at his eyes; then the his_variation eye boxes and the nose point (owner said yes).
+
+## 2026-11-24 — Session 6 (cont.): the top of his eye (owner)
+- Owner: "the new one is almost perfect. Just the top portion is bad." At 8x: the oval bulged past his eye near
+  the top, because his eye narrows to a tip at his lash line. Fix (tools/landmarks.py measure_eye): in the top
+  half his eye may not reach past the dark region cut at his lash line; and his eye is convex (no dents from
+  reflections or his ring's fringe). The oval stays everywhere else. Box grown by 40 px: identical. Eye centres:
+  his right [338.34, 469.18], his left [698.5, 444.72]; the outline is stored (landmarks.json outline_px).
+- Rerun: placement (camera 24.5 cm, 12.95 cm up; top of head 16.64), rays, facing (turned 0.5, tipped 4.6; eyes
+  face 47.1 / 46.9 deg to the sides), 3D page, his_variation. DECISIONS lesson 34 updated.
+- Tests: 60 passed. check.py: does not exist.
+- **Next:** the owner's look at his eyes; then the his_variation eye boxes and the nose point.
