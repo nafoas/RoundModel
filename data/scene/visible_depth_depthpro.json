@@ -14,8 +14,8 @@
   "camera": {
    "position_cm": [
     0.2682,
-    14.3084,
-    43.3214
+    14.2899,
+    43.3275
    ],
    "rotation_room_to_camera": [
     [
@@ -25,13 +25,13 @@
     ],
     [
      0.0,
-     -0.9952036253,
-     0.097825069
+     -0.9952452494,
+     0.0974006852
     ],
     [
      0.0,
-     -0.097825069,
-     -0.9952036253
+     -0.0974006852,
+     -0.9952452494
     ]
    ],
    "focal_px": 2312.0,
@@ -44,7 +44,7 @@
     1433
    ],
    "yaw_deg": -0.0,
-   "pitch_deg": 5.6139,
+   "pitch_deg": 5.5895,
    "roll_deg": 0.0,
    "fov_horizontal_deg": 26.716,
    "fov_vertical_deg": 34.437
@@ -53,12 +53,12 @@
   "scale_means": "the model's own units x 0.9425: the model alone made him 16.4 cm wide; one number brings him to his approved 15.5 cm (his shape is not changed)",
   "width_read_at": "his widest outline (picture row 808), 4 px inside it on each side (the outermost pixels blend into the removed background); read 2 / 4 / 8 px inside, he would be 15.8 / 15.5 / 15.08 cm wide at this scale",
   "camera_to_nose_cm": 30.44,
-  "camera_height_cm": 14.31,
+  "camera_height_cm": 14.29,
   "his_eyes_above_camera_cm": 0.5,
   "picture_centre_points": "5.6 deg down: the cropped picture's centre is not where the camera aimed (lesson 26)",
   "eye_heights_cm": {
    "his_right": 14.61,
-   "his_left": 15.0
+   "his_left": 14.97
   },
   "nose_height_cm": 10.98,
   "top_of_head_cm": 18.28,
@@ -73,120 +73,120 @@
    "his_left": -0.13
   },
   "lowest_point_of_him_cm": {
-   "all": -6.21,
-   "more_than_4_px_inside": -1.13
+   "all": -6.2,
+   "more_than_4_px_inside": -1.12
   },
   "highest_point_of_him_cm": {
-   "all": 21.8,
-   "more_than_4_px_inside": 19.77
+   "all": 21.81,
+   "more_than_4_px_inside": 19.78
   },
   "deepest_point_behind_nose_cm": {
-   "all": 43.72,
+   "all": 43.71,
    "more_than_4_px_inside": 27.23
   },
   "behind_nose_cm": {
-   "eye_his_right": 5.89,
-   "eye_his_left": 6.14,
+   "eye_his_right": 5.88,
+   "eye_his_left": 6.12,
    "chin_midline": 2.22,
    "fold_midline": 3.95,
    "crown_front": 14.34,
-   "belly_front": 10.32
+   "belly_front": 10.33
   },
   "landmarks_room_cm": {
    "belly_front": [
     -0.367,
-    1.676,
+    1.674,
     2.742
    ],
    "chin_midline": [
     0.332,
-    8.545,
-    10.849
+    8.54,
+    10.852
    ],
    "crown_front": [
     0.178,
     18.281,
-    -1.28
+    -1.272
    ],
    "ear_base_inner_his_left": [
     0.901,
-    19.078,
-    -8.756
+    19.082,
+    -8.748
    ],
    "ear_base_inner_his_right": [
     -0.591,
-    18.99,
-    -9.043
+    18.994,
+    -9.035
    ],
    "ear_base_outer_his_left": [
     3.482,
-    17.886,
-    -1.988
+    17.887,
+    -1.98
    ],
    "ear_base_outer_his_right": [
     -3.753,
-    17.818,
-    -3.909
+    17.82,
+    -3.902
    ],
    "ear_tip_his_left": [
     2.614,
-    19.678,
-    -1.853
+    19.679,
+    -1.845
    ],
    "ear_tip_his_right": [
     -2.323,
-    19.77,
-    -4.478
+    19.772,
+    -4.469
    ],
    "eye_his_left": [
-    2.606,
-    15.004,
-    6.928
+    2.619,
+    14.971,
+    6.945
    ],
    "eye_his_right": [
     -3.007,
-    14.614,
-    7.175
+    14.61,
+    7.185
    ],
    "fold_midline": [
     0.336,
-    5.94,
-    9.117
+    5.936,
+    9.12
    ],
    "lip_corner_his_left": [
     2.51,
-    9.26,
-    11.287
+    9.255,
+    11.291
    ],
    "lip_corner_his_right": [
     -1.726,
-    9.012,
-    11.667
+    9.007,
+    11.671
    ],
    "mouth_corner_his_left": [
     0.894,
-    9.654,
-    12.171
+    9.648,
+    12.175
    ],
    "mouth_corner_his_right": [
     -0.574,
-    9.292,
-    11.718
+    9.287,
+    11.722
    ],
    "nose_y_centre": [
     0.255,
-    10.983,
-    13.065
+    10.977,
+    13.069
    ],
    "nostril_wing_his_left": [
     1.173,
-    11.833,
-    12.651
+    11.828,
+    12.656
    ],
    "nostril_wing_his_right": [
     -0.878,
-    11.618,
-    12.628
+    11.613,
+    12.633
    ],
    "peet_bottom_his_left": [
     2.851,
@@ -205,13 +205,13 @@
    ],
    "peet_mark_his_left_2": [
     4.783,
-    -0.779,
+    -0.777,
     -3.193
    ],
    "philtrum_bottom": [
     0.255,
-    9.883,
-    12.432
+    9.878,
+    12.436
    ]
   },
   "owner_remembered": {

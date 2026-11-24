@@ -626,6 +626,16 @@ excuse and was withdrawn.)
    -> A hidden boundary on an identity feature: owner-guided (CLAUDE.md precision protocol). Choice sheet
    `docs/images/space/eye_top_choices.png`: the same smooth oval fitted to his eye's measured sides, its top at
    A (the old oval) ... D (forced, bulges into his marking); his left eye's options differ by only 2 px.
+   **Owner's choice (2026-11-24): "It is between B and C ... On the right one, they're all decent. except for a
+   little strip of fur that accidentally got captured too"** (by picture side: his right eye between B and C; his
+   left eye fine but for a strip of fur). Set, OWNER-GUIDED (tools/landmarks.py EYE_OWNER): each eye is a smooth
+   oval fitted to its measured edge, its top halfway between the plain oval's top and the dark edge of his
+   marking; on his left eye the edge points along the soft fringe (down the picture-left side from the top,
+   before the measured edge first steps inward by more than 1 px) are left out (29 points). Same answer with the
+   box grown by 40 px. Tried and dropped on the way: edge sharpness (it follows the light, not eye vs fringe) and
+   "the first edge out from the middle" (his glossy eye's reflections are edges too). The earlier "two eyes the
+   same size" check was weak (his eyes are seen at different angles); now 38.1 / 40.8 px. Other photos use the
+   plain oval (no owner guidance there). The lash-line, dark-region and convex-shape code is gone.
 - **The light in the anchor photo** (owner, 2026-11-16): ceiling light and lamps in the room; a navy blue
   blanket under him ("some of the blueness from underneath is from that"); "are you sure it needs two
   lights? The light might just be at a very shallow angle on his right". Checked with no shape assumed: along

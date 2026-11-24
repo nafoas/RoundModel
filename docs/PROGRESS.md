@@ -1239,3 +1239,19 @@ check.py output (if applicable), and the next step.
   426.0; his left eye: 405.2 / 404.5 / 403.7 / 403.0 (2 px apart: any will do).
 - The landmarks still hold the flagged version (top cut by the dark region) until the owner picks. Docs only.
 - **Next:** the owner's pick; then set it, rerun everything using his eyes, and mark it owner-guided.
+
+## 2026-11-24 — Session 6 (cont.): his eyes, owner-guided top and fringe (owner)
+- Owner: "It is between B and C ... On the right one, they're all decent. except for a little strip of fur that
+  accidentally got captured too" (by picture side: his right eye between B and C; his left eye fine but for a
+  strip of fur along its upper picture-left side, a soft fringe of lashes and fur).
+- Set in tools/landmarks.py (EYE_OWNER, OWNER-GUIDED): each eye a smooth oval fitted to its measured edge, its top
+  halfway between the plain oval's top and the dark edge of his marking; his left eye's fringe points left out
+  (down the picture-left side from the top, before the edge first steps inward by > 1 px: 29 points). Box +40 px:
+  identical. Eye centres: his right [338.11, 469.74] (semi-axes 38.1 x 19.6), his left [699.26, 446.41] (40.8 x
+  17.8). Other photos: the plain oval. The lash-line / dark-region / convex code removed. Tried and dropped: edge
+  sharpness (follows the light) and "first edge out" (reflections are edges too). Picture:
+  docs/images/space/eyes_owner_guided.png.
+- Rerun: placement (camera 24.5 cm, 12.93 cm up; top of head 16.64), rays, facing (turned 0.5, tipped 4.5; eyes
+  face 46.9 / 46.3 deg to the sides; eyes-to-nose 40 deg below level; eyes 16 deg up), 3D page, his_variation.
+- Tests: 60 passed. check.py: does not exist.
+- **Next:** owner's look; then the his_variation eye boxes and the nose point (owner said yes).
